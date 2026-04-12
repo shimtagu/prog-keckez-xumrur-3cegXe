@@ -1,0 +1,292 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "R プログラミング",
+    "section": "",
+    "text": "はじめに",
+    "crumbs": [
+      "はじめに"
+    ]
+  },
+  {
+    "objectID": "index.html#授業の目的到達目標",
+    "href": "index.html#授業の目的到達目標",
+    "title": "R プログラミング",
+    "section": "授業の目的・到達目標",
+    "text": "授業の目的・到達目標\n\nデータサイエンスの基礎を習得\n\nデータを適切に理解・処理する能力（統計リテラシー）を身につける。\nフリーの統計ソフト「R」を使いデータを可視化・分析する。\n\nR を使い基礎的な統計分析を行い、結果をグラフや表にまとめる技術の習得\n\n\n\n\n\n\n\nNote注意事項\n\n\n\n\n本授業では、アプリやソフトを作成するためのプログラミングは扱わず、統計分析を行うための R 言語プログラミングに特化します。",
+    "crumbs": [
+      "はじめに"
+    ]
+  },
+  {
+    "objectID": "index.html#授業の方法",
+    "href": "index.html#授業の方法",
+    "title": "R プログラミング",
+    "section": "授業の方法",
+    "text": "授業の方法\n本授業は統計ソフト R を用いた分析作業（R 言語プログラミング）を中心に進めます。各授業の冒頭30分程度を使い担当教員から統計的概念の説明、R を用いた分析方法の解説を行い、残りの時間は各自 R を使い演習課題に取り組む演習形式です。受講者が確実に技術を習得できるように、理解度を確認しながら進めていきます。",
+    "crumbs": [
+      "はじめに"
+    ]
+  },
+  {
+    "objectID": "index.html#授業スケジュール",
+    "href": "index.html#授業スケジュール",
+    "title": "R プログラミング",
+    "section": "授業スケジュール",
+    "text": "授業スケジュール\n最初の2回の授業で R の基本操作に慣れ、その後、データを可視化する方法を学びます。続いて、データ分析に必要な基礎的な統計手法を学び、回帰分析へと発展させます。最後の2回の授業では、これまでの学習の集大成として、R を用いたデータ分析の実践演習を行います。\n\n\n\n日程\n回数\n内容\n\n\n\n\n4月13日\n第1回\nオリエンテーションとR環境の理解（Rの導入）\n\n\n4月20日\n第2回\nデータハンドリングの方法\n\n\n4月27日\n第3回\n棒グラフ・ヒストグラム\n\n\n5月4日\n祝日\n（休講）\n\n\n5月11日\n第4回\n箱ひげ図・散布図・折れ線グラフ\n\n\n5月18日\n第5回\nデータを地図上に表現する方法\n\n\n5月25日\n第6回\nデータの特徴を記述する方法\n\n\n6月1日\n第7回\n仮説検定\n\n\n6月8日\n第8回\n相関分析\n\n\n6月15日\n第9回\n単回帰分析・重回帰分析・決定係数\n\n\n6月22日\n第10回\nダミー変数を説明変数に含む回帰分析\n\n\n6月29日\n第11回\n交差項を含む回帰分析\n\n\n7月6日\n第12回\n総合演習1\n\n\n7月13日\n第13回\n総合演習2",
+    "crumbs": [
+      "はじめに"
+    ]
+  },
+  {
+    "objectID": "index.html#評価方法",
+    "href": "index.html#評価方法",
+    "title": "R プログラミング",
+    "section": "評価方法",
+    "text": "評価方法\n成績は以下の配分で算出します。\n\n\n\n評価項目\n配分\n備考\n\n\n\n\n毎週の課題\n50%\nBlackboardへ提出\n\n\n中間レポート\n25%\n第6回後に実施予定\n\n\n期末レポート\n25%\n独自のデータ分析結果を提出\n\n\n\n※ 課題の提出期限は毎週金曜日24時とし、それ以降は提出できません。",
+    "crumbs": [
+      "はじめに"
+    ]
+  },
+  {
+    "objectID": "index.html#生成aiの利用について",
+    "href": "index.html#生成aiの利用について",
+    "title": "R プログラミング",
+    "section": "生成AIの利用について",
+    "text": "生成AIの利用について\n拓殖大学では、生成AI（Chat GPT等）への対応方針として、以下のように定めています。（2023年11月24日）\n\n論文やレポート等、各種の課題作成にあたり直接的な使用はしないこと\n健全な情報の利用に留意すること\nプライバシーと倫理に留意すること\n著作権に留意すること\n学修の補助として活用すること\n\n上記方針を本プログラミングの授業に当てはめると、「AIにプログラミングのコードを全て書かせる」、「データをAIに読み込み分析を実施させる」等の行為は厳禁です。皆さんの学びに繋がりません。\nしかしながら、AIはプログラミング（の学習）において大変優れたパートナーとなり得ます。最近のプログラマーは自分でコードを書くのではなく、AIに書かせたコードを修正することが大半のようです。\n本授業では、AIを学びのパートナーとして上手に活用することを推奨します。Rのコードや書き方が分からない時には、AIに聞けばすぐに教えてくれます。そして、何度聞いても、どれだけ細かく聞いても丁寧に教えてくれます。コードが分からない時はAIを活用してください。ただし、AIは、事実に基づかない情報をあたかも正しいかのように自信満々に回答することがあります。従って、AIが作成したコードは自分で責任を持って全て理解してください（全て理解するまでAIに質問を続けて下さい）。日々の課題、レポート等において本人が理解していないコードを提出した場合には、大幅に減点します。\n\n\n\n\n\n\nNote\n\n\n\n\n本資料（またはネット）を確認しながら RStudio で作業する際、画面の左側にブラウザ、右側に RStudio を配置すると見やすくなります。\nウィンドウズマークを押しながら左右どちらかの矢印を押すと、画面の半分にアプリを配置することができます。",
+    "crumbs": [
+      "はじめに"
+    ]
+  },
+  {
+    "objectID": "index.html#教科書参考書",
+    "href": "index.html#教科書参考書",
+    "title": "R プログラミング",
+    "section": "教科書・参考書",
+    "text": "教科書・参考書\n本授業では特定の教科書は使用しません。学習には本レジュメを使用します。\nR言語プログラミングについては、インターネット上に多くの優れた参考資料が公開されています。学習を深めるために有用なサイトを紹介します。\n\nおすすめの学習リソース\n\n私たちのR：Rの基本から統計分析まで、日本語で最も丁寧に解説されているサイトの一つです。\nRStudio公式チートシート：よく使う関数の使い方が1枚のPDFにまとまっており、印刷して手元に置くと便利です。",
+    "crumbs": [
+      "はじめに"
+    ]
+  },
+  {
+    "objectID": "lec01.html",
+    "href": "lec01.html",
+    "title": "1  R 導入",
+    "section": "",
+    "text": "1.1 プログラミングとは\n参考：15種類のプログラミング言語を難易度や職業別に徹底解説（プロ検）",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>R 導入</span>"
+    ]
+  },
+  {
+    "objectID": "lec01.html#プログラミングとは",
+    "href": "lec01.html#プログラミングとは",
+    "title": "1  R 導入",
+    "section": "",
+    "text": "プログラミングとは、意図した計算を行うためコンピューターに指示を出すことです。そもそもコンピューターは「計算を行う」「計算結果を記憶する」という2つの基本機能を持っています。\nプログラミング言語とは、コンピュータに指示を出すために使われる共通言語です。Java、 Python、 Ruby、 C++、 PHP、 JavaScript などがあり、それぞれ独自の構文（Syntax）、文法、制御構造を持っています。\n言語によって得意とする分野や用途が異なり、スマートフォンアプリ、ゲーム、Web システムなど、現代社会のあらゆるインフラがこれらの言語によって動いています。\n\n\n\n\n\n\n\n\nNote\n\n\n\nプログラミングと聞くと身構えてしまうかもしれませんが、R は「世界中の知恵（パッケージ）を借りて計算する、最高に便利な計算機」です。まずはエラーを恐れず、キーボードを叩くことから始めていきましょう！",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>R 導入</span>"
+    ]
+  },
+  {
+    "objectID": "lec01.html#rとは",
+    "href": "lec01.html#rとは",
+    "title": "1  R 導入",
+    "section": "1.2 Rとは",
+    "text": "1.2 Rとは\n皆さんがこれから学ぶ R は、統計解析やデータの可視化（グラフ作成）に特化したプログラミング言語であり、オープンソース（無償公開）の計算環境です。世界中の研究者やデータサイエンティストに愛用されており、以下のような高度な特徴を備えています。\n\nデータの操作（Data Manipulation）\nExcel等で保存されている煩雑なデータを、ルールに基づいて一瞬で集計・加工する。\nグラフィックス\n論文やレポートにそのまま採用できる、出版クオリティの高品質な図表を作成する。\n統計的モデリング\n単純な平均の比較から、経済現象の要因分析（回帰分析）、機械学習を用いた予測まで幅広く対応する。\nパッケージ（Packages）による拡張性\n世界中の統計学者が開発・公開している「パッケージ」を追加することで、最新の分析手法を即座に利用できる。",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>R 導入</span>"
+    ]
+  },
+  {
+    "objectID": "lec01.html#r-を使う理由",
+    "href": "lec01.html#r-を使う理由",
+    "title": "1  R 導入",
+    "section": "1.3 R を使う理由",
+    "text": "1.3 R を使う理由\n実務で多用される Excel も非常に優秀なツールですが、学術研究や高度なデータ分析において R には圧倒的な優位性があります。\n\n再現性（Reproducibility）\n「どのボタンをどうクリックしたか」という記憶に頼る操作ではなく、「どのような命令（コード）を書いたか」が記録に残るため、第三者が全く同じ分析結果を 100% 再現できます。\nベクトル演算\nR は「ベクトル（数値の列）」をひとかたまりとして一括処理することに最適化されており、大規模なデータセットに対しても計算ミスなく高速に処理を行うことが可能です。",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>R 導入</span>"
+    ]
+  },
+  {
+    "objectID": "lec01.html#r-と-rstudio",
+    "href": "lec01.html#r-と-rstudio",
+    "title": "1  R 導入",
+    "section": "1.4 R と RStudio",
+    "text": "1.4 R と RStudio\nRを効率的に使いこなすために欠かせないのが RStudio です。これらは「エンジン」と「運転席」の関係に例えられます。\n\nR（エンジン）\n実際に計算処理を行う本体です。\nRStudio（運転席 / IDE）\nRを操作しやすくするための統合開発環境（IDE: Integrated Development Environment）です。\n\nRStudio を使用することで、様々な作業を一つの画面で完結させることができます。",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>R 導入</span>"
+    ]
+  },
+  {
+    "objectID": "lec01.html#rstudio-の起動",
+    "href": "lec01.html#rstudio-の起動",
+    "title": "1  R 導入",
+    "section": "1.5 RStudio の起動",
+    "text": "1.5 RStudio の起動\n画面左下のウィンドウズマークを押してRStudioを起動する。\nその際、R本体（R 4.5.1）と間違えないように。\n\n\n\n\n\n\n図 1.1\n\n\n\n以下のように RStudio が起動したことを確認してください。\n\n\n\n\n\n\n図 1.2\n\n\n\n上記は起動時の画面構成です。\nここで、左上のプラスマークから「R Script」を選択します。\n\n\n\n\n\n\n図 1.3\n\n\n\n新しいR Scriptが作成され、画面が4つに分割されます。\n\n\n\n\n\n\n図 1.4\n\n\n\nこれがRStudioで作業（分析）する時の通常の画面構成です。そして、RStudioの画面を構成する4つの領域のことを、一般的に「ペイン（Pane）」と呼びます。\nそれぞれの役割を簡単に確認しておきましょう。\n\nソース（Source） ノート・メモ\nプログラム（スクリプト）を記述・保存する。何度も実行したい命令を蓄積します。\nコンソール（Console） 計算機・実行窓\n命令を実行し、その結果をリアルタイムで確認する。\n環境（Environment） 物置・データ管理\n読み込んだデータセットや変数の状態を一覧する。\n出力/出力（Files/Plots） 本棚・掲示板\n作成したグラフを表示したり、関数の使い方（ドキュメント）を参照したりする。\n\n\n\n\n\n\n\nNote画面が3つしか見当たらないときは？\n\n\n\n左上の「ソース・ペイン」が最小化されている場合があります。その場合は、他のペインとの境界線をマウスでドラッグして広げるか、右上の四角いアイコンを押して広げてください。",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>R 導入</span>"
+    ]
+  },
+  {
+    "objectID": "lec01.html#作業環境の構築",
+    "href": "lec01.html#作業環境の構築",
+    "title": "1  R 導入",
+    "section": "1.6 作業環境の構築",
+    "text": "1.6 作業環境の構築\n大学のパソコンはシャットダウンするたびに初期化されるため、作業（分析）したファイルは初期化されない場所に保存する必要があります。\n拓殖大学では「Kドライブ」と呼ばれるドライブ（保存領域）が、各学生に割り当てられています。シャットダウンしても初期化されることはなく、大学内のどのパソコンからでもアクセスすることができます。\n本授業では、この「Kドライブ」に作業（分析）記録を残します。\nデスクトップ左上のPCから、Kドライブを開きます。\n\n\n\n\n\n\n図 1.5\n\n\n\n以下のように、フォルダのアドレスが（K:）となっいてることを確認してください。\n\n\n\n\n\n\n図 1.6\n\n\n\nKドライブを開いている状態で、「新規作成」から「フォルダ」を選び、新規フォルダを作成します。\n\n\n\n\n\n\n図 1.7\n\n\n\n作成したフォルダの名前を「R_programming」に変更します。\n\n\n\n\n\n\n図 1.8\n\n\n\n今後は、この「R_programming」フォルダの中に本授業で使うファイルやデータを保存します。",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>R 導入</span>"
+    ]
+  },
+  {
+    "objectID": "lec01.html#作業ディレクトリ",
+    "href": "lec01.html#作業ディレクトリ",
+    "title": "1  R 導入",
+    "section": "1.7 作業ディレクトリ",
+    "text": "1.7 作業ディレクトリ\nR でデータ分析を行う際、コンピュータが「今、どこのフォルダを標準の作業場所にしているか」が非常に重要です。これを 「作業ディレクトリ（Working Directory）」 と呼びます。\n\nなぜ重要か？\n分析したいデータ（ExcelやCSV）を読み込むとき、R がそのファイルを探しに行く「基準点」になるからです。基準点がずれていると、「ファイルが見つかりません」というエラーが出てしまいます。\n\n\n作業ディレクトリの確認方法\nRStudioの右下にある [Files] タブを見てください。そこに表示されているフォルダが、現在 R が見ている場所です。\n\n\n\n\n\n\n図 1.9\n\n\n\nまた、コンソール（Console）にgetwd() と入力し実行することでも現在の作業ディレクトリが分かります。\n\n\n\n\n\n\n図 1.10\n\n\n\n\n\n作業ディレクトリの設定方法\n手動で場所を指定したい場合は、主に以下の2つの方法があります。\n\nマウス操作で設定する\n\nRStudioの上部メニューから [Session] をクリック。\n[Set Working Directory] ＞ [Choose Directory…] を選択。\n作業したいフォルダ（例：Kドライブ内のフォルダ）を選択して [Open] を押す。\n\nコマンドで設定する\n\nsetwd(\"K:/R_programming\") という関数を使います。\n\n\n\n\n\n\n\n\n図 1.11",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>R 導入</span>"
+    ]
+  },
+  {
+    "objectID": "lec01.html#プロジェクトの活用",
+    "href": "lec01.html#プロジェクトの活用",
+    "title": "1  R 導入",
+    "section": "1.8 プロジェクトの活用",
+    "text": "1.8 プロジェクトの活用\n大学の演習用PC（Kドライブ）など、決まった場所で作業を続ける場合、毎回「作業場所」を指定するのは面倒です。そこで便利なのが 「Rプロジェクト（.Rproj）」 という機能です。\n\nRプロジェクトを使うメリット\n\n自動で作業場所が決まる\nプロジェクトを開くだけで、そのフォルダが自動的に作業ディレクトリに設定されます。\n前回の続きから再開\n開いていたファイルや設定が保存され、次回スムーズに始められます。\nファイル迷子を防ぐ\n「この授業のデータはこのフォルダ」という箱（プロジェクト）を最初に作ることで、必要なファイルを一括して格納し管理できます。",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>R 導入</span>"
+    ]
+  },
+  {
+    "objectID": "lec01.html#プロジェクトの作成",
+    "href": "lec01.html#プロジェクトの作成",
+    "title": "1  R 導入",
+    "section": "1.9 プロジェクトの作成",
+    "text": "1.9 プロジェクトの作成\n本授業では、第1回から第13回までの授業ごとにプロジェクトを作成します。毎回の授業開始時、以下の手順でその日の授業で使うプロジェクトを準備してください。\n\n左下のウィンドウズマークからRStudioを立ち上げる。\n左上のアイコン（＋R）から新規Rプロジェクトを作成する。\n\n\n\n\n\n\n\n図 1.12\n\n\n\n\nNew Directory を選択する。これにより、新しくフォルダが作成される。（既にあるフォルダをプロジェクトフォルダとして使う場合には Existing Directory を選んでください。）\n\n\n\n\n\n\n\n図 1.13\n\n\n\n\nR New Project を選択する。\n\n\n\n\n\n\n\n図 1.14\n\n\n\n\nDirectory name に「Lesson01」と入力、Browse ボタンから、Kドライブに作成した「R_programming」を選択し、Create Project を押す。\n\n\n\n\n\n\n\n図 1.15\n\n\n\nRStudio で、右上のプロジェクト名を確認する。\n\n\n\n\n\n\n図 1.16\n\n\n\nこの時、R_programming フォルダの中に、Lesson01 というフォルダ（ディレクトリ）が新しく作成されています。\n作業を中断し（一度RStudioを閉じ）た後、再開する際には、Lesson01 フォルダの中の Lesson01.Rproj ファイルをダブルクリックするだけで、一瞬で中断した時の状況に復元できます。\n第1回目の授業で必要なデータなどのファイルは全てこの Lesson01 フォルダの中に入れておくことで、R は迷うことなく必要なファイルを見つけられるようになります。\n\n\n\n\n\n\n図 1.17",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>R 導入</span>"
+    ]
+  },
+  {
+    "objectID": "lec01.html#r-スクリプト",
+    "href": "lec01.html#r-スクリプト",
+    "title": "1  R 導入",
+    "section": "1.10 R スクリプト",
+    "text": "1.10 R スクリプト\n左上のプラス（＋）マークから、R Scriptを選択し、新規 R Script を作成します。\n\n\n\n\n\n\n図 1.18\n\n\n\n\nなぜコンソールに直接打たないのか？\n下の「コンソール」に命令を打ち込んでも計算はできますが、エンターキーを押した瞬間に命令は消えてしまい、後から修正したり、明日同じ計算をやり直したりすることができません。\n\nコンソール: 使い捨ての計算機（やり直しが効かない）\nR Script: 記録に残るノート（保存して、何度でも再現できる）\n\n大学のレポートや分析では、必ずこの R Script に命令を書き溜めて保存する習慣をつけましょう。\n\n\nスクリプトの実行方法\nR Scriptに書いた命令を実際にRに計算させるには、以下のショートカットキー、または画面右上のボタンを使用します。\n\n\n\n\n\n\n\n\n\n実行の範囲\nWindows\nMac\n対応ボタン\n\n\n\n\n現在の1行（または選択範囲）\nCtrl + Enter\nCmd + Return\nRun\n\n\n最初から現在の行まで\nCtrl + Alt + B\nCmd + Opt + B\n\n\n\n現在の行から最後まで\nCtrl + Alt + E\nCmd + Opt + E\n\n\n\nファイル全体（全行実行）\nCtrl + Shift + S\nCmd + Shift + S\nSource\n\n\n\n\n\n\n\n\n\nNote覚え方のコツ\n\n\n\nショートカットの最後の一文字は、英単語の頭文字になっています。\n\nB：Beginning（最初）から現在の行まで実行\nE：End（最後）まで実行\n\n\n\n\n\nボタンの使い分け\n\nRun： 「いま書いたこの1行、ちゃんと動くかな？」と一歩ずつ確認しながら進めるときに使います。実行したコードが下のコンソールにも表示されるので、試行錯誤に最適です。\nSource： 「よし、最後まで書き上げたぞ！最初から一気に自動演奏させてみよう」というときに使います。コンソールが汚れず、最終的な結果だけをスマートに確認できます。\n\n\n\nスクリプトを保存する\n作成した R Script は、必ず名前をつけて保存しましょう。\n\n[File] ＞ [Save]（または Ctrl + S）\n保存ボタンを押す\n\n\n\n\n\n\n\n図 1.19\n\n\n\n\n名前を practice01 などとする。\n\nファイル名には全角文字（日本語）やスペースを使わず、英数字とアンダースコア（_）のみを使うのがプログラミングの鉄則です。\n\n今日作成したプロジェクトフォルダ（Lesson01 など）の中に入っていることを確認する。\n\n\n\n\n\n\n\n図 1.20\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n右下の「Files」に表示されているファイルの内容は実際のフォルダに保存されているファイルの内容と一致しています。",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>R 導入</span>"
+    ]
+  },
+  {
+    "objectID": "lec01.html#r-コードを書いてみよう",
+    "href": "lec01.html#r-コードを書いてみよう",
+    "title": "1  R 導入",
+    "section": "1.11 R コードを書いてみよう",
+    "text": "1.11 R コードを書いてみよう\nRStudioの準備ができたら、実際にRに計算をさせてみましょう。まずは「Rスクリプト」に以下のコードを書き込み、1行ずつ Ctrl + Enter で実行して結果を確認してください。\n\n計算機として使う\nRでは、一般的な数学の計算ができます。\n\n\n\n\n\n\nWarning\n\n\n\n1 + 1\n10 - 3\n5 × 4\n10 ÷ 2\n2の3乗\n\n\n\n\n\n\n\n\nTip解答 1\n\n\n\n\n\nコードを表示\n1 + 1    # 足し算\n[1] 2\n10 - 3   # 引き算\n[1] 7\n5 * 4    # 掛け算（アスタリスク）\n[1] 20\n10 / 2   # 割り算（スラッシュ）\n[1] 5\n2^3      # べき乗（2の3乗）\n[1] 8\n\n\n\n\n\n\n変数（データに名前をつけて保存する）\nプログラミングで最も重要なのが 「変数（Variable）」 です。数値に名前をつけて「物置（Environmentペイン）」に保存しておくことができます。 Rでは、&lt;-（矢印のような記号）を使って代入します。\n\n\n\n\n\n\n\nWarning\n\n\n\nx という名前（変数）に 10 を保存（代入）する。\n\n\n\n\n\n\n\n\nTip\n\n\n\n\n\nコードを表示\nx &lt;- 10\n\n\n右上の環境（Environment）ペインに x が表示されます。\n\n\n\n\n\n\n\n\n\nWarning\n\n\n\ny という名前（変数）に 5 を保存（代入）する。\n\n\n\n\n\n\n\n\nTip\n\n\n\n\n\nコードを表示\ny &lt;- 5\n\n\n右上の環境（Environment）ペインに y が表示されます。\n\n\n\n\n\n\n\n\n\nWarning\n\n\n\n名前（変数）を使い、x と y を足す。\n\n\n\n\n\n\n\n\nTip\n\n\n\n\n\nコードを表示\nx + y\n[1] 15\n\n\n\n\n\n\n\n関数（複雑な計算を一瞬で行う）\n統計解析で欠かせないのが 「関数（Function）」 です。関数とは、特定の計算（平均を出す、グラフを描くなど）を自動で行ってくれる「魔法の箱」のようなものです。\nここでは、複数の数値をまとめた「ベクトル（数値の列）」の平均値を求めてみましょう。\n\n\n\n\n\n\n\nWarning演習\n\n\n\nc() という関数を使い、5人のテスト点数（70点、85点、90点、65点、80点）を「score」という名前に保存する。\n\n\n\n\n\n\n\n\nTip解答\n\n\n\n\n\nコードを表示\nscore &lt;- c(70, 85, 90, 65, 80)\n\n\n右上の環境（Environment）ペインに score が表示されます。\n\n\n\n\n\n\n\n\n\nWarning\n\n\n\n5人の合計値を計算する。\n\n\n\n\n\n\n\n\nTip\n\n\n\n\n\nコードを表示\nsum(score)\n[1] 390\n\n\n\n\n\n\n\n\n\n\n\nWarning\n\n\n\n5人の平均値を計算する。\n\n\n\n\n\n\n\n\nTip\n\n\n\n\n\nコードを表示\nmean(score)\n[1] 78\n\n\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\nプログラミングの世界では、「全角」は大敵です。 数字、コンマ、カッコ、スペースがすべて「半角」になっているか、もう一度確認してみましょう。",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>R 導入</span>"
+    ]
+  },
+  {
+    "objectID": "lec01.html#quartoクゥオート",
+    "href": "lec01.html#quartoクゥオート",
+    "title": "1  R 導入",
+    "section": "1.12 Quarto（クゥオート）",
+    "text": "1.12 Quarto（クゥオート）\nこれまでは、Rを使って計算する方法を学びました。しかし、実際のレポートや論文では、計算結果（数字やグラフ）だけでなく、その背景を説明する「文章」も必要です。\nQuarto は、「文章」と「プログラム」と「実行結果」を一つのファイルに同居させ、そのまま提出用のレポート（HTMLやPDF）として出力できる非常に強力なツールです。\n\nなぜ Quarto を使うのか？\n\nコピペミスがゼロになる\n計算結果をExcelやWordにコピペする手間がありません。プログラムが走れば、結果は自動的にレポートに反映されます。\n「動く」ことが証明できる\n提出されたHTMLを見れば、プログラムが正しく動いたことを一目で確認できます。\n一生モノのスキル\n現在、データサイエンスの現場では、このような「再現可能なレポート作成（Reproducible Reporting）」が世界標準になっています。\n\n\n\nQuarto の仕組み\nここで、Blackboard から assignment01 というファイルをダウンロードし、K ドライブに先ほど作成した Lesson01 フォルダに格納してください。次に、RStudio 右下の Files から assignment01.qmd をクリックして開いてください。\n\n\n\n\n\n\n図 1.21\n\n\n\nQuartoのファイル（拡張子 .qmd）は、いわば「分析の記録ノート」です。ファイルの中で R を実行し、その前後に説明を記入します。\n\n\n\n\n\n\n図 1.22\n\n\n\n冒頭（一番上）には、そのファイルの属性を決める定型フォーマットを、--- と --- で上下に囲み記入します。\nR コードは、```{r} と　``` で上下から囲みます。この記号の間に囲まれた灰色の範囲をR コード・チャンク と呼び、通常のR スクリプトと同じようにコードを書きます。チャンク右上の「緑色の再生ボタン（▶）」を押すと、その場ですぐに実行結果を確認できます。\nRender（レンダリング）ボタンを押すと、RStudio が記載内容を上から順に実行し、コードの実行結果（グラフなど）が埋め込まれた Web ページ形式のレポートが作られます。\n次図の赤丸されているアイコンを押すとブラウザで表示されます。\n\n\n\n\n\n\n図 1.23",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>R 導入</span>"
+    ]
+  },
+  {
+    "objectID": "lec01.html#毎時間の準備と進め方",
+    "href": "lec01.html#毎時間の準備と進め方",
+    "title": "1  R 導入",
+    "section": "1.13 毎時間の準備と進め方",
+    "text": "1.13 毎時間の準備と進め方\n毎時間の課題は HTML ファイルで提出します。 授業が始まったら以下の手順で準備してください。\n\n\n\n\n\n\n\n1.\n画面左下のウィンドウズマークを押してRStudioを起動する。\n\n\n2.\nRStudio 左上のアイコン（＋R）をクリックし、新規 R プロジェクトを作成する。\n\n\n3.\nNew Directory を選択する。（これにより、新しくフォルダが作成される。）\n\n\n4.\nR New Project を選択する。\n\n\n5.\nDirectory name に「LessonXX」と入力、Browse ボタンから、Kドライブに作成した「R_programming」を選択し、Create Project をクリックする。\n\n\n6.\nRStudio で、右上のプロジェクト名が LessonXX に変更されていることを確認する。\n\n\n7.\nR_programming フォルダの中に、LessonXX というフォルダ（ディレクトリ）が新しく作成されていることを確認する。\n\n\n8.\nRStudio 左上のプラス（＋）マークから、R Scriptを選択し、新規 R Script を作成する。\n\n\n9.\nR Script を practiceXX という名前で保存する。\n\n\n10.\nBlackboard から本授業で使うデータと「assignmentXX.qmd」ファイルをダウンロードし、先ほど作成した「R_programming/LessonXX」フォルダに格納する。\n\n\n11.\nRStudio 右下のペインにある Files からそのファイルをクリックして開く。\n\n\n12.\n演習と課題に取り組む。課題ファイルの中には、```{r} で始まるグレーの枠（R コード・チャンク）がある。ここに R コードを記入し、前後に必要な説明も記入する。\n\n\n13.\nすべての問題が解けたら、画面上部にある [Render] をクリックして assignmentXX.html を作成する。\n\n\n14.\n作成されたHTMLファイルをブラウザで開き、自分の名前や計算結果が正しく表示されているか確認する。\n\n\n15.\n最後に、assignmentXX.html を Blackboard の所定の場所にアップロードする。\n\n\n\n\n\n\n\n\n\n\n図 1.24\n\n\n\n\n\n\n\n\n\nImportant提出するのは「HTMLファイル」です！\n\n\n\nプログラムが書かれた .qmd ファイルではなく、Renderボタンを押して新しく作成された .html ファイルを提出してください。\n\n\n\n\n\n\n\n\nNoteRenderでエラーが出たときは？\n\n\n\nコードに間違い（打ち間違いやカッコの閉じ忘れ）があると、Renderが途中で止まり、HTMLが作成されません。エラーメッセージを読み、該当する行を修正してから、もう一度 [Render] を押してください。",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>R 導入</span>"
+    ]
+  },
+  {
+    "objectID": "lec01.html#本日の課題",
+    "href": "lec01.html#本日の課題",
+    "title": "1  R 導入",
+    "section": "1.14 本日の課題",
+    "text": "1.14 本日の課題\nassignment01 に取り組み、assignment01.html を Blackboard から提出してください。\n\n\n\n\n\n\nNote\n\n\n\n\nBlackboardから 「assignment01.qmd」をダウンロードする。\n「assignment01.qmd」を「R_programming/Lesson01」に格納する。\nRStudio の右下にある Files から、 assignment01.qmd をクリックして開く。\n本日の演習課題に取り組む。\n終わったら Render を押し、HTML ファイルを作成する。\n「assignment01.html」をBlackboard から提出して終了する。",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>R 導入</span>"
+    ]
+  },
+  {
+    "objectID": "lec03.html",
+    "href": "lec03.html",
+    "title": "3  可視化1",
+    "section": "",
+    "text": "（棒グラフ・ヒストグラム）",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>可視化1</span>"
+    ]
+  },
+  {
+    "objectID": "lec04.html",
+    "href": "lec04.html",
+    "title": "4  可視化2",
+    "section": "",
+    "text": "（箱ひげ・散布図・折れ線）",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>可視化2</span>"
+    ]
+  },
+  {
+    "objectID": "lec05.html",
+    "href": "lec05.html",
+    "title": "5  可視化3",
+    "section": "",
+    "text": "（地図表現）",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>可視化3</span>"
+    ]
+  },
+  {
+    "objectID": "lec08.html",
+    "href": "lec08.html",
+    "title": "8  二変数の分析",
+    "section": "",
+    "text": "（相関分析）",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>二変数の分析</span>"
+    ]
+  },
+  {
+    "objectID": "lec09.html",
+    "href": "lec09.html",
+    "title": "9  回帰分析1",
+    "section": "",
+    "text": "（単回帰・重回帰）",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>回帰分析1</span>"
+    ]
+  },
+  {
+    "objectID": "lec10.html",
+    "href": "lec10.html",
+    "title": "10  回帰分析2",
+    "section": "",
+    "text": "（ダミー変数）",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>回帰分析2</span>"
+    ]
+  },
+  {
+    "objectID": "lec11.html",
+    "href": "lec11.html",
+    "title": "11  回帰分析3",
+    "section": "",
+    "text": "（交差項）",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>回帰分析3</span>"
+    ]
+  }
+]
