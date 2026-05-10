@@ -269,18 +269,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#geom_col-値を直接指定する" id="toc-geom_col-値を直接指定する" class="nav-link" data-scroll-target="#geom_col-値を直接指定する"><code>geom_col()</code> 値を直接指定する</a></li>
   <li><a href="#テーマを変える" id="toc-テーマを変える" class="nav-link" data-scroll-target="#テーマを変える">テーマを変える</a></li>
   </ul></li>
-  <li><a href="#sec-bar-exercises" id="toc-sec-bar-exercises" class="nav-link" data-scroll-target="#sec-bar-exercises"><span class="header-section-number">3.5</span> 演習問題（棒グラフ）</a></li>
-  <li><a href="#sec-histogram" id="toc-sec-histogram" class="nav-link" data-scroll-target="#sec-histogram"><span class="header-section-number">3.6</span> ヒストグラム</a>
+  <li><a href="#sec-histogram" id="toc-sec-histogram" class="nav-link" data-scroll-target="#sec-histogram"><span class="header-section-number">3.5</span> ヒストグラム</a>
   <ul class="collapse">
   <li><a href="#ビンの幅を調整する" id="toc-ビンの幅を調整する" class="nav-link" data-scroll-target="#ビンの幅を調整する">ビンの幅を調整する</a></li>
   <li><a href="#色と見た目を整える" id="toc-色と見た目を整える" class="nav-link" data-scroll-target="#色と見た目を整える">色と見た目を整える</a></li>
   <li><a href="#グループ別のヒストグラム" id="toc-グループ別のヒストグラム" class="nav-link" data-scroll-target="#グループ別のヒストグラム">グループ別のヒストグラム</a></li>
   <li><a href="#軸の表示を整える" id="toc-軸の表示を整える" class="nav-link" data-scroll-target="#軸の表示を整える">軸の表示を整える</a></li>
   </ul></li>
-  <li><a href="#sec-hist-exercises" id="toc-sec-hist-exercises" class="nav-link" data-scroll-target="#sec-hist-exercises"><span class="header-section-number">3.7</span> 演習問題（ヒストグラム）</a></li>
-  <li><a href="#まとめ" id="toc-まとめ" class="nav-link" data-scroll-target="#まとめ"><span class="header-section-number">3.8</span> まとめ</a>
+  <li><a href="#まとめ" id="toc-まとめ" class="nav-link" data-scroll-target="#まとめ"><span class="header-section-number">3.6</span> まとめ</a>
   <ul class="collapse">
   <li><a href="#本日学んだこと" id="toc-本日学んだこと" class="nav-link" data-scroll-target="#本日学んだこと">本日学んだこと</a></li>
+  </ul></li>
+  <li><a href="#演習問題" id="toc-演習問題" class="nav-link" data-scroll-target="#演習問題"><span class="header-section-number">3.7</span> 演習問題</a>
+  <ul class="collapse">
+  <li><a href="#sec-bar-exercises" id="toc-sec-bar-exercises" class="nav-link" data-scroll-target="#sec-bar-exercises"><span class="header-section-number">3.7.1</span> 棒グラフ</a></li>
+  <li><a href="#sec-hist-exercises" id="toc-sec-hist-exercises" class="nav-link" data-scroll-target="#sec-hist-exercises"><span class="header-section-number">3.7.2</span> ヒストグラム</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -321,9 +324,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <section id="sec-setup" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="sec-setup"><span class="header-section-number">3.1</span> パッケージの準備</h2>
+<p>大学のPCはシャットダウンする度に初期化されるため、毎回インストールが必要です。 毎回授業開始時にこのブロックを実行してください。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">install.packages</span>(<span class="st">"readxl"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <p>今回使用するパッケージを読み込みます。 <code>tidyverse</code> には <code>ggplot2</code> と <code>dplyr</code> がどちらも含まれているので、 これ 1 行で前回の道具もすべて使えます。</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><strong><code>tidyverse</code> に含まれる主なパッケージ</strong></p>
 <table class="caption-top table">
@@ -420,7 +428,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="aesの主な引数" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="aesの主な引数">aes()の主な引数</h3>
 <p><code>aes()</code> の中で、<strong>変数とグラフの見た目を対応させます</strong>（= マッピング）。</p>
-<p><code>aes</code> は Aesthetics（エステティクス）の略です。日本語に訳すと「美学」や「美意識」といった意味になりますが、データ分析の文脈（特に ggplot2 パッケージ）では「視覚的属性」と理解するのが一番しっくりきます。</p>
+<p><code>aes</code> は Aesthetics（エステティクス）の略です。日本語に訳すと「美学」や「美意識」といった意味になりますが、ggplot2 の文脈では 「データの値を、グラフの見た目（視覚的属性）に対応させる」 という意味で使われます。</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -470,7 +478,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="unnumbered anchored" data-anchor-id="mpg-データ"><code>mpg</code> データ</h3>
 <p><code>ggplot2</code> に付属している自動車の燃費データです。234 行 × 11 列で、各行が 1 車種を表します。</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">glimpse</span>(mpg)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">glimpse</span>(mpg)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 234
 Columns: 11
@@ -537,7 +545,7 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <h3 class="unnumbered anchored" data-anchor-id="diamonds-データ"><code>diamonds</code> データ</h3>
 <p><code>ggplot2</code> に付属しているダイヤモンド価格データです。 53940 行 × 10 列の大規模データセットです。</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">glimpse</span>(diamonds)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">glimpse</span>(diamonds)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 53,940
 Columns: 10
@@ -657,8 +665,8 @@ Note
 <h3 class="unnumbered anchored" data-anchor-id="geom_bar-の基本"><code>geom_bar()</code> の基本</h3>
 <p><code>geom_bar()</code> は、<strong>指定した変数の値の個数を自動で数えて</strong>棒グラフにします。 <code>y</code> は指定不要です。</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> class)) <span class="sc">+</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> class)) <span class="sc">+</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -692,13 +700,13 @@ Note
 <h3 class="unnumbered anchored" data-anchor-id="色を変える">色を変える</h3>
 <p><strong><code>fill</code> で塗りつぶしの色を変える</strong></p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-6"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-6-1"><a href="#annotated-cell-6-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> class)) <span class="sc">+</span></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="1">1</button><span id="annotated-cell-6-2" class="code-annotation-target"><a href="#annotated-cell-6-2"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-7"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-7-1"><a href="#annotated-cell-7-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> class)) <span class="sc">+</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="1">1</button><span id="annotated-cell-7-2" class="code-annotation-target"><a href="#annotated-cell-7-2"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-6" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-7" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-6" data-code-lines="2" data-code-annotation="1"><code>aes()</code> の外に書くと、全棒を同じ色にする</span>
+<span data-code-cell="annotated-cell-7" data-code-lines="2" data-code-annotation="1"><code>aes()</code> の外に書くと、全棒を同じ色にする</span>
 </dd>
 </dl>
 </div>
@@ -712,13 +720,13 @@ Note
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-7"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="1">1</button><span id="annotated-cell-7-1" class="code-annotation-target"><a href="#annotated-cell-7-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> class, <span class="at">fill =</span> class)) <span class="sc">+</span></span>
-<span id="annotated-cell-7-2"><a href="#annotated-cell-7-2"></a>  <span class="fu">geom_bar</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-8"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="1">1</button><span id="annotated-cell-8-1" class="code-annotation-target"><a href="#annotated-cell-8-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> class, <span class="at">fill =</span> class)) <span class="sc">+</span></span>
+<span id="annotated-cell-8-2"><a href="#annotated-cell-8-2"></a>  <span class="fu">geom_bar</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-7" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-8" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-7" data-code-lines="1" data-code-annotation="1"><code>aes()</code> の中に <code>fill = 変数</code> を書くと、カテゴリごとに色が変わる</span>
+<span data-code-cell="annotated-cell-8" data-code-lines="1" data-code-annotation="1"><code>aes()</code> の中に <code>fill = 変数</code> を書くと、カテゴリごとに色が変わる</span>
 </dd>
 </dl>
 </div>
@@ -736,13 +744,13 @@ Note
 </div>
 <p><strong><code>color</code>（輪郭色）と組み合わせる</strong></p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-8"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-8-1"><a href="#annotated-cell-8-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> class)) <span class="sc">+</span></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="1">1</button><span id="annotated-cell-8-2" class="code-annotation-target"><a href="#annotated-cell-8-2"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">linewidth =</span> <span class="fl">0.5</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-9"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-9-1"><a href="#annotated-cell-9-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> class)) <span class="sc">+</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="1">1</button><span id="annotated-cell-9-2" class="code-annotation-target"><a href="#annotated-cell-9-2"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">linewidth =</span> <span class="fl">0.5</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-8" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-9" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-8" data-code-lines="2" data-code-annotation="1"><code>color</code> が輪郭の色、<code>linewidth</code> が輪郭の太さ</span>
+<span data-code-cell="annotated-cell-9" data-code-lines="2" data-code-annotation="1"><code>color</code> が輪郭の色、<code>linewidth</code> が輪郭の太さ</span>
 </dd>
 </dl>
 </div>
@@ -763,31 +771,31 @@ Note
 <h3 class="unnumbered anchored" data-anchor-id="軸ラベルタイトルを追加する">軸ラベル・タイトルを追加する</h3>
 <p><code>labs()</code> レイヤーでタイトルや軸ラベルを設定します。</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-9"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-9-1"><a href="#annotated-cell-9-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> class)) <span class="sc">+</span></span>
-<span id="annotated-cell-9-2"><a href="#annotated-cell-9-2"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
-<span id="annotated-cell-9-3"><a href="#annotated-cell-9-3"></a>  <span class="fu">labs</span>(</span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="1">1</button><span id="annotated-cell-9-4" class="code-annotation-target"><a href="#annotated-cell-9-4"></a>    <span class="at">title =</span> <span class="st">"車のクラス別台数"</span>,</span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="2">2</button><span id="annotated-cell-9-5" class="code-annotation-target"><a href="#annotated-cell-9-5"></a>    <span class="at">x =</span> <span class="st">"種類"</span>,</span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="3">3</button><span id="annotated-cell-9-6" class="code-annotation-target"><a href="#annotated-cell-9-6"></a>    <span class="at">y =</span> <span class="st">"台数"</span>,</span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="4">4</button><span id="annotated-cell-9-7" class="code-annotation-target"><a href="#annotated-cell-9-7"></a>    <span class="at">caption =</span> <span class="st">"データ出典: mpg (ggplot2)"</span></span>
-<span id="annotated-cell-9-8"><a href="#annotated-cell-9-8"></a>  )</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-10"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-10-1"><a href="#annotated-cell-10-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> class)) <span class="sc">+</span></span>
+<span id="annotated-cell-10-2"><a href="#annotated-cell-10-2"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-10-3"><a href="#annotated-cell-10-3"></a>  <span class="fu">labs</span>(</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="1">1</button><span id="annotated-cell-10-4" class="code-annotation-target"><a href="#annotated-cell-10-4"></a>    <span class="at">title =</span> <span class="st">"車のクラス別台数"</span>,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="2">2</button><span id="annotated-cell-10-5" class="code-annotation-target"><a href="#annotated-cell-10-5"></a>    <span class="at">x =</span> <span class="st">"種類"</span>,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="3">3</button><span id="annotated-cell-10-6" class="code-annotation-target"><a href="#annotated-cell-10-6"></a>    <span class="at">y =</span> <span class="st">"台数"</span>,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="4">4</button><span id="annotated-cell-10-7" class="code-annotation-target"><a href="#annotated-cell-10-7"></a>    <span class="at">caption =</span> <span class="st">"データ出典: mpg (ggplot2)"</span></span>
+<span id="annotated-cell-10-8"><a href="#annotated-cell-10-8"></a>  )</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-9" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-10" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-9" data-code-lines="4" data-code-annotation="1">グラフのタイトル</span>
+<span data-code-cell="annotated-cell-10" data-code-lines="4" data-code-annotation="1">グラフのタイトル</span>
 </dd>
-<dt data-target-cell="annotated-cell-9" data-target-annotation="2">2</dt>
+<dt data-target-cell="annotated-cell-10" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-9" data-code-lines="5" data-code-annotation="2">X 軸のラベル</span>
+<span data-code-cell="annotated-cell-10" data-code-lines="5" data-code-annotation="2">X 軸のラベル</span>
 </dd>
-<dt data-target-cell="annotated-cell-9" data-target-annotation="3">3</dt>
+<dt data-target-cell="annotated-cell-10" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-cell="annotated-cell-9" data-code-lines="6" data-code-annotation="3">Y 軸のラベル</span>
+<span data-code-cell="annotated-cell-10" data-code-lines="6" data-code-annotation="3">Y 軸のラベル</span>
 </dd>
-<dt data-target-cell="annotated-cell-9" data-target-annotation="4">4</dt>
+<dt data-target-cell="annotated-cell-10" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-cell="annotated-cell-9" data-code-lines="7" data-code-annotation="4">キャプション（右下に表示）</span>
+<span data-code-cell="annotated-cell-10" data-code-lines="7" data-code-annotation="4">キャプション（右下に表示）</span>
 </dd>
 </dl>
 </div>
@@ -809,18 +817,18 @@ Note
 <p>デフォルトでは棒がアルファベット順に並びます。 <strong>個数が多い順</strong>に並べると読みやすくなります。</p>
 <p><strong><code>fct_infreq()</code> で頻度順に並べる</strong></p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-10"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="1">1</button><span id="annotated-cell-10-1" class="code-annotation-target"><a href="#annotated-cell-10-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_infreq</span>(class))) <span class="sc">+</span></span>
-<span id="annotated-cell-10-2"><a href="#annotated-cell-10-2"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
-<span id="annotated-cell-10-3"><a href="#annotated-cell-10-3"></a>  <span class="fu">labs</span>(</span>
-<span id="annotated-cell-10-4"><a href="#annotated-cell-10-4"></a>    <span class="at">title =</span> <span class="st">"車のクラス別台数（頻度順）"</span>,</span>
-<span id="annotated-cell-10-5"><a href="#annotated-cell-10-5"></a>    <span class="at">x =</span> <span class="st">"クラス"</span>,</span>
-<span id="annotated-cell-10-6"><a href="#annotated-cell-10-6"></a>    <span class="at">y =</span> <span class="st">"台数"</span></span>
-<span id="annotated-cell-10-7"><a href="#annotated-cell-10-7"></a>  )</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-11"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="1">1</button><span id="annotated-cell-11-1" class="code-annotation-target"><a href="#annotated-cell-11-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_infreq</span>(class))) <span class="sc">+</span></span>
+<span id="annotated-cell-11-2"><a href="#annotated-cell-11-2"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-11-3"><a href="#annotated-cell-11-3"></a>  <span class="fu">labs</span>(</span>
+<span id="annotated-cell-11-4"><a href="#annotated-cell-11-4"></a>    <span class="at">title =</span> <span class="st">"車のクラス別台数（頻度順）"</span>,</span>
+<span id="annotated-cell-11-5"><a href="#annotated-cell-11-5"></a>    <span class="at">x =</span> <span class="st">"クラス"</span>,</span>
+<span id="annotated-cell-11-6"><a href="#annotated-cell-11-6"></a>    <span class="at">y =</span> <span class="st">"台数"</span></span>
+<span id="annotated-cell-11-7"><a href="#annotated-cell-11-7"></a>  )</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-10" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-11" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-10" data-code-lines="1" data-code-annotation="1"><code>fct_infreq()</code> で因子の順序を頻度の多い順に変換する（<code>forcats</code> パッケージの関数）</span>
+<span data-code-cell="annotated-cell-11" data-code-lines="1" data-code-annotation="1"><code>fct_infreq()</code> で因子の順序を頻度の多い順に変換する（<code>forcats</code> パッケージの関数）</span>
 </dd>
 </dl>
 </div>
@@ -877,23 +885,23 @@ Note
 <h3 class="unnumbered anchored" data-anchor-id="横向き棒グラフ">横向き棒グラフ</h3>
 <p>カテゴリ名が長い場合、横向き（水平）にすると読みやすいです。</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-11"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="1">1</button><span id="annotated-cell-11-1" class="code-annotation-target"><a href="#annotated-cell-11-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_infreq</span>(manufacturer))) <span class="sc">+</span></span>
-<span id="annotated-cell-11-2"><a href="#annotated-cell-11-2"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="2">2</button><span id="annotated-cell-11-3" class="code-annotation-target"><a href="#annotated-cell-11-3"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="annotated-cell-11-4"><a href="#annotated-cell-11-4"></a>  <span class="fu">labs</span>(</span>
-<span id="annotated-cell-11-5"><a href="#annotated-cell-11-5"></a>    <span class="at">title =</span> <span class="st">"メーカー別台数"</span>,</span>
-<span id="annotated-cell-11-6"><a href="#annotated-cell-11-6"></a>    <span class="at">x =</span> <span class="st">"メーカー"</span>,</span>
-<span id="annotated-cell-11-7"><a href="#annotated-cell-11-7"></a>    <span class="at">y =</span> <span class="st">"台数"</span></span>
-<span id="annotated-cell-11-8"><a href="#annotated-cell-11-8"></a>  )</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-12"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="1">1</button><span id="annotated-cell-12-1" class="code-annotation-target"><a href="#annotated-cell-12-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_infreq</span>(manufacturer))) <span class="sc">+</span></span>
+<span id="annotated-cell-12-2"><a href="#annotated-cell-12-2"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="2">2</button><span id="annotated-cell-12-3" class="code-annotation-target"><a href="#annotated-cell-12-3"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="annotated-cell-12-4"><a href="#annotated-cell-12-4"></a>  <span class="fu">labs</span>(</span>
+<span id="annotated-cell-12-5"><a href="#annotated-cell-12-5"></a>    <span class="at">title =</span> <span class="st">"メーカー別台数"</span>,</span>
+<span id="annotated-cell-12-6"><a href="#annotated-cell-12-6"></a>    <span class="at">x =</span> <span class="st">"メーカー"</span>,</span>
+<span id="annotated-cell-12-7"><a href="#annotated-cell-12-7"></a>    <span class="at">y =</span> <span class="st">"台数"</span></span>
+<span id="annotated-cell-12-8"><a href="#annotated-cell-12-8"></a>  )</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-11" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-12" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-11" data-code-lines="1" data-code-annotation="1">メーカー名は長いので横向きにすると読みやすい</span>
+<span data-code-cell="annotated-cell-12" data-code-lines="1" data-code-annotation="1">メーカー名は長いので横向きにすると読みやすい</span>
 </dd>
-<dt data-target-cell="annotated-cell-11" data-target-annotation="2">2</dt>
+<dt data-target-cell="annotated-cell-12" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-11" data-code-lines="3" data-code-annotation="2"><code>coord_flip()</code> で X 軸と Y 軸を入れ替える</span>
+<span data-code-cell="annotated-cell-12" data-code-lines="3" data-code-annotation="2"><code>coord_flip()</code> で X 軸と Y 軸を入れ替える</span>
 </dd>
 </dl>
 </div>
@@ -918,8 +926,8 @@ Note
 <div class="callout-body-container callout-body">
 <p><strong>モダンな書き方</strong></p>
 <p><code>ggplot2</code> 3.3.0 以降は <code>coord_flip()</code> の代わりに、 <code>aes(y = class)</code> のように Y 軸に直接カテゴリを指定する方法も使えます。</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">fct_infreq</span>(manufacturer))) <span class="sc">+</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">fct_infreq</span>(manufacturer))) <span class="sc">+</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>どちらでも同じ結果になります。</p>
 </div>
 </div>
@@ -932,22 +940,22 @@ Note
 <p><code>fill</code> に別の変数を指定すると、グループ別の棒グラフになります。</p>
 <p><strong>積み上げ棒グラフ（デフォルト）</strong></p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-12"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="1">1</button><span id="annotated-cell-12-1" class="code-annotation-target"><a href="#annotated-cell-12-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> class, <span class="at">fill =</span> drv)) <span class="sc">+</span></span>
-<span id="annotated-cell-12-2"><a href="#annotated-cell-12-2"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
-<span id="annotated-cell-12-3"><a href="#annotated-cell-12-3"></a>  <span class="fu">labs</span>(</span>
-<span id="annotated-cell-12-4"><a href="#annotated-cell-12-4"></a>    <span class="at">title =</span> <span class="st">"クラス・駆動方式別台数"</span>,</span>
-<span id="annotated-cell-12-5"><a href="#annotated-cell-12-5"></a>    <span class="at">x =</span> <span class="st">"クラス"</span>, <span class="at">y =</span> <span class="st">"台数"</span>,</span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="2">2</button><span id="annotated-cell-12-6" class="code-annotation-target"><a href="#annotated-cell-12-6"></a>    <span class="at">fill =</span> <span class="st">"駆動方式"</span></span>
-<span id="annotated-cell-12-7"><a href="#annotated-cell-12-7"></a>  )</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-13"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="1">1</button><span id="annotated-cell-13-1" class="code-annotation-target"><a href="#annotated-cell-13-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> class, <span class="at">fill =</span> drv)) <span class="sc">+</span></span>
+<span id="annotated-cell-13-2"><a href="#annotated-cell-13-2"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="annotated-cell-13-3"><a href="#annotated-cell-13-3"></a>  <span class="fu">labs</span>(</span>
+<span id="annotated-cell-13-4"><a href="#annotated-cell-13-4"></a>    <span class="at">title =</span> <span class="st">"クラス・駆動方式別台数"</span>,</span>
+<span id="annotated-cell-13-5"><a href="#annotated-cell-13-5"></a>    <span class="at">x =</span> <span class="st">"クラス"</span>, <span class="at">y =</span> <span class="st">"台数"</span>,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="2">2</button><span id="annotated-cell-13-6" class="code-annotation-target"><a href="#annotated-cell-13-6"></a>    <span class="at">fill =</span> <span class="st">"駆動方式"</span></span>
+<span id="annotated-cell-13-7"><a href="#annotated-cell-13-7"></a>  )</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-12" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-13" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-12" data-code-lines="1" data-code-annotation="1"><code>fill = drv</code> で駆動方式ごとに色分け</span>
+<span data-code-cell="annotated-cell-13" data-code-lines="1" data-code-annotation="1"><code>fill = drv</code> で駆動方式ごとに色分け</span>
 </dd>
-<dt data-target-cell="annotated-cell-12" data-target-annotation="2">2</dt>
+<dt data-target-cell="annotated-cell-13" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-12" data-code-lines="6" data-code-annotation="2"><code>labs()</code> の <code>fill</code> で凡例のタイトルを設定</span>
+<span data-code-cell="annotated-cell-13" data-code-lines="6" data-code-annotation="2"><code>labs()</code> の <code>fill</code> で凡例のタイトルを設定</span>
 </dd>
 </dl>
 </div>
@@ -965,18 +973,18 @@ Note
 </div>
 <p><strong>並列棒グラフ（<code>position = "dodge"</code>）</strong></p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-13"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-13-1"><a href="#annotated-cell-13-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> class, <span class="at">fill =</span> drv)) <span class="sc">+</span></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="1">1</button><span id="annotated-cell-13-2" class="code-annotation-target"><a href="#annotated-cell-13-2"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
-<span id="annotated-cell-13-3"><a href="#annotated-cell-13-3"></a>  <span class="fu">labs</span>(</span>
-<span id="annotated-cell-13-4"><a href="#annotated-cell-13-4"></a>    <span class="at">title =</span> <span class="st">"クラス・駆動方式別台数（並列）"</span>,</span>
-<span id="annotated-cell-13-5"><a href="#annotated-cell-13-5"></a>    <span class="at">x =</span> <span class="st">"クラス"</span>, <span class="at">y =</span> <span class="st">"台数"</span>,</span>
-<span id="annotated-cell-13-6"><a href="#annotated-cell-13-6"></a>    <span class="at">fill =</span> <span class="st">"駆動方式"</span></span>
-<span id="annotated-cell-13-7"><a href="#annotated-cell-13-7"></a>  )</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-14"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-14-1"><a href="#annotated-cell-14-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> class, <span class="at">fill =</span> drv)) <span class="sc">+</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-14" data-target-annotation="1">1</button><span id="annotated-cell-14-2" class="code-annotation-target"><a href="#annotated-cell-14-2"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-14-3"><a href="#annotated-cell-14-3"></a>  <span class="fu">labs</span>(</span>
+<span id="annotated-cell-14-4"><a href="#annotated-cell-14-4"></a>    <span class="at">title =</span> <span class="st">"クラス・駆動方式別台数（並列）"</span>,</span>
+<span id="annotated-cell-14-5"><a href="#annotated-cell-14-5"></a>    <span class="at">x =</span> <span class="st">"クラス"</span>, <span class="at">y =</span> <span class="st">"台数"</span>,</span>
+<span id="annotated-cell-14-6"><a href="#annotated-cell-14-6"></a>    <span class="at">fill =</span> <span class="st">"駆動方式"</span></span>
+<span id="annotated-cell-14-7"><a href="#annotated-cell-14-7"></a>  )</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-13" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-14" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-13" data-code-lines="2" data-code-annotation="1"><code>position = "dodge"</code> で横に並べる（デフォルトは <code>"stack"</code>）</span>
+<span data-code-cell="annotated-cell-14" data-code-lines="2" data-code-annotation="1"><code>position = "dodge"</code> で横に並べる（デフォルトは <code>"stack"</code>）</span>
 </dd>
 </dl>
 </div>
@@ -994,23 +1002,23 @@ Note
 </div>
 <p><strong>割合の積み上げ棒グラフ（<code>position = "fill"</code>）</strong></p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-14"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-14-1"><a href="#annotated-cell-14-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> class, <span class="at">fill =</span> drv)) <span class="sc">+</span></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-14" data-target-annotation="1">1</button><span id="annotated-cell-14-2" class="code-annotation-target"><a href="#annotated-cell-14-2"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
-<span id="annotated-cell-14-3"><a href="#annotated-cell-14-3"></a>  <span class="fu">labs</span>(</span>
-<span id="annotated-cell-14-4"><a href="#annotated-cell-14-4"></a>    <span class="at">title =</span> <span class="st">"クラス別の駆動方式の割合"</span>,</span>
-<span id="annotated-cell-14-5"><a href="#annotated-cell-14-5"></a>    <span class="at">x =</span> <span class="st">"クラス"</span>, <span class="at">y =</span> <span class="st">"割合"</span>,</span>
-<span id="annotated-cell-14-6"><a href="#annotated-cell-14-6"></a>    <span class="at">fill =</span> <span class="st">"駆動方式"</span></span>
-<span id="annotated-cell-14-7"><a href="#annotated-cell-14-7"></a>  ) <span class="sc">+</span></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-14" data-target-annotation="2">2</button><span id="annotated-cell-14-8" class="code-annotation-target"><a href="#annotated-cell-14-8"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>percent)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-15"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-15-1"><a href="#annotated-cell-15-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> class, <span class="at">fill =</span> drv)) <span class="sc">+</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-15" data-target-annotation="1">1</button><span id="annotated-cell-15-2" class="code-annotation-target"><a href="#annotated-cell-15-2"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-15-3"><a href="#annotated-cell-15-3"></a>  <span class="fu">labs</span>(</span>
+<span id="annotated-cell-15-4"><a href="#annotated-cell-15-4"></a>    <span class="at">title =</span> <span class="st">"クラス別の駆動方式の割合"</span>,</span>
+<span id="annotated-cell-15-5"><a href="#annotated-cell-15-5"></a>    <span class="at">x =</span> <span class="st">"クラス"</span>, <span class="at">y =</span> <span class="st">"割合"</span>,</span>
+<span id="annotated-cell-15-6"><a href="#annotated-cell-15-6"></a>    <span class="at">fill =</span> <span class="st">"駆動方式"</span></span>
+<span id="annotated-cell-15-7"><a href="#annotated-cell-15-7"></a>  ) <span class="sc">+</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-15" data-target-annotation="2">2</button><span id="annotated-cell-15-8" class="code-annotation-target"><a href="#annotated-cell-15-8"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>percent)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-14" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-15" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-14" data-code-lines="2" data-code-annotation="1"><code>position = "fill"</code> で各棒を 100% に正規化</span>
+<span data-code-cell="annotated-cell-15" data-code-lines="2" data-code-annotation="1"><code>position = "fill"</code> で各棒を 100% に正規化</span>
 </dd>
-<dt data-target-cell="annotated-cell-14" data-target-annotation="2">2</dt>
+<dt data-target-cell="annotated-cell-15" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-14" data-code-lines="8" data-code-annotation="2">Y 軸をパーセント表示に変換</span>
+<span data-code-cell="annotated-cell-15" data-code-lines="8" data-code-annotation="2">Y 軸をパーセント表示に変換</span>
 </dd>
 </dl>
 </div>
@@ -1066,30 +1074,30 @@ Note
 <h3 class="unnumbered anchored" data-anchor-id="geom_col-値を直接指定する"><code>geom_col()</code> 値を直接指定する</h3>
 <p><code>geom_bar()</code> はデータの<strong>個数</strong>を自動で数えますが、 データにすでに集計値がある場合は <code>geom_col()</code> を使います。</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-15"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-15-1"><a href="#annotated-cell-15-1"></a><span class="co"># まず dplyr でデータを集計する</span></span>
-<span id="annotated-cell-15-2"><a href="#annotated-cell-15-2"></a>mpg_avg <span class="ot">&lt;-</span> mpg <span class="sc">|&gt;</span></span>
-<span id="annotated-cell-15-3"><a href="#annotated-cell-15-3"></a>  <span class="fu">group_by</span>(manufacturer) <span class="sc">|&gt;</span></span>
-<span id="annotated-cell-15-4"><a href="#annotated-cell-15-4"></a>  <span class="fu">summarise</span>(<span class="at">avg_hwy =</span> <span class="fu">mean</span>(hwy)) <span class="sc">|&gt;</span></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-15" data-target-annotation="1">1</button><span id="annotated-cell-15-5" class="code-annotation-target"><a href="#annotated-cell-15-5"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(avg_hwy))</span>
-<span id="annotated-cell-15-6"><a href="#annotated-cell-15-6"></a></span>
-<span id="annotated-cell-15-7"><a href="#annotated-cell-15-7"></a><span class="co"># geom_col() で棒グラフを描く</span></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-15" data-target-annotation="2">2</button><span id="annotated-cell-15-8" class="code-annotation-target"><a href="#annotated-cell-15-8"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg_avg, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(manufacturer, avg_hwy), <span class="at">y =</span> avg_hwy)) <span class="sc">+</span></span>
-<span id="annotated-cell-15-9"><a href="#annotated-cell-15-9"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
-<span id="annotated-cell-15-10"><a href="#annotated-cell-15-10"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="annotated-cell-15-11"><a href="#annotated-cell-15-11"></a>  <span class="fu">labs</span>(</span>
-<span id="annotated-cell-15-12"><a href="#annotated-cell-15-12"></a>    <span class="at">title =</span> <span class="st">"メーカー別の平均高速道路燃費"</span>,</span>
-<span id="annotated-cell-15-13"><a href="#annotated-cell-15-13"></a>    <span class="at">x =</span> <span class="st">"メーカー"</span>,</span>
-<span id="annotated-cell-15-14"><a href="#annotated-cell-15-14"></a>    <span class="at">y =</span> <span class="st">"平均燃費 (mpg)"</span></span>
-<span id="annotated-cell-15-15"><a href="#annotated-cell-15-15"></a>  )</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-16"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-16-1"><a href="#annotated-cell-16-1"></a><span class="co"># まず dplyr でデータを集計する</span></span>
+<span id="annotated-cell-16-2"><a href="#annotated-cell-16-2"></a>mpg_avg <span class="ot">&lt;-</span> mpg <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-16-3"><a href="#annotated-cell-16-3"></a>  <span class="fu">group_by</span>(manufacturer) <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-16-4"><a href="#annotated-cell-16-4"></a>  <span class="fu">summarise</span>(<span class="at">avg_hwy =</span> <span class="fu">mean</span>(hwy)) <span class="sc">|&gt;</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-16" data-target-annotation="1">1</button><span id="annotated-cell-16-5" class="code-annotation-target"><a href="#annotated-cell-16-5"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(avg_hwy))</span>
+<span id="annotated-cell-16-6"><a href="#annotated-cell-16-6"></a></span>
+<span id="annotated-cell-16-7"><a href="#annotated-cell-16-7"></a><span class="co"># geom_col() で棒グラフを描く</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-16" data-target-annotation="2">2</button><span id="annotated-cell-16-8" class="code-annotation-target"><a href="#annotated-cell-16-8"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg_avg, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(manufacturer, avg_hwy), <span class="at">y =</span> avg_hwy)) <span class="sc">+</span></span>
+<span id="annotated-cell-16-9"><a href="#annotated-cell-16-9"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-16-10"><a href="#annotated-cell-16-10"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="annotated-cell-16-11"><a href="#annotated-cell-16-11"></a>  <span class="fu">labs</span>(</span>
+<span id="annotated-cell-16-12"><a href="#annotated-cell-16-12"></a>    <span class="at">title =</span> <span class="st">"メーカー別の平均高速道路燃費"</span>,</span>
+<span id="annotated-cell-16-13"><a href="#annotated-cell-16-13"></a>    <span class="at">x =</span> <span class="st">"メーカー"</span>,</span>
+<span id="annotated-cell-16-14"><a href="#annotated-cell-16-14"></a>    <span class="at">y =</span> <span class="st">"平均燃費 (mpg)"</span></span>
+<span id="annotated-cell-16-15"><a href="#annotated-cell-16-15"></a>  )</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-15" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-16" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-15" data-code-lines="5" data-code-annotation="1">降順に並べ替えて集計</span>
+<span data-code-cell="annotated-cell-16" data-code-lines="5" data-code-annotation="1">降順に並べ替えて集計</span>
 </dd>
-<dt data-target-cell="annotated-cell-15" data-target-annotation="2">2</dt>
+<dt data-target-cell="annotated-cell-16" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-15" data-code-lines="8" data-code-annotation="2"><code>reorder(manufacturer, avg_hwy)</code> で燃費順にメーカーを並べる</span>
+<span data-code-cell="annotated-cell-16" data-code-lines="8" data-code-annotation="2"><code>reorder(manufacturer, avg_hwy)</code> で燃費順にメーカーを並べる</span>
 </dd>
 </dl>
 </div>
@@ -1144,15 +1152,15 @@ Note
 <h3 class="unnumbered anchored" data-anchor-id="テーマを変える">テーマを変える</h3>
 <p><code>theme_*()</code> でグラフ全体のデザインを変更できます。</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-16"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-16-1"><a href="#annotated-cell-16-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_infreq</span>(class))) <span class="sc">+</span></span>
-<span id="annotated-cell-16-2"><a href="#annotated-cell-16-2"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
-<span id="annotated-cell-16-3"><a href="#annotated-cell-16-3"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"車のクラス別台数"</span>, <span class="at">x =</span> <span class="st">"クラス"</span>, <span class="at">y =</span> <span class="st">"台数"</span>) <span class="sc">+</span></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-16" data-target-annotation="1">1</button><span id="annotated-cell-16-4" class="code-annotation-target"><a href="#annotated-cell-16-4"></a>  <span class="fu">theme_minimal</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-17"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-17-1"><a href="#annotated-cell-17-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_infreq</span>(class))) <span class="sc">+</span></span>
+<span id="annotated-cell-17-2"><a href="#annotated-cell-17-2"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-17-3"><a href="#annotated-cell-17-3"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"車のクラス別台数"</span>, <span class="at">x =</span> <span class="st">"クラス"</span>, <span class="at">y =</span> <span class="st">"台数"</span>) <span class="sc">+</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-17" data-target-annotation="1">1</button><span id="annotated-cell-17-4" class="code-annotation-target"><a href="#annotated-cell-17-4"></a>  <span class="fu">theme_minimal</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-16" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-17" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-16" data-code-lines="4" data-code-annotation="1"><code>theme_minimal()</code> はシンプルで講義資料に向いています</span>
+<span data-code-cell="annotated-cell-17" data-code-lines="4" data-code-annotation="1"><code>theme_minimal()</code> はシンプルで講義資料に向いています</span>
 </dd>
 </dl>
 </div>
@@ -1213,132 +1221,8 @@ Note
 </div>
 </section>
 </section>
-<section id="sec-bar-exercises" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="sec-bar-exercises"><span class="header-section-number">3.5</span> 演習問題（棒グラフ）</h2>
-<div class="mondai callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Warning
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><code>mpg</code> データを使って、<strong>シリンダー数（<code>cyl</code>）別の台数</strong>を棒グラフで描いてください。 ただし、以下の条件を満たしてください。</p>
-<ul>
-<li>棒の色：<code>"tomato"</code></li>
-<li>輪郭の色：<code>"white"</code></li>
-<li>X 軸ラベル：「シリンダー数」</li>
-<li>Y 軸ラベル：「台数」</li>
-<li>タイトル：「シリンダー数別の台数」</li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> ___, <span class="fu">aes</span>(<span class="at">x =</span> ___)) <span class="sc">+</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> ___, <span class="at">color =</span> ___) <span class="sc">+</span></span>
-<span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">labs</span>(</span>
-<span id="cb9-4"><a href="#cb9-4"></a>    <span class="at">title =</span> ___,</span>
-<span id="cb9-5"><a href="#cb9-5"></a>    <span class="at">x =</span> ___,</span>
-<span id="cb9-6"><a href="#cb9-6"></a>    <span class="at">y =</span> ___</span>
-<span id="cb9-7"><a href="#cb9-7"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</div>
-</div>
-<div class="kotae callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(cyl))) <span class="sc">+</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"tomato"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
-<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">labs</span>(</span>
-<span id="cb10-4"><a href="#cb10-4"></a>    <span class="at">title =</span> <span class="st">"シリンダー数別の台数"</span>,</span>
-<span id="cb10-5"><a href="#cb10-5"></a>    <span class="at">x =</span> <span class="st">"シリンダー数"</span>,</span>
-<span id="cb10-6"><a href="#cb10-6"></a>    <span class="at">y =</span> <span class="st">"台数"</span></span>
-<span id="cb10-7"><a href="#cb10-7"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="lec03_files/figure-html/ex-bar-01-ans-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="2100"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div style="margin-top: 3.5em;">
-
-</div>
-<div class="mondai callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Warning
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><code>mpg</code> データを使って、<strong>クラス（<code>class</code>）別・駆動方式（<code>drv</code>）別の並列棒グラフ</strong>を描いてください。 ただし、以下の条件を満たしてください。</p>
-<ul>
-<li><code>position = "dodge"</code> を使う</li>
-<li>X 軸ラベル・Y 軸ラベル・タイトル・凡例タイトルを適切に設定する</li>
-<li>テーマ：<code>theme_minimal()</code></li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> ___, <span class="fu">aes</span>(<span class="at">x =</span> ___, <span class="at">fill =</span> ___)) <span class="sc">+</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> ___) <span class="sc">+</span></span>
-<span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">labs</span>(</span>
-<span id="cb11-4"><a href="#cb11-4"></a>    <span class="at">title =</span> ___,</span>
-<span id="cb11-5"><a href="#cb11-5"></a>    <span class="at">x =</span> ___, <span class="at">y =</span> ___,</span>
-<span id="cb11-6"><a href="#cb11-6"></a>    <span class="at">fill =</span> ___</span>
-<span id="cb11-7"><a href="#cb11-7"></a>  ) <span class="sc">+</span></span>
-<span id="cb11-8"><a href="#cb11-8"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</div>
-</div>
-<div class="kotae callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> class, <span class="at">fill =</span> drv)) <span class="sc">+</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a>  <span class="fu">labs</span>(</span>
-<span id="cb12-4"><a href="#cb12-4"></a>    <span class="at">title =</span> <span class="st">"クラス・駆動方式別台数（並列）"</span>,</span>
-<span id="cb12-5"><a href="#cb12-5"></a>    <span class="at">x =</span> <span class="st">"クラス"</span>,</span>
-<span id="cb12-6"><a href="#cb12-6"></a>    <span class="at">y =</span> <span class="st">"台数"</span>,</span>
-<span id="cb12-7"><a href="#cb12-7"></a>    <span class="at">fill =</span> <span class="st">"駆動方式"</span></span>
-<span id="cb12-8"><a href="#cb12-8"></a>  ) <span class="sc">+</span></span>
-<span id="cb12-9"><a href="#cb12-9"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="lec03_files/figure-html/ex-bar-02-ans-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="2100"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div style="margin-top: 4.0em;">
-
-</div>
-</section>
-<section id="sec-histogram" class="level2" data-number="3.6">
-<h2 data-number="3.6" class="anchored" data-anchor-id="sec-histogram"><span class="header-section-number">3.6</span> ヒストグラム</h2>
+<section id="sec-histogram" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="sec-histogram"><span class="header-section-number">3.5</span> ヒストグラム</h2>
 <p>ヒストグラムは<strong>連続変数の分布</strong>を確認するための基本的なグラフです。</p>
 <ul>
 <li>データを<strong>ビン（bin）</strong>と呼ばれる区間に分割する</li>
@@ -1346,8 +1230,8 @@ Tip
 <li>棒の間には隙間がない（← 棒グラフとの違い！）</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> diamonds, <span class="fu">aes</span>(<span class="at">x =</span> price)) <span class="sc">+</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a>  <span class="fu">geom_histogram</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> diamonds, <span class="fu">aes</span>(<span class="at">x =</span> price)) <span class="sc">+</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">geom_histogram</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`stat_bin()` using `bins = 30`. Pick better value `binwidth`.</code></pre>
 </div>
@@ -1381,24 +1265,24 @@ Important
 <h3 class="unnumbered anchored" data-anchor-id="ビンの幅を調整する">ビンの幅を調整する</h3>
 <p>ビンの幅（区間の広さ）の設定は、ヒストグラムで最も重要な調整です。</p>
 <p><strong><code>binwidth</code>（ビンの幅を指定）</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-18"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-18-1"><a href="#annotated-cell-18-1"></a><span class="co"># 細かいビン（binwidth = 500 ドル）</span></span>
-<span id="annotated-cell-18-2"><a href="#annotated-cell-18-2"></a><span class="fu">ggplot</span>(<span class="at">data =</span> diamonds, <span class="fu">aes</span>(<span class="at">x =</span> price)) <span class="sc">+</span></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-18" data-target-annotation="1">1</button><span id="annotated-cell-18-3" class="code-annotation-target"><a href="#annotated-cell-18-3"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">500</span>) <span class="sc">+</span></span>
-<span id="annotated-cell-18-4"><a href="#annotated-cell-18-4"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"binwidth = 500"</span>, <span class="at">x =</span> <span class="st">"価格（ドル）"</span>, <span class="at">y =</span> <span class="st">"個数"</span>)</span>
-<span id="annotated-cell-18-5"><a href="#annotated-cell-18-5"></a></span>
-<span id="annotated-cell-18-6"><a href="#annotated-cell-18-6"></a><span class="co"># 粗いビン（binwidth = 2000 ドル）</span></span>
-<span id="annotated-cell-18-7"><a href="#annotated-cell-18-7"></a><span class="fu">ggplot</span>(<span class="at">data =</span> diamonds, <span class="fu">aes</span>(<span class="at">x =</span> price)) <span class="sc">+</span></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-18" data-target-annotation="2">2</button><span id="annotated-cell-18-8" class="code-annotation-target"><a href="#annotated-cell-18-8"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">2000</span>) <span class="sc">+</span></span>
-<span id="annotated-cell-18-9"><a href="#annotated-cell-18-9"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"binwidth = 2000"</span>, <span class="at">x =</span> <span class="st">"価格（ドル）"</span>, <span class="at">y =</span> <span class="st">"個数"</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-19"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-19-1"><a href="#annotated-cell-19-1"></a><span class="co"># 細かいビン（binwidth = 500 ドル）</span></span>
+<span id="annotated-cell-19-2"><a href="#annotated-cell-19-2"></a><span class="fu">ggplot</span>(<span class="at">data =</span> diamonds, <span class="fu">aes</span>(<span class="at">x =</span> price)) <span class="sc">+</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-19" data-target-annotation="1">1</button><span id="annotated-cell-19-3" class="code-annotation-target"><a href="#annotated-cell-19-3"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">500</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-19-4"><a href="#annotated-cell-19-4"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"binwidth = 500"</span>, <span class="at">x =</span> <span class="st">"価格（ドル）"</span>, <span class="at">y =</span> <span class="st">"個数"</span>)</span>
+<span id="annotated-cell-19-5"><a href="#annotated-cell-19-5"></a></span>
+<span id="annotated-cell-19-6"><a href="#annotated-cell-19-6"></a><span class="co"># 粗いビン（binwidth = 2000 ドル）</span></span>
+<span id="annotated-cell-19-7"><a href="#annotated-cell-19-7"></a><span class="fu">ggplot</span>(<span class="at">data =</span> diamonds, <span class="fu">aes</span>(<span class="at">x =</span> price)) <span class="sc">+</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-19" data-target-annotation="2">2</button><span id="annotated-cell-19-8" class="code-annotation-target"><a href="#annotated-cell-19-8"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">2000</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-19-9"><a href="#annotated-cell-19-9"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"binwidth = 2000"</span>, <span class="at">x =</span> <span class="st">"価格（ドル）"</span>, <span class="at">y =</span> <span class="st">"個数"</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-18" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-19" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-18" data-code-lines="3" data-code-annotation="1">500 ドル刻みで区切る（細かい分布がわかる）</span>
+<span data-code-cell="annotated-cell-19" data-code-lines="3" data-code-annotation="1">500 ドル刻みで区切る（細かい分布がわかる）</span>
 </dd>
-<dt data-target-cell="annotated-cell-18" data-target-annotation="2">2</dt>
+<dt data-target-cell="annotated-cell-19" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-18" data-code-lines="8" data-code-annotation="2">2000 ドル刻みで区切る（全体の形がわかる）</span>
+<span data-code-cell="annotated-cell-19" data-code-lines="8" data-code-annotation="2">2000 ドル刻みで区切る（全体の形がわかる）</span>
 </dd>
 </dl>
 </div>
@@ -1474,33 +1358,33 @@ Note
 <section id="色と見た目を整える" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="色と見た目を整える">色と見た目を整える</h3>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-19"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-19-1"><a href="#annotated-cell-19-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> diamonds, <span class="fu">aes</span>(<span class="at">x =</span> price)) <span class="sc">+</span></span>
-<span id="annotated-cell-19-2"><a href="#annotated-cell-19-2"></a>  <span class="fu">geom_histogram</span>(</span>
-<span id="annotated-cell-19-3"><a href="#annotated-cell-19-3"></a>    <span class="at">binwidth =</span> <span class="dv">500</span>,</span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-19" data-target-annotation="1">1</button><span id="annotated-cell-19-4" class="code-annotation-target"><a href="#annotated-cell-19-4"></a>    <span class="at">fill =</span> <span class="st">"steelblue"</span>,</span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-19" data-target-annotation="2">2</button><span id="annotated-cell-19-5" class="code-annotation-target"><a href="#annotated-cell-19-5"></a>    <span class="at">color =</span> <span class="st">"white"</span>,</span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-19" data-target-annotation="3">3</button><span id="annotated-cell-19-6" class="code-annotation-target"><a href="#annotated-cell-19-6"></a>    <span class="at">linewidth =</span> <span class="fl">0.3</span></span>
-<span id="annotated-cell-19-7"><a href="#annotated-cell-19-7"></a>  ) <span class="sc">+</span></span>
-<span id="annotated-cell-19-8"><a href="#annotated-cell-19-8"></a>  <span class="fu">labs</span>(</span>
-<span id="annotated-cell-19-9"><a href="#annotated-cell-19-9"></a>    <span class="at">title =</span> <span class="st">"ダイヤモンド価格の分布"</span>,</span>
-<span id="annotated-cell-19-10"><a href="#annotated-cell-19-10"></a>    <span class="at">x =</span> <span class="st">"価格（ドル）"</span>,</span>
-<span id="annotated-cell-19-11"><a href="#annotated-cell-19-11"></a>    <span class="at">y =</span> <span class="st">"個数"</span>,</span>
-<span id="annotated-cell-19-12"><a href="#annotated-cell-19-12"></a>    <span class="at">caption =</span> <span class="st">"データ出典: diamonds (ggplot2)"</span></span>
-<span id="annotated-cell-19-13"><a href="#annotated-cell-19-13"></a>  ) <span class="sc">+</span></span>
-<span id="annotated-cell-19-14"><a href="#annotated-cell-19-14"></a>  <span class="fu">theme_minimal</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-20"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-20-1"><a href="#annotated-cell-20-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> diamonds, <span class="fu">aes</span>(<span class="at">x =</span> price)) <span class="sc">+</span></span>
+<span id="annotated-cell-20-2"><a href="#annotated-cell-20-2"></a>  <span class="fu">geom_histogram</span>(</span>
+<span id="annotated-cell-20-3"><a href="#annotated-cell-20-3"></a>    <span class="at">binwidth =</span> <span class="dv">500</span>,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-20" data-target-annotation="1">1</button><span id="annotated-cell-20-4" class="code-annotation-target"><a href="#annotated-cell-20-4"></a>    <span class="at">fill =</span> <span class="st">"steelblue"</span>,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-20" data-target-annotation="2">2</button><span id="annotated-cell-20-5" class="code-annotation-target"><a href="#annotated-cell-20-5"></a>    <span class="at">color =</span> <span class="st">"white"</span>,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-20" data-target-annotation="3">3</button><span id="annotated-cell-20-6" class="code-annotation-target"><a href="#annotated-cell-20-6"></a>    <span class="at">linewidth =</span> <span class="fl">0.3</span></span>
+<span id="annotated-cell-20-7"><a href="#annotated-cell-20-7"></a>  ) <span class="sc">+</span></span>
+<span id="annotated-cell-20-8"><a href="#annotated-cell-20-8"></a>  <span class="fu">labs</span>(</span>
+<span id="annotated-cell-20-9"><a href="#annotated-cell-20-9"></a>    <span class="at">title =</span> <span class="st">"ダイヤモンド価格の分布"</span>,</span>
+<span id="annotated-cell-20-10"><a href="#annotated-cell-20-10"></a>    <span class="at">x =</span> <span class="st">"価格（ドル）"</span>,</span>
+<span id="annotated-cell-20-11"><a href="#annotated-cell-20-11"></a>    <span class="at">y =</span> <span class="st">"個数"</span>,</span>
+<span id="annotated-cell-20-12"><a href="#annotated-cell-20-12"></a>    <span class="at">caption =</span> <span class="st">"データ出典: diamonds (ggplot2)"</span></span>
+<span id="annotated-cell-20-13"><a href="#annotated-cell-20-13"></a>  ) <span class="sc">+</span></span>
+<span id="annotated-cell-20-14"><a href="#annotated-cell-20-14"></a>  <span class="fu">theme_minimal</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-19" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-20" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-19" data-code-lines="4" data-code-annotation="1">棒の塗りつぶし色</span>
+<span data-code-cell="annotated-cell-20" data-code-lines="4" data-code-annotation="1">棒の塗りつぶし色</span>
 </dd>
-<dt data-target-cell="annotated-cell-19" data-target-annotation="2">2</dt>
+<dt data-target-cell="annotated-cell-20" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-19" data-code-lines="5" data-code-annotation="2">棒の輪郭色（白にすると境界がわかりやすい）</span>
+<span data-code-cell="annotated-cell-20" data-code-lines="5" data-code-annotation="2">棒の輪郭色（白にすると境界がわかりやすい）</span>
 </dd>
-<dt data-target-cell="annotated-cell-19" data-target-annotation="3">3</dt>
+<dt data-target-cell="annotated-cell-20" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-cell="annotated-cell-19" data-code-lines="6" data-code-annotation="3">輪郭の太さ</span>
+<span data-code-cell="annotated-cell-20" data-code-lines="6" data-code-annotation="3">輪郭の太さ</span>
 </dd>
 </dl>
 </div>
@@ -1521,23 +1405,23 @@ Note
 <h3 class="unnumbered anchored" data-anchor-id="グループ別のヒストグラム">グループ別のヒストグラム</h3>
 <p><strong><code>fill</code> 変数で色分け（重ねて表示）</strong></p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-20"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-20" data-target-annotation="1">1</button><span id="annotated-cell-20-1" class="code-annotation-target"><a href="#annotated-cell-20-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> diamonds, <span class="fu">aes</span>(<span class="at">x =</span> price, <span class="at">fill =</span> cut)) <span class="sc">+</span></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-20" data-target-annotation="2">2</button><span id="annotated-cell-20-2" class="code-annotation-target"><a href="#annotated-cell-20-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">500</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="annotated-cell-20-3"><a href="#annotated-cell-20-3"></a>  <span class="fu">labs</span>(</span>
-<span id="annotated-cell-20-4"><a href="#annotated-cell-20-4"></a>    <span class="at">title =</span> <span class="st">"カット品質別の価格分布"</span>,</span>
-<span id="annotated-cell-20-5"><a href="#annotated-cell-20-5"></a>    <span class="at">x =</span> <span class="st">"価格（ドル）"</span>, <span class="at">y =</span> <span class="st">"個数"</span>,</span>
-<span id="annotated-cell-20-6"><a href="#annotated-cell-20-6"></a>    <span class="at">fill =</span> <span class="st">"カット品質"</span></span>
-<span id="annotated-cell-20-7"><a href="#annotated-cell-20-7"></a>  ) <span class="sc">+</span></span>
-<span id="annotated-cell-20-8"><a href="#annotated-cell-20-8"></a>  <span class="fu">theme_minimal</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-21"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-21" data-target-annotation="1">1</button><span id="annotated-cell-21-1" class="code-annotation-target"><a href="#annotated-cell-21-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> diamonds, <span class="fu">aes</span>(<span class="at">x =</span> price, <span class="at">fill =</span> cut)) <span class="sc">+</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-21" data-target-annotation="2">2</button><span id="annotated-cell-21-2" class="code-annotation-target"><a href="#annotated-cell-21-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">500</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-21-3"><a href="#annotated-cell-21-3"></a>  <span class="fu">labs</span>(</span>
+<span id="annotated-cell-21-4"><a href="#annotated-cell-21-4"></a>    <span class="at">title =</span> <span class="st">"カット品質別の価格分布"</span>,</span>
+<span id="annotated-cell-21-5"><a href="#annotated-cell-21-5"></a>    <span class="at">x =</span> <span class="st">"価格（ドル）"</span>, <span class="at">y =</span> <span class="st">"個数"</span>,</span>
+<span id="annotated-cell-21-6"><a href="#annotated-cell-21-6"></a>    <span class="at">fill =</span> <span class="st">"カット品質"</span></span>
+<span id="annotated-cell-21-7"><a href="#annotated-cell-21-7"></a>  ) <span class="sc">+</span></span>
+<span id="annotated-cell-21-8"><a href="#annotated-cell-21-8"></a>  <span class="fu">theme_minimal</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-20" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-21" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-20" data-code-lines="1" data-code-annotation="1"><code>fill = cut</code> でカット品質ごとに色分け</span>
+<span data-code-cell="annotated-cell-21" data-code-lines="1" data-code-annotation="1"><code>fill = cut</code> でカット品質ごとに色分け</span>
 </dd>
-<dt data-target-cell="annotated-cell-20" data-target-annotation="2">2</dt>
+<dt data-target-cell="annotated-cell-21" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-20" data-code-lines="2" data-code-annotation="2"><code>alpha = 0.6</code> で透過率 60%（重なりが見えやすくなる）</span>
+<span data-code-cell="annotated-cell-21" data-code-lines="2" data-code-annotation="2"><code>alpha = 0.6</code> で透過率 60%（重なりが見えやすくなる）</span>
 </dd>
 </dl>
 </div>
@@ -1556,19 +1440,19 @@ Note
 <p><strong><code>facet_wrap()</code> で分割表示</strong></p>
 <p>重ねて表示すると見にくい場合は、<strong>分割（ファセット）表示</strong>が便利です。</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-21"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-21-1"><a href="#annotated-cell-21-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> diamonds, <span class="fu">aes</span>(<span class="at">x =</span> price)) <span class="sc">+</span></span>
-<span id="annotated-cell-21-2"><a href="#annotated-cell-21-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">500</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-21" data-target-annotation="1">1</button><span id="annotated-cell-21-3" class="code-annotation-target"><a href="#annotated-cell-21-3"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> cut, <span class="at">ncol =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="annotated-cell-21-4"><a href="#annotated-cell-21-4"></a>  <span class="fu">labs</span>(</span>
-<span id="annotated-cell-21-5"><a href="#annotated-cell-21-5"></a>    <span class="at">title =</span> <span class="st">"カット品質別の価格分布"</span>,</span>
-<span id="annotated-cell-21-6"><a href="#annotated-cell-21-6"></a>    <span class="at">x =</span> <span class="st">"価格（ドル）"</span>, <span class="at">y =</span> <span class="st">"個数"</span></span>
-<span id="annotated-cell-21-7"><a href="#annotated-cell-21-7"></a>  ) <span class="sc">+</span></span>
-<span id="annotated-cell-21-8"><a href="#annotated-cell-21-8"></a>  <span class="fu">theme_minimal</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-22"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-22-1"><a href="#annotated-cell-22-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> diamonds, <span class="fu">aes</span>(<span class="at">x =</span> price)) <span class="sc">+</span></span>
+<span id="annotated-cell-22-2"><a href="#annotated-cell-22-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">500</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-22" data-target-annotation="1">1</button><span id="annotated-cell-22-3" class="code-annotation-target"><a href="#annotated-cell-22-3"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> cut, <span class="at">ncol =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-22-4"><a href="#annotated-cell-22-4"></a>  <span class="fu">labs</span>(</span>
+<span id="annotated-cell-22-5"><a href="#annotated-cell-22-5"></a>    <span class="at">title =</span> <span class="st">"カット品質別の価格分布"</span>,</span>
+<span id="annotated-cell-22-6"><a href="#annotated-cell-22-6"></a>    <span class="at">x =</span> <span class="st">"価格（ドル）"</span>, <span class="at">y =</span> <span class="st">"個数"</span></span>
+<span id="annotated-cell-22-7"><a href="#annotated-cell-22-7"></a>  ) <span class="sc">+</span></span>
+<span id="annotated-cell-22-8"><a href="#annotated-cell-22-8"></a>  <span class="fu">theme_minimal</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-21" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-22" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-21" data-code-lines="3" data-code-annotation="1"><code>facet_wrap(~ 変数)</code> でパネルに分割。<code>ncol</code> で列数を指定</span>
+<span data-code-cell="annotated-cell-22" data-code-lines="3" data-code-annotation="1"><code>facet_wrap(~ 変数)</code> でパネルに分割。<code>ncol</code> で列数を指定</span>
 </dd>
 </dl>
 </div>
@@ -1629,31 +1513,31 @@ Note
 <h3 class="unnumbered anchored" data-anchor-id="軸の表示を整える">軸の表示を整える</h3>
 <p>数値が大きい場合、X 軸のラベルが見にくくなります。</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-22"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-22-1"><a href="#annotated-cell-22-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> diamonds, <span class="fu">aes</span>(<span class="at">x =</span> price)) <span class="sc">+</span></span>
-<span id="annotated-cell-22-2"><a href="#annotated-cell-22-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">500</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
-<span id="annotated-cell-22-3"><a href="#annotated-cell-22-3"></a>  <span class="fu">scale_x_continuous</span>(</span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-22" data-target-annotation="1">1</button><span id="annotated-cell-22-4" class="code-annotation-target"><a href="#annotated-cell-22-4"></a>    <span class="at">labels =</span> scales<span class="sc">::</span>dollar,</span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-22" data-target-annotation="2">2</button><span id="annotated-cell-22-5" class="code-annotation-target"><a href="#annotated-cell-22-5"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">20000</span>, <span class="at">by =</span> <span class="dv">5000</span>)</span>
-<span id="annotated-cell-22-6"><a href="#annotated-cell-22-6"></a>  ) <span class="sc">+</span></span>
-<span id="annotated-cell-22-7"><a href="#annotated-cell-22-7"></a>  <span class="fu">labs</span>(</span>
-<span id="annotated-cell-22-8"><a href="#annotated-cell-22-8"></a>    <span class="at">title =</span> <span class="st">"ダイヤモンド価格の分布"</span>,</span>
-<span id="annotated-cell-22-9"><a href="#annotated-cell-22-9"></a>    <span class="at">x =</span> <span class="st">"価格"</span>, <span class="at">y =</span> <span class="st">"個数"</span></span>
-<span id="annotated-cell-22-10"><a href="#annotated-cell-22-10"></a>  ) <span class="sc">+</span></span>
-<span id="annotated-cell-22-11"><a href="#annotated-cell-22-11"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-22" data-target-annotation="3">3</button><span id="annotated-cell-22-12" class="code-annotation-target"><a href="#annotated-cell-22-12"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-23"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-23-1"><a href="#annotated-cell-23-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> diamonds, <span class="fu">aes</span>(<span class="at">x =</span> price)) <span class="sc">+</span></span>
+<span id="annotated-cell-23-2"><a href="#annotated-cell-23-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">500</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-23-3"><a href="#annotated-cell-23-3"></a>  <span class="fu">scale_x_continuous</span>(</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-23" data-target-annotation="1">1</button><span id="annotated-cell-23-4" class="code-annotation-target"><a href="#annotated-cell-23-4"></a>    <span class="at">labels =</span> scales<span class="sc">::</span>dollar,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-23" data-target-annotation="2">2</button><span id="annotated-cell-23-5" class="code-annotation-target"><a href="#annotated-cell-23-5"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">20000</span>, <span class="at">by =</span> <span class="dv">5000</span>)</span>
+<span id="annotated-cell-23-6"><a href="#annotated-cell-23-6"></a>  ) <span class="sc">+</span></span>
+<span id="annotated-cell-23-7"><a href="#annotated-cell-23-7"></a>  <span class="fu">labs</span>(</span>
+<span id="annotated-cell-23-8"><a href="#annotated-cell-23-8"></a>    <span class="at">title =</span> <span class="st">"ダイヤモンド価格の分布"</span>,</span>
+<span id="annotated-cell-23-9"><a href="#annotated-cell-23-9"></a>    <span class="at">x =</span> <span class="st">"価格"</span>, <span class="at">y =</span> <span class="st">"個数"</span></span>
+<span id="annotated-cell-23-10"><a href="#annotated-cell-23-10"></a>  ) <span class="sc">+</span></span>
+<span id="annotated-cell-23-11"><a href="#annotated-cell-23-11"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-23" data-target-annotation="3">3</button><span id="annotated-cell-23-12" class="code-annotation-target"><a href="#annotated-cell-23-12"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-22" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-23" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-22" data-code-lines="4" data-code-annotation="1"><code>scales::dollar</code> でドル表記（コンマ区切り・$マーク）に変換</span>
+<span data-code-cell="annotated-cell-23" data-code-lines="4" data-code-annotation="1"><code>scales::dollar</code> でドル表記（コンマ区切り・$マーク）に変換</span>
 </dd>
-<dt data-target-cell="annotated-cell-22" data-target-annotation="2">2</dt>
+<dt data-target-cell="annotated-cell-23" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-22" data-code-lines="5" data-code-annotation="2">X 軸の目盛りを 0〜20000 ドルの範囲で 5000 刻みに設定</span>
+<span data-code-cell="annotated-cell-23" data-code-lines="5" data-code-annotation="2">X 軸の目盛りを 0〜20000 ドルの範囲で 5000 刻みに設定</span>
 </dd>
-<dt data-target-cell="annotated-cell-22" data-target-annotation="3">3</dt>
+<dt data-target-cell="annotated-cell-23" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-cell="annotated-cell-22" data-code-lines="12" data-code-annotation="3">X 軸ラベルを 45 度に傾けて重ならないようにする</span>
+<span data-code-cell="annotated-cell-23" data-code-lines="12" data-code-annotation="3">X 軸ラベルを 45 度に傾けて重ならないようにする</span>
 </dd>
 </dl>
 </div>
@@ -1668,136 +1552,15 @@ Note
 </div>
 </section>
 </section>
-<section id="sec-hist-exercises" class="level2" data-number="3.7">
-<h2 data-number="3.7" class="anchored" data-anchor-id="sec-hist-exercises"><span class="header-section-number">3.7</span> 演習問題（ヒストグラム）</h2>
-<div class="mondai callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Warning
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><code>diamonds</code> データを使って、<strong>カラット（<code>carat</code>）の分布</strong>をヒストグラムで描いてください。 ただし、以下の条件を満たしてください。</p>
-<ul>
-<li>ビン幅：<code>0.1</code>（0.1 カラット刻み）</li>
-<li>棒の色：<code>"coral"</code>、輪郭：<code>"white"</code></li>
-<li>X 軸ラベル：「カラット」</li>
-<li>Y 軸ラベル：「個数」</li>
-<li>タイトル：「ダイヤモンドのカラット分布」</li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> ___, <span class="fu">aes</span>(<span class="at">x =</span> ___)) <span class="sc">+</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> ___, <span class="at">fill =</span> ___, <span class="at">color =</span> ___) <span class="sc">+</span></span>
-<span id="cb15-3"><a href="#cb15-3"></a>  <span class="fu">labs</span>(</span>
-<span id="cb15-4"><a href="#cb15-4"></a>    <span class="at">title =</span> ___,</span>
-<span id="cb15-5"><a href="#cb15-5"></a>    <span class="at">x =</span> ___, <span class="at">y =</span> ___</span>
-<span id="cb15-6"><a href="#cb15-6"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</div>
-</div>
-<div class="kotae callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> diamonds, <span class="fu">aes</span>(<span class="at">x =</span> carat)) <span class="sc">+</span></span>
-<span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.1</span>, <span class="at">fill =</span> <span class="st">"coral"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
-<span id="cb16-3"><a href="#cb16-3"></a>  <span class="fu">labs</span>(</span>
-<span id="cb16-4"><a href="#cb16-4"></a>    <span class="at">title =</span> <span class="st">"ダイヤモンドのカラット分布"</span>,</span>
-<span id="cb16-5"><a href="#cb16-5"></a>    <span class="at">x =</span> <span class="st">"カラット"</span>,</span>
-<span id="cb16-6"><a href="#cb16-6"></a>    <span class="at">y =</span> <span class="st">"個数"</span></span>
-<span id="cb16-7"><a href="#cb16-7"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="lec03_files/figure-html/ex-hist-01-ans-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="2100"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div style="margin-top: 3.5em;">
-
-</div>
-<div class="mondai callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Warning
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><code>mpg</code> データを使って、<strong>高速道路燃費（<code>hwy</code>）のヒストグラム</strong>を描いてください。 ただし、以下の条件を満たしてください。</p>
-<ul>
-<li><code>facet_wrap()</code> を使って、<strong>駆動方式（<code>drv</code>）別</strong>に分割表示する</li>
-<li>ビン幅：<code>2</code></li>
-<li>テーマ：<code>theme_minimal()</code></li>
-<li>適切なタイトル・軸ラベルを設定する</li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> ___, <span class="fu">aes</span>(<span class="at">x =</span> ___)) <span class="sc">+</span></span>
-<span id="cb17-2"><a href="#cb17-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> ___) <span class="sc">+</span></span>
-<span id="cb17-3"><a href="#cb17-3"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> ___) <span class="sc">+</span></span>
-<span id="cb17-4"><a href="#cb17-4"></a>  <span class="fu">labs</span>(<span class="at">title =</span> ___, <span class="at">x =</span> ___, <span class="at">y =</span> ___) <span class="sc">+</span></span>
-<span id="cb17-5"><a href="#cb17-5"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</div>
-</div>
-<div class="kotae callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> hwy)) <span class="sc">+</span></span>
-<span id="cb18-2"><a href="#cb18-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">2</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
-<span id="cb18-3"><a href="#cb18-3"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> drv) <span class="sc">+</span></span>
-<span id="cb18-4"><a href="#cb18-4"></a>  <span class="fu">labs</span>(</span>
-<span id="cb18-5"><a href="#cb18-5"></a>    <span class="at">title =</span> <span class="st">"駆動方式別の高速道路燃費分布"</span>,</span>
-<span id="cb18-6"><a href="#cb18-6"></a>    <span class="at">x =</span> <span class="st">"高速道路燃費 (mpg)"</span>,</span>
-<span id="cb18-7"><a href="#cb18-7"></a>    <span class="at">y =</span> <span class="st">"台数"</span></span>
-<span id="cb18-8"><a href="#cb18-8"></a>  ) <span class="sc">+</span></span>
-<span id="cb18-9"><a href="#cb18-9"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="lec03_files/figure-html/ex-hist-02-ans-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="2100"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div style="margin-top: 3.5em;">
-
-</div>
-</section>
-<section id="まとめ" class="level2" data-number="3.8">
-<h2 data-number="3.8" class="anchored" data-anchor-id="まとめ"><span class="header-section-number">3.8</span> まとめ</h2>
+<section id="まとめ" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="まとめ"><span class="header-section-number">3.6</span> まとめ</h2>
 <section id="本日学んだこと" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="本日学んだこと">本日学んだこと</h3>
 <p><strong>ggplot2 の基本文法</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> データ, <span class="fu">aes</span>(<span class="at">x =</span> X変数, <span class="at">y =</span> Y変数, <span class="at">fill =</span> グループ変数)) <span class="sc">+</span></span>
-<span id="cb19-2"><a href="#cb19-2"></a>  geom_<span class="sc">*</span>(オプション) <span class="sc">+</span></span>
-<span id="cb19-3"><a href="#cb19-3"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"タイトル"</span>, <span class="at">x =</span> <span class="st">"X軸"</span>, <span class="at">y =</span> <span class="st">"Y軸"</span>) <span class="sc">+</span></span>
-<span id="cb19-4"><a href="#cb19-4"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> データ, <span class="fu">aes</span>(<span class="at">x =</span> X変数, <span class="at">y =</span> Y変数, <span class="at">fill =</span> グループ変数)) <span class="sc">+</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>  geom_<span class="sc">*</span>(オプション) <span class="sc">+</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"タイトル"</span>, <span class="at">x =</span> <span class="st">"X軸"</span>, <span class="at">y =</span> <span class="st">"Y軸"</span>) <span class="sc">+</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>棒グラフのまとめ</strong></p>
 <table class="caption-top table">
 <thead>
@@ -1890,6 +1653,254 @@ Note
 <li><strong>折れ線グラフ</strong>（<code>geom_line()</code>）</li>
 </ul>
 </div>
+</div>
+</section>
+</section>
+<section id="演習問題" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="演習問題"><span class="header-section-number">3.7</span> 演習問題</h2>
+<section id="sec-bar-exercises" class="level3" data-number="3.7.1">
+<h3 data-number="3.7.1" class="anchored" data-anchor-id="sec-bar-exercises"><span class="header-section-number">3.7.1</span> 棒グラフ</h3>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>mpg</code> データを使って、<strong>シリンダー数（<code>cyl</code>）別の台数</strong>を棒グラフで描いてください。 ただし、以下の条件を満たしてください。</p>
+<ul>
+<li>棒の色：<code>"tomato"</code></li>
+<li>輪郭の色：<code>"white"</code></li>
+<li>X 軸ラベル：「シリンダー数」</li>
+<li>Y 軸ラベル：「台数」</li>
+<li>タイトル：「シリンダー数別の台数」</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> ___, <span class="fu">aes</span>(<span class="at">x =</span> ___)) <span class="sc">+</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> ___, <span class="at">color =</span> ___) <span class="sc">+</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a>  <span class="fu">labs</span>(</span>
+<span id="cb13-4"><a href="#cb13-4"></a>    <span class="at">title =</span> ___,</span>
+<span id="cb13-5"><a href="#cb13-5"></a>    <span class="at">x =</span> ___,</span>
+<span id="cb13-6"><a href="#cb13-6"></a>    <span class="at">y =</span> ___</span>
+<span id="cb13-7"><a href="#cb13-7"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div class="kotae callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(cyl))) <span class="sc">+</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"tomato"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a>  <span class="fu">labs</span>(</span>
+<span id="cb14-4"><a href="#cb14-4"></a>    <span class="at">title =</span> <span class="st">"シリンダー数別の台数"</span>,</span>
+<span id="cb14-5"><a href="#cb14-5"></a>    <span class="at">x =</span> <span class="st">"シリンダー数"</span>,</span>
+<span id="cb14-6"><a href="#cb14-6"></a>    <span class="at">y =</span> <span class="st">"台数"</span></span>
+<span id="cb14-7"><a href="#cb14-7"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lec03_files/figure-html/ex-bar-01-ans-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="2100"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>mpg</code> データを使って、<strong>クラス（<code>class</code>）別・駆動方式（<code>drv</code>）別の並列棒グラフ</strong>を描いてください。 ただし、以下の条件を満たしてください。</p>
+<ul>
+<li><code>position = "dodge"</code> を使う</li>
+<li>X 軸ラベル・Y 軸ラベル・タイトル・凡例タイトルを適切に設定する</li>
+<li>テーマ：<code>theme_minimal()</code></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> ___, <span class="fu">aes</span>(<span class="at">x =</span> ___, <span class="at">fill =</span> ___)) <span class="sc">+</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> ___) <span class="sc">+</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a>  <span class="fu">labs</span>(</span>
+<span id="cb15-4"><a href="#cb15-4"></a>    <span class="at">title =</span> ___,</span>
+<span id="cb15-5"><a href="#cb15-5"></a>    <span class="at">x =</span> ___, <span class="at">y =</span> ___,</span>
+<span id="cb15-6"><a href="#cb15-6"></a>    <span class="at">fill =</span> ___</span>
+<span id="cb15-7"><a href="#cb15-7"></a>  ) <span class="sc">+</span></span>
+<span id="cb15-8"><a href="#cb15-8"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div class="kotae callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> class, <span class="at">fill =</span> drv)) <span class="sc">+</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a>  <span class="fu">labs</span>(</span>
+<span id="cb16-4"><a href="#cb16-4"></a>    <span class="at">title =</span> <span class="st">"クラス・駆動方式別台数（並列）"</span>,</span>
+<span id="cb16-5"><a href="#cb16-5"></a>    <span class="at">x =</span> <span class="st">"クラス"</span>,</span>
+<span id="cb16-6"><a href="#cb16-6"></a>    <span class="at">y =</span> <span class="st">"台数"</span>,</span>
+<span id="cb16-7"><a href="#cb16-7"></a>    <span class="at">fill =</span> <span class="st">"駆動方式"</span></span>
+<span id="cb16-8"><a href="#cb16-8"></a>  ) <span class="sc">+</span></span>
+<span id="cb16-9"><a href="#cb16-9"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lec03_files/figure-html/ex-bar-02-ans-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="2100"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-hist-exercises" class="level3" data-number="3.7.2">
+<h3 data-number="3.7.2" class="anchored" data-anchor-id="sec-hist-exercises"><span class="header-section-number">3.7.2</span> ヒストグラム</h3>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>diamonds</code> データを使って、<strong>カラット（<code>carat</code>）の分布</strong>をヒストグラムで描いてください。 ただし、以下の条件を満たしてください。</p>
+<ul>
+<li>ビン幅：<code>0.1</code>（0.1 カラット刻み）</li>
+<li>棒の色：<code>"coral"</code>、輪郭：<code>"white"</code></li>
+<li>X 軸ラベル：「カラット」</li>
+<li>Y 軸ラベル：「個数」</li>
+<li>タイトル：「ダイヤモンドのカラット分布」</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> ___, <span class="fu">aes</span>(<span class="at">x =</span> ___)) <span class="sc">+</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> ___, <span class="at">fill =</span> ___, <span class="at">color =</span> ___) <span class="sc">+</span></span>
+<span id="cb17-3"><a href="#cb17-3"></a>  <span class="fu">labs</span>(</span>
+<span id="cb17-4"><a href="#cb17-4"></a>    <span class="at">title =</span> ___,</span>
+<span id="cb17-5"><a href="#cb17-5"></a>    <span class="at">x =</span> ___, <span class="at">y =</span> ___</span>
+<span id="cb17-6"><a href="#cb17-6"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div class="kotae callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> diamonds, <span class="fu">aes</span>(<span class="at">x =</span> carat)) <span class="sc">+</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.1</span>, <span class="at">fill =</span> <span class="st">"coral"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a>  <span class="fu">labs</span>(</span>
+<span id="cb18-4"><a href="#cb18-4"></a>    <span class="at">title =</span> <span class="st">"ダイヤモンドのカラット分布"</span>,</span>
+<span id="cb18-5"><a href="#cb18-5"></a>    <span class="at">x =</span> <span class="st">"カラット"</span>,</span>
+<span id="cb18-6"><a href="#cb18-6"></a>    <span class="at">y =</span> <span class="st">"個数"</span></span>
+<span id="cb18-7"><a href="#cb18-7"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lec03_files/figure-html/ex-hist-01-ans-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="2100"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>mpg</code> データを使って、<strong>高速道路燃費（<code>hwy</code>）のヒストグラム</strong>を描いてください。 ただし、以下の条件を満たしてください。</p>
+<ul>
+<li><code>facet_wrap()</code> を使って、<strong>駆動方式（<code>drv</code>）別</strong>に分割表示する</li>
+<li>ビン幅：<code>2</code></li>
+<li>テーマ：<code>theme_minimal()</code></li>
+<li>適切なタイトル・軸ラベルを設定する</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> ___, <span class="fu">aes</span>(<span class="at">x =</span> ___)) <span class="sc">+</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> ___) <span class="sc">+</span></span>
+<span id="cb19-3"><a href="#cb19-3"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> ___) <span class="sc">+</span></span>
+<span id="cb19-4"><a href="#cb19-4"></a>  <span class="fu">labs</span>(<span class="at">title =</span> ___, <span class="at">x =</span> ___, <span class="at">y =</span> ___) <span class="sc">+</span></span>
+<span id="cb19-5"><a href="#cb19-5"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div class="kotae callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> hwy)) <span class="sc">+</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">2</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> drv) <span class="sc">+</span></span>
+<span id="cb20-4"><a href="#cb20-4"></a>  <span class="fu">labs</span>(</span>
+<span id="cb20-5"><a href="#cb20-5"></a>    <span class="at">title =</span> <span class="st">"駆動方式別の高速道路燃費分布"</span>,</span>
+<span id="cb20-6"><a href="#cb20-6"></a>    <span class="at">x =</span> <span class="st">"高速道路燃費 (mpg)"</span>,</span>
+<span id="cb20-7"><a href="#cb20-7"></a>    <span class="at">y =</span> <span class="st">"台数"</span></span>
+<span id="cb20-8"><a href="#cb20-8"></a>  ) <span class="sc">+</span></span>
+<span id="cb20-9"><a href="#cb20-9"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lec03_files/figure-html/ex-hist-02-ans-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="2100"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
 </div>
 
 
