@@ -594,7 +594,7 @@
     "href": "lec05.html#まとめ",
     "title": "5  可視化3",
     "section": "5.7 まとめ",
-    "text": "5.7 まとめ\n\n本日学んだこと\n地図を描くための基本的な流れ\n① 地理空間データの取得（ne_countries / ne_states / jpn_pref）\n② 定量データを left_join() で結合\n③ geom_sf(aes(fill = 変数名)) でコロプレス図を描く\n④ scale_fill_viridis_c() でカラースケールを調整\n主要な関数まとめ\n\n\n\n関数\n役割\n\n\n\n\nne_countries()\n世界の国境データを取得\n\n\nne_states(country = \"japan\")\n都道府県データを取得\n\n\njpn_pref(admin_name = \"〇〇府\")\n市区町村データを取得\n\n\ngeom_sf()\n地図を描く\n\n\ngeom_sf_text()\nポリゴン重心にテキストを表示\n\n\ngeom_sf_label()\nポリゴン重心にラベルを表示\n\n\ncoord_sf(xlim, ylim)\n表示範囲（緯度・経度）を指定\n\n\nscale_fill_viridis_c()\n連続変数のカラースケール\n\n\nleft_join()\n地図データと定量データを結合\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n次回の予告\n第 6 回では、データの整形・変換（tidyr パッケージ）を学習します。\n\npivot_wider() / pivot_longer() でデータの横持ち・縦持ちを変換する\nseparate() / unite() で列の分割・結合を行う",
+    "text": "5.7 まとめ\n\n本日学んだこと\n地図を描くための基本的な流れ\n① 地理空間データの取得（ne_countries / ne_states / jpn_pref）\n② 定量データを left_join() で結合\n③ geom_sf(aes(fill = 変数名)) でコロプレス図を描く\n④ scale_fill_viridis_c() でカラースケールを調整\n主要な関数まとめ\n\n\n\n関数\n役割\n\n\n\n\nne_countries()\n世界の国境データを取得\n\n\nne_states(country = \"japan\")\n都道府県データを取得\n\n\njpn_pref(admin_name = \"〇〇府\")\n市区町村データを取得\n\n\ngeom_sf()\n地図を描く\n\n\ngeom_sf_text()\nポリゴン重心にテキストを表示\n\n\ngeom_sf_label()\nポリゴン重心にラベルを表示\n\n\ncoord_sf(xlim, ylim)\n表示範囲（緯度・経度）を指定\n\n\nscale_fill_viridis_c()\n連続変数のカラースケール\n\n\nleft_join()\n地図データと定量データを結合",
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>可視化3</span>"
     ]
