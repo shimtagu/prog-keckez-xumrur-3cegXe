@@ -21,6 +21,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -73,6 +108,35 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <meta name="robots" content="noindex, nofollow">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -205,8 +269,59 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-setup" id="toc-sec-setup" class="nav-link active" data-scroll-target="#sec-setup"><span class="header-section-number">6.1</span> パッケージの準備</a></li>
+  <li><a href="#sec-stats-types" id="toc-sec-stats-types" class="nav-link" data-scroll-target="#sec-stats-types"><span class="header-section-number">6.2</span> 統計学の種類</a></li>
+  <li><a href="#sec-descriptive" id="toc-sec-descriptive" class="nav-link" data-scroll-target="#sec-descriptive"><span class="header-section-number">6.3</span> 記述統計量とは</a>
+  <ul class="collapse">
+  <li><a href="#中心の指標" id="toc-中心の指標" class="nav-link" data-scroll-target="#中心の指標">中心の指標</a></li>
+  <li><a href="#ばらつきの指標" id="toc-ばらつきの指標" class="nav-link" data-scroll-target="#ばらつきの指標">ばらつきの指標</a></li>
+  </ul></li>
+  <li><a href="#sec-data" id="toc-sec-data" class="nav-link" data-scroll-target="#sec-data"><span class="header-section-number">6.4</span> データの準備</a></li>
+  <li><a href="#sec-basic-stats" id="toc-sec-basic-stats" class="nav-link" data-scroll-target="#sec-basic-stats"><span class="header-section-number">6.5</span> 基本的な記述統計量の計算</a>
+  <ul class="collapse">
+  <li><a href="#個別の関数で計算する" id="toc-個別の関数で計算する" class="nav-link" data-scroll-target="#個別の関数で計算する">個別の関数で計算する</a></li>
+  <li><a href="#summary-で一括確認する" id="toc-summary-で一括確認する" class="nav-link" data-scroll-target="#summary-で一括確認する"><code>summary()</code> で一括確認する</a></li>
+  <li><a href="#最頻値を求める" id="toc-最頻値を求める" class="nav-link" data-scroll-target="#最頻値を求める">最頻値を求める</a></li>
+  </ul></li>
+  <li><a href="#sec-group-stats" id="toc-sec-group-stats" class="nav-link" data-scroll-target="#sec-group-stats"><span class="header-section-number">6.6</span> <code>summarise()</code> でグループ別の統計量を計算する</a>
+  <ul class="collapse">
+  <li><a href="#基本的な使い方" id="toc-基本的な使い方" class="nav-link" data-scroll-target="#基本的な使い方">基本的な使い方</a></li>
+  <li><a href="#複数グループでの集計" id="toc-複数グループでの集計" class="nav-link" data-scroll-target="#複数グループでの集計">複数グループでの集計</a></li>
+  <li><a href="#across-で複数の列に同じ関数を適用する" id="toc-across-で複数の列に同じ関数を適用する" class="nav-link" data-scroll-target="#across-で複数の列に同じ関数を適用する"><code>across()</code> で複数の列に同じ関数を適用する</a></li>
+  </ul></li>
+  <li><a href="#sec-visualization" id="toc-sec-visualization" class="nav-link" data-scroll-target="#sec-visualization"><span class="header-section-number">6.7</span> 記述統計量の可視化</a>
+  <ul class="collapse">
+  <li><a href="#ヒストグラムで分布を確認する" id="toc-ヒストグラムで分布を確認する" class="nav-link" data-scroll-target="#ヒストグラムで分布を確認する">ヒストグラムで分布を確認する</a></li>
+  <li><a href="#箱ひげ図でグループ比較する" id="toc-箱ひげ図でグループ比較する" class="nav-link" data-scroll-target="#箱ひげ図でグループ比較する">箱ひげ図でグループ比較する</a></li>
+  <li><a href="#密度曲線geom_density" id="toc-密度曲線geom_density" class="nav-link" data-scroll-target="#密度曲線geom_density">密度曲線（<code>geom_density()</code>）</a></li>
+  <li><a href="#patchwork-で複数グラフを並べる" id="toc-patchwork-で複数グラフを並べる" class="nav-link" data-scroll-target="#patchwork-で複数グラフを並べる"><code>patchwork</code> で複数グラフを並べる</a></li>
+  </ul></li>
+  <li><a href="#sec-normal" id="toc-sec-normal" class="nav-link" data-scroll-target="#sec-normal"><span class="header-section-number">6.8</span> 正規分布と標準化</a>
+  <ul class="collapse">
+  <li><a href="#正規分布とは" id="toc-正規分布とは" class="nav-link" data-scroll-target="#正規分布とは">正規分布とは</a></li>
+  <li><a href="#標準化z-スコア" id="toc-標準化z-スコア" class="nav-link" data-scroll-target="#標準化z-スコア">標準化（z スコア）</a></li>
+  </ul></li>
+  <li><a href="#sec-exercises" id="toc-sec-exercises" class="nav-link" data-scroll-target="#sec-exercises"><span class="header-section-number">6.9</span> 演習問題</a>
+  <ul class="collapse">
+  <li><a href="#記述統計量の計算" id="toc-記述統計量の計算" class="nav-link" data-scroll-target="#記述統計量の計算">記述統計量の計算</a></li>
+  <li><a href="#可視化" id="toc-可視化" class="nav-link" data-scroll-target="#可視化">可視化</a></li>
+  <li><a href="#across-を使った複数列への統計量計算" id="toc-across-を使った複数列への統計量計算" class="nav-link" data-scroll-target="#across-を使った複数列への統計量計算"><code>across()</code> を使った複数列への統計量計算</a></li>
+  <li><a href="#標準化z-スコア-1" id="toc-標準化z-スコア-1" class="nav-link" data-scroll-target="#標準化z-スコア-1">標準化（z スコア）</a></li>
+  <li><a href="#patchwork-で-3-グラフを組み合わせる" id="toc-patchwork-で-3-グラフを組み合わせる" class="nav-link" data-scroll-target="#patchwork-で-3-グラフを組み合わせる"><code>patchwork</code> で 3 グラフを組み合わせる</a></li>
+  <li><a href="#summary-の結果をグラフと照合する" id="toc-summary-の結果をグラフと照合する" class="nav-link" data-scroll-target="#summary-の結果をグラフと照合する"><code>summary()</code> の結果をグラフと照合する</a></li>
+  <li><a href="#gapminder-データで記述統計" id="toc-gapminder-データで記述統計" class="nav-link" data-scroll-target="#gapminder-データで記述統計"><code>gapminder</code> データで記述統計</a></li>
+  </ul></li>
+  <li><a href="#まとめ" id="toc-まとめ" class="nav-link" data-scroll-target="#まとめ"><span class="header-section-number">6.10</span> まとめ</a>
+  <ul class="collapse">
+  <li><a href="#本日学んだこと" id="toc-本日学んだこと" class="nav-link" data-scroll-target="#本日学んだこと">本日学んだこと</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -230,8 +345,1220 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p><strong>データの特徴を数値で表す</strong></p>
+<div style="margin-top: 2.0em;">
+
+</div>
+<p><strong>今日の目標</strong></p>
+<ol type="1">
+<li><strong>記述統計量</strong>（平均・中央値・最頻値・分散・標準偏差・四分位数）の意味を理解する。</li>
+<li>R を使ってデータの記述統計量を<strong>計算・集計</strong>できるようになる。</li>
+<li>記述統計量を<strong>可視化</strong>して、データの特徴を把握できるようになる。</li>
+</ol>
+<section id="sec-setup" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="sec-setup"><span class="header-section-number">6.1</span> パッケージの準備</h2>
+<p>大学のPCはシャットダウンする度に初期化されるため、毎回インストールが必要です。 毎回授業開始時にこのブロックを実行してください。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">options</span>(<span class="at">repos =</span> <span class="fu">c</span>(<span class="at">CRAN =</span> <span class="st">"https://cran.rstudio.com/"</span>))</span>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">install.packages</span>(<span class="st">"patchwork"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">install.packages</span>(<span class="st">"gapminder"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="fu">library</span>(gapminder)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong><code>patchwork</code> パッケージとは</strong></p>
+<p>複数の <code>ggplot2</code> グラフを並べて表示するためのパッケージです。</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>p1 <span class="sc">+</span> p2          <span class="co"># 横に並べる</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>p1 <span class="sc">/</span> p2          <span class="co"># 縦に並べる</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>(p1 <span class="sc">+</span> p2) <span class="sc">/</span> p3   <span class="co"># 組み合わせ</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-stats-types" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="sec-stats-types"><span class="header-section-number">6.2</span> 統計学の種類</h2>
+<p>統計学は大きく 2 種類に分類されます。</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>統計学の種類</th>
+<th>特徴</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>記述統計学</strong>（descriptive statistics）</td>
+<td>統計量を使ってデータの傾向や性質をつかむ</td>
+</tr>
+<tr class="even">
+<td>推測統計学（inferential statistics）</td>
+<td>母集団の母数（母平均・母分散）を検定・推定する</td>
+</tr>
+</tbody>
+</table>
+<p><strong>今回は記述統計学</strong>を扱います。推測統計（仮説検定）は次回（第7回）で学びます。</p>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-descriptive" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="sec-descriptive"><span class="header-section-number">6.3</span> 記述統計量とは</h2>
+<p><strong>記述統計量</strong>（descriptive statistics）とは、データの特徴を数値で要約したものです。 大きく「中心の指標」と「ばらつきの指標」に分けられます。</p>
+<section id="中心の指標" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="中心の指標">中心の指標</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 34%">
+<col style="width: 26%">
+<col style="width: 39%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>統計量</th>
+<th>説明</th>
+<th>R の関数</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>平均値</strong>（mean）</td>
+<td>全データの合計をデータ数で割った値</td>
+<td><code>mean()</code></td>
+</tr>
+<tr class="even">
+<td><strong>中央値</strong>（median）</td>
+<td>データを小さい順に並べたときの真ん中の値</td>
+<td><code>median()</code></td>
+</tr>
+<tr class="odd">
+<td><strong>最頻値</strong>（mode）</td>
+<td>最も多く現れる値</td>
+<td>R に標準関数なし（後述）</td>
+</tr>
+</tbody>
+</table>
+<div style="margin-top: 3.0em;">
+
+</div>
+</section>
+<section id="ばらつきの指標" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="ばらつきの指標">ばらつきの指標</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 34%">
+<col style="width: 26%">
+<col style="width: 39%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>統計量</th>
+<th>説明</th>
+<th>R の関数</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>分散</strong>（variance）</td>
+<td>各データと平均値の差の二乗の平均</td>
+<td><code>var()</code></td>
+</tr>
+<tr class="even">
+<td><strong>標準偏差</strong>（standard deviation）</td>
+<td>分散の平方根。データと同じ単位で表せる</td>
+<td><code>sd()</code></td>
+</tr>
+<tr class="odd">
+<td><strong>範囲</strong>（range）</td>
+<td>最大値 − 最小値</td>
+<td><code>range()</code>、<code>max() - min()</code></td>
+</tr>
+<tr class="even">
+<td><strong>四分位数</strong>（quartile）</td>
+<td>データを 4 等分する 3 つの値（Q1・Q2・Q3）</td>
+<td><code>quantile()</code></td>
+</tr>
+<tr class="odd">
+<td><strong>四分位範囲</strong>（IQR）</td>
+<td>Q3 − Q1。外れ値の影響を受けにくい</td>
+<td><code>IQR()</code></td>
+</tr>
+</tbody>
+</table>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>平均値 vs 中央値</strong></p>
+<ul>
+<li><strong>平均値</strong>：外れ値の影響を強く受ける</li>
+<li><strong>中央値</strong>：外れ値の影響を受けにくい</li>
+</ul>
+<p>例：年収データのように極端に高い値がある場合、平均値は実態より高くなりがちです。 このような場合は中央値の方が「典型的な値」をよく表します。</p>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+</section>
+<section id="sec-data" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="sec-data"><span class="header-section-number">6.4</span> データの準備</h2>
+<p>今回は <code>ggplot2</code> 付属の <code>mpg</code>（自動車燃費）データと <code>gapminder</code> パッケージのデータを使います。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">glimpse</span>(mpg)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 234
+Columns: 11
+$ manufacturer &lt;chr&gt; "audi", "audi", "audi", "audi", "audi", "audi", "audi", "…
+$ model        &lt;chr&gt; "a4", "a4", "a4", "a4", "a4", "a4", "a4", "a4 quattro", "…
+$ displ        &lt;dbl&gt; 1.8, 1.8, 2.0, 2.0, 2.8, 2.8, 3.1, 1.8, 1.8, 2.0, 2.0, 2.…
+$ year         &lt;int&gt; 1999, 1999, 2008, 2008, 1999, 1999, 2008, 1999, 1999, 200…
+$ cyl          &lt;int&gt; 4, 4, 4, 4, 6, 6, 6, 4, 4, 4, 4, 6, 6, 6, 6, 6, 6, 8, 8, …
+$ trans        &lt;chr&gt; "auto(l5)", "manual(m5)", "manual(m6)", "auto(av)", "auto…
+$ drv          &lt;chr&gt; "f", "f", "f", "f", "f", "f", "f", "4", "4", "4", "4", "4…
+$ cty          &lt;int&gt; 18, 21, 20, 21, 16, 18, 18, 18, 16, 20, 19, 15, 17, 17, 1…
+$ hwy          &lt;int&gt; 29, 29, 31, 30, 26, 26, 27, 26, 25, 28, 27, 25, 25, 25, 2…
+$ fl           &lt;chr&gt; "p", "p", "p", "p", "p", "p", "p", "p", "p", "p", "p", "p…
+$ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact", "c…</code></pre>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-basic-stats" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="sec-basic-stats"><span class="header-section-number">6.5</span> 基本的な記述統計量の計算</h2>
+<section id="個別の関数で計算する" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="個別の関数で計算する">個別の関数で計算する</h3>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># 高速道路燃費（hwy）の記述統計量</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="fu">mean</span>(mpg<span class="sc">$</span>hwy)      <span class="co"># 平均値</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 23.44017</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">median</span>(mpg<span class="sc">$</span>hwy)    <span class="co"># 中央値</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 24</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">var</span>(mpg<span class="sc">$</span>hwy)       <span class="co"># 分散</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 35.45778</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">sd</span>(mpg<span class="sc">$</span>hwy)        <span class="co"># 標準偏差</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5.954643</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">range</span>(mpg<span class="sc">$</span>hwy)     <span class="co"># 最小値・最大値</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 12 44</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">IQR</span>(mpg<span class="sc">$</span>hwy)       <span class="co"># 四分位範囲</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 9</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">quantile</span>(mpg<span class="sc">$</span>hwy)  <span class="co"># 四分位数（0%, 25%, 50%, 75%, 100%）</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  0%  25%  50%  75% 100% 
+  12   18   24   27   44 </code></pre>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="summary-で一括確認する" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="summary-で一括確認する"><code>summary()</code> で一括確認する</h3>
+<p><code>summary()</code> 関数を使うと、主要な記述統計量を一度に確認できます。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">summary</span>(mpg<span class="sc">$</span>hwy)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  12.00   18.00   24.00   23.44   27.00   44.00 </code></pre>
+</div>
+</div>
+<p>データフレーム全体に適用することもできます。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>mpg <span class="sc">|&gt;</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a>  <span class="fu">select</span>(displ, cty, hwy) <span class="sc">|&gt;</span>   <span class="co"># 数値変数のみ選択</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a>  <span class="fu">summary</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     displ            cty             hwy       
+ Min.   :1.600   Min.   : 9.00   Min.   :12.00  
+ 1st Qu.:2.400   1st Qu.:14.00   1st Qu.:18.00  
+ Median :3.300   Median :17.00   Median :24.00  
+ Mean   :3.472   Mean   :16.86   Mean   :23.44  
+ 3rd Qu.:4.600   3rd Qu.:19.00   3rd Qu.:27.00  
+ Max.   :7.000   Max.   :35.00   Max.   :44.00  </code></pre>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="最頻値を求める" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="最頻値を求める">最頻値を求める</h3>
+<p>R には最頻値を直接求める標準関数がありません。 以下のように自分で定義するか、<code>table()</code> を使って頻度を確認します。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="co"># table() で頻度を確認し、最頻値を見つける</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a><span class="fu">table</span>(mpg<span class="sc">$</span>cyl) <span class="sc">|&gt;</span> <span class="fu">sort</span>(<span class="at">decreasing =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ 4  6  8  5 
+81 79 70  4 </code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="co"># 最頻値を返す関数を自作する</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a>get_mode <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb26-3"><a href="#cb26-3"></a>  ux <span class="ot">&lt;-</span> <span class="fu">unique</span>(x)</span>
+<span id="cb26-4"><a href="#cb26-4"></a>  ux[<span class="fu">which.max</span>(<span class="fu">tabulate</span>(<span class="fu">match</span>(x, ux)))]</span>
+<span id="cb26-5"><a href="#cb26-5"></a>}</span>
+<span id="cb26-6"><a href="#cb26-6"></a></span>
+<span id="cb26-7"><a href="#cb26-7"></a><span class="fu">get_mode</span>(mpg<span class="sc">$</span>cyl)   <span class="co"># シリンダー数の最頻値</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+</section>
+<section id="sec-group-stats" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="sec-group-stats"><span class="header-section-number">6.6</span> <code>summarise()</code> でグループ別の統計量を計算する</h2>
+<p><code>dplyr</code> の <code>group_by()</code> と <code>summarise()</code> を組み合わせると、 グループ別の記述統計量をまとめて計算できます。</p>
+<section id="基本的な使い方" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="基本的な使い方">基本的な使い方</h3>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-15"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-15-1"><a href="#annotated-cell-15-1"></a>mpg <span class="sc">|&gt;</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-15" data-target-annotation="1">1</button><span id="annotated-cell-15-2" class="code-annotation-target"><a href="#annotated-cell-15-2"></a>  <span class="fu">group_by</span>(class) <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-15-3"><a href="#annotated-cell-15-3"></a>  <span class="fu">summarise</span>(</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-15" data-target-annotation="2">2</button><span id="annotated-cell-15-4" class="code-annotation-target"><a href="#annotated-cell-15-4"></a>    <span class="at">n       =</span> <span class="fu">n</span>(),</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-15" data-target-annotation="3">3</button><span id="annotated-cell-15-5" class="code-annotation-target"><a href="#annotated-cell-15-5"></a>    <span class="at">mean_hwy  =</span> <span class="fu">mean</span>(hwy),</span>
+<span id="annotated-cell-15-6"><a href="#annotated-cell-15-6"></a>    <span class="at">median_hwy =</span> <span class="fu">median</span>(hwy),</span>
+<span id="annotated-cell-15-7"><a href="#annotated-cell-15-7"></a>    <span class="at">sd_hwy    =</span> <span class="fu">sd</span>(hwy),</span>
+<span id="annotated-cell-15-8"><a href="#annotated-cell-15-8"></a>    <span class="at">min_hwy   =</span> <span class="fu">min</span>(hwy),</span>
+<span id="annotated-cell-15-9"><a href="#annotated-cell-15-9"></a>    <span class="at">max_hwy   =</span> <span class="fu">max</span>(hwy)</span>
+<span id="annotated-cell-15-10"><a href="#annotated-cell-15-10"></a>  )</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-15" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-15" data-code-lines="2" data-code-annotation="1"><code>group_by(class)</code> で車のクラスごとにグループ化</span>
+</dd>
+<dt data-target-cell="annotated-cell-15" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-15" data-code-lines="4" data-code-annotation="2"><code>n()</code> でグループ内のデータ件数を計算</span>
+</dd>
+<dt data-target-cell="annotated-cell-15" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-15" data-code-lines="5" data-code-annotation="3">各統計量を計算して列名を指定する</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 7
+  class          n mean_hwy median_hwy sd_hwy min_hwy max_hwy
+  &lt;chr&gt;      &lt;int&gt;    &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;   &lt;int&gt;   &lt;int&gt;
+1 2seater        5     24.8       25     1.30      23      26
+2 compact       47     28.3       27     3.78      23      44
+3 midsize       41     27.3       27     2.14      23      32
+4 minivan       11     22.4       23     2.06      17      24
+5 pickup        33     16.9       17     2.27      12      22
+6 subcompact    35     28.1       26     5.38      20      44
+7 suv           62     18.1       17.5   2.98      12      27</code></pre>
+</div>
+</div>
+<div style="margin-top: 3.0em;">
+
+</div>
+</section>
+<section id="複数グループでの集計" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="複数グループでの集計">複数グループでの集計</h3>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-16"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-16-1"><a href="#annotated-cell-16-1"></a>mpg <span class="sc">|&gt;</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-16" data-target-annotation="1">1</button><span id="annotated-cell-16-2" class="code-annotation-target"><a href="#annotated-cell-16-2"></a>  <span class="fu">group_by</span>(class, drv) <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-16-3"><a href="#annotated-cell-16-3"></a>  <span class="fu">summarise</span>(</span>
+<span id="annotated-cell-16-4"><a href="#annotated-cell-16-4"></a>    <span class="at">n        =</span> <span class="fu">n</span>(),</span>
+<span id="annotated-cell-16-5"><a href="#annotated-cell-16-5"></a>    <span class="at">mean_hwy =</span> <span class="fu">mean</span>(hwy),</span>
+<span id="annotated-cell-16-6"><a href="#annotated-cell-16-6"></a>    <span class="at">sd_hwy   =</span> <span class="fu">sd</span>(hwy),</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-16" data-target-annotation="2">2</button><span id="annotated-cell-16-7" class="code-annotation-target"><a href="#annotated-cell-16-7"></a>    <span class="at">.groups  =</span> <span class="st">"drop"</span></span>
+<span id="annotated-cell-16-8"><a href="#annotated-cell-16-8"></a>  )</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-16" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-16" data-code-lines="2" data-code-annotation="1">複数の変数でグループ化できる</span>
+</dd>
+<dt data-target-cell="annotated-cell-16" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-16" data-code-lines="7" data-code-annotation="2"><code>.groups = "drop"</code> で集計後にグループを解除する</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 12 × 5
+   class      drv       n mean_hwy sd_hwy
+   &lt;chr&gt;      &lt;chr&gt; &lt;int&gt;    &lt;dbl&gt;  &lt;dbl&gt;
+ 1 2seater    r         5     24.8   1.30
+ 2 compact    4        12     25.8   1.11
+ 3 compact    f        35     29.1   4.01
+ 4 midsize    4         3     24     1   
+ 5 midsize    f        38     27.6   1.98
+ 6 minivan    f        11     22.4   2.06
+ 7 pickup     4        33     16.9   2.27
+ 8 subcompact 4         4     26     0   
+ 9 subcompact f        22     30.5   5.26
+10 subcompact r         9     23.2   2.17
+11 suv        4        51     18.3   3.20
+12 suv        r        11     17.5   1.51</code></pre>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="across-で複数の列に同じ関数を適用する" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="across-で複数の列に同じ関数を適用する"><code>across()</code> で複数の列に同じ関数を適用する</h3>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-17"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-17-1"><a href="#annotated-cell-17-1"></a>mpg <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-17-2"><a href="#annotated-cell-17-2"></a>  <span class="fu">group_by</span>(class) <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-17-3"><a href="#annotated-cell-17-3"></a>  <span class="fu">summarise</span>(</span>
+<span id="annotated-cell-17-4"><a href="#annotated-cell-17-4"></a>    <span class="fu">across</span>(</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-17" data-target-annotation="1">1</button><span id="annotated-cell-17-5" class="code-annotation-target"><a href="#annotated-cell-17-5"></a>      <span class="fu">c</span>(displ, cty, hwy),</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-17" data-target-annotation="2">2</button><span id="annotated-cell-17-6" class="code-annotation-target"><a href="#annotated-cell-17-6"></a>      <span class="fu">list</span>(<span class="at">mean =</span> mean, <span class="at">sd =</span> sd),</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-17" data-target-annotation="3">3</button><span id="annotated-cell-17-7" class="code-annotation-target"><a href="#annotated-cell-17-7"></a>      <span class="at">.names =</span> <span class="st">"{.col}_{.fn}"</span></span>
+<span id="annotated-cell-17-8"><a href="#annotated-cell-17-8"></a>    ),</span>
+<span id="annotated-cell-17-9"><a href="#annotated-cell-17-9"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="annotated-cell-17-10"><a href="#annotated-cell-17-10"></a>  )</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-17" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-17" data-code-lines="5" data-code-annotation="1">統計量を計算したい列を <code>c()</code> で指定</span>
+</dd>
+<dt data-target-cell="annotated-cell-17" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-17" data-code-lines="6" data-code-annotation="2">適用する関数をリストで指定</span>
+</dd>
+<dt data-target-cell="annotated-cell-17" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-17" data-code-lines="7" data-code-annotation="3"><code>{.col}_{.fn}</code> で「列名_関数名」という列名を自動生成</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 7
+  class      displ_mean displ_sd cty_mean cty_sd hwy_mean hwy_sd
+  &lt;chr&gt;           &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;
+1 2seater          6.16    0.532     15.4  0.548     24.8   1.30
+2 compact          2.33    0.452     20.1  3.39      28.3   3.78
+3 midsize          2.92    0.719     18.8  1.95      27.3   2.14
+4 minivan          3.39    0.453     15.8  1.83      22.4   2.06
+5 pickup           4.42    0.829     13    2.05      16.9   2.27
+6 subcompact       2.66    1.10      20.4  4.60      28.1   5.38
+7 suv              4.46    1.07      13.5  2.42      18.1   2.98</code></pre>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+</section>
+<section id="sec-visualization" class="level2" data-number="6.7">
+<h2 data-number="6.7" class="anchored" data-anchor-id="sec-visualization"><span class="header-section-number">6.7</span> 記述統計量の可視化</h2>
+<p>数値だけでなく、グラフでデータの分布を確認することも重要です。</p>
+<section id="ヒストグラムで分布を確認する" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="ヒストグラムで分布を確認する">ヒストグラムで分布を確認する</h3>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-18"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-18-1"><a href="#annotated-cell-18-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> hwy)) <span class="sc">+</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-18" data-target-annotation="1">1</button><span id="annotated-cell-18-2" class="code-annotation-target"><a href="#annotated-cell-18-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">2</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-18-3"><a href="#annotated-cell-18-3"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(mpg<span class="sc">$</span>hwy),</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-18" data-target-annotation="2">2</button><span id="annotated-cell-18-4" class="code-annotation-target"><a href="#annotated-cell-18-4"></a>             <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-18-5"><a href="#annotated-cell-18-5"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">median</span>(mpg<span class="sc">$</span>hwy),</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-18" data-target-annotation="3">3</button><span id="annotated-cell-18-6" class="code-annotation-target"><a href="#annotated-cell-18-6"></a>             <span class="at">color =</span> <span class="st">"orange"</span>, <span class="at">linetype =</span> <span class="st">"solid"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-18-7"><a href="#annotated-cell-18-7"></a>  <span class="fu">labs</span>(</span>
+<span id="annotated-cell-18-8"><a href="#annotated-cell-18-8"></a>    <span class="at">title =</span> <span class="st">"高速道路燃費の分布"</span>,</span>
+<span id="annotated-cell-18-9"><a href="#annotated-cell-18-9"></a>    <span class="at">subtitle =</span> <span class="st">"赤破線：平均値、オレンジ実線：中央値"</span>,</span>
+<span id="annotated-cell-18-10"><a href="#annotated-cell-18-10"></a>    <span class="at">x =</span> <span class="st">"高速道路燃費（mpg）"</span>,</span>
+<span id="annotated-cell-18-11"><a href="#annotated-cell-18-11"></a>    <span class="at">y =</span> <span class="st">"頻度"</span></span>
+<span id="annotated-cell-18-12"><a href="#annotated-cell-18-12"></a>  ) <span class="sc">+</span></span>
+<span id="annotated-cell-18-13"><a href="#annotated-cell-18-13"></a>  <span class="fu">theme_minimal</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-18" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-18" data-code-lines="2" data-code-annotation="1"><code>binwidth</code> でビンの幅を指定</span>
+</dd>
+<dt data-target-cell="annotated-cell-18" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-18" data-code-lines="4" data-code-annotation="2"><code>geom_vline()</code> で平均値に縦の破線を追加</span>
+</dd>
+<dt data-target-cell="annotated-cell-18" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-18" data-code-lines="6" data-code-annotation="3">中央値に縦の実線を追加</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lec06_files/figure-html/histogram-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>高速道路燃費の分布（ヒストグラム）</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div style="margin-top: 3.0em;">
+
+</div>
+</section>
+<section id="箱ひげ図でグループ比較する" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="箱ひげ図でグループ比較する">箱ひげ図でグループ比較する</h3>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-19"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-19-1"><a href="#annotated-cell-19-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(class, hwy, median), <span class="at">y =</span> hwy, <span class="at">fill =</span> class)) <span class="sc">+</span></span>
+<span id="annotated-cell-19-2"><a href="#annotated-cell-19-2"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-19-3"><a href="#annotated-cell-19-3"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"point"</span>,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-19" data-target-annotation="1">1</button><span id="annotated-cell-19-4" class="code-annotation-target"><a href="#annotated-cell-19-4"></a>               <span class="at">shape =</span> <span class="dv">18</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-19-5"><a href="#annotated-cell-19-5"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="annotated-cell-19-6"><a href="#annotated-cell-19-6"></a>  <span class="fu">labs</span>(</span>
+<span id="annotated-cell-19-7"><a href="#annotated-cell-19-7"></a>    <span class="at">title =</span> <span class="st">"クラス別の高速道路燃費"</span>,</span>
+<span id="annotated-cell-19-8"><a href="#annotated-cell-19-8"></a>    <span class="at">subtitle =</span> <span class="st">"赤◆：平均値"</span>,</span>
+<span id="annotated-cell-19-9"><a href="#annotated-cell-19-9"></a>    <span class="at">x =</span> <span class="st">"クラス"</span>,</span>
+<span id="annotated-cell-19-10"><a href="#annotated-cell-19-10"></a>    <span class="at">y =</span> <span class="st">"高速道路燃費（mpg）"</span></span>
+<span id="annotated-cell-19-11"><a href="#annotated-cell-19-11"></a>  ) <span class="sc">+</span></span>
+<span id="annotated-cell-19-12"><a href="#annotated-cell-19-12"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="annotated-cell-19-13"><a href="#annotated-cell-19-13"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-19" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-19" data-code-lines="4" data-code-annotation="1"><code>stat_summary()</code> で平均値を点（◆）として追加</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lec06_files/figure-html/boxplot-stats-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>クラス別の高速道路燃費（箱ひげ図）</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div style="margin-top: 3.0em;">
+
+</div>
+</section>
+<section id="密度曲線geom_density" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="密度曲線geom_density">密度曲線（<code>geom_density()</code>）</h3>
+<p>ヒストグラムをなめらかにした曲線で、データの分布形状を確認できます。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-20"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-20-1"><a href="#annotated-cell-20-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> hwy, <span class="at">fill =</span> drv, <span class="at">color =</span> drv)) <span class="sc">+</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-20" data-target-annotation="1">1</button><span id="annotated-cell-20-2" class="code-annotation-target"><a href="#annotated-cell-20-2"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-20-3"><a href="#annotated-cell-20-3"></a>  <span class="fu">labs</span>(</span>
+<span id="annotated-cell-20-4"><a href="#annotated-cell-20-4"></a>    <span class="at">title =</span> <span class="st">"駆動方式別の高速道路燃費の分布"</span>,</span>
+<span id="annotated-cell-20-5"><a href="#annotated-cell-20-5"></a>    <span class="at">x =</span> <span class="st">"高速道路燃費（mpg）"</span>,</span>
+<span id="annotated-cell-20-6"><a href="#annotated-cell-20-6"></a>    <span class="at">y =</span> <span class="st">"密度"</span>,</span>
+<span id="annotated-cell-20-7"><a href="#annotated-cell-20-7"></a>    <span class="at">fill =</span> <span class="st">"駆動方式"</span>,</span>
+<span id="annotated-cell-20-8"><a href="#annotated-cell-20-8"></a>    <span class="at">color =</span> <span class="st">"駆動方式"</span></span>
+<span id="annotated-cell-20-9"><a href="#annotated-cell-20-9"></a>  ) <span class="sc">+</span></span>
+<span id="annotated-cell-20-10"><a href="#annotated-cell-20-10"></a>  <span class="fu">theme_minimal</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-20" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-20" data-code-lines="2" data-code-annotation="1"><code>alpha</code> で透過率を設定。重なり合う部分が見えやすくなる</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lec06_files/figure-html/density-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>駆動方式別の高速道路燃費の分布（密度曲線）</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div style="margin-top: 3.0em;">
+
+</div>
+</section>
+<section id="patchwork-で複数グラフを並べる" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="patchwork-で複数グラフを並べる"><code>patchwork</code> で複数グラフを並べる</h3>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-21"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-21-1"><a href="#annotated-cell-21-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> hwy)) <span class="sc">+</span></span>
+<span id="annotated-cell-21-2"><a href="#annotated-cell-21-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">2</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-21-3"><a href="#annotated-cell-21-3"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"ヒストグラム"</span>, <span class="at">x =</span> <span class="st">"燃費（mpg）"</span>, <span class="at">y =</span> <span class="st">"頻度"</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-21-4"><a href="#annotated-cell-21-4"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="annotated-cell-21-5"><a href="#annotated-cell-21-5"></a></span>
+<span id="annotated-cell-21-6"><a href="#annotated-cell-21-6"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">y =</span> hwy)) <span class="sc">+</span></span>
+<span id="annotated-cell-21-7"><a href="#annotated-cell-21-7"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-21-8"><a href="#annotated-cell-21-8"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"箱ひげ図"</span>, <span class="at">y =</span> <span class="st">"燃費（mpg）"</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-21-9"><a href="#annotated-cell-21-9"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="annotated-cell-21-10"><a href="#annotated-cell-21-10"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-21" data-target-annotation="1">1</button><span id="annotated-cell-21-11" class="code-annotation-target"><a href="#annotated-cell-21-11"></a>p1 <span class="sc">+</span> p2</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-21" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-21" data-code-lines="11" data-code-annotation="1"><code>+</code> で横に並べる。<code>/</code> を使うと縦に並ぶ</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lec06_files/figure-html/patchwork-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>ヒストグラムと箱ひげ図を並べて表示</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+</section>
+<section id="sec-normal" class="level2" data-number="6.8">
+<h2 data-number="6.8" class="anchored" data-anchor-id="sec-normal"><span class="header-section-number">6.8</span> 正規分布と標準化</h2>
+<section id="正規分布とは" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="正規分布とは">正規分布とは</h3>
+<p><strong>正規分布</strong>（normal distribution）は、平均値を中心に左右対称の釣り鐘型をした分布です。 多くの自然現象や社会現象において、データは正規分布に近い形になります。</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>特徴</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>平均 ± 1σ の範囲</td>
+<td>全データの約 <strong>68.3%</strong> が含まれる</td>
+</tr>
+<tr class="even">
+<td>平均 ± 2σ の範囲</td>
+<td>全データの約 <strong>95.4%</strong> が含まれる</td>
+</tr>
+<tr class="odd">
+<td>平均 ± 3σ の範囲</td>
+<td>全データの約 <strong>99.7%</strong> が含まれる</td>
+</tr>
+</tbody>
+</table>
+<div style="margin-top: 3.0em;">
+
+</div>
+<p><strong>正規分布の可視化</strong></p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-22"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-22-1"><a href="#annotated-cell-22-1"></a><span class="co"># 正規分布のデータを生成して可視化</span></span>
+<span id="annotated-cell-22-2"><a href="#annotated-cell-22-2"></a><span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="at">length.out =</span> <span class="dv">300</span>)) <span class="sc">|&gt;</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-22" data-target-annotation="1">1</button><span id="annotated-cell-22-3" class="code-annotation-target"><a href="#annotated-cell-22-3"></a>  <span class="fu">mutate</span>(<span class="at">y =</span> <span class="fu">dnorm</span>(x, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)) <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-22-4"><a href="#annotated-cell-22-4"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
+<span id="annotated-cell-22-5"><a href="#annotated-cell-22-5"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"steelblue"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-22-6"><a href="#annotated-cell-22-6"></a>  <span class="fu">geom_area</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-22-7"><a href="#annotated-cell-22-7"></a>  <span class="fu">labs</span>(</span>
+<span id="annotated-cell-22-8"><a href="#annotated-cell-22-8"></a>    <span class="at">title =</span> <span class="st">"標準正規分布（平均 = 0、標準偏差 = 1）"</span>,</span>
+<span id="annotated-cell-22-9"><a href="#annotated-cell-22-9"></a>    <span class="at">x =</span> <span class="st">"z スコア"</span>,</span>
+<span id="annotated-cell-22-10"><a href="#annotated-cell-22-10"></a>    <span class="at">y =</span> <span class="st">"確率密度"</span></span>
+<span id="annotated-cell-22-11"><a href="#annotated-cell-22-11"></a>  ) <span class="sc">+</span></span>
+<span id="annotated-cell-22-12"><a href="#annotated-cell-22-12"></a>  <span class="fu">theme_minimal</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-22" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-22" data-code-lines="3" data-code-annotation="1"><code>dnorm(x, mean, sd)</code> で正規分布の確率密度を計算</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lec06_files/figure-html/normal-dist-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>正規分布（平均0、標準偏差1）</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div style="margin-top: 3.0em;">
+
+</div>
+</section>
+<section id="標準化z-スコア" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="標準化z-スコア">標準化（z スコア）</h3>
+<p><strong>標準化</strong>とは、データを「平均 0、標準偏差 1」の分布に変換することです。 単位の異なるデータを比較するときに使います。</p>
+<p><span class="math display">\[z = \frac{x - \bar{x}}{s}\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-23"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-23-1"><a href="#annotated-cell-23-1"></a><span class="co"># 高速道路燃費を標準化する</span></span>
+<span id="annotated-cell-23-2"><a href="#annotated-cell-23-2"></a>mpg <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-23-3"><a href="#annotated-cell-23-3"></a>  <span class="fu">mutate</span>(</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-23" data-target-annotation="1">1</button><span id="annotated-cell-23-4" class="code-annotation-target"><a href="#annotated-cell-23-4"></a>    <span class="at">hwy_z =</span> (hwy <span class="sc">-</span> <span class="fu">mean</span>(hwy)) <span class="sc">/</span> <span class="fu">sd</span>(hwy)</span>
+<span id="annotated-cell-23-5"><a href="#annotated-cell-23-5"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-23-6"><a href="#annotated-cell-23-6"></a>  <span class="fu">select</span>(manufacturer, model, hwy, hwy_z) <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-23-7"><a href="#annotated-cell-23-7"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(hwy_z)) <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-23-8"><a href="#annotated-cell-23-8"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-23" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-23" data-code-lines="4" data-code-annotation="1"><code>(値 - 平均) / 標準偏差</code> で z スコアを計算</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 4
+   manufacturer model        hwy hwy_z
+   &lt;chr&gt;        &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt;
+ 1 volkswagen   jetta         44  3.45
+ 2 volkswagen   new beetle    44  3.45
+ 3 volkswagen   new beetle    41  2.95
+ 4 toyota       corolla       37  2.28
+ 5 honda        civic         36  2.11
+ 6 honda        civic         36  2.11
+ 7 toyota       corolla       35  1.94
+ 8 toyota       corolla       35  1.94
+ 9 honda        civic         34  1.77
+10 honda        civic         33  1.61</code></pre>
+</div>
+</div>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong><code>scale()</code> 関数</strong></p>
+<p>R には標準化を一発で行う <code>scale()</code> 関数があります。</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a>mpg <span class="sc">|&gt;</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a>  <span class="fu">mutate</span>(<span class="at">hwy_z =</span> <span class="fu">scale</span>(hwy)[, <span class="dv">1</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>scale()</code> の返り値は行列なので、<code>[, 1]</code> で最初の列（ベクトル）を取り出します。</p>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+</section>
+<section id="sec-exercises" class="level2" data-number="6.9">
+<h2 data-number="6.9" class="anchored" data-anchor-id="sec-exercises"><span class="header-section-number">6.9</span> 演習問題</h2>
+<section id="記述統計量の計算" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="記述統計量の計算">記述統計量の計算</h3>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>mpg</code> データを使って、<strong>シリンダー数（<code>cyl</code>）別の市街地燃費（<code>cty</code>）</strong>の記述統計量を計算してください。</p>
+<p>ただし、以下の条件を満たしてください。</p>
+<ul>
+<li><code>group_by(cyl)</code> でシリンダー数ごとにグループ化する</li>
+<li><code>summarise()</code> で以下の統計量を計算する
+<ul>
+<li><code>n</code>：データ件数（<code>n()</code>）</li>
+<li><code>mean_cty</code>：平均値</li>
+<li><code>median_cty</code>：中央値</li>
+<li><code>sd_cty</code>：標準偏差</li>
+<li><code>min_cty</code>：最小値</li>
+<li><code>max_cty</code>：最大値</li>
+</ul></li>
+<li><code>.groups = "drop"</code> でグループを解除する</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>mpg <span class="sc">|&gt;</span></span>
+<span id="cb33-2"><a href="#cb33-2"></a>  <span class="fu">group_by</span>(___) <span class="sc">|&gt;</span></span>
+<span id="cb33-3"><a href="#cb33-3"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb33-4"><a href="#cb33-4"></a>    <span class="at">n          =</span> ___,</span>
+<span id="cb33-5"><a href="#cb33-5"></a>    <span class="at">mean_cty   =</span> ___,</span>
+<span id="cb33-6"><a href="#cb33-6"></a>    <span class="at">median_cty =</span> ___,</span>
+<span id="cb33-7"><a href="#cb33-7"></a>    <span class="at">sd_cty     =</span> ___,</span>
+<span id="cb33-8"><a href="#cb33-8"></a>    <span class="at">min_cty    =</span> ___,</span>
+<span id="cb33-9"><a href="#cb33-9"></a>    <span class="at">max_cty    =</span> ___,</span>
+<span id="cb33-10"><a href="#cb33-10"></a>    <span class="at">.groups    =</span> <span class="st">"drop"</span></span>
+<span id="cb33-11"><a href="#cb33-11"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+</section>
+<section id="可視化" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="可視化">可視化</h3>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>mpg</code> データを使って、<strong>排気量（<code>displ</code>）</strong>のヒストグラムを描き、 平均値と中央値を縦線で追加してください。</p>
+<p>ただし、以下の条件を満たしてください。</p>
+<ul>
+<li><code>binwidth = 0.5</code></li>
+<li><code>fill = "tomato"</code>, <code>color = "white"</code></li>
+<li>平均値：赤の破線（<code>"dashed"</code>）</li>
+<li>中央値：青の実線（<code>"solid"</code>）</li>
+<li>X 軸ラベル：「排気量（リットル）」</li>
+<li>Y 軸ラベル：「頻度」</li>
+<li>タイトル：「排気量の分布」</li>
+<li>テーマ：<code>theme_classic()</code></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> ___, <span class="fu">aes</span>(<span class="at">x =</span> ___)) <span class="sc">+</span></span>
+<span id="cb34-2"><a href="#cb34-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> ___, <span class="at">fill =</span> ___, <span class="at">color =</span> ___) <span class="sc">+</span></span>
+<span id="cb34-3"><a href="#cb34-3"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(___<span class="sc">$</span>___),</span>
+<span id="cb34-4"><a href="#cb34-4"></a>             <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb34-5"><a href="#cb34-5"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">median</span>(___<span class="sc">$</span>___),</span>
+<span id="cb34-6"><a href="#cb34-6"></a>             <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">linetype =</span> <span class="st">"solid"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb34-7"><a href="#cb34-7"></a>  <span class="fu">labs</span>(<span class="at">title =</span> ___, <span class="at">x =</span> ___, <span class="at">y =</span> ___) <span class="sc">+</span></span>
+<span id="cb34-8"><a href="#cb34-8"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>mpg</code> データを使って、<strong>駆動方式（<code>drv</code>）別の高速道路燃費（<code>hwy</code>）</strong>の 密度曲線を描いてください。</p>
+<p>ただし、以下の条件を満たしてください。</p>
+<ul>
+<li><code>fill = drv</code>, <code>color = drv</code> で駆動方式ごとに色を変える</li>
+<li><code>alpha = 0.4</code> で透過率を設定する</li>
+<li>X 軸ラベル：「高速道路燃費（mpg）」</li>
+<li>Y 軸ラベル：「密度」</li>
+<li>タイトル：「駆動方式別の燃費分布」</li>
+<li>凡例タイトル（<code>fill</code>, <code>color</code>）：「駆動方式」</li>
+<li>テーマ：<code>theme_minimal()</code></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> ___, <span class="fu">aes</span>(<span class="at">x =</span> ___, <span class="at">fill =</span> ___, <span class="at">color =</span> ___)) <span class="sc">+</span></span>
+<span id="cb35-2"><a href="#cb35-2"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> ___) <span class="sc">+</span></span>
+<span id="cb35-3"><a href="#cb35-3"></a>  <span class="fu">labs</span>(</span>
+<span id="cb35-4"><a href="#cb35-4"></a>    <span class="at">title =</span> ___,</span>
+<span id="cb35-5"><a href="#cb35-5"></a>    <span class="at">x =</span> ___, <span class="at">y =</span> ___,</span>
+<span id="cb35-6"><a href="#cb35-6"></a>    <span class="at">fill =</span> ___, <span class="at">color =</span> ___</span>
+<span id="cb35-7"><a href="#cb35-7"></a>  ) <span class="sc">+</span></span>
+<span id="cb35-8"><a href="#cb35-8"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>mpg</code> データを使って、<strong><code>patchwork</code></strong> を使って以下の 2 つのグラフを<strong>横に並べて</strong>表示してください。</p>
+<ul>
+<li><strong>左</strong>：<code>cyl</code>（シリンダー数）別の <code>hwy</code>（高速道路燃費）の箱ひげ図
+<ul>
+<li><code>x = factor(cyl)</code>, <code>y = hwy</code>, <code>fill = factor(cyl)</code></li>
+<li>タイトル：「シリンダー数別の燃費（箱ひげ図）」</li>
+<li>テーマ：<code>theme_minimal()</code>、凡例非表示</li>
+</ul></li>
+<li><strong>右</strong>：<code>cyl</code>（シリンダー数）別の <code>hwy</code>（高速道路燃費）の密度曲線
+<ul>
+<li><code>x = hwy</code>, <code>fill = factor(cyl)</code>, <code>alpha = 0.4</code></li>
+<li>タイトル：「シリンダー数別の燃費（密度曲線）」</li>
+<li>テーマ：<code>theme_minimal()</code></li>
+</ul></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> ___, <span class="fu">aes</span>(<span class="at">x =</span> ___, <span class="at">y =</span> ___, <span class="at">fill =</span> ___)) <span class="sc">+</span></span>
+<span id="cb36-2"><a href="#cb36-2"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb36-3"><a href="#cb36-3"></a>  <span class="fu">labs</span>(<span class="at">title =</span> ___) <span class="sc">+</span></span>
+<span id="cb36-4"><a href="#cb36-4"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb36-5"><a href="#cb36-5"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
+<span id="cb36-6"><a href="#cb36-6"></a></span>
+<span id="cb36-7"><a href="#cb36-7"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> ___, <span class="fu">aes</span>(<span class="at">x =</span> ___, <span class="at">fill =</span> ___)) <span class="sc">+</span></span>
+<span id="cb36-8"><a href="#cb36-8"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> ___) <span class="sc">+</span></span>
+<span id="cb36-9"><a href="#cb36-9"></a>  <span class="fu">labs</span>(<span class="at">title =</span> ___, <span class="at">fill =</span> <span class="st">"シリンダー数"</span>) <span class="sc">+</span></span>
+<span id="cb36-10"><a href="#cb36-10"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb36-11"><a href="#cb36-11"></a></span>
+<span id="cb36-12"><a href="#cb36-12"></a>___ <span class="sc">+</span> ___   <span class="co"># patchwork で横に並べる</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+</section>
+<section id="across-を使った複数列への統計量計算" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="across-を使った複数列への統計量計算"><code>across()</code> を使った複数列への統計量計算</h3>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>mpg</code> データを使って、<strong>クラス（<code>class</code>）別</strong>に <strong>排気量（<code>displ</code>）・市街地燃費（<code>cty</code>）・高速道路燃費（<code>hwy</code>）</strong>の 平均値と標準偏差を <code>across()</code> でまとめて計算してください。</p>
+<p>ただし、以下の条件を満たしてください。</p>
+<ul>
+<li><code>group_by(class)</code> でグループ化する</li>
+<li><code>across()</code> で <code>c(displ, cty, hwy)</code> に <code>mean</code> と <code>sd</code> を適用する</li>
+<li><code>.names = "{.col}_{.fn}"</code> で列名を自動生成する</li>
+<li><code>.groups = "drop"</code> でグループを解除する</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a>mpg <span class="sc">|&gt;</span></span>
+<span id="cb37-2"><a href="#cb37-2"></a>  <span class="fu">group_by</span>(___) <span class="sc">|&gt;</span></span>
+<span id="cb37-3"><a href="#cb37-3"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb37-4"><a href="#cb37-4"></a>    <span class="fu">across</span>(</span>
+<span id="cb37-5"><a href="#cb37-5"></a>      <span class="fu">c</span>(___, ___, ___),</span>
+<span id="cb37-6"><a href="#cb37-6"></a>      <span class="fu">list</span>(<span class="at">mean =</span> ___, <span class="at">sd =</span> ___),</span>
+<span id="cb37-7"><a href="#cb37-7"></a>      <span class="at">.names =</span> ___</span>
+<span id="cb37-8"><a href="#cb37-8"></a>    ),</span>
+<span id="cb37-9"><a href="#cb37-9"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb37-10"><a href="#cb37-10"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+</section>
+<section id="標準化z-スコア-1" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="標準化z-スコア-1">標準化（z スコア）</h3>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>mpg</code> データを使って、<strong>市街地燃費（<code>cty</code>）を標準化（z スコア化）</strong>してください。</p>
+<p>ただし、以下の手順で実行してください。</p>
+<ol type="1">
+<li><code>mutate()</code> で <code>cty_z = (cty - mean(cty)) / sd(cty)</code> を計算する</li>
+<li><code>select()</code> で <code>manufacturer</code>・<code>model</code>・<code>cty</code>・<code>cty_z</code> の列を選択する</li>
+<li><code>arrange(desc(cty_z))</code> で z スコアの高い順に並べ替える</li>
+<li><code>head(10)</code> で上位 10 件を表示する</li>
+</ol>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a>mpg <span class="sc">|&gt;</span></span>
+<span id="cb38-2"><a href="#cb38-2"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb38-3"><a href="#cb38-3"></a>    <span class="at">cty_z =</span> (___ <span class="sc">-</span> ___) <span class="sc">/</span> ___</span>
+<span id="cb38-4"><a href="#cb38-4"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb38-5"><a href="#cb38-5"></a>  <span class="fu">select</span>(___, ___, ___, ___) <span class="sc">|&gt;</span></span>
+<span id="cb38-6"><a href="#cb38-6"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(___)) <span class="sc">|&gt;</span></span>
+<span id="cb38-7"><a href="#cb38-7"></a>  <span class="fu">head</span>(___)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+</section>
+<section id="patchwork-で-3-グラフを組み合わせる" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="patchwork-で-3-グラフを組み合わせる"><code>patchwork</code> で 3 グラフを組み合わせる</h3>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>mpg</code> データを使って、<strong><code>patchwork</code></strong> で以下の 3 つのグラフを <code>(p1 + p2) / p3</code> の形式で表示してください。</p>
+<ul>
+<li><strong>p1</strong>：<code>hwy</code> のヒストグラム（<code>binwidth = 2</code>、<code>fill = "steelblue"</code>）
+<ul>
+<li>タイトル：「ヒストグラム」</li>
+</ul></li>
+<li><strong>p2</strong>：<code>hwy</code> の箱ひげ図（<code>fill = "steelblue"</code>, <code>alpha = 0.7</code>）
+<ul>
+<li>タイトル：「箱ひげ図」</li>
+</ul></li>
+<li><strong>p3</strong>：<code>hwy</code> の密度曲線（<code>fill = "steelblue"</code>, <code>alpha = 0.4</code>）
+<ul>
+<li>タイトル：「密度曲線」</li>
+</ul></li>
+<li>3 つとも <code>theme_minimal()</code>、X 軸ラベル：「高速道路燃費（mpg）」</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> ___, <span class="fu">aes</span>(<span class="at">x =</span> ___)) <span class="sc">+</span></span>
+<span id="cb39-2"><a href="#cb39-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> ___, <span class="at">fill =</span> ___) <span class="sc">+</span></span>
+<span id="cb39-3"><a href="#cb39-3"></a>  <span class="fu">labs</span>(<span class="at">title =</span> ___, <span class="at">x =</span> ___) <span class="sc">+</span></span>
+<span id="cb39-4"><a href="#cb39-4"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb39-5"><a href="#cb39-5"></a></span>
+<span id="cb39-6"><a href="#cb39-6"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> ___, <span class="fu">aes</span>(<span class="at">y =</span> ___)) <span class="sc">+</span></span>
+<span id="cb39-7"><a href="#cb39-7"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> ___, <span class="at">alpha =</span> ___) <span class="sc">+</span></span>
+<span id="cb39-8"><a href="#cb39-8"></a>  <span class="fu">labs</span>(<span class="at">title =</span> ___, <span class="at">y =</span> ___) <span class="sc">+</span></span>
+<span id="cb39-9"><a href="#cb39-9"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb39-10"><a href="#cb39-10"></a></span>
+<span id="cb39-11"><a href="#cb39-11"></a>p3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> ___, <span class="fu">aes</span>(<span class="at">x =</span> ___)) <span class="sc">+</span></span>
+<span id="cb39-12"><a href="#cb39-12"></a>  <span class="fu">geom_density</span>(<span class="at">fill =</span> ___, <span class="at">alpha =</span> ___) <span class="sc">+</span></span>
+<span id="cb39-13"><a href="#cb39-13"></a>  <span class="fu">labs</span>(<span class="at">title =</span> ___, <span class="at">x =</span> ___) <span class="sc">+</span></span>
+<span id="cb39-14"><a href="#cb39-14"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb39-15"><a href="#cb39-15"></a></span>
+<span id="cb39-16"><a href="#cb39-16"></a>(___ <span class="sc">+</span> ___) <span class="sc">/</span> ___</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+</section>
+<section id="summary-の結果をグラフと照合する" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="summary-の結果をグラフと照合する"><code>summary()</code> の結果をグラフと照合する</h3>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>mpg</code> データの <strong>高速道路燃費（<code>hwy</code>）</strong> について、以下の手順で 平均値・中央値の位置をヒストグラムで確認してください。</p>
+<ol type="1">
+<li>まず <code>summary(mpg$hwy)</code> を実行して平均値と中央値を確認する</li>
+<li><code>geom_histogram(binwidth = 2)</code> でヒストグラムを描く</li>
+<li><code>geom_vline()</code> で平均値（赤破線）と中央値（青実線）を追加する</li>
+<li><code>subtitle</code> に「赤破線：平均値 XX.X、青実線：中央値 XX.X」と記載する （XX.X は <code>summary()</code> で確認した実際の値を入れる）</li>
+<li>テーマ：<code>theme_minimal()</code></li>
+</ol>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="co"># まず summary で確認</span></span>
+<span id="cb40-2"><a href="#cb40-2"></a><span class="fu">summary</span>(mpg<span class="sc">$</span>hwy)</span>
+<span id="cb40-3"><a href="#cb40-3"></a></span>
+<span id="cb40-4"><a href="#cb40-4"></a><span class="co"># ヒストグラムに平均・中央値を重ねる</span></span>
+<span id="cb40-5"><a href="#cb40-5"></a><span class="fu">ggplot</span>(<span class="at">data =</span> ___, <span class="fu">aes</span>(<span class="at">x =</span> ___)) <span class="sc">+</span></span>
+<span id="cb40-6"><a href="#cb40-6"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> ___, <span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb40-7"><a href="#cb40-7"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(___<span class="sc">$</span>___),</span>
+<span id="cb40-8"><a href="#cb40-8"></a>             <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb40-9"><a href="#cb40-9"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">median</span>(___<span class="sc">$</span>___),</span>
+<span id="cb40-10"><a href="#cb40-10"></a>             <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">linetype =</span> <span class="st">"solid"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb40-11"><a href="#cb40-11"></a>  <span class="fu">labs</span>(</span>
+<span id="cb40-12"><a href="#cb40-12"></a>    <span class="at">title =</span> <span class="st">"高速道路燃費の分布"</span>,</span>
+<span id="cb40-13"><a href="#cb40-13"></a>    <span class="at">subtitle =</span> <span class="st">"赤破線：平均値 ___、青実線：中央値 ___"</span>,</span>
+<span id="cb40-14"><a href="#cb40-14"></a>    <span class="at">x =</span> <span class="st">"高速道路燃費（mpg）"</span>,</span>
+<span id="cb40-15"><a href="#cb40-15"></a>    <span class="at">y =</span> <span class="st">"頻度"</span></span>
+<span id="cb40-16"><a href="#cb40-16"></a>  ) <span class="sc">+</span></span>
+<span id="cb40-17"><a href="#cb40-17"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+</section>
+<section id="gapminder-データで記述統計" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="gapminder-データで記述統計"><code>gapminder</code> データで記述統計</h3>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>gapminder</code> データを使って、<strong>大陸（<code>continent</code>）別の平均寿命（<code>lifeExp</code>）</strong>の 記述統計量を計算し、箱ひげ図で可視化してください。</p>
+<p><strong>ステップ1：記述統計量の計算</strong></p>
+<ul>
+<li><code>group_by(continent)</code> でグループ化する</li>
+<li><code>summarise()</code> で以下を計算する
+<ul>
+<li><code>n</code>：データ件数</li>
+<li><code>mean_lifeExp</code>：平均値</li>
+<li><code>median_lifeExp</code>：中央値</li>
+<li><code>sd_lifeExp</code>：標準偏差</li>
+<li><code>min_lifeExp</code>：最小値</li>
+<li><code>max_lifeExp</code>：最大値</li>
+</ul></li>
+<li><code>.groups = "drop"</code> でグループを解除する</li>
+</ul>
+<p><strong>ステップ2：箱ひげ図の作成</strong></p>
+<ul>
+<li><code>x = reorder(continent, lifeExp, median)</code>（中央値順）</li>
+<li><code>y = lifeExp</code>, <code>fill = continent</code></li>
+<li><code>stat_summary()</code> で平均値を赤◆（<code>shape = 18, size = 3, color = "red"</code>）で表示</li>
+<li><code>coord_flip()</code> で横向きにする</li>
+<li>タイトル：「大陸別の平均寿命」、X 軸：「大陸」、Y 軸：「平均寿命（年）」</li>
+<li>テーマ：<code>theme_minimal()</code>、凡例非表示</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="co"># ステップ1：記述統計量</span></span>
+<span id="cb41-2"><a href="#cb41-2"></a>gapminder <span class="sc">|&gt;</span></span>
+<span id="cb41-3"><a href="#cb41-3"></a>  <span class="fu">group_by</span>(___) <span class="sc">|&gt;</span></span>
+<span id="cb41-4"><a href="#cb41-4"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb41-5"><a href="#cb41-5"></a>    <span class="at">n              =</span> ___,</span>
+<span id="cb41-6"><a href="#cb41-6"></a>    <span class="at">mean_lifeExp   =</span> ___,</span>
+<span id="cb41-7"><a href="#cb41-7"></a>    <span class="at">median_lifeExp =</span> ___,</span>
+<span id="cb41-8"><a href="#cb41-8"></a>    <span class="at">sd_lifeExp     =</span> ___,</span>
+<span id="cb41-9"><a href="#cb41-9"></a>    <span class="at">min_lifeExp    =</span> ___,</span>
+<span id="cb41-10"><a href="#cb41-10"></a>    <span class="at">max_lifeExp    =</span> ___,</span>
+<span id="cb41-11"><a href="#cb41-11"></a>    <span class="at">.groups        =</span> <span class="st">"drop"</span></span>
+<span id="cb41-12"><a href="#cb41-12"></a>  )</span>
+<span id="cb41-13"><a href="#cb41-13"></a></span>
+<span id="cb41-14"><a href="#cb41-14"></a><span class="co"># ステップ2：箱ひげ図</span></span>
+<span id="cb41-15"><a href="#cb41-15"></a><span class="fu">ggplot</span>(<span class="at">data =</span> ___, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(___, ___, ___), <span class="at">y =</span> ___, <span class="at">fill =</span> ___)) <span class="sc">+</span></span>
+<span id="cb41-16"><a href="#cb41-16"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb41-17"><a href="#cb41-17"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"point"</span>,</span>
+<span id="cb41-18"><a href="#cb41-18"></a>               <span class="at">shape =</span> ___, <span class="at">size =</span> ___, <span class="at">color =</span> ___) <span class="sc">+</span></span>
+<span id="cb41-19"><a href="#cb41-19"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb41-20"><a href="#cb41-20"></a>  <span class="fu">labs</span>(<span class="at">title =</span> ___, <span class="at">x =</span> ___, <span class="at">y =</span> ___) <span class="sc">+</span></span>
+<span id="cb41-21"><a href="#cb41-21"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb41-22"><a href="#cb41-22"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+</section>
+<section id="まとめ" class="level2" data-number="6.10">
+<h2 data-number="6.10" class="anchored" data-anchor-id="まとめ"><span class="header-section-number">6.10</span> まとめ</h2>
+<section id="本日学んだこと" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="本日学んだこと">本日学んだこと</h3>
+<p><strong>主要な記述統計量と R の関数</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>統計量</th>
+<th>R の関数</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>平均値</td>
+<td><code>mean()</code></td>
+<td>データの重心</td>
+</tr>
+<tr class="even">
+<td>中央値</td>
+<td><code>median()</code></td>
+<td>外れ値に強い中心の指標</td>
+</tr>
+<tr class="odd">
+<td>分散</td>
+<td><code>var()</code></td>
+<td>ばらつきの指標（単位が二乗）</td>
+</tr>
+<tr class="even">
+<td>標準偏差</td>
+<td><code>sd()</code></td>
+<td>ばらつきの指標（元の単位）</td>
+</tr>
+<tr class="odd">
+<td>四分位数</td>
+<td><code>quantile()</code></td>
+<td>データを 4 等分する値</td>
+</tr>
+<tr class="even">
+<td>四分位範囲</td>
+<td><code>IQR()</code></td>
+<td>Q3 − Q1</td>
+</tr>
+<tr class="odd">
+<td>一括確認</td>
+<td><code>summary()</code></td>
+<td>主要統計量を一度に表示</td>
+</tr>
+</tbody>
+</table>
+<p><strong>グループ別集計の流れ</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a>データ <span class="sc">|&gt;</span></span>
+<span id="cb42-2"><a href="#cb42-2"></a>  <span class="fu">group_by</span>(グループ変数) <span class="sc">|&gt;</span></span>
+<span id="cb42-3"><a href="#cb42-3"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb42-4"><a href="#cb42-4"></a>    <span class="at">n    =</span> <span class="fu">n</span>(),</span>
+<span id="cb42-5"><a href="#cb42-5"></a>    <span class="at">mean =</span> <span class="fu">mean</span>(変数),</span>
+<span id="cb42-6"><a href="#cb42-6"></a>    <span class="at">sd   =</span> <span class="fu">sd</span>(変数),</span>
+<span id="cb42-7"><a href="#cb42-7"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb42-8"><a href="#cb42-8"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>次回の予告</strong></p>
+<p>第 7 回では、<strong>推測統計（仮説検定）</strong>を学習します。</p>
+<ul>
+<li>母集団と標本の関係</li>
+<li>t 検定（平均値の差の検定）</li>
+<li>相関係数と相関検定</li>
+</ul>
+</div>
+</div>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

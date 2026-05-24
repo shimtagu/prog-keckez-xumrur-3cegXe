@@ -600,6 +600,116 @@
     ]
   },
   {
+    "objectID": "lec06.html",
+    "href": "lec06.html",
+    "title": "6  記述統計",
+    "section": "",
+    "text": "6.1 パッケージの準備\nデータの特徴を数値で表す\n今日の目標\n大学のPCはシャットダウンする度に初期化されるため、毎回インストールが必要です。 毎回授業開始時にこのブロックを実行してください。\noptions(repos = c(CRAN = \"https://cran.rstudio.com/\"))\n\ninstall.packages(\"tidyverse\")\ninstall.packages(\"patchwork\")\ninstall.packages(\"gapminder\")\nlibrary(tidyverse)\nlibrary(patchwork)\nlibrary(gapminder)",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>記述統計</span>"
+    ]
+  },
+  {
+    "objectID": "lec06.html#sec-setup",
+    "href": "lec06.html#sec-setup",
+    "title": "6  記述統計",
+    "section": "",
+    "text": "Note\n\n\n\npatchwork パッケージとは\n複数の ggplot2 グラフを並べて表示するためのパッケージです。\np1 + p2          # 横に並べる\np1 / p2          # 縦に並べる\n(p1 + p2) / p3   # 組み合わせ",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>記述統計</span>"
+    ]
+  },
+  {
+    "objectID": "lec06.html#sec-stats-types",
+    "href": "lec06.html#sec-stats-types",
+    "title": "6  記述統計",
+    "section": "6.2 統計学の種類",
+    "text": "6.2 統計学の種類\n統計学は大きく 2 種類に分類されます。\n\n\n\n\n\n\n\n統計学の種類\n特徴\n\n\n\n\n記述統計学（descriptive statistics）\n統計量を使ってデータの傾向や性質をつかむ\n\n\n推測統計学（inferential statistics）\n母集団の母数（母平均・母分散）を検定・推定する\n\n\n\n今回は記述統計学を扱います。推測統計（仮説検定）は次回（第7回）で学びます。",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>記述統計</span>"
+    ]
+  },
+  {
+    "objectID": "lec06.html#sec-descriptive",
+    "href": "lec06.html#sec-descriptive",
+    "title": "6  記述統計",
+    "section": "6.3 記述統計量とは",
+    "text": "6.3 記述統計量とは\n記述統計量（descriptive statistics）とは、データの特徴を数値で要約したものです。 大きく「中心の指標」と「ばらつきの指標」に分けられます。\n\n中心の指標\n\n\n\n\n\n\n\n\n統計量\n説明\nR の関数\n\n\n\n\n平均値（mean）\n全データの合計をデータ数で割った値\nmean()\n\n\n中央値（median）\nデータを小さい順に並べたときの真ん中の値\nmedian()\n\n\n最頻値（mode）\n最も多く現れる値\nR に標準関数なし（後述）\n\n\n\n\n\n\n\n\nばらつきの指標\n\n\n\n\n\n\n\n\n統計量\n説明\nR の関数\n\n\n\n\n分散（variance）\n各データと平均値の差の二乗の平均\nvar()\n\n\n標準偏差（standard deviation）\n分散の平方根。データと同じ単位で表せる\nsd()\n\n\n範囲（range）\n最大値 − 最小値\nrange()、max() - min()\n\n\n四分位数（quartile）\nデータを 4 等分する 3 つの値（Q1・Q2・Q3）\nquantile()\n\n\n四分位範囲（IQR）\nQ3 − Q1。外れ値の影響を受けにくい\nIQR()\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n平均値 vs 中央値\n\n平均値：外れ値の影響を強く受ける\n中央値：外れ値の影響を受けにくい\n\n例：年収データのように極端に高い値がある場合、平均値は実態より高くなりがちです。 このような場合は中央値の方が「典型的な値」をよく表します。",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>記述統計</span>"
+    ]
+  },
+  {
+    "objectID": "lec06.html#sec-data",
+    "href": "lec06.html#sec-data",
+    "title": "6  記述統計",
+    "section": "6.4 データの準備",
+    "text": "6.4 データの準備\n今回は ggplot2 付属の mpg（自動車燃費）データと gapminder パッケージのデータを使います。\n\nglimpse(mpg)\n\nRows: 234\nColumns: 11\n$ manufacturer &lt;chr&gt; \"audi\", \"audi\", \"audi\", \"audi\", \"audi\", \"audi\", \"audi\", \"…\n$ model        &lt;chr&gt; \"a4\", \"a4\", \"a4\", \"a4\", \"a4\", \"a4\", \"a4\", \"a4 quattro\", \"…\n$ displ        &lt;dbl&gt; 1.8, 1.8, 2.0, 2.0, 2.8, 2.8, 3.1, 1.8, 1.8, 2.0, 2.0, 2.…\n$ year         &lt;int&gt; 1999, 1999, 2008, 2008, 1999, 1999, 2008, 1999, 1999, 200…\n$ cyl          &lt;int&gt; 4, 4, 4, 4, 6, 6, 6, 4, 4, 4, 4, 6, 6, 6, 6, 6, 6, 8, 8, …\n$ trans        &lt;chr&gt; \"auto(l5)\", \"manual(m5)\", \"manual(m6)\", \"auto(av)\", \"auto…\n$ drv          &lt;chr&gt; \"f\", \"f\", \"f\", \"f\", \"f\", \"f\", \"f\", \"4\", \"4\", \"4\", \"4\", \"4…\n$ cty          &lt;int&gt; 18, 21, 20, 21, 16, 18, 18, 18, 16, 20, 19, 15, 17, 17, 1…\n$ hwy          &lt;int&gt; 29, 29, 31, 30, 26, 26, 27, 26, 25, 28, 27, 25, 25, 25, 2…\n$ fl           &lt;chr&gt; \"p\", \"p\", \"p\", \"p\", \"p\", \"p\", \"p\", \"p\", \"p\", \"p\", \"p\", \"p…\n$ class        &lt;chr&gt; \"compact\", \"compact\", \"compact\", \"compact\", \"compact\", \"c…",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>記述統計</span>"
+    ]
+  },
+  {
+    "objectID": "lec06.html#sec-basic-stats",
+    "href": "lec06.html#sec-basic-stats",
+    "title": "6  記述統計",
+    "section": "6.5 基本的な記述統計量の計算",
+    "text": "6.5 基本的な記述統計量の計算\n\n個別の関数で計算する\n\n# 高速道路燃費（hwy）の記述統計量\nmean(mpg$hwy)      # 平均値\n\n[1] 23.44017\n\nmedian(mpg$hwy)    # 中央値\n\n[1] 24\n\nvar(mpg$hwy)       # 分散\n\n[1] 35.45778\n\nsd(mpg$hwy)        # 標準偏差\n\n[1] 5.954643\n\nrange(mpg$hwy)     # 最小値・最大値\n\n[1] 12 44\n\nIQR(mpg$hwy)       # 四分位範囲\n\n[1] 9\n\nquantile(mpg$hwy)  # 四分位数（0%, 25%, 50%, 75%, 100%）\n\n  0%  25%  50%  75% 100% \n  12   18   24   27   44 \n\n\n\n\n\n\n\nsummary() で一括確認する\nsummary() 関数を使うと、主要な記述統計量を一度に確認できます。\n\nsummary(mpg$hwy)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  12.00   18.00   24.00   23.44   27.00   44.00 \n\n\nデータフレーム全体に適用することもできます。\n\nmpg |&gt;\n  select(displ, cty, hwy) |&gt;   # 数値変数のみ選択\n  summary()\n\n     displ            cty             hwy       \n Min.   :1.600   Min.   : 9.00   Min.   :12.00  \n 1st Qu.:2.400   1st Qu.:14.00   1st Qu.:18.00  \n Median :3.300   Median :17.00   Median :24.00  \n Mean   :3.472   Mean   :16.86   Mean   :23.44  \n 3rd Qu.:4.600   3rd Qu.:19.00   3rd Qu.:27.00  \n Max.   :7.000   Max.   :35.00   Max.   :44.00  \n\n\n\n\n\n\n\n最頻値を求める\nR には最頻値を直接求める標準関数がありません。 以下のように自分で定義するか、table() を使って頻度を確認します。\n\n# table() で頻度を確認し、最頻値を見つける\ntable(mpg$cyl) |&gt; sort(decreasing = TRUE)\n\n\n 4  6  8  5 \n81 79 70  4 \n\n\n\n# 最頻値を返す関数を自作する\nget_mode &lt;- function(x) {\n  ux &lt;- unique(x)\n  ux[which.max(tabulate(match(x, ux)))]\n}\n\nget_mode(mpg$cyl)   # シリンダー数の最頻値\n\n[1] 4",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>記述統計</span>"
+    ]
+  },
+  {
+    "objectID": "lec06.html#sec-group-stats",
+    "href": "lec06.html#sec-group-stats",
+    "title": "6  記述統計",
+    "section": "6.6 summarise() でグループ別の統計量を計算する",
+    "text": "6.6 summarise() でグループ別の統計量を計算する\ndplyr の group_by() と summarise() を組み合わせると、 グループ別の記述統計量をまとめて計算できます。\n\n基本的な使い方\n\nmpg |&gt;\n1  group_by(class) |&gt;\n  summarise(\n2    n       = n(),\n3    mean_hwy  = mean(hwy),\n    median_hwy = median(hwy),\n    sd_hwy    = sd(hwy),\n    min_hwy   = min(hwy),\n    max_hwy   = max(hwy)\n  )\n\n\n1\n\ngroup_by(class) で車のクラスごとにグループ化\n\n2\n\nn() でグループ内のデータ件数を計算\n\n3\n\n各統計量を計算して列名を指定する\n\n\n\n\n# A tibble: 7 × 7\n  class          n mean_hwy median_hwy sd_hwy min_hwy max_hwy\n  &lt;chr&gt;      &lt;int&gt;    &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;   &lt;int&gt;   &lt;int&gt;\n1 2seater        5     24.8       25     1.30      23      26\n2 compact       47     28.3       27     3.78      23      44\n3 midsize       41     27.3       27     2.14      23      32\n4 minivan       11     22.4       23     2.06      17      24\n5 pickup        33     16.9       17     2.27      12      22\n6 subcompact    35     28.1       26     5.38      20      44\n7 suv           62     18.1       17.5   2.98      12      27\n\n\n\n\n\n\n\n複数グループでの集計\n\nmpg |&gt;\n1  group_by(class, drv) |&gt;\n  summarise(\n    n        = n(),\n    mean_hwy = mean(hwy),\n    sd_hwy   = sd(hwy),\n2    .groups  = \"drop\"\n  )\n\n\n1\n\n複数の変数でグループ化できる\n\n2\n\n.groups = \"drop\" で集計後にグループを解除する\n\n\n\n\n# A tibble: 12 × 5\n   class      drv       n mean_hwy sd_hwy\n   &lt;chr&gt;      &lt;chr&gt; &lt;int&gt;    &lt;dbl&gt;  &lt;dbl&gt;\n 1 2seater    r         5     24.8   1.30\n 2 compact    4        12     25.8   1.11\n 3 compact    f        35     29.1   4.01\n 4 midsize    4         3     24     1   \n 5 midsize    f        38     27.6   1.98\n 6 minivan    f        11     22.4   2.06\n 7 pickup     4        33     16.9   2.27\n 8 subcompact 4         4     26     0   \n 9 subcompact f        22     30.5   5.26\n10 subcompact r         9     23.2   2.17\n11 suv        4        51     18.3   3.20\n12 suv        r        11     17.5   1.51\n\n\n\n\n\n\n\nacross() で複数の列に同じ関数を適用する\n\nmpg |&gt;\n  group_by(class) |&gt;\n  summarise(\n    across(\n1      c(displ, cty, hwy),\n2      list(mean = mean, sd = sd),\n3      .names = \"{.col}_{.fn}\"\n    ),\n    .groups = \"drop\"\n  )\n\n\n1\n\n統計量を計算したい列を c() で指定\n\n2\n\n適用する関数をリストで指定\n\n3\n\n{.col}_{.fn} で「列名_関数名」という列名を自動生成\n\n\n\n\n# A tibble: 7 × 7\n  class      displ_mean displ_sd cty_mean cty_sd hwy_mean hwy_sd\n  &lt;chr&gt;           &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;\n1 2seater          6.16    0.532     15.4  0.548     24.8   1.30\n2 compact          2.33    0.452     20.1  3.39      28.3   3.78\n3 midsize          2.92    0.719     18.8  1.95      27.3   2.14\n4 minivan          3.39    0.453     15.8  1.83      22.4   2.06\n5 pickup           4.42    0.829     13    2.05      16.9   2.27\n6 subcompact       2.66    1.10      20.4  4.60      28.1   5.38\n7 suv              4.46    1.07      13.5  2.42      18.1   2.98",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>記述統計</span>"
+    ]
+  },
+  {
+    "objectID": "lec06.html#sec-visualization",
+    "href": "lec06.html#sec-visualization",
+    "title": "6  記述統計",
+    "section": "6.7 記述統計量の可視化",
+    "text": "6.7 記述統計量の可視化\n数値だけでなく、グラフでデータの分布を確認することも重要です。\n\nヒストグラムで分布を確認する\n\nggplot(data = mpg, aes(x = hwy)) +\n1  geom_histogram(binwidth = 2, fill = \"steelblue\", color = \"white\") +\n  geom_vline(xintercept = mean(mpg$hwy),\n2             color = \"red\", linetype = \"dashed\", linewidth = 1) +\n  geom_vline(xintercept = median(mpg$hwy),\n3             color = \"orange\", linetype = \"solid\", linewidth = 1) +\n  labs(\n    title = \"高速道路燃費の分布\",\n    subtitle = \"赤破線：平均値、オレンジ実線：中央値\",\n    x = \"高速道路燃費（mpg）\",\n    y = \"頻度\"\n  ) +\n  theme_minimal()\n\n\n1\n\nbinwidth でビンの幅を指定\n\n2\n\ngeom_vline() で平均値に縦の破線を追加\n\n3\n\n中央値に縦の実線を追加\n\n\n\n\n\n\n\n高速道路燃費の分布（ヒストグラム）\n\n\n\n\n\n\n\n\n\n箱ひげ図でグループ比較する\n\nggplot(data = mpg, aes(x = reorder(class, hwy, median), y = hwy, fill = class)) +\n  geom_boxplot(alpha = 0.7) +\n  stat_summary(fun = mean, geom = \"point\",\n1               shape = 18, size = 3, color = \"red\") +\n  coord_flip() +\n  labs(\n    title = \"クラス別の高速道路燃費\",\n    subtitle = \"赤◆：平均値\",\n    x = \"クラス\",\n    y = \"高速道路燃費（mpg）\"\n  ) +\n  theme_minimal() +\n  theme(legend.position = \"none\")\n\n\n1\n\nstat_summary() で平均値を点（◆）として追加\n\n\n\n\n\n\n\nクラス別の高速道路燃費（箱ひげ図）\n\n\n\n\n\n\n\n\n\n密度曲線（geom_density()）\nヒストグラムをなめらかにした曲線で、データの分布形状を確認できます。\n\nggplot(data = mpg, aes(x = hwy, fill = drv, color = drv)) +\n1  geom_density(alpha = 0.4) +\n  labs(\n    title = \"駆動方式別の高速道路燃費の分布\",\n    x = \"高速道路燃費（mpg）\",\n    y = \"密度\",\n    fill = \"駆動方式\",\n    color = \"駆動方式\"\n  ) +\n  theme_minimal()\n\n\n1\n\nalpha で透過率を設定。重なり合う部分が見えやすくなる\n\n\n\n\n\n\n\n駆動方式別の高速道路燃費の分布（密度曲線）\n\n\n\n\n\n\n\n\n\npatchwork で複数グラフを並べる\n\np1 &lt;- ggplot(data = mpg, aes(x = hwy)) +\n  geom_histogram(binwidth = 2, fill = \"steelblue\", color = \"white\") +\n  labs(title = \"ヒストグラム\", x = \"燃費（mpg）\", y = \"頻度\") +\n  theme_minimal()\n\np2 &lt;- ggplot(data = mpg, aes(y = hwy)) +\n  geom_boxplot(fill = \"steelblue\", alpha = 0.7) +\n  labs(title = \"箱ひげ図\", y = \"燃費（mpg）\") +\n  theme_minimal()\n\n1p1 + p2\n\n\n1\n\n+ で横に並べる。/ を使うと縦に並ぶ\n\n\n\n\n\n\n\nヒストグラムと箱ひげ図を並べて表示",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>記述統計</span>"
+    ]
+  },
+  {
+    "objectID": "lec06.html#sec-normal",
+    "href": "lec06.html#sec-normal",
+    "title": "6  記述統計",
+    "section": "6.8 正規分布と標準化",
+    "text": "6.8 正規分布と標準化\n\n正規分布とは\n正規分布（normal distribution）は、平均値を中心に左右対称の釣り鐘型をした分布です。 多くの自然現象や社会現象において、データは正規分布に近い形になります。\n\n\n\n特徴\n内容\n\n\n\n\n平均 ± 1σ の範囲\n全データの約 68.3% が含まれる\n\n\n平均 ± 2σ の範囲\n全データの約 95.4% が含まれる\n\n\n平均 ± 3σ の範囲\n全データの約 99.7% が含まれる\n\n\n\n\n\n\n正規分布の可視化\n\n# 正規分布のデータを生成して可視化\ntibble(x = seq(-4, 4, length.out = 300)) |&gt;\n1  mutate(y = dnorm(x, mean = 0, sd = 1)) |&gt;\n  ggplot(aes(x = x, y = y)) +\n  geom_line(color = \"steelblue\", linewidth = 1) +\n  geom_area(alpha = 0.2, fill = \"steelblue\") +\n  labs(\n    title = \"標準正規分布（平均 = 0、標準偏差 = 1）\",\n    x = \"z スコア\",\n    y = \"確率密度\"\n  ) +\n  theme_minimal()\n\n\n1\n\ndnorm(x, mean, sd) で正規分布の確率密度を計算\n\n\n\n\n\n\n\n正規分布（平均0、標準偏差1）\n\n\n\n\n\n\n\n\n\n標準化（z スコア）\n標準化とは、データを「平均 0、標準偏差 1」の分布に変換することです。 単位の異なるデータを比較するときに使います。\n\\[z = \\frac{x - \\bar{x}}{s}\\]\n\n# 高速道路燃費を標準化する\nmpg |&gt;\n  mutate(\n1    hwy_z = (hwy - mean(hwy)) / sd(hwy)\n  ) |&gt;\n  select(manufacturer, model, hwy, hwy_z) |&gt;\n  arrange(desc(hwy_z)) |&gt;\n  head(10)\n\n\n1\n\n(値 - 平均) / 標準偏差 で z スコアを計算\n\n\n\n\n# A tibble: 10 × 4\n   manufacturer model        hwy hwy_z\n   &lt;chr&gt;        &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt;\n 1 volkswagen   jetta         44  3.45\n 2 volkswagen   new beetle    44  3.45\n 3 volkswagen   new beetle    41  2.95\n 4 toyota       corolla       37  2.28\n 5 honda        civic         36  2.11\n 6 honda        civic         36  2.11\n 7 toyota       corolla       35  1.94\n 8 toyota       corolla       35  1.94\n 9 honda        civic         34  1.77\n10 honda        civic         33  1.61\n\n\n\n\n\n\n\n\nNote\n\n\n\nscale() 関数\nR には標準化を一発で行う scale() 関数があります。\nmpg |&gt;\n  mutate(hwy_z = scale(hwy)[, 1])\nscale() の返り値は行列なので、[, 1] で最初の列（ベクトル）を取り出します。",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>記述統計</span>"
+    ]
+  },
+  {
+    "objectID": "lec06.html#sec-exercises",
+    "href": "lec06.html#sec-exercises",
+    "title": "6  記述統計",
+    "section": "6.9 演習問題",
+    "text": "6.9 演習問題\n\n記述統計量の計算\n\n\n\n\n\n\nWarning\n\n\n\nmpg データを使って、シリンダー数（cyl）別の市街地燃費（cty）の記述統計量を計算してください。\nただし、以下の条件を満たしてください。\n\ngroup_by(cyl) でシリンダー数ごとにグループ化する\nsummarise() で以下の統計量を計算する\n\nn：データ件数（n()）\nmean_cty：平均値\nmedian_cty：中央値\nsd_cty：標準偏差\nmin_cty：最小値\nmax_cty：最大値\n\n.groups = \"drop\" でグループを解除する\n\n\nmpg |&gt;\n  group_by(___) |&gt;\n  summarise(\n    n          = ___,\n    mean_cty   = ___,\n    median_cty = ___,\n    sd_cty     = ___,\n    min_cty    = ___,\n    max_cty    = ___,\n    .groups    = \"drop\"\n  )\n\n\n\n\n\n\n\n\n可視化\n\n\n\n\n\n\nWarning\n\n\n\nmpg データを使って、排気量（displ）のヒストグラムを描き、 平均値と中央値を縦線で追加してください。\nただし、以下の条件を満たしてください。\n\nbinwidth = 0.5\nfill = \"tomato\", color = \"white\"\n平均値：赤の破線（\"dashed\"）\n中央値：青の実線（\"solid\"）\nX 軸ラベル：「排気量（リットル）」\nY 軸ラベル：「頻度」\nタイトル：「排気量の分布」\nテーマ：theme_classic()\n\n\nggplot(data = ___, aes(x = ___)) +\n  geom_histogram(binwidth = ___, fill = ___, color = ___) +\n  geom_vline(xintercept = mean(___$___),\n             color = \"red\", linetype = \"dashed\", linewidth = 1) +\n  geom_vline(xintercept = median(___$___),\n             color = \"blue\", linetype = \"solid\", linewidth = 1) +\n  labs(title = ___, x = ___, y = ___) +\n  theme_classic()\n\n\n\n\n\n\n\n\n\n\n\n\nWarning\n\n\n\nmpg データを使って、駆動方式（drv）別の高速道路燃費（hwy）の 密度曲線を描いてください。\nただし、以下の条件を満たしてください。\n\nfill = drv, color = drv で駆動方式ごとに色を変える\nalpha = 0.4 で透過率を設定する\nX 軸ラベル：「高速道路燃費（mpg）」\nY 軸ラベル：「密度」\nタイトル：「駆動方式別の燃費分布」\n凡例タイトル（fill, color）：「駆動方式」\nテーマ：theme_minimal()\n\n\nggplot(data = ___, aes(x = ___, fill = ___, color = ___)) +\n  geom_density(alpha = ___) +\n  labs(\n    title = ___,\n    x = ___, y = ___,\n    fill = ___, color = ___\n  ) +\n  theme_minimal()\n\n\n\n\n\n\n\n\n\n\n\n\nWarning\n\n\n\nmpg データを使って、patchwork を使って以下の 2 つのグラフを横に並べて表示してください。\n\n左：cyl（シリンダー数）別の hwy（高速道路燃費）の箱ひげ図\n\nx = factor(cyl), y = hwy, fill = factor(cyl)\nタイトル：「シリンダー数別の燃費（箱ひげ図）」\nテーマ：theme_minimal()、凡例非表示\n\n右：cyl（シリンダー数）別の hwy（高速道路燃費）の密度曲線\n\nx = hwy, fill = factor(cyl), alpha = 0.4\nタイトル：「シリンダー数別の燃費（密度曲線）」\nテーマ：theme_minimal()\n\n\n\np1 &lt;- ggplot(data = ___, aes(x = ___, y = ___, fill = ___)) +\n  geom_boxplot() +\n  labs(title = ___) +\n  theme_minimal() +\n  theme(legend.position = \"none\")\n\np2 &lt;- ggplot(data = ___, aes(x = ___, fill = ___)) +\n  geom_density(alpha = ___) +\n  labs(title = ___, fill = \"シリンダー数\") +\n  theme_minimal()\n\n___ + ___   # patchwork で横に並べる\n\n\n\n\n\n\n\n\nacross() を使った複数列への統計量計算\n\n\n\n\n\n\nWarning\n\n\n\nmpg データを使って、クラス（class）別に 排気量（displ）・市街地燃費（cty）・高速道路燃費（hwy）の 平均値と標準偏差を across() でまとめて計算してください。\nただし、以下の条件を満たしてください。\n\ngroup_by(class) でグループ化する\nacross() で c(displ, cty, hwy) に mean と sd を適用する\n.names = \"{.col}_{.fn}\" で列名を自動生成する\n.groups = \"drop\" でグループを解除する\n\n\nmpg |&gt;\n  group_by(___) |&gt;\n  summarise(\n    across(\n      c(___, ___, ___),\n      list(mean = ___, sd = ___),\n      .names = ___\n    ),\n    .groups = \"drop\"\n  )\n\n\n\n\n\n\n\n\n標準化（z スコア）\n\n\n\n\n\n\nWarning\n\n\n\nmpg データを使って、市街地燃費（cty）を標準化（z スコア化）してください。\nただし、以下の手順で実行してください。\n\nmutate() で cty_z = (cty - mean(cty)) / sd(cty) を計算する\nselect() で manufacturer・model・cty・cty_z の列を選択する\narrange(desc(cty_z)) で z スコアの高い順に並べ替える\nhead(10) で上位 10 件を表示する\n\n\nmpg |&gt;\n  mutate(\n    cty_z = (___ - ___) / ___\n  ) |&gt;\n  select(___, ___, ___, ___) |&gt;\n  arrange(desc(___)) |&gt;\n  head(___)\n\n\n\n\n\n\n\n\npatchwork で 3 グラフを組み合わせる\n\n\n\n\n\n\nWarning\n\n\n\nmpg データを使って、patchwork で以下の 3 つのグラフを (p1 + p2) / p3 の形式で表示してください。\n\np1：hwy のヒストグラム（binwidth = 2、fill = \"steelblue\"）\n\nタイトル：「ヒストグラム」\n\np2：hwy の箱ひげ図（fill = \"steelblue\", alpha = 0.7）\n\nタイトル：「箱ひげ図」\n\np3：hwy の密度曲線（fill = \"steelblue\", alpha = 0.4）\n\nタイトル：「密度曲線」\n\n3 つとも theme_minimal()、X 軸ラベル：「高速道路燃費（mpg）」\n\n\np1 &lt;- ggplot(data = ___, aes(x = ___)) +\n  geom_histogram(binwidth = ___, fill = ___) +\n  labs(title = ___, x = ___) +\n  theme_minimal()\n\np2 &lt;- ggplot(data = ___, aes(y = ___)) +\n  geom_boxplot(fill = ___, alpha = ___) +\n  labs(title = ___, y = ___) +\n  theme_minimal()\n\np3 &lt;- ggplot(data = ___, aes(x = ___)) +\n  geom_density(fill = ___, alpha = ___) +\n  labs(title = ___, x = ___) +\n  theme_minimal()\n\n(___ + ___) / ___\n\n\n\n\n\n\n\n\nsummary() の結果をグラフと照合する\n\n\n\n\n\n\nWarning\n\n\n\nmpg データの 高速道路燃費（hwy） について、以下の手順で 平均値・中央値の位置をヒストグラムで確認してください。\n\nまず summary(mpg$hwy) を実行して平均値と中央値を確認する\ngeom_histogram(binwidth = 2) でヒストグラムを描く\ngeom_vline() で平均値（赤破線）と中央値（青実線）を追加する\nsubtitle に「赤破線：平均値 XX.X、青実線：中央値 XX.X」と記載する （XX.X は summary() で確認した実際の値を入れる）\nテーマ：theme_minimal()\n\n\n# まず summary で確認\nsummary(mpg$hwy)\n\n# ヒストグラムに平均・中央値を重ねる\nggplot(data = ___, aes(x = ___)) +\n  geom_histogram(binwidth = ___, fill = \"steelblue\", color = \"white\") +\n  geom_vline(xintercept = mean(___$___),\n             color = \"red\", linetype = \"dashed\", linewidth = 1) +\n  geom_vline(xintercept = median(___$___),\n             color = \"blue\", linetype = \"solid\", linewidth = 1) +\n  labs(\n    title = \"高速道路燃費の分布\",\n    subtitle = \"赤破線：平均値 ___、青実線：中央値 ___\",\n    x = \"高速道路燃費（mpg）\",\n    y = \"頻度\"\n  ) +\n  theme_minimal()\n\n\n\n\n\n\n\n\ngapminder データで記述統計\n\n\n\n\n\n\nWarning\n\n\n\ngapminder データを使って、大陸（continent）別の平均寿命（lifeExp）の 記述統計量を計算し、箱ひげ図で可視化してください。\nステップ1：記述統計量の計算\n\ngroup_by(continent) でグループ化する\nsummarise() で以下を計算する\n\nn：データ件数\nmean_lifeExp：平均値\nmedian_lifeExp：中央値\nsd_lifeExp：標準偏差\nmin_lifeExp：最小値\nmax_lifeExp：最大値\n\n.groups = \"drop\" でグループを解除する\n\nステップ2：箱ひげ図の作成\n\nx = reorder(continent, lifeExp, median)（中央値順）\ny = lifeExp, fill = continent\nstat_summary() で平均値を赤◆（shape = 18, size = 3, color = \"red\"）で表示\ncoord_flip() で横向きにする\nタイトル：「大陸別の平均寿命」、X 軸：「大陸」、Y 軸：「平均寿命（年）」\nテーマ：theme_minimal()、凡例非表示\n\n\n# ステップ1：記述統計量\ngapminder |&gt;\n  group_by(___) |&gt;\n  summarise(\n    n              = ___,\n    mean_lifeExp   = ___,\n    median_lifeExp = ___,\n    sd_lifeExp     = ___,\n    min_lifeExp    = ___,\n    max_lifeExp    = ___,\n    .groups        = \"drop\"\n  )\n\n# ステップ2：箱ひげ図\nggplot(data = ___, aes(x = reorder(___, ___, ___), y = ___, fill = ___)) +\n  geom_boxplot(alpha = 0.7) +\n  stat_summary(fun = mean, geom = \"point\",\n               shape = ___, size = ___, color = ___) +\n  coord_flip() +\n  labs(title = ___, x = ___, y = ___) +\n  theme_minimal() +\n  theme(legend.position = \"none\")",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>記述統計</span>"
+    ]
+  },
+  {
+    "objectID": "lec06.html#まとめ",
+    "href": "lec06.html#まとめ",
+    "title": "6  記述統計",
+    "section": "6.10 まとめ",
+    "text": "6.10 まとめ\n\n本日学んだこと\n主要な記述統計量と R の関数\n\n\n\n統計量\nR の関数\n意味\n\n\n\n\n平均値\nmean()\nデータの重心\n\n\n中央値\nmedian()\n外れ値に強い中心の指標\n\n\n分散\nvar()\nばらつきの指標（単位が二乗）\n\n\n標準偏差\nsd()\nばらつきの指標（元の単位）\n\n\n四分位数\nquantile()\nデータを 4 等分する値\n\n\n四分位範囲\nIQR()\nQ3 − Q1\n\n\n一括確認\nsummary()\n主要統計量を一度に表示\n\n\n\nグループ別集計の流れ\nデータ |&gt;\n  group_by(グループ変数) |&gt;\n  summarise(\n    n    = n(),\n    mean = mean(変数),\n    sd   = sd(変数),\n    .groups = \"drop\"\n  )\n\n\n\n\n\n\nNote\n\n\n\n次回の予告\n第 7 回では、推測統計（仮説検定）を学習します。\n\n母集団と標本の関係\nt 検定（平均値の差の検定）\n相関係数と相関検定",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>記述統計</span>"
+    ]
+  },
+  {
     "objectID": "lec08.html",
     "href": "lec08.html",
     "title": "8  二変数の分析",
