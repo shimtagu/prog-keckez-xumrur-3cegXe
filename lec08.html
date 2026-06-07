@@ -354,19 +354,6 @@ Warning
 </div>
 </div>
 </div>
-<div class="kotae callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><code>ggplot2</code> に付属する自動車燃費データ <code>mpg</code> を使っている。 <code>filter()</code> で <code>class</code>（車のクラス）が <code>"suv"</code> の行だけを抽出している。 出力は、SUV に該当する行のみを含むデータフレームである。</p>
-</div>
-</div>
 <div style="margin-top: 3.5em;">
 
 </div>
@@ -385,19 +372,6 @@ Warning
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>mpg <span class="sc">|&gt;</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">select</span>(manufacturer, model, year, hwy)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</div>
-</div>
-<div class="kotae callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><code>mpg</code> データを使っている。 <code>select()</code> で <code>manufacturer</code>（メーカー）・<code>model</code>（モデル名）・<code>year</code>（年）・<code>hwy</code>（高速道路燃費）の4列だけを取り出している。 出力は、4列のみを含むデータフレームである。</p>
 </div>
 </div>
 <div style="margin-top: 3.5em;">
@@ -421,19 +395,6 @@ Warning
 </div>
 </div>
 </div>
-<div class="kotae callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><code>mpg</code> データを使っている。 <code>arrange(desc(hwy))</code> で高速道路燃費（<code>hwy</code>）を降順（大きい順）に並べ替え、 <code>head(5)</code> で上位5行を取り出している。 出力は、燃費が最も良い5台の車の情報を含むデータフレームである。</p>
-</div>
-</div>
 <div style="margin-top: 3.5em;">
 
 </div>
@@ -453,19 +414,6 @@ Warning
 <span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">select</span>(displ, cty, hwy) <span class="sc">|&gt;</span></span>
 <span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">summary</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</div>
-</div>
-<div class="kotae callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><code>mpg</code> データを使っている。 <code>select()</code> で排気量（<code>displ</code>）・市街地燃費（<code>cty</code>）・高速道路燃費（<code>hwy</code>）の3列を選択し、 <code>summary()</code> でそれぞれの最小値・第1四分位数・中央値・平均値・第3四分位数・最大値を一括表示している。 出力は3変数の記述統計量の一覧表である。</p>
 </div>
 </div>
 <div style="margin-top: 3.5em;">
@@ -490,19 +438,6 @@ Warning
 </div>
 </div>
 </div>
-<div class="kotae callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><code>mpg</code> データを使っている。 <code>aes(x = class)</code> で X 軸に車のクラスを指定し、<code>geom_bar()</code> で各クラスの台数を自動的に集計して棒グラフを描いている。 <code>labs()</code> でタイトルと軸ラベルを設定し、<code>theme_minimal()</code> で背景をシンプルにしている。 出力は車のクラスごとの台数を示す棒グラフである。</p>
-</div>
-</div>
 <div style="margin-top: 3.5em;">
 
 </div>
@@ -523,19 +458,6 @@ Warning
 <span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"高速道路燃費の分布"</span>, <span class="at">x =</span> <span class="st">"燃費（mpg）"</span>, <span class="at">y =</span> <span class="st">"頻度"</span>) <span class="sc">+</span></span>
 <span id="cb8-4"><a href="#cb8-4"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</div>
-</div>
-<div class="kotae callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><code>mpg</code> データを使っている。 <code>aes(x = hwy)</code> で X 軸に高速道路燃費を指定し、<code>geom_histogram()</code> でヒストグラムを描いている。 <code>binwidth = 3</code> はビンの幅を3 mpg に設定し、<code>fill</code> と <code>color</code> で色を指定している。 出力は高速道路燃費の分布を示すヒストグラムである。</p>
 </div>
 </div>
 <div style="margin-top: 3.5em;">
@@ -562,19 +484,6 @@ Warning
 </div>
 </div>
 </div>
-<div class="kotae callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><code>mpg</code> データを使っている。 <code>mutate()</code> で新しい列 <code>hwy_kml</code> を追加している。これは高速道路燃費（<code>hwy</code>）を mpg（マイル毎ガロン）から km/L（キロメートル毎リットル）に換算した値である（1 mpg ≈ 0.425 km/L）。 <code>select()</code> でメーカー・モデル・元の燃費・換算後の燃費の4列を選択し、<code>head(5)</code> で最初の5行を表示している。</p>
-</div>
-</div>
 <div style="margin-top: 3.5em;">
 
 </div>
@@ -599,19 +508,6 @@ Warning
 </div>
 </div>
 </div>
-<div class="kotae callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><code>mpg</code> データを使っている。 <code>group_by(class)</code> で車のクラスごとにグループ化し、<code>summarise()</code> で各グループの台数（<code>n()</code>）と高速道路燃費の平均値（<code>mean(hwy)</code>）を計算している。 出力は、クラスごとの台数と平均燃費をまとめたデータフレームである。</p>
-</div>
-</div>
 <div style="margin-top: 3.5em;">
 
 </div>
@@ -634,19 +530,6 @@ Warning
 <span id="cb11-5"><a href="#cb11-5"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
 <span id="cb11-6"><a href="#cb11-6"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</div>
-</div>
-<div class="kotae callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><code>mpg</code> データを使っている。 <code>aes(fill = class)</code> でクラスごとに箱の色を変え、<code>geom_boxplot()</code> で箱ひげ図を描いている。 <code>alpha = 0.7</code> で塗りつぶしを70%の透明度にし、<code>coord_flip()</code> で X 軸と Y 軸を入れ替えて横向きにしている。 <code>theme(legend.position = "none")</code> で凡例を非表示にしている（軸ラベルと情報が重複するため）。 出力はクラスごとの高速道路燃費の分布を示す横向きの箱ひげ図である。</p>
 </div>
 </div>
 <div style="margin-top: 3.5em;">
@@ -674,19 +557,6 @@ Warning
 <span id="cb12-8"><a href="#cb12-8"></a>  ) <span class="sc">+</span></span>
 <span id="cb12-9"><a href="#cb12-9"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</div>
-</div>
-<div class="kotae callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><code>mpg</code> データを使っている。 X 軸に排気量（<code>displ</code>）、Y 軸に高速道路燃費（<code>hwy</code>）を指定した散布図を描いている。 <code>aes(color = drv)</code> で駆動方式（前輪・後輪・4WD）ごとに点の色を変えている。 <code>alpha = 0.6</code> で点を少し透明にして、重なりを見やすくしている。 出力は駆動方式ごとに色分けされた、排気量と燃費の散布図である。</p>
 </div>
 </div>
 <div style="margin-top: 4.0em;">
@@ -723,19 +593,6 @@ Warning
 </div>
 </div>
 </div>
-<div class="kotae callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><code>mpg</code> データを使っている。 まず <code>filter()</code> で2008年モデルの車だけを抽出し、<code>group_by(manufacturer)</code> でメーカーごとにグループ化している。 <code>summarise()</code> で各メーカーの台数と高速道路燃費の平均値を計算し、<code>.groups = "drop"</code> でグループ化を解除している。 最後に <code>arrange(desc(mean_hwy))</code> で平均燃費の高い順に並べ替えている。 出力は2008年モデルのメーカー別平均燃費ランキングのデータフレームである。</p>
-</div>
-</div>
 <div style="margin-top: 3.5em;">
 
 </div>
@@ -762,19 +619,6 @@ Warning
 <span id="cb14-9"><a href="#cb14-9"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
 <span id="cb14-10"><a href="#cb14-10"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</div>
-</div>
-<div class="kotae callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><code>mpg</code> データを使っている。 まずクラスごとの平均燃費を計算し、その結果をそのまま <code>ggplot()</code> にパイプで渡している。 <code>reorder(class, mean_hwy)</code> で平均燃費の小さい順にクラスを並べ替えてから棒グラフを描いている。 <code>coord_flip()</code> で横向きにし、<code>scale_fill_viridis_c()</code> で棒の色を燃費の値に応じたグラデーションにしている。 出力はクラス別平均燃費を燃費の順に並べた横棒グラフである。</p>
 </div>
 </div>
 <div style="margin-top: 3.5em;">
@@ -804,19 +648,6 @@ Warning
 </div>
 </div>
 </div>
-<div class="kotae callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><code>mpg</code> データを使っている。 <code>reorder(class, hwy, median)</code> で <code>hwy</code> の中央値を基準にクラスを昇順に並べ替えて X 軸に配置している。 <code>outlier.color = "red"</code> で外れ値の点を赤く表示し、<code>stat_summary()</code> で各クラスの平均値を黒い◆で重ねて表示している。 <code>coord_flip()</code> で横向きにしている。 出力は中央値順に並んだ、外れ値と平均値が強調されたクラス別燃費の箱ひげ図である。</p>
-</div>
-</div>
 <div style="margin-top: 3.5em;">
 
 </div>
@@ -843,19 +674,6 @@ Warning
 </div>
 </div>
 </div>
-<div class="kotae callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><code>mpg</code> データを使っている。 散布図に <code>geom_smooth(method = "lm", se = FALSE)</code> で線形回帰直線を追加し、<code>facet_wrap(~ drv)</code> で駆動方式ごとにパネルを分割している。 <code>labeller</code> でパネルのラベルを英語から日本語（4WD・前輪・後輪）に変更している。 出力は駆動方式ごとに分割された、排気量と燃費の散布図＋回帰直線のグラフである。</p>
-</div>
-</div>
 <div style="margin-top: 3.5em;">
 
 </div>
@@ -880,19 +698,6 @@ Warning
 <span id="cb17-7"><a href="#cb17-7"></a>       <span class="at">x =</span> <span class="st">"西暦"</span>, <span class="at">y =</span> <span class="st">"平均寿命（年）"</span>, <span class="at">color =</span> <span class="st">"国名"</span>) <span class="sc">+</span></span>
 <span id="cb17-8"><a href="#cb17-8"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</div>
-</div>
-<div class="kotae callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><code>gapminder</code> パッケージのデータを使っている。 <code>filter()</code> で日本・中国・韓国の3カ国のデータを <code>%in%</code> 演算子で一度に抽出し、そのまま <code>ggplot()</code> にパイプで渡している。 <code>geom_line()</code> と <code>geom_point()</code> を重ねることで、折れ線グラフ上に各データポイントの点も表示している。 <code>aes(color = country)</code> で国ごとに色を分けている。 出力は3カ国の平均寿命の時系列変化を比較した折れ線グラフである。</p>
 </div>
 </div>
 <div style="margin-top: 3.5em;">
@@ -923,19 +728,6 @@ Warning
 </div>
 </div>
 </div>
-<div class="kotae callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>学生の試験成績データ（<code>df_students</code>）を使っている。 <code>group_by(gender)</code> で性別ごとにグループ化し、<code>across()</code> で <code>math</code>・<code>reading</code>・<code>writing</code> の3列に対して平均値（<code>mean</code>）と標準偏差（<code>sd</code>）を一度に計算している。 <code>.names = "{.col}_{.fn}"</code> で「列名_関数名」（例：<code>math_mean</code>）という列名を自動生成している。 出力は性別ごとの3科目の平均値と標準偏差をまとめたデータフレームである。</p>
-</div>
-</div>
 <div style="margin-top: 3.5em;">
 
 </div>
@@ -961,19 +753,6 @@ Warning
 <span id="cb19-8"><a href="#cb19-8"></a>       <span class="at">x =</span> <span class="st">"西暦"</span>, <span class="at">y =</span> <span class="st">"平均寿命（年）"</span>, <span class="at">color =</span> <span class="st">"大陸"</span>) <span class="sc">+</span></span>
 <span id="cb19-9"><a href="#cb19-9"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</div>
-</div>
-<div class="kotae callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><code>gapminder</code> データを使っている。 <code>group_by(continent, year)</code> で大陸×年の組み合わせごとにグループ化し、<code>summarise()</code> で各グループの平均寿命を計算している。 その集計結果をそのまま <code>ggplot()</code> にパイプで渡し、大陸ごとに色分けした折れ線グラフを描いている。 出力は大陸別の平均寿命の推移（各年の平均値）を示す折れ線グラフである。</p>
 </div>
 </div>
 <div style="margin-top: 3.5em;">
@@ -1009,19 +788,6 @@ Warning
 </div>
 </div>
 </div>
-<div class="kotae callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><code>mpg</code> データを使っている。 <code>p1</code> はヒストグラムに2本の縦線を重ねたグラフで、赤の破線が平均値・青の実線が中央値の位置を示している。<code>mpg$hwy</code> という書き方で <code>mpg</code> データフレームの <code>hwy</code> 列を直接参照している。 <code>p2</code> は同じ変数の密度曲線である。 最後の <code>p1 + p2</code> は <code>patchwork</code> パッケージの機能で、2つのグラフを横に並べて表示している。 出力は高速道路燃費の分布をヒストグラムと密度曲線で横並びに示したグラフである。</p>
-</div>
-</div>
 <div style="margin-top: 3.5em;">
 
 </div>
@@ -1045,19 +811,6 @@ Warning
 </div>
 </div>
 </div>
-<div class="kotae callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>学生の試験成績データ（<code>df_students</code>）を使っている。 <code>mutate()</code> で数学スコア（<code>math</code>）を標準化した z スコア（<code>cty_z</code>）を新しい列として追加している。 z スコアは「（値 − 平均）÷ 標準偏差」で計算され、平均からどれだけ離れているかを標準偏差の単位で表したものである。 <code>select()</code> で性別・数学スコア・z スコアの3列を選択し、z スコアの高い順（数学が得意な学生順）に上位10人を表示している。</p>
-</div>
-</div>
 <div style="margin-top: 3.5em;">
 
 </div>
@@ -1076,19 +829,6 @@ Warning
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>result <span class="ot">&lt;-</span> <span class="fu">t.test</span>(math <span class="sc">~</span> gender, <span class="at">data =</span> df_students)</span>
 <span id="cb22-2"><a href="#cb22-2"></a>result <span class="sc">|&gt;</span> <span class="fu">tidy</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</div>
-</div>
-<div class="kotae callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>学生の試験成績データ（<code>df_students</code>）を使っている。 <code>t.test(math ~ gender, data = df_students)</code> で性別（<code>gender</code>）ごとの数学スコア（<code>math</code>）の平均値に統計的な差があるかを<strong>対応なし t 検定</strong>（Welch の t 検定）で検定している。 <code>math ~ gender</code> は「数学スコアを性別によって比較する」という意味の式形式である。 <code>tidy()</code> は <code>broom</code> パッケージの関数で、検定結果のリストをデータフレーム形式に変換している。 出力は t 値・p 値・95% 信頼区間などを含む1行のデータフレームである。</p>
 </div>
 </div>
 <div style="margin-top: 4.0em;">
@@ -1129,19 +869,6 @@ Warning
 </div>
 </div>
 </div>
-<div class="kotae callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>学生の試験成績データ（<code>df_students</code>）を使っている。 <code>pivot_longer()</code> で <code>math</code>・<code>reading</code>・<code>writing</code> の3列を縦長形式（1行1科目）に変換している。<code>names_to = "subject"</code> で科目名の列を、<code>values_to = "score"</code> でスコアの列を新たに作っている。 その後、性別×科目でグループ化して平均スコアを計算し、<code>geom_col(position = "dodge")</code> で性別ごとに並べた棒グラフを描いている。 出力は性別・科目別の平均スコアを比較した棒グラフである。</p>
-</div>
-</div>
 <div style="margin-top: 3.5em;">
 
 </div>
@@ -1169,19 +896,6 @@ Warning
 <span id="cb24-10"><a href="#cb24-10"></a>       <span class="at">size =</span> <span class="st">"人口"</span>, <span class="at">color =</span> <span class="st">"大陸"</span>) <span class="sc">+</span></span>
 <span id="cb24-11"><a href="#cb24-11"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</div>
-</div>
-<div class="kotae callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><code>gapminder</code> データの2007年分を使っている。 X 軸に一人当たりGDP・Y 軸に平均寿命・点の大きさ（<code>size</code>）に人口・色（<code>color</code>）に大陸をマッピングした散布図で、1点が1カ国を表している。 <code>scale_x_log10()</code> で X 軸を対数スケールに変換し、GDP の広い範囲を見やすくしている。 <code>scale_size_continuous(range = c(1, 15))</code> で点の大きさの範囲を指定している。 出力はいわゆる「バブルチャート」で、GDP・平均寿命・人口・大陸の4変数を1つのグラフで表現している。</p>
 </div>
 </div>
 <div style="margin-top: 3.5em;">
@@ -1219,19 +933,6 @@ Warning
 <span id="cb25-18"><a href="#cb25-18"></a>    <span class="at">values_to =</span> <span class="st">"value"</span></span>
 <span id="cb25-19"><a href="#cb25-19"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</div>
-</div>
-<div class="kotae callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>学生の試験成績データの中から試験準備コースを受講した学生（<code>test_preparation == "completed"</code>）のみを対象にしている。 <code>across()</code> で3科目の平均・標準偏差・中央値を一括計算して横長のデータフレームを作り、<code>pivot_longer()</code> で縦長形式に変換している。 <code>names_sep = "_"</code> は「<code>math_mean</code>」という列名を「<code>math</code>」と「<code>mean</code>」に分割するための指定である。 出力は試験準備受講者の3科目×3統計量の組み合わせを縦長形式で示したデータフレームである。</p>
 </div>
 </div>
 <div style="margin-top: 3.5em;">
@@ -1277,19 +978,6 @@ Warning
 </div>
 </div>
 </div>
-<div class="kotae callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>学生の試験成績データを使っている。 最初の <code>t.test()</code> で読解スコアと数学スコアの差を<strong>対応あり t 検定</strong>で検定し、<code>paired = TRUE</code> で同一学生のペアを考慮している。 <code>if_else()</code> で p 値が 0.001 未満かどうかで表示形式を切り替えるラベル文字列を作成している。 続くグラフでは <code>mutate()</code> で読解 − 数学の差を計算してヒストグラムを描き、赤の破線（差 = 0）と青の実線（平均差）を重ねて表示している。サブタイトルに検定の p 値を自動的に表示している。 出力は対応あり t 検定の結果と差の分布を組み合わせた可視化である。</p>
-</div>
-</div>
 <div style="margin-top: 3.5em;">
 
 </div>
@@ -1318,19 +1006,6 @@ Warning
 <span id="cb27-11"><a href="#cb27-11"></a>               <span class="at">values_to =</span> <span class="st">"p_value"</span>) <span class="sc">|&gt;</span></span>
 <span id="cb27-12"><a href="#cb27-12"></a>  <span class="fu">mutate</span>(<span class="at">significant =</span> <span class="fu">if_else</span>(p_value <span class="sc">&lt;</span> <span class="fl">0.05</span>, <span class="st">"有意"</span>, <span class="st">"非有意"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</div>
-</div>
-<div class="kotae callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>学生の試験成績データを使っている。 <code>summarise()</code> の中で3つの対応あり t 検定を実行し、各検定の p 値だけを <code>$p.value</code> で取り出して横長のデータフレームに格納している。 <code>pivot_longer()</code> で縦長形式に変換し、<code>mutate()</code> と <code>if_else()</code> で p 値が 0.05 未満かどうかで「有意」・「非有意」というラベルを付けている。 出力は3科目間の全ペア比較の p 値と有意性の判断をまとめたデータフレームである。</p>
 </div>
 </div>
 <div style="margin-top: 3.5em;">
@@ -1373,19 +1048,6 @@ Warning
 </div>
 </div>
 </div>
-<div class="kotae callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>学生の試験成績データを使っている。 試験準備コースの受講有無でグループ化し、<code>across()</code> で3科目の平均と標準偏差を計算している。 横長のデータを <code>pivot_longer()</code> で縦長形式に変換し、<code>filter(stat == "mean")</code> で平均値の行のみを抽出している。 <code>-test_preparation</code> は「<code>test_preparation</code> 以外の全列を縦長に変換する」という意味である。 出力は試験準備コースの受講有無による3科目の平均スコアを比較した棒グラフである。</p>
-</div>
-</div>
 <div style="margin-top: 3.5em;">
 
 </div>
@@ -1418,19 +1080,6 @@ Warning
 <span id="cb29-15"><a href="#cb29-15"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
 <span id="cb29-16"><a href="#cb29-16"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</div>
-</div>
-<div class="kotae callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><code>gapminder</code> データのアジアの国のみを使っている。 <code>group_by(country)</code> で国ごとにグループ化し、<code>mutate()</code> で各年の平均寿命から <code>first(lifeExp)</code>（その国の最初の記録、つまり1952年の値）を引いた「平均寿命の伸び」を計算している。 <code>ungroup()</code> でグループ化を解除した後、2007年のデータのみ抽出し、伸びの大きい上位10カ国を棒グラフで表示している。 出力は1952年から2007年にかけて平均寿命が最も伸びたアジアの国トップ10の棒グラフである。</p>
 </div>
 </div>
 <div style="margin-top: 3.5em;">
@@ -1476,19 +1125,6 @@ Warning
 </div>
 </div>
 </div>
-<div class="kotae callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>学生の試験成績データを使っている。 まず <code>pivot_longer()</code> で3科目を縦長形式に変換し、<code>factor()</code> で科目名を英語から日本語にラベル変換している。 <code>p1</code> は科目別の箱ひげ図で <code>stat_summary()</code> で平均値を赤◆で追加し、<code>p2</code> は科目別の密度曲線である。 <code>p1 + p2</code> で <code>patchwork</code> により横並びに表示している。 出力は3科目のスコア分布を箱ひげ図と密度曲線で並べて比較したグラフである。</p>
-</div>
-</div>
 <div style="margin-top: 3.5em;">
 
 </div>
@@ -1528,19 +1164,6 @@ Warning
 <span id="cb31-22"><a href="#cb31-22"></a>       <span class="at">x =</span> <span class="st">"親の学歴"</span>, <span class="at">y =</span> <span class="st">"平均スコア"</span>, <span class="at">color =</span> <span class="st">"科目"</span>) <span class="sc">+</span></span>
 <span id="cb31-23"><a href="#cb31-23"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</div>
-</div>
-<div class="kotae callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>学生の試験成績データを使っている。 親の学歴（<code>parent_education</code>）ごとに3科目の平均スコアを計算し、<code>fct_reorder()</code> で数学の平均スコア順に親の学歴を並べ替えている。 <code>pivot_longer()</code> の <code>starts_with("mean_")</code> で <code>mean_</code> で始まる列のみを縦長に変換し、<code>names_prefix = "mean_"</code> で列名から <code>mean_</code> という接頭辞を取り除いている。 <code>geom_line()</code> と <code>geom_point()</code> を組み合わせることで、折れ線グラフとして親の学歴と科目別スコアの関係を表現している。 出力は親の学歴別・科目別の平均スコアを比較した横向きの折れ線グラフである。</p>
 </div>
 </div>
 <div style="margin-top: 3.5em;">
@@ -1589,23 +1212,6 @@ Warning
 <span id="cb32-29"><a href="#cb32-29"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
 <span id="cb32-30"><a href="#cb32-30"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</div>
-</div>
-<div class="kotae callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>学生の試験成績データを使っている。複数の高度な処理が組み合わさっている。</p>
-<p>まず <code>map()</code> で3科目それぞれに対応なし t 検定を実行し、<code>list_rbind()</code> で結果を1つのデータフレームに結合している。<code>as.formula(paste(.x, "~ test_preparation"))</code> は文字列から検定式を動的に生成している。</p>
-<p>次に <code>pivot_longer()</code> でスコアデータを縦長に変換し、<code>left_join()</code> で t 検定の有意性（<code>sig</code>）列を結合している。</p>
-<p><code>geom_boxplot()</code> と <code>geom_beeswarm()</code> を重ね、<code>facet_wrap(~ subject)</code> で科目ごとにパネルを分割している。</p>
-<p>出力は試験準備コースの受講有無による3科目のスコア分布を、箱ひげ図と個人の点を重ねたグラフで科目別に比較したものである。</p>
 </div>
 </div>
 <div style="margin-top: 4.0em;">
