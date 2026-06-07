@@ -8,7 +8,7 @@
 
 <meta name="description" content="2026年度　A（前期） B（後期） 時間： 月曜日 4 時限（15:45-17:30） 教室： C 館 地下1階 PC4 教室">
 
-<title>8&nbsp; 二変数の分析 – R プログラミング</title>
+<title>8&nbsp; コードを読む – R プログラミング</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -85,7 +120,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lec08.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">二変数の分析</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lec08.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">コードを読む</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -161,37 +196,37 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lec08.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">二変数の分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">コードを読む</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lec09.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">回帰分析1</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">二変数の分析</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lec10.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">回帰分析2</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">回帰分析1</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lec11.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">回帰分析3</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">回帰分析2</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lec12.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">総合演習1</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">回帰分析3</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lec13.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">総合演習2</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">総合演習1</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -205,15 +240,24 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-setup" id="toc-sec-setup" class="nav-link active" data-scroll-target="#sec-setup"><span class="header-section-number">8.1</span> パッケージの準備</a></li>
+  <li><a href="#sec-basic" id="toc-sec-basic" class="nav-link" data-scroll-target="#sec-basic"><span class="header-section-number">8.2</span> 基礎問題（★☆☆）</a></li>
+  <li><a href="#sec-intermediate" id="toc-sec-intermediate" class="nav-link" data-scroll-target="#sec-intermediate"><span class="header-section-number">8.3</span> 中級問題（★★☆）</a></li>
+  <li><a href="#sec-advanced" id="toc-sec-advanced" class="nav-link" data-scroll-target="#sec-advanced"><span class="header-section-number">8.4</span> 上級問題（★★★）</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">二変数の分析</span></h1>
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">コードを読む</span></h1>
 </div>
 
 
@@ -230,9 +274,1346 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>（相関分析）</p>
+<p><strong>これまでの学習内容の振り返り</strong></p>
+<div style="margin-top: 2.0em;">
+
+</div>
+<p><strong>今日の目標</strong></p>
+<ol type="1">
+<li>これまで学習したコードを<strong>自分の言葉で説明</strong>できるようになる。</li>
+<li>コードを読む力（<strong>コードリーディング</strong>）を身につける。</li>
+<li>各関数の役割と組み合わせ方を改めて整理する。</li>
+</ol>
+<div style="margin-top: 2.0em;">
+
+</div>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>今日の取り組み方</strong></p>
+<p>各問題のコードを読んで、以下の3点を説明してください。</p>
+<ol type="1">
+<li><strong>何のデータを使っているか</strong></li>
+<li><strong>何をしているか</strong>（各行・各関数の役割）</li>
+<li><strong>何が出力されるか</strong>（数値・グラフ・表など）</li>
+</ol>
+<p>ペアまたはグループで話し合いながら取り組んでください。</p>
+</div>
+</div>
+<div style="margin-top: 2.0em;">
+
+</div>
+<section id="sec-setup" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="sec-setup"><span class="header-section-number">8.1</span> パッケージの準備</h2>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">options</span>(<span class="at">repos =</span> <span class="fu">c</span>(<span class="at">CRAN =</span> <span class="st">"https://cran.rstudio.com/"</span>))</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">install.packages</span>(<span class="st">"patchwork"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">install.packages</span>(<span class="st">"broom"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">install.packages</span>(<span class="st">"gapminder"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="fu">library</span>(broom)</span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="fu">library</span>(gapminder)</span>
+<span id="cb2-5"><a href="#cb2-5"></a></span>
+<span id="cb2-6"><a href="#cb2-6"></a>df_students <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/StudentsPerformance.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-basic" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="sec-basic"><span class="header-section-number">8.2</span> 基礎問題（★☆☆）</h2>
+<p><em>lec02〜lec04 の内容が中心です。</em></p>
+<div style="margin-top: 2.0em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>以下のコードを読んで、何のデータを使い・何をして・何が出力されるかを説明してください。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>mpg <span class="sc">|&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">filter</span>(class <span class="sc">==</span> <span class="st">"suv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div class="kotae callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>ggplot2</code> に付属する自動車燃費データ <code>mpg</code> を使っている。 <code>filter()</code> で <code>class</code>（車のクラス）が <code>"suv"</code> の行だけを抽出している。 出力は、SUV に該当する行のみを含むデータフレームである。</p>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>以下のコードを読んで、何のデータを使い・何をして・何が出力されるかを説明してください。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>mpg <span class="sc">|&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">select</span>(manufacturer, model, year, hwy)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div class="kotae callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>mpg</code> データを使っている。 <code>select()</code> で <code>manufacturer</code>（メーカー）・<code>model</code>（モデル名）・<code>year</code>（年）・<code>hwy</code>（高速道路燃費）の4列だけを取り出している。 出力は、4列のみを含むデータフレームである。</p>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>以下のコードを読んで、何のデータを使い・何をして・何が出力されるかを説明してください。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>mpg <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(hwy)) <span class="sc">|&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">head</span>(<span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div class="kotae callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>mpg</code> データを使っている。 <code>arrange(desc(hwy))</code> で高速道路燃費（<code>hwy</code>）を降順（大きい順）に並べ替え、 <code>head(5)</code> で上位5行を取り出している。 出力は、燃費が最も良い5台の車の情報を含むデータフレームである。</p>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>以下のコードを読んで、何のデータを使い・何をして・何が出力されるかを説明してください。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>mpg <span class="sc">|&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">select</span>(displ, cty, hwy) <span class="sc">|&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">summary</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div class="kotae callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>mpg</code> データを使っている。 <code>select()</code> で排気量（<code>displ</code>）・市街地燃費（<code>cty</code>）・高速道路燃費（<code>hwy</code>）の3列を選択し、 <code>summary()</code> でそれぞれの最小値・第1四分位数・中央値・平均値・第3四分位数・最大値を一括表示している。 出力は3変数の記述統計量の一覧表である。</p>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>以下のコードを読んで、何のデータを使い・何をして・何が出力されるかを説明してください。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> class)) <span class="sc">+</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"車のクラス別台数"</span>, <span class="at">x =</span> <span class="st">"クラス"</span>, <span class="at">y =</span> <span class="st">"台数"</span>) <span class="sc">+</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div class="kotae callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>mpg</code> データを使っている。 <code>aes(x = class)</code> で X 軸に車のクラスを指定し、<code>geom_bar()</code> で各クラスの台数を自動的に集計して棒グラフを描いている。 <code>labs()</code> でタイトルと軸ラベルを設定し、<code>theme_minimal()</code> で背景をシンプルにしている。 出力は車のクラスごとの台数を示す棒グラフである。</p>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>以下のコードを読んで、何のデータを使い・何をして・何が出力されるかを説明してください。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> hwy)) <span class="sc">+</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">3</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"高速道路燃費の分布"</span>, <span class="at">x =</span> <span class="st">"燃費（mpg）"</span>, <span class="at">y =</span> <span class="st">"頻度"</span>) <span class="sc">+</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div class="kotae callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>mpg</code> データを使っている。 <code>aes(x = hwy)</code> で X 軸に高速道路燃費を指定し、<code>geom_histogram()</code> でヒストグラムを描いている。 <code>binwidth = 3</code> はビンの幅を3 mpg に設定し、<code>fill</code> と <code>color</code> で色を指定している。 出力は高速道路燃費の分布を示すヒストグラムである。</p>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>以下のコードを読んで、何のデータを使い・何をして・何が出力されるかを説明してください。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>mpg <span class="sc">|&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb9-3"><a href="#cb9-3"></a>    <span class="at">hwy_kml =</span> hwy <span class="sc">*</span> <span class="fl">0.425</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a>  <span class="fu">select</span>(manufacturer, model, hwy, hwy_kml) <span class="sc">|&gt;</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a>  <span class="fu">head</span>(<span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div class="kotae callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>mpg</code> データを使っている。 <code>mutate()</code> で新しい列 <code>hwy_kml</code> を追加している。これは高速道路燃費（<code>hwy</code>）を mpg（マイル毎ガロン）から km/L（キロメートル毎リットル）に換算した値である（1 mpg ≈ 0.425 km/L）。 <code>select()</code> でメーカー・モデル・元の燃費・換算後の燃費の4列を選択し、<code>head(5)</code> で最初の5行を表示している。</p>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>以下のコードを読んで、何のデータを使い・何をして・何が出力されるかを説明してください。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>mpg <span class="sc">|&gt;</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">group_by</span>(class) <span class="sc">|&gt;</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb10-4"><a href="#cb10-4"></a>    <span class="at">n        =</span> <span class="fu">n</span>(),</span>
+<span id="cb10-5"><a href="#cb10-5"></a>    <span class="at">mean_hwy =</span> <span class="fu">mean</span>(hwy)</span>
+<span id="cb10-6"><a href="#cb10-6"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div class="kotae callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>mpg</code> データを使っている。 <code>group_by(class)</code> で車のクラスごとにグループ化し、<code>summarise()</code> で各グループの台数（<code>n()</code>）と高速道路燃費の平均値（<code>mean(hwy)</code>）を計算している。 出力は、クラスごとの台数と平均燃費をまとめたデータフレームである。</p>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>以下のコードを読んで、何のデータを使い・何をして・何が出力されるかを説明してください。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> class, <span class="at">y =</span> hwy, <span class="at">fill =</span> class)) <span class="sc">+</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"クラス別の高速道路燃費"</span>, <span class="at">x =</span> <span class="st">"クラス"</span>, <span class="at">y =</span> <span class="st">"燃費（mpg）"</span>) <span class="sc">+</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div class="kotae callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>mpg</code> データを使っている。 <code>aes(fill = class)</code> でクラスごとに箱の色を変え、<code>geom_boxplot()</code> で箱ひげ図を描いている。 <code>alpha = 0.7</code> で塗りつぶしを70%の透明度にし、<code>coord_flip()</code> で X 軸と Y 軸を入れ替えて横向きにしている。 <code>theme(legend.position = "none")</code> で凡例を非表示にしている（軸ラベルと情報が重複するため）。 出力はクラスごとの高速道路燃費の分布を示す横向きの箱ひげ図である。</p>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>以下のコードを読んで、何のデータを使い・何をして・何が出力されるかを説明してください。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy, <span class="at">color =</span> drv)) <span class="sc">+</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a>  <span class="fu">labs</span>(</span>
+<span id="cb12-4"><a href="#cb12-4"></a>    <span class="at">title =</span> <span class="st">"排気量と高速道路燃費の関係"</span>,</span>
+<span id="cb12-5"><a href="#cb12-5"></a>    <span class="at">x =</span> <span class="st">"排気量（リットル）"</span>,</span>
+<span id="cb12-6"><a href="#cb12-6"></a>    <span class="at">y =</span> <span class="st">"高速道路燃費（mpg）"</span>,</span>
+<span id="cb12-7"><a href="#cb12-7"></a>    <span class="at">color =</span> <span class="st">"駆動方式"</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a>  ) <span class="sc">+</span></span>
+<span id="cb12-9"><a href="#cb12-9"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div class="kotae callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>mpg</code> データを使っている。 X 軸に排気量（<code>displ</code>）、Y 軸に高速道路燃費（<code>hwy</code>）を指定した散布図を描いている。 <code>aes(color = drv)</code> で駆動方式（前輪・後輪・4WD）ごとに点の色を変えている。 <code>alpha = 0.6</code> で点を少し透明にして、重なりを見やすくしている。 出力は駆動方式ごとに色分けされた、排気量と燃費の散布図である。</p>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-intermediate" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="sec-intermediate"><span class="header-section-number">8.3</span> 中級問題（★★☆）</h2>
+<p><em>lec02〜lec07 の内容が中心です。パイプで複数の処理をつないだコードです。</em></p>
+<div style="margin-top: 2.0em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>以下のコードを読んで、何のデータを使い・何をして・何が出力されるかを説明してください。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>mpg <span class="sc">|&gt;</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2008</span>) <span class="sc">|&gt;</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a>  <span class="fu">group_by</span>(manufacturer) <span class="sc">|&gt;</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb13-5"><a href="#cb13-5"></a>    <span class="at">n        =</span> <span class="fu">n</span>(),</span>
+<span id="cb13-6"><a href="#cb13-6"></a>    <span class="at">mean_hwy =</span> <span class="fu">mean</span>(hwy),</span>
+<span id="cb13-7"><a href="#cb13-7"></a>    <span class="at">.groups  =</span> <span class="st">"drop"</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(mean_hwy))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div class="kotae callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>mpg</code> データを使っている。 まず <code>filter()</code> で2008年モデルの車だけを抽出し、<code>group_by(manufacturer)</code> でメーカーごとにグループ化している。 <code>summarise()</code> で各メーカーの台数と高速道路燃費の平均値を計算し、<code>.groups = "drop"</code> でグループ化を解除している。 最後に <code>arrange(desc(mean_hwy))</code> で平均燃費の高い順に並べ替えている。 出力は2008年モデルのメーカー別平均燃費ランキングのデータフレームである。</p>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>以下のコードを読んで、何のデータを使い・何をして・何が出力されるかを説明してください。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>mpg <span class="sc">|&gt;</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">group_by</span>(class) <span class="sc">|&gt;</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a>  <span class="fu">summarise</span>(<span class="at">mean_hwy =</span> <span class="fu">mean</span>(hwy), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(class, mean_hwy), <span class="at">y =</span> mean_hwy, <span class="at">fill =</span> mean_hwy)) <span class="sc">+</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb14-7"><a href="#cb14-7"></a>  <span class="fu">scale_fill_viridis_c</span>() <span class="sc">+</span></span>
+<span id="cb14-8"><a href="#cb14-8"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"クラス別の平均燃費"</span>, <span class="at">x =</span> <span class="st">"クラス"</span>, <span class="at">y =</span> <span class="st">"平均燃費（mpg）"</span>) <span class="sc">+</span></span>
+<span id="cb14-9"><a href="#cb14-9"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb14-10"><a href="#cb14-10"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div class="kotae callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>mpg</code> データを使っている。 まずクラスごとの平均燃費を計算し、その結果をそのまま <code>ggplot()</code> にパイプで渡している。 <code>reorder(class, mean_hwy)</code> で平均燃費の小さい順にクラスを並べ替えてから棒グラフを描いている。 <code>coord_flip()</code> で横向きにし、<code>scale_fill_viridis_c()</code> で棒の色を燃費の値に応じたグラデーションにしている。 出力はクラス別平均燃費を燃費の順に並べた横棒グラフである。</p>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>以下のコードを読んで、何のデータを使い・何をして・何が出力されるかを説明してください。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(class, hwy, median), <span class="at">y =</span> hwy, <span class="at">fill =</span> class)) <span class="sc">+</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">outlier.color =</span> <span class="st">"red"</span>, <span class="at">outlier.size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"point"</span>, <span class="at">shape =</span> <span class="dv">18</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb15-5"><a href="#cb15-5"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"クラス別の高速道路燃費（中央値順）"</span>,</span>
+<span id="cb15-6"><a href="#cb15-6"></a>       <span class="at">subtitle =</span> <span class="st">"黒◆：平均値、赤点：外れ値"</span>,</span>
+<span id="cb15-7"><a href="#cb15-7"></a>       <span class="at">x =</span> <span class="st">"クラス"</span>, <span class="at">y =</span> <span class="st">"燃費（mpg）"</span>) <span class="sc">+</span></span>
+<span id="cb15-8"><a href="#cb15-8"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb15-9"><a href="#cb15-9"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div class="kotae callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>mpg</code> データを使っている。 <code>reorder(class, hwy, median)</code> で <code>hwy</code> の中央値を基準にクラスを昇順に並べ替えて X 軸に配置している。 <code>outlier.color = "red"</code> で外れ値の点を赤く表示し、<code>stat_summary()</code> で各クラスの平均値を黒い◆で重ねて表示している。 <code>coord_flip()</code> で横向きにしている。 出力は中央値順に並んだ、外れ値と平均値が強調されたクラス別燃費の箱ひげ図である。</p>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>以下のコードを読んで、何のデータを使い・何をして・何が出力されるかを説明してください。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy, <span class="at">color =</span> drv)) <span class="sc">+</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> drv, <span class="at">labeller =</span> <span class="fu">labeller</span>(<span class="at">drv =</span> <span class="fu">c</span>(<span class="st">"4"</span> <span class="ot">=</span> <span class="st">"4WD"</span>, <span class="st">"f"</span> <span class="ot">=</span> <span class="st">"前輪"</span>, <span class="st">"r"</span> <span class="ot">=</span> <span class="st">"後輪"</span>))) <span class="sc">+</span></span>
+<span id="cb16-5"><a href="#cb16-5"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"排気量と燃費の関係（駆動方式別）"</span>,</span>
+<span id="cb16-6"><a href="#cb16-6"></a>       <span class="at">x =</span> <span class="st">"排気量（リットル）"</span>, <span class="at">y =</span> <span class="st">"高速道路燃費（mpg）"</span>) <span class="sc">+</span></span>
+<span id="cb16-7"><a href="#cb16-7"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb16-8"><a href="#cb16-8"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div class="kotae callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>mpg</code> データを使っている。 散布図に <code>geom_smooth(method = "lm", se = FALSE)</code> で線形回帰直線を追加し、<code>facet_wrap(~ drv)</code> で駆動方式ごとにパネルを分割している。 <code>labeller</code> でパネルのラベルを英語から日本語（4WD・前輪・後輪）に変更している。 出力は駆動方式ごとに分割された、排気量と燃費の散布図＋回帰直線のグラフである。</p>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>以下のコードを読んで、何のデータを使い・何をして・何が出力されるかを説明してください。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>gapminder <span class="sc">|&gt;</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>  <span class="fu">filter</span>(country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Japan"</span>, <span class="st">"China"</span>, <span class="st">"Korea, Rep."</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb17-3"><a href="#cb17-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> lifeExp, <span class="at">color =</span> country)) <span class="sc">+</span></span>
+<span id="cb17-4"><a href="#cb17-4"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb17-5"><a href="#cb17-5"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb17-6"><a href="#cb17-6"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"東アジア3カ国の平均寿命の推移"</span>,</span>
+<span id="cb17-7"><a href="#cb17-7"></a>       <span class="at">x =</span> <span class="st">"西暦"</span>, <span class="at">y =</span> <span class="st">"平均寿命（年）"</span>, <span class="at">color =</span> <span class="st">"国名"</span>) <span class="sc">+</span></span>
+<span id="cb17-8"><a href="#cb17-8"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div class="kotae callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>gapminder</code> パッケージのデータを使っている。 <code>filter()</code> で日本・中国・韓国の3カ国のデータを <code>%in%</code> 演算子で一度に抽出し、そのまま <code>ggplot()</code> にパイプで渡している。 <code>geom_line()</code> と <code>geom_point()</code> を重ねることで、折れ線グラフ上に各データポイントの点も表示している。 <code>aes(color = country)</code> で国ごとに色を分けている。 出力は3カ国の平均寿命の時系列変化を比較した折れ線グラフである。</p>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>以下のコードを読んで、何のデータを使い・何をして・何が出力されるかを説明してください。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>df_students <span class="sc">|&gt;</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a>  <span class="fu">group_by</span>(gender) <span class="sc">|&gt;</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb18-4"><a href="#cb18-4"></a>    <span class="fu">across</span>(</span>
+<span id="cb18-5"><a href="#cb18-5"></a>      <span class="fu">c</span>(math, reading, writing),</span>
+<span id="cb18-6"><a href="#cb18-6"></a>      <span class="fu">list</span>(<span class="at">mean =</span> mean, <span class="at">sd =</span> sd),</span>
+<span id="cb18-7"><a href="#cb18-7"></a>      <span class="at">.names =</span> <span class="st">"{.col}_{.fn}"</span></span>
+<span id="cb18-8"><a href="#cb18-8"></a>    ),</span>
+<span id="cb18-9"><a href="#cb18-9"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb18-10"><a href="#cb18-10"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div class="kotae callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>学生の試験成績データ（<code>df_students</code>）を使っている。 <code>group_by(gender)</code> で性別ごとにグループ化し、<code>across()</code> で <code>math</code>・<code>reading</code>・<code>writing</code> の3列に対して平均値（<code>mean</code>）と標準偏差（<code>sd</code>）を一度に計算している。 <code>.names = "{.col}_{.fn}"</code> で「列名_関数名」（例：<code>math_mean</code>）という列名を自動生成している。 出力は性別ごとの3科目の平均値と標準偏差をまとめたデータフレームである。</p>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>以下のコードを読んで、何のデータを使い・何をして・何が出力されるかを説明してください。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>gapminder <span class="sc">|&gt;</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a>  <span class="fu">group_by</span>(continent, year) <span class="sc">|&gt;</span></span>
+<span id="cb19-3"><a href="#cb19-3"></a>  <span class="fu">summarise</span>(<span class="at">mean_lifeExp =</span> <span class="fu">mean</span>(lifeExp), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb19-4"><a href="#cb19-4"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> mean_lifeExp, <span class="at">color =</span> continent)) <span class="sc">+</span></span>
+<span id="cb19-5"><a href="#cb19-5"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb19-6"><a href="#cb19-6"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb19-7"><a href="#cb19-7"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"大陸別の平均寿命の推移（平均値）"</span>,</span>
+<span id="cb19-8"><a href="#cb19-8"></a>       <span class="at">x =</span> <span class="st">"西暦"</span>, <span class="at">y =</span> <span class="st">"平均寿命（年）"</span>, <span class="at">color =</span> <span class="st">"大陸"</span>) <span class="sc">+</span></span>
+<span id="cb19-9"><a href="#cb19-9"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div class="kotae callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>gapminder</code> データを使っている。 <code>group_by(continent, year)</code> で大陸×年の組み合わせごとにグループ化し、<code>summarise()</code> で各グループの平均寿命を計算している。 その集計結果をそのまま <code>ggplot()</code> にパイプで渡し、大陸ごとに色分けした折れ線グラフを描いている。 出力は大陸別の平均寿命の推移（各年の平均値）を示す折れ線グラフである。</p>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>以下のコードを読んで、何のデータを使い・何をして・何が出力されるかを説明してください。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> hwy)) <span class="sc">+</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">2</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(mpg<span class="sc">$</span>hwy), <span class="at">color =</span> <span class="st">"red"</span>,</span>
+<span id="cb20-4"><a href="#cb20-4"></a>             <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb20-5"><a href="#cb20-5"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">median</span>(mpg<span class="sc">$</span>hwy), <span class="at">color =</span> <span class="st">"blue"</span>,</span>
+<span id="cb20-6"><a href="#cb20-6"></a>             <span class="at">linetype =</span> <span class="st">"solid"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb20-7"><a href="#cb20-7"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"ヒストグラム"</span>, <span class="at">x =</span> <span class="st">"燃費（mpg）"</span>, <span class="at">y =</span> <span class="st">"頻度"</span>) <span class="sc">+</span></span>
+<span id="cb20-8"><a href="#cb20-8"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb20-9"><a href="#cb20-9"></a></span>
+<span id="cb20-10"><a href="#cb20-10"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> hwy)) <span class="sc">+</span></span>
+<span id="cb20-11"><a href="#cb20-11"></a>  <span class="fu">geom_density</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb20-12"><a href="#cb20-12"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"密度曲線"</span>, <span class="at">x =</span> <span class="st">"燃費（mpg）"</span>, <span class="at">y =</span> <span class="st">"密度"</span>) <span class="sc">+</span></span>
+<span id="cb20-13"><a href="#cb20-13"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb20-14"><a href="#cb20-14"></a></span>
+<span id="cb20-15"><a href="#cb20-15"></a>p1 <span class="sc">+</span> p2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div class="kotae callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>mpg</code> データを使っている。 <code>p1</code> はヒストグラムに2本の縦線を重ねたグラフで、赤の破線が平均値・青の実線が中央値の位置を示している。<code>mpg$hwy</code> という書き方で <code>mpg</code> データフレームの <code>hwy</code> 列を直接参照している。 <code>p2</code> は同じ変数の密度曲線である。 最後の <code>p1 + p2</code> は <code>patchwork</code> パッケージの機能で、2つのグラフを横に並べて表示している。 出力は高速道路燃費の分布をヒストグラムと密度曲線で横並びに示したグラフである。</p>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>以下のコードを読んで、何のデータを使い・何をして・何が出力されるかを説明してください。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>df_students <span class="sc">|&gt;</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a>  <span class="fu">mutate</span>(<span class="at">cty_z =</span> (math <span class="sc">-</span> <span class="fu">mean</span>(math)) <span class="sc">/</span> <span class="fu">sd</span>(math)) <span class="sc">|&gt;</span></span>
+<span id="cb21-3"><a href="#cb21-3"></a>  <span class="fu">select</span>(gender, math, cty_z) <span class="sc">|&gt;</span></span>
+<span id="cb21-4"><a href="#cb21-4"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(cty_z)) <span class="sc">|&gt;</span></span>
+<span id="cb21-5"><a href="#cb21-5"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div class="kotae callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>学生の試験成績データ（<code>df_students</code>）を使っている。 <code>mutate()</code> で数学スコア（<code>math</code>）を標準化した z スコア（<code>cty_z</code>）を新しい列として追加している。 z スコアは「（値 − 平均）÷ 標準偏差」で計算され、平均からどれだけ離れているかを標準偏差の単位で表したものである。 <code>select()</code> で性別・数学スコア・z スコアの3列を選択し、z スコアの高い順（数学が得意な学生順）に上位10人を表示している。</p>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>以下のコードを読んで、何のデータを使い・何をして・何が出力されるかを説明してください。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>result <span class="ot">&lt;-</span> <span class="fu">t.test</span>(math <span class="sc">~</span> gender, <span class="at">data =</span> df_students)</span>
+<span id="cb22-2"><a href="#cb22-2"></a>result <span class="sc">|&gt;</span> <span class="fu">tidy</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div class="kotae callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>学生の試験成績データ（<code>df_students</code>）を使っている。 <code>t.test(math ~ gender, data = df_students)</code> で性別（<code>gender</code>）ごとの数学スコア（<code>math</code>）の平均値に統計的な差があるかを<strong>対応なし t 検定</strong>（Welch の t 検定）で検定している。 <code>math ~ gender</code> は「数学スコアを性別によって比較する」という意味の式形式である。 <code>tidy()</code> は <code>broom</code> パッケージの関数で、検定結果のリストをデータフレーム形式に変換している。 出力は t 値・p 値・95% 信頼区間などを含む1行のデータフレームである。</p>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-advanced" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="sec-advanced"><span class="header-section-number">8.4</span> 上級問題（★★★）</h2>
+<p><em>複数の関数を組み合わせた複雑なコードです。じっくり読んで取り組んでください。</em></p>
+<div style="margin-top: 2.0em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>以下のコードを読んで、何のデータを使い・何をして・何が出力されるかを説明してください。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>df_students <span class="sc">|&gt;</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb23-3"><a href="#cb23-3"></a>    <span class="at">cols      =</span> <span class="fu">c</span>(math, reading, writing),</span>
+<span id="cb23-4"><a href="#cb23-4"></a>    <span class="at">names_to  =</span> <span class="st">"subject"</span>,</span>
+<span id="cb23-5"><a href="#cb23-5"></a>    <span class="at">values_to =</span> <span class="st">"score"</span></span>
+<span id="cb23-6"><a href="#cb23-6"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb23-7"><a href="#cb23-7"></a>  <span class="fu">group_by</span>(gender, subject) <span class="sc">|&gt;</span></span>
+<span id="cb23-8"><a href="#cb23-8"></a>  <span class="fu">summarise</span>(<span class="at">mean_score =</span> <span class="fu">mean</span>(score), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb23-9"><a href="#cb23-9"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> subject, <span class="at">y =</span> mean_score, <span class="at">fill =</span> gender)) <span class="sc">+</span></span>
+<span id="cb23-10"><a href="#cb23-10"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb23-11"><a href="#cb23-11"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"性別・科目別の平均スコア"</span>,</span>
+<span id="cb23-12"><a href="#cb23-12"></a>       <span class="at">x =</span> <span class="st">"科目"</span>, <span class="at">y =</span> <span class="st">"平均スコア"</span>, <span class="at">fill =</span> <span class="st">"性別"</span>) <span class="sc">+</span></span>
+<span id="cb23-13"><a href="#cb23-13"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div class="kotae callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>学生の試験成績データ（<code>df_students</code>）を使っている。 <code>pivot_longer()</code> で <code>math</code>・<code>reading</code>・<code>writing</code> の3列を縦長形式（1行1科目）に変換している。<code>names_to = "subject"</code> で科目名の列を、<code>values_to = "score"</code> でスコアの列を新たに作っている。 その後、性別×科目でグループ化して平均スコアを計算し、<code>geom_col(position = "dodge")</code> で性別ごとに並べた棒グラフを描いている。 出力は性別・科目別の平均スコアを比較した棒グラフである。</p>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>以下のコードを読んで、何のデータを使い・何をして・何が出力されるかを説明してください。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>gapminder <span class="sc">|&gt;</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2007</span>) <span class="sc">|&gt;</span></span>
+<span id="cb24-3"><a href="#cb24-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> gdpPercap, <span class="at">y =</span> lifeExp, <span class="at">size =</span> pop, <span class="at">color =</span> continent)) <span class="sc">+</span></span>
+<span id="cb24-4"><a href="#cb24-4"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb24-5"><a href="#cb24-5"></a>  <span class="fu">scale_x_log10</span>(<span class="at">labels =</span> scales<span class="sc">::</span>comma) <span class="sc">+</span></span>
+<span id="cb24-6"><a href="#cb24-6"></a>  <span class="fu">scale_size_continuous</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">15</span>), <span class="at">labels =</span> scales<span class="sc">::</span>comma) <span class="sc">+</span></span>
+<span id="cb24-7"><a href="#cb24-7"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"2007年：一人当たりGDPと平均寿命の関係"</span>,</span>
+<span id="cb24-8"><a href="#cb24-8"></a>       <span class="at">x =</span> <span class="st">"一人当たりGDP（対数スケール）"</span>,</span>
+<span id="cb24-9"><a href="#cb24-9"></a>       <span class="at">y =</span> <span class="st">"平均寿命（年）"</span>,</span>
+<span id="cb24-10"><a href="#cb24-10"></a>       <span class="at">size =</span> <span class="st">"人口"</span>, <span class="at">color =</span> <span class="st">"大陸"</span>) <span class="sc">+</span></span>
+<span id="cb24-11"><a href="#cb24-11"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div class="kotae callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>gapminder</code> データの2007年分を使っている。 X 軸に一人当たりGDP・Y 軸に平均寿命・点の大きさ（<code>size</code>）に人口・色（<code>color</code>）に大陸をマッピングした散布図で、1点が1カ国を表している。 <code>scale_x_log10()</code> で X 軸を対数スケールに変換し、GDP の広い範囲を見やすくしている。 <code>scale_size_continuous(range = c(1, 15))</code> で点の大きさの範囲を指定している。 出力はいわゆる「バブルチャート」で、GDP・平均寿命・人口・大陸の4変数を1つのグラフで表現している。</p>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>以下のコードを読んで、何のデータを使い・何をして・何が出力されるかを説明してください。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>df_students <span class="sc">|&gt;</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a>  <span class="fu">filter</span>(test_preparation <span class="sc">==</span> <span class="st">"completed"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb25-3"><a href="#cb25-3"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb25-4"><a href="#cb25-4"></a>    <span class="fu">across</span>(</span>
+<span id="cb25-5"><a href="#cb25-5"></a>      <span class="fu">c</span>(math, reading, writing),</span>
+<span id="cb25-6"><a href="#cb25-6"></a>      <span class="fu">list</span>(</span>
+<span id="cb25-7"><a href="#cb25-7"></a>        <span class="at">mean   =</span> mean,</span>
+<span id="cb25-8"><a href="#cb25-8"></a>        <span class="at">sd     =</span> sd,</span>
+<span id="cb25-9"><a href="#cb25-9"></a>        <span class="at">median =</span> median</span>
+<span id="cb25-10"><a href="#cb25-10"></a>      ),</span>
+<span id="cb25-11"><a href="#cb25-11"></a>      <span class="at">.names =</span> <span class="st">"{.col}_{.fn}"</span></span>
+<span id="cb25-12"><a href="#cb25-12"></a>    )</span>
+<span id="cb25-13"><a href="#cb25-13"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb25-14"><a href="#cb25-14"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb25-15"><a href="#cb25-15"></a>    <span class="fu">everything</span>(),</span>
+<span id="cb25-16"><a href="#cb25-16"></a>    <span class="at">names_to  =</span> <span class="fu">c</span>(<span class="st">"subject"</span>, <span class="st">"stat"</span>),</span>
+<span id="cb25-17"><a href="#cb25-17"></a>    <span class="at">names_sep =</span> <span class="st">"_"</span>,</span>
+<span id="cb25-18"><a href="#cb25-18"></a>    <span class="at">values_to =</span> <span class="st">"value"</span></span>
+<span id="cb25-19"><a href="#cb25-19"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div class="kotae callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>学生の試験成績データの中から試験準備コースを受講した学生（<code>test_preparation == "completed"</code>）のみを対象にしている。 <code>across()</code> で3科目の平均・標準偏差・中央値を一括計算して横長のデータフレームを作り、<code>pivot_longer()</code> で縦長形式に変換している。 <code>names_sep = "_"</code> は「<code>math_mean</code>」という列名を「<code>math</code>」と「<code>mean</code>」に分割するための指定である。 出力は試験準備受講者の3科目×3統計量の組み合わせを縦長形式で示したデータフレームである。</p>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>以下のコードを読んで、何のデータを使い・何をして・何が出力されるかを説明してください。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>result <span class="ot">&lt;-</span> <span class="fu">t.test</span>(</span>
+<span id="cb26-2"><a href="#cb26-2"></a>  df_students<span class="sc">$</span>reading,</span>
+<span id="cb26-3"><a href="#cb26-3"></a>  df_students<span class="sc">$</span>math,</span>
+<span id="cb26-4"><a href="#cb26-4"></a>  <span class="at">paired =</span> <span class="cn">TRUE</span></span>
+<span id="cb26-5"><a href="#cb26-5"></a>)</span>
+<span id="cb26-6"><a href="#cb26-6"></a></span>
+<span id="cb26-7"><a href="#cb26-7"></a>p_label <span class="ot">&lt;-</span> <span class="fu">if_else</span>(</span>
+<span id="cb26-8"><a href="#cb26-8"></a>  result<span class="sc">$</span>p.value <span class="sc">&lt;</span> <span class="fl">0.001</span>,</span>
+<span id="cb26-9"><a href="#cb26-9"></a>  <span class="st">"p &lt; 0.001"</span>,</span>
+<span id="cb26-10"><a href="#cb26-10"></a>  <span class="fu">paste0</span>(<span class="st">"p = "</span>, <span class="fu">round</span>(result<span class="sc">$</span>p.value, <span class="dv">3</span>))</span>
+<span id="cb26-11"><a href="#cb26-11"></a>)</span>
+<span id="cb26-12"><a href="#cb26-12"></a></span>
+<span id="cb26-13"><a href="#cb26-13"></a>df_students <span class="sc">|&gt;</span></span>
+<span id="cb26-14"><a href="#cb26-14"></a>  <span class="fu">mutate</span>(<span class="at">diff =</span> reading <span class="sc">-</span> math) <span class="sc">|&gt;</span></span>
+<span id="cb26-15"><a href="#cb26-15"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> diff)) <span class="sc">+</span></span>
+<span id="cb26-16"><a href="#cb26-16"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">5</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>,</span>
+<span id="cb26-17"><a href="#cb26-17"></a>                 <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb26-18"><a href="#cb26-18"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">"red"</span>,</span>
+<span id="cb26-19"><a href="#cb26-19"></a>             <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb26-20"><a href="#cb26-20"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(df_students<span class="sc">$</span>reading <span class="sc">-</span> df_students<span class="sc">$</span>math),</span>
+<span id="cb26-21"><a href="#cb26-21"></a>             <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb26-22"><a href="#cb26-22"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"読解 − 数学スコアの差の分布"</span>,</span>
+<span id="cb26-23"><a href="#cb26-23"></a>       <span class="at">subtitle =</span> p_label,</span>
+<span id="cb26-24"><a href="#cb26-24"></a>       <span class="at">x =</span> <span class="st">"差（読解 − 数学）"</span>, <span class="at">y =</span> <span class="st">"頻度"</span>) <span class="sc">+</span></span>
+<span id="cb26-25"><a href="#cb26-25"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div class="kotae callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>学生の試験成績データを使っている。 最初の <code>t.test()</code> で読解スコアと数学スコアの差を<strong>対応あり t 検定</strong>で検定し、<code>paired = TRUE</code> で同一学生のペアを考慮している。 <code>if_else()</code> で p 値が 0.001 未満かどうかで表示形式を切り替えるラベル文字列を作成している。 続くグラフでは <code>mutate()</code> で読解 − 数学の差を計算してヒストグラムを描き、赤の破線（差 = 0）と青の実線（平均差）を重ねて表示している。サブタイトルに検定の p 値を自動的に表示している。 出力は対応あり t 検定の結果と差の分布を組み合わせた可視化である。</p>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>以下のコードを読んで、何のデータを使い・何をして・何が出力されるかを説明してください。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>results <span class="ot">&lt;-</span> df_students <span class="sc">|&gt;</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb27-3"><a href="#cb27-3"></a>    <span class="at">math_vs_reading =</span> <span class="fu">t.test</span>(math, reading, <span class="at">paired =</span> <span class="cn">TRUE</span>)<span class="sc">$</span>p.value,</span>
+<span id="cb27-4"><a href="#cb27-4"></a>    <span class="at">math_vs_writing =</span> <span class="fu">t.test</span>(math, writing, <span class="at">paired =</span> <span class="cn">TRUE</span>)<span class="sc">$</span>p.value,</span>
+<span id="cb27-5"><a href="#cb27-5"></a>    <span class="at">reading_vs_writing =</span> <span class="fu">t.test</span>(reading, writing, <span class="at">paired =</span> <span class="cn">TRUE</span>)<span class="sc">$</span>p.value</span>
+<span id="cb27-6"><a href="#cb27-6"></a>  )</span>
+<span id="cb27-7"><a href="#cb27-7"></a></span>
+<span id="cb27-8"><a href="#cb27-8"></a>results <span class="sc">|&gt;</span></span>
+<span id="cb27-9"><a href="#cb27-9"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(),</span>
+<span id="cb27-10"><a href="#cb27-10"></a>               <span class="at">names_to  =</span> <span class="st">"comparison"</span>,</span>
+<span id="cb27-11"><a href="#cb27-11"></a>               <span class="at">values_to =</span> <span class="st">"p_value"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb27-12"><a href="#cb27-12"></a>  <span class="fu">mutate</span>(<span class="at">significant =</span> <span class="fu">if_else</span>(p_value <span class="sc">&lt;</span> <span class="fl">0.05</span>, <span class="st">"有意"</span>, <span class="st">"非有意"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div class="kotae callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>学生の試験成績データを使っている。 <code>summarise()</code> の中で3つの対応あり t 検定を実行し、各検定の p 値だけを <code>$p.value</code> で取り出して横長のデータフレームに格納している。 <code>pivot_longer()</code> で縦長形式に変換し、<code>mutate()</code> と <code>if_else()</code> で p 値が 0.05 未満かどうかで「有意」・「非有意」というラベルを付けている。 出力は3科目間の全ペア比較の p 値と有意性の判断をまとめたデータフレームである。</p>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>以下のコードを読んで、何のデータを使い・何をして・何が出力されるかを説明してください。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>df_students <span class="sc">|&gt;</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a>  <span class="fu">group_by</span>(test_preparation) <span class="sc">|&gt;</span></span>
+<span id="cb28-3"><a href="#cb28-3"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb28-4"><a href="#cb28-4"></a>    <span class="fu">across</span>(</span>
+<span id="cb28-5"><a href="#cb28-5"></a>      <span class="fu">c</span>(math, reading, writing),</span>
+<span id="cb28-6"><a href="#cb28-6"></a>      <span class="fu">list</span>(<span class="at">mean =</span> mean, <span class="at">sd =</span> sd),</span>
+<span id="cb28-7"><a href="#cb28-7"></a>      <span class="at">.names =</span> <span class="st">"{.col}_{.fn}"</span></span>
+<span id="cb28-8"><a href="#cb28-8"></a>    ),</span>
+<span id="cb28-9"><a href="#cb28-9"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb28-10"><a href="#cb28-10"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb28-11"><a href="#cb28-11"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb28-12"><a href="#cb28-12"></a>    <span class="sc">-</span>test_preparation,</span>
+<span id="cb28-13"><a href="#cb28-13"></a>    <span class="at">names_to  =</span> <span class="fu">c</span>(<span class="st">"subject"</span>, <span class="st">"stat"</span>),</span>
+<span id="cb28-14"><a href="#cb28-14"></a>    <span class="at">names_sep =</span> <span class="st">"_"</span>,</span>
+<span id="cb28-15"><a href="#cb28-15"></a>    <span class="at">values_to =</span> <span class="st">"value"</span></span>
+<span id="cb28-16"><a href="#cb28-16"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb28-17"><a href="#cb28-17"></a>  <span class="fu">filter</span>(stat <span class="sc">==</span> <span class="st">"mean"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb28-18"><a href="#cb28-18"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> subject, <span class="at">y =</span> value, <span class="at">fill =</span> test_preparation)) <span class="sc">+</span></span>
+<span id="cb28-19"><a href="#cb28-19"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb28-20"><a href="#cb28-20"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"試験準備コース別・科目別の平均スコア"</span>,</span>
+<span id="cb28-21"><a href="#cb28-21"></a>       <span class="at">x =</span> <span class="st">"科目"</span>, <span class="at">y =</span> <span class="st">"平均スコア"</span>, <span class="at">fill =</span> <span class="st">"試験準備コース"</span>) <span class="sc">+</span></span>
+<span id="cb28-22"><a href="#cb28-22"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div class="kotae callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>学生の試験成績データを使っている。 試験準備コースの受講有無でグループ化し、<code>across()</code> で3科目の平均と標準偏差を計算している。 横長のデータを <code>pivot_longer()</code> で縦長形式に変換し、<code>filter(stat == "mean")</code> で平均値の行のみを抽出している。 <code>-test_preparation</code> は「<code>test_preparation</code> 以外の全列を縦長に変換する」という意味である。 出力は試験準備コースの受講有無による3科目の平均スコアを比較した棒グラフである。</p>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>以下のコードを読んで、何のデータを使い・何をして・何が出力されるかを説明してください。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>gapminder <span class="sc">|&gt;</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a>  <span class="fu">filter</span>(continent <span class="sc">==</span> <span class="st">"Asia"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb29-3"><a href="#cb29-3"></a>  <span class="fu">group_by</span>(country) <span class="sc">|&gt;</span></span>
+<span id="cb29-4"><a href="#cb29-4"></a>  <span class="fu">mutate</span>(<span class="at">lifeExp_gain =</span> lifeExp <span class="sc">-</span> <span class="fu">first</span>(lifeExp)) <span class="sc">|&gt;</span></span>
+<span id="cb29-5"><a href="#cb29-5"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
+<span id="cb29-6"><a href="#cb29-6"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2007</span>) <span class="sc">|&gt;</span></span>
+<span id="cb29-7"><a href="#cb29-7"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(lifeExp_gain)) <span class="sc">|&gt;</span></span>
+<span id="cb29-8"><a href="#cb29-8"></a>  <span class="fu">head</span>(<span class="dv">10</span>) <span class="sc">|&gt;</span></span>
+<span id="cb29-9"><a href="#cb29-9"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(country, lifeExp_gain), <span class="at">y =</span> lifeExp_gain, <span class="at">fill =</span> lifeExp_gain)) <span class="sc">+</span></span>
+<span id="cb29-10"><a href="#cb29-10"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb29-11"><a href="#cb29-11"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb29-12"><a href="#cb29-12"></a>  <span class="fu">scale_fill_viridis_c</span>() <span class="sc">+</span></span>
+<span id="cb29-13"><a href="#cb29-13"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"アジア各国の平均寿命の伸び（1952→2007年）"</span>,</span>
+<span id="cb29-14"><a href="#cb29-14"></a>       <span class="at">x =</span> <span class="st">"国名"</span>, <span class="at">y =</span> <span class="st">"平均寿命の増加（年）"</span>) <span class="sc">+</span></span>
+<span id="cb29-15"><a href="#cb29-15"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb29-16"><a href="#cb29-16"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div class="kotae callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>gapminder</code> データのアジアの国のみを使っている。 <code>group_by(country)</code> で国ごとにグループ化し、<code>mutate()</code> で各年の平均寿命から <code>first(lifeExp)</code>（その国の最初の記録、つまり1952年の値）を引いた「平均寿命の伸び」を計算している。 <code>ungroup()</code> でグループ化を解除した後、2007年のデータのみ抽出し、伸びの大きい上位10カ国を棒グラフで表示している。 出力は1952年から2007年にかけて平均寿命が最も伸びたアジアの国トップ10の棒グラフである。</p>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>以下のコードを読んで、何のデータを使い・何をして・何が出力されるかを説明してください。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>df_long <span class="ot">&lt;-</span> df_students <span class="sc">|&gt;</span></span>
+<span id="cb30-2"><a href="#cb30-2"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb30-3"><a href="#cb30-3"></a>    <span class="at">cols      =</span> <span class="fu">c</span>(math, reading, writing),</span>
+<span id="cb30-4"><a href="#cb30-4"></a>    <span class="at">names_to  =</span> <span class="st">"subject"</span>,</span>
+<span id="cb30-5"><a href="#cb30-5"></a>    <span class="at">values_to =</span> <span class="st">"score"</span></span>
+<span id="cb30-6"><a href="#cb30-6"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb30-7"><a href="#cb30-7"></a>  <span class="fu">mutate</span>(<span class="at">subject =</span> <span class="fu">factor</span>(subject,</span>
+<span id="cb30-8"><a href="#cb30-8"></a>                          <span class="at">levels  =</span> <span class="fu">c</span>(<span class="st">"math"</span>, <span class="st">"reading"</span>, <span class="st">"writing"</span>),</span>
+<span id="cb30-9"><a href="#cb30-9"></a>                          <span class="at">labels  =</span> <span class="fu">c</span>(<span class="st">"数学"</span>, <span class="st">"読解"</span>, <span class="st">"ライティング"</span>)))</span>
+<span id="cb30-10"><a href="#cb30-10"></a></span>
+<span id="cb30-11"><a href="#cb30-11"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df_long, <span class="fu">aes</span>(<span class="at">x =</span> subject, <span class="at">y =</span> score, <span class="at">fill =</span> subject)) <span class="sc">+</span></span>
+<span id="cb30-12"><a href="#cb30-12"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb30-13"><a href="#cb30-13"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"point"</span>,</span>
+<span id="cb30-14"><a href="#cb30-14"></a>               <span class="at">shape =</span> <span class="dv">18</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb30-15"><a href="#cb30-15"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"科目別スコア分布"</span>, <span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">"スコア"</span>) <span class="sc">+</span></span>
+<span id="cb30-16"><a href="#cb30-16"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb30-17"><a href="#cb30-17"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
+<span id="cb30-18"><a href="#cb30-18"></a></span>
+<span id="cb30-19"><a href="#cb30-19"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df_long, <span class="fu">aes</span>(<span class="at">x =</span> score, <span class="at">fill =</span> subject, <span class="at">color =</span> subject)) <span class="sc">+</span></span>
+<span id="cb30-20"><a href="#cb30-20"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb30-21"><a href="#cb30-21"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"科目別スコアの密度曲線"</span>, <span class="at">x =</span> <span class="st">"スコア"</span>, <span class="at">y =</span> <span class="st">"密度"</span>,</span>
+<span id="cb30-22"><a href="#cb30-22"></a>       <span class="at">fill =</span> <span class="st">"科目"</span>, <span class="at">color =</span> <span class="st">"科目"</span>) <span class="sc">+</span></span>
+<span id="cb30-23"><a href="#cb30-23"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb30-24"><a href="#cb30-24"></a></span>
+<span id="cb30-25"><a href="#cb30-25"></a>p1 <span class="sc">+</span> p2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div class="kotae callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>学生の試験成績データを使っている。 まず <code>pivot_longer()</code> で3科目を縦長形式に変換し、<code>factor()</code> で科目名を英語から日本語にラベル変換している。 <code>p1</code> は科目別の箱ひげ図で <code>stat_summary()</code> で平均値を赤◆で追加し、<code>p2</code> は科目別の密度曲線である。 <code>p1 + p2</code> で <code>patchwork</code> により横並びに表示している。 出力は3科目のスコア分布を箱ひげ図と密度曲線で並べて比較したグラフである。</p>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>以下のコードを読んで、何のデータを使い・何をして・何が出力されるかを説明してください。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>df_students <span class="sc">|&gt;</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a>  <span class="fu">group_by</span>(parent_education) <span class="sc">|&gt;</span></span>
+<span id="cb31-3"><a href="#cb31-3"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb31-4"><a href="#cb31-4"></a>    <span class="at">n            =</span> <span class="fu">n</span>(),</span>
+<span id="cb31-5"><a href="#cb31-5"></a>    <span class="at">mean_math    =</span> <span class="fu">mean</span>(math),</span>
+<span id="cb31-6"><a href="#cb31-6"></a>    <span class="at">mean_reading =</span> <span class="fu">mean</span>(reading),</span>
+<span id="cb31-7"><a href="#cb31-7"></a>    <span class="at">mean_writing =</span> <span class="fu">mean</span>(writing),</span>
+<span id="cb31-8"><a href="#cb31-8"></a>    <span class="at">.groups      =</span> <span class="st">"drop"</span></span>
+<span id="cb31-9"><a href="#cb31-9"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb31-10"><a href="#cb31-10"></a>  <span class="fu">mutate</span>(<span class="at">parent_education =</span> <span class="fu">fct_reorder</span>(parent_education, mean_math)) <span class="sc">|&gt;</span></span>
+<span id="cb31-11"><a href="#cb31-11"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb31-12"><a href="#cb31-12"></a>    <span class="at">cols      =</span> <span class="fu">starts_with</span>(<span class="st">"mean_"</span>),</span>
+<span id="cb31-13"><a href="#cb31-13"></a>    <span class="at">names_to  =</span> <span class="st">"subject"</span>,</span>
+<span id="cb31-14"><a href="#cb31-14"></a>    <span class="at">values_to =</span> <span class="st">"mean_score"</span>,</span>
+<span id="cb31-15"><a href="#cb31-15"></a>    <span class="at">names_prefix =</span> <span class="st">"mean_"</span></span>
+<span id="cb31-16"><a href="#cb31-16"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb31-17"><a href="#cb31-17"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> parent_education, <span class="at">y =</span> mean_score, <span class="at">color =</span> subject, <span class="at">group =</span> subject)) <span class="sc">+</span></span>
+<span id="cb31-18"><a href="#cb31-18"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb31-19"><a href="#cb31-19"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb31-20"><a href="#cb31-20"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb31-21"><a href="#cb31-21"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"親の学歴別・科目別の平均スコア"</span>,</span>
+<span id="cb31-22"><a href="#cb31-22"></a>       <span class="at">x =</span> <span class="st">"親の学歴"</span>, <span class="at">y =</span> <span class="st">"平均スコア"</span>, <span class="at">color =</span> <span class="st">"科目"</span>) <span class="sc">+</span></span>
+<span id="cb31-23"><a href="#cb31-23"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div class="kotae callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>学生の試験成績データを使っている。 親の学歴（<code>parent_education</code>）ごとに3科目の平均スコアを計算し、<code>fct_reorder()</code> で数学の平均スコア順に親の学歴を並べ替えている。 <code>pivot_longer()</code> の <code>starts_with("mean_")</code> で <code>mean_</code> で始まる列のみを縦長に変換し、<code>names_prefix = "mean_"</code> で列名から <code>mean_</code> という接頭辞を取り除いている。 <code>geom_line()</code> と <code>geom_point()</code> を組み合わせることで、折れ線グラフとして親の学歴と科目別スコアの関係を表現している。 出力は親の学歴別・科目別の平均スコアを比較した横向きの折れ線グラフである。</p>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>以下のコードを読んで、何のデータを使い・何をして・何が出力されるかを説明してください。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">library</span>(ggbeeswarm)</span>
+<span id="cb32-2"><a href="#cb32-2"></a><span class="fu">library</span>(ggsignif)</span>
+<span id="cb32-3"><a href="#cb32-3"></a></span>
+<span id="cb32-4"><a href="#cb32-4"></a>comparisons <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">"completed"</span>, <span class="st">"none"</span>))</span>
+<span id="cb32-5"><a href="#cb32-5"></a></span>
+<span id="cb32-6"><a href="#cb32-6"></a>t_results <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"math"</span>, <span class="st">"reading"</span>, <span class="st">"writing"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb32-7"><a href="#cb32-7"></a>  <span class="fu">map</span>(<span class="sc">~</span> {</span>
+<span id="cb32-8"><a href="#cb32-8"></a>    formula <span class="ot">&lt;-</span> <span class="fu">as.formula</span>(<span class="fu">paste</span>(.x, <span class="st">"~ test_preparation"</span>))</span>
+<span id="cb32-9"><a href="#cb32-9"></a>    <span class="fu">t.test</span>(formula, <span class="at">data =</span> df_students) <span class="sc">|&gt;</span> <span class="fu">tidy</span>()</span>
+<span id="cb32-10"><a href="#cb32-10"></a>  }) <span class="sc">|&gt;</span></span>
+<span id="cb32-11"><a href="#cb32-11"></a>  <span class="fu">list_rbind</span>() <span class="sc">|&gt;</span></span>
+<span id="cb32-12"><a href="#cb32-12"></a>  <span class="fu">mutate</span>(<span class="at">subject =</span> <span class="fu">c</span>(<span class="st">"math"</span>, <span class="st">"reading"</span>, <span class="st">"writing"</span>),</span>
+<span id="cb32-13"><a href="#cb32-13"></a>         <span class="at">sig =</span> <span class="fu">if_else</span>(p.value <span class="sc">&lt;</span> <span class="fl">0.05</span>, <span class="st">"*"</span>, <span class="st">"ns"</span>))</span>
+<span id="cb32-14"><a href="#cb32-14"></a></span>
+<span id="cb32-15"><a href="#cb32-15"></a>df_students <span class="sc">|&gt;</span></span>
+<span id="cb32-16"><a href="#cb32-16"></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(math, reading, writing),</span>
+<span id="cb32-17"><a href="#cb32-17"></a>               <span class="at">names_to  =</span> <span class="st">"subject"</span>,</span>
+<span id="cb32-18"><a href="#cb32-18"></a>               <span class="at">values_to =</span> <span class="st">"score"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb32-19"><a href="#cb32-19"></a>  <span class="fu">left_join</span>(t_results <span class="sc">|&gt;</span> <span class="fu">select</span>(subject, sig), <span class="at">by =</span> <span class="st">"subject"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb32-20"><a href="#cb32-20"></a>  <span class="fu">mutate</span>(<span class="at">subject =</span> <span class="fu">factor</span>(subject,</span>
+<span id="cb32-21"><a href="#cb32-21"></a>                          <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"math"</span>, <span class="st">"reading"</span>, <span class="st">"writing"</span>),</span>
+<span id="cb32-22"><a href="#cb32-22"></a>                          <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"数学"</span>, <span class="st">"読解"</span>, <span class="st">"ライティング"</span>))) <span class="sc">|&gt;</span></span>
+<span id="cb32-23"><a href="#cb32-23"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> test_preparation, <span class="at">y =</span> score, <span class="at">fill =</span> test_preparation)) <span class="sc">+</span></span>
+<span id="cb32-24"><a href="#cb32-24"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>, <span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb32-25"><a href="#cb32-25"></a>  <span class="fu">geom_beeswarm</span>(<span class="fu">aes</span>(<span class="at">color =</span> test_preparation), <span class="at">size =</span> <span class="fl">0.8</span>, <span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb32-26"><a href="#cb32-26"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> subject) <span class="sc">+</span></span>
+<span id="cb32-27"><a href="#cb32-27"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"試験準備コース別・科目別のスコア分布"</span>,</span>
+<span id="cb32-28"><a href="#cb32-28"></a>       <span class="at">x =</span> <span class="st">"試験準備コース"</span>, <span class="at">y =</span> <span class="st">"スコア"</span>) <span class="sc">+</span></span>
+<span id="cb32-29"><a href="#cb32-29"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb32-30"><a href="#cb32-30"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div class="kotae callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>学生の試験成績データを使っている。複数の高度な処理が組み合わさっている。</p>
+<p>まず <code>map()</code> で3科目それぞれに対応なし t 検定を実行し、<code>list_rbind()</code> で結果を1つのデータフレームに結合している。<code>as.formula(paste(.x, "~ test_preparation"))</code> は文字列から検定式を動的に生成している。</p>
+<p>次に <code>pivot_longer()</code> でスコアデータを縦長に変換し、<code>left_join()</code> で t 検定の有意性（<code>sig</code>）列を結合している。</p>
+<p><code>geom_boxplot()</code> と <code>geom_beeswarm()</code> を重ね、<code>facet_wrap(~ subject)</code> で科目ごとにパネルを分割している。</p>
+<p>出力は試験準備コースの受講有無による3科目のスコア分布を、箱ひげ図と個人の点を重ねたグラフで科目別に比較したものである。</p>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -688,8 +2069,8 @@ ul.task-list li input[type="checkbox"] {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./lec09.html" class="pagination-link" aria-label="回帰分析1">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">回帰分析1</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./lec09.html" class="pagination-link" aria-label="二変数の分析">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">二変数の分析</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
