@@ -8,7 +8,7 @@
 
 <meta name="description" content="2026年度　A（前期） B（後期） 時間： 月曜日 4 時限（15:45-17:30） 教室： C 館 地下1階 PC4 教室">
 
-<title>9&nbsp; 二変数の分析 – R プログラミング</title>
+<title>9&nbsp; 相関分析 – R プログラミング</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -73,6 +108,35 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <meta name="robots" content="noindex, nofollow">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -85,7 +149,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lec09.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">二変数の分析</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lec09.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">相関分析</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -167,7 +231,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lec09.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">二変数の分析</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">相関分析</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -205,15 +269,56 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-setup" id="toc-sec-setup" class="nav-link active" data-scroll-target="#sec-setup"><span class="header-section-number">9.1</span> パッケージの準備</a></li>
+  <li><a href="#sec-intro" id="toc-sec-intro" class="nav-link" data-scroll-target="#sec-intro"><span class="header-section-number">9.2</span> 相関分析とは</a>
+  <ul class="collapse">
+  <li><a href="#変数の関係を数値化する" id="toc-変数の関係を数値化する" class="nav-link" data-scroll-target="#変数の関係を数値化する">2 変数の関係を数値化する</a></li>
+  <li><a href="#相関係数とは" id="toc-相関係数とは" class="nav-link" data-scroll-target="#相関係数とは">相関係数とは</a></li>
+  </ul></li>
+  <li><a href="#sec-cor" id="toc-sec-cor" class="nav-link" data-scroll-target="#sec-cor"><span class="header-section-number">9.3</span> 相関係数の計算</a>
+  <ul class="collapse">
+  <li><a href="#cor-関数の基本" id="toc-cor-関数の基本" class="nav-link" data-scroll-target="#cor-関数の基本"><code>cor()</code> 関数の基本</a></li>
+  <li><a href="#相関係数の可視化" id="toc-相関係数の可視化" class="nav-link" data-scroll-target="#相関係数の可視化">相関係数の可視化</a></li>
+  </ul></li>
+  <li><a href="#sec-cor-test" id="toc-sec-cor-test" class="nav-link" data-scroll-target="#sec-cor-test"><span class="header-section-number">9.4</span> 相関の検定</a>
+  <ul class="collapse">
+  <li><a href="#cor.test-で相関の有意性を検定する" id="toc-cor.test-で相関の有意性を検定する" class="nav-link" data-scroll-target="#cor.test-で相関の有意性を検定する"><code>cor.test()</code> で相関の有意性を検定する</a></li>
+  <li><a href="#複数ペアの相関検定" id="toc-複数ペアの相関検定" class="nav-link" data-scroll-target="#複数ペアの相関検定">複数ペアの相関検定</a></li>
+  </ul></li>
+  <li><a href="#sec-cor-matrix" id="toc-sec-cor-matrix" class="nav-link" data-scroll-target="#sec-cor-matrix"><span class="header-section-number">9.5</span> 相関行列</a>
+  <ul class="collapse">
+  <li><a href="#複数変数の相関係数を一覧する" id="toc-複数変数の相関係数を一覧する" class="nav-link" data-scroll-target="#複数変数の相関係数を一覧する">複数変数の相関係数を一覧する</a></li>
+  <li><a href="#相関行列をヒートマップで可視化する" id="toc-相関行列をヒートマップで可視化する" class="nav-link" data-scroll-target="#相関行列をヒートマップで可視化する">相関行列をヒートマップで可視化する</a></li>
+  </ul></li>
+  <li><a href="#sec-ggpairs" id="toc-sec-ggpairs" class="nav-link" data-scroll-target="#sec-ggpairs"><span class="header-section-number">9.6</span> 散布図行列（<code>ggpairs()</code>）</a>
+  <ul class="collapse">
+  <li><a href="#ggallyggpairs-で全関係を一度に可視化" id="toc-ggallyggpairs-で全関係を一度に可視化" class="nav-link" data-scroll-target="#ggallyggpairs-で全関係を一度に可視化"><code>GGally::ggpairs()</code> で全関係を一度に可視化</a></li>
+  </ul></li>
+  <li><a href="#sec-caution" id="toc-sec-caution" class="nav-link" data-scroll-target="#sec-caution"><span class="header-section-number">9.7</span> 相関分析の注意点</a>
+  <ul class="collapse">
+  <li><a href="#相関-因果" id="toc-相関-因果" class="nav-link" data-scroll-target="#相関-因果">相関 ≠ 因果</a></li>
+  <li><a href="#アンスコムの-quartet" id="toc-アンスコムの-quartet" class="nav-link" data-scroll-target="#アンスコムの-quartet">アンスコムの quartet</a></li>
+  <li><a href="#外れ値の影響" id="toc-外れ値の影響" class="nav-link" data-scroll-target="#外れ値の影響">外れ値の影響</a></li>
+  </ul></li>
+  <li><a href="#sec-exercises" id="toc-sec-exercises" class="nav-link" data-scroll-target="#sec-exercises"><span class="header-section-number">9.8</span> 演習問題</a></li>
+  <li><a href="#まとめ" id="toc-まとめ" class="nav-link" data-scroll-target="#まとめ"><span class="header-section-number">9.9</span> まとめ</a>
+  <ul class="collapse">
+  <li><a href="#本日学んだこと" id="toc-本日学んだこと" class="nav-link" data-scroll-target="#本日学んだこと">本日学んだこと</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">二変数の分析</span></h1>
+<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">相関分析</span></h1>
 </div>
 
 
@@ -230,9 +335,1030 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>（相関分析）</p>
+<p><strong>2 変数の関係を数値で捉える</strong></p>
+<div style="margin-top: 2.0em;">
+
+</div>
+<p><strong>今日の目標</strong></p>
+<ol type="1">
+<li><strong>相関係数</strong>の意味と解釈を理解する。</li>
+<li>R を使って相関係数の<strong>計算・検定</strong>ができるようになる。</li>
+<li><strong>相関行列</strong>と<strong>散布図行列</strong>でデータ全体の関係を把握できるようになる。</li>
+<li>相関分析の<strong>注意点</strong>（相関 ≠ 因果、疑似相関）を理解する。</li>
+</ol>
+<section id="sec-setup" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="sec-setup"><span class="header-section-number">9.1</span> パッケージの準備</h2>
+<p>大学の PC はシャットダウンするたびに初期化されるため、毎回インストールが必要です。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">options</span>(<span class="at">repos =</span> <span class="fu">c</span>(<span class="at">CRAN =</span> <span class="st">"https://cran.rstudio.com/"</span>))</span>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">install.packages</span>(<span class="st">"broom"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">install.packages</span>(<span class="st">"patchwork"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="fu">install.packages</span>(<span class="st">"GGally"</span>)</span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="fu">install.packages</span>(<span class="st">"gapminder"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">library</span>(broom)</span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="fu">library</span>(GGally)</span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="fu">library</span>(gapminder)</span>
+<span id="cb2-6"><a href="#cb2-6"></a></span>
+<span id="cb2-7"><a href="#cb2-7"></a>df_students <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/StudentsPerformance.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong><code>GGally</code> パッケージとは</strong></p>
+<p><code>ggplot2</code> を拡張したパッケージで、複数変数の関係を一度に可視化する <code>ggpairs()</code> 関数が特に便利です。相関係数・散布図・分布をまとめて表示できます。</p>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-intro" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="sec-intro"><span class="header-section-number">9.2</span> 相関分析とは</h2>
+<section id="変数の関係を数値化する" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="変数の関係を数値化する">2 変数の関係を数値化する</h3>
+<p><strong>相関分析</strong>とは、2 つの変数の間に「どの程度の関係があるか」を <strong>相関係数</strong>（correlation coefficient）という 1 つの数値で表す分析手法です。</p>
+<p>前回（lec07）の t 検定は「2 グループの平均値の差」を調べるものでしたが、 相関分析は <strong>「2 つの連続変数が一緒に動くかどうか」</strong> を調べます。</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 37%">
+<col style="width: 37%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>分析</th>
+<th>目的</th>
+<th>例</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>t 検定</td>
+<td>2 グループの平均値の差</td>
+<td>男子と女子で数学スコアに差があるか</td>
+</tr>
+<tr class="even">
+<td><strong>相関分析</strong></td>
+<td>2 変数間の関係の強さと方向</td>
+<td>数学スコアと読解スコアは関係があるか</td>
+</tr>
+</tbody>
+</table>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="相関係数とは" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="相関係数とは">相関係数とは</h3>
+<p><strong>ピアソンの相関係数</strong>（<span class="math inline">\(r\)</span>）は −1 から 1 の間の値をとります。</p>
+<p><span class="math display">\[r = \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum_{i=1}^{n}(x_i - \bar{x})^2} \cdot \sqrt{\sum_{i=1}^{n}(y_i - \bar{y})^2}}\]</span></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><span class="math inline">\(r\)</span> の値</th>
+<th>解釈</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(r = 1\)</span></td>
+<td>完全な正の相関（一方が増えると他方も増える）</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(0.7 \leq r &lt; 1\)</span></td>
+<td>強い正の相関</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(0.4 \leq r &lt; 0.7\)</span></td>
+<td>中程度の正の相関</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(0 &lt; r &lt; 0.4\)</span></td>
+<td>弱い正の相関</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(r = 0\)</span></td>
+<td>相関なし</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(-0.4 &lt; r &lt; 0\)</span></td>
+<td>弱い負の相関</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(-0.7 &lt; r \leq -0.4\)</span></td>
+<td>中程度の負の相関</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(-1 &lt; r \leq -0.7\)</span></td>
+<td>強い負の相関</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(r = -1\)</span></td>
+<td>完全な負の相関（一方が増えると他方は減る）</td>
+</tr>
+</tbody>
+</table>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>相関係数の解釈の目安</strong></p>
+<p>上の表はあくまで目安です。分野によって解釈の基準が異なります。 また、相関係数だけを見るのではなく、<strong>必ず散布図も確認する</strong>ことが重要です （後述の「アンスコムの quartet」参照）。</p>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lec09_files/figure-html/cor-examples-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>相関係数の視覚的なイメージ</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+</section>
+<section id="sec-cor" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="sec-cor"><span class="header-section-number">9.3</span> 相関係数の計算</h2>
+<section id="cor-関数の基本" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="cor-関数の基本"><code>cor()</code> 関数の基本</h3>
+<p>2 変数の相関係数は <code>cor()</code> 関数で計算します。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># 数学スコアと読解スコアの相関係数</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">cor</span>(df_students<span class="sc">$</span>math, df_students<span class="sc">$</span>reading)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8175797</code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-4"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-4-1"><a href="#annotated-cell-4-1"></a><span class="co"># デフォルトはピアソン相関係数</span></span>
+<span id="annotated-cell-4-2"><a href="#annotated-cell-4-2"></a><span class="co"># スピアマン順位相関係数を使う場合</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1">1</button><span id="annotated-cell-4-3" class="code-annotation-target"><a href="#annotated-cell-4-3"></a><span class="fu">cor</span>(df_students<span class="sc">$</span>math, df_students<span class="sc">$</span>reading, <span class="at">method =</span> <span class="st">"spearman"</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-4" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="3" data-code-annotation="1"><code>method = "spearman"</code> でスピアマン順位相関係数を計算。外れ値の影響を受けにくい。</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8040639</code></pre>
+</div>
+</div>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>ピアソン vs スピアマン</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>ピアソン</th>
+<th>スピアマン</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>前提</strong></td>
+<td>正規分布、線形関係</td>
+<td>前提なし</td>
+</tr>
+<tr class="even">
+<td><strong>外れ値</strong></td>
+<td>影響を受けやすい</td>
+<td>受けにくい</td>
+</tr>
+<tr class="odd">
+<td><strong>データ型</strong></td>
+<td>連続変数</td>
+<td>連続変数・順序変数</td>
+</tr>
+<tr class="even">
+<td><strong>使いどころ</strong></td>
+<td>正規分布に従う連続変数</td>
+<td>外れ値がある・順序データ</td>
+</tr>
+</tbody>
+</table>
+<p>迷った場合は両方計算して比較するのが安全です。</p>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="相関係数の可視化" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="相関係数の可視化">相関係数の可視化</h3>
+<p>相関係数を計算する前に、必ず<strong>散布図</strong>で関係を確認しましょう。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-5"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-5-1"><a href="#annotated-cell-5-1"></a><span class="fu">ggplot</span>(df_students, <span class="fu">aes</span>(<span class="at">x =</span> math, <span class="at">y =</span> reading)) <span class="sc">+</span></span>
+<span id="annotated-cell-5-2"><a href="#annotated-cell-5-2"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>, <span class="at">color =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="1">1</button><span id="annotated-cell-5-3" class="code-annotation-target"><a href="#annotated-cell-5-3"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-5-4"><a href="#annotated-cell-5-4"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="dv">20</span>, <span class="at">y =</span> <span class="dv">95</span>,</span>
+<span id="annotated-cell-5-5"><a href="#annotated-cell-5-5"></a>           <span class="at">label =</span> <span class="fu">paste0</span>(<span class="st">"r = "</span>, <span class="fu">round</span>(<span class="fu">cor</span>(df_students<span class="sc">$</span>math, df_students<span class="sc">$</span>reading), <span class="dv">3</span>)),</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="2">2</button><span id="annotated-cell-5-6" class="code-annotation-target"><a href="#annotated-cell-5-6"></a>           <span class="at">size =</span> <span class="dv">5</span>, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">hjust =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-5-7"><a href="#annotated-cell-5-7"></a>  <span class="fu">labs</span>(</span>
+<span id="annotated-cell-5-8"><a href="#annotated-cell-5-8"></a>    <span class="at">title =</span> <span class="st">"数学スコアと読解スコアの関係"</span>,</span>
+<span id="annotated-cell-5-9"><a href="#annotated-cell-5-9"></a>    <span class="at">x =</span> <span class="st">"数学スコア"</span>,</span>
+<span id="annotated-cell-5-10"><a href="#annotated-cell-5-10"></a>    <span class="at">y =</span> <span class="st">"読解スコア"</span></span>
+<span id="annotated-cell-5-11"><a href="#annotated-cell-5-11"></a>  ) <span class="sc">+</span></span>
+<span id="annotated-cell-5-12"><a href="#annotated-cell-5-12"></a>  <span class="fu">theme_minimal</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-5" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="3" data-code-annotation="1"><code>geom_smooth(method = "lm")</code> で線形回帰直線を追加</span>
+</dd>
+<dt data-target-cell="annotated-cell-5" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="6" data-code-annotation="2"><code>annotate()</code> でグラフ内に相関係数の値をテキストとして表示</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lec09_files/figure-html/scatter-cor-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>数学スコアと読解スコアの散布図</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+</section>
+<section id="sec-cor-test" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="sec-cor-test"><span class="header-section-number">9.4</span> 相関の検定</h2>
+<section id="cor.test-で相関の有意性を検定する" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="cor.test-で相関の有意性を検定する"><code>cor.test()</code> で相関の有意性を検定する</h3>
+<p>相関係数が「偶然 0 でない値になった」のか、「統計的に有意な関係がある」のかを <strong>相関係数の検定</strong>で確認します。</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>帰無仮説 <span class="math inline">\(H_0\)</span></strong></td>
+<td>母相関係数 = 0（相関がない）</td>
+</tr>
+<tr class="even">
+<td><strong>対立仮説 <span class="math inline">\(H_1\)</span></strong></td>
+<td>母相関係数 ≠ 0（相関がある）</td>
+</tr>
+<tr class="odd">
+<td><strong>判断基準</strong></td>
+<td>p 値 &lt; 0.05 なら帰無仮説を棄却 → 有意な相関あり</td>
+</tr>
+</tbody>
+</table>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># 数学スコアと読解スコアの相関検定</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>result_cor <span class="ot">&lt;-</span> <span class="fu">cor.test</span>(df_students<span class="sc">$</span>math, df_students<span class="sc">$</span>reading)</span>
+<span id="cb7-3"><a href="#cb7-3"></a>result_cor</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's product-moment correlation
+
+data:  df_students$math and df_students$reading
+t = 44.855, df = 998, p-value &lt; 2.2e-16
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ 0.7959276 0.8371428
+sample estimates:
+      cor 
+0.8175797 </code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># tidy() で整然データに変換</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>result_cor <span class="sc">|&gt;</span> <span class="fu">tidy</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 8
+  estimate statistic   p.value parameter conf.low conf.high method   alternative
+     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;int&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;      
+1    0.818      44.9 1.79e-241       998    0.796     0.837 Pearson… two.sided  </code></pre>
+</div>
+</div>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong><code>tidy()</code> の出力の読み方</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>列名</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>estimate</code></td>
+<td>相関係数 <span class="math inline">\(r\)</span></td>
+</tr>
+<tr class="even">
+<td><code>statistic</code></td>
+<td>t 値（検定統計量）</td>
+</tr>
+<tr class="odd">
+<td><code>p.value</code></td>
+<td>p 値</td>
+</tr>
+<tr class="even">
+<td><code>conf.low</code>, <code>conf.high</code></td>
+<td>95% 信頼区間</td>
+</tr>
+<tr class="odd">
+<td><code>parameter</code></td>
+<td>自由度（= n − 2）</td>
+</tr>
+<tr class="even">
+<td><code>method</code></td>
+<td>検定の種類</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="複数ペアの相関検定" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="複数ペアの相関検定">複数ペアの相関検定</h3>
+<p>3 科目の全ペアについて相関検定を実行します。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-8"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-8-1"><a href="#annotated-cell-8-1"></a><span class="co"># 3ペアの相関検定をまとめて実行</span></span>
+<span id="annotated-cell-8-2"><a href="#annotated-cell-8-2"></a>pairs_list <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="annotated-cell-8-3"><a href="#annotated-cell-8-3"></a>  <span class="fu">c</span>(<span class="st">"math"</span>, <span class="st">"reading"</span>),</span>
+<span id="annotated-cell-8-4"><a href="#annotated-cell-8-4"></a>  <span class="fu">c</span>(<span class="st">"math"</span>, <span class="st">"writing"</span>),</span>
+<span id="annotated-cell-8-5"><a href="#annotated-cell-8-5"></a>  <span class="fu">c</span>(<span class="st">"reading"</span>, <span class="st">"writing"</span>)</span>
+<span id="annotated-cell-8-6"><a href="#annotated-cell-8-6"></a>)</span>
+<span id="annotated-cell-8-7"><a href="#annotated-cell-8-7"></a></span>
+<span id="annotated-cell-8-8"><a href="#annotated-cell-8-8"></a>pairs_list <span class="sc">|&gt;</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="1">1</button><span id="annotated-cell-8-9" class="code-annotation-target"><a href="#annotated-cell-8-9"></a>  <span class="fu">map</span>(<span class="sc">~</span> <span class="fu">cor.test</span>(df_students[[.x[<span class="dv">1</span>]]], df_students[[.x[<span class="dv">2</span>]]]) <span class="sc">|&gt;</span> <span class="fu">tidy</span>()) <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-8-10"><a href="#annotated-cell-8-10"></a>  <span class="fu">list_rbind</span>() <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-8-11"><a href="#annotated-cell-8-11"></a>  <span class="fu">mutate</span>(<span class="at">pair =</span> <span class="fu">c</span>(<span class="st">"数学 × 読解"</span>, <span class="st">"数学 × ライティング"</span>, <span class="st">"読解 × ライティング"</span>)) <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-8-12"><a href="#annotated-cell-8-12"></a>  <span class="fu">select</span>(pair, estimate, p.value, conf.low, conf.high)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-8" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="9" data-code-annotation="1"><code>map()</code> でリストの各ペアに <code>cor.test()</code> を適用し、<code>tidy()</code> で整形している</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 5
+  pair                estimate   p.value conf.low conf.high
+  &lt;chr&gt;                  &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+1 数学 × 読解            0.818 1.79e-241    0.796     0.837
+2 数学 × ライティング    0.803 3.38e-226    0.779     0.824
+3 読解 × ライティング    0.955 0            0.949     0.960</code></pre>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+</section>
+<section id="sec-cor-matrix" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="sec-cor-matrix"><span class="header-section-number">9.5</span> 相関行列</h2>
+<section id="複数変数の相関係数を一覧する" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="複数変数の相関係数を一覧する">複数変数の相関係数を一覧する</h3>
+<p>変数が 3 つ以上あるとき、全ペアの相関係数を行列形式で表示できます。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-9"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-9-1"><a href="#annotated-cell-9-1"></a><span class="co"># 3科目の相関行列</span></span>
+<span id="annotated-cell-9-2"><a href="#annotated-cell-9-2"></a>df_students <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-9-3"><a href="#annotated-cell-9-3"></a>  <span class="fu">select</span>(math, reading, writing) <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-9-4"><a href="#annotated-cell-9-4"></a>  <span class="fu">cor</span>() <span class="sc">|&gt;</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="1">1</button><span id="annotated-cell-9-5" class="code-annotation-target"><a href="#annotated-cell-9-5"></a>  <span class="fu">round</span>(<span class="dv">3</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-9" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-9" data-code-lines="5" data-code-annotation="1"><code>round(3)</code> で小数点3桁に丸める</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         math reading writing
+math    1.000   0.818   0.803
+reading 0.818   1.000   0.955
+writing 0.803   0.955   1.000</code></pre>
+</div>
+</div>
+<div style="margin-top: 3.0em;">
+
+</div>
+</section>
+<section id="相関行列をヒートマップで可視化する" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="相関行列をヒートマップで可視化する">相関行列をヒートマップで可視化する</h3>
+<p>相関行列をヒートマップにすると、変数間の関係が一目でわかります。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-10"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-10-1"><a href="#annotated-cell-10-1"></a><span class="co"># 相関行列をデータフレームに変換</span></span>
+<span id="annotated-cell-10-2"><a href="#annotated-cell-10-2"></a>cor_matrix <span class="ot">&lt;-</span> df_students <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-10-3"><a href="#annotated-cell-10-3"></a>  <span class="fu">select</span>(math, reading, writing) <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-10-4"><a href="#annotated-cell-10-4"></a>  <span class="fu">cor</span>()</span>
+<span id="annotated-cell-10-5"><a href="#annotated-cell-10-5"></a></span>
+<span id="annotated-cell-10-6"><a href="#annotated-cell-10-6"></a><span class="co"># ヒートマップ用に縦長形式に変換</span></span>
+<span id="annotated-cell-10-7"><a href="#annotated-cell-10-7"></a>cor_long <span class="ot">&lt;-</span> cor_matrix <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-10-8"><a href="#annotated-cell-10-8"></a>  <span class="fu">as.data.frame</span>() <span class="sc">|&gt;</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="1">1</button><span id="annotated-cell-10-9" class="code-annotation-target"><a href="#annotated-cell-10-9"></a>  <span class="fu">rownames_to_column</span>(<span class="st">"var1"</span>) <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-10-10"><a href="#annotated-cell-10-10"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span>var1, <span class="at">names_to =</span> <span class="st">"var2"</span>, <span class="at">values_to =</span> <span class="st">"r"</span>)</span>
+<span id="annotated-cell-10-11"><a href="#annotated-cell-10-11"></a></span>
+<span id="annotated-cell-10-12"><a href="#annotated-cell-10-12"></a><span class="fu">ggplot</span>(cor_long, <span class="fu">aes</span>(<span class="at">x =</span> var1, <span class="at">y =</span> var2, <span class="at">fill =</span> r)) <span class="sc">+</span></span>
+<span id="annotated-cell-10-13"><a href="#annotated-cell-10-13"></a>  <span class="fu">geom_tile</span>(<span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="2">2</button><span id="annotated-cell-10-14" class="code-annotation-target"><a href="#annotated-cell-10-14"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">round</span>(r, <span class="dv">2</span>)), <span class="at">size =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-10-15"><a href="#annotated-cell-10-15"></a>  <span class="fu">scale_fill_gradient2</span>(</span>
+<span id="annotated-cell-10-16"><a href="#annotated-cell-10-16"></a>    <span class="at">low =</span> <span class="st">"steelblue"</span>, <span class="at">mid =</span> <span class="st">"white"</span>, <span class="at">high =</span> <span class="st">"tomato"</span>,</span>
+<span id="annotated-cell-10-17"><a href="#annotated-cell-10-17"></a>    <span class="at">midpoint =</span> <span class="dv">0</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="at">name =</span> <span class="st">"相関係数"</span></span>
+<span id="annotated-cell-10-18"><a href="#annotated-cell-10-18"></a>  ) <span class="sc">+</span></span>
+<span id="annotated-cell-10-19"><a href="#annotated-cell-10-19"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"3科目の相関行列"</span>, <span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">""</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-10-20"><a href="#annotated-cell-10-20"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="annotated-cell-10-21"><a href="#annotated-cell-10-21"></a>  <span class="fu">theme</span>(<span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>))</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-10" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-10" data-code-lines="9" data-code-annotation="1"><code>rownames_to_column()</code> で行名（変数名）を通常の列に変換</span>
+</dd>
+<dt data-target-cell="annotated-cell-10" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-10" data-code-lines="14" data-code-annotation="2"><code>geom_text()</code> でタイル上に相関係数の数値を表示</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lec09_files/figure-html/cor-heatmap-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>3科目の相関行列ヒートマップ</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>ヒートマップを描くためのデータ変形の流れ</strong></p>
+<p>このコードでは、<code>cor()</code> の出力から <code>ggplot2</code> で描けるデータ形式にするために、 3段階の変形を行っています。</p>
+<p><strong>ステップ1：<code>cor_matrix</code>（行列型）</strong></p>
+<p><code>cor()</code> の出力は通常のデータフレームではなく、R の <code>matrix</code>（行列）型オブジェクトです。 すべてのセルが数値で、行名・列名を持っています。</p>
+<pre><code>        math reading writing
+math    1.00    0.82    0.80
+reading 0.82    1.00    0.95
+writing 0.80    0.95    1.00</code></pre>
+<p>左端の <code>math</code>, <code>reading</code>, <code>writing</code> はデータではなく「行の名前」として存在しています。</p>
+<p><strong>ステップ2：<code>rownames_to_column("var1")</code> 後（データフレーム型）</strong></p>
+<p><code>as.data.frame()</code> でデータフレームに変換し、<code>rownames_to_column()</code> で 「行の名前」だったものを <code>var1</code> という列として表の内側に取り込みます。</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>var1</th>
+<th>math</th>
+<th>reading</th>
+<th>writing</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>math</td>
+<td>1.00</td>
+<td>0.82</td>
+<td>0.80</td>
+</tr>
+<tr class="even">
+<td>reading</td>
+<td>0.82</td>
+<td>1.00</td>
+<td>0.95</td>
+</tr>
+<tr class="odd">
+<td>writing</td>
+<td>0.80</td>
+<td>0.95</td>
+<td>1.00</td>
+</tr>
+</tbody>
+</table>
+<p><strong>ステップ3：<code>pivot_longer()</code> 後（縦長形式）</strong></p>
+<p><code>pivot_longer(-var1, names_to = "var2", values_to = "r")</code> で 横に並んでいた列（<code>math</code>, <code>reading</code>, <code>writing</code>）を縦に並べ替えます。 <code>-var1</code> は「<code>var1</code> 列以外を縦長に変換する」という意味です。</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>var1</th>
+<th>var2</th>
+<th>r</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>math</td>
+<td>math</td>
+<td>1.00</td>
+</tr>
+<tr class="even">
+<td>math</td>
+<td>reading</td>
+<td>0.82</td>
+</tr>
+<tr class="odd">
+<td>math</td>
+<td>writing</td>
+<td>0.80</td>
+</tr>
+<tr class="even">
+<td>reading</td>
+<td>math</td>
+<td>0.82</td>
+</tr>
+<tr class="odd">
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+</tbody>
+</table>
+<p>この「縦長リスト」の形（1行に X 軸の位置・Y 軸の位置・値が揃った状態）になって 初めて、<code>ggplot2</code> が <code>aes(x = var1, y = var2, fill = r)</code> を理解して ヒートマップを描くことができます。</p>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+</section>
+<section id="sec-ggpairs" class="level2" data-number="9.6">
+<h2 data-number="9.6" class="anchored" data-anchor-id="sec-ggpairs"><span class="header-section-number">9.6</span> 散布図行列（<code>ggpairs()</code>）</h2>
+<section id="ggallyggpairs-で全関係を一度に可視化" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="ggallyggpairs-で全関係を一度に可視化"><code>GGally::ggpairs()</code> で全関係を一度に可視化</h3>
+<p><code>ggpairs()</code> を使うと、複数変数の散布図・相関係数・分布を <strong>1 つのグラフ</strong>にまとめて表示できます。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-11"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-11-1"><a href="#annotated-cell-11-1"></a>df_students <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-11-2"><a href="#annotated-cell-11-2"></a>  <span class="fu">select</span>(math, reading, writing) <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-11-3"><a href="#annotated-cell-11-3"></a>  <span class="fu">ggpairs</span>(</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="1">1</button><span id="annotated-cell-11-4" class="code-annotation-target"><a href="#annotated-cell-11-4"></a>    <span class="at">columnLabels =</span> <span class="fu">c</span>(<span class="st">"数学"</span>, <span class="st">"読解"</span>, <span class="st">"ライティング"</span>),</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="2">2</button><span id="annotated-cell-11-5" class="code-annotation-target"><a href="#annotated-cell-11-5"></a>    <span class="at">upper =</span> <span class="fu">list</span>(<span class="at">continuous =</span> <span class="fu">wrap</span>(<span class="st">"cor"</span>, <span class="at">size =</span> <span class="dv">5</span>)),</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="3">3</button><span id="annotated-cell-11-6" class="code-annotation-target"><a href="#annotated-cell-11-6"></a>    <span class="at">lower =</span> <span class="fu">list</span>(<span class="at">continuous =</span> <span class="fu">wrap</span>(<span class="st">"points"</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>)),</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="4">4</button><span id="annotated-cell-11-7" class="code-annotation-target"><a href="#annotated-cell-11-7"></a>    <span class="at">diag  =</span> <span class="fu">list</span>(<span class="at">continuous =</span> <span class="fu">wrap</span>(<span class="st">"densityDiag"</span>))</span>
+<span id="annotated-cell-11-8"><a href="#annotated-cell-11-8"></a>  ) <span class="sc">+</span></span>
+<span id="annotated-cell-11-9"><a href="#annotated-cell-11-9"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"3科目スコアの散布図行列"</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-11-10"><a href="#annotated-cell-11-10"></a>  <span class="fu">theme_minimal</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-11" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-11" data-code-lines="4" data-code-annotation="1"><code>columnLabels</code> で軸ラベルを日本語に変更</span>
+</dd>
+<dt data-target-cell="annotated-cell-11" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-11" data-code-lines="5" data-code-annotation="2"><code>upper</code>（右上）に相関係数を表示</span>
+</dd>
+<dt data-target-cell="annotated-cell-11" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-11" data-code-lines="6" data-code-annotation="3"><code>lower</code>（左下）に散布図を表示（<code>alpha</code> で透過率を設定）</span>
+</dd>
+<dt data-target-cell="annotated-cell-11" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-11" data-code-lines="7" data-code-annotation="4"><code>diag</code>（対角線）に密度曲線を表示</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lec09_files/figure-html/ggpairs-basic-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>3科目の散布図行列（ggpairs）</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div style="margin-top: 3.0em;">
+
+</div>
+<p><strong>グループ別に色分けした散布図行列</strong></p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-12"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-12-1"><a href="#annotated-cell-12-1"></a>df_students <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-12-2"><a href="#annotated-cell-12-2"></a>  <span class="fu">select</span>(gender, math, reading, writing) <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-12-3"><a href="#annotated-cell-12-3"></a>  <span class="fu">ggpairs</span>(</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="1">1</button><span id="annotated-cell-12-4" class="code-annotation-target"><a href="#annotated-cell-12-4"></a>    <span class="fu">aes</span>(<span class="at">color =</span> gender, <span class="at">alpha =</span> <span class="fl">0.4</span>),</span>
+<span id="annotated-cell-12-5"><a href="#annotated-cell-12-5"></a>    <span class="at">columnLabels =</span> <span class="fu">c</span>(<span class="st">"性別"</span>, <span class="st">"数学"</span>, <span class="st">"読解"</span>, <span class="st">"ライティング"</span>),</span>
+<span id="annotated-cell-12-6"><a href="#annotated-cell-12-6"></a>    <span class="at">upper =</span> <span class="fu">list</span>(<span class="at">continuous =</span> <span class="fu">wrap</span>(<span class="st">"cor"</span>, <span class="at">size =</span> <span class="fl">3.5</span>))</span>
+<span id="annotated-cell-12-7"><a href="#annotated-cell-12-7"></a>  ) <span class="sc">+</span></span>
+<span id="annotated-cell-12-8"><a href="#annotated-cell-12-8"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"性別・3科目スコアの散布図行列"</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-12-9"><a href="#annotated-cell-12-9"></a>  <span class="fu">theme_minimal</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-12" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-12" data-code-lines="4" data-code-annotation="1"><code>aes(color = gender)</code> で性別ごとに色分け。グループ別の関係も一目で確認できる</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lec09_files/figure-html/ggpairs-group-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>性別で色分けした散布図行列</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+</section>
+<section id="sec-caution" class="level2" data-number="9.7">
+<h2 data-number="9.7" class="anchored" data-anchor-id="sec-caution"><span class="header-section-number">9.7</span> 相関分析の注意点</h2>
+<section id="相関-因果" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="相関-因果">相関 ≠ 因果</h3>
+<p><strong>相関関係</strong>（correlation）と<strong>因果関係</strong>（causation）は異なります。</p>
+<blockquote class="blockquote">
+<p>「2 変数に相関がある」= 「一方が他方の原因である」ではない</p>
+</blockquote>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>疑似相関（spurious correlation）</strong></p>
+<p>2 変数の間に直接の因果関係はないのに、 第 3 の変数（<strong>交絡変数</strong>）の影響で相関が生じることを<strong>疑似相関</strong>といいます。</p>
+<p><strong>例：</strong> アイスクリームの売上と溺死者数の間には正の相関がある。 しかし「アイスクリームが溺死を引き起こす」わけではなく、 <strong>気温</strong>（交絡変数）が両方に影響しているためである。</p>
+</div>
+</div>
+<div style="margin-top: 3.0em;">
+
+</div>
+</section>
+<section id="アンスコムの-quartet" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="アンスコムの-quartet">アンスコムの quartet</h3>
+<p>相関係数が同じでも、散布図の形は大きく異なる場合があります。 これを示すのが「<strong>アンスコムの quartet</strong>」です。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># R 付属の anscombe データセット</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>anscombe_long <span class="ot">&lt;-</span> anscombe <span class="sc">|&gt;</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a>  <span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">row_number</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span>id,</span>
+<span id="cb14-5"><a href="#cb14-5"></a>               <span class="at">names_to  =</span> <span class="fu">c</span>(<span class="st">".value"</span>, <span class="st">"set"</span>),</span>
+<span id="cb14-6"><a href="#cb14-6"></a>               <span class="at">names_pattern =</span> <span class="st">"([xy])(.)"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb14-7"><a href="#cb14-7"></a>  <span class="fu">mutate</span>(<span class="at">set =</span> <span class="fu">paste0</span>(<span class="st">"データセット "</span>, set))</span>
+<span id="cb14-8"><a href="#cb14-8"></a></span>
+<span id="cb14-9"><a href="#cb14-9"></a><span class="fu">ggplot</span>(anscombe_long, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
+<span id="cb14-10"><a href="#cb14-10"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"steelblue"</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb14-11"><a href="#cb14-11"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb14-12"><a href="#cb14-12"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> set) <span class="sc">+</span></span>
+<span id="cb14-13"><a href="#cb14-13"></a>  <span class="fu">labs</span>(</span>
+<span id="cb14-14"><a href="#cb14-14"></a>    <span class="at">title =</span> <span class="st">"アンスコムの quartet"</span>,</span>
+<span id="cb14-15"><a href="#cb14-15"></a>    <span class="at">subtitle =</span> <span class="st">"4つのデータセットはすべて r ≈ 0.816、平均・分散・回帰式がほぼ同一"</span>,</span>
+<span id="cb14-16"><a href="#cb14-16"></a>    <span class="at">x =</span> <span class="st">"x"</span>, <span class="at">y =</span> <span class="st">"y"</span></span>
+<span id="cb14-17"><a href="#cb14-17"></a>  ) <span class="sc">+</span></span>
+<span id="cb14-18"><a href="#cb14-18"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lec09_files/figure-html/anscombe-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>アンスコムの quartet：4つのデータセットは全て r ≈ 0.816</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>散布図を必ず確認する</strong></p>
+<p>4 つのデータセットは相関係数・平均・分散がほぼ同じですが、散布図の形は全く異なります。 データ分析では<strong>相関係数だけで判断せず、必ず散布図を描く</strong>ことが重要です。</p>
+</div>
+</div>
+<div style="margin-top: 3.0em;">
+
+</div>
+</section>
+<section id="外れ値の影響" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="外れ値の影響">外れ値の影響</h3>
+<p>ピアソンの相関係数は外れ値の影響を強く受けます。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb16-2"><a href="#cb16-2"></a></span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="co"># 外れ値なし</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a>df_no_outlier <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb16-5"><a href="#cb16-5"></a>  <span class="at">x =</span> <span class="fu">rnorm</span>(<span class="dv">50</span>, <span class="at">mean =</span> <span class="dv">50</span>, <span class="at">sd =</span> <span class="dv">10</span>),</span>
+<span id="cb16-6"><a href="#cb16-6"></a>  <span class="at">y =</span> x <span class="sc">*</span> <span class="fl">0.5</span> <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">50</span>, <span class="at">sd =</span> <span class="dv">8</span>)</span>
+<span id="cb16-7"><a href="#cb16-7"></a>)</span>
+<span id="cb16-8"><a href="#cb16-8"></a></span>
+<span id="cb16-9"><a href="#cb16-9"></a><span class="co"># 外れ値あり（1点だけ大きく外れた点を追加）</span></span>
+<span id="cb16-10"><a href="#cb16-10"></a>df_with_outlier <span class="ot">&lt;-</span> df_no_outlier <span class="sc">|&gt;</span></span>
+<span id="cb16-11"><a href="#cb16-11"></a>  <span class="fu">add_row</span>(<span class="at">x =</span> <span class="dv">90</span>, <span class="at">y =</span> <span class="dv">10</span>)</span>
+<span id="cb16-12"><a href="#cb16-12"></a></span>
+<span id="cb16-13"><a href="#cb16-13"></a>r_no  <span class="ot">&lt;-</span> <span class="fu">cor</span>(df_no_outlier<span class="sc">$</span>x, df_no_outlier<span class="sc">$</span>y) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">3</span>)</span>
+<span id="cb16-14"><a href="#cb16-14"></a>r_with <span class="ot">&lt;-</span> <span class="fu">cor</span>(df_with_outlier<span class="sc">$</span>x, df_with_outlier<span class="sc">$</span>y) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">3</span>)</span>
+<span id="cb16-15"><a href="#cb16-15"></a></span>
+<span id="cb16-16"><a href="#cb16-16"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df_no_outlier, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
+<span id="cb16-17"><a href="#cb16-17"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"steelblue"</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb16-18"><a href="#cb16-18"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb16-19"><a href="#cb16-19"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste0</span>(<span class="st">"外れ値なし：r = "</span>, r_no), <span class="at">x =</span> <span class="st">"x"</span>, <span class="at">y =</span> <span class="st">"y"</span>) <span class="sc">+</span></span>
+<span id="cb16-20"><a href="#cb16-20"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb16-21"><a href="#cb16-21"></a></span>
+<span id="cb16-22"><a href="#cb16-22"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df_with_outlier, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
+<span id="cb16-23"><a href="#cb16-23"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"steelblue"</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb16-24"><a href="#cb16-24"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="dv">90</span>, <span class="at">y =</span> <span class="dv">10</span>),</span>
+<span id="cb16-25"><a href="#cb16-25"></a>             <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb16-26"><a href="#cb16-26"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb16-27"><a href="#cb16-27"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste0</span>(<span class="st">"外れ値あり：r = "</span>, r_with),</span>
+<span id="cb16-28"><a href="#cb16-28"></a>       <span class="at">subtitle =</span> <span class="st">"赤点が外れ値"</span>, <span class="at">x =</span> <span class="st">"x"</span>, <span class="at">y =</span> <span class="st">"y"</span>) <span class="sc">+</span></span>
+<span id="cb16-29"><a href="#cb16-29"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb16-30"><a href="#cb16-30"></a></span>
+<span id="cb16-31"><a href="#cb16-31"></a>p1 <span class="sc">+</span> p2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'
+`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lec09_files/figure-html/outlier-effect-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>外れ値が相関係数に与える影響</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+</section>
+<section id="sec-exercises" class="level2" data-number="9.8">
+<h2 data-number="9.8" class="anchored" data-anchor-id="sec-exercises"><span class="header-section-number">9.8</span> 演習問題</h2>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>（1） <code>gapminder</code> データ（2007年）を使って、<strong>一人当たりGDP（<code>gdpPercap</code>）と平均寿命（<code>lifeExp</code>）の相関係数</strong>を計算してください。</p>
+<p>（2） 相関検定を実行し、<code>tidy()</code> で結果を表示してください。</p>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>（1） <code>gapminder</code> データ（2007年）を使って、一人当たりGDPを <strong>対数変換</strong> した値と平均寿命の相関係数を計算してください。</p>
+<p>（2） <code>patchwork</code> を使い、一人当たりのGDPと平均寿命との散布図を左に、一人当たりのGDPを対数変換した値と平均寿命との散布図を書いてください。</p>
+<ul>
+<li>左：<code>gdpPercap</code>（対数変換なし）と <code>lifeExp</code> の散布図</li>
+<li>右：<code>log(gdpPercap)</code>（対数変換あり）と <code>lifeExp</code> の散布図</li>
+</ul>
+<p>その上で、両グラフに 赤い色の回帰直線を追加してください。</p>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>df_students</code> データを使って、<strong>親の学歴（<code>parent_education</code>）ごとに 数学スコアと読解スコアの相関係数</strong>を計算し、結果を相関係数の高い順に並べ替えて表示してください。</p>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>gapminder</code> データ（2007年）を使って、<strong>数値変数（<code>lifeExp</code>・<code>pop</code>・<code>gdpPercap</code>）の 相関行列をヒートマップ</strong>で可視化してください。</p>
+<p>ただし、以下の手順で実行してください。</p>
+<ol type="1">
+<li><code>filter(year == 2007)</code> で2007年のデータを抽出する</li>
+<li><code>select(lifeExp, pop, gdpPercap)</code> で3変数を選択する</li>
+<li><code>cor()</code> で相関行列を計算する</li>
+<li><code>as.data.frame()</code> → <code>rownames_to_column()</code> → <code>pivot_longer()</code> で縦長に変換する</li>
+<li><code>geom_tile()</code> + <code>geom_text()</code> でヒートマップを描く</li>
+</ol>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>df_students</code> データを使って、<strong><code>ggpairs()</code> で試験準備コース（<code>test_preparation</code>） 別に色分けした3科目の散布図行列</strong>を描いてください。</p>
+<p>ただし、以下の条件を満たしてください。</p>
+<ul>
+<li><code>select(test_preparation, math, reading, writing)</code> で4列を選択する</li>
+<li><code>aes(color = test_preparation, alpha = 0.4)</code> で色分けする</li>
+<li><code>columnLabels</code> で列名を日本語（「試験準備」「数学」「読解」「ライティング」）にする</li>
+<li>タイトル：「試験準備コース別の3科目スコア関係」</li>
+</ul>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="まとめ" class="level2" data-number="9.9">
+<h2 data-number="9.9" class="anchored" data-anchor-id="まとめ"><span class="header-section-number">9.9</span> まとめ</h2>
+<section id="本日学んだこと" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="本日学んだこと">本日学んだこと</h3>
+<p><strong>相関分析の主要な関数</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>関数</th>
+<th>役割</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>cor(x, y)</code></td>
+<td>2 変数の相関係数を計算</td>
+</tr>
+<tr class="even">
+<td><code>cor(df)</code></td>
+<td>データフレーム全変数の相関行列を計算</td>
+</tr>
+<tr class="odd">
+<td><code>cor.test(x, y)</code></td>
+<td>相関係数の有意性検定</td>
+</tr>
+<tr class="even">
+<td><code>cor.test(...) \|&gt; tidy()</code></td>
+<td>検定結果を整然データに変換</td>
+</tr>
+<tr class="odd">
+<td><code>ggpairs()</code></td>
+<td>散布図行列（分布・散布図・相関係数を一度に表示）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>相関分析の流れ</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># ① 散布図で関係を確認</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> var1, <span class="at">y =</span> var2)) <span class="sc">+</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)</span>
+<span id="cb18-4"><a href="#cb18-4"></a></span>
+<span id="cb18-5"><a href="#cb18-5"></a><span class="co"># ② 相関係数を計算</span></span>
+<span id="cb18-6"><a href="#cb18-6"></a><span class="fu">cor</span>(df<span class="sc">$</span>var1, df<span class="sc">$</span>var2)</span>
+<span id="cb18-7"><a href="#cb18-7"></a></span>
+<span id="cb18-8"><a href="#cb18-8"></a><span class="co"># ③ 相関の有意性検定</span></span>
+<span id="cb18-9"><a href="#cb18-9"></a><span class="fu">cor.test</span>(df<span class="sc">$</span>var1, df<span class="sc">$</span>var2) <span class="sc">|&gt;</span> <span class="fu">tidy</span>()</span>
+<span id="cb18-10"><a href="#cb18-10"></a></span>
+<span id="cb18-11"><a href="#cb18-11"></a><span class="co"># ④ 複数変数は相関行列・ggpairs() で全体像を把握</span></span>
+<span id="cb18-12"><a href="#cb18-12"></a><span class="fu">cor</span>(df <span class="sc">|&gt;</span> <span class="fu">select</span>(v1, v2, v3))</span>
+<span id="cb18-13"><a href="#cb18-13"></a><span class="fu">ggpairs</span>(df <span class="sc">|&gt;</span> <span class="fu">select</span>(v1, v2, v3))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>相関分析の注意点（重要）</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>注意点</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>相関 ≠ 因果</td>
+<td>相関があっても因果関係があるとは限らない</td>
+</tr>
+<tr class="even">
+<td>疑似相関</td>
+<td>第 3 の変数（交絡変数）が両方に影響している可能性</td>
+</tr>
+<tr class="odd">
+<td>外れ値の影響</td>
+<td>ピアソン相関は外れ値に敏感。散布図で必ず確認</td>
+</tr>
+<tr class="even">
+<td>線形関係のみ</td>
+<td>ピアソン相関は非線形の関係を捉えられない</td>
+</tr>
+</tbody>
+</table>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>次回の予告</strong></p>
+<p>第 10 回では、<strong>回帰分析</strong>（単回帰・重回帰）を学習します。</p>
+<ul>
+<li>相関分析が「関係の強さ」を測るのに対し、回帰分析は「X が 1 増えると Y がどれだけ変わるか」を推定します</li>
+<li><code>lm()</code> 関数を使った単回帰・重回帰の実行</li>
+<li>回帰係数の解釈と有意性検定</li>
+</ul>
+</div>
+</div>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

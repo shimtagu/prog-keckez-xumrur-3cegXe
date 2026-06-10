@@ -852,11 +852,101 @@
   {
     "objectID": "lec09.html",
     "href": "lec09.html",
-    "title": "9  二変数の分析",
+    "title": "9  相関分析",
     "section": "",
-    "text": "（相関分析）",
+    "text": "9.1 パッケージの準備\n2 変数の関係を数値で捉える\n今日の目標\n大学の PC はシャットダウンするたびに初期化されるため、毎回インストールが必要です。\noptions(repos = c(CRAN = \"https://cran.rstudio.com/\"))\n\ninstall.packages(\"tidyverse\")\ninstall.packages(\"broom\")\ninstall.packages(\"patchwork\")\ninstall.packages(\"GGally\")\ninstall.packages(\"gapminder\")\nlibrary(tidyverse)\nlibrary(broom)\nlibrary(patchwork)\nlibrary(GGally)\nlibrary(gapminder)\n\ndf_students &lt;- read_csv(\"data/StudentsPerformance.csv\")",
     "crumbs": [
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>二変数の分析</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>相関分析</span>"
+    ]
+  },
+  {
+    "objectID": "lec09.html#sec-setup",
+    "href": "lec09.html#sec-setup",
+    "title": "9  相関分析",
+    "section": "",
+    "text": "Note\n\n\n\nGGally パッケージとは\nggplot2 を拡張したパッケージで、複数変数の関係を一度に可視化する ggpairs() 関数が特に便利です。相関係数・散布図・分布をまとめて表示できます。",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>相関分析</span>"
+    ]
+  },
+  {
+    "objectID": "lec09.html#sec-intro",
+    "href": "lec09.html#sec-intro",
+    "title": "9  相関分析",
+    "section": "9.2 相関分析とは",
+    "text": "9.2 相関分析とは\n\n2 変数の関係を数値化する\n相関分析とは、2 つの変数の間に「どの程度の関係があるか」を 相関係数（correlation coefficient）という 1 つの数値で表す分析手法です。\n前回（lec07）の t 検定は「2 グループの平均値の差」を調べるものでしたが、 相関分析は 「2 つの連続変数が一緒に動くかどうか」 を調べます。\n\n\n\n\n\n\n\n\n分析\n目的\n例\n\n\n\n\nt 検定\n2 グループの平均値の差\n男子と女子で数学スコアに差があるか\n\n\n相関分析\n2 変数間の関係の強さと方向\n数学スコアと読解スコアは関係があるか\n\n\n\n\n\n\n\n\n相関係数とは\nピアソンの相関係数（\\(r\\)）は −1 から 1 の間の値をとります。\n\\[r = \\frac{\\sum_{i=1}^{n}(x_i - \\bar{x})(y_i - \\bar{y})}{\\sqrt{\\sum_{i=1}^{n}(x_i - \\bar{x})^2} \\cdot \\sqrt{\\sum_{i=1}^{n}(y_i - \\bar{y})^2}}\\]\n\n\n\n\\(r\\) の値\n解釈\n\n\n\n\n\\(r = 1\\)\n完全な正の相関（一方が増えると他方も増える）\n\n\n\\(0.7 \\leq r &lt; 1\\)\n強い正の相関\n\n\n\\(0.4 \\leq r &lt; 0.7\\)\n中程度の正の相関\n\n\n\\(0 &lt; r &lt; 0.4\\)\n弱い正の相関\n\n\n\\(r = 0\\)\n相関なし\n\n\n\\(-0.4 &lt; r &lt; 0\\)\n弱い負の相関\n\n\n\\(-0.7 &lt; r \\leq -0.4\\)\n中程度の負の相関\n\n\n\\(-1 &lt; r \\leq -0.7\\)\n強い負の相関\n\n\n\\(r = -1\\)\n完全な負の相関（一方が増えると他方は減る）\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n相関係数の解釈の目安\n上の表はあくまで目安です。分野によって解釈の基準が異なります。 また、相関係数だけを見るのではなく、必ず散布図も確認することが重要です （後述の「アンスコムの quartet」参照）。\n\n\n\n\n\n\n\n\n\n\n相関係数の視覚的なイメージ",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>相関分析</span>"
+    ]
+  },
+  {
+    "objectID": "lec09.html#sec-cor",
+    "href": "lec09.html#sec-cor",
+    "title": "9  相関分析",
+    "section": "9.3 相関係数の計算",
+    "text": "9.3 相関係数の計算\n\ncor() 関数の基本\n2 変数の相関係数は cor() 関数で計算します。\n\n# 数学スコアと読解スコアの相関係数\ncor(df_students$math, df_students$reading)\n\n[1] 0.8175797\n\n\n\n# デフォルトはピアソン相関係数\n# スピアマン順位相関係数を使う場合\n1cor(df_students$math, df_students$reading, method = \"spearman\")\n\n\n1\n\nmethod = \"spearman\" でスピアマン順位相関係数を計算。外れ値の影響を受けにくい。\n\n\n\n\n[1] 0.8040639\n\n\n\n\n\n\n\n\nNote\n\n\n\nピアソン vs スピアマン\n\n\n\n\nピアソン\nスピアマン\n\n\n\n\n前提\n正規分布、線形関係\n前提なし\n\n\n外れ値\n影響を受けやすい\n受けにくい\n\n\nデータ型\n連続変数\n連続変数・順序変数\n\n\n使いどころ\n正規分布に従う連続変数\n外れ値がある・順序データ\n\n\n\n迷った場合は両方計算して比較するのが安全です。\n\n\n\n\n\n\n\n相関係数の可視化\n相関係数を計算する前に、必ず散布図で関係を確認しましょう。\n\nggplot(df_students, aes(x = math, y = reading)) +\n  geom_point(alpha = 0.3, color = \"steelblue\") +\n1  geom_smooth(method = \"lm\", se = TRUE, color = \"red\") +\n  annotate(\"text\", x = 20, y = 95,\n           label = paste0(\"r = \", round(cor(df_students$math, df_students$reading), 3)),\n2           size = 5, color = \"red\", hjust = 0) +\n  labs(\n    title = \"数学スコアと読解スコアの関係\",\n    x = \"数学スコア\",\n    y = \"読解スコア\"\n  ) +\n  theme_minimal()\n\n\n1\n\ngeom_smooth(method = \"lm\") で線形回帰直線を追加\n\n2\n\nannotate() でグラフ内に相関係数の値をテキストとして表示\n\n\n\n\n`geom_smooth()` using formula = 'y ~ x'\n\n\n\n\n\n数学スコアと読解スコアの散布図",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>相関分析</span>"
+    ]
+  },
+  {
+    "objectID": "lec09.html#sec-cor-test",
+    "href": "lec09.html#sec-cor-test",
+    "title": "9  相関分析",
+    "section": "9.4 相関の検定",
+    "text": "9.4 相関の検定\n\ncor.test() で相関の有意性を検定する\n相関係数が「偶然 0 でない値になった」のか、「統計的に有意な関係がある」のかを 相関係数の検定で確認します。\n\n\n\n\n内容\n\n\n\n\n帰無仮説 \\(H_0\\)\n母相関係数 = 0（相関がない）\n\n\n対立仮説 \\(H_1\\)\n母相関係数 ≠ 0（相関がある）\n\n\n判断基準\np 値 &lt; 0.05 なら帰無仮説を棄却 → 有意な相関あり\n\n\n\n\n# 数学スコアと読解スコアの相関検定\nresult_cor &lt;- cor.test(df_students$math, df_students$reading)\nresult_cor\n\n\n    Pearson's product-moment correlation\n\ndata:  df_students$math and df_students$reading\nt = 44.855, df = 998, p-value &lt; 2.2e-16\nalternative hypothesis: true correlation is not equal to 0\n95 percent confidence interval:\n 0.7959276 0.8371428\nsample estimates:\n      cor \n0.8175797 \n\n\n\n# tidy() で整然データに変換\nresult_cor |&gt; tidy()\n\n# A tibble: 1 × 8\n  estimate statistic   p.value parameter conf.low conf.high method   alternative\n     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;int&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;      \n1    0.818      44.9 1.79e-241       998    0.796     0.837 Pearson… two.sided  \n\n\n\n\n\n\n\n\nNote\n\n\n\ntidy() の出力の読み方\n\n\n\n列名\n内容\n\n\n\n\nestimate\n相関係数 \\(r\\)\n\n\nstatistic\nt 値（検定統計量）\n\n\np.value\np 値\n\n\nconf.low, conf.high\n95% 信頼区間\n\n\nparameter\n自由度（= n − 2）\n\n\nmethod\n検定の種類\n\n\n\n\n\n\n\n\n\n\n複数ペアの相関検定\n3 科目の全ペアについて相関検定を実行します。\n\n# 3ペアの相関検定をまとめて実行\npairs_list &lt;- list(\n  c(\"math\", \"reading\"),\n  c(\"math\", \"writing\"),\n  c(\"reading\", \"writing\")\n)\n\npairs_list |&gt;\n1  map(~ cor.test(df_students[[.x[1]]], df_students[[.x[2]]]) |&gt; tidy()) |&gt;\n  list_rbind() |&gt;\n  mutate(pair = c(\"数学 × 読解\", \"数学 × ライティング\", \"読解 × ライティング\")) |&gt;\n  select(pair, estimate, p.value, conf.low, conf.high)\n\n\n1\n\nmap() でリストの各ペアに cor.test() を適用し、tidy() で整形している\n\n\n\n\n# A tibble: 3 × 5\n  pair                estimate   p.value conf.low conf.high\n  &lt;chr&gt;                  &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;\n1 数学 × 読解            0.818 1.79e-241    0.796     0.837\n2 数学 × ライティング    0.803 3.38e-226    0.779     0.824\n3 読解 × ライティング    0.955 0            0.949     0.960",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>相関分析</span>"
+    ]
+  },
+  {
+    "objectID": "lec09.html#sec-cor-matrix",
+    "href": "lec09.html#sec-cor-matrix",
+    "title": "9  相関分析",
+    "section": "9.5 相関行列",
+    "text": "9.5 相関行列\n\n複数変数の相関係数を一覧する\n変数が 3 つ以上あるとき、全ペアの相関係数を行列形式で表示できます。\n\n# 3科目の相関行列\ndf_students |&gt;\n  select(math, reading, writing) |&gt;\n  cor() |&gt;\n1  round(3)\n\n\n1\n\nround(3) で小数点3桁に丸める\n\n\n\n\n         math reading writing\nmath    1.000   0.818   0.803\nreading 0.818   1.000   0.955\nwriting 0.803   0.955   1.000\n\n\n\n\n\n\n\n相関行列をヒートマップで可視化する\n相関行列をヒートマップにすると、変数間の関係が一目でわかります。\n\n# 相関行列をデータフレームに変換\ncor_matrix &lt;- df_students |&gt;\n  select(math, reading, writing) |&gt;\n  cor()\n\n# ヒートマップ用に縦長形式に変換\ncor_long &lt;- cor_matrix |&gt;\n  as.data.frame() |&gt;\n1  rownames_to_column(\"var1\") |&gt;\n  pivot_longer(-var1, names_to = \"var2\", values_to = \"r\")\n\nggplot(cor_long, aes(x = var1, y = var2, fill = r)) +\n  geom_tile(color = \"white\") +\n2  geom_text(aes(label = round(r, 2)), size = 5) +\n  scale_fill_gradient2(\n    low = \"steelblue\", mid = \"white\", high = \"tomato\",\n    midpoint = 0, limits = c(-1, 1), name = \"相関係数\"\n  ) +\n  labs(title = \"3科目の相関行列\", x = \"\", y = \"\") +\n  theme_minimal() +\n  theme(axis.text = element_text(size = 12))\n\n\n1\n\nrownames_to_column() で行名（変数名）を通常の列に変換\n\n2\n\ngeom_text() でタイル上に相関係数の数値を表示\n\n\n\n\n\n\n\n3科目の相関行列ヒートマップ\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nヒートマップを描くためのデータ変形の流れ\nこのコードでは、cor() の出力から ggplot2 で描けるデータ形式にするために、 3段階の変形を行っています。\nステップ1：cor_matrix（行列型）\ncor() の出力は通常のデータフレームではなく、R の matrix（行列）型オブジェクトです。 すべてのセルが数値で、行名・列名を持っています。\n        math reading writing\nmath    1.00    0.82    0.80\nreading 0.82    1.00    0.95\nwriting 0.80    0.95    1.00\n左端の math, reading, writing はデータではなく「行の名前」として存在しています。\nステップ2：rownames_to_column(\"var1\") 後（データフレーム型）\nas.data.frame() でデータフレームに変換し、rownames_to_column() で 「行の名前」だったものを var1 という列として表の内側に取り込みます。\n\n\n\nvar1\nmath\nreading\nwriting\n\n\n\n\nmath\n1.00\n0.82\n0.80\n\n\nreading\n0.82\n1.00\n0.95\n\n\nwriting\n0.80\n0.95\n1.00\n\n\n\nステップ3：pivot_longer() 後（縦長形式）\npivot_longer(-var1, names_to = \"var2\", values_to = \"r\") で 横に並んでいた列（math, reading, writing）を縦に並べ替えます。 -var1 は「var1 列以外を縦長に変換する」という意味です。\n\n\n\nvar1\nvar2\nr\n\n\n\n\nmath\nmath\n1.00\n\n\nmath\nreading\n0.82\n\n\nmath\nwriting\n0.80\n\n\nreading\nmath\n0.82\n\n\n…\n…\n…\n\n\n\nこの「縦長リスト」の形（1行に X 軸の位置・Y 軸の位置・値が揃った状態）になって 初めて、ggplot2 が aes(x = var1, y = var2, fill = r) を理解して ヒートマップを描くことができます。",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>相関分析</span>"
+    ]
+  },
+  {
+    "objectID": "lec09.html#sec-ggpairs",
+    "href": "lec09.html#sec-ggpairs",
+    "title": "9  相関分析",
+    "section": "9.6 散布図行列（ggpairs()）",
+    "text": "9.6 散布図行列（ggpairs()）\n\nGGally::ggpairs() で全関係を一度に可視化\nggpairs() を使うと、複数変数の散布図・相関係数・分布を 1 つのグラフにまとめて表示できます。\n\ndf_students |&gt;\n  select(math, reading, writing) |&gt;\n  ggpairs(\n1    columnLabels = c(\"数学\", \"読解\", \"ライティング\"),\n2    upper = list(continuous = wrap(\"cor\", size = 5)),\n3    lower = list(continuous = wrap(\"points\", alpha = 0.2)),\n4    diag  = list(continuous = wrap(\"densityDiag\"))\n  ) +\n  labs(title = \"3科目スコアの散布図行列\") +\n  theme_minimal()\n\n\n1\n\ncolumnLabels で軸ラベルを日本語に変更\n\n2\n\nupper（右上）に相関係数を表示\n\n3\n\nlower（左下）に散布図を表示（alpha で透過率を設定）\n\n4\n\ndiag（対角線）に密度曲線を表示\n\n\n\n\n\n\n\n3科目の散布図行列（ggpairs）\n\n\n\n\n\n\n\nグループ別に色分けした散布図行列\n\ndf_students |&gt;\n  select(gender, math, reading, writing) |&gt;\n  ggpairs(\n1    aes(color = gender, alpha = 0.4),\n    columnLabels = c(\"性別\", \"数学\", \"読解\", \"ライティング\"),\n    upper = list(continuous = wrap(\"cor\", size = 3.5))\n  ) +\n  labs(title = \"性別・3科目スコアの散布図行列\") +\n  theme_minimal()\n\n\n1\n\naes(color = gender) で性別ごとに色分け。グループ別の関係も一目で確認できる\n\n\n\n\n\n\n\n性別で色分けした散布図行列",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>相関分析</span>"
+    ]
+  },
+  {
+    "objectID": "lec09.html#sec-caution",
+    "href": "lec09.html#sec-caution",
+    "title": "9  相関分析",
+    "section": "9.7 相関分析の注意点",
+    "text": "9.7 相関分析の注意点\n\n相関 ≠ 因果\n相関関係（correlation）と因果関係（causation）は異なります。\n\n「2 変数に相関がある」= 「一方が他方の原因である」ではない\n\n\n\n\n\n\n\nImportant\n\n\n\n疑似相関（spurious correlation）\n2 変数の間に直接の因果関係はないのに、 第 3 の変数（交絡変数）の影響で相関が生じることを疑似相関といいます。\n例： アイスクリームの売上と溺死者数の間には正の相関がある。 しかし「アイスクリームが溺死を引き起こす」わけではなく、 気温（交絡変数）が両方に影響しているためである。\n\n\n\n\n\n\n\nアンスコムの quartet\n相関係数が同じでも、散布図の形は大きく異なる場合があります。 これを示すのが「アンスコムの quartet」です。\n\n# R 付属の anscombe データセット\nanscombe_long &lt;- anscombe |&gt;\n  mutate(id = row_number()) |&gt;\n  pivot_longer(-id,\n               names_to  = c(\".value\", \"set\"),\n               names_pattern = \"([xy])(.)\") |&gt;\n  mutate(set = paste0(\"データセット \", set))\n\nggplot(anscombe_long, aes(x = x, y = y)) +\n  geom_point(color = \"steelblue\", size = 3) +\n  geom_smooth(method = \"lm\", se = FALSE, color = \"red\") +\n  facet_wrap(~ set) +\n  labs(\n    title = \"アンスコムの quartet\",\n    subtitle = \"4つのデータセットはすべて r ≈ 0.816、平均・分散・回帰式がほぼ同一\",\n    x = \"x\", y = \"y\"\n  ) +\n  theme_minimal()\n\n`geom_smooth()` using formula = 'y ~ x'\n\n\n\n\n\nアンスコムの quartet：4つのデータセットは全て r ≈ 0.816\n\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\n散布図を必ず確認する\n4 つのデータセットは相関係数・平均・分散がほぼ同じですが、散布図の形は全く異なります。 データ分析では相関係数だけで判断せず、必ず散布図を描くことが重要です。\n\n\n\n\n\n\n\n外れ値の影響\nピアソンの相関係数は外れ値の影響を強く受けます。\n\nset.seed(42)\n\n# 外れ値なし\ndf_no_outlier &lt;- tibble(\n  x = rnorm(50, mean = 50, sd = 10),\n  y = x * 0.5 + rnorm(50, sd = 8)\n)\n\n# 外れ値あり（1点だけ大きく外れた点を追加）\ndf_with_outlier &lt;- df_no_outlier |&gt;\n  add_row(x = 90, y = 10)\n\nr_no  &lt;- cor(df_no_outlier$x, df_no_outlier$y) |&gt; round(3)\nr_with &lt;- cor(df_with_outlier$x, df_with_outlier$y) |&gt; round(3)\n\np1 &lt;- ggplot(df_no_outlier, aes(x = x, y = y)) +\n  geom_point(color = \"steelblue\", alpha = 0.7) +\n  geom_smooth(method = \"lm\", se = FALSE, color = \"red\") +\n  labs(title = paste0(\"外れ値なし：r = \", r_no), x = \"x\", y = \"y\") +\n  theme_minimal()\n\np2 &lt;- ggplot(df_with_outlier, aes(x = x, y = y)) +\n  geom_point(color = \"steelblue\", alpha = 0.7) +\n  geom_point(data = tibble(x = 90, y = 10),\n             color = \"red\", size = 4) +\n  geom_smooth(method = \"lm\", se = FALSE, color = \"red\") +\n  labs(title = paste0(\"外れ値あり：r = \", r_with),\n       subtitle = \"赤点が外れ値\", x = \"x\", y = \"y\") +\n  theme_minimal()\n\np1 + p2\n\n`geom_smooth()` using formula = 'y ~ x'\n`geom_smooth()` using formula = 'y ~ x'\n\n\n\n\n\n外れ値が相関係数に与える影響",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>相関分析</span>"
+    ]
+  },
+  {
+    "objectID": "lec09.html#sec-exercises",
+    "href": "lec09.html#sec-exercises",
+    "title": "9  相関分析",
+    "section": "9.8 演習問題",
+    "text": "9.8 演習問題\n\n\n\n\n\n\nWarning\n\n\n\n（1） gapminder データ（2007年）を使って、一人当たりGDP（gdpPercap）と平均寿命（lifeExp）の相関係数を計算してください。\n（2） 相関検定を実行し、tidy() で結果を表示してください。\n\n\n\n\n\n\n\n\n\n\n\nWarning\n\n\n\n（1） gapminder データ（2007年）を使って、一人当たりGDPを 対数変換 した値と平均寿命の相関係数を計算してください。\n（2） patchwork を使い、一人当たりのGDPと平均寿命との散布図を左に、一人当たりのGDPを対数変換した値と平均寿命との散布図を書いてください。\n\n左：gdpPercap（対数変換なし）と lifeExp の散布図\n右：log(gdpPercap)（対数変換あり）と lifeExp の散布図\n\nその上で、両グラフに 赤い色の回帰直線を追加してください。\n\n\n\n\n\n\n\n\n\n\n\nWarning\n\n\n\ndf_students データを使って、親の学歴（parent_education）ごとに 数学スコアと読解スコアの相関係数を計算し、結果を相関係数の高い順に並べ替えて表示してください。\n\n\n\n\n\n\n\n\n\n\n\nWarning\n\n\n\ngapminder データ（2007年）を使って、数値変数（lifeExp・pop・gdpPercap）の 相関行列をヒートマップで可視化してください。\nただし、以下の手順で実行してください。\n\nfilter(year == 2007) で2007年のデータを抽出する\nselect(lifeExp, pop, gdpPercap) で3変数を選択する\ncor() で相関行列を計算する\nas.data.frame() → rownames_to_column() → pivot_longer() で縦長に変換する\ngeom_tile() + geom_text() でヒートマップを描く\n\n\n\n\n\n\n\n\n\n\n\n\nWarning\n\n\n\ndf_students データを使って、ggpairs() で試験準備コース（test_preparation） 別に色分けした3科目の散布図行列を描いてください。\nただし、以下の条件を満たしてください。\n\nselect(test_preparation, math, reading, writing) で4列を選択する\naes(color = test_preparation, alpha = 0.4) で色分けする\ncolumnLabels で列名を日本語（「試験準備」「数学」「読解」「ライティング」）にする\nタイトル：「試験準備コース別の3科目スコア関係」",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>相関分析</span>"
+    ]
+  },
+  {
+    "objectID": "lec09.html#まとめ",
+    "href": "lec09.html#まとめ",
+    "title": "9  相関分析",
+    "section": "9.9 まとめ",
+    "text": "9.9 まとめ\n\n本日学んだこと\n相関分析の主要な関数\n\n\n\n関数\n役割\n\n\n\n\ncor(x, y)\n2 変数の相関係数を計算\n\n\ncor(df)\nデータフレーム全変数の相関行列を計算\n\n\ncor.test(x, y)\n相関係数の有意性検定\n\n\ncor.test(...) \\|&gt; tidy()\n検定結果を整然データに変換\n\n\nggpairs()\n散布図行列（分布・散布図・相関係数を一度に表示）\n\n\n\n相関分析の流れ\n# ① 散布図で関係を確認\nggplot(df, aes(x = var1, y = var2)) +\n  geom_point() + geom_smooth(method = \"lm\")\n\n# ② 相関係数を計算\ncor(df$var1, df$var2)\n\n# ③ 相関の有意性検定\ncor.test(df$var1, df$var2) |&gt; tidy()\n\n# ④ 複数変数は相関行列・ggpairs() で全体像を把握\ncor(df |&gt; select(v1, v2, v3))\nggpairs(df |&gt; select(v1, v2, v3))\n相関分析の注意点（重要）\n\n\n\n注意点\n内容\n\n\n\n\n相関 ≠ 因果\n相関があっても因果関係があるとは限らない\n\n\n疑似相関\n第 3 の変数（交絡変数）が両方に影響している可能性\n\n\n外れ値の影響\nピアソン相関は外れ値に敏感。散布図で必ず確認\n\n\n線形関係のみ\nピアソン相関は非線形の関係を捉えられない\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n次回の予告\n第 10 回では、回帰分析（単回帰・重回帰）を学習します。\n\n相関分析が「関係の強さ」を測るのに対し、回帰分析は「X が 1 増えると Y がどれだけ変わるか」を推定します\nlm() 関数を使った単回帰・重回帰の実行\n回帰係数の解釈と有意性検定",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>相関分析</span>"
     ]
   },
   {
