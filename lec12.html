@@ -21,6 +21,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -73,6 +108,35 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <meta name="robots" content="noindex, nofollow">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -205,8 +269,47 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-setup" id="toc-sec-setup" class="nav-link active" data-scroll-target="#sec-setup"><span class="header-section-number">12.1</span> パッケージの準備</a></li>
+  <li><a href="#sec-data" id="toc-sec-data" class="nav-link" data-scroll-target="#sec-data"><span class="header-section-number">12.2</span> データの準備</a></li>
+  <li><a href="#sec-interaction-intro" id="toc-sec-interaction-intro" class="nav-link" data-scroll-target="#sec-interaction-intro"><span class="header-section-number">12.3</span> 交差項とは</a>
+  <ul class="collapse">
+  <li><a href="#直感的な理解" id="toc-直感的な理解" class="nav-link" data-scroll-target="#直感的な理解">直感的な理解</a></li>
+  <li><a href="#ダミー変数なしモデルとの比較" id="toc-ダミー変数なしモデルとの比較" class="nav-link" data-scroll-target="#ダミー変数なしモデルとの比較">ダミー変数なしモデルとの比較</a></li>
+  </ul></li>
+  <li><a href="#sec-cont-dummy-interaction" id="toc-sec-cont-dummy-interaction" class="nav-link" data-scroll-target="#sec-cont-dummy-interaction"><span class="header-section-number">12.4</span> 連続変数 × ダミー変数の交差項</a>
+  <ul class="collapse">
+  <li><a href="#r-での書き方" id="toc-r-での書き方" class="nav-link" data-scroll-target="#r-での書き方">R での書き方</a></li>
+  <li><a href="#交差項の係数の解釈" id="toc-交差項の係数の解釈" class="nav-link" data-scroll-target="#交差項の係数の解釈">交差項の係数の解釈</a></li>
+  <li><a href="#交差項の視覚化グループ別の回帰直線" id="toc-交差項の視覚化グループ別の回帰直線" class="nav-link" data-scroll-target="#交差項の視覚化グループ別の回帰直線">交差項の視覚化（グループ別の回帰直線）</a></li>
+  <li><a href="#plot_predictions-で予測値を可視化する" id="toc-plot_predictions-で予測値を可視化する" class="nav-link" data-scroll-target="#plot_predictions-で予測値を可視化する"><code>plot_predictions()</code> で予測値を可視化する</a></li>
+  <li><a href="#ダミー変数なしあり交差項の比較" id="toc-ダミー変数なしあり交差項の比較" class="nav-link" data-scroll-target="#ダミー変数なしあり交差項の比較">ダミー変数なし・あり・交差項の比較</a></li>
+  </ul></li>
+  <li><a href="#sec-cont-cont-interaction" id="toc-sec-cont-cont-interaction" class="nav-link" data-scroll-target="#sec-cont-cont-interaction"><span class="header-section-number">12.5</span> 連続変数 × 連続変数の交差項</a>
+  <ul class="collapse">
+  <li><a href="#概念の説明" id="toc-概念の説明" class="nav-link" data-scroll-target="#概念の説明">概念の説明</a></li>
+  <li><a href="#plot_slopes-で条件付き限界効果を可視化する" id="toc-plot_slopes-で条件付き限界効果を可視化する" class="nav-link" data-scroll-target="#plot_slopes-で条件付き限界効果を可視化する"><code>plot_slopes()</code> で条件付き限界効果を可視化する</a></li>
+  </ul></li>
+  <li><a href="#sec-salary-interaction" id="toc-sec-salary-interaction" class="nav-link" data-scroll-target="#sec-salary-interaction"><span class="header-section-number">12.6</span> 実践例：給与データの交差項</a>
+  <ul class="collapse">
+  <li><a href="#経験年数-学歴の交差項" id="toc-経験年数-学歴の交差項" class="nav-link" data-scroll-target="#経験年数-学歴の交差項">経験年数 × 学歴の交差項</a></li>
+  </ul></li>
+  <li><a href="#sec-full-model" id="toc-sec-full-model" class="nav-link" data-scroll-target="#sec-full-model"><span class="header-section-number">12.7</span> 交差項を含む全変数モデル</a>
+  <ul class="collapse">
+  <li><a href="#医療費データの完全モデル" id="toc-医療費データの完全モデル" class="nav-link" data-scroll-target="#医療費データの完全モデル">医療費データの完全モデル</a></li>
+  <li><a href="#stargazer-で論文形式の表を作成" id="toc-stargazer-で論文形式の表を作成" class="nav-link" data-scroll-target="#stargazer-で論文形式の表を作成"><code>stargazer()</code> で論文形式の表を作成</a></li>
+  </ul></li>
+  <li><a href="#sec-exercises" id="toc-sec-exercises" class="nav-link" data-scroll-target="#sec-exercises"><span class="header-section-number">12.8</span> 演習問題</a></li>
+  <li><a href="#まとめ" id="toc-まとめ" class="nav-link" data-scroll-target="#まとめ"><span class="header-section-number">12.9</span> まとめ</a>
+  <ul class="collapse">
+  <li><a href="#本日学んだこと" id="toc-本日学んだこと" class="nav-link" data-scroll-target="#本日学んだこと">本日学んだこと</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -230,9 +333,1855 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>（交差項）</p>
+<p><strong>交差項を用いた回帰分析</strong></p>
+<div style="margin-top: 2.0em;">
+
+</div>
+<p><strong>今日の目標</strong></p>
+<ol type="1">
+<li><strong>交差項</strong>（interaction term）の概念を理解する。</li>
+<li>「連続変数 × ダミー変数」の交差項を実行・解釈できるようになる。</li>
+<li>「連続変数 × 連続変数」の交差項を実行・解釈できるようになる。</li>
+<li>交差項の効果を<strong>グラフ</strong>で視覚的に確認できるようになる。</li>
+</ol>
+<section id="sec-setup" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="sec-setup"><span class="header-section-number">12.1</span> パッケージの準備</h2>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">options</span>(<span class="at">repos =</span> <span class="fu">c</span>(<span class="at">CRAN =</span> <span class="st">"https://cran.rstudio.com/"</span>))</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">install.packages</span>(<span class="st">"broom"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">install.packages</span>(<span class="st">"modelsummary"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">install.packages</span>(<span class="st">"jtools"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="fu">install.packages</span>(<span class="st">"stargazer"</span>)</span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="fu">install.packages</span>(<span class="st">"marginaleffects"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">library</span>(broom)</span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="fu">library</span>(modelsummary)</span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="fu">library</span>(jtools)</span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="fu">library</span>(stargazer)</span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="fu">library</span>(marginaleffects)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong><code>marginaleffects</code> パッケージとは</strong></p>
+<p>交差項を含むモデルの<strong>限界効果</strong>（marginal effects）を計算・可視化するパッケージです。 交差項があると係数の解釈が複雑になるため、このパッケージを使うと効果をわかりやすく確認できます。</p>
+<p>主な関数：</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>関数</th>
+<th>役割</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>avg_slopes()</code></td>
+<td>平均限界効果を計算</td>
+</tr>
+<tr class="even">
+<td><code>plot_predictions()</code></td>
+<td>予測値のグラフを描く</td>
+</tr>
+<tr class="odd">
+<td><code>plot_slopes()</code></td>
+<td>条件付き限界効果のグラフを描く</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-data" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="sec-data"><span class="header-section-number">12.2</span> データの準備</h2>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>df_ins   <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/insurance.csv"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2"></a>df_sal   <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/Salary_Data.csv"</span>) <span class="sc">|&gt;</span> <span class="fu">drop_na</span>()</span>
+<span id="cb3-3"><a href="#cb3-3"></a>df_house <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/Housing.csv"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4"></a>df_stu   <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/Student_Performance.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-interaction-intro" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="sec-interaction-intro"><span class="header-section-number">12.3</span> 交差項とは</h2>
+<section id="直感的な理解" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="直感的な理解">直感的な理解</h3>
+<p><strong>交差項</strong>（interaction term）とは、2 つの変数の<strong>積</strong>を新しい説明変数として加えることで、 「X₁ の効果が X₂ の値によって変わる」という<strong>相互作用</strong>を捉えるものです。</p>
+<p><strong>具体例：</strong></p>
+<blockquote class="blockquote">
+<p>「BMI が高いほど医療費が増える」—— これは全員に同じように当てはまるか？ 喫煙者では BMI の影響がより大きいかもしれない。</p>
+</blockquote>
+<p>このような「<strong>変数の効果が別の変数の水準によって異なる</strong>」ことを <strong>交互作用効果</strong>（interaction effect）といいます。</p>
+<div style="margin-top: 3.0em;">
+
+</div>
+</section>
+<section id="ダミー変数なしモデルとの比較" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="ダミー変数なしモデルとの比較">ダミー変数なしモデルとの比較</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 24%">
+<col style="width: 27%">
+<col style="width: 48%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>モデル</th>
+<th>回帰直線</th>
+<th>ダミー変数の効果</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ダミー変数のみ</td>
+<td>切片が異なる<strong>平行</strong>な直線</td>
+<td>グループ間の「差」（傾きは同じ）</td>
+</tr>
+<tr class="even">
+<td><strong>ダミー変数 + 交差項</strong></td>
+<td>切片も傾きも異なる直線</td>
+<td>グループ間で「差」も「傾き」も異なる</td>
+</tr>
+</tbody>
+</table>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+</section>
+<section id="sec-cont-dummy-interaction" class="level2" data-number="12.4">
+<h2 data-number="12.4" class="anchored" data-anchor-id="sec-cont-dummy-interaction"><span class="header-section-number">12.4</span> 連続変数 × ダミー変数の交差項</h2>
+<section id="r-での書き方" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="r-での書き方">R での書き方</h3>
+<p>R では <code>*</code> または <code>:</code> を使って交差項を指定します。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-4"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-4-1"><a href="#annotated-cell-4-1"></a><span class="co"># 方法1：* を使う（主効果 + 交差項を一度に指定）</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1">1</button><span id="annotated-cell-4-2" class="code-annotation-target"><a href="#annotated-cell-4-2"></a>model_i1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(charges <span class="sc">~</span> bmi <span class="sc">*</span> smoker, <span class="at">data =</span> df_ins)</span>
+<span id="annotated-cell-4-3"><a href="#annotated-cell-4-3"></a></span>
+<span id="annotated-cell-4-4"><a href="#annotated-cell-4-4"></a><span class="co"># 方法2：: を使う（交差項のみ）</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="2">2</button><span id="annotated-cell-4-5" class="code-annotation-target"><a href="#annotated-cell-4-5"></a>model_i2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(charges <span class="sc">~</span> bmi <span class="sc">+</span> smoker <span class="sc">+</span> bmi<span class="sc">:</span>smoker, <span class="at">data =</span> df_ins)</span>
+<span id="annotated-cell-4-6"><a href="#annotated-cell-4-6"></a></span>
+<span id="annotated-cell-4-7"><a href="#annotated-cell-4-7"></a><span class="co"># 両者は同じ結果</span></span>
+<span id="annotated-cell-4-8"><a href="#annotated-cell-4-8"></a><span class="fu">summary</span>(model_i1)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-4" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="2" data-code-annotation="1"><code>bmi * smoker</code> は <code>bmi + smoker + bmi:smoker</code> と同義</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="5" data-code-annotation="2"><code>bmi:smoker</code> が交差項（積）の項</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = charges ~ bmi * smoker, data = df_ins)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-19768.0  -4400.7   -869.5   2957.7  31055.9 
+
+Coefficients:
+               Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)     5879.42     976.87   6.019 2.27e-09 ***
+bmi               83.35      31.27   2.666  0.00778 ** 
+smokeryes     -19066.00    2092.03  -9.114  &lt; 2e-16 ***
+bmi:smokeryes   1389.76      66.78  20.810  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 6161 on 1334 degrees of freedom
+Multiple R-squared:  0.7418,    Adjusted R-squared:  0.7412 
+F-statistic:  1277 on 3 and 1334 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<div style="margin-top: 3.0em;">
+
+</div>
+</section>
+<section id="交差項の係数の解釈" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="交差項の係数の解釈">交差項の係数の解釈</h3>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>model_i1 <span class="sc">|&gt;</span> <span class="fu">tidy</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 5
+  term          estimate std.error statistic  p.value
+  &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept)     5879.      977.       6.02 2.27e- 9
+2 bmi               83.4      31.3      2.67 7.78e- 3
+3 smokeryes     -19066.     2092.      -9.11 2.84e-19
+4 bmi:smokeryes   1390.       66.8     20.8  1.61e-83</code></pre>
+</div>
+</div>
+<p><strong>モデル：charges = β₀ + β₁ × bmi + β₂ × smoker + β₃ × (bmi × smoker)</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>係数</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\beta_0\)</span>（切片）</td>
+<td>非喫煙者（smoker = 0）かつ BMI = 0 のときの予測医療費</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\beta_1\)</span>（bmi）</td>
+<td><strong>非喫煙者</strong>において BMI が 1 増えると医療費はどれだけ増えるか</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\beta_2\)</span>（smokeryes）</td>
+<td>BMI = 0 のとき、喫煙者は非喫煙者より医療費がいくら高いか</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\beta_3\)</span>（bmi:smokeryes）</td>
+<td><strong>喫煙者</strong>では BMI の効果が非喫煙者と比べてどれだけ大きいか</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>交差項の係数解釈の注意点</strong></p>
+<p>交差項がある場合、各変数の主効果（<span class="math inline">\(\beta_1\)</span>, <span class="math inline">\(\beta_2\)</span>）の解釈が変わります。</p>
+<ul>
+<li><strong>非喫煙者（smoker = 0）</strong>における BMI の効果：<span class="math inline">\(\beta_1\)</span></li>
+<li><strong>喫煙者（smoker = 1）</strong>における BMI の効果：<span class="math inline">\(\beta_1 + \beta_3\)</span></li>
+</ul>
+<p><code>β₃</code> が有意であれば、喫煙者と非喫煙者で BMI の効果が統計的に異なることを意味します。</p>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="交差項の視覚化グループ別の回帰直線" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="交差項の視覚化グループ別の回帰直線">交差項の視覚化（グループ別の回帰直線）</h3>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-6"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-6-1"><a href="#annotated-cell-6-1"></a><span class="fu">ggplot</span>(df_ins, <span class="fu">aes</span>(<span class="at">x =</span> bmi, <span class="at">y =</span> charges, <span class="at">color =</span> smoker)) <span class="sc">+</span></span>
+<span id="annotated-cell-6-2"><a href="#annotated-cell-6-2"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="1">1</button><span id="annotated-cell-6-3" class="code-annotation-target"><a href="#annotated-cell-6-3"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-6-4"><a href="#annotated-cell-6-4"></a>  <span class="fu">labs</span>(</span>
+<span id="annotated-cell-6-5"><a href="#annotated-cell-6-5"></a>    <span class="at">title =</span> <span class="st">"BMI と医療費の関係（交差項あり）"</span>,</span>
+<span id="annotated-cell-6-6"><a href="#annotated-cell-6-6"></a>    <span class="at">subtitle =</span> <span class="st">"喫煙者は BMI の増加に伴い医療費が急増する"</span>,</span>
+<span id="annotated-cell-6-7"><a href="#annotated-cell-6-7"></a>    <span class="at">x =</span> <span class="st">"BMI"</span>,</span>
+<span id="annotated-cell-6-8"><a href="#annotated-cell-6-8"></a>    <span class="at">y =</span> <span class="st">"医療費（ドル）"</span>,</span>
+<span id="annotated-cell-6-9"><a href="#annotated-cell-6-9"></a>    <span class="at">color =</span> <span class="st">"喫煙"</span></span>
+<span id="annotated-cell-6-10"><a href="#annotated-cell-6-10"></a>  ) <span class="sc">+</span></span>
+<span id="annotated-cell-6-11"><a href="#annotated-cell-6-11"></a>  <span class="fu">theme_minimal</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-6" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-6" data-code-lines="3" data-code-annotation="1"><code>aes(color = smoker)</code> があれば <code>geom_smooth()</code> はグループ別に別々の直線を描く</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lec12_files/figure-html/interaction-plot-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>BMIと医療費の関係（喫煙有無で傾きが異なる）</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div style="margin-top: 3.0em;">
+
+</div>
+</section>
+<section id="plot_predictions-で予測値を可視化する" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="plot_predictions-で予測値を可視化する"><code>plot_predictions()</code> で予測値を可視化する</h3>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-7"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-7-1"><a href="#annotated-cell-7-1"></a><span class="fu">plot_predictions</span>(model_i1,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="1">1</button><span id="annotated-cell-7-2" class="code-annotation-target"><a href="#annotated-cell-7-2"></a>                 <span class="at">condition =</span> <span class="fu">c</span>(<span class="st">"bmi"</span>, <span class="st">"smoker"</span>)) <span class="sc">+</span></span>
+<span id="annotated-cell-7-3"><a href="#annotated-cell-7-3"></a>  <span class="fu">labs</span>(</span>
+<span id="annotated-cell-7-4"><a href="#annotated-cell-7-4"></a>    <span class="at">title =</span> <span class="st">"BMI の効果（喫煙有無別）"</span>,</span>
+<span id="annotated-cell-7-5"><a href="#annotated-cell-7-5"></a>    <span class="at">x =</span> <span class="st">"BMI"</span>,</span>
+<span id="annotated-cell-7-6"><a href="#annotated-cell-7-6"></a>    <span class="at">y =</span> <span class="st">"予測医療費（ドル）"</span>,</span>
+<span id="annotated-cell-7-7"><a href="#annotated-cell-7-7"></a>    <span class="at">color =</span> <span class="st">"喫煙"</span>,</span>
+<span id="annotated-cell-7-8"><a href="#annotated-cell-7-8"></a>    <span class="at">fill =</span> <span class="st">"喫煙"</span></span>
+<span id="annotated-cell-7-9"><a href="#annotated-cell-7-9"></a>  ) <span class="sc">+</span></span>
+<span id="annotated-cell-7-10"><a href="#annotated-cell-7-10"></a>  <span class="fu">theme_minimal</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-7" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="2" data-code-annotation="1"><code>condition</code> で X 軸の変数とグループ変数を指定する</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lec12_files/figure-html/plot-predictions-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>BMIと予測医療費（喫煙有無別）</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="ダミー変数なしあり交差項の比較" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="ダミー変数なしあり交差項の比較">ダミー変数なし・あり・交差項の比較</h3>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>model_base <span class="ot">&lt;-</span> <span class="fu">lm</span>(charges <span class="sc">~</span> bmi <span class="sc">+</span> smoker, <span class="at">data =</span> df_ins)    <span class="co"># ダミーのみ</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>model_int  <span class="ot">&lt;-</span> <span class="fu">lm</span>(charges <span class="sc">~</span> bmi <span class="sc">*</span> smoker, <span class="at">data =</span> df_ins)    <span class="co"># 交差項あり</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="fu">modelsummary</span>(</span>
+<span id="cb8-5"><a href="#cb8-5"></a>  <span class="fu">list</span>(<span class="st">"ダミーのみ"</span> <span class="ot">=</span> model_base, <span class="st">"交差項あり"</span> <span class="ot">=</span> model_int),</span>
+<span id="cb8-6"><a href="#cb8-6"></a>  <span class="at">stars =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb8-7"><a href="#cb8-7"></a>  <span class="at">gof_map =</span> <span class="fu">c</span>(<span class="st">"nobs"</span>, <span class="st">"r.squared"</span>, <span class="st">"adj.r.squared"</span>),</span>
+<span id="cb8-8"><a href="#cb8-8"></a>  <span class="at">title =</span> <span class="st">"交差項の有無による比較"</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<!-- preamble start -->
+
+    <script src="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.js"></script>
+
+    <script>
+      // Create table-specific functions using external factory
+      const tableFns_t6ata7oqipbx54tu2paw = TinyTable.createTableFunctions("tinytable_t6ata7oqipbx54tu2paw");
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: '11', j: 2 }, { i: '11', j: 3 } ], css_id: 'tinytable_css_a7q0srbjs5vpemnobxpk',}, 
+          { positions: [ { i: '8', j: 2 }, { i: '8', j: 3 } ], css_id: 'tinytable_css_t4s373oihw1q0lcb3i17',}, 
+          { positions: [ { i: '1', j: 2 }, { i: '2', j: 2 }, { i: '3', j: 2 }, { i: '4', j: 2 }, { i: '5', j: 2 }, { i: '6', j: 2 }, { i: '7', j: 2 }, { i: '9', j: 2 }, { i: '10', j: 2 }, { i: '1', j: 3 }, { i: '2', j: 3 }, { i: '3', j: 3 }, { i: '4', j: 3 }, { i: '5', j: 3 }, { i: '6', j: 3 }, { i: '7', j: 3 }, { i: '9', j: 3 }, { i: '10', j: 3 } ], css_id: 'tinytable_css_b9klw7r3pv1mn0ra6ag3',}, 
+          { positions: [ { i: '0', j: 2 }, { i: '0', j: 3 } ], css_id: 'tinytable_css_kf64uq15s71bkedyug95',}, 
+          { positions: [ { i: '11', j: 1 } ], css_id: 'tinytable_css_8z9guza3yaprkvb7w4ob',}, 
+          { positions: [ { i: '8', j: 1 } ], css_id: 'tinytable_css_jnx51mk3ijiww9pvd15m',}, 
+          { positions: [ { i: '1', j: 1 }, { i: '2', j: 1 }, { i: '3', j: 1 }, { i: '4', j: 1 }, { i: '5', j: 1 }, { i: '6', j: 1 }, { i: '7', j: 1 }, { i: '9', j: 1 }, { i: '10', j: 1 } ], css_id: 'tinytable_css_9r1x92xbhg5x9dyiqhas',}, 
+          { positions: [ { i: '0', j: 1 } ], css_id: 'tinytable_css_tcr4ifmn83hn1hb11as7',}, 
+          ];
+
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  tableFns_t6ata7oqipbx54tu2paw.styleCell(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
+    <style>
+    /* tinytable css entries after */
+    #tinytable_t6ata7oqipbx54tu2paw td.tinytable_css_a7q0srbjs5vpemnobxpk, #tinytable_t6ata7oqipbx54tu2paw th.tinytable_css_a7q0srbjs5vpemnobxpk {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_t6ata7oqipbx54tu2paw td.tinytable_css_t4s373oihw1q0lcb3i17, #tinytable_t6ata7oqipbx54tu2paw th.tinytable_css_t4s373oihw1q0lcb3i17 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_t6ata7oqipbx54tu2paw td.tinytable_css_b9klw7r3pv1mn0ra6ag3, #tinytable_t6ata7oqipbx54tu2paw th.tinytable_css_b9klw7r3pv1mn0ra6ag3 { text-align: center }
+    #tinytable_t6ata7oqipbx54tu2paw td.tinytable_css_kf64uq15s71bkedyug95, #tinytable_t6ata7oqipbx54tu2paw th.tinytable_css_kf64uq15s71bkedyug95 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_t6ata7oqipbx54tu2paw td.tinytable_css_8z9guza3yaprkvb7w4ob, #tinytable_t6ata7oqipbx54tu2paw th.tinytable_css_8z9guza3yaprkvb7w4ob {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_t6ata7oqipbx54tu2paw td.tinytable_css_jnx51mk3ijiww9pvd15m, #tinytable_t6ata7oqipbx54tu2paw th.tinytable_css_jnx51mk3ijiww9pvd15m {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_t6ata7oqipbx54tu2paw td.tinytable_css_9r1x92xbhg5x9dyiqhas, #tinytable_t6ata7oqipbx54tu2paw th.tinytable_css_9r1x92xbhg5x9dyiqhas { text-align: left }
+    #tinytable_t6ata7oqipbx54tu2paw td.tinytable_css_tcr4ifmn83hn1hb11as7, #tinytable_t6ata7oqipbx54tu2paw th.tinytable_css_tcr4ifmn83hn1hb11as7 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    </style>
+    <div class="container">
+      <table class="tinytable" id="tinytable_t6ata7oqipbx54tu2paw" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        <caption>交差項の有無による比較</caption>
+        <thead>
+              <tr>
+                <th scope="col" data-row="0" data-col="1"> </th>
+                <th scope="col" data-row="0" data-col="2">ダミーのみ</th>
+                <th scope="col" data-row="0" data-col="3">交差項あり</th>
+              </tr>
+        </thead>
+        <tfoot><tr><td colspan="3">+ p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001</td></tr></tfoot>
+        <tbody>
+                <tr>
+                  <td data-row="1" data-col="1">(Intercept)</td>
+                  <td data-row="1" data-col="2">-3459.096***</td>
+                  <td data-row="1" data-col="3">5879.424***</td>
+                </tr>
+                <tr>
+                  <td data-row="2" data-col="1"></td>
+                  <td data-row="2" data-col="2">(998.279)</td>
+                  <td data-row="2" data-col="3">(976.869)</td>
+                </tr>
+                <tr>
+                  <td data-row="3" data-col="1">bmi</td>
+                  <td data-row="3" data-col="2">388.015***</td>
+                  <td data-row="3" data-col="3">83.351**</td>
+                </tr>
+                <tr>
+                  <td data-row="4" data-col="1"></td>
+                  <td data-row="4" data-col="2">(31.787)</td>
+                  <td data-row="4" data-col="3">(31.269)</td>
+                </tr>
+                <tr>
+                  <td data-row="5" data-col="1">smokeryes</td>
+                  <td data-row="5" data-col="2">23593.981***</td>
+                  <td data-row="5" data-col="3">-19066.000***</td>
+                </tr>
+                <tr>
+                  <td data-row="6" data-col="1"></td>
+                  <td data-row="6" data-col="2">(480.180)</td>
+                  <td data-row="6" data-col="3">(2092.028)</td>
+                </tr>
+                <tr>
+                  <td data-row="7" data-col="1">bmi × smokeryes</td>
+                  <td data-row="7" data-col="2"></td>
+                  <td data-row="7" data-col="3">1389.756***</td>
+                </tr>
+                <tr>
+                  <td data-row="8" data-col="1"></td>
+                  <td data-row="8" data-col="2"></td>
+                  <td data-row="8" data-col="3">(66.783)</td>
+                </tr>
+                <tr>
+                  <td data-row="9" data-col="1">Num.Obs.</td>
+                  <td data-row="9" data-col="2">1338</td>
+                  <td data-row="9" data-col="3">1338</td>
+                </tr>
+                <tr>
+                  <td data-row="10" data-col="1">R2</td>
+                  <td data-row="10" data-col="2">0.658</td>
+                  <td data-row="10" data-col="3">0.742</td>
+                </tr>
+                <tr>
+                  <td data-row="11" data-col="1">R2 Adj.</td>
+                  <td data-row="11" data-col="2">0.657</td>
+                  <td data-row="11" data-col="3">0.741</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- hack to avoid NA insertion in last line -->
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+</section>
+<section id="sec-cont-cont-interaction" class="level2" data-number="12.5">
+<h2 data-number="12.5" class="anchored" data-anchor-id="sec-cont-cont-interaction"><span class="header-section-number">12.5</span> 連続変数 × 連続変数の交差項</h2>
+<section id="概念の説明" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="概念の説明">概念の説明</h3>
+<p>連続変数どうしの交差項は「X₁ の効果が X₂ の水準によって変わる」ことを捉えます。</p>
+<p><strong>例：</strong> 「学習時間の効果が、過去のスコアによって変わる」</p>
+<ul>
+<li>過去のスコアが高い学生では、学習時間の効果が小さいかもしれない（天井効果）</li>
+<li>過去のスコアが低い学生では、学習時間の効果が大きいかもしれない</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># 学習時間 × 過去スコアの交差項</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>model_stu_base <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="st">`</span><span class="at">Performance Index</span><span class="st">`</span> <span class="sc">~</span> <span class="st">`</span><span class="at">Hours Studied</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">Previous Scores</span><span class="st">`</span>,</span>
+<span id="cb9-3"><a href="#cb9-3"></a>                     <span class="at">data =</span> df_stu)</span>
+<span id="cb9-4"><a href="#cb9-4"></a>model_stu_int  <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="st">`</span><span class="at">Performance Index</span><span class="st">`</span> <span class="sc">~</span> <span class="st">`</span><span class="at">Hours Studied</span><span class="st">`</span> <span class="sc">*</span> <span class="st">`</span><span class="at">Previous Scores</span><span class="st">`</span>,</span>
+<span id="cb9-5"><a href="#cb9-5"></a>                     <span class="at">data =</span> df_stu)</span>
+<span id="cb9-6"><a href="#cb9-6"></a></span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="fu">modelsummary</span>(</span>
+<span id="cb9-8"><a href="#cb9-8"></a>  <span class="fu">list</span>(<span class="st">"交差項なし"</span> <span class="ot">=</span> model_stu_base, <span class="st">"交差項あり"</span> <span class="ot">=</span> model_stu_int),</span>
+<span id="cb9-9"><a href="#cb9-9"></a>  <span class="at">stars =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb9-10"><a href="#cb9-10"></a>  <span class="at">gof_map =</span> <span class="fu">c</span>(<span class="st">"nobs"</span>, <span class="st">"r.squared"</span>, <span class="st">"adj.r.squared"</span>),</span>
+<span id="cb9-11"><a href="#cb9-11"></a>  <span class="at">title =</span> <span class="st">"学習時間と過去スコアの交差項"</span></span>
+<span id="cb9-12"><a href="#cb9-12"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<!-- preamble start -->
+
+    <script src="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.js"></script>
+
+    <script>
+      // Create table-specific functions using external factory
+      const tableFns_tsa89pgtxso4cp69ajc8 = TinyTable.createTableFunctions("tinytable_tsa89pgtxso4cp69ajc8");
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: '11', j: 2 }, { i: '11', j: 3 } ], css_id: 'tinytable_css_o2b59fo1kmk7ukondiz2',}, 
+          { positions: [ { i: '8', j: 2 }, { i: '8', j: 3 } ], css_id: 'tinytable_css_wg4n80g5equjgi2m75wz',}, 
+          { positions: [ { i: '1', j: 2 }, { i: '2', j: 2 }, { i: '3', j: 2 }, { i: '4', j: 2 }, { i: '5', j: 2 }, { i: '6', j: 2 }, { i: '7', j: 2 }, { i: '9', j: 2 }, { i: '10', j: 2 }, { i: '1', j: 3 }, { i: '2', j: 3 }, { i: '3', j: 3 }, { i: '4', j: 3 }, { i: '5', j: 3 }, { i: '6', j: 3 }, { i: '7', j: 3 }, { i: '9', j: 3 }, { i: '10', j: 3 } ], css_id: 'tinytable_css_v4sknohkp5yifc338xmt',}, 
+          { positions: [ { i: '0', j: 2 }, { i: '0', j: 3 } ], css_id: 'tinytable_css_j5ngooxjc9yim3z6qucb',}, 
+          { positions: [ { i: '11', j: 1 } ], css_id: 'tinytable_css_lb2oy0s9wrj27ow2w4kx',}, 
+          { positions: [ { i: '8', j: 1 } ], css_id: 'tinytable_css_yu3i8t7t2vd11xo0shgn',}, 
+          { positions: [ { i: '1', j: 1 }, { i: '2', j: 1 }, { i: '3', j: 1 }, { i: '4', j: 1 }, { i: '5', j: 1 }, { i: '6', j: 1 }, { i: '7', j: 1 }, { i: '9', j: 1 }, { i: '10', j: 1 } ], css_id: 'tinytable_css_7kay01dcsmzwsuqw5dwc',}, 
+          { positions: [ { i: '0', j: 1 } ], css_id: 'tinytable_css_e9uyxlil4elq7b6scezt',}, 
+          ];
+
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  tableFns_tsa89pgtxso4cp69ajc8.styleCell(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
+    <style>
+    /* tinytable css entries after */
+    #tinytable_tsa89pgtxso4cp69ajc8 td.tinytable_css_o2b59fo1kmk7ukondiz2, #tinytable_tsa89pgtxso4cp69ajc8 th.tinytable_css_o2b59fo1kmk7ukondiz2 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_tsa89pgtxso4cp69ajc8 td.tinytable_css_wg4n80g5equjgi2m75wz, #tinytable_tsa89pgtxso4cp69ajc8 th.tinytable_css_wg4n80g5equjgi2m75wz {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_tsa89pgtxso4cp69ajc8 td.tinytable_css_v4sknohkp5yifc338xmt, #tinytable_tsa89pgtxso4cp69ajc8 th.tinytable_css_v4sknohkp5yifc338xmt { text-align: center }
+    #tinytable_tsa89pgtxso4cp69ajc8 td.tinytable_css_j5ngooxjc9yim3z6qucb, #tinytable_tsa89pgtxso4cp69ajc8 th.tinytable_css_j5ngooxjc9yim3z6qucb {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_tsa89pgtxso4cp69ajc8 td.tinytable_css_lb2oy0s9wrj27ow2w4kx, #tinytable_tsa89pgtxso4cp69ajc8 th.tinytable_css_lb2oy0s9wrj27ow2w4kx {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_tsa89pgtxso4cp69ajc8 td.tinytable_css_yu3i8t7t2vd11xo0shgn, #tinytable_tsa89pgtxso4cp69ajc8 th.tinytable_css_yu3i8t7t2vd11xo0shgn {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_tsa89pgtxso4cp69ajc8 td.tinytable_css_7kay01dcsmzwsuqw5dwc, #tinytable_tsa89pgtxso4cp69ajc8 th.tinytable_css_7kay01dcsmzwsuqw5dwc { text-align: left }
+    #tinytable_tsa89pgtxso4cp69ajc8 td.tinytable_css_e9uyxlil4elq7b6scezt, #tinytable_tsa89pgtxso4cp69ajc8 th.tinytable_css_e9uyxlil4elq7b6scezt {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    </style>
+    <div class="container">
+      <table class="tinytable" id="tinytable_tsa89pgtxso4cp69ajc8" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        <caption>学習時間と過去スコアの交差項</caption>
+        <thead>
+              <tr>
+                <th scope="col" data-row="0" data-col="1"> </th>
+                <th scope="col" data-row="0" data-col="2">交差項なし</th>
+                <th scope="col" data-row="0" data-col="3">交差項あり</th>
+              </tr>
+        </thead>
+        <tfoot><tr><td colspan="3">+ p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001</td></tr></tfoot>
+        <tbody>
+                <tr>
+                  <td data-row="1" data-col="1">(Intercept)</td>
+                  <td data-row="1" data-col="2">-29.817***</td>
+                  <td data-row="1" data-col="3">-29.905***</td>
+                </tr>
+                <tr>
+                  <td data-row="2" data-col="1"></td>
+                  <td data-row="2" data-col="2">(0.105)</td>
+                  <td data-row="2" data-col="3">(0.205)</td>
+                </tr>
+                <tr>
+                  <td data-row="3" data-col="1">Hours Studied</td>
+                  <td data-row="3" data-col="2">2.858***</td>
+                  <td data-row="3" data-col="3">2.875***</td>
+                </tr>
+                <tr>
+                  <td data-row="4" data-col="1"></td>
+                  <td data-row="4" data-col="2">(0.009)</td>
+                  <td data-row="4" data-col="3">(0.036)</td>
+                </tr>
+                <tr>
+                  <td data-row="5" data-col="1">Previous Scores</td>
+                  <td data-row="5" data-col="2">1.019***</td>
+                  <td data-row="5" data-col="3">1.020***</td>
+                </tr>
+                <tr>
+                  <td data-row="6" data-col="1"></td>
+                  <td data-row="6" data-col="2">(0.001)</td>
+                  <td data-row="6" data-col="3">(0.003)</td>
+                </tr>
+                <tr>
+                  <td data-row="7" data-col="1">Hours Studied × Previous Scores</td>
+                  <td data-row="7" data-col="2"></td>
+                  <td data-row="7" data-col="3">-0.000</td>
+                </tr>
+                <tr>
+                  <td data-row="8" data-col="1"></td>
+                  <td data-row="8" data-col="2"></td>
+                  <td data-row="8" data-col="3">(0.001)</td>
+                </tr>
+                <tr>
+                  <td data-row="9" data-col="1">Num.Obs.</td>
+                  <td data-row="9" data-col="2">10000</td>
+                  <td data-row="9" data-col="3">10000</td>
+                </tr>
+                <tr>
+                  <td data-row="10" data-col="1">R2</td>
+                  <td data-row="10" data-col="2">0.986</td>
+                  <td data-row="10" data-col="3">0.986</td>
+                </tr>
+                <tr>
+                  <td data-row="11" data-col="1">R2 Adj.</td>
+                  <td data-row="11" data-col="2">0.986</td>
+                  <td data-row="11" data-col="3">0.986</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- hack to avoid NA insertion in last line -->
+</div>
+</div>
+<div style="margin-top: 3.0em;">
+
+</div>
+</section>
+<section id="plot_slopes-で条件付き限界効果を可視化する" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="plot_slopes-で条件付き限界効果を可視化する"><code>plot_slopes()</code> で条件付き限界効果を可視化する</h3>
+<p>連続×連続の交差項では、「X₁ の効果が X₂ の値によってどう変わるか」を <strong>条件付き限界効果</strong>のグラフで確認します。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-10"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-10-1"><a href="#annotated-cell-10-1"></a><span class="fu">plot_slopes</span>(model_stu_int,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="1">1</button><span id="annotated-cell-10-2" class="code-annotation-target"><a href="#annotated-cell-10-2"></a>            <span class="at">variables =</span> <span class="st">"Hours Studied"</span>,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="2">2</button><span id="annotated-cell-10-3" class="code-annotation-target"><a href="#annotated-cell-10-3"></a>            <span class="at">condition =</span> <span class="st">"Previous Scores"</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-10-4"><a href="#annotated-cell-10-4"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-10-5"><a href="#annotated-cell-10-5"></a>  <span class="fu">labs</span>(</span>
+<span id="annotated-cell-10-6"><a href="#annotated-cell-10-6"></a>    <span class="at">title =</span> <span class="st">"学習時間の限界効果（過去スコアによる変化）"</span>,</span>
+<span id="annotated-cell-10-7"><a href="#annotated-cell-10-7"></a>    <span class="at">x =</span> <span class="st">"過去のスコア"</span>,</span>
+<span id="annotated-cell-10-8"><a href="#annotated-cell-10-8"></a>    <span class="at">y =</span> <span class="st">"学習時間の限界効果（成績への影響）"</span></span>
+<span id="annotated-cell-10-9"><a href="#annotated-cell-10-9"></a>  ) <span class="sc">+</span></span>
+<span id="annotated-cell-10-10"><a href="#annotated-cell-10-10"></a>  <span class="fu">theme_minimal</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-10" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-10" data-code-lines="2" data-code-annotation="1"><code>variables</code> で効果を見たい変数を指定</span>
+</dd>
+<dt data-target-cell="annotated-cell-10" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-10" data-code-lines="3" data-code-annotation="2"><code>condition</code> で効果が変わる変数を指定</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lec12_files/figure-html/plot-slopes-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>学習時間の限界効果（過去スコアの水準別）</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+</section>
+<section id="sec-salary-interaction" class="level2" data-number="12.6">
+<h2 data-number="12.6" class="anchored" data-anchor-id="sec-salary-interaction"><span class="header-section-number">12.6</span> 実践例：給与データの交差項</h2>
+<section id="経験年数-学歴の交差項" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="経験年数-学歴の交差項">経験年数 × 学歴の交差項</h3>
+<p>「経験年数の年収への効果が、学歴によって異なる」かどうかを検証します。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>model_s_base <span class="ot">&lt;-</span> <span class="fu">lm</span>(Salary <span class="sc">~</span> <span class="st">`</span><span class="at">Years of Experience</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">Education Level</span><span class="st">`</span>,</span>
+<span id="cb10-2"><a href="#cb10-2"></a>                   <span class="at">data =</span> df_sal)</span>
+<span id="cb10-3"><a href="#cb10-3"></a>model_s_int  <span class="ot">&lt;-</span> <span class="fu">lm</span>(Salary <span class="sc">~</span> <span class="st">`</span><span class="at">Years of Experience</span><span class="st">`</span> <span class="sc">*</span> <span class="st">`</span><span class="at">Education Level</span><span class="st">`</span>,</span>
+<span id="cb10-4"><a href="#cb10-4"></a>                   <span class="at">data =</span> df_sal)</span>
+<span id="cb10-5"><a href="#cb10-5"></a></span>
+<span id="cb10-6"><a href="#cb10-6"></a><span class="fu">modelsummary</span>(</span>
+<span id="cb10-7"><a href="#cb10-7"></a>  <span class="fu">list</span>(<span class="st">"交差項なし"</span> <span class="ot">=</span> model_s_base, <span class="st">"交差項あり"</span> <span class="ot">=</span> model_s_int),</span>
+<span id="cb10-8"><a href="#cb10-8"></a>  <span class="at">stars =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb10-9"><a href="#cb10-9"></a>  <span class="at">gof_map =</span> <span class="fu">c</span>(<span class="st">"nobs"</span>, <span class="st">"r.squared"</span>, <span class="st">"adj.r.squared"</span>),</span>
+<span id="cb10-10"><a href="#cb10-10"></a>  <span class="at">title =</span> <span class="st">"給与の回帰分析（経験年数×学歴の交差項）"</span></span>
+<span id="cb10-11"><a href="#cb10-11"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<!-- preamble start -->
+
+    <script src="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.js"></script>
+
+    <script>
+      // Create table-specific functions using external factory
+      const tableFns_exuo5jptgxjaviko3omn = TinyTable.createTableFunctions("tinytable_exuo5jptgxjaviko3omn");
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: '15', j: 2 }, { i: '15', j: 3 } ], css_id: 'tinytable_css_gbjeriiaifqbb8dxk4g2',}, 
+          { positions: [ { i: '12', j: 2 }, { i: '12', j: 3 } ], css_id: 'tinytable_css_91p7mc89e9coh3u0b518',}, 
+          { positions: [ { i: '1', j: 2 }, { i: '2', j: 2 }, { i: '3', j: 2 }, { i: '4', j: 2 }, { i: '5', j: 2 }, { i: '6', j: 2 }, { i: '7', j: 2 }, { i: '8', j: 2 }, { i: '9', j: 2 }, { i: '10', j: 2 }, { i: '11', j: 2 }, { i: '13', j: 2 }, { i: '14', j: 2 }, { i: '1', j: 3 }, { i: '2', j: 3 }, { i: '3', j: 3 }, { i: '4', j: 3 }, { i: '5', j: 3 }, { i: '6', j: 3 }, { i: '7', j: 3 }, { i: '8', j: 3 }, { i: '9', j: 3 }, { i: '10', j: 3 }, { i: '11', j: 3 }, { i: '13', j: 3 }, { i: '14', j: 3 } ], css_id: 'tinytable_css_0rej98e2qj636j38czx9',}, 
+          { positions: [ { i: '0', j: 2 }, { i: '0', j: 3 } ], css_id: 'tinytable_css_p1cl1ho1kj9cxz8s22wz',}, 
+          { positions: [ { i: '15', j: 1 } ], css_id: 'tinytable_css_uakpbmczhmjmsurewbnn',}, 
+          { positions: [ { i: '12', j: 1 } ], css_id: 'tinytable_css_gztduejfgyeg3lhzisla',}, 
+          { positions: [ { i: '1', j: 1 }, { i: '2', j: 1 }, { i: '3', j: 1 }, { i: '4', j: 1 }, { i: '5', j: 1 }, { i: '6', j: 1 }, { i: '7', j: 1 }, { i: '8', j: 1 }, { i: '9', j: 1 }, { i: '10', j: 1 }, { i: '11', j: 1 }, { i: '13', j: 1 }, { i: '14', j: 1 } ], css_id: 'tinytable_css_0kjuea4d2a766zwwh2nc',}, 
+          { positions: [ { i: '0', j: 1 } ], css_id: 'tinytable_css_u5dozdj4n9qgltl6d59m',}, 
+          ];
+
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  tableFns_exuo5jptgxjaviko3omn.styleCell(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
+    <style>
+    /* tinytable css entries after */
+    #tinytable_exuo5jptgxjaviko3omn td.tinytable_css_gbjeriiaifqbb8dxk4g2, #tinytable_exuo5jptgxjaviko3omn th.tinytable_css_gbjeriiaifqbb8dxk4g2 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_exuo5jptgxjaviko3omn td.tinytable_css_91p7mc89e9coh3u0b518, #tinytable_exuo5jptgxjaviko3omn th.tinytable_css_91p7mc89e9coh3u0b518 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_exuo5jptgxjaviko3omn td.tinytable_css_0rej98e2qj636j38czx9, #tinytable_exuo5jptgxjaviko3omn th.tinytable_css_0rej98e2qj636j38czx9 { text-align: center }
+    #tinytable_exuo5jptgxjaviko3omn td.tinytable_css_p1cl1ho1kj9cxz8s22wz, #tinytable_exuo5jptgxjaviko3omn th.tinytable_css_p1cl1ho1kj9cxz8s22wz {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_exuo5jptgxjaviko3omn td.tinytable_css_uakpbmczhmjmsurewbnn, #tinytable_exuo5jptgxjaviko3omn th.tinytable_css_uakpbmczhmjmsurewbnn {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_exuo5jptgxjaviko3omn td.tinytable_css_gztduejfgyeg3lhzisla, #tinytable_exuo5jptgxjaviko3omn th.tinytable_css_gztduejfgyeg3lhzisla {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_exuo5jptgxjaviko3omn td.tinytable_css_0kjuea4d2a766zwwh2nc, #tinytable_exuo5jptgxjaviko3omn th.tinytable_css_0kjuea4d2a766zwwh2nc { text-align: left }
+    #tinytable_exuo5jptgxjaviko3omn td.tinytable_css_u5dozdj4n9qgltl6d59m, #tinytable_exuo5jptgxjaviko3omn th.tinytable_css_u5dozdj4n9qgltl6d59m {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    </style>
+    <div class="container">
+      <table class="tinytable" id="tinytable_exuo5jptgxjaviko3omn" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        <caption>給与の回帰分析（経験年数×学歴の交差項）</caption>
+        <thead>
+              <tr>
+                <th scope="col" data-row="0" data-col="1"> </th>
+                <th scope="col" data-row="0" data-col="2">交差項なし</th>
+                <th scope="col" data-row="0" data-col="3">交差項あり</th>
+              </tr>
+        </thead>
+        <tfoot><tr><td colspan="3">+ p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001</td></tr></tfoot>
+        <tbody>
+                <tr>
+                  <td data-row="1" data-col="1">(Intercept)</td>
+                  <td data-row="1" data-col="2">32981.900***</td>
+                  <td data-row="1" data-col="3">33034.945***</td>
+                </tr>
+                <tr>
+                  <td data-row="2" data-col="1"></td>
+                  <td data-row="2" data-col="2">(1541.309)</td>
+                  <td data-row="2" data-col="3">(1812.848)</td>
+                </tr>
+                <tr>
+                  <td data-row="3" data-col="1">Years of Experience</td>
+                  <td data-row="3" data-col="2">5996.414***</td>
+                  <td data-row="3" data-col="3">5988.800***</td>
+                </tr>
+                <tr>
+                  <td data-row="4" data-col="1"></td>
+                  <td data-row="4" data-col="2">(158.584)</td>
+                  <td data-row="4" data-col="3">(209.415)</td>
+                </tr>
+                <tr>
+                  <td data-row="5" data-col="1">Education LevelMaster's</td>
+                  <td data-row="5" data-col="2">16474.305***</td>
+                  <td data-row="5" data-col="3">15080.311***</td>
+                </tr>
+                <tr>
+                  <td data-row="6" data-col="1"></td>
+                  <td data-row="6" data-col="2">(2198.993)</td>
+                  <td data-row="6" data-col="3">(4236.185)</td>
+                </tr>
+                <tr>
+                  <td data-row="7" data-col="1">Education LevelPhD</td>
+                  <td data-row="7" data-col="2">22804.619***</td>
+                  <td data-row="7" data-col="3">34496.027**</td>
+                </tr>
+                <tr>
+                  <td data-row="8" data-col="1"></td>
+                  <td data-row="8" data-col="2">(2961.442)</td>
+                  <td data-row="8" data-col="3">(12631.930)</td>
+                </tr>
+                <tr>
+                  <td data-row="9" data-col="1">Years of Experience × Education LevelMaster's</td>
+                  <td data-row="9" data-col="2"></td>
+                  <td data-row="9" data-col="3">107.700</td>
+                </tr>
+                <tr>
+                  <td data-row="10" data-col="1"></td>
+                  <td data-row="10" data-col="2"></td>
+                  <td data-row="10" data-col="3">(332.823)</td>
+                </tr>
+                <tr>
+                  <td data-row="11" data-col="1">Years of Experience × Education LevelPhD</td>
+                  <td data-row="11" data-col="2"></td>
+                  <td data-row="11" data-col="3">-682.440</td>
+                </tr>
+                <tr>
+                  <td data-row="12" data-col="1"></td>
+                  <td data-row="12" data-col="2"></td>
+                  <td data-row="12" data-col="3">(752.203)</td>
+                </tr>
+                <tr>
+                  <td data-row="13" data-col="1">Num.Obs.</td>
+                  <td data-row="13" data-col="2">373</td>
+                  <td data-row="13" data-col="3">373</td>
+                </tr>
+                <tr>
+                  <td data-row="14" data-col="1">R2</td>
+                  <td data-row="14" data-col="2">0.890</td>
+                  <td data-row="14" data-col="3">0.890</td>
+                </tr>
+                <tr>
+                  <td data-row="15" data-col="1">R2 Adj.</td>
+                  <td data-row="15" data-col="2">0.889</td>
+                  <td data-row="15" data-col="3">0.889</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- hack to avoid NA insertion in last line -->
+</div>
+</div>
+<div style="margin-top: 3.0em;">
+
+</div>
+<p><strong>グラフで確認する</strong></p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">ggplot</span>(df_sal, <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">Years of Experience</span><span class="st">`</span>, <span class="at">y =</span> Salary,</span>
+<span id="cb11-2"><a href="#cb11-2"></a>                   <span class="at">color =</span> <span class="st">`</span><span class="at">Education Level</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a>  <span class="fu">labs</span>(</span>
+<span id="cb11-6"><a href="#cb11-6"></a>    <span class="at">title =</span> <span class="st">"経験年数と年収の関係（学歴別）"</span>,</span>
+<span id="cb11-7"><a href="#cb11-7"></a>    <span class="at">subtitle =</span> <span class="st">"学歴によって経験年数の効果が異なる"</span>,</span>
+<span id="cb11-8"><a href="#cb11-8"></a>    <span class="at">x =</span> <span class="st">"経験年数（年）"</span>,</span>
+<span id="cb11-9"><a href="#cb11-9"></a>    <span class="at">y =</span> <span class="st">"年収（ドル）"</span>,</span>
+<span id="cb11-10"><a href="#cb11-10"></a>    <span class="at">color =</span> <span class="st">"学歴"</span></span>
+<span id="cb11-11"><a href="#cb11-11"></a>  ) <span class="sc">+</span></span>
+<span id="cb11-12"><a href="#cb11-12"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lec12_files/figure-html/salary-interaction-plot-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>経験年数と年収（学歴別の回帰直線）</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+</section>
+<section id="sec-full-model" class="level2" data-number="12.7">
+<h2 data-number="12.7" class="anchored" data-anchor-id="sec-full-model"><span class="header-section-number">12.7</span> 交差項を含む全変数モデル</h2>
+<section id="医療費データの完全モデル" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="医療費データの完全モデル">医療費データの完全モデル</h3>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># モデルの段階的な構築</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>m1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(charges <span class="sc">~</span> age <span class="sc">+</span> bmi <span class="sc">+</span> children <span class="sc">+</span> smoker <span class="sc">+</span> sex <span class="sc">+</span> region,</span>
+<span id="cb13-3"><a href="#cb13-3"></a>         <span class="at">data =</span> df_ins)</span>
+<span id="cb13-4"><a href="#cb13-4"></a></span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="co"># 交差項を追加</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a>m2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(charges <span class="sc">~</span> age <span class="sc">+</span> bmi <span class="sc">*</span> smoker <span class="sc">+</span> children <span class="sc">+</span> sex <span class="sc">+</span> region,</span>
+<span id="cb13-7"><a href="#cb13-7"></a>         <span class="at">data =</span> df_ins)</span>
+<span id="cb13-8"><a href="#cb13-8"></a></span>
+<span id="cb13-9"><a href="#cb13-9"></a><span class="co"># 複数の交差項</span></span>
+<span id="cb13-10"><a href="#cb13-10"></a>m3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(charges <span class="sc">~</span> age <span class="sc">+</span> bmi <span class="sc">*</span> smoker <span class="sc">+</span> children <span class="sc">+</span> sex <span class="sc">+</span> region <span class="sc">+</span></span>
+<span id="cb13-11"><a href="#cb13-11"></a>           age<span class="sc">:</span>smoker,</span>
+<span id="cb13-12"><a href="#cb13-12"></a>         <span class="at">data =</span> df_ins)</span>
+<span id="cb13-13"><a href="#cb13-13"></a></span>
+<span id="cb13-14"><a href="#cb13-14"></a><span class="fu">modelsummary</span>(</span>
+<span id="cb13-15"><a href="#cb13-15"></a>  <span class="fu">list</span>(<span class="st">"基本モデル"</span> <span class="ot">=</span> m1, <span class="st">"bmi×smoker"</span> <span class="ot">=</span> m2, <span class="st">"複数交差項"</span> <span class="ot">=</span> m3),</span>
+<span id="cb13-16"><a href="#cb13-16"></a>  <span class="at">stars =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb13-17"><a href="#cb13-17"></a>  <span class="at">gof_map =</span> <span class="fu">c</span>(<span class="st">"nobs"</span>, <span class="st">"r.squared"</span>, <span class="st">"adj.r.squared"</span>),</span>
+<span id="cb13-18"><a href="#cb13-18"></a>  <span class="at">title =</span> <span class="st">"医療費の回帰分析（交差項の段階的追加）"</span></span>
+<span id="cb13-19"><a href="#cb13-19"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<!-- preamble start -->
+
+    <script src="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.js"></script>
+
+    <script>
+      // Create table-specific functions using external factory
+      const tableFns_1yv73o3i1tjnd5zo2j9g = TinyTable.createTableFunctions("tinytable_1yv73o3i1tjnd5zo2j9g");
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: '25', j: 2 }, { i: '25', j: 3 }, { i: '25', j: 4 } ], css_id: 'tinytable_css_qcocv942phypmi8z8r4h',}, 
+          { positions: [ { i: '22', j: 2 }, { i: '22', j: 3 }, { i: '22', j: 4 } ], css_id: 'tinytable_css_8vo78f7arnjnta9ahbws',}, 
+          { positions: [ { i: '1', j: 2 }, { i: '2', j: 2 }, { i: '3', j: 2 }, { i: '4', j: 2 }, { i: '5', j: 2 }, { i: '6', j: 2 }, { i: '7', j: 2 }, { i: '8', j: 2 }, { i: '9', j: 2 }, { i: '10', j: 2 }, { i: '11', j: 2 }, { i: '12', j: 2 }, { i: '13', j: 2 }, { i: '14', j: 2 }, { i: '15', j: 2 }, { i: '16', j: 2 }, { i: '17', j: 2 }, { i: '18', j: 2 }, { i: '19', j: 2 }, { i: '20', j: 2 }, { i: '21', j: 2 }, { i: '23', j: 2 }, { i: '24', j: 2 }, { i: '1', j: 3 }, { i: '2', j: 3 }, { i: '3', j: 3 }, { i: '4', j: 3 }, { i: '5', j: 3 }, { i: '6', j: 3 }, { i: '7', j: 3 }, { i: '8', j: 3 }, { i: '9', j: 3 }, { i: '10', j: 3 }, { i: '11', j: 3 }, { i: '12', j: 3 }, { i: '13', j: 3 }, { i: '14', j: 3 }, { i: '15', j: 3 }, { i: '16', j: 3 }, { i: '17', j: 3 }, { i: '18', j: 3 }, { i: '19', j: 3 }, { i: '20', j: 3 }, { i: '21', j: 3 }, { i: '23', j: 3 }, { i: '24', j: 3 }, { i: '1', j: 4 }, { i: '2', j: 4 }, { i: '3', j: 4 }, { i: '4', j: 4 }, { i: '5', j: 4 }, { i: '6', j: 4 }, { i: '7', j: 4 }, { i: '8', j: 4 }, { i: '9', j: 4 }, { i: '10', j: 4 }, { i: '11', j: 4 }, { i: '12', j: 4 }, { i: '13', j: 4 }, { i: '14', j: 4 }, { i: '15', j: 4 }, { i: '16', j: 4 }, { i: '17', j: 4 }, { i: '18', j: 4 }, { i: '19', j: 4 }, { i: '20', j: 4 }, { i: '21', j: 4 }, { i: '23', j: 4 }, { i: '24', j: 4 } ], css_id: 'tinytable_css_esmd8s26t8zhyy9z5rwd',}, 
+          { positions: [ { i: '0', j: 2 }, { i: '0', j: 3 }, { i: '0', j: 4 } ], css_id: 'tinytable_css_3iym45ybivur52rjcomq',}, 
+          { positions: [ { i: '25', j: 1 } ], css_id: 'tinytable_css_uw0c4koxu3zp4wxj7f2b',}, 
+          { positions: [ { i: '22', j: 1 } ], css_id: 'tinytable_css_pasc2vixmgirr66sdfuh',}, 
+          { positions: [ { i: '1', j: 1 }, { i: '2', j: 1 }, { i: '3', j: 1 }, { i: '4', j: 1 }, { i: '5', j: 1 }, { i: '6', j: 1 }, { i: '7', j: 1 }, { i: '8', j: 1 }, { i: '9', j: 1 }, { i: '10', j: 1 }, { i: '11', j: 1 }, { i: '12', j: 1 }, { i: '13', j: 1 }, { i: '14', j: 1 }, { i: '15', j: 1 }, { i: '16', j: 1 }, { i: '17', j: 1 }, { i: '18', j: 1 }, { i: '19', j: 1 }, { i: '20', j: 1 }, { i: '21', j: 1 }, { i: '23', j: 1 }, { i: '24', j: 1 } ], css_id: 'tinytable_css_qswh1wgwclv23andpd4r',}, 
+          { positions: [ { i: '0', j: 1 } ], css_id: 'tinytable_css_bj6g9b7axn36kgzbzf4c',}, 
+          ];
+
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  tableFns_1yv73o3i1tjnd5zo2j9g.styleCell(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
+    <style>
+    /* tinytable css entries after */
+    #tinytable_1yv73o3i1tjnd5zo2j9g td.tinytable_css_qcocv942phypmi8z8r4h, #tinytable_1yv73o3i1tjnd5zo2j9g th.tinytable_css_qcocv942phypmi8z8r4h {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_1yv73o3i1tjnd5zo2j9g td.tinytable_css_8vo78f7arnjnta9ahbws, #tinytable_1yv73o3i1tjnd5zo2j9g th.tinytable_css_8vo78f7arnjnta9ahbws {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_1yv73o3i1tjnd5zo2j9g td.tinytable_css_esmd8s26t8zhyy9z5rwd, #tinytable_1yv73o3i1tjnd5zo2j9g th.tinytable_css_esmd8s26t8zhyy9z5rwd { text-align: center }
+    #tinytable_1yv73o3i1tjnd5zo2j9g td.tinytable_css_3iym45ybivur52rjcomq, #tinytable_1yv73o3i1tjnd5zo2j9g th.tinytable_css_3iym45ybivur52rjcomq {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_1yv73o3i1tjnd5zo2j9g td.tinytable_css_uw0c4koxu3zp4wxj7f2b, #tinytable_1yv73o3i1tjnd5zo2j9g th.tinytable_css_uw0c4koxu3zp4wxj7f2b {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_1yv73o3i1tjnd5zo2j9g td.tinytable_css_pasc2vixmgirr66sdfuh, #tinytable_1yv73o3i1tjnd5zo2j9g th.tinytable_css_pasc2vixmgirr66sdfuh {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_1yv73o3i1tjnd5zo2j9g td.tinytable_css_qswh1wgwclv23andpd4r, #tinytable_1yv73o3i1tjnd5zo2j9g th.tinytable_css_qswh1wgwclv23andpd4r { text-align: left }
+    #tinytable_1yv73o3i1tjnd5zo2j9g td.tinytable_css_bj6g9b7axn36kgzbzf4c, #tinytable_1yv73o3i1tjnd5zo2j9g th.tinytable_css_bj6g9b7axn36kgzbzf4c {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    </style>
+    <div class="container">
+      <table class="tinytable" id="tinytable_1yv73o3i1tjnd5zo2j9g" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        <caption>医療費の回帰分析（交差項の段階的追加）</caption>
+        <thead>
+              <tr>
+                <th scope="col" data-row="0" data-col="1"> </th>
+                <th scope="col" data-row="0" data-col="2">基本モデル</th>
+                <th scope="col" data-row="0" data-col="3">bmi×smoker</th>
+                <th scope="col" data-row="0" data-col="4">複数交差項</th>
+              </tr>
+        </thead>
+        <tfoot><tr><td colspan="4">+ p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001</td></tr></tfoot>
+        <tbody>
+                <tr>
+                  <td data-row="1" data-col="1">(Intercept)</td>
+                  <td data-row="1" data-col="2">-11938.539***</td>
+                  <td data-row="1" data-col="3">-2223.454*</td>
+                  <td data-row="1" data-col="4">-2237.992*</td>
+                </tr>
+                <tr>
+                  <td data-row="2" data-col="1"></td>
+                  <td data-row="2" data-col="2">(987.819)</td>
+                  <td data-row="2" data-col="3">(865.611)</td>
+                  <td data-row="2" data-col="4">(878.032)</td>
+                </tr>
+                <tr>
+                  <td data-row="3" data-col="1">age</td>
+                  <td data-row="3" data-col="2">256.856***</td>
+                  <td data-row="3" data-col="3">263.620***</td>
+                  <td data-row="3" data-col="4">264.101***</td>
+                </tr>
+                <tr>
+                  <td data-row="4" data-col="1"></td>
+                  <td data-row="4" data-col="2">(11.899)</td>
+                  <td data-row="4" data-col="3">(9.516)</td>
+                  <td data-row="4" data-col="4">(10.664)</td>
+                </tr>
+                <tr>
+                  <td data-row="5" data-col="1">bmi</td>
+                  <td data-row="5" data-col="2">339.193***</td>
+                  <td data-row="5" data-col="3">23.533</td>
+                  <td data-row="5" data-col="4">23.373</td>
+                </tr>
+                <tr>
+                  <td data-row="6" data-col="1"></td>
+                  <td data-row="6" data-col="2">(28.599)</td>
+                  <td data-row="6" data-col="3">(25.601)</td>
+                  <td data-row="6" data-col="4">(25.660)</td>
+                </tr>
+                <tr>
+                  <td data-row="7" data-col="1">children</td>
+                  <td data-row="7" data-col="2">475.501***</td>
+                  <td data-row="7" data-col="3">516.403***</td>
+                  <td data-row="7" data-col="4">516.629***</td>
+                </tr>
+                <tr>
+                  <td data-row="8" data-col="1"></td>
+                  <td data-row="8" data-col="2">(137.804)</td>
+                  <td data-row="8" data-col="3">(110.179)</td>
+                  <td data-row="8" data-col="4">(110.244)</td>
+                </tr>
+                <tr>
+                  <td data-row="9" data-col="1">smokeryes</td>
+                  <td data-row="9" data-col="2">23848.535***</td>
+                  <td data-row="9" data-col="3">-20415.611***</td>
+                  <td data-row="9" data-col="4">-20335.905***</td>
+                </tr>
+                <tr>
+                  <td data-row="10" data-col="1"></td>
+                  <td data-row="10" data-col="2">(413.153)</td>
+                  <td data-row="10" data-col="3">(1648.277)</td>
+                  <td data-row="10" data-col="4">(1831.134)</td>
+                </tr>
+                <tr>
+                  <td data-row="11" data-col="1">sexmale</td>
+                  <td data-row="11" data-col="2">-131.314</td>
+                  <td data-row="11" data-col="3">-500.146+</td>
+                  <td data-row="11" data-col="4">-500.043+</td>
+                </tr>
+                <tr>
+                  <td data-row="12" data-col="1"></td>
+                  <td data-row="12" data-col="2">(332.945)</td>
+                  <td data-row="12" data-col="3">(266.518)</td>
+                  <td data-row="12" data-col="4">(266.619)</td>
+                </tr>
+                <tr>
+                  <td data-row="13" data-col="1">regionnorthwest</td>
+                  <td data-row="13" data-col="2">-352.964</td>
+                  <td data-row="13" data-col="3">-585.478</td>
+                  <td data-row="13" data-col="4">-585.037</td>
+                </tr>
+                <tr>
+                  <td data-row="14" data-col="1"></td>
+                  <td data-row="14" data-col="2">(476.276)</td>
+                  <td data-row="14" data-col="3">(380.859)</td>
+                  <td data-row="14" data-col="4">(381.027)</td>
+                </tr>
+                <tr>
+                  <td data-row="15" data-col="1">regionsoutheast</td>
+                  <td data-row="15" data-col="2">-1035.022*</td>
+                  <td data-row="15" data-col="3">-1210.131**</td>
+                  <td data-row="15" data-col="4">-1208.863**</td>
+                </tr>
+                <tr>
+                  <td data-row="16" data-col="1"></td>
+                  <td data-row="16" data-col="2">(478.692)</td>
+                  <td data-row="16" data-col="3">(382.750)</td>
+                  <td data-row="16" data-col="4">(383.103)</td>
+                </tr>
+                <tr>
+                  <td data-row="17" data-col="1">regionsouthwest</td>
+                  <td data-row="17" data-col="2">-960.051*</td>
+                  <td data-row="17" data-col="3">-1231.108**</td>
+                  <td data-row="17" data-col="4">-1232.060**</td>
+                </tr>
+                <tr>
+                  <td data-row="18" data-col="1"></td>
+                  <td data-row="18" data-col="2">(477.933)</td>
+                  <td data-row="18" data-col="3">(382.218)</td>
+                  <td data-row="18" data-col="4">(382.479)</td>
+                </tr>
+                <tr>
+                  <td data-row="19" data-col="1">bmi × smokeryes</td>
+                  <td data-row="19" data-col="2"></td>
+                  <td data-row="19" data-col="3">1443.096***</td>
+                  <td data-row="19" data-col="4">1443.484***</td>
+                </tr>
+                <tr>
+                  <td data-row="20" data-col="1"></td>
+                  <td data-row="20" data-col="2"></td>
+                  <td data-row="20" data-col="3">(52.647)</td>
+                  <td data-row="20" data-col="4">(52.809)</td>
+                </tr>
+                <tr>
+                  <td data-row="21" data-col="1">age × smokeryes</td>
+                  <td data-row="21" data-col="2"></td>
+                  <td data-row="21" data-col="3"></td>
+                  <td data-row="21" data-col="4">-2.371</td>
+                </tr>
+                <tr>
+                  <td data-row="22" data-col="1"></td>
+                  <td data-row="22" data-col="2"></td>
+                  <td data-row="22" data-col="3"></td>
+                  <td data-row="22" data-col="4">(23.689)</td>
+                </tr>
+                <tr>
+                  <td data-row="23" data-col="1">Num.Obs.</td>
+                  <td data-row="23" data-col="2">1338</td>
+                  <td data-row="23" data-col="3">1338</td>
+                  <td data-row="23" data-col="4">1338</td>
+                </tr>
+                <tr>
+                  <td data-row="24" data-col="1">R2</td>
+                  <td data-row="24" data-col="2">0.751</td>
+                  <td data-row="24" data-col="3">0.841</td>
+                  <td data-row="24" data-col="4">0.841</td>
+                </tr>
+                <tr>
+                  <td data-row="25" data-col="1">R2 Adj.</td>
+                  <td data-row="25" data-col="2">0.749</td>
+                  <td data-row="25" data-col="3">0.840</td>
+                  <td data-row="25" data-col="4">0.840</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- hack to avoid NA insertion in last line -->
+</div>
+</div>
+<div style="margin-top: 3.0em;">
+
+</div>
+</section>
+<section id="stargazer-で論文形式の表を作成" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="stargazer-で論文形式の表を作成"><code>stargazer()</code> で論文形式の表を作成</h3>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">stargazer</span>(m1, m2, m3,</span>
+<span id="cb14-2"><a href="#cb14-2"></a>          <span class="at">type =</span> <span class="st">"html"</span>,</span>
+<span id="cb14-3"><a href="#cb14-3"></a>          <span class="at">title =</span> <span class="st">"医療費の回帰分析（交差項含む）"</span>,</span>
+<span id="cb14-4"><a href="#cb14-4"></a>          <span class="at">dep.var.labels =</span> <span class="st">"医療費（ドル）"</span>,</span>
+<span id="cb14-5"><a href="#cb14-5"></a>          <span class="at">covariate.labels =</span> <span class="fu">c</span>(<span class="st">"年齢"</span>, <span class="st">"BMI"</span>, <span class="st">"子供数"</span>,</span>
+<span id="cb14-6"><a href="#cb14-6"></a>                               <span class="st">"喫煙（yes）"</span>, <span class="st">"性別（male）"</span>,</span>
+<span id="cb14-7"><a href="#cb14-7"></a>                               <span class="st">"地域（northwest）"</span>, <span class="st">"地域（southeast）"</span>, <span class="st">"地域（southwest）"</span>,</span>
+<span id="cb14-8"><a href="#cb14-8"></a>                               <span class="st">"BMI × 喫煙"</span>, <span class="st">"年齢 × 喫煙"</span>),</span>
+<span id="cb14-9"><a href="#cb14-9"></a>          <span class="at">digits =</span> <span class="dv">1</span>,</span>
+<span id="cb14-10"><a href="#cb14-10"></a>          <span class="at">column.labels =</span> <span class="fu">c</span>(<span class="st">"基本"</span>, <span class="st">"bmi×smoker"</span>, <span class="st">"複数交差項"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<table style="text-align:center">
+<caption>
+<strong>医療費の回帰分析（交差項含む）</strong>
+</caption>
+<tbody><tr>
+<td colspan="4" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td colspan="3">
+<em>Dependent variable:</em>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td colspan="3" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td colspan="3">
+医療費（ドル）
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+基本
+</td>
+<td>
+bmi×smoker
+</td>
+<td>
+複数交差項
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(1)
+</td>
+<td>
+(2)
+</td>
+<td>
+(3)
+</td>
+</tr>
+<tr>
+<td colspan="4" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+年齢
+</td>
+<td>
+256.9<sup>***</sup>
+</td>
+<td>
+263.6<sup>***</sup>
+</td>
+<td>
+264.1<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(11.9)
+</td>
+<td>
+(9.5)
+</td>
+<td>
+(10.7)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+BMI
+</td>
+<td>
+339.2<sup>***</sup>
+</td>
+<td>
+23.5
+</td>
+<td>
+23.4
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(28.6)
+</td>
+<td>
+(25.6)
+</td>
+<td>
+(25.7)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+子供数
+</td>
+<td>
+475.5<sup>***</sup>
+</td>
+<td>
+516.4<sup>***</sup>
+</td>
+<td>
+516.6<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(137.8)
+</td>
+<td>
+(110.2)
+</td>
+<td>
+(110.2)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+喫煙（yes）
+</td>
+<td>
+23,848.5<sup>***</sup>
+</td>
+<td>
+-20,415.6<sup>***</sup>
+</td>
+<td>
+-20,335.9<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(413.2)
+</td>
+<td>
+(1,648.3)
+</td>
+<td>
+(1,831.1)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+性別（male）
+</td>
+<td>
+-131.3
+</td>
+<td>
+-500.1<sup>*</sup>
+</td>
+<td>
+-500.0<sup>*</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(332.9)
+</td>
+<td>
+(266.5)
+</td>
+<td>
+(266.6)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+地域（northwest）
+</td>
+<td>
+-353.0
+</td>
+<td>
+-585.5
+</td>
+<td>
+-585.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(476.3)
+</td>
+<td>
+(380.9)
+</td>
+<td>
+(381.0)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+地域（southeast）
+</td>
+<td>
+-1,035.0<sup>**</sup>
+</td>
+<td>
+-1,210.1<sup>***</sup>
+</td>
+<td>
+-1,208.9<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(478.7)
+</td>
+<td>
+(382.8)
+</td>
+<td>
+(383.1)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+地域（southwest）
+</td>
+<td>
+-960.1<sup>**</sup>
+</td>
+<td>
+-1,231.1<sup>***</sup>
+</td>
+<td>
+-1,232.1<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(477.9)
+</td>
+<td>
+(382.2)
+</td>
+<td>
+(382.5)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+BMI × 喫煙
+</td>
+<td>
+</td>
+<td>
+1,443.1<sup>***</sup>
+</td>
+<td>
+1,443.5<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+(52.6)
+</td>
+<td>
+(52.8)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+年齢 × 喫煙
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+-2.4
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+(23.7)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Constant
+</td>
+<td>
+-11,938.5<sup>***</sup>
+</td>
+<td>
+-2,223.5<sup>**</sup>
+</td>
+<td>
+-2,238.0<sup>**</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(987.8)
+</td>
+<td>
+(865.6)
+</td>
+<td>
+(878.0)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td colspan="4" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Observations
+</td>
+<td>
+1,338
+</td>
+<td>
+1,338
+</td>
+<td>
+1,338
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+R<sup>2</sup>
+</td>
+<td>
+0.8
+</td>
+<td>
+0.8
+</td>
+<td>
+0.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Adjusted R<sup>2</sup>
+</td>
+<td>
+0.7
+</td>
+<td>
+0.8
+</td>
+<td>
+0.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Residual Std. Error
+</td>
+<td>
+6,062.1 (df = 1329)
+</td>
+<td>
+4,846.4 (df = 1328)
+</td>
+<td>
+4,848.2 (df = 1327)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+F Statistic
+</td>
+<td>
+500.8<sup>***</sup> (df = 8; 1329)
+</td>
+<td>
+780.0<sup>***</sup> (df = 9; 1328)
+</td>
+<td>
+701.5<sup>***</sup> (df = 10; 1327)
+</td>
+</tr>
+<tr>
+<td colspan="4" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+<em>Note:</em>
+</td>
+<td colspan="3" style="text-align:right">
+<sup><em></em></sup><em>p&lt;0.1; <sup><strong></strong></sup><strong>p&lt;0.05; <sup></sup></strong></em>p&lt;0.01
+</td>
+</tr>
+</tbody></table>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+</section>
+<section id="sec-exercises" class="level2" data-number="12.8">
+<h2 data-number="12.8" class="anchored" data-anchor-id="sec-exercises"><span class="header-section-number">12.8</span> 演習問題</h2>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong><code>insurance.csv</code> の <code>age × smoker</code> 交差項</strong></p>
+<p>年齢（<code>age</code>）と喫煙（<code>smoker</code>）の交差項を含むモデルを推定し、 「年齢の効果が喫煙者と非喫煙者で異なるか」を分析してください。</p>
+<p><strong>手順のヒント：</strong></p>
+<pre><code>① 以下の2モデルを推定する
+   モデルA：lm(charges ~ age + smoker, data = df_ins)
+   モデルB：lm(charges ~ age * smoker, data = df_ins)
+② modelsummary() で2モデルを比較する
+③ モデルBの交差項（age:smokeryes）の係数を解釈する
+   → 「喫煙者では年齢が1歳増えるごとに医療費がいくら追加で増えるか」
+④ ggplot で喫煙有無別の散布図 + グループ別回帰直線を描く
+   （aes(color = smoker) + geom_smooth(method = "lm")）</code></pre>
+<ul>
+<li>結果の表示には <strong><code>modelsummary()</code></strong> を使ってください</li>
+</ul>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong><code>insurance.csv</code> の <code>bmi × smoker</code> の可視化</strong></p>
+<p>問題 1 で扱った <code>bmi × smoker</code> の交差項モデルを使って、 <strong><code>marginaleffects::plot_predictions()</code></strong> で予測値を可視化してください。</p>
+<p><strong>手順のヒント：</strong></p>
+<pre><code>① lm(charges ~ bmi * smoker, data = df_ins) でモデルを推定する
+② plot_predictions(model, condition = c("bmi", "smoker")) でグラフを描く
+③ labs() でタイトルと軸ラベルを日本語で設定する
+④ 喫煙者と非喫煙者で BMI の傾きがどう違うかコメントする</code></pre>
+<ul>
+<li><strong><code>marginaleffects::plot_predictions()</code></strong> を使ってください</li>
+</ul>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong><code>Salary_Data.csv</code> の <code>Years of Experience × Gender</code> 交差項</strong></p>
+<p>経験年数（<code>Years of Experience</code>）と性別（<code>Gender</code>）の交差項を含むモデルを推定し、 「経験年数の効果が男女で異なるか」を分析してください。</p>
+<p><strong>手順のヒント：</strong></p>
+<pre><code>① df_sal（drop_na() 済み）を使う
+② 以下の3モデルを推定する
+   モデルA：lm(Salary ~ `Years of Experience`, data = df_sal)
+   モデルB：lm(Salary ~ `Years of Experience` + Gender, data = df_sal)
+   モデルC：lm(Salary ~ `Years of Experience` * Gender, data = df_sal)
+③ modelsummary() で3モデルを比較する
+④ モデルCの交差項の係数を解釈する
+   → 「男性（or 女性）では経験年数の効果がいくら追加で違うか」
+⑤ ggplot で性別別の散布図 + グループ別回帰直線を描く</code></pre>
+<ul>
+<li>結果の表示には <strong><code>modelsummary()</code></strong> を使ってください</li>
+</ul>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong><code>Student_Performance.csv</code> の連続変数どうしの交差項</strong></p>
+<p>学習時間（<code>Hours Studied</code>）と過去スコア（<code>Previous Scores</code>）の 交差項を含むモデルを推定し、<strong><code>plot_slopes()</code></strong> で限界効果を可視化してください。</p>
+<p><strong>手順のヒント：</strong></p>
+<pre><code>① 以下の2モデルを推定する
+   モデルA：lm(Performance Index ~ `Hours Studied` + `Previous Scores`, data = df_stu)
+   モデルB：lm(Performance Index ~ `Hours Studied` * `Previous Scores`, data = df_stu)
+② modelsummary() で2モデルを比較する
+③ plot_slopes(モデルB, variables = "Hours Studied", condition = "Previous Scores")
+   で限界効果を可視化する
+④ 過去スコアが高い学生ほど学習時間の効果は大きいか小さいかコメントする</code></pre>
+<ul>
+<li>結果の表示には <strong><code>modelsummary()</code></strong> と <strong><code>plot_slopes()</code></strong> を使ってください</li>
+</ul>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong><code>Housing.csv</code> の交差項（発展）</strong></p>
+<p>住宅面積（<code>area</code>）と幹線道路沿い（<code>mainroad</code>）の交差項を含むモデルを推定し、 「面積の価格への効果が立地によって異なるか」を分析してください。</p>
+<p><strong>手順のヒント：</strong></p>
+<pre><code>① 以下の3モデルを推定する
+   モデルA：lm(price ~ area, data = df_house)
+   モデルB：lm(price ~ area + mainroad, data = df_house)
+   モデルC：lm(price ~ area * mainroad, data = df_house)
+② stargazer() で3モデルの比較表を作成する（type = "html"）
+③ モデルCの交差項（area:mainroadyes）の係数を解釈する
+   → 「幹線道路沿いでは面積が1単位増えるごとに価格がいくら追加で変わるか」
+④ ggplot で mainroad 別の散布図 + グループ別回帰直線を描く
+⑤ plot_predictions() で立地別の予測価格を可視化する</code></pre>
+<ul>
+<li>結果の表示には <strong><code>stargazer()</code></strong> と <strong><code>plot_predictions()</code></strong> を使ってください</li>
+</ul>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="まとめ" class="level2" data-number="12.9">
+<h2 data-number="12.9" class="anchored" data-anchor-id="まとめ"><span class="header-section-number">12.9</span> まとめ</h2>
+<section id="本日学んだこと" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="本日学んだこと">本日学んだこと</h3>
+<p><strong>交差項のまとめ</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>種類</th>
+<th>例</th>
+<th>R の書き方</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>連続 × ダミー</td>
+<td>BMI × 喫煙</td>
+<td><code>bmi * smoker</code></td>
+</tr>
+<tr class="even">
+<td>連続 × 連続</td>
+<td>学習時間 × 過去スコア</td>
+<td><code>hours * scores</code></td>
+</tr>
+<tr class="odd">
+<td>ダミー × ダミー</td>
+<td>性別 × 地域</td>
+<td><code>gender * region</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>交差項の解釈の流れ</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co"># ① 交差項なし vs あり で R² の変化を確認</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="fu">modelsummary</span>(<span class="fu">list</span>(model_base, model_int), <span class="at">stars =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb20-3"><a href="#cb20-3"></a></span>
+<span id="cb20-4"><a href="#cb20-4"></a><span class="co"># ② 交差項の係数を確認</span></span>
+<span id="cb20-5"><a href="#cb20-5"></a>model_int <span class="sc">|&gt;</span> <span class="fu">tidy</span>()</span>
+<span id="cb20-6"><a href="#cb20-6"></a></span>
+<span id="cb20-7"><a href="#cb20-7"></a><span class="co"># ③ 視覚的に確認（グループ別回帰直線）</span></span>
+<span id="cb20-8"><a href="#cb20-8"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> X, <span class="at">y =</span> Y, <span class="at">color =</span> D)) <span class="sc">+</span></span>
+<span id="cb20-9"><a href="#cb20-9"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb20-10"><a href="#cb20-10"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)</span>
+<span id="cb20-11"><a href="#cb20-11"></a></span>
+<span id="cb20-12"><a href="#cb20-12"></a><span class="co"># ④ marginaleffects で限界効果を確認</span></span>
+<span id="cb20-13"><a href="#cb20-13"></a><span class="fu">plot_predictions</span>(model_int, <span class="at">condition =</span> <span class="fu">c</span>(<span class="st">"X"</span>, <span class="st">"D"</span>))</span>
+<span id="cb20-14"><a href="#cb20-14"></a><span class="fu">plot_slopes</span>(model_int, <span class="at">variables =</span> <span class="st">"X1"</span>, <span class="at">condition =</span> <span class="st">"X2"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>使い分けのポイント</strong></p>
+<ul>
+<li>「2変数の効果が互いに依存しているかもしれない」と思ったら交差項を試す</li>
+<li>ただし、交差項を増やすと解釈が複雑になるため、理論的な根拠を持って追加する</li>
+</ul>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>次回の予告（lec13：総合演習）</strong></p>
+<p>これまで学んできた内容を総合的に活用した演習を行います。</p>
+<ul>
+<li>記述統計 → 可視化 → 相関分析 → 回帰分析という一連の流れ</li>
+<li>複数のデータセットを使った実践的な分析</li>
+</ul>
+</div>
+</div>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
