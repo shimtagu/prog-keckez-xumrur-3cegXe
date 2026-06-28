@@ -535,6 +535,20 @@ window.Quarto = {
 <div style="margin-top: 3.0em;">
 
 </div>
+<p><strong>単回帰分析と重回帰分析</strong></p>
+<ul>
+<li><p>重回帰分析は複数の単回帰分析を同時に行なっているのではない。</p></li>
+<li><p>重回帰分析の係数は、他の説明変数をコントロールしたときに説明変数が非説明変数に与える影響の大きさを示している。</p></li>
+<li><p>多次元の空間の中にデータが散らばり、そのちょうど真ん中を通るように面を作るイメージ。</p></li>
+</ul>
+<p>参考</p>
+<ul>
+<li><a href="https://qiita.com/karaage0703/items/f38d18afc1569fcc0418">Pythonで基礎から機械学習 「重回帰分析」</a></li>
+<li><a href="https://www.geogebra.org/m/apcknxyf">重回帰分析のイメージ（GeoGebra）</a></li>
+</ul>
+<div style="margin-top: 3.0em;">
+
+</div>
 <section id="まとめ" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="まとめ">まとめ</h3>
 <p><strong>回帰分析</strong>（regression analysis）は、ある変数（<strong>説明変数</strong> X）が 別の変数（<strong>被説明変数</strong> Y）にどのような影響を与えるかを数式で表す分析手法です。</p>
@@ -2224,11 +2238,11 @@ Warning
 </div>
 <div class="callout-body-container callout-body">
 <p><strong><code>Student_Performance.csv</code> を使った単回帰</strong></p>
-<p>学習時間（<code>Hours Studied</code>）が成績（<code>Performance Index</code>）に与える影響を 単回帰分析で分析してください。</p>
+<p>学習時間（HoursStudied）が成績（PerformanceIndex）に与える影響を 単回帰分析で分析してください。</p>
 <p><strong>手順のヒント：</strong></p>
 <pre><code>① データを読み込む（read_csv）
 ② glimpse() でデータ構造を確認する
-③ lm(Performance Index ~ Hours Studied, data = ...) で単回帰を実行する
+③ lm(PerformanceIndex ~ HoursStudied, data = ...) で単回帰を実行する
 ④ summary() で結果を確認する
 ⑤ tidy() と glance() で整然データとして確認する
 ⑥ 散布図 + 回帰直線（geom_smooth(method = "lm")）を描く</code></pre>
@@ -2255,9 +2269,9 @@ Warning
 <p><strong><code>Student_Performance.csv</code> を使った重回帰</strong></p>
 <p>以下の3つのモデルを <code>lm()</code> で推定し、<code>modelsummary()</code> で比較してください。</p>
 <ul>
-<li>モデルA：<code>Performance Index ~ Hours Studied</code></li>
-<li>モデルB：<code>Performance Index ~ Hours Studied + Previous Scores</code></li>
-<li>モデルC：<code>Performance Index ~ Hours Studied + Previous Scores + Sleep Hours + Sample Question Papers Practiced</code></li>
+<li>モデルA：<code>PerformanceIndex ~ HoursStudied</code></li>
+<li>モデルB：<code>PerformanceIndex ~ HoursStudied + PreviousScores</code></li>
+<li>モデルC：<code>PerformanceIndex ~ HoursStudied + PreviousScores + SleepHours + SamplePapers</code></li>
 </ul>
 <p><strong>手順のヒント：</strong></p>
 <pre><code>① 3つのモデルをそれぞれ lm() で推定する
@@ -2284,11 +2298,11 @@ Warning
 </div>
 <div class="callout-body-container callout-body">
 <p><strong><code>Salary_Data.csv</code> を使った単回帰</strong></p>
-<p>経験年数（<code>Years of Experience</code>）が年収（<code>Salary</code>）に与える影響を 単回帰分析で分析してください。</p>
+<p>経験年数（YearsExperience）が年収（<code>Salary</code>）に与える影響を 単回帰分析で分析してください。</p>
 <p><strong>手順のヒント：</strong></p>
 <pre><code>① read_csv("Salary_Data.csv", locale = locale(encoding = "utf-8-sig")) で読み込む
 ② glimpse() でデータ構造を確認する
-③ lm(Salary ~ `Years of Experience`, data = ...) で単回帰を実行する
+③ lm(Salary ~ YearsExperience, data = ...) で単回帰を実行する
    （列名にスペースが含まれるためバッククォートで囲む）
 ④ summ() で結果を確認する（jtools パッケージ）
 ⑤ 散布図 + 回帰直線を描く</code></pre>
