@@ -1,0 +1,3018 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="2026年度　A（前期） B（後期） 時間： 月曜日 4 時限（15:45-17:30） 教室： C 館 地下1階 PC4 教室">
+
+<title>10&nbsp; 回帰分析1 – R プログラミング</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./lecA11.html" rel="next">
+<link href="./lecA09.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-ff88f174eb6c98cff991482d4cc81ba9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<meta name="robots" content="noindex, nofollow">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lecA01.html">前期（A）</a></li><li class="breadcrumb-item"><a href="./lecA10.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">回帰分析1</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">R プログラミング</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">はじめに</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">前期（A）</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R 導入</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">データ操作</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">可視化1</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">可視化2</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">可視化3</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">記述統計</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">t 検定</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">コードを読む</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">相関分析</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA10.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">回帰分析1</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">回帰分析2</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">回帰分析3</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">総合演習</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">後期（B）</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">データ分析の流れ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">演習</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">演習</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">総合分析演習 1</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">発表・分析結果説明 1</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">総合分析演習 2</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">発表・分析結果説明 2</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">総合分析演習 3</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">発表・分析結果説明 3</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">総合分析演習 4</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">発表・分析結果説明 4</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">総合分析演習 5</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">発表・分析結果説明 5</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">参考文献</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-intro" id="toc-sec-intro" class="nav-link active" data-scroll-target="#sec-intro"><span class="header-section-number">10.1</span> 回帰分析とは</a>
+  <ul class="collapse">
+  <li><a href="#まとめ" id="toc-まとめ" class="nav-link" data-scroll-target="#まとめ">まとめ</a></li>
+  </ul></li>
+  <li><a href="#sec-setup" id="toc-sec-setup" class="nav-link" data-scroll-target="#sec-setup"><span class="header-section-number">10.2</span> パッケージの準備</a></li>
+  <li><a href="#sec-data" id="toc-sec-data" class="nav-link" data-scroll-target="#sec-data"><span class="header-section-number">10.3</span> データの準備</a></li>
+  <li><a href="#sec-simple" id="toc-sec-simple" class="nav-link" data-scroll-target="#sec-simple"><span class="header-section-number">10.4</span> 単回帰分析</a>
+  <ul class="collapse">
+  <li><a href="#単回帰モデルとは" id="toc-単回帰モデルとは" class="nav-link" data-scroll-target="#単回帰モデルとは">単回帰モデルとは</a></li>
+  <li><a href="#lm-関数で回帰分析を実行する" id="toc-lm-関数で回帰分析を実行する" class="nav-link" data-scroll-target="#lm-関数で回帰分析を実行する"><code>lm()</code> 関数で回帰分析を実行する</a></li>
+  <li><a href="#結果の表示方法①summary" id="toc-結果の表示方法①summary" class="nav-link" data-scroll-target="#結果の表示方法①summary">結果の表示方法①：<code>summary()</code></a></li>
+  <li><a href="#結果の表示方法②broomtidy-と-glance" id="toc-結果の表示方法②broomtidy-と-glance" class="nav-link" data-scroll-target="#結果の表示方法②broomtidy-と-glance">結果の表示方法②：<code>broom::tidy()</code> と <code>glance()</code></a></li>
+  <li><a href="#結果の表示方法③jtoolssumm" id="toc-結果の表示方法③jtoolssumm" class="nav-link" data-scroll-target="#結果の表示方法③jtoolssumm">結果の表示方法③：<code>jtools::summ()</code></a></li>
+  <li><a href="#結果の表示方法④modelsummary" id="toc-結果の表示方法④modelsummary" class="nav-link" data-scroll-target="#結果の表示方法④modelsummary">結果の表示方法④：<code>modelsummary()</code></a></li>
+  <li><a href="#結果の表示方法⑤stargazer" id="toc-結果の表示方法⑤stargazer" class="nav-link" data-scroll-target="#結果の表示方法⑤stargazer">結果の表示方法⑤：<code>stargazer()</code></a></li>
+  <li><a href="#単回帰結果の可視化" id="toc-単回帰結果の可視化" class="nav-link" data-scroll-target="#単回帰結果の可視化">単回帰結果の可視化</a></li>
+  <li><a href="#回帰係数の解釈" id="toc-回帰係数の解釈" class="nav-link" data-scroll-target="#回帰係数の解釈">回帰係数の解釈</a></li>
+  </ul></li>
+  <li><a href="#sec-multiple" id="toc-sec-multiple" class="nav-link" data-scroll-target="#sec-multiple"><span class="header-section-number">10.5</span> 重回帰分析</a>
+  <ul class="collapse">
+  <li><a href="#重回帰モデルとは" id="toc-重回帰モデルとは" class="nav-link" data-scroll-target="#重回帰モデルとは">重回帰モデルとは</a></li>
+  <li><a href="#重回帰の実行" id="toc-重回帰の実行" class="nav-link" data-scroll-target="#重回帰の実行">重回帰の実行</a></li>
+  <li><a href="#複数モデルの比較modelsummary" id="toc-複数モデルの比較modelsummary" class="nav-link" data-scroll-target="#複数モデルの比較modelsummary">複数モデルの比較：<code>modelsummary()</code></a></li>
+  <li><a href="#複数モデルの比較stargazer" id="toc-複数モデルの比較stargazer" class="nav-link" data-scroll-target="#複数モデルの比較stargazer">複数モデルの比較：<code>stargazer()</code></a></li>
+  <li><a href="#住宅価格データを使った重回帰" id="toc-住宅価格データを使った重回帰" class="nav-link" data-scroll-target="#住宅価格データを使った重回帰">住宅価格データを使った重回帰</a></li>
+  <li><a href="#augment-で予測値残差を確認する" id="toc-augment-で予測値残差を確認する" class="nav-link" data-scroll-target="#augment-で予測値残差を確認する"><code>augment()</code> で予測値・残差を確認する</a></li>
+  <li><a href="#jtoolsplot_summs-で係数を可視化する" id="toc-jtoolsplot_summs-で係数を可視化する" class="nav-link" data-scroll-target="#jtoolsplot_summs-で係数を可視化する"><code>jtools::plot_summs()</code> で係数を可視化する</a></li>
+  </ul></li>
+  <li><a href="#sec-exercises" id="toc-sec-exercises" class="nav-link" data-scroll-target="#sec-exercises"><span class="header-section-number">10.6</span> 演習問題</a></li>
+  <li><a href="#まとめ-1" id="toc-まとめ-1" class="nav-link" data-scroll-target="#まとめ-1"><span class="header-section-number">10.7</span> まとめ</a>
+  <ul class="collapse">
+  <li><a href="#本日学んだこと" id="toc-本日学んだこと" class="nav-link" data-scroll-target="#本日学んだこと">本日学んだこと</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lecA01.html">前期（A）</a></li><li class="breadcrumb-item"><a href="./lecA10.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">回帰分析1</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">回帰分析1</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><strong>単回帰分析・重回帰分析</strong></p>
+<div style="margin-top: 2.0em;">
+
+</div>
+<p><strong>今日の目標</strong></p>
+<ol type="1">
+<li><strong>単回帰分析</strong>の考え方と R での実行方法を理解する。</li>
+<li><strong>重回帰分析</strong>で複数の説明変数を扱えるようになる。</li>
+<li>回帰結果を<strong>複数のパッケージ</strong>で表示・比較できるようになる。</li>
+<li>回帰係数の<strong>解釈</strong>ができるようになる。</li>
+</ol>
+<section id="sec-intro" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="sec-intro"><span class="header-section-number">10.1</span> 回帰分析とは</h2>
+<p>回帰分析とは、結果となる数値（Y）と、それに影響を与える要因（X）の関係性を数式で表し、要因の影響度の評価や未来の予測を行う統計手法です。</p>
+<div style="margin-top: 3.0em;">
+
+</div>
+<p><strong>概念</strong></p>
+<div id="fig-A10-1" class="quarto-float quarto-figure quarto-figure-center anchored" width="90%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-A10-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/A10/A10-1.png" id="fig-A10-1" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-A10-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+図&nbsp;10.1
+</figcaption>
+</figure>
+</div>
+<div style="margin-top: 2.0em;">
+
+</div>
+<p><strong>数式</strong></p>
+<div id="fig-A10-2" class="quarto-float quarto-figure quarto-figure-center anchored" width="90%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-A10-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/A10/A10-2.png" id="fig-A10-2" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-A10-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+図&nbsp;10.2
+</figcaption>
+</figure>
+</div>
+<div style="margin-top: 3.0em;">
+
+</div>
+<p><strong>イメージ図</strong></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecA10_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="2100"></p>
+</figure>
+</div>
+</div>
+</div>
+<div style="margin-top: 3.0em;">
+
+</div>
+<p><strong>推定</strong></p>
+<div id="fig-A10-3" class="quarto-float quarto-figure quarto-figure-center anchored" width="100%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-A10-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/A10/A10-3.png" id="fig-A10-3" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-A10-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+図&nbsp;10.3
+</figcaption>
+</figure>
+</div>
+<div style="margin-top: 3.0em;">
+
+</div>
+<p><strong>誤差</strong></p>
+<p>母集団から取得した標本は毎回違うと考えられるので、標本回帰式も毎回異なります。つまり、標本回帰式から母集団回帰式を推定する際には、誤差が生じます。</p>
+<div id="fig-A10-4" class="quarto-float quarto-figure quarto-figure-center anchored" width="55%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-A10-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/A10/A10-4.png" id="fig-A10-4" class="img-fluid figure-img" style="width:55.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-A10-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+図&nbsp;10.4
+</figcaption>
+</figure>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecA10_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="2100"></p>
+</figure>
+</div>
+</div>
+</div>
+<div style="margin-top: 3.0em;">
+
+</div>
+<div id="fig-A10-5" class="quarto-float quarto-figure quarto-figure-center anchored" width="100%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-A10-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/A10/A10-5.png" id="fig-A10-5" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-A10-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+図&nbsp;10.5
+</figcaption>
+</figure>
+</div>
+<div style="margin-top: 3.0em;">
+
+</div>
+<div id="fig-A10-6" class="quarto-float quarto-figure quarto-figure-center anchored" width="100%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-A10-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/A10/A10-6.png" id="fig-A10-6" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-A10-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+図&nbsp;10.6
+</figcaption>
+</figure>
+</div>
+<div style="margin-top: 3.0em;">
+
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecA10_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="2100"></p>
+</figure>
+</div>
+</div>
+</div>
+<div style="margin-top: 3.0em;">
+
+</div>
+<p><strong>X（説明変数）の効果</strong></p>
+<p>回帰分析は、X(説明変数・原因)がY（目的変数・結果）に関連しているか（影響を及ぼすか）検証しています。ここで、回帰直線がX軸と並行の場合、X は Y と関連していない（影響を及びさない）といえます。つまり、回帰分析では、X の係数（<span class="math inline">\(\beta_1\)</span>）が 0 となるかどうか（直線が横一直線となるかどうか）の判断が必要です。</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecA10_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="2100"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>上記のように実際に X の係数（<span class="math inline">\(\beta_1\)</span>）が完全に0になることはほとんどありませんが、誤差（影）の範囲に0が含まれることがあります。この場合、母集団では、X の係数（<span class="math inline">\(\beta_1\)</span>）が0になり得ることを意味ます。つまり、母集団では、X は Y に関係していない（影響を与えていない）ことを示唆しています。</p>
+<div style="margin-top: 3.0em;">
+
+</div>
+<p><strong>P値</strong></p>
+<p>母集団において係数（<span class="math inline">\(\beta_1\)</span>）が、0になる確率を表すのがP値です。</p>
+<p>例：以下は、エクセルで回帰分析を行った時の分析結果です。</p>
+<div id="fig-A10-7" class="quarto-float quarto-figure quarto-figure-center anchored" width="100%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-A10-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/A10/A10-7.png" id="fig-A10-7" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-A10-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+図&nbsp;10.7
+</figcaption>
+</figure>
+</div>
+<p><span class="math display">\[
+\text{SNSの満足度100点満点} = \beta_0 + \beta_1 \text{女性} + \beta_2 \text{社宅} + \beta_3 \text{マンション} + \beta_4 \text{賃貸} + \beta_5 \text{郊外} + \beta_6 \text{地方} + e
+\]</span></p>
+<div style="margin-top: 3.0em;">
+
+</div>
+<p><span class="math display">\[
+\text{SNSの満足度100点満点} = 73.2 + 1.75 \text{女性} - 3.42 \text{社宅} - 3.39 \text{マンション} - 8.45 \text{賃貸} - 4.08 \text{郊外} - 5.74 \text{地方} + e
+\]</span></p>
+<div style="margin-top: 3.0em;">
+
+</div>
+<p><span class="math display">\[
+\text{SNSの満足度100点満点} = 73.2 + 1.75 \text{女性} - 3.42 \text{社宅} \color{green}{- 3.39 \text{マンション}} \color{red}{- 8.45 \text{賃貸}} \color{blue}{- 4.08 \text{郊外}} \color{magenta}{- 5.74 \text{地方}} \color{black}{+ e}
+\]</span></p>
+<div style="margin-top: 3.0em;">
+
+</div>
+<p><strong>決定係数（<span class="math inline">\(R^2\)</span>）</strong></p>
+<p>分析の精度（直線の当てはまりの良さ）を表す指標です。</p>
+<p>決定係数の定義は <span class="math inline">\(\text{決定係数 } (R^2) = \frac{\text{回帰変動}}{\text{全変動}}\)</span> と表されます。</p>
+<div id="fig-A10-8" class="quarto-float quarto-figure quarto-figure-center anchored" width="80%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-A10-8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/A10/A10-8.png" id="fig-A10-8" class="img-fluid figure-img" style="width:80.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-A10-8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+図&nbsp;10.8
+</figcaption>
+</figure>
+</div>
+<div style="margin-top: 3.0em;">
+
+</div>
+<p><strong>自由度調整済み決定係数（Adjusted <span class="math inline">\(R^2\)</span>）</strong></p>
+<p>決定係数は説明変数の数が増えるにつれて大きくなり1に近づくという性質を持ちます。（説明する材料が増えるので説明力が大きくなる。）</p>
+<p>そこで、「重回帰分析」では、説明変数が増えた分を考慮した自由度調整済決定係数を見るのが鉄則です。</p>
+<p>通常の決定係数（(R^{2})）の弱点を補った、「本当に意味のある要因だけを評価した予測スコア」です。説明変数が複数ある場合に用いられます。</p>
+<div style="margin-top: 3.0em;">
+
+</div>
+<p><strong>単回帰分析と重回帰分析</strong></p>
+<ul>
+<li><p>重回帰分析は複数の単回帰分析を同時に行なっているのではない。</p></li>
+<li><p>重回帰分析の係数は、他の説明変数をコントロールしたときに説明変数が非説明変数に与える影響の大きさを示している。</p></li>
+<li><p>多次元の空間の中にデータが散らばり、そのちょうど真ん中を通るように面を作るイメージ。</p></li>
+</ul>
+<p>参考</p>
+<ul>
+<li><a href="https://qiita.com/karaage0703/items/f38d18afc1569fcc0418">Pythonで基礎から機械学習 「重回帰分析」</a></li>
+<li><a href="https://www.geogebra.org/m/apcknxyf">重回帰分析のイメージ（GeoGebra）</a></li>
+</ul>
+<div style="margin-top: 3.0em;">
+
+</div>
+<section id="まとめ" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="まとめ">まとめ</h3>
+<p><strong>回帰分析</strong>（regression analysis）は、ある変数（<strong>説明変数</strong> X）が 別の変数（<strong>被説明変数</strong> Y）にどのような影響を与えるかを数式で表す分析手法です。</p>
+<table class="table-hover caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 40%">
+<col style="width: 40%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>用語</th>
+<th>別の呼び方</th>
+<th>例</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>被説明変数</strong>（Y）</td>
+<td>目的変数・応答変数・従属変数</td>
+<td>医療費・年収・住宅価格</td>
+</tr>
+<tr class="even">
+<td><strong>説明変数</strong>（X）</td>
+<td>予測変数・独立変数・共変量</td>
+<td>年齢・経験年数・面積</td>
+</tr>
+</tbody>
+</table>
+<p><strong>回帰分析の主な目的：</strong></p>
+<ol type="1">
+<li><strong>説明</strong>：X が Y に与える影響の大きさを定量化する</li>
+<li><strong>予測</strong>：X の値から Y の値を予測する</li>
+<li><strong>制御</strong>：Y を特定の値に近づけるために X をどう操作するか考える</li>
+</ol>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>相関分析と回帰分析の違い</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>相関分析</th>
+<th>回帰分析</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>問い</strong></td>
+<td>X と Y は関係があるか？</td>
+<td>X が 1 増えると Y はどれだけ変わるか？</td>
+</tr>
+<tr class="even">
+<td><strong>方向性</strong></td>
+<td>対称（X↔︎Y）</td>
+<td>非対称（X→Y）</td>
+</tr>
+<tr class="odd">
+<td><strong>結果</strong></td>
+<td>相関係数 r（−1〜1）</td>
+<td>回帰係数（傾き）と切片</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+</section>
+<section id="sec-setup" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="sec-setup"><span class="header-section-number">10.2</span> パッケージの準備</h2>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">options</span>(<span class="at">repos =</span> <span class="fu">c</span>(<span class="at">CRAN =</span> <span class="st">"https://cran.rstudio.com/"</span>))</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">install.packages</span>(<span class="st">"broom"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">install.packages</span>(<span class="st">"modelsummary"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">install.packages</span>(<span class="st">"jtools"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="fu">install.packages</span>(<span class="st">"stargazer"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">library</span>(broom)</span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="fu">library</span>(modelsummary)</span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="fu">library</span>(jtools)</span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="fu">library</span>(stargazer)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>今回使う結果表示パッケージの概要</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>パッケージ</th>
+<th>主な関数</th>
+<th>特徴</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>broom</code></td>
+<td><code>tidy()</code>, <code>glance()</code></td>
+<td>結果を整然データ（tibble）に変換</td>
+</tr>
+<tr class="even">
+<td><code>modelsummary</code></td>
+<td><code>modelsummary()</code></td>
+<td>複数モデルを並べて比較できる表</td>
+</tr>
+<tr class="odd">
+<td><code>jtools</code></td>
+<td><code>summ()</code></td>
+<td>標準化係数や頑健標準誤差も表示可</td>
+</tr>
+<tr class="even">
+<td><code>stargazer</code></td>
+<td><code>stargazer()</code></td>
+<td>論文・レポート向けの美しい表</td>
+</tr>
+</tbody>
+</table>
+<p>演習問題では、どのパッケージを使うか問題ごとに指定します。</p>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-data" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="sec-data"><span class="header-section-number">10.3</span> データの準備</h2>
+<p>これから回帰分析の勉強をするために使うデータです。全てフォルダに入れてください。</p>
+<p><strong><a href="https://www.kaggle.com/datasets/mirichoi0218/insurance">医療保険費用データ</a></strong>（<code>insurance.csv</code>）</p>
+<p><strong><a href="https://www.kaggle.com/datasets/yasserh/housing-prices-dataset">住宅価格データ</a></strong>（<code>Housing.csv</code>）</p>
+<p><strong><a href="https://www.kaggle.com/datasets/rkiattisak/salaly-prediction-for-beginer">給与データ</a></strong>（<code>Salary_Data.csv</code>）</p>
+<p><strong><a href="https://www.kaggle.com/datasets/nikhil7280/student-performance-multiple-linear-regression">学生成績データ</a></strong>（<code>Student_Performance.csv</code>）</p>
+<p><strong><a href="https://www.kaggle.com/datasets/nelgiriyewithana/countries-of-the-world-2023">世界国情報</a></strong>（<code>world-data-2023.csv</code>）</p>
+<p>まずは主に <strong>医療保険費用データ</strong>（<code>insurance.csv</code>）を使います。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>df_ins <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/insurance.csv"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">glimpse</span>(df_ins)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 1,338
+Columns: 7
+$ age      &lt;dbl&gt; 19, 18, 28, 33, 32, 31, 46, 37, 37, 60, 25, 62, 23, 56, 27, 1…
+$ sex      &lt;chr&gt; "female", "male", "male", "male", "male", "female", "female",…
+$ bmi      &lt;dbl&gt; 27.900, 33.770, 33.000, 22.705, 28.880, 25.740, 33.440, 27.74…
+$ children &lt;dbl&gt; 0, 1, 3, 0, 0, 0, 1, 3, 2, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0…
+$ smoker   &lt;chr&gt; "yes", "no", "no", "no", "no", "no", "no", "no", "no", "no", …
+$ region   &lt;chr&gt; "southwest", "southeast", "southeast", "northwest", "northwes…
+$ charges  &lt;dbl&gt; 16884.924, 1725.552, 4449.462, 21984.471, 3866.855, 3756.622,…</code></pre>
+</div>
+</div>
+<p><strong>変数の説明</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>変数名</th>
+<th>内容</th>
+<th>型</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>age</code></td>
+<td>年齢（歳）</td>
+<td>数値</td>
+</tr>
+<tr class="even">
+<td><code>sex</code></td>
+<td>性別（<code>male</code> / <code>female</code>）</td>
+<td>カテゴリ</td>
+</tr>
+<tr class="odd">
+<td><code>bmi</code></td>
+<td>BMI（体格指数）</td>
+<td>数値</td>
+</tr>
+<tr class="even">
+<td><code>children</code></td>
+<td>扶養子供数</td>
+<td>数値</td>
+</tr>
+<tr class="odd">
+<td><code>smoker</code></td>
+<td>喫煙有無（<code>yes</code> / <code>no</code>）</td>
+<td>カテゴリ</td>
+</tr>
+<tr class="even">
+<td><code>region</code></td>
+<td>居住地域（4地域）</td>
+<td>カテゴリ</td>
+</tr>
+<tr class="odd">
+<td><code>charges</code></td>
+<td>医療保険費用（ドル）【<strong>被説明変数</strong>】</td>
+<td>数値</td>
+</tr>
+</tbody>
+</table>
+<p>また、住宅価格データ（<code>Housing.csv</code>）も補足的に使います。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>df_house <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/Housing.csv"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">glimpse</span>(df_house)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 545
+Columns: 13
+$ price            &lt;dbl&gt; 13300000, 12250000, 12250000, 12215000, 11410000, 108…
+$ area             &lt;dbl&gt; 7420, 8960, 9960, 7500, 7420, 7500, 8580, 16200, 8100…
+$ bedrooms         &lt;dbl&gt; 4, 4, 3, 4, 4, 3, 4, 5, 4, 3, 3, 4, 4, 4, 3, 4, 4, 3,…
+$ bathrooms        &lt;dbl&gt; 2, 4, 2, 2, 1, 3, 3, 3, 1, 2, 1, 3, 2, 2, 2, 1, 2, 2,…
+$ stories          &lt;dbl&gt; 3, 4, 2, 2, 2, 1, 4, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 4,…
+$ mainroad         &lt;chr&gt; "yes", "yes", "yes", "yes", "yes", "yes", "yes", "yes…
+$ guestroom        &lt;chr&gt; "no", "no", "no", "no", "yes", "no", "no", "no", "yes…
+$ basement         &lt;chr&gt; "no", "no", "yes", "yes", "yes", "yes", "no", "no", "…
+$ hotwaterheating  &lt;chr&gt; "no", "no", "no", "no", "no", "no", "no", "no", "no",…
+$ airconditioning  &lt;chr&gt; "yes", "yes", "no", "yes", "yes", "yes", "yes", "no",…
+$ parking          &lt;dbl&gt; 2, 3, 2, 3, 2, 2, 2, 0, 2, 1, 2, 2, 1, 2, 0, 2, 1, 2,…
+$ prefarea         &lt;chr&gt; "yes", "no", "yes", "yes", "no", "yes", "yes", "no", …
+$ furnishingstatus &lt;chr&gt; "furnished", "furnished", "semi-furnished", "furnishe…</code></pre>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-simple" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="sec-simple"><span class="header-section-number">10.4</span> 単回帰分析</h2>
+<section id="単回帰モデルとは" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="単回帰モデルとは">単回帰モデルとは</h3>
+<p><strong>単回帰分析</strong>（simple linear regression）は、説明変数が <strong>1 つ</strong>の回帰分析です。</p>
+<p><span class="math display">\[Y = \beta_0 + \beta_1 X + \varepsilon\]</span></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>記号</th>
+<th>名前</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(Y\)</span></td>
+<td>被説明変数</td>
+<td>予測したい変数</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(X\)</span></td>
+<td>説明変数</td>
+<td>影響を与える変数</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\beta_0\)</span></td>
+<td>切片（intercept）</td>
+<td>X = 0 のときの Y の予測値</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\beta_1\)</span></td>
+<td>回帰係数（coefficient）</td>
+<td>X が 1 増えたときの Y の変化量</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\varepsilon\)</span></td>
+<td>誤差項</td>
+<td>モデルで説明できない部分</td>
+</tr>
+</tbody>
+</table>
+<div style="margin-top: 3.0em;">
+
+</div>
+</section>
+<section id="lm-関数で回帰分析を実行する" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="lm-関数で回帰分析を実行する"><code>lm()</code> 関数で回帰分析を実行する</h3>
+<p>R では <code>lm()</code> 関数（linear model）で回帰分析を実行します。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-5"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-5-1"><a href="#annotated-cell-5-1"></a><span class="co"># 年齢（age）→ 医療費（charges）の単回帰</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="1">1</button><span id="annotated-cell-5-2" class="code-annotation-target"><a href="#annotated-cell-5-2"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(charges <span class="sc">~</span> age, <span class="at">data =</span> df_ins)</span>
+<span id="annotated-cell-5-3"><a href="#annotated-cell-5-3"></a>model1</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-5" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="2" data-code-annotation="1"><code>lm(被説明変数 ~ 説明変数, data = データ)</code> という形式で書く</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = charges ~ age, data = df_ins)
+
+Coefficients:
+(Intercept)          age  
+     3165.9        257.7  </code></pre>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="結果の表示方法①summary" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="結果の表示方法①summary">結果の表示方法①：<code>summary()</code></h3>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">summary</span>(model1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = charges ~ age, data = df_ins)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+ -8059  -6671  -5939   5440  47829 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   3165.9      937.1   3.378 0.000751 ***
+age            257.7       22.5  11.453  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 11560 on 1336 degrees of freedom
+Multiple R-squared:  0.08941,   Adjusted R-squared:  0.08872 
+F-statistic: 131.2 on 1 and 1336 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong><code>summary()</code> の出力の読み方</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>出力項目</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>Estimate</code></td>
+<td>回帰係数の推定値（切片・傾き）</td>
+</tr>
+<tr class="even">
+<td><code>Std. Error</code></td>
+<td>標準誤差（推定の不確かさ）</td>
+</tr>
+<tr class="odd">
+<td><code>t value</code></td>
+<td>t 値（係数 ÷ 標準誤差）</td>
+</tr>
+<tr class="even">
+<td><code>Pr(&gt;|t|)</code></td>
+<td>p 値（有意性の指標）</td>
+</tr>
+<tr class="odd">
+<td><code>Multiple R-squared</code></td>
+<td>決定係数 <span class="math inline">\(R^2\)</span>（モデルの説明力、0〜1）</td>
+</tr>
+<tr class="even">
+<td><code>Adjusted R-squared</code></td>
+<td>自由度調整済み <span class="math inline">\(R^2\)</span></td>
+</tr>
+<tr class="odd">
+<td><code>F-statistic</code></td>
+<td>F 値（モデル全体の有意性検定）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>有意性の星印（<code>*</code>）の意味：</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>記号</th>
+<th>p 値の範囲</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>***</code></td>
+<td>&lt; 0.001</td>
+<td>0.1% 水準で有意</td>
+</tr>
+<tr class="even">
+<td><code>**</code></td>
+<td>&lt; 0.01</td>
+<td>1% 水準で有意</td>
+</tr>
+<tr class="odd">
+<td><code>*</code></td>
+<td>&lt; 0.05</td>
+<td>5% 水準で有意</td>
+</tr>
+<tr class="even">
+<td><code>.</code></td>
+<td>&lt; 0.1</td>
+<td>10% 水準で有意</td>
+</tr>
+<tr class="odd">
+<td>（なし）</td>
+<td>≥ 0.1</td>
+<td>有意でない</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="結果の表示方法②broomtidy-と-glance" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="結果の表示方法②broomtidy-と-glance">結果の表示方法②：<code>broom::tidy()</code> と <code>glance()</code></h3>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># 係数の整然データ</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>model1 <span class="sc">|&gt;</span> <span class="fu">tidy</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term        estimate std.error statistic  p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept)    3166.     937.       3.38 7.51e- 4
+2 age             258.      22.5     11.5  4.89e-29</code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># モデル全体の統計量</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>model1 <span class="sc">|&gt;</span> <span class="fu">glance</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 12
+  r.squared adj.r.squared  sigma statistic  p.value    df  logLik    AIC    BIC
+      &lt;dbl&gt;         &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+1    0.0894        0.0887 11560.      131. 4.89e-29     1 -14415. 28836. 28852.
+# ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;</code></pre>
+</div>
+</div>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong><code>tidy()</code> と <code>glance()</code> の使い分け</strong></p>
+<table class="table-hover caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 40%">
+<col style="width: 40%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>関数</th>
+<th>出力</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>tidy()</code></td>
+<td>係数ごとの統計量（1行＝1係数）</td>
+<td>係数の p 値・信頼区間の確認</td>
+</tr>
+<tr class="even">
+<td><code>glance()</code></td>
+<td>モデル全体の統計量（1行）</td>
+<td><span class="math inline">\(R^2\)</span>・AIC・F 値などの確認</td>
+</tr>
+<tr class="odd">
+<td><code>augment()</code></td>
+<td>予測値・残差を追加したデータ</td>
+<td>残差分析・可視化</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="結果の表示方法③jtoolssumm" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="結果の表示方法③jtoolssumm">結果の表示方法③：<code>jtools::summ()</code></h3>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-9"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="1">1</button><span id="annotated-cell-9-1" class="code-annotation-target"><a href="#annotated-cell-9-1"></a><span class="fu">summ</span>(model1)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-9" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-9" data-code-lines="1" data-code-annotation="1"><code>jtools</code> の <code>summ()</code> は <code>summary()</code> より見やすい表で結果を表示する</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>MODEL INFO:
+Observations: 1338
+Dependent Variable: charges
+Type: OLS linear regression 
+
+MODEL FIT:
+F(1,1336) = 131.17, p = 0.00
+R² = 0.09
+Adj. R² = 0.09 
+
+Standard errors:OLS
+----------------------------------------------------
+                       Est.     S.E.   t val.      p
+----------------- --------- -------- -------- ------
+(Intercept)         3165.89   937.15     3.38   0.00
+age                  257.72    22.50    11.45   0.00
+----------------------------------------------------</code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># 95% 信頼区間を追加表示</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="fu">summ</span>(model1, <span class="at">confint =</span> <span class="cn">TRUE</span>, <span class="at">ci.width =</span> <span class="fl">0.95</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>MODEL INFO:
+Observations: 1338
+Dependent Variable: charges
+Type: OLS linear regression 
+
+MODEL FIT:
+F(1,1336) = 131.17, p = 0.00
+R² = 0.09
+Adj. R² = 0.09 
+
+Standard errors:OLS
+---------------------------------------------------------------
+                       Est.      2.5%     97.5%   t val.      p
+----------------- --------- --------- --------- -------- ------
+(Intercept)         3165.89   1327.44   5004.33     3.38   0.00
+age                  257.72    213.58    301.87    11.45   0.00
+---------------------------------------------------------------</code></pre>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="結果の表示方法④modelsummary" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="結果の表示方法④modelsummary">結果の表示方法④：<code>modelsummary()</code></h3>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-11"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-11-1"><a href="#annotated-cell-11-1"></a><span class="fu">modelsummary</span>(model1,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="1">1</button><span id="annotated-cell-11-2" class="code-annotation-target"><a href="#annotated-cell-11-2"></a>             <span class="at">stars =</span> <span class="cn">TRUE</span>,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="2">2</button><span id="annotated-cell-11-3" class="code-annotation-target"><a href="#annotated-cell-11-3"></a>             <span class="at">gof_map =</span> <span class="fu">c</span>(<span class="st">"nobs"</span>, <span class="st">"r.squared"</span>, <span class="st">"adj.r.squared"</span>))</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-11" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-11" data-code-lines="2" data-code-annotation="1"><code>stars = TRUE</code> で有意性の星印を表示</span>
+</dd>
+<dt data-target-cell="annotated-cell-11" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-11" data-code-lines="3" data-code-annotation="2"><code>gof_map</code> で表示するモデル適合指標を選択</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output-display">
+<!-- preamble start -->
+
+    <script src="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.js"></script>
+
+    <script>
+      // Create table-specific functions using external factory
+      const tableFns_293znthdv91igs5eb7ob = TinyTable.createTableFunctions("tinytable_293znthdv91igs5eb7ob");
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: '7', j: 2 } ], css_id: 'tinytable_css_mhrlc0zyyt8zfw6tdg7u',}, 
+          { positions: [ { i: '4', j: 2 } ], css_id: 'tinytable_css_g8ztzqrshs1ebp3pcd7u',}, 
+          { positions: [ { i: '1', j: 2 }, { i: '2', j: 2 }, { i: '3', j: 2 }, { i: '5', j: 2 }, { i: '6', j: 2 } ], css_id: 'tinytable_css_90k0mdipi3owzal9ak0x',}, 
+          { positions: [ { i: '0', j: 2 } ], css_id: 'tinytable_css_pmdl0n0yvywvzma8vung',}, 
+          { positions: [ { i: '7', j: 1 } ], css_id: 'tinytable_css_n1zqd34nxe9jmtc4sim6',}, 
+          { positions: [ { i: '4', j: 1 } ], css_id: 'tinytable_css_hi7t1c56twtu33edqbzy',}, 
+          { positions: [ { i: '1', j: 1 }, { i: '2', j: 1 }, { i: '3', j: 1 }, { i: '5', j: 1 }, { i: '6', j: 1 } ], css_id: 'tinytable_css_levtom0q4ttto6p2niie',}, 
+          { positions: [ { i: '0', j: 1 } ], css_id: 'tinytable_css_67qa91xe5oamsuv89uhs',}, 
+          ];
+
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  tableFns_293znthdv91igs5eb7ob.styleCell(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
+    <style>
+    /* tinytable css entries after */
+    #tinytable_293znthdv91igs5eb7ob td.tinytable_css_mhrlc0zyyt8zfw6tdg7u, #tinytable_293znthdv91igs5eb7ob th.tinytable_css_mhrlc0zyyt8zfw6tdg7u {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_293znthdv91igs5eb7ob td.tinytable_css_g8ztzqrshs1ebp3pcd7u, #tinytable_293znthdv91igs5eb7ob th.tinytable_css_g8ztzqrshs1ebp3pcd7u {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_293znthdv91igs5eb7ob td.tinytable_css_90k0mdipi3owzal9ak0x, #tinytable_293znthdv91igs5eb7ob th.tinytable_css_90k0mdipi3owzal9ak0x { text-align: center }
+    #tinytable_293znthdv91igs5eb7ob td.tinytable_css_pmdl0n0yvywvzma8vung, #tinytable_293znthdv91igs5eb7ob th.tinytable_css_pmdl0n0yvywvzma8vung {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_293znthdv91igs5eb7ob td.tinytable_css_n1zqd34nxe9jmtc4sim6, #tinytable_293znthdv91igs5eb7ob th.tinytable_css_n1zqd34nxe9jmtc4sim6 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_293znthdv91igs5eb7ob td.tinytable_css_hi7t1c56twtu33edqbzy, #tinytable_293znthdv91igs5eb7ob th.tinytable_css_hi7t1c56twtu33edqbzy {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_293znthdv91igs5eb7ob td.tinytable_css_levtom0q4ttto6p2niie, #tinytable_293znthdv91igs5eb7ob th.tinytable_css_levtom0q4ttto6p2niie { text-align: left }
+    #tinytable_293znthdv91igs5eb7ob td.tinytable_css_67qa91xe5oamsuv89uhs, #tinytable_293znthdv91igs5eb7ob th.tinytable_css_67qa91xe5oamsuv89uhs {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    </style>
+    <div class="container">
+      <table class="tinytable" id="tinytable_293znthdv91igs5eb7ob" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        
+        <thead>
+              <tr>
+                <th scope="col" data-row="0" data-col="1"> </th>
+                <th scope="col" data-row="0" data-col="2">(1)</th>
+              </tr>
+        </thead>
+        <tfoot><tr><td colspan="2">+ p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001</td></tr></tfoot>
+        <tbody>
+                <tr>
+                  <td data-row="1" data-col="1">(Intercept)</td>
+                  <td data-row="1" data-col="2">3165.885***</td>
+                </tr>
+                <tr>
+                  <td data-row="2" data-col="1"></td>
+                  <td data-row="2" data-col="2">(937.149)</td>
+                </tr>
+                <tr>
+                  <td data-row="3" data-col="1">age</td>
+                  <td data-row="3" data-col="2">257.723***</td>
+                </tr>
+                <tr>
+                  <td data-row="4" data-col="1"></td>
+                  <td data-row="4" data-col="2">(22.502)</td>
+                </tr>
+                <tr>
+                  <td data-row="5" data-col="1">Num.Obs.</td>
+                  <td data-row="5" data-col="2">1338</td>
+                </tr>
+                <tr>
+                  <td data-row="6" data-col="1">R2</td>
+                  <td data-row="6" data-col="2">0.089</td>
+                </tr>
+                <tr>
+                  <td data-row="7" data-col="1">R2 Adj.</td>
+                  <td data-row="7" data-col="2">0.089</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- hack to avoid NA insertion in last line -->
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="結果の表示方法⑤stargazer" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="結果の表示方法⑤stargazer">結果の表示方法⑤：<code>stargazer()</code></h3>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">stargazer</span>(model1,</span>
+<span id="cb17-2"><a href="#cb17-2"></a>          <span class="at">type =</span> <span class="st">"html"</span>,</span>
+<span id="cb17-3"><a href="#cb17-3"></a>          <span class="at">title =</span> <span class="st">"単回帰分析の結果"</span>,</span>
+<span id="cb17-4"><a href="#cb17-4"></a>          <span class="at">dep.var.labels =</span> <span class="st">"医療費（ドル）"</span>,</span>
+<span id="cb17-5"><a href="#cb17-5"></a>          <span class="at">covariate.labels =</span> <span class="fu">c</span>(<span class="st">"年齢"</span>),</span>
+<span id="cb17-6"><a href="#cb17-6"></a>          <span class="at">digits =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<table style="text-align:center">
+<caption>
+<strong>単回帰分析の結果</strong>
+</caption>
+<tbody><tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+<em>Dependent variable:</em>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td colspan="1" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+医療費（ドル）
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+年齢
+</td>
+<td>
+257.72<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(22.50)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Constant
+</td>
+<td>
+3,165.89<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(937.15)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Observations
+</td>
+<td>
+1,338
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+R<sup>2</sup>
+</td>
+<td>
+0.09
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Adjusted R<sup>2</sup>
+</td>
+<td>
+0.09
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Residual Std. Error
+</td>
+<td>
+11,560.31 (df = 1336)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+F Statistic
+</td>
+<td>
+131.17<sup>***</sup> (df = 1; 1336)
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+<em>Note:</em>
+</td>
+<td style="text-align:right">
+<sup><em></em></sup><em>p&lt;0.1; <sup><strong></strong></sup><strong>p&lt;0.05; <sup></sup></strong></em>p&lt;0.01
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong><code>stargazer()</code> の <code>type</code> 引数</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>値</th>
+<th>出力形式</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>"html"</code></td>
+<td>HTML 表</td>
+<td>Quarto / R Markdown の HTML 出力</td>
+</tr>
+<tr class="even">
+<td><code>"latex"</code></td>
+<td>LaTeX コード</td>
+<td>論文（PDF）用</td>
+</tr>
+<tr class="odd">
+<td><code>"text"</code></td>
+<td>テキスト表</td>
+<td>コンソール確認用</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="単回帰結果の可視化" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="単回帰結果の可視化">単回帰結果の可視化</h3>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">ggplot</span>(df_ins, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> charges)) <span class="sc">+</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>, <span class="at">color =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="dv">20</span>, <span class="at">y =</span> <span class="dv">60000</span>,</span>
+<span id="cb18-5"><a href="#cb18-5"></a>           <span class="at">label =</span> <span class="fu">paste0</span>(<span class="st">"charges = "</span>,</span>
+<span id="cb18-6"><a href="#cb18-6"></a>                          <span class="fu">round</span>(<span class="fu">coef</span>(model1)[<span class="dv">1</span>], <span class="dv">0</span>), <span class="st">" + "</span>,</span>
+<span id="cb18-7"><a href="#cb18-7"></a>                          <span class="fu">round</span>(<span class="fu">coef</span>(model1)[<span class="dv">2</span>], <span class="dv">0</span>), <span class="st">" × age"</span>),</span>
+<span id="cb18-8"><a href="#cb18-8"></a>           <span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb18-9"><a href="#cb18-9"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"年齢と医療費の関係"</span>,</span>
+<span id="cb18-10"><a href="#cb18-10"></a>       <span class="at">x =</span> <span class="st">"年齢（歳）"</span>,</span>
+<span id="cb18-11"><a href="#cb18-11"></a>       <span class="at">y =</span> <span class="st">"医療費（ドル）"</span>) <span class="sc">+</span></span>
+<span id="cb18-12"><a href="#cb18-12"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecA10_files/figure-html/simple-reg-plot-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>年齢と医療費の関係（単回帰直線付き）</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div style="margin-top: 3.0em;">
+
+</div>
+</section>
+<section id="回帰係数の解釈" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="回帰係数の解釈">回帰係数の解釈</h3>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>model1 <span class="sc">|&gt;</span> <span class="fu">tidy</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term        estimate std.error statistic  p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept)    3166.     937.       3.38 7.51e- 4
+2 age             258.      22.5     11.5  4.89e-29</code></pre>
+</div>
+</div>
+<p><strong>解釈の例：</strong></p>
+<ul>
+<li><strong>切片</strong>（Intercept）≈ 3,165：年齢が 0 歳のとき（現実的ではないが数式上）の予測医療費は約 3,165 ドル</li>
+<li><strong>age の係数</strong> ≈ 257：年齢が 1 歳増えるごとに、医療費が平均約 257 ドル増加する</li>
+</ul>
+<p><strong>決定係数 <span class="math inline">\(R^2\)</span> の解釈：</strong></p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>model1 <span class="sc">|&gt;</span> <span class="fu">glance</span>() <span class="sc">|&gt;</span> <span class="fu">select</span>(r.squared, adj.r.squared)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  r.squared adj.r.squared
+      &lt;dbl&gt;         &lt;dbl&gt;
+1    0.0894        0.0887</code></pre>
+</div>
+</div>
+<p><span class="math inline">\(R^2 \approx 0.09\)</span> は、年齢だけでは医療費の変動の約 9% しか説明できないことを意味します。</p>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+</section>
+<section id="sec-multiple" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="sec-multiple"><span class="header-section-number">10.5</span> 重回帰分析</h2>
+<section id="重回帰モデルとは" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="重回帰モデルとは">重回帰モデルとは</h3>
+<p><strong>重回帰分析</strong>（multiple linear regression）は、説明変数が <strong>2 つ以上</strong>の回帰分析です。</p>
+<p><span class="math display">\[Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_k X_k + \varepsilon\]</span></p>
+<p>各 <span class="math inline">\(\beta_k\)</span> は「他の説明変数を一定に保ったときの <span class="math inline">\(X_k\)</span> の効果」（<strong>偏回帰係数</strong>）を表します。</p>
+<div style="margin-top: 3.0em;">
+
+</div>
+</section>
+<section id="重回帰の実行" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="重回帰の実行">重回帰の実行</h3>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-16"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-16-1"><a href="#annotated-cell-16-1"></a><span class="co"># 年齢 + BMI → 医療費</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-16" data-target-annotation="1">1</button><span id="annotated-cell-16-2" class="code-annotation-target"><a href="#annotated-cell-16-2"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(charges <span class="sc">~</span> age <span class="sc">+</span> bmi, <span class="at">data =</span> df_ins)</span>
+<span id="annotated-cell-16-3"><a href="#annotated-cell-16-3"></a></span>
+<span id="annotated-cell-16-4"><a href="#annotated-cell-16-4"></a><span class="co"># 年齢 + BMI + 子供数 → 医療費</span></span>
+<span id="annotated-cell-16-5"><a href="#annotated-cell-16-5"></a>model3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(charges <span class="sc">~</span> age <span class="sc">+</span> bmi <span class="sc">+</span> children, <span class="at">data =</span> df_ins)</span>
+<span id="annotated-cell-16-6"><a href="#annotated-cell-16-6"></a></span>
+<span id="annotated-cell-16-7"><a href="#annotated-cell-16-7"></a><span class="fu">summary</span>(model2)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-16" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-16" data-code-lines="2" data-code-annotation="1"><code>+</code> で説明変数を追加するだけで重回帰になる</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = charges ~ age + bmi, data = df_ins)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-14457  -7045  -5136   7211  48022 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -6424.80    1744.09  -3.684 0.000239 ***
+age           241.93      22.30  10.850  &lt; 2e-16 ***
+bmi           332.97      51.37   6.481 1.28e-10 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 11390 on 1335 degrees of freedom
+Multiple R-squared:  0.1172,    Adjusted R-squared:  0.1159 
+F-statistic:  88.6 on 2 and 1335 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<div style="margin-top: 3.0em;">
+
+</div>
+</section>
+<section id="複数モデルの比較modelsummary" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="複数モデルの比較modelsummary">複数モデルの比較：<code>modelsummary()</code></h3>
+<p><code>modelsummary()</code> は複数モデルを横に並べて比較できるのが最大の強みです。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>models <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb25-2"><a href="#cb25-2"></a>  <span class="st">"単回帰"</span> <span class="ot">=</span> model1,</span>
+<span id="cb25-3"><a href="#cb25-3"></a>  <span class="st">"年齢+BMI"</span> <span class="ot">=</span> model2,</span>
+<span id="cb25-4"><a href="#cb25-4"></a>  <span class="st">"年齢+BMI+子供"</span> <span class="ot">=</span> model3</span>
+<span id="cb25-5"><a href="#cb25-5"></a>)</span>
+<span id="cb25-6"><a href="#cb25-6"></a></span>
+<span id="cb25-7"><a href="#cb25-7"></a><span class="fu">modelsummary</span>(models,</span>
+<span id="cb25-8"><a href="#cb25-8"></a>             <span class="at">stars =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb25-9"><a href="#cb25-9"></a>             <span class="at">gof_map =</span> <span class="fu">c</span>(<span class="st">"nobs"</span>, <span class="st">"r.squared"</span>, <span class="st">"adj.r.squared"</span>),</span>
+<span id="cb25-10"><a href="#cb25-10"></a>             <span class="at">title =</span> <span class="st">"回帰分析の結果比較"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<!-- preamble start -->
+
+    <script src="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.js"></script>
+
+    <script>
+      // Create table-specific functions using external factory
+      const tableFns_oa8nfjntfrgeivh901u8 = TinyTable.createTableFunctions("tinytable_oa8nfjntfrgeivh901u8");
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: '11', j: 2 }, { i: '11', j: 3 }, { i: '11', j: 4 } ], css_id: 'tinytable_css_fduie9xsuu3xyik61gv3',}, 
+          { positions: [ { i: '8', j: 2 }, { i: '8', j: 3 }, { i: '8', j: 4 } ], css_id: 'tinytable_css_rox2ibws664sey42rzne',}, 
+          { positions: [ { i: '1', j: 2 }, { i: '2', j: 2 }, { i: '3', j: 2 }, { i: '4', j: 2 }, { i: '5', j: 2 }, { i: '6', j: 2 }, { i: '7', j: 2 }, { i: '9', j: 2 }, { i: '10', j: 2 }, { i: '1', j: 3 }, { i: '2', j: 3 }, { i: '3', j: 3 }, { i: '4', j: 3 }, { i: '5', j: 3 }, { i: '6', j: 3 }, { i: '7', j: 3 }, { i: '9', j: 3 }, { i: '10', j: 3 }, { i: '1', j: 4 }, { i: '2', j: 4 }, { i: '3', j: 4 }, { i: '4', j: 4 }, { i: '5', j: 4 }, { i: '6', j: 4 }, { i: '7', j: 4 }, { i: '9', j: 4 }, { i: '10', j: 4 } ], css_id: 'tinytable_css_4idqd5qm755rasv2jl77',}, 
+          { positions: [ { i: '0', j: 2 }, { i: '0', j: 3 }, { i: '0', j: 4 } ], css_id: 'tinytable_css_jlwrxuc96rtbjn9dizue',}, 
+          { positions: [ { i: '11', j: 1 } ], css_id: 'tinytable_css_oh0ml5qk1zhyi0j2127z',}, 
+          { positions: [ { i: '8', j: 1 } ], css_id: 'tinytable_css_dlj88vz6qgvimfqoeobh',}, 
+          { positions: [ { i: '1', j: 1 }, { i: '2', j: 1 }, { i: '3', j: 1 }, { i: '4', j: 1 }, { i: '5', j: 1 }, { i: '6', j: 1 }, { i: '7', j: 1 }, { i: '9', j: 1 }, { i: '10', j: 1 } ], css_id: 'tinytable_css_dibndkq29lcj4zw8ktln',}, 
+          { positions: [ { i: '0', j: 1 } ], css_id: 'tinytable_css_fwtm063djjuyh2uwyj06',}, 
+          ];
+
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  tableFns_oa8nfjntfrgeivh901u8.styleCell(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
+    <style>
+    /* tinytable css entries after */
+    #tinytable_oa8nfjntfrgeivh901u8 td.tinytable_css_fduie9xsuu3xyik61gv3, #tinytable_oa8nfjntfrgeivh901u8 th.tinytable_css_fduie9xsuu3xyik61gv3 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_oa8nfjntfrgeivh901u8 td.tinytable_css_rox2ibws664sey42rzne, #tinytable_oa8nfjntfrgeivh901u8 th.tinytable_css_rox2ibws664sey42rzne {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_oa8nfjntfrgeivh901u8 td.tinytable_css_4idqd5qm755rasv2jl77, #tinytable_oa8nfjntfrgeivh901u8 th.tinytable_css_4idqd5qm755rasv2jl77 { text-align: center }
+    #tinytable_oa8nfjntfrgeivh901u8 td.tinytable_css_jlwrxuc96rtbjn9dizue, #tinytable_oa8nfjntfrgeivh901u8 th.tinytable_css_jlwrxuc96rtbjn9dizue {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_oa8nfjntfrgeivh901u8 td.tinytable_css_oh0ml5qk1zhyi0j2127z, #tinytable_oa8nfjntfrgeivh901u8 th.tinytable_css_oh0ml5qk1zhyi0j2127z {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_oa8nfjntfrgeivh901u8 td.tinytable_css_dlj88vz6qgvimfqoeobh, #tinytable_oa8nfjntfrgeivh901u8 th.tinytable_css_dlj88vz6qgvimfqoeobh {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_oa8nfjntfrgeivh901u8 td.tinytable_css_dibndkq29lcj4zw8ktln, #tinytable_oa8nfjntfrgeivh901u8 th.tinytable_css_dibndkq29lcj4zw8ktln { text-align: left }
+    #tinytable_oa8nfjntfrgeivh901u8 td.tinytable_css_fwtm063djjuyh2uwyj06, #tinytable_oa8nfjntfrgeivh901u8 th.tinytable_css_fwtm063djjuyh2uwyj06 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    </style>
+    <div class="container">
+      <table class="tinytable" id="tinytable_oa8nfjntfrgeivh901u8" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        <caption>回帰分析の結果比較</caption>
+        <thead>
+              <tr>
+                <th scope="col" data-row="0" data-col="1"> </th>
+                <th scope="col" data-row="0" data-col="2">単回帰</th>
+                <th scope="col" data-row="0" data-col="3">年齢+BMI</th>
+                <th scope="col" data-row="0" data-col="4">年齢+BMI+子供</th>
+              </tr>
+        </thead>
+        <tfoot><tr><td colspan="4">+ p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001</td></tr></tfoot>
+        <tbody>
+                <tr>
+                  <td data-row="1" data-col="1">(Intercept)</td>
+                  <td data-row="1" data-col="2">3165.885***</td>
+                  <td data-row="1" data-col="3">-6424.805***</td>
+                  <td data-row="1" data-col="4">-6916.243***</td>
+                </tr>
+                <tr>
+                  <td data-row="2" data-col="1"></td>
+                  <td data-row="2" data-col="2">(937.149)</td>
+                  <td data-row="2" data-col="3">(1744.091)</td>
+                  <td data-row="2" data-col="4">(1757.480)</td>
+                </tr>
+                <tr>
+                  <td data-row="3" data-col="1">age</td>
+                  <td data-row="3" data-col="2">257.723***</td>
+                  <td data-row="3" data-col="3">241.931***</td>
+                  <td data-row="3" data-col="4">239.994***</td>
+                </tr>
+                <tr>
+                  <td data-row="4" data-col="1"></td>
+                  <td data-row="4" data-col="2">(22.502)</td>
+                  <td data-row="4" data-col="3">(22.298)</td>
+                  <td data-row="4" data-col="4">(22.289)</td>
+                </tr>
+                <tr>
+                  <td data-row="5" data-col="1">bmi</td>
+                  <td data-row="5" data-col="2"></td>
+                  <td data-row="5" data-col="3">332.965***</td>
+                  <td data-row="5" data-col="4">332.083***</td>
+                </tr>
+                <tr>
+                  <td data-row="6" data-col="1"></td>
+                  <td data-row="6" data-col="2"></td>
+                  <td data-row="6" data-col="3">(51.374)</td>
+                  <td data-row="6" data-col="4">(51.310)</td>
+                </tr>
+                <tr>
+                  <td data-row="7" data-col="1">children</td>
+                  <td data-row="7" data-col="2"></td>
+                  <td data-row="7" data-col="3"></td>
+                  <td data-row="7" data-col="4">542.865*</td>
+                </tr>
+                <tr>
+                  <td data-row="8" data-col="1"></td>
+                  <td data-row="8" data-col="2"></td>
+                  <td data-row="8" data-col="3"></td>
+                  <td data-row="8" data-col="4">(258.241)</td>
+                </tr>
+                <tr>
+                  <td data-row="9" data-col="1">Num.Obs.</td>
+                  <td data-row="9" data-col="2">1338</td>
+                  <td data-row="9" data-col="3">1338</td>
+                  <td data-row="9" data-col="4">1338</td>
+                </tr>
+                <tr>
+                  <td data-row="10" data-col="1">R2</td>
+                  <td data-row="10" data-col="2">0.089</td>
+                  <td data-row="10" data-col="3">0.117</td>
+                  <td data-row="10" data-col="4">0.120</td>
+                </tr>
+                <tr>
+                  <td data-row="11" data-col="1">R2 Adj.</td>
+                  <td data-row="11" data-col="2">0.089</td>
+                  <td data-row="11" data-col="3">0.116</td>
+                  <td data-row="11" data-col="4">0.118</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- hack to avoid NA insertion in last line -->
+</div>
+</div>
+<div style="margin-top: 3.0em;">
+
+</div>
+</section>
+<section id="複数モデルの比較stargazer" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="複数モデルの比較stargazer">複数モデルの比較：<code>stargazer()</code></h3>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">stargazer</span>(model1, model2, model3,</span>
+<span id="cb26-2"><a href="#cb26-2"></a>          <span class="at">type =</span> <span class="st">"html"</span>,</span>
+<span id="cb26-3"><a href="#cb26-3"></a>          <span class="at">title =</span> <span class="st">"回帰分析の結果比較"</span>,</span>
+<span id="cb26-4"><a href="#cb26-4"></a>          <span class="at">dep.var.labels =</span> <span class="st">"医療費（ドル）"</span>,</span>
+<span id="cb26-5"><a href="#cb26-5"></a>          <span class="at">covariate.labels =</span> <span class="fu">c</span>(<span class="st">"年齢"</span>, <span class="st">"BMI"</span>, <span class="st">"子供数"</span>),</span>
+<span id="cb26-6"><a href="#cb26-6"></a>          <span class="at">digits =</span> <span class="dv">2</span>,</span>
+<span id="cb26-7"><a href="#cb26-7"></a>          <span class="at">column.labels =</span> <span class="fu">c</span>(<span class="st">"単回帰"</span>, <span class="st">"年齢+BMI"</span>, <span class="st">"年齢+BMI+子供"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<table style="text-align:center">
+<caption>
+<strong>回帰分析の結果比較</strong>
+</caption>
+<tbody><tr>
+<td colspan="4" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td colspan="3">
+<em>Dependent variable:</em>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td colspan="3" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td colspan="3">
+医療費（ドル）
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+単回帰
+</td>
+<td>
+年齢+BMI
+</td>
+<td>
+年齢+BMI+子供
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(1)
+</td>
+<td>
+(2)
+</td>
+<td>
+(3)
+</td>
+</tr>
+<tr>
+<td colspan="4" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+年齢
+</td>
+<td>
+257.72<sup>***</sup>
+</td>
+<td>
+241.93<sup>***</sup>
+</td>
+<td>
+239.99<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(22.50)
+</td>
+<td>
+(22.30)
+</td>
+<td>
+(22.29)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+BMI
+</td>
+<td>
+</td>
+<td>
+332.97<sup>***</sup>
+</td>
+<td>
+332.08<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+(51.37)
+</td>
+<td>
+(51.31)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+子供数
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+542.86<sup>**</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+(258.24)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Constant
+</td>
+<td>
+3,165.89<sup>***</sup>
+</td>
+<td>
+-6,424.80<sup>***</sup>
+</td>
+<td>
+-6,916.24<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(937.15)
+</td>
+<td>
+(1,744.09)
+</td>
+<td>
+(1,757.48)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td colspan="4" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Observations
+</td>
+<td>
+1,338
+</td>
+<td>
+1,338
+</td>
+<td>
+1,338
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+R<sup>2</sup>
+</td>
+<td>
+0.09
+</td>
+<td>
+0.12
+</td>
+<td>
+0.12
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Adjusted R<sup>2</sup>
+</td>
+<td>
+0.09
+</td>
+<td>
+0.12
+</td>
+<td>
+0.12
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Residual Std. Error
+</td>
+<td>
+11,560.31 (df = 1336)
+</td>
+<td>
+11,386.88 (df = 1335)
+</td>
+<td>
+11,372.33 (df = 1334)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+F Statistic
+</td>
+<td>
+131.17<sup>***</sup> (df = 1; 1336)
+</td>
+<td>
+88.60<sup>***</sup> (df = 2; 1335)
+</td>
+<td>
+60.69<sup>***</sup> (df = 3; 1334)
+</td>
+</tr>
+<tr>
+<td colspan="4" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+<em>Note:</em>
+</td>
+<td colspan="3" style="text-align:right">
+<sup><em></em></sup><em>p&lt;0.1; <sup><strong></strong></sup><strong>p&lt;0.05; <sup></sup></strong></em>p&lt;0.01
+</td>
+</tr>
+</tbody></table>
+</div>
+<div style="margin-top: 3.0em;">
+
+</div>
+</section>
+<section id="住宅価格データを使った重回帰" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="住宅価格データを使った重回帰">住宅価格データを使った重回帰</h3>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="co"># 面積 → 住宅価格（単回帰）</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a>model_h1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(price <span class="sc">~</span> area, <span class="at">data =</span> df_house)</span>
+<span id="cb27-3"><a href="#cb27-3"></a></span>
+<span id="cb27-4"><a href="#cb27-4"></a><span class="co"># 面積 + 寝室数 + 浴室数 → 住宅価格（重回帰）</span></span>
+<span id="cb27-5"><a href="#cb27-5"></a>model_h2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(price <span class="sc">~</span> area <span class="sc">+</span> bedrooms <span class="sc">+</span> bathrooms, <span class="at">data =</span> df_house)</span>
+<span id="cb27-6"><a href="#cb27-6"></a></span>
+<span id="cb27-7"><a href="#cb27-7"></a><span class="co"># 面積 + 寝室数 + 浴室数 + 階数 + 駐車場 → 住宅価格</span></span>
+<span id="cb27-8"><a href="#cb27-8"></a>model_h3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(price <span class="sc">~</span> area <span class="sc">+</span> bedrooms <span class="sc">+</span> bathrooms <span class="sc">+</span> stories <span class="sc">+</span> parking,</span>
+<span id="cb27-9"><a href="#cb27-9"></a>               <span class="at">data =</span> df_house)</span>
+<span id="cb27-10"><a href="#cb27-10"></a></span>
+<span id="cb27-11"><a href="#cb27-11"></a><span class="fu">modelsummary</span>(</span>
+<span id="cb27-12"><a href="#cb27-12"></a>  <span class="fu">list</span>(<span class="st">"単回帰"</span> <span class="ot">=</span> model_h1, <span class="st">"重回帰1"</span> <span class="ot">=</span> model_h2, <span class="st">"重回帰2"</span> <span class="ot">=</span> model_h3),</span>
+<span id="cb27-13"><a href="#cb27-13"></a>  <span class="at">stars =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb27-14"><a href="#cb27-14"></a>  <span class="at">gof_map =</span> <span class="fu">c</span>(<span class="st">"nobs"</span>, <span class="st">"r.squared"</span>, <span class="st">"adj.r.squared"</span>),</span>
+<span id="cb27-15"><a href="#cb27-15"></a>  <span class="at">title =</span> <span class="st">"住宅価格の回帰分析"</span></span>
+<span id="cb27-16"><a href="#cb27-16"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<!-- preamble start -->
+
+    <script src="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.js"></script>
+
+    <script>
+      // Create table-specific functions using external factory
+      const tableFns_yiq4oyzr5ki3bse4s592 = TinyTable.createTableFunctions("tinytable_yiq4oyzr5ki3bse4s592");
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: '15', j: 2 }, { i: '15', j: 3 }, { i: '15', j: 4 } ], css_id: 'tinytable_css_aiedcx2nz2pupcwnhq8d',}, 
+          { positions: [ { i: '12', j: 2 }, { i: '12', j: 3 }, { i: '12', j: 4 } ], css_id: 'tinytable_css_wy0fzidilqjx0oitpudi',}, 
+          { positions: [ { i: '1', j: 2 }, { i: '2', j: 2 }, { i: '3', j: 2 }, { i: '4', j: 2 }, { i: '5', j: 2 }, { i: '6', j: 2 }, { i: '7', j: 2 }, { i: '8', j: 2 }, { i: '9', j: 2 }, { i: '10', j: 2 }, { i: '11', j: 2 }, { i: '13', j: 2 }, { i: '14', j: 2 }, { i: '1', j: 3 }, { i: '2', j: 3 }, { i: '3', j: 3 }, { i: '4', j: 3 }, { i: '5', j: 3 }, { i: '6', j: 3 }, { i: '7', j: 3 }, { i: '8', j: 3 }, { i: '9', j: 3 }, { i: '10', j: 3 }, { i: '11', j: 3 }, { i: '13', j: 3 }, { i: '14', j: 3 }, { i: '1', j: 4 }, { i: '2', j: 4 }, { i: '3', j: 4 }, { i: '4', j: 4 }, { i: '5', j: 4 }, { i: '6', j: 4 }, { i: '7', j: 4 }, { i: '8', j: 4 }, { i: '9', j: 4 }, { i: '10', j: 4 }, { i: '11', j: 4 }, { i: '13', j: 4 }, { i: '14', j: 4 } ], css_id: 'tinytable_css_gz0nj58ej52zvqltnm30',}, 
+          { positions: [ { i: '0', j: 2 }, { i: '0', j: 3 }, { i: '0', j: 4 } ], css_id: 'tinytable_css_00t2tqy3chuvr9lubwkt',}, 
+          { positions: [ { i: '15', j: 1 } ], css_id: 'tinytable_css_lhzmjzqv4lrg0edt8qae',}, 
+          { positions: [ { i: '12', j: 1 } ], css_id: 'tinytable_css_gs1of97eoyab6dqcultw',}, 
+          { positions: [ { i: '1', j: 1 }, { i: '2', j: 1 }, { i: '3', j: 1 }, { i: '4', j: 1 }, { i: '5', j: 1 }, { i: '6', j: 1 }, { i: '7', j: 1 }, { i: '8', j: 1 }, { i: '9', j: 1 }, { i: '10', j: 1 }, { i: '11', j: 1 }, { i: '13', j: 1 }, { i: '14', j: 1 } ], css_id: 'tinytable_css_n726nzf9lbkvkir1sfu6',}, 
+          { positions: [ { i: '0', j: 1 } ], css_id: 'tinytable_css_1kk0ficfqv3k773eus5n',}, 
+          ];
+
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  tableFns_yiq4oyzr5ki3bse4s592.styleCell(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
+    <style>
+    /* tinytable css entries after */
+    #tinytable_yiq4oyzr5ki3bse4s592 td.tinytable_css_aiedcx2nz2pupcwnhq8d, #tinytable_yiq4oyzr5ki3bse4s592 th.tinytable_css_aiedcx2nz2pupcwnhq8d {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_yiq4oyzr5ki3bse4s592 td.tinytable_css_wy0fzidilqjx0oitpudi, #tinytable_yiq4oyzr5ki3bse4s592 th.tinytable_css_wy0fzidilqjx0oitpudi {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_yiq4oyzr5ki3bse4s592 td.tinytable_css_gz0nj58ej52zvqltnm30, #tinytable_yiq4oyzr5ki3bse4s592 th.tinytable_css_gz0nj58ej52zvqltnm30 { text-align: center }
+    #tinytable_yiq4oyzr5ki3bse4s592 td.tinytable_css_00t2tqy3chuvr9lubwkt, #tinytable_yiq4oyzr5ki3bse4s592 th.tinytable_css_00t2tqy3chuvr9lubwkt {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_yiq4oyzr5ki3bse4s592 td.tinytable_css_lhzmjzqv4lrg0edt8qae, #tinytable_yiq4oyzr5ki3bse4s592 th.tinytable_css_lhzmjzqv4lrg0edt8qae {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_yiq4oyzr5ki3bse4s592 td.tinytable_css_gs1of97eoyab6dqcultw, #tinytable_yiq4oyzr5ki3bse4s592 th.tinytable_css_gs1of97eoyab6dqcultw {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_yiq4oyzr5ki3bse4s592 td.tinytable_css_n726nzf9lbkvkir1sfu6, #tinytable_yiq4oyzr5ki3bse4s592 th.tinytable_css_n726nzf9lbkvkir1sfu6 { text-align: left }
+    #tinytable_yiq4oyzr5ki3bse4s592 td.tinytable_css_1kk0ficfqv3k773eus5n, #tinytable_yiq4oyzr5ki3bse4s592 th.tinytable_css_1kk0ficfqv3k773eus5n {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    </style>
+    <div class="container">
+      <table class="tinytable" id="tinytable_yiq4oyzr5ki3bse4s592" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        <caption>住宅価格の回帰分析</caption>
+        <thead>
+              <tr>
+                <th scope="col" data-row="0" data-col="1"> </th>
+                <th scope="col" data-row="0" data-col="2">単回帰</th>
+                <th scope="col" data-row="0" data-col="3">重回帰1</th>
+                <th scope="col" data-row="0" data-col="4">重回帰2</th>
+              </tr>
+        </thead>
+        <tfoot><tr><td colspan="4">+ p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001</td></tr></tfoot>
+        <tbody>
+                <tr>
+                  <td data-row="1" data-col="1">(Intercept)</td>
+                  <td data-row="1" data-col="2">2387308.482***</td>
+                  <td data-row="1" data-col="3">-173171.608</td>
+                  <td data-row="1" data-col="4">-145734.489</td>
+                </tr>
+                <tr>
+                  <td data-row="2" data-col="1"></td>
+                  <td data-row="2" data-col="2">(174497.798)</td>
+                  <td data-row="2" data-col="3">(264559.570)</td>
+                  <td data-row="2" data-col="4">(246634.481)</td>
+                </tr>
+                <tr>
+                  <td data-row="3" data-col="1">area</td>
+                  <td data-row="3" data-col="2">461.975***</td>
+                  <td data-row="3" data-col="3">378.763***</td>
+                  <td data-row="3" data-col="4">331.115***</td>
+                </tr>
+                <tr>
+                  <td data-row="4" data-col="1"></td>
+                  <td data-row="4" data-col="2">(31.226)</td>
+                  <td data-row="4" data-col="3">(27.155)</td>
+                  <td data-row="4" data-col="4">(26.600)</td>
+                </tr>
+                <tr>
+                  <td data-row="5" data-col="1">bedrooms</td>
+                  <td data-row="5" data-col="2"></td>
+                  <td data-row="5" data-col="3">406820.034***</td>
+                  <td data-row="5" data-col="4">167809.788*</td>
+                </tr>
+                <tr>
+                  <td data-row="6" data-col="1"></td>
+                  <td data-row="6" data-col="2"></td>
+                  <td data-row="6" data-col="3">(84457.883)</td>
+                  <td data-row="6" data-col="4">(82932.687)</td>
+                </tr>
+                <tr>
+                  <td data-row="7" data-col="1">bathrooms</td>
+                  <td data-row="7" data-col="2"></td>
+                  <td data-row="7" data-col="3">1386049.498***</td>
+                  <td data-row="7" data-col="4">1133740.163***</td>
+                </tr>
+                <tr>
+                  <td data-row="8" data-col="1"></td>
+                  <td data-row="8" data-col="2"></td>
+                  <td data-row="8" data-col="3">(124989.225)</td>
+                  <td data-row="8" data-col="4">(118828.331)</td>
+                </tr>
+                <tr>
+                  <td data-row="9" data-col="1">stories</td>
+                  <td data-row="9" data-col="2"></td>
+                  <td data-row="9" data-col="3"></td>
+                  <td data-row="9" data-col="4">547939.810***</td>
+                </tr>
+                <tr>
+                  <td data-row="10" data-col="1"></td>
+                  <td data-row="10" data-col="2"></td>
+                  <td data-row="10" data-col="3"></td>
+                  <td data-row="10" data-col="4">(68894.469)</td>
+                </tr>
+                <tr>
+                  <td data-row="11" data-col="1">parking</td>
+                  <td data-row="11" data-col="2"></td>
+                  <td data-row="11" data-col="3"></td>
+                  <td data-row="11" data-col="4">377596.289***</td>
+                </tr>
+                <tr>
+                  <td data-row="12" data-col="1"></td>
+                  <td data-row="12" data-col="2"></td>
+                  <td data-row="12" data-col="3"></td>
+                  <td data-row="12" data-col="4">(66804.138)</td>
+                </tr>
+                <tr>
+                  <td data-row="13" data-col="1">Num.Obs.</td>
+                  <td data-row="13" data-col="2">545</td>
+                  <td data-row="13" data-col="3">545</td>
+                  <td data-row="13" data-col="4">545</td>
+                </tr>
+                <tr>
+                  <td data-row="14" data-col="1">R2</td>
+                  <td data-row="14" data-col="2">0.287</td>
+                  <td data-row="14" data-col="3">0.487</td>
+                  <td data-row="14" data-col="4">0.562</td>
+                </tr>
+                <tr>
+                  <td data-row="15" data-col="1">R2 Adj.</td>
+                  <td data-row="15" data-col="2">0.286</td>
+                  <td data-row="15" data-col="3">0.484</td>
+                  <td data-row="15" data-col="4">0.558</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- hack to avoid NA insertion in last line -->
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="augment-で予測値残差を確認する" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="augment-で予測値残差を確認する"><code>augment()</code> で予測値・残差を確認する</h3>
+<p><code>broom::augment()</code> を使うと、元データに予測値・残差などを追加できます。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-20"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-20" data-target-annotation="1">1</button><span id="annotated-cell-20-1" class="code-annotation-target"><a href="#annotated-cell-20-1"></a>df_aug <span class="ot">&lt;-</span> model2 <span class="sc">|&gt;</span> <span class="fu">augment</span>()</span>
+<span id="annotated-cell-20-2"><a href="#annotated-cell-20-2"></a><span class="fu">glimpse</span>(df_aug)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-20" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-20" data-code-lines="1" data-code-annotation="1">元データに <code>.fitted</code>（予測値）・<code>.resid</code>（残差）・<code>.hat</code> などを追加する</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 1,338
+Columns: 9
+$ charges    &lt;dbl&gt; 16884.924, 1725.552, 4449.462, 21984.471, 3866.855, 3756.62…
+$ age        &lt;dbl&gt; 19, 18, 28, 33, 32, 31, 46, 37, 37, 60, 25, 62, 23, 56, 27,…
+$ bmi        &lt;dbl&gt; 27.900, 33.770, 33.000, 22.705, 28.880, 25.740, 33.440, 27.…
+$ .fitted    &lt;dbl&gt; 7461.606, 9174.181, 11337.105, 9118.883, 10933.012, 9645.57…
+$ .resid     &lt;dbl&gt; 9423.318, -7448.628, -6887.643, 12865.587, -7066.157, -5888…
+$ .hat       &lt;dbl&gt; 0.0023608217, 0.0027956687, 0.0013907145, 0.0020889897, 0.0…
+$ .sigma     &lt;dbl&gt; 11388.22, 11389.32, 11389.59, 11385.69, 11389.51, 11390.01,…
+$ .cooksd    &lt;dbl&gt; 5.414931e-04, 4.009950e-04, 1.700815e-04, 8.926494e-04, 1.2…
+$ .std.resid &lt;dbl&gt; 0.8285376, -0.6550574, -0.6052962, 1.1310423, -0.6208586, -…</code></pre>
+</div>
+</div>
+<p><strong>残差のチェック（残差 vs 予測値プロット）</strong></p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">ggplot</span>(df_aug, <span class="fu">aes</span>(<span class="at">x =</span> .fitted, <span class="at">y =</span> .resid)) <span class="sc">+</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>, <span class="at">color =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb29-3"><a href="#cb29-3"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb29-4"><a href="#cb29-4"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"残差 vs 予測値"</span>,</span>
+<span id="cb29-5"><a href="#cb29-5"></a>       <span class="at">x =</span> <span class="st">"予測値（fitted values）"</span>,</span>
+<span id="cb29-6"><a href="#cb29-6"></a>       <span class="at">y =</span> <span class="st">"残差（residuals）"</span>) <span class="sc">+</span></span>
+<span id="cb29-7"><a href="#cb29-7"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecA10_files/figure-html/residual-plot-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>残差プロット（理想的にはランダムに分散）</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="jtoolsplot_summs-で係数を可視化する" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="jtoolsplot_summs-で係数を可視化する"><code>jtools::plot_summs()</code> で係数を可視化する</h3>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">plot_summs</span>(model1, model2, model3,</span>
+<span id="cb30-2"><a href="#cb30-2"></a>           <span class="at">model.names =</span> <span class="fu">c</span>(<span class="st">"単回帰"</span>, <span class="st">"年齢+BMI"</span>, <span class="st">"年齢+BMI+子供"</span>),</span>
+<span id="cb30-3"><a href="#cb30-3"></a>           <span class="at">plot.distributions =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecA10_files/figure-html/plot-summs-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>回帰係数の可視化（95%信頼区間付き）</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+</section>
+<section id="sec-exercises" class="level2" data-number="10.6">
+<h2 data-number="10.6" class="anchored" data-anchor-id="sec-exercises"><span class="header-section-number">10.6</span> 演習問題</h2>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong><code>Student_Performance.csv</code> を使った単回帰</strong></p>
+<p>学習時間（HoursStudied）が成績（PerformanceIndex）に与える影響を 単回帰分析で分析してください。</p>
+<p><strong>手順のヒント：</strong></p>
+<pre><code>① データを読み込む（read_csv）
+② glimpse() でデータ構造を確認する
+③ lm(PerformanceIndex ~ HoursStudied, data = ...) で単回帰を実行する
+④ summary() で結果を確認する
+⑤ tidy() と glance() で整然データとして確認する
+⑥ 散布図 + 回帰直線（geom_smooth(method = "lm")）を描く</code></pre>
+<ul>
+<li>回帰係数を解釈してください（学習時間が 1 時間増えると成績はどれだけ変わるか）</li>
+<li>決定係数 <span class="math inline">\(R^2\)</span> を確認し、モデルの説明力を評価してください</li>
+<li>結果の表示には <strong><code>summary()</code></strong> と <strong><code>tidy()</code></strong> を使ってください</li>
+</ul>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong><code>Student_Performance.csv</code> を使った重回帰</strong></p>
+<p>以下の3つのモデルを <code>lm()</code> で推定し、<code>modelsummary()</code> で比較してください。</p>
+<ul>
+<li>モデルA：<code>PerformanceIndex ~ HoursStudied</code></li>
+<li>モデルB：<code>PerformanceIndex ~ HoursStudied + PreviousScores</code></li>
+<li>モデルC：<code>PerformanceIndex ~ HoursStudied + PreviousScores + SleepHours + SamplePapers</code></li>
+</ul>
+<p><strong>手順のヒント：</strong></p>
+<pre><code>① 3つのモデルをそれぞれ lm() で推定する
+② list() で3モデルをまとめる
+③ modelsummary() で比較表を作成する（stars = TRUE, gof_map を指定）
+④ 各モデルの R² を比較し、説明変数を増やすと何が変わるか確認する</code></pre>
+<ul>
+<li><strong><code>modelsummary()</code></strong> を使ってください</li>
+<li>モデルBとモデルCの <span class="math inline">\(R^2\)</span> を比較し、説明変数を追加した効果を考察してください</li>
+</ul>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong><code>Salary_Data.csv</code> を使った単回帰</strong></p>
+<p>経験年数（YearsExperience）が年収（<code>Salary</code>）に与える影響を 単回帰分析で分析してください。</p>
+<p><strong>手順のヒント：</strong></p>
+<pre><code>① read_csv("Salary_Data.csv", locale = locale(encoding = "utf-8-sig")) で読み込む
+② glimpse() でデータ構造を確認する
+③ lm(Salary ~ YearsExperience, data = ...) で単回帰を実行する
+   （列名にスペースが含まれるためバッククォートで囲む）
+④ summ() で結果を確認する（jtools パッケージ）
+⑤ 散布図 + 回帰直線を描く</code></pre>
+<ul>
+<li>結果の表示には <strong><code>jtools::summ()</code></strong> を使ってください</li>
+<li>経験年数が 1 年増えると年収はいくら増えるか解釈してください</li>
+</ul>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong><code>insurance.csv</code> を使った重回帰と <code>stargazer()</code></strong></p>
+<p><code>insurance.csv</code> を使って以下の2モデルを推定し、 <code>stargazer()</code> で比較表を作成してください。</p>
+<ul>
+<li>モデルA：<code>charges ~ age</code></li>
+<li>モデルB：<code>charges ~ age + bmi + children</code></li>
+</ul>
+<p><strong>手順のヒント：</strong></p>
+<pre><code>① 2つのモデルを lm() で推定する
+② stargazer(モデルA, モデルB, type = "html", ...) で表を作成する
+③ covariate.labels でわかりやすい日本語ラベルを付ける
+④ R² の変化を確認する</code></pre>
+<p>チャンクオプションに <code>#| results: asis</code> を追加することを忘れないでください。</p>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>今回はやらなくていいいです。</p>
+<p><strong><code>augment()</code> を使った残差分析</strong></p>
+<p>問題 2 のモデル C（<code>Student_Performance.csv</code> の4変数モデル）について、 <code>augment()</code> で予測値と残差を取得し、残差プロットを描いてください。</p>
+<p><strong>手順のヒント：</strong></p>
+<pre><code>① 問題2のモデルC を augment() に渡す
+② ggplot で aes(x = .fitted, y = .resid) の散布図を描く
+③ geom_hline(yintercept = 0) で水平線を追加する
+④ 残差にパターンがないか（ランダムに散らばっているか）確認する</code></pre>
+<ul>
+<li>残差プロットを見て、線形モデルの仮定が成立しているかコメントしてください</li>
+</ul>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="まとめ-1" class="level2" data-number="10.7">
+<h2 data-number="10.7" class="anchored" data-anchor-id="まとめ-1"><span class="header-section-number">10.7</span> まとめ</h2>
+<section id="本日学んだこと" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="本日学んだこと">本日学んだこと</h3>
+<p><strong>回帰分析の基本的な流れ</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="co"># ① モデルの推定</span></span>
+<span id="cb36-2"><a href="#cb36-2"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X1 <span class="sc">+</span> X2, <span class="at">data =</span> df)</span>
+<span id="cb36-3"><a href="#cb36-3"></a></span>
+<span id="cb36-4"><a href="#cb36-4"></a><span class="co"># ② 結果の確認</span></span>
+<span id="cb36-5"><a href="#cb36-5"></a><span class="fu">summary</span>(model)           <span class="co"># 基本</span></span>
+<span id="cb36-6"><a href="#cb36-6"></a>model <span class="sc">|&gt;</span> <span class="fu">tidy</span>()          <span class="co"># 係数の整然データ（broom）</span></span>
+<span id="cb36-7"><a href="#cb36-7"></a>model <span class="sc">|&gt;</span> <span class="fu">glance</span>()        <span class="co"># モデル全体の統計量（broom）</span></span>
+<span id="cb36-8"><a href="#cb36-8"></a><span class="fu">summ</span>(model)              <span class="co"># 見やすい表（jtools）</span></span>
+<span id="cb36-9"><a href="#cb36-9"></a></span>
+<span id="cb36-10"><a href="#cb36-10"></a><span class="co"># ③ 複数モデルの比較</span></span>
+<span id="cb36-11"><a href="#cb36-11"></a><span class="fu">modelsummary</span>(<span class="fu">list</span>(m1, m2, m3), <span class="at">stars =</span> <span class="cn">TRUE</span>)   <span class="co"># modelsummary</span></span>
+<span id="cb36-12"><a href="#cb36-12"></a><span class="fu">stargazer</span>(m1, m2, m3, <span class="at">type =</span> <span class="st">"html"</span>)           <span class="co"># stargazer</span></span>
+<span id="cb36-13"><a href="#cb36-13"></a></span>
+<span id="cb36-14"><a href="#cb36-14"></a><span class="co"># ④ 残差分析</span></span>
+<span id="cb36-15"><a href="#cb36-15"></a>model <span class="sc">|&gt;</span> <span class="fu">augment</span>()       <span class="co"># 予測値・残差を追加（broom）</span></span>
+<span id="cb36-16"><a href="#cb36-16"></a><span class="fu">plot_summs</span>(m1, m2)       <span class="co"># 係数の可視化（jtools）</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>各パッケージの使い分け</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>パッケージ</th>
+<th>関数</th>
+<th>向いている場面</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>broom</code></td>
+<td><code>tidy()</code>, <code>glance()</code>, <code>augment()</code></td>
+<td>データ処理・後続の可視化</td>
+</tr>
+<tr class="even">
+<td><code>jtools</code></td>
+<td><code>summ()</code>, <code>plot_summs()</code></td>
+<td>授業・探索的分析</td>
+</tr>
+<tr class="odd">
+<td><code>modelsummary</code></td>
+<td><code>modelsummary()</code></td>
+<td>複数モデルの比較</td>
+</tr>
+<tr class="even">
+<td><code>stargazer</code></td>
+<td><code>stargazer()</code></td>
+<td>論文・レポート提出</td>
+</tr>
+</tbody>
+</table>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>次回の予告</strong></p>
+<p>第 11 回では、<strong>ダミー変数を用いた回帰分析</strong>を学習します。</p>
+<ul>
+<li>「喫煙者か否か」「性別」などのカテゴリ変数を回帰分析に組み込む方法</li>
+<li>R が自動的にダミー変数を作る仕組み（参照カテゴリ）</li>
+<li>ダミー変数の係数の解釈</li>
+</ul>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+        for (let i=0; i<annoteTargets.length; i++) {
+          const annoteTarget = annoteTargets[i];
+          const targetCell = annoteTarget.getAttribute("data-target-cell");
+          const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+          const contentFn = () => {
+            const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+            if (content) {
+              const tipContent = content.cloneNode(true);
+              tipContent.classList.add("code-annotation-tip-content");
+              return tipContent.outerHTML;
+            }
+          }
+          const config = {
+            allowHTML: true,
+            content: contentFn,
+            onShow: (instance) => {
+              selectCodeLines(instance.reference);
+              instance.reference.classList.add('code-annotation-active');
+              window.tippy.hideAll();
+            },
+            onHide: (instance) => {
+              unselectCodeLines();
+              instance.reference.classList.remove('code-annotation-active');
+            },
+            maxWidth: 300,
+            delay: [50, 0],
+            duration: [200, 0],
+            offset: [5, 10],
+            arrow: true,
+            trigger: 'click',
+            appendTo: function(el) {
+              return el.parentElement.parentElement.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'quarto',
+            placement: 'right',
+            positionFixed: true,
+            popperOptions: {
+              modifiers: [
+              {
+                name: 'flip',
+                options: {
+                  flipVariations: false, // true by default
+                  allowedAutoPlacements: ['right'],
+                  fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                },
+              },
+              {
+                name: 'preventOverflow',
+                options: {
+                  mainAxis: false,
+                  altAxis: false
+                }
+              }
+              ]        
+            }      
+          };
+          window.tippy(annoteTarget, config); 
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./lecA09.html" class="pagination-link" aria-label="相関分析">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">相関分析</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./lecA11.html" class="pagination-link" aria-label="回帰分析2">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">回帰分析2</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

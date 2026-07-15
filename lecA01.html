@@ -1,0 +1,1802 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="2026年度　A（前期） B（後期） 時間： 月曜日 4 時限（15:45-17:30） 教室： C 館 地下1階 PC4 教室">
+
+<title>1&nbsp; R 導入 – R プログラミング</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./lecA02.html" rel="next">
+<link href="./index.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-ff88f174eb6c98cff991482d4cc81ba9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<meta name="robots" content="noindex, nofollow">
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lecA01.html">前期（A）</a></li><li class="breadcrumb-item"><a href="./lecA01.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R 導入</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">R プログラミング</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">はじめに</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">前期（A）</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA01.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R 導入</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">データ操作</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">可視化1</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">可視化2</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">可視化3</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">記述統計</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">t 検定</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">コードを読む</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">相関分析</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">回帰分析1</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">回帰分析2</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">回帰分析3</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">総合演習</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">後期（B）</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">データ分析の流れ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">演習</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">演習</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">総合分析演習 1</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">発表・分析結果説明 1</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">総合分析演習 2</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">発表・分析結果説明 2</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">総合分析演習 3</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">発表・分析結果説明 3</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">総合分析演習 4</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">発表・分析結果説明 4</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">総合分析演習 5</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">発表・分析結果説明 5</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">参考文献</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#プログラミングとは" id="toc-プログラミングとは" class="nav-link active" data-scroll-target="#プログラミングとは"><span class="header-section-number">1.1</span> プログラミングとは</a></li>
+  <li><a href="#rとは" id="toc-rとは" class="nav-link" data-scroll-target="#rとは"><span class="header-section-number">1.2</span> Rとは</a></li>
+  <li><a href="#r-を使う理由" id="toc-r-を使う理由" class="nav-link" data-scroll-target="#r-を使う理由"><span class="header-section-number">1.3</span> R を使う理由</a></li>
+  <li><a href="#r-と-rstudio" id="toc-r-と-rstudio" class="nav-link" data-scroll-target="#r-と-rstudio"><span class="header-section-number">1.4</span> R と RStudio</a></li>
+  <li><a href="#rstudio-の起動" id="toc-rstudio-の起動" class="nav-link" data-scroll-target="#rstudio-の起動"><span class="header-section-number">1.5</span> RStudio の起動</a></li>
+  <li><a href="#作業環境の構築" id="toc-作業環境の構築" class="nav-link" data-scroll-target="#作業環境の構築"><span class="header-section-number">1.6</span> 作業環境の構築</a></li>
+  <li><a href="#作業ディレクトリ" id="toc-作業ディレクトリ" class="nav-link" data-scroll-target="#作業ディレクトリ"><span class="header-section-number">1.7</span> 作業ディレクトリ</a>
+  <ul class="collapse">
+  <li><a href="#なぜ重要か" id="toc-なぜ重要か" class="nav-link" data-scroll-target="#なぜ重要か">なぜ重要か？</a></li>
+  <li><a href="#作業ディレクトリの確認方法" id="toc-作業ディレクトリの確認方法" class="nav-link" data-scroll-target="#作業ディレクトリの確認方法">作業ディレクトリの確認方法</a></li>
+  <li><a href="#作業ディレクトリの設定方法" id="toc-作業ディレクトリの設定方法" class="nav-link" data-scroll-target="#作業ディレクトリの設定方法">作業ディレクトリの設定方法</a></li>
+  </ul></li>
+  <li><a href="#プロジェクトの活用" id="toc-プロジェクトの活用" class="nav-link" data-scroll-target="#プロジェクトの活用"><span class="header-section-number">1.8</span> プロジェクトの活用</a>
+  <ul class="collapse">
+  <li><a href="#rプロジェクトを使うメリット" id="toc-rプロジェクトを使うメリット" class="nav-link" data-scroll-target="#rプロジェクトを使うメリット">Rプロジェクトを使うメリット</a></li>
+  </ul></li>
+  <li><a href="#プロジェクトの作成" id="toc-プロジェクトの作成" class="nav-link" data-scroll-target="#プロジェクトの作成"><span class="header-section-number">1.9</span> プロジェクトの作成</a></li>
+  <li><a href="#r-スクリプト" id="toc-r-スクリプト" class="nav-link" data-scroll-target="#r-スクリプト"><span class="header-section-number">1.10</span> R スクリプト</a>
+  <ul class="collapse">
+  <li><a href="#なぜコンソールに直接打たないのか" id="toc-なぜコンソールに直接打たないのか" class="nav-link" data-scroll-target="#なぜコンソールに直接打たないのか">なぜコンソールに直接打たないのか？</a></li>
+  <li><a href="#スクリプトの実行方法" id="toc-スクリプトの実行方法" class="nav-link" data-scroll-target="#スクリプトの実行方法">スクリプトの実行方法</a></li>
+  <li><a href="#ボタンの使い分け" id="toc-ボタンの使い分け" class="nav-link" data-scroll-target="#ボタンの使い分け">ボタンの使い分け</a></li>
+  <li><a href="#スクリプトを保存する" id="toc-スクリプトを保存する" class="nav-link" data-scroll-target="#スクリプトを保存する">スクリプトを保存する</a></li>
+  </ul></li>
+  <li><a href="#r-コードを書いてみよう" id="toc-r-コードを書いてみよう" class="nav-link" data-scroll-target="#r-コードを書いてみよう"><span class="header-section-number">1.11</span> R コードを書いてみよう</a>
+  <ul class="collapse">
+  <li><a href="#計算機として使う" id="toc-計算機として使う" class="nav-link" data-scroll-target="#計算機として使う">計算機として使う</a></li>
+  <li><a href="#変数データに名前をつけて保存する" id="toc-変数データに名前をつけて保存する" class="nav-link" data-scroll-target="#変数データに名前をつけて保存する">変数（データに名前をつけて保存する）</a></li>
+  <li><a href="#関数複雑な計算を一瞬で行う" id="toc-関数複雑な計算を一瞬で行う" class="nav-link" data-scroll-target="#関数複雑な計算を一瞬で行う">関数（複雑な計算を一瞬で行う）</a></li>
+  </ul></li>
+  <li><a href="#quartoクゥオート" id="toc-quartoクゥオート" class="nav-link" data-scroll-target="#quartoクゥオート"><span class="header-section-number">1.12</span> Quarto（クゥオート）</a>
+  <ul class="collapse">
+  <li><a href="#なぜ-quarto-を使うのか" id="toc-なぜ-quarto-を使うのか" class="nav-link" data-scroll-target="#なぜ-quarto-を使うのか">なぜ Quarto を使うのか？</a></li>
+  <li><a href="#quarto-の仕組み" id="toc-quarto-の仕組み" class="nav-link" data-scroll-target="#quarto-の仕組み">Quarto の仕組み</a></li>
+  </ul></li>
+  <li><a href="#毎時間の準備と進め方" id="toc-毎時間の準備と進め方" class="nav-link" data-scroll-target="#毎時間の準備と進め方"><span class="header-section-number">1.13</span> 毎時間の準備と進め方</a></li>
+  <li><a href="#本日の課題" id="toc-本日の課題" class="nav-link" data-scroll-target="#本日の課題"><span class="header-section-number">1.14</span> 本日の課題</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lecA01.html">前期（A）</a></li><li class="breadcrumb-item"><a href="./lecA01.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R 導入</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R 導入</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="プログラミングとは" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="プログラミングとは"><span class="header-section-number">1.1</span> プログラミングとは</h2>
+<ul>
+<li><strong>プログラミング</strong>とは、意図した計算を行うためコンピューターに指示を出すことです。そもそもコンピューターは「計算を行う」「計算結果を記憶する」という2つの基本機能を持っています。</li>
+<li><strong>プログラミング言語</strong>とは、コンピュータに指示を出すために使われる共通言語です。Java、 Python、 Ruby、 C++、 PHP、 JavaScript などがあり、それぞれ独自の<strong>構文（Syntax）</strong>、文法、制御構造を持っています。</li>
+<li>言語によって得意とする分野や用途が異なり、スマートフォンアプリ、ゲーム、Web システムなど、現代社会のあらゆるインフラがこれらの言語によって動いています。</li>
+</ul>
+<p>参考：<a href="https://programming-sc.com/column/column1/">15種類のプログラミング言語を難易度や職業別に徹底解説</a>（プロ検）</p>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>プログラミングと聞くと身構えてしまうかもしれませんが、R は「世界中の知恵（パッケージ）を借りて計算する、最高に便利な計算機」です。まずはエラーを恐れず、キーボードを叩くことから始めていきましょう！</p>
+</div>
+</div>
+</section>
+<section id="rとは" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="rとは"><span class="header-section-number">1.2</span> Rとは</h2>
+<p>皆さんがこれから学ぶ R は、統計解析やデータの可視化（グラフ作成）に特化したプログラミング言語であり、<strong>オープンソース</strong>（無償公開）の計算環境です。世界中の研究者やデータサイエンティストに愛用されており、以下のような高度な特徴を備えています。</p>
+<ul>
+<li><p><strong>データの操作（Data Manipulation）</strong></p>
+<p>Excel等で保存されている煩雑なデータを、ルールに基づいて一瞬で集計・加工する。</p></li>
+<li><p><strong>グラフィックス</strong></p>
+<p>論文やレポートにそのまま採用できる、出版クオリティの高品質な図表を作成する。</p></li>
+<li><p><strong>統計的モデリング</strong></p>
+<p>単純な平均の比較から、経済現象の要因分析（回帰分析）、機械学習を用いた予測まで幅広く対応する。</p></li>
+<li><p><strong>パッケージ（Packages）による拡張性</strong></p>
+<p>世界中の統計学者が開発・公開している「パッケージ」を追加することで、最新の分析手法を即座に利用できる。</p></li>
+</ul>
+</section>
+<section id="r-を使う理由" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="r-を使う理由"><span class="header-section-number">1.3</span> R を使う理由</h2>
+<p>実務で多用される Excel も非常に優秀なツールですが、学術研究や高度なデータ分析において R には圧倒的な優位性があります。</p>
+<ul>
+<li><p><strong>再現性（Reproducibility）</strong></p>
+<p>「どのボタンをどうクリックしたか」という記憶に頼る操作ではなく、「どのような命令（コード）を書いたか」が記録に残るため、第三者が全く同じ分析結果を 100% 再現できます。</p></li>
+<li><p><strong>ベクトル演算</strong></p>
+<p>R は「ベクトル（数値の列）」をひとかたまりとして一括処理することに最適化されており、大規模なデータセットに対しても計算ミスなく高速に処理を行うことが可能です。</p></li>
+</ul>
+</section>
+<section id="r-と-rstudio" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="r-と-rstudio"><span class="header-section-number">1.4</span> R と RStudio</h2>
+<p>Rを効率的に使いこなすために欠かせないのが <strong>RStudio</strong> です。これらは「エンジン」と「運転席」の関係に例えられます。</p>
+<ul>
+<li><p><strong>R（エンジン）</strong></p>
+<p>実際に計算処理を行う本体です。</p></li>
+<li><p><strong>RStudio（運転席 / IDE）</strong></p>
+<p>Rを操作しやすくするための<strong>統合開発環境（IDE: Integrated Development Environment）</strong>です。</p></li>
+</ul>
+<p>RStudio を使用することで、様々な作業を一つの画面で完結させることができます。</p>
+</section>
+<section id="rstudio-の起動" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="rstudio-の起動"><span class="header-section-number">1.5</span> RStudio の起動</h2>
+<p>画面左下のウィンドウズマークを押してRStudioを起動する。</p>
+<p>その際、R本体（R 4.5.1）と間違えないように。</p>
+<div id="fig-RStudio-start-1" class="quarto-float quarto-figure quarto-figure-center anchored" width="90%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-RStudio-start-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/A01/RStudio-start-1.png" id="fig-RStudio-start-1" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-RStudio-start-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+図&nbsp;1.1
+</figcaption>
+</figure>
+</div>
+<p>以下のように RStudio が起動したことを確認してください。</p>
+<div id="fig-RStudio-start-2" class="quarto-float quarto-figure quarto-figure-center anchored" width="90%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-RStudio-start-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/A01/RStudio-start-2.png" id="fig-RStudio-start-2" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-RStudio-start-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+図&nbsp;1.2
+</figcaption>
+</figure>
+</div>
+<p>上記は起動時の画面構成です。</p>
+<p>ここで、左上のプラスマークから「R Script」を選択します。</p>
+<div id="fig-RStudio-start-3" class="quarto-float quarto-figure quarto-figure-center anchored" width="90%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-RStudio-start-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/A01/RStudio-start-3.png" id="fig-RStudio-start-3" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-RStudio-start-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+図&nbsp;1.3
+</figcaption>
+</figure>
+</div>
+<p>新しいR Scriptが作成され、画面が4つに分割されます。</p>
+<div id="fig-RStudio-start-4" class="quarto-float quarto-figure quarto-figure-center anchored" width="90%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-RStudio-start-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/A01/RStudio-start-4.png" id="fig-RStudio-start-4" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-RStudio-start-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+図&nbsp;1.4
+</figcaption>
+</figure>
+</div>
+<p>これがRStudioで作業（分析）する時の通常の画面構成です。そして、RStudioの画面を構成する4つの領域のことを、一般的に<strong>「ペイン（Pane）」</strong>と呼びます。</p>
+<p>それぞれの役割を簡単に確認しておきましょう。</p>
+<ul>
+<li><p><strong>ソース（Source）</strong> ノート・メモ</p>
+<p>プログラム（スクリプト）を記述・保存する。何度も実行したい命令を蓄積します。</p></li>
+<li><p><strong>コンソール（Console）</strong> 計算機・実行窓</p>
+<p>命令を実行し、その結果をリアルタイムで確認する。</p></li>
+<li><p><strong>環境（Environment）</strong> 物置・データ管理</p>
+<p>読み込んだデータセットや変数の状態を一覧する。</p></li>
+<li><p><strong>出力/出力（Files/Plots）</strong> 本棚・掲示板</p>
+<p>作成したグラフを表示したり、関数の使い方（ドキュメント）を参照したりする。</p></li>
+</ul>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>画面が3つしか見当たらないときは？
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>左上の「ソース・ペイン」が最小化されている場合があります。その場合は、他のペインとの境界線をマウスでドラッグして広げるか、右上の四角いアイコンを押して広げてください。</p>
+</div>
+</div>
+</section>
+<section id="作業環境の構築" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="作業環境の構築"><span class="header-section-number">1.6</span> 作業環境の構築</h2>
+<p>大学のパソコンはシャットダウンするたびに初期化されるため、作業（分析）したファイルは初期化されない場所に保存する必要があります。</p>
+<p>拓殖大学では「Kドライブ」と呼ばれるドライブ（保存領域）が、各学生に割り当てられています。シャットダウンしても初期化されることはなく、大学内のどのパソコンからでもアクセスすることができます。</p>
+<p>本授業では、この「Kドライブ」に作業（分析）記録を残します。</p>
+<p>デスクトップ左上のPCから、Kドライブを開きます。</p>
+<div id="fig-K-drive-1" class="quarto-float quarto-figure quarto-figure-center anchored" width="90%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-K-drive-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/A01/K-drive-1.png" id="fig-K-drive-1" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-K-drive-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+図&nbsp;1.5
+</figcaption>
+</figure>
+</div>
+<p>以下のように、フォルダのアドレスが<strong>（K:）</strong>となっいてることを確認してください。</p>
+<div id="fig-K-drive-2" class="quarto-float quarto-figure quarto-figure-center anchored" width="90%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-K-drive-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/A01/K-drive-2.png" id="fig-K-drive-2" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-K-drive-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+図&nbsp;1.6
+</figcaption>
+</figure>
+</div>
+<p>Kドライブを開いている状態で、「新規作成」から「フォルダ」を選び、新規フォルダを作成します。</p>
+<div id="fig-K-drive-3" class="quarto-float quarto-figure quarto-figure-center anchored" width="90%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-K-drive-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/A01/K-drive-3.png" id="fig-K-drive-3" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-K-drive-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+図&nbsp;1.7
+</figcaption>
+</figure>
+</div>
+<p>作成したフォルダの名前を「<strong>R_programming</strong>」に変更します。</p>
+<div id="fig-K-drive-4" class="quarto-float quarto-figure quarto-figure-center anchored" width="90%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-K-drive-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/A01/K-drive-4.png" id="fig-K-drive-4" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-K-drive-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+図&nbsp;1.8
+</figcaption>
+</figure>
+</div>
+<p>今後は、この「R_programming」フォルダの中に本授業で使うファイルやデータを保存します。</p>
+</section>
+<section id="作業ディレクトリ" class="level2" data-number="1.7">
+<h2 data-number="1.7" class="anchored" data-anchor-id="作業ディレクトリ"><span class="header-section-number">1.7</span> 作業ディレクトリ</h2>
+<p>R でデータ分析を行う際、コンピュータが「今、どこのフォルダを標準の作業場所にしているか」が非常に重要です。これを <strong>「作業ディレクトリ（Working Directory）」</strong> と呼びます。</p>
+<section id="なぜ重要か" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="なぜ重要か">なぜ重要か？</h3>
+<p>分析したいデータ（ExcelやCSV）を読み込むとき、R がそのファイルを探しに行く「基準点」になるからです。基準点がずれていると、「ファイルが見つかりません」というエラーが出てしまいます。</p>
+</section>
+<section id="作業ディレクトリの確認方法" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="作業ディレクトリの確認方法">作業ディレクトリの確認方法</h3>
+<p>RStudioの右下にある <strong>[Files]</strong> タブを見てください。そこに表示されているフォルダが、現在 R が見ている場所です。</p>
+<div id="fig-working-directory1" class="quarto-float quarto-figure quarto-figure-center anchored" width="90%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-working-directory1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/A01/working-directory1.png" id="fig-working-directory1" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-working-directory1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+図&nbsp;1.9
+</figcaption>
+</figure>
+</div>
+<p>また、コンソール（Console）に<code>getwd()</code> と入力し実行することでも現在の作業ディレクトリが分かります。</p>
+<div id="fig-working-directory2" class="quarto-float quarto-figure quarto-figure-center anchored" width="90%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-working-directory2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/A01/working-directory2.png" id="fig-working-directory2" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-working-directory2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+図&nbsp;1.10
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="作業ディレクトリの設定方法" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="作業ディレクトリの設定方法">作業ディレクトリの設定方法</h3>
+<p>手動で場所を指定したい場合は、主に以下の2つの方法があります。</p>
+<ul>
+<li><p>マウス操作で設定する</p>
+<ol type="1">
+<li>RStudioの上部メニューから <strong>[Session]</strong> をクリック。</li>
+<li><strong>[Set Working Directory]</strong> ＞ <strong>[Choose Directory…]</strong> を選択。</li>
+<li>作業したいフォルダ（例：Kドライブ内のフォルダ）を選択して <strong>[Open]</strong> を押す。</li>
+</ol></li>
+<li><p>コマンドで設定する</p>
+<ul>
+<li><code>setwd("K:/R_programming")</code> という関数を使います。</li>
+</ul></li>
+</ul>
+<div id="fig-working-directory3" class="quarto-float quarto-figure quarto-figure-center anchored" width="90%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-working-directory3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/A01/working-directory3.png" id="fig-working-directory3" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-working-directory3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+図&nbsp;1.11
+</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="プロジェクトの活用" class="level2" data-number="1.8">
+<h2 data-number="1.8" class="anchored" data-anchor-id="プロジェクトの活用"><span class="header-section-number">1.8</span> プロジェクトの活用</h2>
+<p>大学の演習用PC（Kドライブ）など、決まった場所で作業を続ける場合、毎回「作業場所」を指定するのは面倒です。そこで便利なのが <strong>「Rプロジェクト（.Rproj）」</strong> という機能です。</p>
+<section id="rプロジェクトを使うメリット" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="rプロジェクトを使うメリット">Rプロジェクトを使うメリット</h3>
+<ul>
+<li><p><strong>自動で作業場所が決まる</strong></p>
+<p>プロジェクトを開くだけで、そのフォルダが自動的に作業ディレクトリに設定されます。</p></li>
+<li><p><strong>前回の続きから再開</strong></p>
+<p>開いていたファイルや設定が保存され、次回スムーズに始められます。</p></li>
+<li><p><strong>ファイル迷子を防ぐ</strong></p>
+<p>「この授業のデータはこのフォルダ」という箱（プロジェクト）を最初に作ることで、必要なファイルを一括して格納し管理できます。</p></li>
+</ul>
+</section>
+</section>
+<section id="プロジェクトの作成" class="level2" data-number="1.9">
+<h2 data-number="1.9" class="anchored" data-anchor-id="プロジェクトの作成"><span class="header-section-number">1.9</span> プロジェクトの作成</h2>
+<p>本授業では、第1回から第13回までの授業ごとにプロジェクトを作成します。毎回の授業開始時、以下の手順でその日の授業で使うプロジェクトを準備してください。</p>
+<ol type="1">
+<li>左下のウィンドウズマークからRStudioを立ち上げる。</li>
+<li>左上のアイコン（＋R）から新規Rプロジェクトを作成する。</li>
+</ol>
+<div id="fig-R-project-1" class="quarto-float quarto-figure quarto-figure-center anchored" width="90%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-R-project-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/A01/R-project-1.png" id="fig-R-project-1" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-R-project-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+図&nbsp;1.12
+</figcaption>
+</figure>
+</div>
+<ol start="3" type="1">
+<li>New Directory を選択する。これにより、新しくフォルダが作成される。（既にあるフォルダをプロジェクトフォルダとして使う場合には Existing Directory を選んでください。）</li>
+</ol>
+<div id="fig-R-project-2" class="quarto-float quarto-figure quarto-figure-center anchored" width="90%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-R-project-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/A01/R-project-2.png" id="fig-R-project-2" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-R-project-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+図&nbsp;1.13
+</figcaption>
+</figure>
+</div>
+<ol start="4" type="1">
+<li>R New Project を選択する。</li>
+</ol>
+<div id="fig-R-project-3" class="quarto-float quarto-figure quarto-figure-center anchored" width="90%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-R-project-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/A01/R-project-3.png" id="fig-R-project-3" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-R-project-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+図&nbsp;1.14
+</figcaption>
+</figure>
+</div>
+<ol start="5" type="1">
+<li>Directory name に「Lesson01」と入力、Browse ボタンから、Kドライブに作成した「R_programming」を選択し、Create Project を押す。</li>
+</ol>
+<div id="fig-R-project-4" class="quarto-float quarto-figure quarto-figure-center anchored" width="90%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-R-project-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/A01/R-project-4.png" id="fig-R-project-4" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-R-project-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+図&nbsp;1.15
+</figcaption>
+</figure>
+</div>
+<p>RStudio で、右上のプロジェクト名を確認する。</p>
+<div id="fig-R-project-5" class="quarto-float quarto-figure quarto-figure-center anchored" width="90%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-R-project-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/A01/R-project-5.png" id="fig-R-project-5" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-R-project-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+図&nbsp;1.16
+</figcaption>
+</figure>
+</div>
+<p>この時、R_programming フォルダの中に、Lesson01 というフォルダ（ディレクトリ）が新しく作成されています。</p>
+<p>作業を中断し（一度RStudioを閉じ）た後、再開する際には、Lesson01 フォルダの中の <code>Lesson01.Rproj</code> ファイルをダブルクリックするだけで、一瞬で中断した時の状況に復元できます。</p>
+<p>第1回目の授業で必要なデータなどのファイルは全てこの Lesson01 フォルダの中に入れておくことで、R は迷うことなく必要なファイルを見つけられるようになります。</p>
+<div id="fig-R-project-6" class="quarto-float quarto-figure quarto-figure-center anchored" width="90%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-R-project-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/A01/R-project-6.png" id="fig-R-project-6" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-R-project-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+図&nbsp;1.17
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="r-スクリプト" class="level2" data-number="1.10">
+<h2 data-number="1.10" class="anchored" data-anchor-id="r-スクリプト"><span class="header-section-number">1.10</span> R スクリプト</h2>
+<p>左上のプラス（＋）マークから、R Scriptを選択し、新規 R Script を作成します。</p>
+<div id="fig-temp1" class="quarto-float quarto-figure quarto-figure-center anchored" width="90%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-temp1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/A01/RStudio-start-3.png" id="fig-temp1" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-temp1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+図&nbsp;1.18
+</figcaption>
+</figure>
+</div>
+<section id="なぜコンソールに直接打たないのか" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="なぜコンソールに直接打たないのか">なぜコンソールに直接打たないのか？</h3>
+<p>下の「コンソール」に命令を打ち込んでも計算はできますが、エンターキーを押した瞬間に命令は消えてしまい、後から修正したり、明日同じ計算をやり直したりすることができません。</p>
+<ul>
+<li><p>コンソール: 使い捨ての計算機（やり直しが効かない）</p></li>
+<li><p>R Script: 記録に残るノート（保存して、何度でも再現できる）</p></li>
+</ul>
+<p>大学のレポートや分析では、必ずこの R Script に命令を書き溜めて保存する習慣をつけましょう。</p>
+</section>
+<section id="スクリプトの実行方法" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="スクリプトの実行方法">スクリプトの実行方法</h3>
+<p>R Scriptに書いた命令を実際にRに計算させるには、以下のショートカットキー、または画面右上のボタンを使用します。</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">実行の範囲</th>
+<th style="text-align: left;">Windows</th>
+<th style="text-align: left;">Mac</th>
+<th style="text-align: left;">対応ボタン</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">現在の1行<br>（または選択範囲）</td>
+<td style="text-align: left;">Ctrl + Enter</td>
+<td style="text-align: left;">Cmd + Return</td>
+<td style="text-align: left;">Run</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">最初から現在の行まで</td>
+<td style="text-align: left;">Ctrl + Alt + B</td>
+<td style="text-align: left;">Cmd + Opt + B</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">現在の行から最後まで</td>
+<td style="text-align: left;">Ctrl + Alt + E</td>
+<td style="text-align: left;">Cmd + Opt + E</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ファイル全体<br>（全行実行）</td>
+<td style="text-align: left;">Ctrl + Shift + S</td>
+<td style="text-align: left;">Cmd + Shift + S</td>
+<td style="text-align: left;">Source</td>
+</tr>
+</tbody>
+</table>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>覚え方のコツ
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>ショートカットの最後の一文字は、英単語の頭文字になっています。</p>
+<ul>
+<li><strong>B</strong>：<strong>B</strong>eginning（最初）から現在の行まで実行</li>
+<li><strong>E</strong>：<strong>E</strong>nd（最後）まで実行</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="ボタンの使い分け" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="ボタンの使い分け">ボタンの使い分け</h3>
+<ul>
+<li><strong>Run</strong>： 「いま書いたこの1行、ちゃんと動くかな？」と<strong>一歩ずつ確認</strong>しながら進めるときに使います。実行したコードが下のコンソールにも表示されるので、試行錯誤に最適です。</li>
+<li><strong>Source</strong>： 「よし、最後まで書き上げたぞ！最初から一気に<strong>自動演奏</strong>させてみよう」というときに使います。コンソールが汚れず、最終的な結果だけをスマートに確認できます。</li>
+</ul>
+</section>
+<section id="スクリプトを保存する" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="スクリプトを保存する">スクリプトを保存する</h3>
+<p>作成した R Script は、必ず名前をつけて保存しましょう。</p>
+<ul>
+<li>[File] ＞ [Save]（または Ctrl + S）</li>
+<li>保存ボタンを押す</li>
+</ul>
+<div id="fig-R-script-1" class="quarto-float quarto-figure quarto-figure-center anchored" width="90%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-R-script-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/A01/R-script-1.png" id="fig-R-script-1" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-R-script-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+図&nbsp;1.19
+</figcaption>
+</figure>
+</div>
+<ul>
+<li>名前を practice01 などとする。
+<ul>
+<li>ファイル名には全角文字（日本語）やスペースを使わず、英数字とアンダースコア（_）のみを使うのがプログラミングの鉄則です。</li>
+</ul></li>
+<li>今日作成したプロジェクトフォルダ（Lesson01 など）の中に入っていることを確認する。</li>
+</ul>
+<div id="fig-R-script-2" class="quarto-float quarto-figure quarto-figure-center anchored" width="90%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-R-script-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/A01/R-script-2.png" id="fig-R-script-2" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-R-script-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+図&nbsp;1.20
+</figcaption>
+</figure>
+</div>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>右下の「Files」に表示されているファイルの内容は実際のフォルダに保存されているファイルの内容と一致しています。</p>
+</div>
+</div>
+<p><br></p>
+</section>
+</section>
+<section id="r-コードを書いてみよう" class="level2" data-number="1.11">
+<h2 data-number="1.11" class="anchored" data-anchor-id="r-コードを書いてみよう"><span class="header-section-number">1.11</span> R コードを書いてみよう</h2>
+<p>RStudioの準備ができたら、実際にRに計算をさせてみましょう。まずは「Rスクリプト」に以下のコードを書き込み、1行ずつ Ctrl + Enter で実行して結果を確認してください。</p>
+<section id="計算機として使う" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="計算機として使う">計算機として使う</h3>
+<p>Rでは、一般的な数学の計算ができます。</p>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>1 + 1</p>
+<p>10 - 3</p>
+<p>5 × 4</p>
+<p>10 ÷ 2</p>
+<p>2の3乗</p>
+</div>
+</div>
+<div class="kotae callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>解答 1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span>    <span class="co"># 足し算</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>[<span class="dv">1</span>] <span class="dv">2</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="dv">10</span> <span class="sc">-</span> <span class="dv">3</span>   <span class="co"># 引き算</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>[<span class="dv">1</span>] <span class="dv">7</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="dv">5</span> <span class="sc">*</span> <span class="dv">4</span>    <span class="co"># 掛け算（アスタリスク）</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>[<span class="dv">1</span>] <span class="dv">20</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="dv">10</span> <span class="sc">/</span> <span class="dv">2</span>   <span class="co"># 割り算（スラッシュ）</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>[<span class="dv">1</span>] <span class="dv">5</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="dv">2</span><span class="sc">^</span><span class="dv">3</span>      <span class="co"># べき乗（2の3乗）</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a>[<span class="dv">1</span>] <span class="dv">8</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</section>
+<section id="変数データに名前をつけて保存する" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="変数データに名前をつけて保存する">変数（データに名前をつけて保存する）</h3>
+<p>プログラミングで最も重要なのが 「変数（Variable）」 です。数値に名前をつけて「物置（Environmentペイン）」に保存しておくことができます。 Rでは、&lt;-（矢印のような記号）を使って代入します。</p>
+<p><br></p>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>x という名前（変数）に 10 を保存（代入）する。</p>
+</div>
+</div>
+<div class="kotae callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>x <span class="ot">&lt;-</span> <span class="dv">10</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>右上の環境（Environment）ペインに x が表示されます。</p>
+</div>
+</div>
+<p><br></p>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>y という名前（変数）に 5 を保存（代入）する。</p>
+</div>
+</div>
+<div class="kotae callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>y <span class="ot">&lt;-</span> <span class="dv">5</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>右上の環境（Environment）ペインに y が表示されます。</p>
+</div>
+</div>
+<p><br></p>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>名前（変数）を使い、x と y を足す。</p>
+</div>
+</div>
+<div class="kotae callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>x <span class="sc">+</span> y</span>
+<span id="cb4-2"><a href="#cb4-2"></a>[<span class="dv">1</span>] <span class="dv">15</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<p><br></p>
+</section>
+<section id="関数複雑な計算を一瞬で行う" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="関数複雑な計算を一瞬で行う">関数（複雑な計算を一瞬で行う）</h3>
+<p>統計解析で欠かせないのが 「関数（Function）」 です。関数とは、特定の計算（平均を出す、グラフを描くなど）を自動で行ってくれる「魔法の箱」のようなものです。</p>
+<p>ここでは、複数の数値をまとめた「ベクトル（数値の列）」の平均値を求めてみましょう。</p>
+<p><br></p>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>演習
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>c()</code> という関数を使い、5人のテスト点数（70点、85点、90点、65点、80点）を「score」という名前に保存する。</p>
+</div>
+</div>
+<div class="kotae callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>解答
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>score <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">70</span>, <span class="dv">85</span>, <span class="dv">90</span>, <span class="dv">65</span>, <span class="dv">80</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>右上の環境（Environment）ペインに score が表示されます。</p>
+</div>
+</div>
+<p><br></p>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>5人の合計値を計算する。</p>
+</div>
+</div>
+<div class="kotae callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">sum</span>(score)</span>
+<span id="cb6-2"><a href="#cb6-2"></a>[<span class="dv">1</span>] <span class="dv">390</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<p><br></p>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>5人の平均値を計算する。</p>
+</div>
+</div>
+<div class="kotae callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">mean</span>(score)</span>
+<span id="cb7-2"><a href="#cb7-2"></a>[<span class="dv">1</span>] <span class="dv">78</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<p><br></p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>プログラミングの世界では、「全角」は大敵です。 数字、コンマ、カッコ、スペースがすべて「半角」になっているか、もう一度確認してみましょう。</p>
+</div>
+</div>
+<p><br></p>
+</section>
+</section>
+<section id="quartoクゥオート" class="level2" data-number="1.12">
+<h2 data-number="1.12" class="anchored" data-anchor-id="quartoクゥオート"><span class="header-section-number">1.12</span> Quarto（クゥオート）</h2>
+<p>これまでは、Rを使って計算する方法を学びました。しかし、実際のレポートや論文では、計算結果（数字やグラフ）だけでなく、その背景を説明する「文章」も必要です。</p>
+<p><strong>Quarto</strong> は、「文章」と「プログラム」と「実行結果」を一つのファイルに同居させ、そのまま提出用のレポート（HTMLやPDF）として出力できる非常に強力なツールです。</p>
+<section id="なぜ-quarto-を使うのか" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="なぜ-quarto-を使うのか">なぜ Quarto を使うのか？</h3>
+<ul>
+<li><p><strong>コピペミスがゼロになる</strong></p>
+<p>計算結果をExcelやWordにコピペする手間がありません。プログラムが走れば、結果は自動的にレポートに反映されます。</p></li>
+<li><p><strong>「動く」ことが証明できる</strong></p>
+<p>提出されたHTMLを見れば、プログラムが正しく動いたことを一目で確認できます。</p></li>
+<li><p><strong>一生モノのスキル</strong></p>
+<p>現在、データサイエンスの現場では、このような「再現可能なレポート作成（Reproducible Reporting）」が世界標準になっています。</p></li>
+</ul>
+</section>
+<section id="quarto-の仕組み" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="quarto-の仕組み">Quarto の仕組み</h3>
+<p>ここで、Blackboard から assignment01 というファイルをダウンロードし、K ドライブに先ほど作成した Lesson01 フォルダに格納してください。次に、RStudio 右下の Files から assignment01.qmd をクリックして開いてください。</p>
+<div id="fig-Quarto-1" class="quarto-float quarto-figure quarto-figure-center anchored" width="90%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Quarto-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/A01/Quarto-1.png" id="fig-Quarto-1" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-Quarto-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+図&nbsp;1.21
+</figcaption>
+</figure>
+</div>
+<p>Quartoのファイル（拡張子 <code>.qmd</code>）は、いわば「分析の記録ノート」です。ファイルの中で R を実行し、その前後に説明を記入します。</p>
+<div id="fig-Quarto-2" class="quarto-float quarto-figure quarto-figure-center anchored" width="90%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Quarto-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/A01/Quarto-2.png" id="fig-Quarto-2" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-Quarto-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+図&nbsp;1.22
+</figcaption>
+</figure>
+</div>
+<p>冒頭（一番上）には、そのファイルの属性を決める定型フォーマットを、<code>---</code> と <code>---</code> で上下に囲み記入します。</p>
+<p>R コードは、<code>```{r}</code> と　<code>```</code> で上下から囲みます。この記号の間に囲まれた灰色の範囲をR コード・チャンク と呼び、通常のR スクリプトと同じようにコードを書きます。チャンク右上の「緑色の再生ボタン（▶）」を押すと、その場ですぐに実行結果を確認できます。</p>
+<p>Render（レンダリング）ボタンを押すと、RStudio が記載内容を上から順に実行し、コードの実行結果（グラフなど）が埋め込まれた Web ページ形式のレポートが作られます。</p>
+<p>次図の赤丸されているアイコンを押すとブラウザで表示されます。</p>
+<div id="fig-Quarto-3" class="quarto-float quarto-figure quarto-figure-center anchored" width="90%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Quarto-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/A01/Quarto-3.png" id="fig-Quarto-3" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-Quarto-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+図&nbsp;1.23
+</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="毎時間の準備と進め方" class="level2" data-number="1.13">
+<h2 data-number="1.13" class="anchored" data-anchor-id="毎時間の準備と進め方"><span class="header-section-number">1.13</span> 毎時間の準備と進め方</h2>
+<p>授業が始まったら以下の手順で準備してください。</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 87%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1.</td>
+<td style="text-align: left;">画面左下のウィンドウズマークを押してRStudioを起動する。</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2.</td>
+<td style="text-align: left;">RStudio 左上のアイコン（＋R）をクリックし、新規 R プロジェクトを作成する。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3.</td>
+<td style="text-align: left;">New Directory を選択する。（これにより、新しくフォルダが作成される。）</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4.</td>
+<td style="text-align: left;">R New Project を選択する。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5.</td>
+<td style="text-align: left;">Directory name に「LessonXX」と入力、Browse ボタンから、Kドライブに作成した「R_programming」を選択し、Create Project をクリックする。</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">6.</td>
+<td style="text-align: left;">RStudio で、右上のプロジェクト名が LessonXX に変更されていることを確認する。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">7.</td>
+<td style="text-align: left;">R_programming フォルダの中に、LessonXX というフォルダ（ディレクトリ）が新しく作成されていることを確認する。</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">8.</td>
+<td style="text-align: left;">RStudio 左上のプラス（＋）マークから、R Scriptを選択し、新規 R Script を作成する。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">9.</td>
+<td style="text-align: left;">R Script を practiceXX という名前で保存する。</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">10.</td>
+<td style="text-align: left;">Blackboard から本授業で使うデータと「assignmentXX.qmd」ファイルをダウンロードし、先ほど作成した「R_programming/LessonXX」フォルダに格納する。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">11.</td>
+<td style="text-align: left;">RStudio 右下のペインにある Files からそのファイルをクリックして開く。</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">12.</td>
+<td style="text-align: left;">演習と課題に取り組む。課題ファイルの中には、<code>```{r}</code> で始まるグレーの枠（R コード・チャンク）がある。ここに R コードを記入し、前後に必要な説明も記入する。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">13.</td>
+<td style="text-align: left;">すべての問題が解けたら、画面上部にある [Render] をクリックして <code>assignmentXX.html</code> を作成する。</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">14.</td>
+<td style="text-align: left;">作成されたhtmlファイルをブラウザで開き、自分の名前や計算結果が正しく表示されているか確認する。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">15.</td>
+<td style="text-align: left;">htmlファイルはBlackboardにアップロードできないので、作成したhtmlファイルを「ZIP形式」に圧縮する。htmlファイルを右クリックして「圧縮（ZIP形式）」をクリックする。</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">16.</td>
+<td style="text-align: left;">最後に、<code>assignmentXX.html.zip</code> を Blackboard の所定の場所にアップロードする。</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<div id="fig-Quarto-4" class="quarto-float quarto-figure quarto-figure-center anchored" width="90%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Quarto-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/A01/Quarto-4.png" id="fig-Quarto-4" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-Quarto-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+図&nbsp;1.24
+</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>提出するのは「ZIPファイル」です！
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>プログラムが書かれた <code>.qmd</code> ファイルではなく、Renderボタンを押して新しく作成された <code>.html</code> ファイルでもなく、htmlファイルを圧縮した <code>.zip</code> ファイルを提出してください。</p>
+</div>
+</div>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Renderでエラーが出たときは？
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>コードに間違い（打ち間違いやカッコの閉じ忘れ）があると、Renderが途中で止まり、HTMLが作成されません。エラーメッセージを読み、該当する行を修正してから、もう一度 [Render] を押してください。</p>
+</div>
+</div>
+</section>
+<section id="本日の課題" class="level2" data-number="1.14">
+<h2 data-number="1.14" class="anchored" data-anchor-id="本日の課題"><span class="header-section-number">1.14</span> 本日の課題</h2>
+<p>assignment01 に取り組み、<span class="marker">assignment01.html</span> を Blackboard から提出してください。</p>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Blackboardから 「assignment01.qmd」をダウンロードする。</li>
+<li>「assignment01.qmd」を「R_programming/Lesson01」に格納する。</li>
+<li>RStudio の右下にある Files から、 assignment01.qmd をクリックして開く。</li>
+<li>本日の演習課題に取り組む。</li>
+<li>終わったら Render を押し、HTML ファイルを作成する。</li>
+<li>「assignment01.html」をBlackboard から提出して終了する。</li>
+</ol>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+        for (let i=0; i<annoteTargets.length; i++) {
+          const annoteTarget = annoteTargets[i];
+          const targetCell = annoteTarget.getAttribute("data-target-cell");
+          const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+          const contentFn = () => {
+            const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+            if (content) {
+              const tipContent = content.cloneNode(true);
+              tipContent.classList.add("code-annotation-tip-content");
+              return tipContent.outerHTML;
+            }
+          }
+          const config = {
+            allowHTML: true,
+            content: contentFn,
+            onShow: (instance) => {
+              selectCodeLines(instance.reference);
+              instance.reference.classList.add('code-annotation-active');
+              window.tippy.hideAll();
+            },
+            onHide: (instance) => {
+              unselectCodeLines();
+              instance.reference.classList.remove('code-annotation-active');
+            },
+            maxWidth: 300,
+            delay: [50, 0],
+            duration: [200, 0],
+            offset: [5, 10],
+            arrow: true,
+            trigger: 'click',
+            appendTo: function(el) {
+              return el.parentElement.parentElement.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'quarto',
+            placement: 'right',
+            positionFixed: true,
+            popperOptions: {
+              modifiers: [
+              {
+                name: 'flip',
+                options: {
+                  flipVariations: false, // true by default
+                  allowedAutoPlacements: ['right'],
+                  fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                },
+              },
+              {
+                name: 'preventOverflow',
+                options: {
+                  mainAxis: false,
+                  altAxis: false
+                }
+              }
+              ]        
+            }      
+          };
+          window.tippy(annoteTarget, config); 
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link" aria-label="はじめに">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">はじめに</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./lecA02.html" class="pagination-link" aria-label="データ操作">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">データ操作</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

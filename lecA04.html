@@ -1,0 +1,2541 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="2026年度　A（前期） B（後期） 時間： 月曜日 4 時限（15:45-17:30） 教室： C 館 地下1階 PC4 教室">
+
+<title>4&nbsp; 可視化2 – R プログラミング</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./lecA05.html" rel="next">
+<link href="./lecA03.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-ff88f174eb6c98cff991482d4cc81ba9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<meta name="robots" content="noindex, nofollow">
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lecA01.html">前期（A）</a></li><li class="breadcrumb-item"><a href="./lecA04.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">可視化2</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">R プログラミング</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">はじめに</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">前期（A）</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R 導入</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">データ操作</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">可視化1</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA04.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">可視化2</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">可視化3</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">記述統計</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">t 検定</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">コードを読む</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">相関分析</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">回帰分析1</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">回帰分析2</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">回帰分析3</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">総合演習</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">後期（B）</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">データ分析の流れ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">演習</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">演習</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">総合分析演習 1</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">発表・分析結果説明 1</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">総合分析演習 2</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">発表・分析結果説明 2</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">総合分析演習 3</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">発表・分析結果説明 3</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">総合分析演習 4</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">発表・分析結果説明 4</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">総合分析演習 5</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">発表・分析結果説明 5</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">参考文献</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-setup" id="toc-sec-setup" class="nav-link active" data-scroll-target="#sec-setup"><span class="header-section-number">4.1</span> パッケージの準備</a></li>
+  <li><a href="#今回使うデータ" id="toc-今回使うデータ" class="nav-link" data-scroll-target="#今回使うデータ"><span class="header-section-number">4.2</span> 今回使うデータ</a>
+  <ul class="collapse">
+  <li><a href="#mpg-データ箱ひげ図散布図" id="toc-mpg-データ箱ひげ図散布図" class="nav-link" data-scroll-target="#mpg-データ箱ひげ図散布図"><code>mpg</code> データ（箱ひげ図・散布図）</a></li>
+  <li><a href="#gapminder-データ折れ線グラフ" id="toc-gapminder-データ折れ線グラフ" class="nav-link" data-scroll-target="#gapminder-データ折れ線グラフ"><code>gapminder</code> データ（折れ線グラフ）</a></li>
+  </ul></li>
+  <li><a href="#sec-boxplot" id="toc-sec-boxplot" class="nav-link" data-scroll-target="#sec-boxplot"><span class="header-section-number">4.3</span> 箱ひげ図</a>
+  <ul class="collapse">
+  <li><a href="#箱ひげ図とは" id="toc-箱ひげ図とは" class="nav-link" data-scroll-target="#箱ひげ図とは">箱ひげ図とは</a></li>
+  <li><a href="#geom_boxplot-の基本" id="toc-geom_boxplot-の基本" class="nav-link" data-scroll-target="#geom_boxplot-の基本"><code>geom_boxplot()</code> の基本</a></li>
+  <li><a href="#色を変える" id="toc-色を変える" class="nav-link" data-scroll-target="#色を変える">色を変える</a></li>
+  <li><a href="#グループ別の箱ひげ図" id="toc-グループ別の箱ひげ図" class="nav-link" data-scroll-target="#グループ別の箱ひげ図">グループ別の箱ひげ図</a></li>
+  <li><a href="#横向き箱ひげ図" id="toc-横向き箱ひげ図" class="nav-link" data-scroll-target="#横向き箱ひげ図">横向き箱ひげ図</a></li>
+  <li><a href="#透過率と外れ値" id="toc-透過率と外れ値" class="nav-link" data-scroll-target="#透過率と外れ値">透過率と外れ値</a></li>
+  <li><a href="#ファセット分割" id="toc-ファセット分割" class="nav-link" data-scroll-target="#ファセット分割">ファセット分割</a></li>
+  </ul></li>
+  <li><a href="#sec-scatterplot" id="toc-sec-scatterplot" class="nav-link" data-scroll-target="#sec-scatterplot"><span class="header-section-number">4.4</span> 散布図</a>
+  <ul class="collapse">
+  <li><a href="#散布図とは" id="toc-散布図とは" class="nav-link" data-scroll-target="#散布図とは">散布図とは</a></li>
+  <li><a href="#geom_point-の基本" id="toc-geom_point-の基本" class="nav-link" data-scroll-target="#geom_point-の基本"><code>geom_point()</code> の基本</a></li>
+  <li><a href="#色サイズをマッピングする" id="toc-色サイズをマッピングする" class="nav-link" data-scroll-target="#色サイズをマッピングする">色・サイズをマッピングする</a></li>
+  <li><a href="#重なりを解消するjitter" id="toc-重なりを解消するjitter" class="nav-link" data-scroll-target="#重なりを解消するjitter">重なりを解消する（jitter）</a></li>
+  <li><a href="#回帰直線を追加するgeom_smooth" id="toc-回帰直線を追加するgeom_smooth" class="nav-link" data-scroll-target="#回帰直線を追加するgeom_smooth">回帰直線を追加する（<code>geom_smooth()</code>）</a></li>
+  <li><a href="#ファセット分割-1" id="toc-ファセット分割-1" class="nav-link" data-scroll-target="#ファセット分割-1">ファセット分割</a></li>
+  </ul></li>
+  <li><a href="#sec-linechart" id="toc-sec-linechart" class="nav-link" data-scroll-target="#sec-linechart"><span class="header-section-number">4.5</span> 折れ線グラフ</a>
+  <ul class="collapse">
+  <li><a href="#折れ線グラフとは" id="toc-折れ線グラフとは" class="nav-link" data-scroll-target="#折れ線グラフとは">折れ線グラフとは</a></li>
+  <li><a href="#データの確認" id="toc-データの確認" class="nav-link" data-scroll-target="#データの確認">データの確認</a></li>
+  <li><a href="#geom_line-の基本1-カ国" id="toc-geom_line-の基本1-カ国" class="nav-link" data-scroll-target="#geom_line-の基本1-カ国"><code>geom_line()</code> の基本（1 カ国）</a></li>
+  <li><a href="#複数のグループを描く" id="toc-複数のグループを描く" class="nav-link" data-scroll-target="#複数のグループを描く">複数のグループを描く</a></li>
+  <li><a href="#大陸別の比較" id="toc-大陸別の比較" class="nav-link" data-scroll-target="#大陸別の比較">大陸別の比較</a></li>
+  <li><a href="#ファセット分割-2" id="toc-ファセット分割-2" class="nav-link" data-scroll-target="#ファセット分割-2">ファセット分割</a></li>
+  <li><a href="#特定の国を強調する" id="toc-特定の国を強調する" class="nav-link" data-scroll-target="#特定の国を強調する">特定の国を強調する</a></li>
+  </ul></li>
+  <li><a href="#まとめ" id="toc-まとめ" class="nav-link" data-scroll-target="#まとめ"><span class="header-section-number">4.6</span> まとめ</a>
+  <ul class="collapse">
+  <li><a href="#本日学んだこと" id="toc-本日学んだこと" class="nav-link" data-scroll-target="#本日学んだこと">本日学んだこと</a></li>
+  </ul></li>
+  <li><a href="#演習問題" id="toc-演習問題" class="nav-link" data-scroll-target="#演習問題"><span class="header-section-number">4.7</span> 演習問題</a>
+  <ul class="collapse">
+  <li><a href="#sec-boxplot-exercises" id="toc-sec-boxplot-exercises" class="nav-link" data-scroll-target="#sec-boxplot-exercises"><span class="header-section-number">4.7.1</span> 箱ひげ図</a></li>
+  <li><a href="#sec-scatter-exercises" id="toc-sec-scatter-exercises" class="nav-link" data-scroll-target="#sec-scatter-exercises"><span class="header-section-number">4.7.2</span> 散布図</a></li>
+  <li><a href="#sec-line-exercises" id="toc-sec-line-exercises" class="nav-link" data-scroll-target="#sec-line-exercises"><span class="header-section-number">4.7.3</span> 折れ線グラフ</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lecA01.html">前期（A）</a></li><li class="breadcrumb-item"><a href="./lecA04.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">可視化2</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">可視化2</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><strong>箱ひげ図・散布図・折れ線グラフ</strong></p>
+<div style="margin-top: 2.0em;">
+
+</div>
+<p><strong>今日の目標</strong></p>
+<ol type="1">
+<li><strong>箱ひげ図</strong>（<code>geom_boxplot()</code>）を描けるようになる。</li>
+<li><strong>散布図</strong>（<code>geom_point()</code>）を描けるようになる。</li>
+<li><strong>折れ線グラフ</strong>（<code>geom_line()</code>）を描けるようになる。</li>
+</ol>
+<section id="sec-setup" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="sec-setup"><span class="header-section-number">4.1</span> パッケージの準備</h2>
+<p>大学のPCはシャットダウンする度に初期化されるため、毎回インストールが必要です。 毎回授業開始時にこのブロックを実行してください。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">install.packages</span>(<span class="st">"readxl"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">install.packages</span>(<span class="st">"gapminder"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>必要なパッケージを読み込みます。 折れ線グラフの演習では <code>gapminder</code> パッケージを使います。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="fu">library</span>(gapminder)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong><code>gapminder</code> パッケージとは</strong></p>
+<p>世界各国の経済・健康データをまとめたデータセットです。</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>変数名</th>
+<th>内容</th>
+<th>型</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>country</code></td>
+<td>国名</td>
+<td>文字列（離散）</td>
+</tr>
+<tr class="even">
+<td><code>continent</code></td>
+<td>大陸名</td>
+<td>文字列（離散）</td>
+</tr>
+<tr class="odd">
+<td><code>year</code></td>
+<td>年（1952〜2007、5年刻み）</td>
+<td>数値（離散）</td>
+</tr>
+<tr class="even">
+<td><code>lifeExp</code></td>
+<td>平均寿命（年）</td>
+<td>数値（連続）</td>
+</tr>
+<tr class="odd">
+<td><code>pop</code></td>
+<td>人口</td>
+<td>数値（連続）</td>
+</tr>
+<tr class="even">
+<td><code>gdpPercap</code></td>
+<td>一人当たり GDP（ドル）</td>
+<td>数値（連続）</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="今回使うデータ" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="今回使うデータ"><span class="header-section-number">4.2</span> 今回使うデータ</h2>
+<section id="mpg-データ箱ひげ図散布図" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="mpg-データ箱ひげ図散布図"><code>mpg</code> データ（箱ひげ図・散布図）</h3>
+<p>前回と同じく <code>ggplot2</code> 付属の自動車燃費データを使います。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">glimpse</span>(mpg)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 234
+Columns: 11
+$ manufacturer &lt;chr&gt; "audi", "audi", "audi", "audi", "audi", "audi", "audi", "…
+$ model        &lt;chr&gt; "a4", "a4", "a4", "a4", "a4", "a4", "a4", "a4 quattro", "…
+$ displ        &lt;dbl&gt; 1.8, 1.8, 2.0, 2.0, 2.8, 2.8, 3.1, 1.8, 1.8, 2.0, 2.0, 2.…
+$ year         &lt;int&gt; 1999, 1999, 2008, 2008, 1999, 1999, 2008, 1999, 1999, 200…
+$ cyl          &lt;int&gt; 4, 4, 4, 4, 6, 6, 6, 4, 4, 4, 4, 6, 6, 6, 6, 6, 6, 8, 8, …
+$ trans        &lt;chr&gt; "auto(l5)", "manual(m5)", "manual(m6)", "auto(av)", "auto…
+$ drv          &lt;chr&gt; "f", "f", "f", "f", "f", "f", "f", "4", "4", "4", "4", "4…
+$ cty          &lt;int&gt; 18, 21, 20, 21, 16, 18, 18, 18, 16, 20, 19, 15, 17, 17, 1…
+$ hwy          &lt;int&gt; 29, 29, 31, 30, 26, 26, 27, 26, 25, 28, 27, 25, 25, 25, 2…
+$ fl           &lt;chr&gt; "p", "p", "p", "p", "p", "p", "p", "p", "p", "p", "p", "p…
+$ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact", "c…</code></pre>
+</div>
+</div>
+<div style="margin-top: 3.0em;">
+
+</div>
+</section>
+<section id="gapminder-データ折れ線グラフ" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="gapminder-データ折れ線グラフ"><code>gapminder</code> データ（折れ線グラフ）</h3>
+<p>世界各国の経済・人口・平均寿命データです。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">glimpse</span>(gapminder)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 1,704
+Columns: 6
+$ country   &lt;fct&gt; "Afghanistan", "Afghanistan", "Afghanistan", "Afghanistan", …
+$ continent &lt;fct&gt; Asia, Asia, Asia, Asia, Asia, Asia, Asia, Asia, Asia, Asia, …
+$ year      &lt;int&gt; 1952, 1957, 1962, 1967, 1972, 1977, 1982, 1987, 1992, 1997, …
+$ lifeExp   &lt;dbl&gt; 28.801, 30.332, 31.997, 34.020, 36.088, 38.438, 39.854, 40.8…
+$ pop       &lt;int&gt; 8425333, 9240934, 10267083, 11537966, 13079460, 14880372, 12…
+$ gdpPercap &lt;dbl&gt; 779.4453, 820.8530, 853.1007, 836.1971, 739.9811, 786.1134, …</code></pre>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+</section>
+<section id="sec-boxplot" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="sec-boxplot"><span class="header-section-number">4.3</span> 箱ひげ図</h2>
+<section id="箱ひげ図とは" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="箱ひげ図とは">箱ひげ図とは</h3>
+<p>箱ひげ図（boxplot）は<strong>連続変数の分布</strong>を視覚的に要約する方法です。 特定のグループごとに「分布の形」を比較するのが得意です。</p>
+<p>参考：<br>
+<a href="https://www.stat.go.jp/naruhodo/4_graph/shokyu/hakohige.html">なるほど統計学園（総務省）</a></p>
+<p><a href="https://bellcurve.jp/statistics/course/5220.html?srsltid=AfmBOorTBfR-NXze-D1FhdxPyLzdjymxuhrxeB5p1x9QLspzlb-TPT3a">箱ひげ図の見方（統計WEB）</a></p>
+<div style="margin-top: 3.0em;">
+
+</div>
+<p><strong>箱ひげ図で読める情報</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>要素</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>箱の下辺（第1四分位数 Q1）</td>
+<td>データの下位25%の境界</td>
+</tr>
+<tr class="even">
+<td>箱の中央線（第2四分位数 Q2 = 中央値）</td>
+<td>データの真ん中の値</td>
+</tr>
+<tr class="odd">
+<td>箱の上辺（第3四分位数 Q3）</td>
+<td>データの上位25%の境界</td>
+</tr>
+<tr class="even">
+<td>ひげの上端</td>
+<td>Q3 + 1.5 × IQR（四分位範囲）以内の最大値</td>
+</tr>
+<tr class="odd">
+<td>ひげの下端</td>
+<td>Q1 − 1.5 × IQR 以内の最小値</td>
+</tr>
+<tr class="even">
+<td>点（●）</td>
+<td><strong>外れ値</strong>（ひげの外側にある観測値）</td>
+</tr>
+</tbody>
+</table>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>ヒストグラム vs 箱ひげ図</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>ヒストグラム</th>
+<th>箱ひげ図</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>得意なこと</strong></td>
+<td>分布の「形」（山の位置・歪み）を把握</td>
+<td>複数グループの分布を1つのグラフで比較</td>
+</tr>
+<tr class="even">
+<td><strong>グループ比較</strong></td>
+<td><code>facet_wrap()</code> で分割が必要</td>
+<td>1つのグラフ内でグループを並べられる</td>
+</tr>
+<tr class="odd">
+<td><strong>記述統計</strong></td>
+<td>直接は読めない</td>
+<td>中央値・四分位数がひと目でわかる</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="geom_boxplot-の基本" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="geom_boxplot-の基本"><code>geom_boxplot()</code> の基本</h3>
+<p><code>geom_boxplot()</code> は <code>x</code> に<strong>カテゴリ変数</strong>、<code>y</code> に<strong>連続変数</strong>を指定します。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> class, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecA04_files/figure-html/boxplot-basic-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>車のクラス別の高速道路燃費（基本）</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div style="margin-top: 3.0em;">
+
+</div>
+<p><strong>ラベルを整える</strong></p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> class, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">labs</span>(</span>
+<span id="cb8-4"><a href="#cb8-4"></a>    <span class="at">title =</span> <span class="st">"車のクラス別の高速道路燃費"</span>,</span>
+<span id="cb8-5"><a href="#cb8-5"></a>    <span class="at">x =</span> <span class="st">"クラス"</span>,</span>
+<span id="cb8-6"><a href="#cb8-6"></a>    <span class="at">y =</span> <span class="st">"高速道路燃費（mpg）"</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a>  ) <span class="sc">+</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecA04_files/figure-html/boxplot-labs-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>ラベルを整えた箱ひげ図</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="色を変える" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="色を変える">色を変える</h3>
+<p><strong><code>fill</code> で箱の塗りつぶし色を変える</strong></p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-7"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-7-1"><a href="#annotated-cell-7-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> class, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="1">1</button><span id="annotated-cell-7-2" class="code-annotation-target"><a href="#annotated-cell-7-2"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">color =</span> <span class="st">"gray30"</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-7-3"><a href="#annotated-cell-7-3"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"クラス別の高速道路燃費"</span>, <span class="at">x =</span> <span class="st">"クラス"</span>, <span class="at">y =</span> <span class="st">"燃費（mpg）"</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-7-4"><a href="#annotated-cell-7-4"></a>  <span class="fu">theme_minimal</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-7" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="2" data-code-annotation="1"><code>fill</code> で箱の色、<code>color</code> でひげ・輪郭の色を指定</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecA04_files/figure-html/boxplot-fill-fixed-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>塗りつぶし色を固定値で指定</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div style="margin-top: 3.0em;">
+
+</div>
+<p><strong><code>fill</code> に変数をマッピングしてカテゴリごとに色を変える</strong></p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-8"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="1">1</button><span id="annotated-cell-8-1" class="code-annotation-target"><a href="#annotated-cell-8-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> class, <span class="at">y =</span> hwy, <span class="at">fill =</span> class)) <span class="sc">+</span></span>
+<span id="annotated-cell-8-2"><a href="#annotated-cell-8-2"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="annotated-cell-8-3"><a href="#annotated-cell-8-3"></a>  <span class="fu">labs</span>(</span>
+<span id="annotated-cell-8-4"><a href="#annotated-cell-8-4"></a>    <span class="at">title =</span> <span class="st">"クラス別の高速道路燃費"</span>,</span>
+<span id="annotated-cell-8-5"><a href="#annotated-cell-8-5"></a>    <span class="at">x =</span> <span class="st">"クラス"</span>, <span class="at">y =</span> <span class="st">"燃費（mpg）"</span>,</span>
+<span id="annotated-cell-8-6"><a href="#annotated-cell-8-6"></a>    <span class="at">fill =</span> <span class="st">"クラス"</span></span>
+<span id="annotated-cell-8-7"><a href="#annotated-cell-8-7"></a>  ) <span class="sc">+</span></span>
+<span id="annotated-cell-8-8"><a href="#annotated-cell-8-8"></a>  <span class="fu">theme_minimal</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-8" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="1" data-code-annotation="1"><code>aes()</code> の中に <code>fill = class</code> を書くと、クラスごとに自動的に色が変わる</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecA04_files/figure-html/boxplot-fill-var-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>クラスごとに色を変えた箱ひげ図</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="グループ別の箱ひげ図" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="グループ別の箱ひげ図">グループ別の箱ひげ図</h3>
+<p><code>x</code> に一つのカテゴリ変数、<code>fill</code> に別のカテゴリ変数を指定すると、 グループ別に色分けした箱ひげ図が描けます。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-9"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="1">1</button><span id="annotated-cell-9-1" class="code-annotation-target"><a href="#annotated-cell-9-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> class, <span class="at">y =</span> hwy, <span class="at">fill =</span> drv)) <span class="sc">+</span></span>
+<span id="annotated-cell-9-2"><a href="#annotated-cell-9-2"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="annotated-cell-9-3"><a href="#annotated-cell-9-3"></a>  <span class="fu">labs</span>(</span>
+<span id="annotated-cell-9-4"><a href="#annotated-cell-9-4"></a>    <span class="at">title =</span> <span class="st">"クラス・駆動方式別の高速道路燃費"</span>,</span>
+<span id="annotated-cell-9-5"><a href="#annotated-cell-9-5"></a>    <span class="at">x =</span> <span class="st">"クラス"</span>, <span class="at">y =</span> <span class="st">"燃費（mpg）"</span>,</span>
+<span id="annotated-cell-9-6"><a href="#annotated-cell-9-6"></a>    <span class="at">fill =</span> <span class="st">"駆動方式"</span></span>
+<span id="annotated-cell-9-7"><a href="#annotated-cell-9-7"></a>  ) <span class="sc">+</span></span>
+<span id="annotated-cell-9-8"><a href="#annotated-cell-9-8"></a>  <span class="fu">theme_minimal</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-9" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-9" data-code-lines="1" data-code-annotation="1"><code>fill = drv</code> で駆動方式ごとに色分け。箱が自動的にグループ別に並ぶ</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecA04_files/figure-html/boxplot-group-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>クラス・駆動方式別の高速道路燃費</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="横向き箱ひげ図" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="横向き箱ひげ図">横向き箱ひげ図</h3>
+<p>カテゴリ名が長い場合や箱を見やすくしたい場合は、<code>coord_flip()</code> で横向きにします。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-10"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="1">1</button><span id="annotated-cell-10-1" class="code-annotation-target"><a href="#annotated-cell-10-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(class, hwy, median), <span class="at">y =</span> hwy, <span class="at">fill =</span> class)) <span class="sc">+</span></span>
+<span id="annotated-cell-10-2"><a href="#annotated-cell-10-2"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="2">2</button><span id="annotated-cell-10-3" class="code-annotation-target"><a href="#annotated-cell-10-3"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="annotated-cell-10-4"><a href="#annotated-cell-10-4"></a>  <span class="fu">labs</span>(</span>
+<span id="annotated-cell-10-5"><a href="#annotated-cell-10-5"></a>    <span class="at">title =</span> <span class="st">"クラス別の高速道路燃費（中央値順）"</span>,</span>
+<span id="annotated-cell-10-6"><a href="#annotated-cell-10-6"></a>    <span class="at">x =</span> <span class="st">"クラス"</span>, <span class="at">y =</span> <span class="st">"燃費（mpg）"</span></span>
+<span id="annotated-cell-10-7"><a href="#annotated-cell-10-7"></a>  ) <span class="sc">+</span></span>
+<span id="annotated-cell-10-8"><a href="#annotated-cell-10-8"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="3">3</button><span id="annotated-cell-10-9" class="code-annotation-target"><a href="#annotated-cell-10-9"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-10" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-10" data-code-lines="1" data-code-annotation="1"><code>reorder(class, hwy, median)</code> で中央値の大きさ順にクラスを並べ替える</span>
+</dd>
+<dt data-target-cell="annotated-cell-10" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-10" data-code-lines="3" data-code-annotation="2"><code>coord_flip()</code> で X 軸と Y 軸を入れ替える</span>
+</dd>
+<dt data-target-cell="annotated-cell-10" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-10" data-code-lines="9" data-code-annotation="3">軸ラベルと凡例の情報が重複するので凡例を非表示にする</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecA04_files/figure-html/boxplot-flip-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>横向き箱ひげ図</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong><code>reorder()</code> 関数</strong></p>
+<p><code>reorder(並べたい変数, 基準にする変数, 集計関数)</code> の形で使います。</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">reorder</span>(class, hwy, median)   <span class="co"># hwy の中央値順に class を並べる</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="fu">reorder</span>(class, hwy, mean)     <span class="co"># hwy の平均値順に class を並べる</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>coord_flip()</code> との組み合わせで「値の大きい順に上から並ぶ」見やすいグラフになります。</p>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="透過率と外れ値" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="透過率と外れ値">透過率と外れ値</h3>
+<p><strong><code>alpha</code> で透過率を設定する</strong></p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-11"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-11-1"><a href="#annotated-cell-11-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> class, <span class="at">y =</span> hwy, <span class="at">fill =</span> class)) <span class="sc">+</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="1">1</button><span id="annotated-cell-11-2" class="code-annotation-target"><a href="#annotated-cell-11-2"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="2">2</button><span id="annotated-cell-11-3" class="code-annotation-target"><a href="#annotated-cell-11-3"></a>               <span class="at">outlier.color =</span> <span class="st">"red"</span>,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="3">3</button><span id="annotated-cell-11-4" class="code-annotation-target"><a href="#annotated-cell-11-4"></a>               <span class="at">outlier.size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-11-5"><a href="#annotated-cell-11-5"></a>  <span class="fu">labs</span>(</span>
+<span id="annotated-cell-11-6"><a href="#annotated-cell-11-6"></a>    <span class="at">title =</span> <span class="st">"クラス別の高速道路燃費"</span>,</span>
+<span id="annotated-cell-11-7"><a href="#annotated-cell-11-7"></a>    <span class="at">x =</span> <span class="st">"クラス"</span>, <span class="at">y =</span> <span class="st">"燃費（mpg）"</span></span>
+<span id="annotated-cell-11-8"><a href="#annotated-cell-11-8"></a>  ) <span class="sc">+</span></span>
+<span id="annotated-cell-11-9"><a href="#annotated-cell-11-9"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="annotated-cell-11-10"><a href="#annotated-cell-11-10"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-11" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-11" data-code-lines="2" data-code-annotation="1"><code>alpha = 0.7</code> で透過率 70%（1 = 不透明、0 = 完全透明）</span>
+</dd>
+<dt data-target-cell="annotated-cell-11" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-11" data-code-lines="3" data-code-annotation="2"><code>outlier.color</code> で外れ値の点の色を変える</span>
+</dd>
+<dt data-target-cell="annotated-cell-11" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-11" data-code-lines="4" data-code-annotation="3"><code>outlier.size</code> で外れ値の点の大きさを変える</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecA04_files/figure-html/boxplot-alpha-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>透過率を設定した箱ひげ図</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="ファセット分割" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="ファセット分割">ファセット分割</h3>
+<p><code>facet_wrap()</code> で変数ごとにパネルを分割できます。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-12"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-12-1"><a href="#annotated-cell-12-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> class, <span class="at">y =</span> hwy, <span class="at">fill =</span> class)) <span class="sc">+</span></span>
+<span id="annotated-cell-12-2"><a href="#annotated-cell-12-2"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="1">1</button><span id="annotated-cell-12-3" class="code-annotation-target"><a href="#annotated-cell-12-3"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> cyl) <span class="sc">+</span></span>
+<span id="annotated-cell-12-4"><a href="#annotated-cell-12-4"></a>  <span class="fu">labs</span>(</span>
+<span id="annotated-cell-12-5"><a href="#annotated-cell-12-5"></a>    <span class="at">title =</span> <span class="st">"シリンダー数・クラス別の高速道路燃費"</span>,</span>
+<span id="annotated-cell-12-6"><a href="#annotated-cell-12-6"></a>    <span class="at">x =</span> <span class="st">"クラス"</span>, <span class="at">y =</span> <span class="st">"燃費（mpg）"</span></span>
+<span id="annotated-cell-12-7"><a href="#annotated-cell-12-7"></a>  ) <span class="sc">+</span></span>
+<span id="annotated-cell-12-8"><a href="#annotated-cell-12-8"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="annotated-cell-12-9"><a href="#annotated-cell-12-9"></a>  <span class="fu">theme</span>(</span>
+<span id="annotated-cell-12-10"><a href="#annotated-cell-12-10"></a>    <span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="2">2</button><span id="annotated-cell-12-11" class="code-annotation-target"><a href="#annotated-cell-12-11"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)</span>
+<span id="annotated-cell-12-12"><a href="#annotated-cell-12-12"></a>  )</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-12" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-12" data-code-lines="3" data-code-annotation="1"><code>facet_wrap(~ cyl)</code> でシリンダー数別にパネル分割</span>
+</dd>
+<dt data-target-cell="annotated-cell-12" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-12" data-code-lines="11" data-code-annotation="2">X 軸ラベルを 45 度傾けて重ならないようにする</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecA04_files/figure-html/boxplot-facet-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>シリンダー数別・クラス別の高速道路燃費（分割表示）</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-scatterplot" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="sec-scatterplot"><span class="header-section-number">4.4</span> 散布図</h2>
+<section id="散布図とは" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="散布図とは">散布図とは</h3>
+<p>散布図（scatter plot）は <strong>2 つの連続変数の間の関係</strong>（相関）を視覚的に確認するグラフです。 各データ点が 2 次元平面上の点として描かれます。</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>幾何オブジェクト</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>ggplot()</code></td>
+<td>図を描くキャンバスを用意する</td>
+</tr>
+<tr class="even">
+<td><code>geom_point()</code></td>
+<td><strong>散布図を描く</strong></td>
+</tr>
+</tbody>
+</table>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>因果関係と相関関係</strong></p>
+<p>散布図を描く際、X 軸と Y 軸の変数の設定が重要です。</p>
+<ul>
+<li><strong>原因</strong>と考えられる変数 → X 軸（例：エンジン排気量）</li>
+<li><strong>結果</strong>と考えられる変数 → Y 軸（例：燃費）</li>
+</ul>
+<p>ただし、散布図で見えるのは「相関関係」であり、「因果関係」ではありません。 2 つの変数に強い相関があっても、必ずしも一方が他方の原因とは限りません。</p>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="geom_point-の基本" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="geom_point-の基本"><code>geom_point()</code> の基本</h3>
+<p><code>geom_point()</code> は <code>x</code> と <code>y</code> の両方に<strong>連続変数</strong>を指定します。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">geom_point</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecA04_files/figure-html/scatter-basic-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>排気量と高速道路燃費の散布図（基本）</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><code>aes(x = displ, y = hwy)</code> と書くだけで、各車の排気量と燃費の関係が点で表示されます。</p>
+<div style="margin-top: 3.0em;">
+
+</div>
+<p><strong>ラベルを整える</strong></p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">labs</span>(</span>
+<span id="cb11-4"><a href="#cb11-4"></a>    <span class="at">title =</span> <span class="st">"排気量と高速道路燃費の関係"</span>,</span>
+<span id="cb11-5"><a href="#cb11-5"></a>    <span class="at">x =</span> <span class="st">"排気量（リットル）"</span>,</span>
+<span id="cb11-6"><a href="#cb11-6"></a>    <span class="at">y =</span> <span class="st">"高速道路燃費（mpg）"</span>,</span>
+<span id="cb11-7"><a href="#cb11-7"></a>    <span class="at">caption =</span> <span class="st">"データ出典: mpg (ggplot2)"</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a>  ) <span class="sc">+</span></span>
+<span id="cb11-9"><a href="#cb11-9"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecA04_files/figure-html/scatter-labs-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>ラベルを整えた散布図</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="色サイズをマッピングする" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="色サイズをマッピングする">色・サイズをマッピングする</h3>
+<p><code>aes()</code> の中で変数を色やサイズにマッピングすると、追加の情報を同じグラフで表現できます。</p>
+<p><strong><code>color</code> で色を変数にマッピングする</strong></p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-15"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-15" data-target-annotation="1">1</button><span id="annotated-cell-15-1" class="code-annotation-target"><a href="#annotated-cell-15-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy, <span class="at">color =</span> drv)) <span class="sc">+</span></span>
+<span id="annotated-cell-15-2"><a href="#annotated-cell-15-2"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="annotated-cell-15-3"><a href="#annotated-cell-15-3"></a>  <span class="fu">labs</span>(</span>
+<span id="annotated-cell-15-4"><a href="#annotated-cell-15-4"></a>    <span class="at">title =</span> <span class="st">"排気量と高速道路燃費の関係"</span>,</span>
+<span id="annotated-cell-15-5"><a href="#annotated-cell-15-5"></a>    <span class="at">x =</span> <span class="st">"排気量（リットル）"</span>,</span>
+<span id="annotated-cell-15-6"><a href="#annotated-cell-15-6"></a>    <span class="at">y =</span> <span class="st">"高速道路燃費（mpg）"</span>,</span>
+<span id="annotated-cell-15-7"><a href="#annotated-cell-15-7"></a>    <span class="at">color =</span> <span class="st">"駆動方式"</span></span>
+<span id="annotated-cell-15-8"><a href="#annotated-cell-15-8"></a>  ) <span class="sc">+</span></span>
+<span id="annotated-cell-15-9"><a href="#annotated-cell-15-9"></a>  <span class="fu">theme_minimal</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-15" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-15" data-code-lines="1" data-code-annotation="1"><code>color = drv</code> で駆動方式ごとに点の色が変わる</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecA04_files/figure-html/scatter-color-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>駆動方式ごとに色を変えた散布図</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div style="margin-top: 3.0em;">
+
+</div>
+<p><strong><code>size</code> でサイズを変数にマッピングする</strong></p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-16"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-16" data-target-annotation="1">1</button><span id="annotated-cell-16-1" class="code-annotation-target"><a href="#annotated-cell-16-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy, <span class="at">color =</span> drv, <span class="at">size =</span> cyl)) <span class="sc">+</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-16" data-target-annotation="2">2</button><span id="annotated-cell-16-2" class="code-annotation-target"><a href="#annotated-cell-16-2"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-16-3"><a href="#annotated-cell-16-3"></a>  <span class="fu">labs</span>(</span>
+<span id="annotated-cell-16-4"><a href="#annotated-cell-16-4"></a>    <span class="at">title =</span> <span class="st">"排気量・高速道路燃費・シリンダー数・駆動方式の関係"</span>,</span>
+<span id="annotated-cell-16-5"><a href="#annotated-cell-16-5"></a>    <span class="at">x =</span> <span class="st">"排気量（リットル）"</span>,</span>
+<span id="annotated-cell-16-6"><a href="#annotated-cell-16-6"></a>    <span class="at">y =</span> <span class="st">"高速道路燃費（mpg）"</span>,</span>
+<span id="annotated-cell-16-7"><a href="#annotated-cell-16-7"></a>    <span class="at">color =</span> <span class="st">"駆動方式"</span>,</span>
+<span id="annotated-cell-16-8"><a href="#annotated-cell-16-8"></a>    <span class="at">size =</span> <span class="st">"シリンダー数"</span></span>
+<span id="annotated-cell-16-9"><a href="#annotated-cell-16-9"></a>  ) <span class="sc">+</span></span>
+<span id="annotated-cell-16-10"><a href="#annotated-cell-16-10"></a>  <span class="fu">theme_minimal</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-16" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-16" data-code-lines="1" data-code-annotation="1"><code>size = cyl</code> でシリンダー数が大きいほど点が大きくなる</span>
+</dd>
+<dt data-target-cell="annotated-cell-16" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-16" data-code-lines="2" data-code-annotation="2">点が重なる部分は <code>alpha</code> で透明にすると見やすくなる</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecA04_files/figure-html/scatter-size-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>シリンダー数でサイズを変えた散布図</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong><code>color</code> と <code>fill</code> の使い分け（点の場合）</strong></p>
+<p><code>geom_point()</code> の点は「面積」を持たないため、通常は <code>color</code> を使います。</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>図形</th>
+<th>使うもの</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>点（散布図）</td>
+<td><code>color</code>（点の色）</td>
+</tr>
+<tr class="even">
+<td>棒・箱（棒グラフ・箱ひげ図）</td>
+<td><code>fill</code>（塗りつぶし）と <code>color</code>（輪郭）</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="重なりを解消するjitter" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="重なりを解消するjitter">重なりを解消する（jitter）</h3>
+<p>データが重なって見えにくい場合、<code>geom_jitter()</code> で点をランダムにずらすことができます。</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-17"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-17-1"><a href="#annotated-cell-17-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> drv, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
+<span id="annotated-cell-17-2"><a href="#annotated-cell-17-2"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="annotated-cell-17-3"><a href="#annotated-cell-17-3"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"geom_point()"</span>, <span class="at">x =</span> <span class="st">"駆動方式"</span>, <span class="at">y =</span> <span class="st">"燃費（mpg）"</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-17-4"><a href="#annotated-cell-17-4"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="annotated-cell-17-5"><a href="#annotated-cell-17-5"></a></span>
+<span id="annotated-cell-17-6"><a href="#annotated-cell-17-6"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> drv, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-17" data-target-annotation="1">1</button><span id="annotated-cell-17-7" class="code-annotation-target"><a href="#annotated-cell-17-7"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">height =</span> <span class="dv">0</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-17-8"><a href="#annotated-cell-17-8"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"geom_jitter()"</span>, <span class="at">x =</span> <span class="st">"駆動方式"</span>, <span class="at">y =</span> <span class="st">"燃費（mpg）"</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-17-9"><a href="#annotated-cell-17-9"></a>  <span class="fu">theme_minimal</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-17" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-17" data-code-lines="7" data-code-annotation="1"><code>width</code> で横方向のずらし幅、<code>height</code> で縦方向のずらし幅を指定</span>
+</dd>
+</dl>
+</div>
+<div class="cell quarto-layout-panel" data-layout-align="center" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecA04_files/figure-html/scatter-jitter-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>geom_point()（重なりあり）</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecA04_files/figure-html/scatter-jitter-2.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>geom_jitter()（重なりを解消）</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p>jitter を使って点の重なりを解消</p>
+</div>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="回帰直線を追加するgeom_smooth" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="回帰直線を追加するgeom_smooth">回帰直線を追加する（<code>geom_smooth()</code>）</h3>
+<p>散布図に<strong>回帰直線（トレンドライン）</strong>を追加するには <code>geom_smooth()</code> を使います。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-18"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-18-1"><a href="#annotated-cell-18-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
+<span id="annotated-cell-18-2"><a href="#annotated-cell-18-2"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-18" data-target-annotation="1">1</button><span id="annotated-cell-18-3" class="code-annotation-target"><a href="#annotated-cell-18-3"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-18" data-target-annotation="2">2</button><span id="annotated-cell-18-4" class="code-annotation-target"><a href="#annotated-cell-18-4"></a>              <span class="at">se =</span> <span class="cn">TRUE</span>,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-18" data-target-annotation="3">3</button><span id="annotated-cell-18-5" class="code-annotation-target"><a href="#annotated-cell-18-5"></a>              <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-18-6"><a href="#annotated-cell-18-6"></a>  <span class="fu">labs</span>(</span>
+<span id="annotated-cell-18-7"><a href="#annotated-cell-18-7"></a>    <span class="at">title =</span> <span class="st">"排気量と高速道路燃費の関係（線形回帰）"</span>,</span>
+<span id="annotated-cell-18-8"><a href="#annotated-cell-18-8"></a>    <span class="at">x =</span> <span class="st">"排気量（リットル）"</span>,</span>
+<span id="annotated-cell-18-9"><a href="#annotated-cell-18-9"></a>    <span class="at">y =</span> <span class="st">"高速道路燃費（mpg）"</span></span>
+<span id="annotated-cell-18-10"><a href="#annotated-cell-18-10"></a>  ) <span class="sc">+</span></span>
+<span id="annotated-cell-18-11"><a href="#annotated-cell-18-11"></a>  <span class="fu">theme_minimal</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-18" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-18" data-code-lines="3" data-code-annotation="1"><code>method = "lm"</code> で線形回帰（直線）を使う</span>
+</dd>
+<dt data-target-cell="annotated-cell-18" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-18" data-code-lines="4" data-code-annotation="2"><code>se = TRUE</code>（デフォルト）で 95% 信頼区間を薄い帯で表示</span>
+</dd>
+<dt data-target-cell="annotated-cell-18" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-18" data-code-lines="5" data-code-annotation="3"><code>color</code> で直線の色を指定</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecA04_files/figure-html/scatter-smooth-lm-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>線形回帰直線を追加した散布図</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div style="margin-top: 3.0em;">
+
+</div>
+<p><strong>グループごとに回帰直線を追加する</strong></p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-19"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-19" data-target-annotation="1">1</button><span id="annotated-cell-19-1" class="code-annotation-target"><a href="#annotated-cell-19-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy, <span class="at">color =</span> drv)) <span class="sc">+</span></span>
+<span id="annotated-cell-19-2"><a href="#annotated-cell-19-2"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-19" data-target-annotation="2">2</button><span id="annotated-cell-19-3" class="code-annotation-target"><a href="#annotated-cell-19-3"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-19-4"><a href="#annotated-cell-19-4"></a>  <span class="fu">labs</span>(</span>
+<span id="annotated-cell-19-5"><a href="#annotated-cell-19-5"></a>    <span class="at">title =</span> <span class="st">"排気量・燃費の関係（駆動方式別）"</span>,</span>
+<span id="annotated-cell-19-6"><a href="#annotated-cell-19-6"></a>    <span class="at">x =</span> <span class="st">"排気量（リットル）"</span>,</span>
+<span id="annotated-cell-19-7"><a href="#annotated-cell-19-7"></a>    <span class="at">y =</span> <span class="st">"高速道路燃費（mpg）"</span>,</span>
+<span id="annotated-cell-19-8"><a href="#annotated-cell-19-8"></a>    <span class="at">color =</span> <span class="st">"駆動方式"</span></span>
+<span id="annotated-cell-19-9"><a href="#annotated-cell-19-9"></a>  ) <span class="sc">+</span></span>
+<span id="annotated-cell-19-10"><a href="#annotated-cell-19-10"></a>  <span class="fu">theme_minimal</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-19" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-19" data-code-lines="1" data-code-annotation="1"><code>aes()</code> で <code>color = drv</code> を設定すると、<code>geom_smooth()</code> もグループ別に適用される</span>
+</dd>
+<dt data-target-cell="annotated-cell-19" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-19" data-code-lines="3" data-code-annotation="2"><code>se = FALSE</code> で信頼区間の帯を非表示にするとすっきりする</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecA04_files/figure-html/scatter-smooth-group-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>駆動方式ごとに回帰直線を追加</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong><code>geom_smooth()</code> の <code>method</code> 引数</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>値</th>
+<th>手法</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>"lm"</code></td>
+<td>線形回帰</td>
+<td>直線的な関係</td>
+</tr>
+<tr class="even">
+<td><code>"loess"</code></td>
+<td>LOESS（局所回帰）</td>
+<td>デフォルト。曲線的な関係</td>
+</tr>
+<tr class="odd">
+<td><code>"glm"</code></td>
+<td>一般化線形モデル</td>
+<td>ロジスティック回帰など</td>
+</tr>
+</tbody>
+</table>
+<p>データ数が少ないときは <code>"loess"</code> でも十分ですが、 「直線的な傾向を見たい」ときは <code>method = "lm"</code> を使うのが一般的です。</p>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="ファセット分割-1" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="ファセット分割-1">ファセット分割</h3>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-20"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-20-1"><a href="#annotated-cell-20-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
+<span id="annotated-cell-20-2"><a href="#annotated-cell-20-2"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-20-3"><a href="#annotated-cell-20-3"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-20" data-target-annotation="1">1</button><span id="annotated-cell-20-4" class="code-annotation-target"><a href="#annotated-cell-20-4"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> drv, <span class="at">labeller =</span> <span class="fu">labeller</span>(<span class="at">drv =</span> <span class="fu">c</span>(<span class="st">"4"</span> <span class="ot">=</span> <span class="st">"4WD"</span>, <span class="st">"f"</span> <span class="ot">=</span> <span class="st">"前輪"</span>, <span class="st">"r"</span> <span class="ot">=</span> <span class="st">"後輪"</span>))) <span class="sc">+</span></span>
+<span id="annotated-cell-20-5"><a href="#annotated-cell-20-5"></a>  <span class="fu">labs</span>(</span>
+<span id="annotated-cell-20-6"><a href="#annotated-cell-20-6"></a>    <span class="at">title =</span> <span class="st">"排気量と高速道路燃費の関係（駆動方式別）"</span>,</span>
+<span id="annotated-cell-20-7"><a href="#annotated-cell-20-7"></a>    <span class="at">x =</span> <span class="st">"排気量（リットル）"</span>,</span>
+<span id="annotated-cell-20-8"><a href="#annotated-cell-20-8"></a>    <span class="at">y =</span> <span class="st">"高速道路燃費（mpg）"</span></span>
+<span id="annotated-cell-20-9"><a href="#annotated-cell-20-9"></a>  ) <span class="sc">+</span></span>
+<span id="annotated-cell-20-10"><a href="#annotated-cell-20-10"></a>  <span class="fu">theme_minimal</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-20" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-20" data-code-lines="4" data-code-annotation="1"><code>labeller</code> でパネルのラベルを変更できる</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecA04_files/figure-html/scatter-facet-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>駆動方式別に分割した散布図</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-linechart" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="sec-linechart"><span class="header-section-number">4.5</span> 折れ線グラフ</h2>
+<section id="折れ線グラフとは" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="折れ線グラフとは">折れ線グラフとは</h3>
+<p>折れ線グラフは<strong>ある変数の時系列的な変化</strong>を示す際に使われます。 横軸は時間（年・月・日など）、縦軸は値（人口・気温・株価など）です。</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>幾何オブジェクト</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>ggplot()</code></td>
+<td>図を描くキャンバスを用意する</td>
+</tr>
+<tr class="even">
+<td><code>geom_line()</code></td>
+<td><strong>折れ線グラフを描く</strong></td>
+</tr>
+</tbody>
+</table>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>折れ線グラフの横軸データについての注意点</strong></p>
+<ul>
+<li>横軸上の値は<strong>グループ内において 1 回だけ登場する</strong></li>
+<li>例）総選挙が実施された年の場合、「1996」はデータでは 1 回だけ登場する</li>
+<li>横軸が連続変数でも離散変数でも使えるが、<strong>順序付き</strong>である必要がある</li>
+</ul>
+<p>複数の線を描く場合は、<code>color</code> や <code>group</code> でグループを指定します。</p>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="データの確認" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="データの確認">データの確認</h3>
+<p><code>gapminder</code> データから日本のデータを確認します。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># 日本のデータを確認</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>gapminder <span class="sc">|&gt;</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a>  <span class="fu">filter</span>(country <span class="sc">==</span> <span class="st">"Japan"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 12 × 6
+   country continent  year lifeExp       pop gdpPercap
+   &lt;fct&gt;   &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;     &lt;int&gt;     &lt;dbl&gt;
+ 1 Japan   Asia       1952    63.0  86459025     3217.
+ 2 Japan   Asia       1957    65.5  91563009     4318.
+ 3 Japan   Asia       1962    68.7  95831757     6577.
+ 4 Japan   Asia       1967    71.4 100825279     9848.
+ 5 Japan   Asia       1972    73.4 107188273    14779.
+ 6 Japan   Asia       1977    75.4 113872473    16610.
+ 7 Japan   Asia       1982    77.1 118454974    19384.
+ 8 Japan   Asia       1987    78.7 122091325    22376.
+ 9 Japan   Asia       1992    79.4 124329269    26825.
+10 Japan   Asia       1997    80.7 125956499    28817.
+11 Japan   Asia       2002    82   127065841    28605.
+12 Japan   Asia       2007    82.6 127467972    31656.</code></pre>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="geom_line-の基本1-カ国" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="geom_line-の基本1-カ国"><code>geom_line()</code> の基本（1 カ国）</h3>
+<p>まず、日本の平均寿命の推移を折れ線グラフで描きます。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-22"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-22-1"><a href="#annotated-cell-22-1"></a>gapminder <span class="sc">|&gt;</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-22" data-target-annotation="1">1</button><span id="annotated-cell-22-2" class="code-annotation-target"><a href="#annotated-cell-22-2"></a>  <span class="fu">filter</span>(country <span class="sc">==</span> <span class="st">"Japan"</span>) <span class="sc">|&gt;</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-22" data-target-annotation="2">2</button><span id="annotated-cell-22-3" class="code-annotation-target"><a href="#annotated-cell-22-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> lifeExp)) <span class="sc">+</span></span>
+<span id="annotated-cell-22-4"><a href="#annotated-cell-22-4"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="annotated-cell-22-5"><a href="#annotated-cell-22-5"></a>  <span class="fu">labs</span>(</span>
+<span id="annotated-cell-22-6"><a href="#annotated-cell-22-6"></a>    <span class="at">title =</span> <span class="st">"平均寿命の推移（日本）"</span>,</span>
+<span id="annotated-cell-22-7"><a href="#annotated-cell-22-7"></a>    <span class="at">x =</span> <span class="st">"西暦"</span>,</span>
+<span id="annotated-cell-22-8"><a href="#annotated-cell-22-8"></a>    <span class="at">y =</span> <span class="st">"平均寿命（年）"</span></span>
+<span id="annotated-cell-22-9"><a href="#annotated-cell-22-9"></a>  ) <span class="sc">+</span></span>
+<span id="annotated-cell-22-10"><a href="#annotated-cell-22-10"></a>  <span class="fu">theme_minimal</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-22" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-22" data-code-lines="2" data-code-annotation="1"><code>filter()</code> で日本のデータのみ抽出</span>
+</dd>
+<dt data-target-cell="annotated-cell-22" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-22" data-code-lines="3" data-code-annotation="2">パイプ <code>|&gt;</code> から <code>ggplot()</code> に渡す場合、<code>data =</code> は省略できる</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecA04_files/figure-html/line-japan-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>日本の平均寿命の推移</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div style="margin-top: 3.0em;">
+
+</div>
+<p><strong>点と線を組み合わせる</strong></p>
+<p>折れ線グラフに <code>geom_point()</code> を重ねると、各データ点が強調されます。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-23"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-23-1"><a href="#annotated-cell-23-1"></a>gapminder <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-23-2"><a href="#annotated-cell-23-2"></a>  <span class="fu">filter</span>(country <span class="sc">==</span> <span class="st">"Japan"</span>) <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-23-3"><a href="#annotated-cell-23-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> lifeExp)) <span class="sc">+</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-23" data-target-annotation="1">1</button><span id="annotated-cell-23-4" class="code-annotation-target"><a href="#annotated-cell-23-4"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"steelblue"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-23" data-target-annotation="2">2</button><span id="annotated-cell-23-5" class="code-annotation-target"><a href="#annotated-cell-23-5"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"steelblue"</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-23-6"><a href="#annotated-cell-23-6"></a>  <span class="fu">labs</span>(</span>
+<span id="annotated-cell-23-7"><a href="#annotated-cell-23-7"></a>    <span class="at">title =</span> <span class="st">"平均寿命の推移（日本）"</span>,</span>
+<span id="annotated-cell-23-8"><a href="#annotated-cell-23-8"></a>    <span class="at">x =</span> <span class="st">"西暦"</span>,</span>
+<span id="annotated-cell-23-9"><a href="#annotated-cell-23-9"></a>    <span class="at">y =</span> <span class="st">"平均寿命（年）"</span></span>
+<span id="annotated-cell-23-10"><a href="#annotated-cell-23-10"></a>  ) <span class="sc">+</span></span>
+<span id="annotated-cell-23-11"><a href="#annotated-cell-23-11"></a>  <span class="fu">theme_minimal</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-23" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-23" data-code-lines="4" data-code-annotation="1"><code>linewidth</code> で線の太さを指定</span>
+</dd>
+<dt data-target-cell="annotated-cell-23" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-23" data-code-lines="5" data-code-annotation="2"><code>size</code> で点の大きさを指定</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecA04_files/figure-html/line-japan-point-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>点と線を組み合わせた折れ線グラフ</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="複数のグループを描く" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="複数のグループを描く">複数のグループを描く</h3>
+<p>複数の国の推移を 1 つのグラフに描くには、 <code>color</code> または <code>group</code> にグループ変数を指定します。</p>
+<p><strong>日本・中国・韓国の平均寿命の比較</strong></p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-24"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-24-1"><a href="#annotated-cell-24-1"></a><span class="co"># 東アジア3カ国を抽出</span></span>
+<span id="annotated-cell-24-2"><a href="#annotated-cell-24-2"></a>east_asia <span class="ot">&lt;-</span> gapminder <span class="sc">|&gt;</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-24" data-target-annotation="1">1</button><span id="annotated-cell-24-3" class="code-annotation-target"><a href="#annotated-cell-24-3"></a>  <span class="fu">filter</span>(country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Japan"</span>, <span class="st">"China"</span>, <span class="st">"Korea, Rep."</span>))</span>
+<span id="annotated-cell-24-4"><a href="#annotated-cell-24-4"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-24" data-target-annotation="2">2</button><span id="annotated-cell-24-5" class="code-annotation-target"><a href="#annotated-cell-24-5"></a><span class="fu">ggplot</span>(<span class="at">data =</span> east_asia, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> lifeExp, <span class="at">color =</span> country)) <span class="sc">+</span></span>
+<span id="annotated-cell-24-6"><a href="#annotated-cell-24-6"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-24-7"><a href="#annotated-cell-24-7"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-24-8"><a href="#annotated-cell-24-8"></a>  <span class="fu">labs</span>(</span>
+<span id="annotated-cell-24-9"><a href="#annotated-cell-24-9"></a>    <span class="at">title =</span> <span class="st">"東アジア3カ国の平均寿命の推移"</span>,</span>
+<span id="annotated-cell-24-10"><a href="#annotated-cell-24-10"></a>    <span class="at">x =</span> <span class="st">"西暦"</span>,</span>
+<span id="annotated-cell-24-11"><a href="#annotated-cell-24-11"></a>    <span class="at">y =</span> <span class="st">"平均寿命（年）"</span>,</span>
+<span id="annotated-cell-24-12"><a href="#annotated-cell-24-12"></a>    <span class="at">color =</span> <span class="st">"国名"</span></span>
+<span id="annotated-cell-24-13"><a href="#annotated-cell-24-13"></a>  ) <span class="sc">+</span></span>
+<span id="annotated-cell-24-14"><a href="#annotated-cell-24-14"></a>  <span class="fu">theme_minimal</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-24" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-24" data-code-lines="3" data-code-annotation="1"><code>%in%</code> で複数の値を一度に指定できる（<code>==</code> の複数版）</span>
+</dd>
+<dt data-target-cell="annotated-cell-24" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-24" data-code-lines="5" data-code-annotation="2"><code>color = country</code> で国ごとに線の色が変わる</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecA04_files/figure-html/line-east-asia-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>東アジア3カ国の平均寿命の推移</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong><code>%in%</code> 演算子</strong></p>
+<p><code>%in%</code> は「複数の値のどれかに一致する」かどうかを確認する演算子です。</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># 以下の2つは同じ意味</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="fu">filter</span>(country <span class="sc">==</span> <span class="st">"Japan"</span> <span class="sc">|</span> country <span class="sc">==</span> <span class="st">"China"</span> <span class="sc">|</span> country <span class="sc">==</span> <span class="st">"Korea, Rep."</span>)</span>
+<span id="cb17-3"><a href="#cb17-3"></a><span class="fu">filter</span>(country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Japan"</span>, <span class="st">"China"</span>, <span class="st">"Korea, Rep."</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>リストが長くなるほど <code>%in%</code> の方が簡潔に書けます。</p>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="大陸別の比較" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="大陸別の比較">大陸別の比較</h3>
+<p>各大陸の平均的な平均寿命の変化を見てみましょう。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-25"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-25-1"><a href="#annotated-cell-25-1"></a>gapminder <span class="sc">|&gt;</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-25" data-target-annotation="1">1</button><span id="annotated-cell-25-2" class="code-annotation-target"><a href="#annotated-cell-25-2"></a>  <span class="fu">group_by</span>(continent, year) <span class="sc">|&gt;</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-25" data-target-annotation="2">2</button><span id="annotated-cell-25-3" class="code-annotation-target"><a href="#annotated-cell-25-3"></a>  <span class="fu">summarise</span>(<span class="at">mean_lifeExp =</span> <span class="fu">mean</span>(lifeExp), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-25-4"><a href="#annotated-cell-25-4"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> mean_lifeExp, <span class="at">color =</span> continent)) <span class="sc">+</span></span>
+<span id="annotated-cell-25-5"><a href="#annotated-cell-25-5"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-25-6"><a href="#annotated-cell-25-6"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-25-7"><a href="#annotated-cell-25-7"></a>  <span class="fu">labs</span>(</span>
+<span id="annotated-cell-25-8"><a href="#annotated-cell-25-8"></a>    <span class="at">title =</span> <span class="st">"大陸別の平均寿命の推移（平均値）"</span>,</span>
+<span id="annotated-cell-25-9"><a href="#annotated-cell-25-9"></a>    <span class="at">x =</span> <span class="st">"西暦"</span>,</span>
+<span id="annotated-cell-25-10"><a href="#annotated-cell-25-10"></a>    <span class="at">y =</span> <span class="st">"平均寿命（年）"</span>,</span>
+<span id="annotated-cell-25-11"><a href="#annotated-cell-25-11"></a>    <span class="at">color =</span> <span class="st">"大陸"</span></span>
+<span id="annotated-cell-25-12"><a href="#annotated-cell-25-12"></a>  ) <span class="sc">+</span></span>
+<span id="annotated-cell-25-13"><a href="#annotated-cell-25-13"></a>  <span class="fu">theme_minimal</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-25" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-25" data-code-lines="2" data-code-annotation="1"><code>group_by(continent, year)</code> で大陸×年ごとにグループ化</span>
+</dd>
+<dt data-target-cell="annotated-cell-25" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-25" data-code-lines="3" data-code-annotation="2"><code>summarise()</code> で各グループの平均値を計算</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecA04_files/figure-html/line-continent-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>大陸別の平均寿命の推移（大陸平均）</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="ファセット分割-2" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="ファセット分割-2">ファセット分割</h3>
+<p>大陸別に分割して表示することで、各大陸内の国のばらつきも確認できます。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-26"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-26" data-target-annotation="1">1</button><span id="annotated-cell-26-1" class="code-annotation-target"><a href="#annotated-cell-26-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> gapminder, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> lifeExp, <span class="at">group =</span> country)) <span class="sc">+</span></span>
+<span id="annotated-cell-26-2"><a href="#annotated-cell-26-2"></a>  <span class="fu">geom_line</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>, <span class="at">color =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-26" data-target-annotation="2">2</button><span id="annotated-cell-26-3" class="code-annotation-target"><a href="#annotated-cell-26-3"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> continent, <span class="at">ncol =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-26-4"><a href="#annotated-cell-26-4"></a>  <span class="fu">labs</span>(</span>
+<span id="annotated-cell-26-5"><a href="#annotated-cell-26-5"></a>    <span class="at">title =</span> <span class="st">"大陸別・国別の平均寿命の推移"</span>,</span>
+<span id="annotated-cell-26-6"><a href="#annotated-cell-26-6"></a>    <span class="at">x =</span> <span class="st">"西暦"</span>,</span>
+<span id="annotated-cell-26-7"><a href="#annotated-cell-26-7"></a>    <span class="at">y =</span> <span class="st">"平均寿命（年）"</span></span>
+<span id="annotated-cell-26-8"><a href="#annotated-cell-26-8"></a>  ) <span class="sc">+</span></span>
+<span id="annotated-cell-26-9"><a href="#annotated-cell-26-9"></a>  <span class="fu">theme_minimal</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-26" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-26" data-code-lines="1" data-code-annotation="1"><code>group = country</code> で国ごとに 1 本の線を描く（<code>color</code> を使わないときに必要）</span>
+</dd>
+<dt data-target-cell="annotated-cell-26" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-26" data-code-lines="3" data-code-annotation="2"><code>facet_wrap(~ continent)</code> で大陸別にパネル分割</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecA04_files/figure-html/line-facet-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>大陸別・国別の平均寿命の推移</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong><code>group</code> 引数が必要なとき</strong></p>
+<p>折れ線グラフで複数グループを描く場合、通常は <code>color = グループ変数</code> を使えば自動的に線が分かれます。しかし、色分けはせずに線だけグループ別に描きたい場合は <code>group = グループ変数</code> を明示的に指定する必要があります。</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># 色で区別する（color を使う）</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> lifeExp, <span class="at">color =</span> country)</span>
+<span id="cb18-3"><a href="#cb18-3"></a></span>
+<span id="cb18-4"><a href="#cb18-4"></a><span class="co"># 色分けなし（全部同じ色で線だけ分ける）</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a><span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> lifeExp, <span class="at">group =</span> country)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="特定の国を強調する" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="特定の国を強調する">特定の国を強調する</h3>
+<p>多くの線がある中で特定の国を強調したい場合、 レイヤーを重ねる方法が有効です。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-27"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-27-1"><a href="#annotated-cell-27-1"></a><span class="co"># アジアのデータを抽出</span></span>
+<span id="annotated-cell-27-2"><a href="#annotated-cell-27-2"></a>asia <span class="ot">&lt;-</span> gapminder <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-27-3"><a href="#annotated-cell-27-3"></a>  <span class="fu">filter</span>(continent <span class="sc">==</span> <span class="st">"Asia"</span>)</span>
+<span id="annotated-cell-27-4"><a href="#annotated-cell-27-4"></a></span>
+<span id="annotated-cell-27-5"><a href="#annotated-cell-27-5"></a><span class="co"># 日本のデータを別途抽出</span></span>
+<span id="annotated-cell-27-6"><a href="#annotated-cell-27-6"></a>japan <span class="ot">&lt;-</span> asia <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-27-7"><a href="#annotated-cell-27-7"></a>  <span class="fu">filter</span>(country <span class="sc">==</span> <span class="st">"Japan"</span>)</span>
+<span id="annotated-cell-27-8"><a href="#annotated-cell-27-8"></a></span>
+<span id="annotated-cell-27-9"><a href="#annotated-cell-27-9"></a><span class="co"># グラフを描く</span></span>
+<span id="annotated-cell-27-10"><a href="#annotated-cell-27-10"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="annotated-cell-27-11"><a href="#annotated-cell-27-11"></a>  <span class="co"># 全アジア国の薄い線（背景）</span></span>
+<span id="annotated-cell-27-12"><a href="#annotated-cell-27-12"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> asia,</span>
+<span id="annotated-cell-27-13"><a href="#annotated-cell-27-13"></a>            <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> lifeExp, <span class="at">group =</span> country),</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-27" data-target-annotation="1">1</button><span id="annotated-cell-27-14" class="code-annotation-target"><a href="#annotated-cell-27-14"></a>            <span class="at">color =</span> <span class="st">"gray70"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-27-15"><a href="#annotated-cell-27-15"></a>  <span class="co"># 日本の線（強調）</span></span>
+<span id="annotated-cell-27-16"><a href="#annotated-cell-27-16"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> japan,</span>
+<span id="annotated-cell-27-17"><a href="#annotated-cell-27-17"></a>            <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> lifeExp),</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-27" data-target-annotation="2">2</button><span id="annotated-cell-27-18" class="code-annotation-target"><a href="#annotated-cell-27-18"></a>            <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linewidth =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-27-19"><a href="#annotated-cell-27-19"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> japan,</span>
+<span id="annotated-cell-27-20"><a href="#annotated-cell-27-20"></a>             <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> lifeExp),</span>
+<span id="annotated-cell-27-21"><a href="#annotated-cell-27-21"></a>             <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-27-22"><a href="#annotated-cell-27-22"></a>  <span class="fu">labs</span>(</span>
+<span id="annotated-cell-27-23"><a href="#annotated-cell-27-23"></a>    <span class="at">title =</span> <span class="st">"アジア各国の平均寿命の推移（日本を強調）"</span>,</span>
+<span id="annotated-cell-27-24"><a href="#annotated-cell-27-24"></a>    <span class="at">x =</span> <span class="st">"西暦"</span>,</span>
+<span id="annotated-cell-27-25"><a href="#annotated-cell-27-25"></a>    <span class="at">y =</span> <span class="st">"平均寿命（年）"</span></span>
+<span id="annotated-cell-27-26"><a href="#annotated-cell-27-26"></a>  ) <span class="sc">+</span></span>
+<span id="annotated-cell-27-27"><a href="#annotated-cell-27-27"></a>  <span class="fu">theme_minimal</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-27" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-27" data-code-lines="14" data-code-annotation="1">全アジア国のデータを薄くグレーで描いて背景にする</span>
+</dd>
+<dt data-target-cell="annotated-cell-27" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-27" data-code-lines="18" data-code-annotation="2">日本のデータを赤く太くして前面に描く</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecA04_files/figure-html/line-highlight-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>アジア各国の平均寿命（日本を強調）</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="まとめ" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="まとめ"><span class="header-section-number">4.6</span> まとめ</h2>
+<section id="本日学んだこと" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="本日学んだこと">本日学んだこと</h3>
+<p><strong>3 種類のグラフと使い分け</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>グラフ</th>
+<th>関数</th>
+<th>主な用途</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>箱ひげ図</td>
+<td><code>geom_boxplot()</code></td>
+<td>連続変数の分布・グループ比較</td>
+</tr>
+<tr class="even">
+<td>散布図</td>
+<td><code>geom_point()</code></td>
+<td>2 つの連続変数の関係（相関）</td>
+</tr>
+<tr class="odd">
+<td>折れ線グラフ</td>
+<td><code>geom_line()</code></td>
+<td>時系列データの推移</td>
+</tr>
+</tbody>
+</table>
+<div style="margin-top: 2.0em;">
+
+</div>
+<p><strong>箱ひげ図のまとめ</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>やりたいこと</th>
+<th>書き方</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>基本の箱ひげ図</td>
+<td><code>geom_boxplot()</code></td>
+</tr>
+<tr class="even">
+<td>色を固定</td>
+<td><code>geom_boxplot(fill = "steelblue")</code></td>
+</tr>
+<tr class="odd">
+<td>変数で色分け</td>
+<td><code>aes(fill = 変数名)</code></td>
+</tr>
+<tr class="even">
+<td>中央値順に並べ替え</td>
+<td><code>aes(x = reorder(変数, 値, median))</code></td>
+</tr>
+<tr class="odd">
+<td>横向きにする</td>
+<td><code>+ coord_flip()</code></td>
+</tr>
+<tr class="even">
+<td>外れ値の色を変える</td>
+<td><code>geom_boxplot(outlier.color = "red")</code></td>
+</tr>
+<tr class="odd">
+<td>分割表示</td>
+<td><code>+ facet_wrap(~ 変数)</code></td>
+</tr>
+</tbody>
+</table>
+<div style="margin-top: 2.0em;">
+
+</div>
+<p><strong>散布図のまとめ</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>やりたいこと</th>
+<th>書き方</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>基本の散布図</td>
+<td><code>geom_point()</code></td>
+</tr>
+<tr class="even">
+<td>色で変数を表現</td>
+<td><code>aes(color = 変数名)</code></td>
+</tr>
+<tr class="odd">
+<td>サイズで変数を表現</td>
+<td><code>aes(size = 変数名)</code></td>
+</tr>
+<tr class="even">
+<td>透過率を設定</td>
+<td><code>geom_point(alpha = 0.6)</code></td>
+</tr>
+<tr class="odd">
+<td>点をずらす（重なり解消）</td>
+<td><code>geom_jitter(width = 0.2)</code></td>
+</tr>
+<tr class="even">
+<td>線形回帰直線を追加</td>
+<td><code>+ geom_smooth(method = "lm")</code></td>
+</tr>
+</tbody>
+</table>
+<div style="margin-top: 2.0em;">
+
+</div>
+<p><strong>折れ線グラフのまとめ</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>やりたいこと</th>
+<th>書き方</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>基本の折れ線グラフ</td>
+<td><code>geom_line()</code></td>
+</tr>
+<tr class="even">
+<td>線の太さを変える</td>
+<td><code>geom_line(linewidth = 1)</code></td>
+</tr>
+<tr class="odd">
+<td>点を重ねる</td>
+<td><code>+ geom_point()</code></td>
+</tr>
+<tr class="even">
+<td>複数グループ（色分け）</td>
+<td><code>aes(color = 変数名)</code></td>
+</tr>
+<tr class="odd">
+<td>複数グループ（色なし）</td>
+<td><code>aes(group = 変数名)</code></td>
+</tr>
+<tr class="even">
+<td>分割表示</td>
+<td><code>+ facet_wrap(~ 変数)</code></td>
+</tr>
+</tbody>
+</table>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>次回の予告</strong></p>
+<p>第 5 回では、データを<strong>地図上</strong>に可視化する方法を学習します。</p>
+<ul>
+<li>日本地図・世界地図への色塗り</li>
+<li>緯度・経度データを地図上に描く</li>
+</ul>
+</div>
+</div>
+</section>
+</section>
+<section id="演習問題" class="level2" data-number="4.7">
+<h2 data-number="4.7" class="anchored" data-anchor-id="演習問題"><span class="header-section-number">4.7</span> 演習問題</h2>
+<section id="sec-boxplot-exercises" class="level3" data-number="4.7.1">
+<h3 data-number="4.7.1" class="anchored" data-anchor-id="sec-boxplot-exercises"><span class="header-section-number">4.7.1</span> 箱ひげ図</h3>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>mpg</code> データを使って、<strong>シリンダー数（<code>cyl</code>）別の排気量（<code>displ</code>）</strong>の 箱ひげ図を描いてください。 ただし、以下の条件を満たしてください。</p>
+<ul>
+<li>X 軸に <code>factor(cyl)</code>（シリンダー数を因子型に変換）を使う</li>
+<li><code>fill = factor(cyl)</code> でシリンダー数ごとに色を変える</li>
+<li>X 軸ラベル：「シリンダー数」</li>
+<li>Y 軸ラベル：「排気量（リットル）」</li>
+<li>タイトル：「シリンダー数別の排気量分布」</li>
+<li>テーマ：<code>theme_minimal()</code></li>
+<li>凡例は非表示（<code>theme(legend.position = "none")</code>）</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> ___, <span class="fu">aes</span>(<span class="at">x =</span> ___, <span class="at">y =</span> ___, <span class="at">fill =</span> ___)) <span class="sc">+</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb19-3"><a href="#cb19-3"></a>  <span class="fu">labs</span>(</span>
+<span id="cb19-4"><a href="#cb19-4"></a>    <span class="at">title =</span> ___,</span>
+<span id="cb19-5"><a href="#cb19-5"></a>    <span class="at">x =</span> ___, <span class="at">y =</span> ___</span>
+<span id="cb19-6"><a href="#cb19-6"></a>  ) <span class="sc">+</span></span>
+<span id="cb19-7"><a href="#cb19-7"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb19-8"><a href="#cb19-8"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> ___)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>mpg</code> データを使って、<strong>車のクラス（<code>class</code>）別の市街地燃費（<code>cty</code>）</strong>の 箱ひげ図を描いてください。 ただし、以下の条件を満たしてください。</p>
+<ul>
+<li>市街地燃費の<strong>中央値が大きい順</strong>に並べる（<code>reorder()</code> を使う）</li>
+<li><code>coord_flip()</code> で横向きにする</li>
+<li>X 軸ラベル：「クラス」</li>
+<li>Y 軸ラベル：「市街地燃費（mpg）」</li>
+<li>タイトル：「クラス別の市街地燃費（中央値順）」</li>
+<li>テーマ：<code>theme_classic()</code></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> ___, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(___, ___, ___), <span class="at">y =</span> ___)) <span class="sc">+</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">"skyblue"</span>, <span class="at">color =</span> <span class="st">"gray30"</span>) <span class="sc">+</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb20-4"><a href="#cb20-4"></a>  <span class="fu">labs</span>(</span>
+<span id="cb20-5"><a href="#cb20-5"></a>    <span class="at">title =</span> ___,</span>
+<span id="cb20-6"><a href="#cb20-6"></a>    <span class="at">x =</span> ___, <span class="at">y =</span> ___</span>
+<span id="cb20-7"><a href="#cb20-7"></a>  ) <span class="sc">+</span></span>
+<span id="cb20-8"><a href="#cb20-8"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-scatter-exercises" class="level3" data-number="4.7.2">
+<h3 data-number="4.7.2" class="anchored" data-anchor-id="sec-scatter-exercises"><span class="header-section-number">4.7.2</span> 散布図</h3>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>mpg</code> データを使って、<strong>市街地燃費（<code>cty</code>）と高速道路燃費（<code>hwy</code>）の散布図</strong>を描いてください。 ただし、以下の条件を満たしてください。</p>
+<ul>
+<li><code>color = class</code> でクラスごとに色を変える</li>
+<li><code>alpha = 0.6</code>（透過率 60%）</li>
+<li>X 軸ラベル：「市街地燃費（mpg）」</li>
+<li>Y 軸ラベル：「高速道路燃費（mpg）」</li>
+<li>タイトル：「市街地燃費と高速道路燃費の関係」</li>
+<li>凡例タイトル：「クラス」</li>
+<li>テーマ：<code>theme_minimal()</code></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> ___, <span class="fu">aes</span>(<span class="at">x =</span> ___, <span class="at">y =</span> ___, <span class="at">color =</span> ___)) <span class="sc">+</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> ___) <span class="sc">+</span></span>
+<span id="cb21-3"><a href="#cb21-3"></a>  <span class="fu">labs</span>(</span>
+<span id="cb21-4"><a href="#cb21-4"></a>    <span class="at">title =</span> ___,</span>
+<span id="cb21-5"><a href="#cb21-5"></a>    <span class="at">x =</span> ___, <span class="at">y =</span> ___,</span>
+<span id="cb21-6"><a href="#cb21-6"></a>    <span class="at">color =</span> ___</span>
+<span id="cb21-7"><a href="#cb21-7"></a>  ) <span class="sc">+</span></span>
+<span id="cb21-8"><a href="#cb21-8"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>mpg</code> データを使って、<strong>排気量（<code>displ</code>）と市街地燃費（<code>cty</code>）の散布図</strong>を <code>facet_wrap()</code> を使ってシリンダー数別（<code>cyl</code>）に分割表示してください。 ただし、以下の条件を満たしてください。</p>
+<ul>
+<li>各パネルに <code>method = "lm"</code> の回帰直線を追加（<code>se = FALSE</code>）</li>
+<li>X 軸ラベル：「排気量（リットル）」</li>
+<li>Y 軸ラベル：「市街地燃費（mpg）」</li>
+<li>タイトル：「シリンダー数別：排気量と市街地燃費の関係」</li>
+<li>テーマ：<code>theme_bw()</code></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> ___, <span class="fu">aes</span>(<span class="at">x =</span> ___, <span class="at">y =</span> ___)) <span class="sc">+</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> ___, <span class="at">se =</span> ___) <span class="sc">+</span></span>
+<span id="cb22-4"><a href="#cb22-4"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> ___) <span class="sc">+</span></span>
+<span id="cb22-5"><a href="#cb22-5"></a>  <span class="fu">labs</span>(<span class="at">title =</span> ___, <span class="at">x =</span> ___, <span class="at">y =</span> ___) <span class="sc">+</span></span>
+<span id="cb22-6"><a href="#cb22-6"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-line-exercises" class="level3" data-number="4.7.3">
+<h3 data-number="4.7.3" class="anchored" data-anchor-id="sec-line-exercises"><span class="header-section-number">4.7.3</span> 折れ線グラフ</h3>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>gapminder</code> データを使って、<strong>アメリカ（United States）・日本（Japan）・ドイツ（Germany）</strong> の<strong>一人当たり GDP（<code>gdpPercap</code>）の推移</strong>を折れ線グラフで描いてください。</p>
+<p>ただし、以下の条件を満たしてください。</p>
+<ul>
+<li>3 カ国のデータを <code>filter()</code> と <code>%in%</code> で抽出する</li>
+<li><code>color = country</code> で国ごとに色を変える</li>
+<li>点（<code>geom_point()</code>）も重ねて表示する</li>
+<li>X 軸ラベル：「西暦」</li>
+<li>Y 軸ラベル：「一人当たり GDP（ドル）」</li>
+<li>タイトル：「一人当たり GDP の推移（米・日・独）」</li>
+<li>凡例タイトル：「国名」</li>
+<li>テーマ：<code>theme_minimal()</code></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>gapminder <span class="sc">|&gt;</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a>  <span class="fu">filter</span>(country <span class="sc">%in%</span> <span class="fu">c</span>(___)) <span class="sc">|&gt;</span></span>
+<span id="cb23-3"><a href="#cb23-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> ___, <span class="at">y =</span> ___, <span class="at">color =</span> ___)) <span class="sc">+</span></span>
+<span id="cb23-4"><a href="#cb23-4"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb23-5"><a href="#cb23-5"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb23-6"><a href="#cb23-6"></a>  <span class="fu">labs</span>(</span>
+<span id="cb23-7"><a href="#cb23-7"></a>    <span class="at">title =</span> ___,</span>
+<span id="cb23-8"><a href="#cb23-8"></a>    <span class="at">x =</span> ___, <span class="at">y =</span> ___,</span>
+<span id="cb23-9"><a href="#cb23-9"></a>    <span class="at">color =</span> ___</span>
+<span id="cb23-10"><a href="#cb23-10"></a>  ) <span class="sc">+</span></span>
+<span id="cb23-11"><a href="#cb23-11"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>gapminder</code> データを使って、各大陸の<strong>人口合計（<code>pop</code>）の推移</strong>を折れ線グラフで描いてください。</p>
+<p>ただし、以下の手順で実行してください。</p>
+<ol type="1">
+<li><code>group_by(continent, year)</code> でグループ化する</li>
+<li><code>summarise()</code> で各大陸×年の人口合計（<code>total_pop = sum(pop)</code>）を計算する</li>
+<li><code>ggplot()</code> で折れ線グラフを描く（<code>color = continent</code>）</li>
+<li>X 軸ラベル：「西暦」、Y 軸ラベル：「人口合計」</li>
+<li>タイトル：「大陸別の人口推移」</li>
+<li>テーマ：任意</li>
+</ol>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>gapminder <span class="sc">|&gt;</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a>  <span class="fu">group_by</span>(___, ___) <span class="sc">|&gt;</span></span>
+<span id="cb24-3"><a href="#cb24-3"></a>  <span class="fu">summarise</span>(<span class="at">total_pop =</span> ___, <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb24-4"><a href="#cb24-4"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> ___, <span class="at">y =</span> ___, <span class="at">color =</span> ___)) <span class="sc">+</span></span>
+<span id="cb24-5"><a href="#cb24-5"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb24-6"><a href="#cb24-6"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb24-7"><a href="#cb24-7"></a>  <span class="fu">labs</span>(<span class="at">title =</span> ___, <span class="at">x =</span> ___, <span class="at">y =</span> ___, <span class="at">color =</span> ___) <span class="sc">+</span></span>
+<span id="cb24-8"><a href="#cb24-8"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+        for (let i=0; i<annoteTargets.length; i++) {
+          const annoteTarget = annoteTargets[i];
+          const targetCell = annoteTarget.getAttribute("data-target-cell");
+          const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+          const contentFn = () => {
+            const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+            if (content) {
+              const tipContent = content.cloneNode(true);
+              tipContent.classList.add("code-annotation-tip-content");
+              return tipContent.outerHTML;
+            }
+          }
+          const config = {
+            allowHTML: true,
+            content: contentFn,
+            onShow: (instance) => {
+              selectCodeLines(instance.reference);
+              instance.reference.classList.add('code-annotation-active');
+              window.tippy.hideAll();
+            },
+            onHide: (instance) => {
+              unselectCodeLines();
+              instance.reference.classList.remove('code-annotation-active');
+            },
+            maxWidth: 300,
+            delay: [50, 0],
+            duration: [200, 0],
+            offset: [5, 10],
+            arrow: true,
+            trigger: 'click',
+            appendTo: function(el) {
+              return el.parentElement.parentElement.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'quarto',
+            placement: 'right',
+            positionFixed: true,
+            popperOptions: {
+              modifiers: [
+              {
+                name: 'flip',
+                options: {
+                  flipVariations: false, // true by default
+                  allowedAutoPlacements: ['right'],
+                  fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                },
+              },
+              {
+                name: 'preventOverflow',
+                options: {
+                  mainAxis: false,
+                  altAxis: false
+                }
+              }
+              ]        
+            }      
+          };
+          window.tippy(annoteTarget, config); 
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./lecA03.html" class="pagination-link" aria-label="可視化1">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">可視化1</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./lecA05.html" class="pagination-link" aria-label="可視化3">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">可視化3</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

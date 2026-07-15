@@ -1,0 +1,2115 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="2026年度　A（前期） B（後期） 時間： 月曜日 4 時限（15:45-17:30） 教室： C 館 地下1階 PC4 教室">
+
+<title>11&nbsp; 回帰分析2 – R プログラミング</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./lecA12.html" rel="next">
+<link href="./lecA10.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-ff88f174eb6c98cff991482d4cc81ba9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<meta name="robots" content="noindex, nofollow">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lecA01.html">前期（A）</a></li><li class="breadcrumb-item"><a href="./lecA11.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">回帰分析2</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">R プログラミング</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">はじめに</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">前期（A）</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R 導入</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">データ操作</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">可視化1</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">可視化2</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">可視化3</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">記述統計</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">t 検定</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">コードを読む</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">相関分析</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">回帰分析1</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA11.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">回帰分析2</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">回帰分析3</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecA13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">総合演習</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">後期（B）</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">データ分析の流れ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">演習</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">演習</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">総合分析演習 1</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">発表・分析結果説明 1</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">総合分析演習 2</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">発表・分析結果説明 2</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">総合分析演習 3</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">発表・分析結果説明 3</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">総合分析演習 4</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">発表・分析結果説明 4</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">総合分析演習 5</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lecB13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">発表・分析結果説明 5</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">参考文献</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-setup" id="toc-sec-setup" class="nav-link active" data-scroll-target="#sec-setup"><span class="header-section-number">11.1</span> パッケージの準備</a></li>
+  <li><a href="#sec-data" id="toc-sec-data" class="nav-link" data-scroll-target="#sec-data"><span class="header-section-number">11.2</span> データの準備</a></li>
+  <li><a href="#sec-dummy-intro" id="toc-sec-dummy-intro" class="nav-link" data-scroll-target="#sec-dummy-intro"><span class="header-section-number">11.3</span> ダミー変数とは</a>
+  <ul class="collapse">
+  <li><a href="#定義" id="toc-定義" class="nav-link" data-scroll-target="#定義">定義</a></li>
+  <li><a href="#ダミーを使う際の留意点" id="toc-ダミーを使う際の留意点" class="nav-link" data-scroll-target="#ダミーを使う際の留意点">ダミーを使う際の留意点</a></li>
+  <li><a href="#ダミー変数の効果を可視化する" id="toc-ダミー変数の効果を可視化する" class="nav-link" data-scroll-target="#ダミー変数の効果を可視化する">ダミー変数の効果を可視化する</a></li>
+  <li><a href="#ダミー変数が意味すること" id="toc-ダミー変数が意味すること" class="nav-link" data-scroll-target="#ダミー変数が意味すること">ダミー変数が意味すること</a></li>
+  </ul></li>
+  <li><a href="#sec-dummy-r" id="toc-sec-dummy-r" class="nav-link" data-scroll-target="#sec-dummy-r"><span class="header-section-number">11.4</span> R でのダミー変数の扱い</a>
+  <ul class="collapse">
+  <li><a href="#文字列変数は自動的にダミー化される" id="toc-文字列変数は自動的にダミー化される" class="nav-link" data-scroll-target="#文字列変数は自動的にダミー化される">文字列変数は自動的にダミー化される</a></li>
+  <li><a href="#ダミー変数の係数の解釈" id="toc-ダミー変数の係数の解釈" class="nav-link" data-scroll-target="#ダミー変数の係数の解釈">ダミー変数の係数の解釈</a></li>
+  </ul></li>
+  <li><a href="#sec-cont-dummy" id="toc-sec-cont-dummy" class="nav-link" data-scroll-target="#sec-cont-dummy"><span class="header-section-number">11.5</span> 連続変数 + ダミー変数の重回帰</a>
+  <ul class="collapse">
+  <li><a href="#基本的な組み合わせ" id="toc-基本的な組み合わせ" class="nav-link" data-scroll-target="#基本的な組み合わせ">基本的な組み合わせ</a></li>
+  <li><a href="#ダミー変数の視覚的な意味" id="toc-ダミー変数の視覚的な意味" class="nav-link" data-scroll-target="#ダミー変数の視覚的な意味">ダミー変数の視覚的な意味</a></li>
+  </ul></li>
+  <li><a href="#sec-multi-dummy" id="toc-sec-multi-dummy" class="nav-link" data-scroll-target="#sec-multi-dummy"><span class="header-section-number">11.6</span> 複数カテゴリのダミー変数</a>
+  <ul class="collapse">
+  <li><a href="#カテゴリが-3-つ以上の場合" id="toc-カテゴリが-3-つ以上の場合" class="nav-link" data-scroll-target="#カテゴリが-3-つ以上の場合">カテゴリが 3 つ以上の場合</a></li>
+  <li><a href="#住宅データでのダミー変数" id="toc-住宅データでのダミー変数" class="nav-link" data-scroll-target="#住宅データでのダミー変数">住宅データでのダミー変数</a></li>
+  <li><a href="#給与データでのダミー変数" id="toc-給与データでのダミー変数" class="nav-link" data-scroll-target="#給与データでのダミー変数">給与データでのダミー変数</a></li>
+  </ul></li>
+  <li><a href="#sec-exercises" id="toc-sec-exercises" class="nav-link" data-scroll-target="#sec-exercises"><span class="header-section-number">11.7</span> 演習問題</a></li>
+  <li><a href="#まとめ" id="toc-まとめ" class="nav-link" data-scroll-target="#まとめ"><span class="header-section-number">11.8</span> まとめ</a>
+  <ul class="collapse">
+  <li><a href="#本日学んだこと" id="toc-本日学んだこと" class="nav-link" data-scroll-target="#本日学んだこと">本日学んだこと</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lecA01.html">前期（A）</a></li><li class="breadcrumb-item"><a href="./lecA11.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">回帰分析2</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">回帰分析2</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><strong>ダミー変数を用いた回帰分析</strong></p>
+<div style="margin-top: 2.0em;">
+
+</div>
+<p><strong>今日の目標</strong></p>
+<ol type="1">
+<li><strong>ダミー変数</strong>の概念と R での扱い方を理解する。</li>
+<li>カテゴリ変数を含む<strong>回帰分析</strong>を実行・解釈できるようになる。</li>
+<li><strong>参照カテゴリ</strong>の意味を理解する。</li>
+<li><strong>複数カテゴリ</strong>をもつ変数のダミー変数化を理解する。</li>
+</ol>
+<section id="sec-setup" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="sec-setup"><span class="header-section-number">11.1</span> パッケージの準備</h2>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">options</span>(<span class="at">repos =</span> <span class="fu">c</span>(<span class="at">CRAN =</span> <span class="st">"https://cran.rstudio.com/"</span>))</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">install.packages</span>(<span class="st">"broom"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">install.packages</span>(<span class="st">"modelsummary"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">install.packages</span>(<span class="st">"jtools"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="fu">install.packages</span>(<span class="st">"stargazer"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">library</span>(broom)</span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="fu">library</span>(modelsummary)</span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="fu">library</span>(jtools)</span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="fu">library</span>(stargazer)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-data" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="sec-data"><span class="header-section-number">11.2</span> データの準備</h2>
+<p>今回は主に <strong>医療保険費用データ</strong>（<code>insurance.csv</code>）と <strong>給与データ</strong>（<code>Salary_Data.csv</code>）を使います。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>df_ins <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/insurance.csv"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2"></a>df_sal <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/Salary_Data.csv"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3"></a>df_house <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/Housing.csv"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4"></a></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="fu">glimpse</span>(df_ins)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 1,338
+Columns: 7
+$ age      &lt;dbl&gt; 19, 18, 28, 33, 32, 31, 46, 37, 37, 60, 25, 62, 23, 56, 27, 1…
+$ sex      &lt;chr&gt; "female", "male", "male", "male", "male", "female", "female",…
+$ bmi      &lt;dbl&gt; 27.900, 33.770, 33.000, 22.705, 28.880, 25.740, 33.440, 27.74…
+$ children &lt;dbl&gt; 0, 1, 3, 0, 0, 0, 1, 3, 2, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0…
+$ smoker   &lt;chr&gt; "yes", "no", "no", "no", "no", "no", "no", "no", "no", "no", …
+$ region   &lt;chr&gt; "southwest", "southeast", "southeast", "northwest", "northwes…
+$ charges  &lt;dbl&gt; 16884.924, 1725.552, 4449.462, 21984.471, 3866.855, 3756.622,…</code></pre>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-dummy-intro" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="sec-dummy-intro"><span class="header-section-number">11.3</span> ダミー変数とは</h2>
+<section id="定義" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="定義">定義</h3>
+<p><strong>ダミー変数</strong>（dummy variable）とは、カテゴリ変数を数値化するために 0 か 1 の値をとる変数です。</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>カテゴリ</th>
+<th>ダミー変数の値</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>該当する場合</td>
+<td><strong>1</strong></td>
+</tr>
+<tr class="even">
+<td>該当しない場合</td>
+<td><strong>0</strong></td>
+</tr>
+</tbody>
+</table>
+<div style="margin-top: 2.0em;">
+
+</div>
+<p><strong>例：喫煙するかどうかを表すダミー</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>変数</th>
+<th>カテゴリ</th>
+<th>ダミー変数</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>喫煙ダミー（<code>smoker</code>）</td>
+<td><code>yes</code> = 喫煙者</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td></td>
+<td><code>no</code> = 非喫煙者</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<div style="margin-top: 2.0em;">
+
+</div>
+<p><strong>例：女性を表すダミー</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>変数</th>
+<th>カテゴリ</th>
+<th>ダミー変数</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>女性ダミー（<code>female</code>）</td>
+<td><code>female</code></td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td></td>
+<td><code>male</code></td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<div style="margin-top: 2.0em;">
+
+</div>
+<div id="fig-A11-1" class="quarto-float quarto-figure quarto-figure-center anchored" width="80%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-A11-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/A11/A11-1.png" id="fig-A11-1" class="img-fluid figure-img" style="width:80.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-A11-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+図&nbsp;11.1
+</figcaption>
+</figure>
+</div>
+<div style="margin-top: 2.0em;">
+
+</div>
+<p><strong>例：出身地を表すダミー</strong></p>
+<div style="margin-top: 2.0em;">
+
+</div>
+<div id="fig-A11-2" class="quarto-float quarto-figure quarto-figure-center anchored" width="95%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-A11-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/A11/A11-2.png" id="fig-A11-2" class="img-fluid figure-img" style="width:95.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-A11-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+図&nbsp;11.2
+</figcaption>
+</figure>
+</div>
+<div style="margin-top: 3.0em;">
+
+</div>
+</section>
+<section id="ダミーを使う際の留意点" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="ダミーを使う際の留意点">ダミーを使う際の留意点</h3>
+<ul>
+<li><p>カテゴリカル変数の全てのカテゴリに対してダミー変数を作成し、回帰分析に加えた場合、変数の和が常に1になるため、線形従属の関係が生じ（多重共線性が生じ）、回帰分析が推計されない。</p></li>
+<li><p>何からの変化か分からない。基になる基準が存在しなくなる。</p></li>
+<li><p>この問題を解決するには、カテゴリ数よりも1つ少ない数のダミー変数を作成し、残りの1カテゴリを基準（参照カテゴリ）とすることで回避する。</p></li>
+<li><p>以下のような場合には推計されない。（基準がないから）</p></li>
+</ul>
+<p><span class="math display">\[y_i = \beta_0 + \beta_1 \text{東京}_i + \beta_2 \text{埼玉}_i + \beta_3 \text{千葉}_i + \cdots + \beta_n x_{ni} + \varepsilon_i\]</span></p>
+<ul>
+<li>以下のように基準（参照カテゴリ）を決め、その基準を式に入れない。</li>
+</ul>
+<p><span class="math display">\[y_i = \beta_0 + {\cancel{\beta_1 \text{東京}_i}} + \beta_2 \text{埼玉}_i + \beta_3 \text{千葉}_i + \cdots + \beta_n x_{ni} + \varepsilon_i\]</span></p>
+<ul>
+<li><span class="math inline">\(\beta_2\)</span> の値は、東京と比べて埼玉になった場合の変化量、<span class="math inline">\(\beta_3\)</span> の値は、東京と比べて千葉になった場合の変化量を表す。基準（参照カテゴリ）は自分で決める。</li>
+</ul>
+<div style="margin-top: 3.0em;">
+
+</div>
+</section>
+<section id="ダミー変数の効果を可視化する" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="ダミー変数の効果を可視化する">ダミー変数の効果を可視化する</h3>
+<p>まず、喫煙有無によって医療費がどう違うかを視覚的に確認します。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">ggplot</span>(df_ins, <span class="fu">aes</span>(<span class="at">x =</span> smoker, <span class="at">y =</span> charges, <span class="at">fill =</span> smoker)) <span class="sc">+</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"point"</span>,</span>
+<span id="cb5-4"><a href="#cb5-4"></a>               <span class="at">shape =</span> <span class="dv">18</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"喫煙有無別の医療費"</span>,</span>
+<span id="cb5-6"><a href="#cb5-6"></a>       <span class="at">subtitle =</span> <span class="st">"赤◆：平均値"</span>,</span>
+<span id="cb5-7"><a href="#cb5-7"></a>       <span class="at">x =</span> <span class="st">"喫煙"</span>, <span class="at">y =</span> <span class="st">"医療費（ドル）"</span>) <span class="sc">+</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecA11_files/figure-html/dummy-viz-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>喫煙有無別の医療費分布</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="ダミー変数が意味すること" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="ダミー変数が意味すること">ダミー変数が意味すること</h3>
+<p>具体例で確認します。勉強時間と女性ダミーで点数を説明するモデルを考えます。</p>
+<p><span class="math display">\[\text{点数}_i = \beta_0 + \beta_1 \text{勉強時間}_i + \beta_2 \text{女性ダミー}_i + \varepsilon_i\]</span></p>
+<p><strong>女性ダミー = <span style="color: tomato; font-weight: bold;">1</span> の場合（女性の場合）</strong></p>
+<p><span class="math display">\[\text{点数}_i = \beta_0 + \beta_1 \text{勉強時間}_i + \beta_2 \times \textcolor{tomato}{1} + \varepsilon_i\]</span></p>
+<p><span class="math display">\[= [\textcolor{tomato}{\beta_0 + \beta_2}] + \beta_1 \text{勉強時間}_i + \varepsilon_i\]</span></p>
+<p><strong>女性ダミー = <span style="color: steelblue; font-weight: bold;">0</span> の場合（男性の場合）</strong></p>
+<p><span class="math display">\[\text{点数}_i = \beta_0 + \beta_1 \text{勉強時間}_i + \beta_2 \times \textcolor{steelblue}{0} + \varepsilon_i\]</span></p>
+<p><span class="math display">\[= \textcolor{steelblue}{\beta_0} + \beta_1 \text{勉強時間}_i + \varepsilon_i\]</span></p>
+<p>つまり、<span style="color: steelblue; font-weight: bold;">男性の切片は <span class="math inline">\(\beta_0\)</span></span> であり、 <span style="color: tomato; font-weight: bold;">女性の切片は <span class="math inline">\(\beta_0 + \beta_2\)</span></span> となる。 女性の方が <span class="math inline">\(\beta_2\)</span> だけ平均的な点数が高い（または低い）。</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecA11_files/figure-html/dummy-meaning-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>ダミー変数 = 切片が異なる平行な直線</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+</section>
+<section id="sec-dummy-r" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="sec-dummy-r"><span class="header-section-number">11.4</span> R でのダミー変数の扱い</h2>
+<section id="文字列変数は自動的にダミー化される" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="文字列変数は自動的にダミー化される">文字列変数は自動的にダミー化される</h3>
+<p>R の <code>lm()</code> は、文字型変数（<code>character</code>）や因子型変数（<code>factor</code>）を 自動的にダミー変数に変換します。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># smoker（文字型）を説明変数に入れると自動でダミー化</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>model_d1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(charges <span class="sc">~</span> smoker, <span class="at">data =</span> df_ins)</span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="fu">summary</span>(model_d1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = charges ~ smoker, data = df_ins)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-19221  -5042   -919   3705  31720 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   8434.3      229.0   36.83   &lt;2e-16 ***
+smokeryes    23616.0      506.1   46.66   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 7470 on 1336 degrees of freedom
+Multiple R-squared:  0.6198,    Adjusted R-squared:  0.6195 
+F-statistic:  2178 on 1 and 1336 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>参照カテゴリ（reference category）</strong></p>
+<p>カテゴリ変数にはアルファベット順の最初のカテゴリが<strong>参照カテゴリ</strong>になります。</p>
+<ul>
+<li><code>smoker</code>：<code>no</code>（n &lt; y） → <code>no</code> が参照カテゴリ</li>
+<li>出力に表示されるのは <code>smokeryes</code>（喫煙者であることの効果）</li>
+</ul>
+<p>つまり、<code>smokeryes</code> の係数は「非喫煙者に比べて喫煙者の医療費がいくら高いか」を意味します。</p>
+<p><strong>参照カテゴリを変えたい場合は <code>relevel()</code> を使います：</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>df_ins <span class="ot">&lt;-</span> df_ins <span class="sc">|&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">mutate</span>(<span class="at">smoker =</span> <span class="fu">relevel</span>(<span class="fu">factor</span>(smoker), <span class="at">ref =</span> <span class="st">"yes"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="ダミー変数の係数の解釈" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="ダミー変数の係数の解釈">ダミー変数の係数の解釈</h3>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>model_d1 <span class="sc">|&gt;</span> <span class="fu">tidy</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term        estimate std.error statistic   p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+1 (Intercept)    8434.      229.      36.8 1.58e-205
+2 smokeryes     23616.      506.      46.7 8.27e-283</code></pre>
+</div>
+</div>
+<p><strong>解釈の例：</strong></p>
+<ul>
+<li><strong>切片</strong>（Intercept）≈ 8,434：非喫煙者（参照カテゴリ）の平均医療費の予測値</li>
+<li><strong>smokeryes</strong> ≈ 23,616：非喫煙者と比べて、喫煙者の医療費は平均約 23,616 ドル高い</li>
+</ul>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+</section>
+<section id="sec-cont-dummy" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="sec-cont-dummy"><span class="header-section-number">11.5</span> 連続変数 + ダミー変数の重回帰</h2>
+<section id="基本的な組み合わせ" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="基本的な組み合わせ">基本的な組み合わせ</h3>
+<p>連続変数とダミー変数を組み合わせた重回帰を実行します。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># 年齢 + 喫煙ダミー → 医療費</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>model_d2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(charges <span class="sc">~</span> age <span class="sc">+</span> smoker, <span class="at">data =</span> df_ins)</span>
+<span id="cb11-3"><a href="#cb11-3"></a></span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="co"># 年齢 + BMI + 喫煙ダミー → 医療費</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a>model_d3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(charges <span class="sc">~</span> age <span class="sc">+</span> bmi <span class="sc">+</span> smoker, <span class="at">data =</span> df_ins)</span>
+<span id="cb11-6"><a href="#cb11-6"></a></span>
+<span id="cb11-7"><a href="#cb11-7"></a><span class="co"># 年齢 + BMI + 喫煙ダミー + 性別ダミー + 子供数</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a>model_d4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(charges <span class="sc">~</span> age <span class="sc">+</span> bmi <span class="sc">+</span> smoker <span class="sc">+</span> sex <span class="sc">+</span> children, <span class="at">data =</span> df_ins)</span>
+<span id="cb11-9"><a href="#cb11-9"></a></span>
+<span id="cb11-10"><a href="#cb11-10"></a><span class="fu">modelsummary</span>(</span>
+<span id="cb11-11"><a href="#cb11-11"></a>  <span class="fu">list</span>(<span class="st">"喫煙のみ"</span> <span class="ot">=</span> model_d1,</span>
+<span id="cb11-12"><a href="#cb11-12"></a>       <span class="st">"年齢+喫煙"</span> <span class="ot">=</span> model_d2,</span>
+<span id="cb11-13"><a href="#cb11-13"></a>       <span class="st">"年齢+BMI+喫煙"</span> <span class="ot">=</span> model_d3,</span>
+<span id="cb11-14"><a href="#cb11-14"></a>       <span class="st">"全変数"</span> <span class="ot">=</span> model_d4),</span>
+<span id="cb11-15"><a href="#cb11-15"></a>  <span class="at">stars =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb11-16"><a href="#cb11-16"></a>  <span class="at">gof_map =</span> <span class="fu">c</span>(<span class="st">"nobs"</span>, <span class="st">"r.squared"</span>, <span class="st">"adj.r.squared"</span>),</span>
+<span id="cb11-17"><a href="#cb11-17"></a>  <span class="at">title =</span> <span class="st">"医療費の回帰分析（ダミー変数を含む）"</span></span>
+<span id="cb11-18"><a href="#cb11-18"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<!-- preamble start -->
+
+    <script src="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.js"></script>
+
+    <script>
+      // Create table-specific functions using external factory
+      const tableFns_44967ndo3t14zpnbwnet = TinyTable.createTableFunctions("tinytable_44967ndo3t14zpnbwnet");
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: '15', j: 2 }, { i: '15', j: 3 }, { i: '15', j: 4 }, { i: '15', j: 5 } ], css_id: 'tinytable_css_k2ntsksu0dlmo5d2c3uf',}, 
+          { positions: [ { i: '12', j: 2 }, { i: '12', j: 3 }, { i: '12', j: 4 }, { i: '12', j: 5 } ], css_id: 'tinytable_css_5n99e5uwu02dobyteego',}, 
+          { positions: [ { i: '1', j: 2 }, { i: '2', j: 2 }, { i: '3', j: 2 }, { i: '4', j: 2 }, { i: '5', j: 2 }, { i: '6', j: 2 }, { i: '7', j: 2 }, { i: '8', j: 2 }, { i: '9', j: 2 }, { i: '10', j: 2 }, { i: '11', j: 2 }, { i: '13', j: 2 }, { i: '14', j: 2 }, { i: '1', j: 3 }, { i: '2', j: 3 }, { i: '3', j: 3 }, { i: '4', j: 3 }, { i: '5', j: 3 }, { i: '6', j: 3 }, { i: '7', j: 3 }, { i: '8', j: 3 }, { i: '9', j: 3 }, { i: '10', j: 3 }, { i: '11', j: 3 }, { i: '13', j: 3 }, { i: '14', j: 3 }, { i: '1', j: 4 }, { i: '2', j: 4 }, { i: '3', j: 4 }, { i: '4', j: 4 }, { i: '5', j: 4 }, { i: '6', j: 4 }, { i: '7', j: 4 }, { i: '8', j: 4 }, { i: '9', j: 4 }, { i: '10', j: 4 }, { i: '11', j: 4 }, { i: '13', j: 4 }, { i: '14', j: 4 }, { i: '1', j: 5 }, { i: '2', j: 5 }, { i: '3', j: 5 }, { i: '4', j: 5 }, { i: '5', j: 5 }, { i: '6', j: 5 }, { i: '7', j: 5 }, { i: '8', j: 5 }, { i: '9', j: 5 }, { i: '10', j: 5 }, { i: '11', j: 5 }, { i: '13', j: 5 }, { i: '14', j: 5 } ], css_id: 'tinytable_css_1cej8yet7b9pghi3hpyz',}, 
+          { positions: [ { i: '0', j: 2 }, { i: '0', j: 3 }, { i: '0', j: 4 }, { i: '0', j: 5 } ], css_id: 'tinytable_css_y7b3dnv0ncydoxrsjicz',}, 
+          { positions: [ { i: '15', j: 1 } ], css_id: 'tinytable_css_b2qipsgyblwxiq9plj5j',}, 
+          { positions: [ { i: '12', j: 1 } ], css_id: 'tinytable_css_opvar1n9c7c72tx3i7x1',}, 
+          { positions: [ { i: '1', j: 1 }, { i: '2', j: 1 }, { i: '3', j: 1 }, { i: '4', j: 1 }, { i: '5', j: 1 }, { i: '6', j: 1 }, { i: '7', j: 1 }, { i: '8', j: 1 }, { i: '9', j: 1 }, { i: '10', j: 1 }, { i: '11', j: 1 }, { i: '13', j: 1 }, { i: '14', j: 1 } ], css_id: 'tinytable_css_xb5t7xihvu95imj3cprs',}, 
+          { positions: [ { i: '0', j: 1 } ], css_id: 'tinytable_css_ips9bt2amixrdssde4mt',}, 
+          ];
+
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  tableFns_44967ndo3t14zpnbwnet.styleCell(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
+    <style>
+    /* tinytable css entries after */
+    #tinytable_44967ndo3t14zpnbwnet td.tinytable_css_k2ntsksu0dlmo5d2c3uf, #tinytable_44967ndo3t14zpnbwnet th.tinytable_css_k2ntsksu0dlmo5d2c3uf {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_44967ndo3t14zpnbwnet td.tinytable_css_5n99e5uwu02dobyteego, #tinytable_44967ndo3t14zpnbwnet th.tinytable_css_5n99e5uwu02dobyteego {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_44967ndo3t14zpnbwnet td.tinytable_css_1cej8yet7b9pghi3hpyz, #tinytable_44967ndo3t14zpnbwnet th.tinytable_css_1cej8yet7b9pghi3hpyz { text-align: center }
+    #tinytable_44967ndo3t14zpnbwnet td.tinytable_css_y7b3dnv0ncydoxrsjicz, #tinytable_44967ndo3t14zpnbwnet th.tinytable_css_y7b3dnv0ncydoxrsjicz {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_44967ndo3t14zpnbwnet td.tinytable_css_b2qipsgyblwxiq9plj5j, #tinytable_44967ndo3t14zpnbwnet th.tinytable_css_b2qipsgyblwxiq9plj5j {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_44967ndo3t14zpnbwnet td.tinytable_css_opvar1n9c7c72tx3i7x1, #tinytable_44967ndo3t14zpnbwnet th.tinytable_css_opvar1n9c7c72tx3i7x1 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_44967ndo3t14zpnbwnet td.tinytable_css_xb5t7xihvu95imj3cprs, #tinytable_44967ndo3t14zpnbwnet th.tinytable_css_xb5t7xihvu95imj3cprs { text-align: left }
+    #tinytable_44967ndo3t14zpnbwnet td.tinytable_css_ips9bt2amixrdssde4mt, #tinytable_44967ndo3t14zpnbwnet th.tinytable_css_ips9bt2amixrdssde4mt {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    </style>
+    <div class="container">
+      <table class="tinytable" id="tinytable_44967ndo3t14zpnbwnet" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        <caption>医療費の回帰分析（ダミー変数を含む）</caption>
+        <thead>
+              <tr>
+                <th scope="col" data-row="0" data-col="1"> </th>
+                <th scope="col" data-row="0" data-col="2">喫煙のみ</th>
+                <th scope="col" data-row="0" data-col="3">年齢+喫煙</th>
+                <th scope="col" data-row="0" data-col="4">年齢+BMI+喫煙</th>
+                <th scope="col" data-row="0" data-col="5">全変数</th>
+              </tr>
+        </thead>
+        <tfoot><tr><td colspan="5">+ p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001</td></tr></tfoot>
+        <tbody>
+                <tr>
+                  <td data-row="1" data-col="1">(Intercept)</td>
+                  <td data-row="1" data-col="2">8434.268***</td>
+                  <td data-row="1" data-col="3">-2391.626***</td>
+                  <td data-row="1" data-col="4">-11676.830***</td>
+                  <td data-row="1" data-col="5">-12052.462***</td>
+                </tr>
+                <tr>
+                  <td data-row="2" data-col="1"></td>
+                  <td data-row="2" data-col="2">(229.014)</td>
+                  <td data-row="2" data-col="3">(528.302)</td>
+                  <td data-row="2" data-col="4">(937.569)</td>
+                  <td data-row="2" data-col="5">(951.260)</td>
+                </tr>
+                <tr>
+                  <td data-row="3" data-col="1">smokeryes</td>
+                  <td data-row="3" data-col="2">23615.964***</td>
+                  <td data-row="3" data-col="3">23855.305***</td>
+                  <td data-row="3" data-col="4">23823.684***</td>
+                  <td data-row="3" data-col="5">23823.393***</td>
+                </tr>
+                <tr>
+                  <td data-row="4" data-col="1"></td>
+                  <td data-row="4" data-col="2">(506.075)</td>
+                  <td data-row="4" data-col="3">(433.488)</td>
+                  <td data-row="4" data-col="4">(412.867)</td>
+                  <td data-row="4" data-col="5">(412.523)</td>
+                </tr>
+                <tr>
+                  <td data-row="5" data-col="1">age</td>
+                  <td data-row="5" data-col="2"></td>
+                  <td data-row="5" data-col="3">274.871***</td>
+                  <td data-row="5" data-col="4">259.547***</td>
+                  <td data-row="5" data-col="5">257.735***</td>
+                </tr>
+                <tr>
+                  <td data-row="6" data-col="1"></td>
+                  <td data-row="6" data-col="2"></td>
+                  <td data-row="6" data-col="3">(12.455)</td>
+                  <td data-row="6" data-col="4">(11.934)</td>
+                  <td data-row="6" data-col="5">(11.904)</td>
+                </tr>
+                <tr>
+                  <td data-row="7" data-col="1">bmi</td>
+                  <td data-row="7" data-col="2"></td>
+                  <td data-row="7" data-col="3"></td>
+                  <td data-row="7" data-col="4">322.615***</td>
+                  <td data-row="7" data-col="5">322.364***</td>
+                </tr>
+                <tr>
+                  <td data-row="8" data-col="1"></td>
+                  <td data-row="8" data-col="2"></td>
+                  <td data-row="8" data-col="3"></td>
+                  <td data-row="8" data-col="4">(27.487)</td>
+                  <td data-row="8" data-col="5">(27.419)</td>
+                </tr>
+                <tr>
+                  <td data-row="9" data-col="1">sexmale</td>
+                  <td data-row="9" data-col="2"></td>
+                  <td data-row="9" data-col="3"></td>
+                  <td data-row="9" data-col="4"></td>
+                  <td data-row="9" data-col="5">-128.640</td>
+                </tr>
+                <tr>
+                  <td data-row="10" data-col="1"></td>
+                  <td data-row="10" data-col="2"></td>
+                  <td data-row="10" data-col="3"></td>
+                  <td data-row="10" data-col="4"></td>
+                  <td data-row="10" data-col="5">(333.361)</td>
+                </tr>
+                <tr>
+                  <td data-row="11" data-col="1">children</td>
+                  <td data-row="11" data-col="2"></td>
+                  <td data-row="11" data-col="3"></td>
+                  <td data-row="11" data-col="4"></td>
+                  <td data-row="11" data-col="5">474.411***</td>
+                </tr>
+                <tr>
+                  <td data-row="12" data-col="1"></td>
+                  <td data-row="12" data-col="2"></td>
+                  <td data-row="12" data-col="3"></td>
+                  <td data-row="12" data-col="4"></td>
+                  <td data-row="12" data-col="5">(137.856)</td>
+                </tr>
+                <tr>
+                  <td data-row="13" data-col="1">Num.Obs.</td>
+                  <td data-row="13" data-col="2">1338</td>
+                  <td data-row="13" data-col="3">1338</td>
+                  <td data-row="13" data-col="4">1338</td>
+                  <td data-row="13" data-col="5">1338</td>
+                </tr>
+                <tr>
+                  <td data-row="14" data-col="1">R2</td>
+                  <td data-row="14" data-col="2">0.620</td>
+                  <td data-row="14" data-col="3">0.721</td>
+                  <td data-row="14" data-col="4">0.747</td>
+                  <td data-row="14" data-col="5">0.750</td>
+                </tr>
+                <tr>
+                  <td data-row="15" data-col="1">R2 Adj.</td>
+                  <td data-row="15" data-col="2">0.619</td>
+                  <td data-row="15" data-col="3">0.721</td>
+                  <td data-row="15" data-col="4">0.747</td>
+                  <td data-row="15" data-col="5">0.749</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- hack to avoid NA insertion in last line -->
+</div>
+</div>
+<div style="margin-top: 3.0em;">
+
+</div>
+</section>
+<section id="ダミー変数の視覚的な意味" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="ダミー変数の視覚的な意味">ダミー変数の視覚的な意味</h3>
+<p>ダミー変数を含む回帰モデルは、グループごとに<strong>切片が異なる平行な回帰直線</strong>を表します。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># モデルD2の予測値を計算</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>df_pred <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
+<span id="cb12-3"><a href="#cb12-3"></a>  <span class="at">age    =</span> <span class="fu">seq</span>(<span class="dv">18</span>, <span class="dv">65</span>, <span class="at">by =</span> <span class="dv">1</span>),</span>
+<span id="cb12-4"><a href="#cb12-4"></a>  <span class="at">smoker =</span> <span class="fu">c</span>(<span class="st">"yes"</span>, <span class="st">"no"</span>)</span>
+<span id="cb12-5"><a href="#cb12-5"></a>)</span>
+<span id="cb12-6"><a href="#cb12-6"></a></span>
+<span id="cb12-7"><a href="#cb12-7"></a>df_pred<span class="sc">$</span>pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(model_d2, <span class="at">newdata =</span> df_pred)   <span class="co"># ← ここを修正</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a></span>
+<span id="cb12-9"><a href="#cb12-9"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb12-10"><a href="#cb12-10"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> df_ins,</span>
+<span id="cb12-11"><a href="#cb12-11"></a>             <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> charges, <span class="at">color =</span> smoker), <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb12-12"><a href="#cb12-12"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> df_pred,</span>
+<span id="cb12-13"><a href="#cb12-13"></a>            <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> pred, <span class="at">color =</span> smoker), <span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb12-14"><a href="#cb12-14"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"年齢と医療費の関係（喫煙有無別）"</span>,</span>
+<span id="cb12-15"><a href="#cb12-15"></a>       <span class="at">subtitle =</span> <span class="st">"ダミー変数 = 切片が異なる平行な直線"</span>,</span>
+<span id="cb12-16"><a href="#cb12-16"></a>       <span class="at">x =</span> <span class="st">"年齢（歳）"</span>, <span class="at">y =</span> <span class="st">"医療費（ドル）"</span>,</span>
+<span id="cb12-17"><a href="#cb12-17"></a>       <span class="at">color =</span> <span class="st">"喫煙"</span>) <span class="sc">+</span></span>
+<span id="cb12-18"><a href="#cb12-18"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecA11_files/figure-html/dummy-lines-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>喫煙者・非喫煙者で切片が異なる回帰直線</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+</section>
+<section id="sec-multi-dummy" class="level2" data-number="11.6">
+<h2 data-number="11.6" class="anchored" data-anchor-id="sec-multi-dummy"><span class="header-section-number">11.6</span> 複数カテゴリのダミー変数</h2>
+<section id="カテゴリが-3-つ以上の場合" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="カテゴリが-3-つ以上の場合">カテゴリが 3 つ以上の場合</h3>
+<p>カテゴリが 3 つ以上の変数（例：地域 = 4 種類）を説明変数に含めると、 R は自動的に<strong>（カテゴリ数 − 1）個</strong>のダミー変数を作成します。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># region（4地域）を説明変数に含める</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>model_d5 <span class="ot">&lt;-</span> <span class="fu">lm</span>(charges <span class="sc">~</span> age <span class="sc">+</span> bmi <span class="sc">+</span> smoker <span class="sc">+</span> region, <span class="at">data =</span> df_ins)</span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="fu">summary</span>(model_d5)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = charges ~ age + bmi + smoker + region, data = df_ins)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-11905  -3041  -1000   1542  29419 
+
+Coefficients:
+                 Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)     -11601.56     976.20 -11.884   &lt;2e-16 ***
+age                258.64      11.93  21.680   &lt;2e-16 ***
+bmi                340.01      28.67  11.858   &lt;2e-16 ***
+smokeryes        23852.48     413.51  57.683   &lt;2e-16 ***
+regionnorthwest   -303.52     477.85  -0.635   0.5254    
+regionsoutheast  -1038.63     480.49  -2.162   0.0308 *  
+regionsouthwest   -915.94     479.56  -1.910   0.0564 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 6085 on 1331 degrees of freedom
+Multiple R-squared:  0.7487,    Adjusted R-squared:  0.7475 
+F-statistic: 660.8 on 6 and 1331 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>model_d5 <span class="sc">|&gt;</span> <span class="fu">tidy</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 5
+  term            estimate std.error statistic  p.value
+  &lt;chr&gt;              &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept)      -11602.     976.    -11.9   4.97e-31
+2 age                 259.      11.9    21.7   1.68e-89
+3 bmi                 340.      28.7    11.9   6.60e-31
+4 smokeryes         23852.     414.     57.7   0       
+5 regionnorthwest    -304.     478.     -0.635 5.25e- 1
+6 regionsoutheast   -1039.     480.     -2.16  3.08e- 2
+7 regionsouthwest    -916.     480.     -1.91  5.64e- 2</code></pre>
+</div>
+</div>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>ダミー変数の数のルール</strong></p>
+<p>カテゴリ数が <span class="math inline">\(k\)</span> の変数には、<strong><span class="math inline">\(k - 1\)</span> 個</strong>のダミー変数が作成されます。</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 31%">
+<col style="width: 48%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>変数</th>
+<th>カテゴリ</th>
+<th>ダミー変数の数</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>smoker</code></td>
+<td>2（yes / no）</td>
+<td>1（<code>smokeryes</code>）</td>
+</tr>
+<tr class="even">
+<td><code>region</code></td>
+<td>4（northeast / northwest / southeast / southwest）</td>
+<td>3（southeast が参照）</td>
+</tr>
+<tr class="odd">
+<td>EducationLevel</td>
+<td>3（Bachelor’s / Master’s / PhD）</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p>残りの 1 つは<strong>参照カテゴリ</strong>（切片に含まれる）です。</p>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="住宅データでのダミー変数" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="住宅データでのダミー変数">住宅データでのダミー変数</h3>
+<p>住宅データの <code>furnishingstatus</code>（家具状態：furnished / semi-furnished / unfurnished） は 3 カテゴリなので、2 つのダミー変数が作成されます。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># furnishingstatus は 3 カテゴリ → 2 つのダミー変数</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>model_h_d1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(price <span class="sc">~</span> area <span class="sc">+</span> furnishingstatus, <span class="at">data =</span> df_house)</span>
+<span id="cb17-3"><a href="#cb17-3"></a>model_h_d2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(price <span class="sc">~</span> area <span class="sc">+</span> bedrooms <span class="sc">+</span> bathrooms <span class="sc">+</span></span>
+<span id="cb17-4"><a href="#cb17-4"></a>                   mainroad <span class="sc">+</span> furnishingstatus, <span class="at">data =</span> df_house)</span>
+<span id="cb17-5"><a href="#cb17-5"></a></span>
+<span id="cb17-6"><a href="#cb17-6"></a><span class="fu">modelsummary</span>(</span>
+<span id="cb17-7"><a href="#cb17-7"></a>  <span class="fu">list</span>(<span class="st">"面積+家具"</span> <span class="ot">=</span> model_h_d1, <span class="st">"全変数"</span> <span class="ot">=</span> model_h_d2),</span>
+<span id="cb17-8"><a href="#cb17-8"></a>  <span class="at">stars =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb17-9"><a href="#cb17-9"></a>  <span class="at">gof_map =</span> <span class="fu">c</span>(<span class="st">"nobs"</span>, <span class="st">"r.squared"</span>, <span class="st">"adj.r.squared"</span>),</span>
+<span id="cb17-10"><a href="#cb17-10"></a>  <span class="at">title =</span> <span class="st">"住宅価格の回帰分析（ダミー変数含む）"</span></span>
+<span id="cb17-11"><a href="#cb17-11"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<!-- preamble start -->
+
+    <script src="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.js"></script>
+
+    <script>
+      // Create table-specific functions using external factory
+      const tableFns_m3m4ha3rgdv1gt9czjq2 = TinyTable.createTableFunctions("tinytable_m3m4ha3rgdv1gt9czjq2");
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: '17', j: 2 }, { i: '17', j: 3 } ], css_id: 'tinytable_css_esk2yavj9okgyeyycqx4',}, 
+          { positions: [ { i: '14', j: 2 }, { i: '14', j: 3 } ], css_id: 'tinytable_css_hure9qylfr1ky5dvai31',}, 
+          { positions: [ { i: '1', j: 2 }, { i: '2', j: 2 }, { i: '3', j: 2 }, { i: '4', j: 2 }, { i: '5', j: 2 }, { i: '6', j: 2 }, { i: '7', j: 2 }, { i: '8', j: 2 }, { i: '9', j: 2 }, { i: '10', j: 2 }, { i: '11', j: 2 }, { i: '12', j: 2 }, { i: '13', j: 2 }, { i: '15', j: 2 }, { i: '16', j: 2 }, { i: '1', j: 3 }, { i: '2', j: 3 }, { i: '3', j: 3 }, { i: '4', j: 3 }, { i: '5', j: 3 }, { i: '6', j: 3 }, { i: '7', j: 3 }, { i: '8', j: 3 }, { i: '9', j: 3 }, { i: '10', j: 3 }, { i: '11', j: 3 }, { i: '12', j: 3 }, { i: '13', j: 3 }, { i: '15', j: 3 }, { i: '16', j: 3 } ], css_id: 'tinytable_css_9m1o0nmwztiwf6q096m5',}, 
+          { positions: [ { i: '0', j: 2 }, { i: '0', j: 3 } ], css_id: 'tinytable_css_z2k9bslkktc90jtnf02c',}, 
+          { positions: [ { i: '17', j: 1 } ], css_id: 'tinytable_css_ayo41haeqorltuedmxw9',}, 
+          { positions: [ { i: '14', j: 1 } ], css_id: 'tinytable_css_135eqtgkypq2f8i5oph9',}, 
+          { positions: [ { i: '1', j: 1 }, { i: '2', j: 1 }, { i: '3', j: 1 }, { i: '4', j: 1 }, { i: '5', j: 1 }, { i: '6', j: 1 }, { i: '7', j: 1 }, { i: '8', j: 1 }, { i: '9', j: 1 }, { i: '10', j: 1 }, { i: '11', j: 1 }, { i: '12', j: 1 }, { i: '13', j: 1 }, { i: '15', j: 1 }, { i: '16', j: 1 } ], css_id: 'tinytable_css_d5s5jcdahhqzf5pz9w0u',}, 
+          { positions: [ { i: '0', j: 1 } ], css_id: 'tinytable_css_gstmfb43hitvpqvq56sa',}, 
+          ];
+
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  tableFns_m3m4ha3rgdv1gt9czjq2.styleCell(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
+    <style>
+    /* tinytable css entries after */
+    #tinytable_m3m4ha3rgdv1gt9czjq2 td.tinytable_css_esk2yavj9okgyeyycqx4, #tinytable_m3m4ha3rgdv1gt9czjq2 th.tinytable_css_esk2yavj9okgyeyycqx4 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_m3m4ha3rgdv1gt9czjq2 td.tinytable_css_hure9qylfr1ky5dvai31, #tinytable_m3m4ha3rgdv1gt9czjq2 th.tinytable_css_hure9qylfr1ky5dvai31 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_m3m4ha3rgdv1gt9czjq2 td.tinytable_css_9m1o0nmwztiwf6q096m5, #tinytable_m3m4ha3rgdv1gt9czjq2 th.tinytable_css_9m1o0nmwztiwf6q096m5 { text-align: center }
+    #tinytable_m3m4ha3rgdv1gt9czjq2 td.tinytable_css_z2k9bslkktc90jtnf02c, #tinytable_m3m4ha3rgdv1gt9czjq2 th.tinytable_css_z2k9bslkktc90jtnf02c {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_m3m4ha3rgdv1gt9czjq2 td.tinytable_css_ayo41haeqorltuedmxw9, #tinytable_m3m4ha3rgdv1gt9czjq2 th.tinytable_css_ayo41haeqorltuedmxw9 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_m3m4ha3rgdv1gt9czjq2 td.tinytable_css_135eqtgkypq2f8i5oph9, #tinytable_m3m4ha3rgdv1gt9czjq2 th.tinytable_css_135eqtgkypq2f8i5oph9 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_m3m4ha3rgdv1gt9czjq2 td.tinytable_css_d5s5jcdahhqzf5pz9w0u, #tinytable_m3m4ha3rgdv1gt9czjq2 th.tinytable_css_d5s5jcdahhqzf5pz9w0u { text-align: left }
+    #tinytable_m3m4ha3rgdv1gt9czjq2 td.tinytable_css_gstmfb43hitvpqvq56sa, #tinytable_m3m4ha3rgdv1gt9czjq2 th.tinytable_css_gstmfb43hitvpqvq56sa {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    </style>
+    <div class="container">
+      <table class="tinytable" id="tinytable_m3m4ha3rgdv1gt9czjq2" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        <caption>住宅価格の回帰分析（ダミー変数含む）</caption>
+        <thead>
+              <tr>
+                <th scope="col" data-row="0" data-col="1"> </th>
+                <th scope="col" data-row="0" data-col="2">面積+家具</th>
+                <th scope="col" data-row="0" data-col="3">全変数</th>
+              </tr>
+        </thead>
+        <tfoot><tr><td colspan="3">+ p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001</td></tr></tfoot>
+        <tbody>
+                <tr>
+                  <td data-row="1" data-col="1">(Intercept)</td>
+                  <td data-row="1" data-col="2">3050661.639***</td>
+                  <td data-row="1" data-col="3">-171531.322</td>
+                </tr>
+                <tr>
+                  <td data-row="2" data-col="1"></td>
+                  <td data-row="2" data-col="2">(216999.265)</td>
+                  <td data-row="2" data-col="3">(314270.873)</td>
+                </tr>
+                <tr>
+                  <td data-row="3" data-col="1">area</td>
+                  <td data-row="3" data-col="2">429.851***</td>
+                  <td data-row="3" data-col="3">322.011***</td>
+                </tr>
+                <tr>
+                  <td data-row="4" data-col="1"></td>
+                  <td data-row="4" data-col="2">(30.653)</td>
+                  <td data-row="4" data-col="3">(27.253)</td>
+                </tr>
+                <tr>
+                  <td data-row="5" data-col="1">furnishingstatussemi-furnished</td>
+                  <td data-row="5" data-col="2">-363892.474*</td>
+                  <td data-row="5" data-col="3">-239192.643+</td>
+                </tr>
+                <tr>
+                  <td data-row="6" data-col="1"></td>
+                  <td data-row="6" data-col="2">(165034.605)</td>
+                  <td data-row="6" data-col="3">(138926.508)</td>
+                </tr>
+                <tr>
+                  <td data-row="7" data-col="1">furnishingstatusunfurnished</td>
+                  <td data-row="7" data-col="2">-1060393.894***</td>
+                  <td data-row="7" data-col="3">-704929.521***</td>
+                </tr>
+                <tr>
+                  <td data-row="8" data-col="1"></td>
+                  <td data-row="8" data-col="2">(175263.337)</td>
+                  <td data-row="8" data-col="3">(149408.946)</td>
+                </tr>
+                <tr>
+                  <td data-row="9" data-col="1">bedrooms</td>
+                  <td data-row="9" data-col="2"></td>
+                  <td data-row="9" data-col="3">401953.283***</td>
+                </tr>
+                <tr>
+                  <td data-row="10" data-col="1"></td>
+                  <td data-row="10" data-col="2"></td>
+                  <td data-row="10" data-col="3">(81072.207)</td>
+                </tr>
+                <tr>
+                  <td data-row="11" data-col="1">bathrooms</td>
+                  <td data-row="11" data-col="2"></td>
+                  <td data-row="11" data-col="3">1332110.565***</td>
+                </tr>
+                <tr>
+                  <td data-row="12" data-col="1"></td>
+                  <td data-row="12" data-col="2"></td>
+                  <td data-row="12" data-col="3">(119823.159)</td>
+                </tr>
+                <tr>
+                  <td data-row="13" data-col="1">mainroadyes</td>
+                  <td data-row="13" data-col="2"></td>
+                  <td data-row="13" data-col="3">820215.407***</td>
+                </tr>
+                <tr>
+                  <td data-row="14" data-col="1"></td>
+                  <td data-row="14" data-col="2"></td>
+                  <td data-row="14" data-col="3">(166322.750)</td>
+                </tr>
+                <tr>
+                  <td data-row="15" data-col="1">Num.Obs.</td>
+                  <td data-row="15" data-col="2">545</td>
+                  <td data-row="15" data-col="3">545</td>
+                </tr>
+                <tr>
+                  <td data-row="16" data-col="1">R2</td>
+                  <td data-row="16" data-col="2">0.336</td>
+                  <td data-row="16" data-col="3">0.535</td>
+                </tr>
+                <tr>
+                  <td data-row="17" data-col="1">R2 Adj.</td>
+                  <td data-row="17" data-col="2">0.332</td>
+                  <td data-row="17" data-col="3">0.529</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- hack to avoid NA insertion in last line -->
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="給与データでのダミー変数" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="給与データでのダミー変数">給与データでのダミー変数</h3>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-12"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-12-1"><a href="#annotated-cell-12-1"></a><span class="co"># 経験年数 + 性別ダミー + 学歴ダミー → 年収</span></span>
+<span id="annotated-cell-12-2"><a href="#annotated-cell-12-2"></a>df_sal_clean <span class="ot">&lt;-</span> df_sal <span class="sc">|&gt;</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="1">1</button><span id="annotated-cell-12-3" class="code-annotation-target"><a href="#annotated-cell-12-3"></a>  <span class="fu">drop_na</span>()</span>
+<span id="annotated-cell-12-4"><a href="#annotated-cell-12-4"></a></span>
+<span id="annotated-cell-12-5"><a href="#annotated-cell-12-5"></a>model_s1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Salary <span class="sc">~</span> YearsExperience, <span class="at">data =</span> df_sal_clean)</span>
+<span id="annotated-cell-12-6"><a href="#annotated-cell-12-6"></a>model_s2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Salary <span class="sc">~</span> YearsExperience <span class="sc">+</span> Gender, <span class="at">data =</span> df_sal_clean)</span>
+<span id="annotated-cell-12-7"><a href="#annotated-cell-12-7"></a>model_s3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Salary <span class="sc">~</span> YearsExperience <span class="sc">+</span> Gender <span class="sc">+</span> EducationLevel,</span>
+<span id="annotated-cell-12-8"><a href="#annotated-cell-12-8"></a>               <span class="at">data =</span> df_sal_clean)</span>
+<span id="annotated-cell-12-9"><a href="#annotated-cell-12-9"></a></span>
+<span id="annotated-cell-12-10"><a href="#annotated-cell-12-10"></a><span class="fu">modelsummary</span>(</span>
+<span id="annotated-cell-12-11"><a href="#annotated-cell-12-11"></a>  <span class="fu">list</span>(<span class="st">"経験のみ"</span> <span class="ot">=</span> model_s1, <span class="st">"+性別"</span> <span class="ot">=</span> model_s2, <span class="st">"+学歴"</span> <span class="ot">=</span> model_s3),</span>
+<span id="annotated-cell-12-12"><a href="#annotated-cell-12-12"></a>  <span class="at">stars =</span> <span class="cn">TRUE</span>,</span>
+<span id="annotated-cell-12-13"><a href="#annotated-cell-12-13"></a>  <span class="at">gof_map =</span> <span class="fu">c</span>(<span class="st">"nobs"</span>, <span class="st">"r.squared"</span>, <span class="st">"adj.r.squared"</span>),</span>
+<span id="annotated-cell-12-14"><a href="#annotated-cell-12-14"></a>  <span class="at">title =</span> <span class="st">"給与の回帰分析（ダミー変数含む）"</span></span>
+<span id="annotated-cell-12-15"><a href="#annotated-cell-12-15"></a>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-12" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-12" data-code-lines="3" data-code-annotation="1"><code>drop_na()</code> で欠損値のある行を除外する</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output-display">
+<!-- preamble start -->
+
+    <script src="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.js"></script>
+
+    <script>
+      // Create table-specific functions using external factory
+      const tableFns_sgm9zw4dh4obixo1povk = TinyTable.createTableFunctions("tinytable_sgm9zw4dh4obixo1povk");
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: '13', j: 2 }, { i: '13', j: 3 }, { i: '13', j: 4 } ], css_id: 'tinytable_css_xnel6srqlyt8wgbzpvta',}, 
+          { positions: [ { i: '10', j: 2 }, { i: '10', j: 3 }, { i: '10', j: 4 } ], css_id: 'tinytable_css_xa8avowiw60e4ae8pnoy',}, 
+          { positions: [ { i: '1', j: 2 }, { i: '2', j: 2 }, { i: '3', j: 2 }, { i: '4', j: 2 }, { i: '5', j: 2 }, { i: '6', j: 2 }, { i: '7', j: 2 }, { i: '8', j: 2 }, { i: '9', j: 2 }, { i: '11', j: 2 }, { i: '12', j: 2 }, { i: '1', j: 3 }, { i: '2', j: 3 }, { i: '3', j: 3 }, { i: '4', j: 3 }, { i: '5', j: 3 }, { i: '6', j: 3 }, { i: '7', j: 3 }, { i: '8', j: 3 }, { i: '9', j: 3 }, { i: '11', j: 3 }, { i: '12', j: 3 }, { i: '1', j: 4 }, { i: '2', j: 4 }, { i: '3', j: 4 }, { i: '4', j: 4 }, { i: '5', j: 4 }, { i: '6', j: 4 }, { i: '7', j: 4 }, { i: '8', j: 4 }, { i: '9', j: 4 }, { i: '11', j: 4 }, { i: '12', j: 4 } ], css_id: 'tinytable_css_ll64e4ivv82ubq38wnin',}, 
+          { positions: [ { i: '0', j: 2 }, { i: '0', j: 3 }, { i: '0', j: 4 } ], css_id: 'tinytable_css_y4wa3iewb98r27pieq25',}, 
+          { positions: [ { i: '13', j: 1 } ], css_id: 'tinytable_css_xef5l4nyeq065764unp6',}, 
+          { positions: [ { i: '10', j: 1 } ], css_id: 'tinytable_css_9co5feyz20j9wziss23f',}, 
+          { positions: [ { i: '1', j: 1 }, { i: '2', j: 1 }, { i: '3', j: 1 }, { i: '4', j: 1 }, { i: '5', j: 1 }, { i: '6', j: 1 }, { i: '7', j: 1 }, { i: '8', j: 1 }, { i: '9', j: 1 }, { i: '11', j: 1 }, { i: '12', j: 1 } ], css_id: 'tinytable_css_d7ldb3poq69yimat9qhu',}, 
+          { positions: [ { i: '0', j: 1 } ], css_id: 'tinytable_css_7l2s2r50xzd4lg7ramdg',}, 
+          ];
+
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  tableFns_sgm9zw4dh4obixo1povk.styleCell(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
+    <style>
+    /* tinytable css entries after */
+    #tinytable_sgm9zw4dh4obixo1povk td.tinytable_css_xnel6srqlyt8wgbzpvta, #tinytable_sgm9zw4dh4obixo1povk th.tinytable_css_xnel6srqlyt8wgbzpvta {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_sgm9zw4dh4obixo1povk td.tinytable_css_xa8avowiw60e4ae8pnoy, #tinytable_sgm9zw4dh4obixo1povk th.tinytable_css_xa8avowiw60e4ae8pnoy {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_sgm9zw4dh4obixo1povk td.tinytable_css_ll64e4ivv82ubq38wnin, #tinytable_sgm9zw4dh4obixo1povk th.tinytable_css_ll64e4ivv82ubq38wnin { text-align: center }
+    #tinytable_sgm9zw4dh4obixo1povk td.tinytable_css_y4wa3iewb98r27pieq25, #tinytable_sgm9zw4dh4obixo1povk th.tinytable_css_y4wa3iewb98r27pieq25 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_sgm9zw4dh4obixo1povk td.tinytable_css_xef5l4nyeq065764unp6, #tinytable_sgm9zw4dh4obixo1povk th.tinytable_css_xef5l4nyeq065764unp6 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_sgm9zw4dh4obixo1povk td.tinytable_css_9co5feyz20j9wziss23f, #tinytable_sgm9zw4dh4obixo1povk th.tinytable_css_9co5feyz20j9wziss23f {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_sgm9zw4dh4obixo1povk td.tinytable_css_d7ldb3poq69yimat9qhu, #tinytable_sgm9zw4dh4obixo1povk th.tinytable_css_d7ldb3poq69yimat9qhu { text-align: left }
+    #tinytable_sgm9zw4dh4obixo1povk td.tinytable_css_7l2s2r50xzd4lg7ramdg, #tinytable_sgm9zw4dh4obixo1povk th.tinytable_css_7l2s2r50xzd4lg7ramdg {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    </style>
+    <div class="container">
+      <table class="tinytable" id="tinytable_sgm9zw4dh4obixo1povk" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        <caption>給与の回帰分析（ダミー変数含む）</caption>
+        <thead>
+              <tr>
+                <th scope="col" data-row="0" data-col="1"> </th>
+                <th scope="col" data-row="0" data-col="2">経験のみ</th>
+                <th scope="col" data-row="0" data-col="3">+性別</th>
+                <th scope="col" data-row="0" data-col="4">+学歴</th>
+              </tr>
+        </thead>
+        <tfoot><tr><td colspan="4">+ p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001</td></tr></tfoot>
+        <tbody>
+                <tr>
+                  <td data-row="1" data-col="1">(Intercept)</td>
+                  <td data-row="1" data-col="2">31921.217***</td>
+                  <td data-row="1" data-col="3">28504.125***</td>
+                  <td data-row="1" data-col="4">29092.982***</td>
+                </tr>
+                <tr>
+                  <td data-row="2" data-col="1"></td>
+                  <td data-row="2" data-col="2">(1677.842)</td>
+                  <td data-row="2" data-col="3">(1897.199)</td>
+                  <td data-row="2" data-col="4">(1717.358)</td>
+                </tr>
+                <tr>
+                  <td data-row="3" data-col="1">YearsExperience</td>
+                  <td data-row="3" data-col="2">6844.511***</td>
+                  <td data-row="3" data-col="3">6843.059***</td>
+                  <td data-row="3" data-col="4">5968.525***</td>
+                </tr>
+                <tr>
+                  <td data-row="4" data-col="1"></td>
+                  <td data-row="4" data-col="2">(140.065)</td>
+                  <td data-row="4" data-col="3">(137.792)</td>
+                  <td data-row="4" data-col="4">(154.446)</td>
+                </tr>
+                <tr>
+                  <td data-row="5" data-col="1">GenderMale</td>
+                  <td data-row="5" data-col="2"></td>
+                  <td data-row="5" data-col="3">6597.971***</td>
+                  <td data-row="5" data-col="4">7558.991***</td>
+                </tr>
+                <tr>
+                  <td data-row="6" data-col="1"></td>
+                  <td data-row="6" data-col="2"></td>
+                  <td data-row="6" data-col="3">(1806.041)</td>
+                  <td data-row="6" data-col="4">(1625.576)</td>
+                </tr>
+                <tr>
+                  <td data-row="7" data-col="1">EducationLevelMaster's</td>
+                  <td data-row="7" data-col="2"></td>
+                  <td data-row="7" data-col="3"></td>
+                  <td data-row="7" data-col="4">17034.512***</td>
+                </tr>
+                <tr>
+                  <td data-row="8" data-col="1"></td>
+                  <td data-row="8" data-col="2"></td>
+                  <td data-row="8" data-col="3"></td>
+                  <td data-row="8" data-col="4">(2143.394)</td>
+                </tr>
+                <tr>
+                  <td data-row="9" data-col="1">EducationLevelPhD</td>
+                  <td data-row="9" data-col="2"></td>
+                  <td data-row="9" data-col="3"></td>
+                  <td data-row="9" data-col="4">23462.804***</td>
+                </tr>
+                <tr>
+                  <td data-row="10" data-col="1"></td>
+                  <td data-row="10" data-col="2"></td>
+                  <td data-row="10" data-col="3"></td>
+                  <td data-row="10" data-col="4">(2885.475)</td>
+                </tr>
+                <tr>
+                  <td data-row="11" data-col="1">Num.Obs.</td>
+                  <td data-row="11" data-col="2">373</td>
+                  <td data-row="11" data-col="3">373</td>
+                  <td data-row="11" data-col="4">373</td>
+                </tr>
+                <tr>
+                  <td data-row="12" data-col="1">R2</td>
+                  <td data-row="12" data-col="2">0.866</td>
+                  <td data-row="12" data-col="3">0.870</td>
+                  <td data-row="12" data-col="4">0.896</td>
+                </tr>
+                <tr>
+                  <td data-row="13" data-col="1">R2 Adj.</td>
+                  <td data-row="13" data-col="2">0.865</td>
+                  <td data-row="13" data-col="3">0.870</td>
+                  <td data-row="13" data-col="4">0.895</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- hack to avoid NA insertion in last line -->
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+</section>
+<section id="sec-exercises" class="level2" data-number="11.7">
+<h2 data-number="11.7" class="anchored" data-anchor-id="sec-exercises"><span class="header-section-number">11.7</span> 演習問題</h2>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong><code>insurance.csv</code> の喫煙ダミー</strong></p>
+<p><code>insurance.csv</code> を使って、以下の2つのモデルを推定してください。</p>
+<ul>
+<li>モデルA：<code>charges ~ age + bmi</code>（ダミー変数なし）</li>
+<li>モデルB：<code>charges ~ age + bmi + smoker</code>（喫煙ダミーを追加）</li>
+</ul>
+<p><strong>手順のヒント：</strong></p>
+<pre><code>① lm() で2つのモデルを推定する
+② modelsummary() で2モデルを横並びで比較する
+③ smoker の係数を確認し、「喫煙者の医療費は非喫煙者と比べていくら高いか」を解釈する
+④ R² の変化を確認する（喫煙ダミーを追加するとどれだけ説明力が上がるか）</code></pre>
+<ul>
+<li>結果の表示には <strong><code>modelsummary()</code></strong> を使ってください</li>
+</ul>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong><code>insurance.csv</code> の性別ダミー</strong></p>
+<p><code>insurance.csv</code> を使って、性別（<code>sex</code>）が医療費に与える影響を 以下の手順で分析してください。</p>
+<p><strong>手順のヒント：</strong></p>
+<pre><code>① まず ggplot で性別別の医療費の boxplot を描く（視覚的確認）
+② lm(charges ~ sex, data = df_ins) で単回帰
+③ lm(charges ~ age + bmi + smoker + sex, data = df_ins) で重回帰（性別を追加）
+④ jtools::summ()で結果を表示する
+⑤ 結果を解釈する</code></pre>
+<ul>
+<li>結果の表示には <strong><code>jtools::summ()</code></strong> を使ってください</li>
+</ul>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong><code>Salary_Data.csv</code> の学歴ダミー</strong></p>
+<p><code>Salary_Data.csv</code> を使って、学歴（EducationLevel）が年収に与える影響を分析してください。</p>
+<p><strong>手順のヒント：</strong></p>
+<pre><code>① df_sal_clean（drop_na() 済み）を使う
+② lm(Salary ~ EducationLevel, data = df_sal_clean) で単回帰
+③ lm(Salary ~ YearsExperience + EducationLevel, data = df_sal_clean) で重回帰
+④ stargazer() で結果を表示する。
+⑤ 結果を解釈する（各学歴ダミーの係数を解釈する（参照カテゴリと比較していくら高い/低いか））</code></pre>
+<ul>
+<li>参照カテゴリは何ですか？（アルファベット順に注意）</li>
+<li>結果の表示には <strong><code>stargazer()</code></strong> を使ってください（<code>type = "html"</code>）</li>
+</ul>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong><code>Housing.csv</code> のダミー変数</strong></p>
+<p><code>Housing.csv</code> を使って、以下のモデルを推定してください。</p>
+<ul>
+<li>モデルA：<code>price ~ area</code></li>
+<li>モデルB：<code>price ~ area + mainroad</code>（幹線道路沿いダミー）</li>
+<li>モデルC：<code>price ~ area + mainroad + furnishingstatus</code>（家具状態ダミー追加）</li>
+</ul>
+<p><strong>手順のヒント：</strong></p>
+<pre><code>① 3つのモデルを lm() で推定する
+② furnishingstatus は3カテゴリ（furnished / semi-furnished / unfurnished）
+   → 2つのダミー変数が自動生成される
+③ modelsummary() で3モデルを比較する
+④ mainroad の係数を解釈する（幹線道路沿いだと価格はいくら高い/低いか）
+⑤ furnishingstatus の各ダミーの係数を解釈する</code></pre>
+<ul>
+<li>結果の表示には <strong><code>modelsummary()</code></strong> を使ってください</li>
+</ul>
+</div>
+</div>
+<div style="margin-top: 3.5em;">
+
+</div>
+<div class="mondai callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong><code>world-data-2023.csv</code> のダミー変数（発展）</strong></p>
+<p><code>world-data-2023.csv</code> を使って、大陸（地域）ごとに平均寿命（LifeExpectancy）が どう異なるかを分析してください。</p>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>世界データの前処理</strong></p>
+<p><code>world-data-2023.csv</code> は数値が文字列型で格納されているため、前処理が必要です。</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>df_world <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"world-data-2023.csv"</span>,</span>
+<span id="cb22-2"><a href="#cb22-2"></a>                     <span class="at">locale =</span> <span class="fu">locale</span>(<span class="at">encoding =</span> <span class="st">"latin1"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb22-4"><a href="#cb22-4"></a>    <span class="at">GDP_num =</span> <span class="fu">parse_number</span>(GDP),</span>
+<span id="cb22-5"><a href="#cb22-5"></a>    <span class="at">unemp   =</span> <span class="fu">parse_number</span>(Unemployment)</span>
+<span id="cb22-6"><a href="#cb22-6"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ただし、このデータには「大陸」列がありません。 <code>countrycode</code> パッケージや手動でカテゴリを付与するか、 代わりに以下の分析に取り組んでください。</p>
+</div>
+</div>
+<p>代替として <code>Insurance.csv</code> の <code>region</code>（4地域）を使って、 地域ごとの医療費の違いを分析してください。</p>
+<p><strong>手順のヒント：</strong></p>
+<pre><code>① lm(charges ~ region, data = df_ins) で地域ダミーの回帰
+② lm(charges ~ age + bmi + smoker + region, data = df_ins) で全変数モデル
+③ modelsummary()で結果を確認する
+④ plot_summs() で係数を可視化する（jtools パッケージ）
+⑤ 参照カテゴリ（northeast）と比較して、各地域の医療費の違いを解釈する</code></pre>
+<ul>
+<li>結果の表示には <strong><code>modelsummary()</code></strong> と <strong><code>jtools::plot_summs()</code></strong> を使ってください</li>
+</ul>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="まとめ" class="level2" data-number="11.8">
+<h2 data-number="11.8" class="anchored" data-anchor-id="まとめ"><span class="header-section-number">11.8</span> まとめ</h2>
+<section id="本日学んだこと" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="本日学んだこと">本日学んだこと</h3>
+<p><strong>ダミー変数の基本</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>ポイント</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ダミー変数の値</td>
+<td>0 か 1 のみ</td>
+</tr>
+<tr class="even">
+<td>R での自動変換</td>
+<td>文字型・因子型変数は自動でダミー化</td>
+</tr>
+<tr class="odd">
+<td>参照カテゴリ</td>
+<td>アルファベット順で最初のカテゴリ（切片に含まれる）</td>
+</tr>
+<tr class="even">
+<td>ダミー変数の数</td>
+<td>カテゴリ数 − 1</td>
+</tr>
+<tr class="odd">
+<td>係数の解釈</td>
+<td>参照カテゴリと比較した差</td>
+</tr>
+</tbody>
+</table>
+<p><strong>ダミー変数を含む回帰の流れ</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="co"># ① カテゴリ変数をそのまま lm() に渡す（自動でダミー化）</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X_連続 <span class="sc">+</span> X_カテゴリ, <span class="at">data =</span> df)</span>
+<span id="cb24-3"><a href="#cb24-3"></a></span>
+<span id="cb24-4"><a href="#cb24-4"></a><span class="co"># ② 参照カテゴリを確認（アルファベット順の最初）</span></span>
+<span id="cb24-5"><a href="#cb24-5"></a><span class="fu">levels</span>(<span class="fu">factor</span>(df<span class="sc">$</span>X_カテゴリ))</span>
+<span id="cb24-6"><a href="#cb24-6"></a></span>
+<span id="cb24-7"><a href="#cb24-7"></a><span class="co"># ③ 参照カテゴリを変更したい場合</span></span>
+<span id="cb24-8"><a href="#cb24-8"></a>df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">X =</span> <span class="fu">relevel</span>(<span class="fu">factor</span>(X), <span class="at">ref =</span> <span class="st">"希望のカテゴリ"</span>))</span>
+<span id="cb24-9"><a href="#cb24-9"></a></span>
+<span id="cb24-10"><a href="#cb24-10"></a><span class="co"># ④ 結果の確認と解釈</span></span>
+<span id="cb24-11"><a href="#cb24-11"></a>model <span class="sc">|&gt;</span> <span class="fu">tidy</span>()</span>
+<span id="cb24-12"><a href="#cb24-12"></a><span class="fu">modelsummary</span>(<span class="fu">list</span>(m1, m2, m3), <span class="at">stars =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>次回の予告</strong></p>
+<p>第 12 回では、<strong>交差項</strong>を用いた回帰分析を学習します。</p>
+<ul>
+<li>「喫煙者では BMI の効果が非喫煙者より大きい」のような<strong>変数間の相互作用</strong>を捉える方法</li>
+<li>交差項の作り方（<code>X1 * X2</code>）</li>
+<li>交差項の係数の解釈</li>
+</ul>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+        for (let i=0; i<annoteTargets.length; i++) {
+          const annoteTarget = annoteTargets[i];
+          const targetCell = annoteTarget.getAttribute("data-target-cell");
+          const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+          const contentFn = () => {
+            const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+            if (content) {
+              const tipContent = content.cloneNode(true);
+              tipContent.classList.add("code-annotation-tip-content");
+              return tipContent.outerHTML;
+            }
+          }
+          const config = {
+            allowHTML: true,
+            content: contentFn,
+            onShow: (instance) => {
+              selectCodeLines(instance.reference);
+              instance.reference.classList.add('code-annotation-active');
+              window.tippy.hideAll();
+            },
+            onHide: (instance) => {
+              unselectCodeLines();
+              instance.reference.classList.remove('code-annotation-active');
+            },
+            maxWidth: 300,
+            delay: [50, 0],
+            duration: [200, 0],
+            offset: [5, 10],
+            arrow: true,
+            trigger: 'click',
+            appendTo: function(el) {
+              return el.parentElement.parentElement.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'quarto',
+            placement: 'right',
+            positionFixed: true,
+            popperOptions: {
+              modifiers: [
+              {
+                name: 'flip',
+                options: {
+                  flipVariations: false, // true by default
+                  allowedAutoPlacements: ['right'],
+                  fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                },
+              },
+              {
+                name: 'preventOverflow',
+                options: {
+                  mainAxis: false,
+                  altAxis: false
+                }
+              }
+              ]        
+            }      
+          };
+          window.tippy(annoteTarget, config); 
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./lecA10.html" class="pagination-link" aria-label="回帰分析1">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">回帰分析1</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./lecA12.html" class="pagination-link" aria-label="回帰分析3">
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">回帰分析3</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
