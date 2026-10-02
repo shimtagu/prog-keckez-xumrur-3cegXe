@@ -8,7 +8,7 @@
 
 <meta name="description" content="2026年度　前期（A） 後期（B） 時間： 月曜日 4 時限（15:45-17:30） 教室： C 館 地下1階 PC4 教室">
 
-<title>15&nbsp; 演習 – R プログラミング</title>
+<title>15&nbsp; 論文のレプリケーション1 – R プログラミング</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -73,6 +108,35 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <meta name="robots" content="noindex, nofollow">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -85,7 +149,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lecB01.html">後期（B）</a></li><li class="breadcrumb-item"><a href="./lecB02.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">演習</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lecB01.html">後期（B）</a></li><li class="breadcrumb-item"><a href="./lecB02.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">論文のレプリケーション1</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -223,13 +287,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lecB02.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">演習</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">論文のレプリケーション1</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lecB03.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">演習</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">論文のレプリケーション2</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -305,15 +369,28 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-replication" id="toc-sec-replication" class="nav-link active" data-scroll-target="#sec-replication"><span class="header-section-number">15.1</span> レプリケーションとは</a></li>
+  <li><a href="#sec-steps" id="toc-sec-steps" class="nav-link" data-scroll-target="#sec-steps"><span class="header-section-number">15.2</span> 論文の構成と5つのステップ</a></li>
+  <li><a href="#sec-data" id="toc-sec-data" class="nav-link" data-scroll-target="#sec-data"><span class="header-section-number">15.3</span> 今日の論文とデータ</a></li>
+  <li><a href="#sec-prepare" id="toc-sec-prepare" class="nav-link" data-scroll-target="#sec-prepare"><span class="header-section-number">15.4</span> 今日の準備</a></li>
+  <li><a href="#sec-setup" id="toc-sec-setup" class="nav-link" data-scroll-target="#sec-setup"><span class="header-section-number">15.5</span> パッケージの準備</a></li>
+  <li><a href="#sec-assignment" id="toc-sec-assignment" class="nav-link" data-scroll-target="#sec-assignment"><span class="header-section-number">15.6</span> 本日の課題</a></li>
+  <li><a href="#sec-hints" id="toc-sec-hints" class="nav-link" data-scroll-target="#sec-hints"><span class="header-section-number">15.7</span> 課題のヒント</a></li>
+  <li><a href="#sec-summary" id="toc-sec-summary" class="nav-link" data-scroll-target="#sec-summary"><span class="header-section-number">15.8</span> まとめ</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lecB01.html">後期（B）</a></li><li class="breadcrumb-item"><a href="./lecB02.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">演習</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lecB01.html">後期（B）</a></li><li class="breadcrumb-item"><a href="./lecB02.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">論文のレプリケーション1</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">演習</span></h1>
+<h1 class="title"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">論文のレプリケーション1</span></h1>
 </div>
 
 
@@ -330,8 +407,665 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p><strong>「NHK受信料を払っているのは誰か」を R で再現する</strong></p>
+<div style="margin-top: 2.0em;">
+
+</div>
+<p><strong>今日の目標</strong></p>
+<ol type="1">
+<li><strong>レプリケーション（再現）</strong>とは何か、なぜ大切なのかを理解する。</li>
+<li>実際の論文を読み、<strong>問い・仮説・データ・分析・考察</strong>が論文のどこに書かれているかを確認する。</li>
+<li>論文と同じデータを使い、記述統計・グラフ・重回帰分析（交差項を含む）を R で<strong>自力で再現</strong>して、同じ結果が出るかを確かめる。</li>
+<li>再現した結果をもとに、分析から何が分かったかを<strong>自分の言葉でまとめる</strong>。</li>
+</ol>
+<div style="margin-top: 2.0em;">
+
+</div>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>今日の位置づけ</strong></p>
+<p>前回は、学習用に作られたデータで「データ分析の5つのステップ」を体験しました。今日は、実際に大学生が書いた論文を1本取り上げ、<strong>論文の中で5つのステップがどう使われているか</strong>を読み取りながら、その分析を自分の手で再現します。</p>
+<p>次回（第3回）は、別の論文で同じことを行います。</p>
+</div>
+</div>
+<div style="margin-top: 3.0em;">
+
+</div>
+<!--
+## 今日の進め方 {#sec-howto}
+
+今日は、最初に今日の内容を説明したあと、皆さんが **`assignmentB02.qmd` の課題に自力で取り組む**時間にします。
+
+|   |   |
+|:-:|:--------------------|
+| 1. | 最初の約10分で、レプリケーションとは何か、今日の論文とデータ、課題の進め方を説明します。 |
+| 2. | そのあとは、論文の PDF を読みながら、`assignmentB02.qmd` の課題1から順に取り組みます。 |
+| 3. | 授業の途中で、教員がスクリーンに解答例を映します。自分の答えと見比べて、答え合わせをしてください。 |
+| 4. | 課題1〜8を終えたら Render し、授業時間内の提出を目指してください。 |
+| 5. | 授業中に終わらなかった人は、残りを宿題として仕上げ、期限までに提出してください。 |
+: {tbl-colwidths="[8, 92]"}
+
+-->
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>分からないところは、まず<strong>論文の該当ページをもう一度読む</strong>、<strong>前期の講義資料を見返す</strong>ことから始めましょう。それでも分からないときは、遠慮なく手を挙げて質問してください。生成 AI に質問するのも構いませんが、<span class="marker">出てきたコードは自分で理解してから使ってください</span>。</p>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+<section id="sec-replication" class="level2" data-number="15.1">
+<h2 data-number="15.1" class="anchored" data-anchor-id="sec-replication"><span class="header-section-number">15.1</span> レプリケーションとは</h2>
+<p><strong>レプリケーション（replication）</strong>とは、すでに発表された研究の分析を、同じデータ・同じ方法でもう一度行い、<strong>同じ結果が得られるかを確かめる</strong>ことです。</p>
+<p>なぜレプリケーションが大切なのでしょうか。</p>
+<ul>
+<li><strong>研究の信頼性を確かめるため</strong>：同じデータで同じ分析をしても同じ結果が出ないなら、その研究の結論は信用できません。近年、心理学や経済学などで「有名な研究の結果が再現できない」という問題（再現性の危機）が大きく取り上げられています。</li>
+<li><strong>分析の手順を学ぶため</strong>：論文には「何をしたか」は書かれていても、「どうやったか（コード）」は書かれていないことが多いです。自分で再現しようとすると、論文の一文一文がどの操作に対応しているのかを考えることになり、分析の力が大きく伸びます。</li>
+<li><strong>研究の出発点にするため</strong>：再現できたら、変数を加える・データを変えるなど、少し手を加えて<strong>自分の分析に発展</strong>させることができます。</li>
+</ul>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>レプリケーションは「論文のあら探し」ではありません。<span class="marker">論文を正確に読み、自分の手で確かめる</span>ための練習です。うまく再現できなかったときも、「どこが違うのか」「なぜ違うのか」を考えることに意味があります。</p>
+</div>
+</div>
+</section>
+<section id="sec-steps" class="level2" data-number="15.2">
+<h2 data-number="15.2" class="anchored" data-anchor-id="sec-steps"><span class="header-section-number">15.2</span> 論文の構成と5つのステップ</h2>
+<p>実証分析の論文は、多くの場合、次のような構成になっています。これは前回学んだ<strong>5つのステップ</strong>とほぼ対応しています。</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 55%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">論文の章</th>
+<th style="text-align: left;">書かれていること</th>
+<th style="text-align: center;">5つのステップ</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">はじめに</td>
+<td style="text-align: left;">研究の背景、問い<br>（何を明らかにしたいか）</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">先行研究</td>
+<td style="text-align: left;">これまでの研究で分かっていること</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">理論と仮説</td>
+<td style="text-align: left;">問いに対する予想（仮説）と、その理由</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">データ</td>
+<td style="text-align: left;">使ったデータの出典・変数の説明・記述統計・グラフ</td>
+<td style="text-align: center;">2・3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">分析結果</td>
+<td style="text-align: left;">回帰分析などの結果とその解釈</td>
+<td style="text-align: center;">4</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">結論と展望</td>
+<td style="text-align: left;">結果のまとめ、分かったこと、限界と今後の課題</td>
+<td style="text-align: center;">5</td>
+</tr>
+</tbody>
+</table>
+<p><span class="marker">後期の総合分析演習のレポートも、この構成を目標にして書きます。</span>今日の論文を、レポートの「お手本」として読んでください。</p>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>論文で使われる言葉</strong></p>
+<p>論文では「従属変数」「独立変数」という言葉が使われています。前期の回帰分析の言葉では、従属変数＝<strong>被説明変数</strong>（<span class="math inline">\(Y\)</span>）、独立変数＝<strong>説明変数</strong>（<span class="math inline">\(X\)</span>）です。論文の「コントロール変数」は、主な関心ではないものの、<span class="math inline">\(Y\)</span> に影響しそうなので<strong>一緒にモデルに入れておく説明変数</strong>のことです。</p>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-data" class="level2" data-number="15.3">
+<h2 data-number="15.3" class="anchored" data-anchor-id="sec-data"><span class="header-section-number">15.3</span> 今日の論文とデータ</h2>
+<p><strong>今日の論文</strong></p>
+<p>矢澤翼・永瀬真鈴（2016）「NHK受信料を払っているのは誰か」平成28年度 拓殖大学研究所奨学論文</p>
+<p>拓殖大学政経学部の浅野正彦先生のゼミで書かれた論文です。都道府県によって NHK 受信料の支払率に大きな差がある（秋田県 97% に対して沖縄県 46.8%）のはなぜか、を重回帰分析で調べています。</p>
+<p><strong>今日のデータ</strong>（<code>nhk.csv</code>）</p>
+<p>論文の著者が分析に使ったデータです（論文の Appendix に変数の説明があります）。47都道府県が1行ずつ入っています。</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 52%">
+<col style="width: 30%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>変数名</th>
+<th>内容</th>
+<th>出典</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>pref</code></td>
+<td>都道府県名（ローマ字）</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>nhk</code></td>
+<td>NHK 受信料の支払率（%）</td>
+<td>NHK 放送文化研究所（2014年度末）</td>
+</tr>
+<tr class="odd">
+<td><code>kosu</code></td>
+<td>賃貸住宅（共同住宅）の戸数（戸）</td>
+<td>日本賃貸住宅管理協会</td>
+</tr>
+<tr class="even">
+<td><code>mobility</code></td>
+<td>人口移動率（%）：5年間で住む場所が変わった人の割合</td>
+<td>国勢調査（2010年）</td>
+</tr>
+<tr class="odd">
+<td><code>ldp</code></td>
+<td>自民党得票率（%）：衆議院選挙の比例区</td>
+<td>総務省（2014年）</td>
+</tr>
+<tr class="even">
+<td><code>age</code></td>
+<td>高齢化率（%）：65歳以上の人口の割合</td>
+<td>高齢社会白書（2014年）</td>
+</tr>
+<tr class="odd">
+<td><code>income</code></td>
+<td>一人当たりの県民所得（千円）</td>
+<td>内閣府 県民経済計算</td>
+</tr>
+</tbody>
+</table>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>実際の研究で使われたデータは、きれいに整っているとは限りません。分析を始める前に、データの中身をよく確認しましょう（課題3）。</p>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-prepare" class="level2" data-number="15.4">
+<h2 data-number="15.4" class="anchored" data-anchor-id="sec-prepare"><span class="header-section-number">15.4</span> 今日の準備</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 8%">
+<col style="width: 92%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1.</td>
+<td style="text-align: left;">新規 R プロジェクトを作成する。Directory name は「LessonB02」、場所は Kドライブの「R_programming」。</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2.</td>
+<td style="text-align: left;">Blackboard から <code>nhk.csv</code>・<code>2016_yazawa_marin.pdf</code>（論文）・<code>assignmentB02.qmd</code> をダウンロードし、「R_programming/LessonB02」フォルダに入れる。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3.</td>
+<td style="text-align: left;">まずは氏名（学籍番号）を記入し、この状態で Rendering ができるか確認する。</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4.</td>
+<td style="text-align: left;">左側に Rendering して出力された画面を置き、右半分には RStudioを置いて assignmentB02.qmd の課題に取り組む。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5.</td>
+<td style="text-align: left;">適当なところで Rendering し、確かめながら進める。</td>
+</tr>
+</tbody>
+</table>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-setup" class="level2" data-number="15.5">
+<h2 data-number="15.5" class="anchored" data-anchor-id="sec-setup"><span class="header-section-number">15.5</span> パッケージの準備</h2>
+<p>大学の PC はシャットダウンするたびに初期化されるため、毎回インストールが必要です。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">options</span>(<span class="at">repos =</span> <span class="fu">c</span>(<span class="at">CRAN =</span> <span class="st">"https://cran.rstudio.com/"</span>))</span>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">install.packages</span>(<span class="st">"broom"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">install.packages</span>(<span class="st">"modelsummary"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-assignment" class="level2" data-number="15.6">
+<h2 data-number="15.6" class="anchored" data-anchor-id="sec-assignment"><span class="header-section-number">15.6</span> 本日の課題</h2>
+<p><code>assignmentB02.qmd</code> には、5つのステップに沿って次の課題が並んでいます。論文の該当ページを読みながら、課題1から順に取り組んでください。</p>
+<div style="margin-top: 2.0em;">
+
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 14%">
+<col style="width: 53%">
+<col style="width: 18%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">ステップ</th>
+<th style="text-align: center;">課題</th>
+<th style="text-align: left;">内容</th>
+<th style="text-align: center;">論文</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">課題1</td>
+<td style="text-align: left;">論文の問いを書き出す</td>
+<td style="text-align: center;">p.2</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">課題2</td>
+<td style="text-align: left;">4つの仮説とコントロール変数を整理する</td>
+<td style="text-align: center;">p.4〜5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">課題3</td>
+<td style="text-align: left;">データを確認し、前処理をする</td>
+<td style="text-align: center;">p.6, Appendix</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">課題4</td>
+<td style="text-align: left;">記述統計（表2）を再現する</td>
+<td style="text-align: center;">p.6〜7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">課題5</td>
+<td style="text-align: left;">散布図（図3・図4）を再現する</td>
+<td style="text-align: center;">p.8〜9</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">課題6</td>
+<td style="text-align: left;">重回帰分析（表3）を再現する</td>
+<td style="text-align: center;">p.10</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">課題7</td>
+<td style="text-align: left;">交差項を含む重回帰分析（表4）を再現する</td>
+<td style="text-align: center;">p.11</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">課題8</td>
+<td style="text-align: left;">分析の結果、何が分かったかをまとめる</td>
+<td style="text-align: center;">p.13</td>
+</tr>
+</tbody>
+</table>
+<div style="margin-top: 2.0em;">
+
+</div>
+<p><strong>提出方法</strong>：Render して出力された HTML ファイルを ZIP 形式に圧縮して Blackboard から提出してください。提出期限は<span class="marker">金曜日24時</span>です。</p>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-hints" class="level2" data-number="15.7">
+<h2 data-number="15.7" class="anchored" data-anchor-id="sec-hints"><span class="header-section-number">15.7</span> 課題のヒント</h2>
+<p>課題に取り組んでいて困ったときは、該当する課題のヒントを開いてください。<span class="marker">まずは自分の力で考え、どうしても進めないときに開く</span>ようにしましょう。</p>
+<p>コードのヒントの <code>___</code> の部分は、自分で考えて埋めてください。</p>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Render が止まったときは</strong></p>
+<p>Render の途中でエラーが出ると、HTML は作られません。Background Jobs（または Render）タブのエラーメッセージに出ているチャンクの名前（<code>label</code>）を確認し、そのチャンクのコードを直してから、もう一度 Render しましょう。<span class="marker">課題を1つ終えるごとに Render する</span>と、どこでエラーが出たのかすぐに分かります。</p>
+</div>
+</div>
+<div style="margin-top: 2.0em;">
+
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="課題1のヒント">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>課題1のヒント
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>論文の p.2 に「本論文の目的は、……」という一文があります。これが問いにあたります。</li>
+<li>「なぜ〜なのか」「〜は何によって決まるのか」という<strong>疑問文の形</strong>に書き直すと、問いとして分かりやすくなります。</li>
+<li>表1（p.3）を見ると、支払率が最も高い県と最も低い県で、どのくらい差があるかが分かります。</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="課題2のヒント">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>課題2のヒント
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>4つの仮説は、p.4〜5 に「仮説1.」〜「仮説4.」として書かれています。</li>
+<li>仮説の文の「〜ほど受信料を<strong>支払わない</strong>」は支払率が下がる（−）、「〜ほど受信料を<strong>支払う</strong>」は支払率が上がる（＋）という予想です。</li>
+<li>仮説4は「自民党の支持が高い県では、人口移動率が高くても受信料を払う」という予想です。人口移動率のマイナスの影響を、自民党得票率が<strong>弱める</strong>方向に働くとき、交差項の係数の符号はどうなるでしょうか（前期第12回）。</li>
+<li>コントロール変数は、p.5 の図1の上に「コントロール変数として……を加え」と書かれています。</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="課題3のヒント">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>課題3のヒント
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>データの行数・列数・変数の型は <code>glimpse()</code> で確認できます。</li>
+<li>1つの列だけを表示するには <code>データ名$列名</code> と書きます。</li>
+<li>都道府県名の表記を直すには、次の2つの関数を <code>mutate()</code> の中で使います。
+<ul>
+<li><code>str_remove(列名, "取り除く文字")</code>：文字列から指定した文字を取り除く</li>
+<li><code>str_to_lower(列名)</code>：文字列をすべて小文字にする</li>
+</ul></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># ① データの行数・列数・変数の型を確認する</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">___</span>(df_nhk)</span>
+<span id="cb2-3"><a href="#cb2-3"></a></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="co"># ② 都道府県名を表示する</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>df_nhk<span class="sc">$</span>___</span>
+<span id="cb2-6"><a href="#cb2-6"></a></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="co"># ③ 表記の揺れを直す</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a>df_nhk <span class="ot">&lt;-</span> df_nhk <span class="sc">|&gt;</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a>  <span class="fu">___</span>(</span>
+<span id="cb2-10"><a href="#cb2-10"></a>    <span class="at">pref =</span> <span class="fu">str_remove</span>(pref, ___),</span>
+<span id="cb2-11"><a href="#cb2-11"></a>    <span class="at">pref =</span> <span class="fu">str_to_lower</span>(___)</span>
+<span id="cb2-12"><a href="#cb2-12"></a>  )</span>
+<span id="cb2-13"><a href="#cb2-13"></a></span>
+<span id="cb2-14"><a href="#cb2-14"></a><span class="co"># ④ 直ったことを確認する</span></span>
+<span id="cb2-15"><a href="#cb2-15"></a>df_nhk<span class="sc">$</span>pref</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="課題4のヒント">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>課題4のヒント
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>表2には、交差項「人口移動率 × 自民党得票率」も載っています。まず <code>mutate()</code> で、2つの列を掛け算した新しい列を作ります。</li>
+<li>複数の変数について平均などをまとめて計算するには、<code>pivot_longer()</code> でデータを<strong>縦長</strong>（「変数名」の列と「値」の列の2列）に変形してから、<code>group_by()</code> と <code>summarise()</code> を使うと便利です。</li>
+<li><code>fct_inorder()</code> を使うと、変数の並び順が <code>select()</code> で選んだ順になります（使わないとアルファベット順になります）。</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>df_nhk <span class="sc">|&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">mutate</span>(<span class="at">mob_ldp =</span> ___ <span class="sc">*</span> ___) <span class="sc">|&gt;</span>                         <span class="co"># 交差項の列を作る</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>  <span class="fu">select</span>(nhk, kosu, mobility, ldp, mob_ldp, age, income) <span class="sc">|&gt;</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">"variable"</span>, <span class="at">values_to =</span> <span class="st">"value"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a>  <span class="fu">mutate</span>(<span class="at">variable =</span> <span class="fu">fct_inorder</span>(variable)) <span class="sc">|&gt;</span>           <span class="co"># 変数の並び順を固定する</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>  <span class="fu">group_by</span>(___) <span class="sc">|&gt;</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb3-8"><a href="#cb3-8"></a>    <span class="at">mean =</span> <span class="fu">mean</span>(value),</span>
+<span id="cb3-9"><a href="#cb3-9"></a>    <span class="at">sd   =</span> <span class="fu">___</span>(value),</span>
+<span id="cb3-10"><a href="#cb3-10"></a>    <span class="at">min  =</span> <span class="fu">min</span>(value),</span>
+<span id="cb3-11"><a href="#cb3-11"></a>    <span class="at">max  =</span> <span class="fu">___</span>(value),</span>
+<span id="cb3-12"><a href="#cb3-12"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="課題5のヒント">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>課題5のヒント
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>散布図は <code>geom_point()</code>、回帰直線は <code>geom_smooth(method = "lm", se = FALSE)</code> で描きます（前期第4回）。</li>
+<li>点の近くに文字を表示するには <code>geom_text(aes(label = 列名))</code> を使います。<code>vjust = -0.8</code> とすると、文字が点の少し上に表示されます。</li>
+<li>図4は、図3のコードの x 軸の変数と軸ラベルを変えるだけで描けます。</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>df_nhk <span class="sc">|&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> ___, <span class="at">y =</span> ___)) <span class="sc">+</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> ___), <span class="at">size =</span> <span class="fl">2.5</span>, <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"gray30"</span>) <span class="sc">+</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"人口移動率（%）"</span>, <span class="at">y =</span> <span class="st">"受信料支払率（%）"</span>) <span class="sc">+</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="課題6のヒント">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>課題6のヒント
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>重回帰分析は <code>lm(被説明変数 ~ 説明変数1 + 説明変数2 + ..., data = データ名)</code> です（前期第10回）。</li>
+<li><code>tidy()</code> で係数と p 値を、<code>glance()</code> で補正 R²（<code>adj.r.squared</code>）を確認できます。</li>
+<li><code>kosu</code> の係数は <code>-2.83e-06</code> のように表示されます。これは <span class="math inline">\(-2.83 \times 10^{-6} = -0.00000283\)</span> のことです。</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(___ <span class="sc">~</span> kosu <span class="sc">+</span> ___ <span class="sc">+</span> ___ <span class="sc">+</span> age <span class="sc">+</span> income, <span class="at">data =</span> df_nhk)</span>
+<span id="cb5-2"><a href="#cb5-2"></a></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="fu">tidy</span>(model1)</span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="fu">glance</span>(model1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="課題7のヒント">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>課題7のヒント
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>交差項は、2つの変数を <code>*</code> でつなぎます。<code>x1 * x2</code> は <code>x1 + x2 + x1:x2</code> と同じ意味です（前期第12回）。</li>
+<li>2つのモデルを並べて表示するには <code>modelsummary()</code> を使います（前期第10回）。</li>
+<li><code>modelsummary()</code> では <code>kosu</code> の係数が小さすぎて <code>0.000</code> と表示されます。細かい値は <code>tidy()</code> で確認しましょう。</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(nhk <span class="sc">~</span> kosu <span class="sc">+</span> ___ ___ ___ <span class="sc">+</span> age <span class="sc">+</span> income, <span class="at">data =</span> df_nhk)</span>
+<span id="cb6-2"><a href="#cb6-2"></a></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="fu">modelsummary</span>(<span class="fu">list</span>(<span class="st">"表3"</span> <span class="ot">=</span> ___, <span class="st">"表4"</span> <span class="ot">=</span> ___),</span>
+<span id="cb6-4"><a href="#cb6-4"></a>             <span class="at">stars =</span> <span class="cn">TRUE</span>, <span class="at">gof_map =</span> <span class="fu">c</span>(<span class="st">"nobs"</span>, <span class="st">"r.squared"</span>, <span class="st">"adj.r.squared"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="課題8のヒント">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>課題8のヒント
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>仮説が「支持された」と言えるのは、<strong>係数の符号が予想と同じ</strong>で、かつ <strong>p 値 &lt; 0.05</strong> のときです。符号が予想と同じでも、p 値が 0.05 以上なら「支持されない」となります。</li>
+<li>仮説1〜3の結果は課題6の <code>model1</code>、仮説4（交差項）の結果は課題7の <code>model2</code> で確認します。</li>
+<li>問いへの答えは、「〜な県ほど、受信料の支払率が高い（低い）」という形で書くと分かりやすくなります。支持されなかった仮説についても、「〜とは関係がなかった」と書きましょう。</li>
+<li>仮説4は、「自民党得票率が高い県では、人口移動率が高くても……」のように、2つの変数を組み合わせて書きます。</li>
+<li>最後に、自分のまとめと論文の結論（p.13）が同じになっているかを確かめましょう。</li>
+</ul>
+</div>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-summary" class="level2" data-number="15.8">
+<h2 data-number="15.8" class="anchored" data-anchor-id="sec-summary"><span class="header-section-number">15.8</span> まとめ</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 75%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">項目</th>
+<th style="text-align: left;">ポイント</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">レプリケーション</td>
+<td style="text-align: left;">同じデータ・同じ方法で分析し、同じ結果が得られるかを確かめる</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">論文の構成</td>
+<td style="text-align: left;">はじめに・先行研究・仮説 → データ → 分析結果 → 結論（＝5つのステップ）</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">再現の確かめ方</td>
+<td style="text-align: left;">論文の表・図の数字を、自分の結果と一つひとつ比べる</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">まとめ</td>
+<td style="text-align: left;">仮説ごとに支持されたかを確かめ、問いに対する答えを自分の言葉で書く</td>
+</tr>
+</tbody>
+</table>
+<div style="margin-top: 2.0em;">
+
+</div>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>次回の予告</strong></p>
+<p>第3回では、別の論文「<strong>七三分けと得票率の関係</strong>」（2017年東京都議会議員選挙）をレプリケーションします。</p>
+<ul>
+<li>今日は都道府県のデータでしたが、次回は<strong>候補者一人ひとり</strong>のデータを使います</li>
+<li>主な説明変数が「七三分けかどうか」という<strong>ダミー変数</strong>になります（前期第11回の復習）</li>
+<li>分析結果が<strong>仮説と逆</strong>になったとき、どう考察すればよいかを考えます</li>
+</ul>
+</div>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -787,8 +1521,8 @@ ul.task-list li input[type="checkbox"] {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./lecB03.html" class="pagination-link" aria-label="演習">
-        <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">演習</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./lecB03.html" class="pagination-link" aria-label="論文のレプリケーション2">
+        <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">論文のレプリケーション2</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

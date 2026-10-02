@@ -8,7 +8,7 @@
 
 <meta name="description" content="2026年度　前期（A） 後期（B） 時間： 月曜日 4 時限（15:45-17:30） 教室： C 館 地下1階 PC4 教室">
 
-<title>16&nbsp; 演習 – R プログラミング</title>
+<title>16&nbsp; 論文のレプリケーション2 – R プログラミング</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -73,6 +108,35 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <meta name="robots" content="noindex, nofollow">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -85,7 +149,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lecB01.html">後期（B）</a></li><li class="breadcrumb-item"><a href="./lecB03.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">演習</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lecB01.html">後期（B）</a></li><li class="breadcrumb-item"><a href="./lecB03.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">論文のレプリケーション2</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -223,13 +287,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lecB02.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">演習</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">論文のレプリケーション1</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lecB03.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">演習</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">論文のレプリケーション2</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -305,15 +369,27 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-reverse" id="toc-sec-reverse" class="nav-link active" data-scroll-target="#sec-reverse"><span class="header-section-number">16.1</span> 仮説が支持されないとき</a></li>
+  <li><a href="#sec-data" id="toc-sec-data" class="nav-link" data-scroll-target="#sec-data"><span class="header-section-number">16.2</span> 今日の論文とデータ</a></li>
+  <li><a href="#sec-prepare" id="toc-sec-prepare" class="nav-link" data-scroll-target="#sec-prepare"><span class="header-section-number">16.3</span> 今日の準備</a></li>
+  <li><a href="#sec-setup" id="toc-sec-setup" class="nav-link" data-scroll-target="#sec-setup"><span class="header-section-number">16.4</span> パッケージの準備</a></li>
+  <li><a href="#sec-assignment" id="toc-sec-assignment" class="nav-link" data-scroll-target="#sec-assignment"><span class="header-section-number">16.5</span> 本日の課題</a></li>
+  <li><a href="#sec-hints" id="toc-sec-hints" class="nav-link" data-scroll-target="#sec-hints"><span class="header-section-number">16.6</span> 課題のヒント</a></li>
+  <li><a href="#sec-summary" id="toc-sec-summary" class="nav-link" data-scroll-target="#sec-summary"><span class="header-section-number">16.7</span> まとめ</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lecB01.html">後期（B）</a></li><li class="breadcrumb-item"><a href="./lecB03.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">演習</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lecB01.html">後期（B）</a></li><li class="breadcrumb-item"><a href="./lecB03.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">論文のレプリケーション2</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">演習</span></h1>
+<h1 class="title"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">論文のレプリケーション2</span></h1>
 </div>
 
 
@@ -330,8 +406,628 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p><strong>「七三分けと得票率の関係」を R で再現する</strong></p>
+<div style="margin-top: 2.0em;">
+
+</div>
+<p><strong>今日の目標</strong></p>
+<ol type="1">
+<li>候補者一人ひとりのデータを使った論文を読み、<strong>問い・仮説・データ・分析・考察</strong>が論文のどこに書かれているかを確認する。</li>
+<li><strong>ダミー変数</strong>（0 と 1 の変数）を含むデータの記述統計・グラフ・重回帰分析を R で<strong>自力で再現</strong>して、同じ結果が出るかを確かめる。</li>
+<li>分析の結果が<strong>仮説と逆</strong>になったとき、それをどう読み取り、どう考察すればよいかを考える。</li>
+<li>再現した結果をもとに、分析から何が分かったかを<strong>自分の言葉でまとめる</strong>。</li>
+</ol>
+<div style="margin-top: 2.0em;">
+
+</div>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>今日の位置づけ</strong></p>
+<p>前回は、都道府県のデータを使った論文「NHK受信料を払っているのは誰か」をレプリケーションしました。今日は、別の論文で<strong>同じ5つのステップ</strong>をもう一度たどります。</p>
+<p>前回と違うところは、次の3つです。</p>
+<ul>
+<li>分析の単位が都道府県ではなく、選挙に立候補した<strong>候補者一人ひとり</strong>です。</li>
+<li>主な説明変数が「七三分けかどうか」という<strong>ダミー変数</strong>です（前期第11回）。</li>
+<li>分析の結果が、論文の<strong>仮説と逆</strong>になります。</li>
+</ul>
+</div>
+</div>
+<div style="margin-top: 3.0em;">
+
+</div>
+<!--
+## 今日の進め方 {#sec-howto}
+
+今日は、最初に今日の内容を説明したあと、皆さんが **`assignmentB03.qmd` の課題に自力で取り組む**時間にします。
+
+|   |   |
+|:-:|:--------------------|
+| 1. | 最初の約10分で、今日の論文とデータ、課題の進め方を説明します。 |
+| 2. | そのあとは、論文の PDF を読みながら、`assignmentB03.qmd` の課題1から順に取り組みます。 |
+| 3. | 授業の途中で、教員がスクリーンに解答例を映します。自分の答えと見比べて、答え合わせをしてください。 |
+| 4. | 課題1〜8を終えたら Render し、授業時間内の提出を目指してください。 |
+| 5. | 授業中に終わらなかった人は、残りを宿題として仕上げ、期限までに提出してください。 |
+: {tbl-colwidths="[8, 92]"}
+
+-->
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>分からないところは、まず<strong>論文の該当ページをもう一度読む</strong>、<strong>前回の課題や前期の講義資料を見返す</strong>ことから始めましょう。それでも分からないときは、遠慮なく手を挙げて質問してください。生成 AI に質問するのも構いませんが、<span class="marker">出てきたコードは自分で理解してから使ってください</span>。</p>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+<section id="sec-reverse" class="level2" data-number="16.1">
+<h2 data-number="16.1" class="anchored" data-anchor-id="sec-reverse"><span class="header-section-number">16.1</span> 仮説が支持されないとき</h2>
+<p>分析をすると、仮説が支持されないことはよくあります。仮説が支持されなかったのは「分析の失敗」ではありません。<span class="marker">予想と違う結果も、問いに対する立派な答え</span>です。</p>
+<p>ただし、結果を正しく読み取るためには、「支持されない」にも2つの種類があることに注意しましょう。</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 30%">
+<col style="width: 45%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">結果</th>
+<th style="text-align: left;">例（予想は＋）</th>
+<th style="text-align: left;">言えること</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">有意ではない</td>
+<td style="text-align: left;">係数 ＋0.5（p = 0.40）</td>
+<td style="text-align: left;"><span class="math inline">\(X\)</span> と <span class="math inline">\(Y\)</span> の間に関係があるとは言えない</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">予想と<strong>逆</strong>の符号で有意</td>
+<td style="text-align: left;">係数 −3.0（p = 0.02）</td>
+<td style="text-align: left;"><span class="math inline">\(X\)</span> と <span class="math inline">\(Y\)</span> の間には関係があるが、その向きが予想と<strong>逆</strong></td>
+</tr>
+</tbody>
+</table>
+<p>予想と逆の結果が出たときは、考察で次のようなことを考えます。</p>
+<ul>
+<li><strong>なぜ逆になったのか</strong>：仮説の理由づけ（理論）のどこが現実と合わなかったのか。</li>
+<li><strong>測り方に問題はないか</strong>：変数の作り方やデータの集め方に、結果をゆがめるところはないか。</li>
+<li><strong>ほかの要因はないか</strong>：<span class="math inline">\(X\)</span> と <span class="math inline">\(Y\)</span> の両方に影響する別の要因（<strong>交絡因子</strong>）が隠れていないか。</li>
+</ul>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>交絡因子とは</strong></p>
+<p><span class="math inline">\(X\)</span> と <span class="math inline">\(Y\)</span> の両方に影響を与える第3の要因のことです。例えば、「七三分けの候補者」と「得票率」の両方に「所属する政党」が影響しているなら、七三分けそのものの効果ではなく、政党の違いを見ているだけかもしれません。重回帰分析でコントロール変数を入れるのは、こうした要因の影響を取り除くためです。</p>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-data" class="level2" data-number="16.2">
+<h2 data-number="16.2" class="anchored" data-anchor-id="sec-data"><span class="header-section-number">16.2</span> 今日の論文とデータ</h2>
+<p><strong>今日の論文</strong></p>
+<p>石割司悠（2017）「七三分けと得票率の関係」平成29年度 拓殖大学研究所奨学論文</p>
+<p>前回と同じく、拓殖大学政経学部の浅野正彦先生のゼミで書かれた論文です。「なぜ男性政治家は皆同じ髪型、特に七三分けをしているのか」という疑問から出発し、2017年7月の東京都議会議員選挙の候補者について、<strong>七三分けの候補者ほど得票率が高いのか</strong>を重回帰分析で調べています。</p>
+<p><strong>今日のデータ</strong>（<code>seventhree.csv</code>）</p>
+<p>論文の著者が分析に使ったデータです（論文の Appendix に変数の説明があります）。候補者165人が1行ずつ入っています。</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 80%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>変数名</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>name</code></td>
+<td>候補者の名前（ローマ字、「姓,名」）</td>
+</tr>
+<tr class="even">
+<td><code>seventhree</code></td>
+<td>七三分けダミー：七三分けなら 1、そうでなければ 0</td>
+</tr>
+<tr class="odd">
+<td><code>Tfirst</code></td>
+<td>都民ファーストダミー：都民ファーストの会の候補者なら 1、そうでなければ 0</td>
+</tr>
+<tr class="even">
+<td><code>voteshare</code></td>
+<td>得票率（%）：その候補者が選挙区で得た票の割合</td>
+</tr>
+<tr class="odd">
+<td><code>age</code></td>
+<td>候補者の年齢（歳）</td>
+</tr>
+<tr class="even">
+<td><code>nocand</code></td>
+<td>候補者数（人）：その候補者が立候補した選挙区の候補者の数</td>
+</tr>
+</tbody>
+</table>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>七三分けダミーの作り方</strong></p>
+<p>七三分けかどうかは、著者が選挙公報の写真を5人に見せ、<strong>5人中3人以上</strong>が「七三分けである」と答えた候補者を 1 としています（論文 p.6）。また、女性の候補者と斜めを向いている男性の候補者は判定が難しいため、データから除かれています。データがどのように作られたかは、考察（課題8）で論文の限界を考えるときの手がかりになります。</p>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-prepare" class="level2" data-number="16.3">
+<h2 data-number="16.3" class="anchored" data-anchor-id="sec-prepare"><span class="header-section-number">16.3</span> 今日の準備</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 8%">
+<col style="width: 92%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1.</td>
+<td style="text-align: left;">新規 R プロジェクトを作成する。Directory name は「LessonB03」、場所は Kドライブの「R_programming」。</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2.</td>
+<td style="text-align: left;">Blackboard から <code>seventhree.csv</code>・<code>2017_ishiwari.pdf</code>（論文）・<code>assignmentB03.qmd</code> をダウンロードし、「R_programming/LessonB03」フォルダに入れる。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3.</td>
+<td style="text-align: left;">まずは氏名（学籍番号）を記入し、この状態で Rendering ができるか確認する。</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4.</td>
+<td style="text-align: left;">左側に Rendering して出力された画面を置き、右半分には RStudioを置いて assignmentB03.qmd の課題に取り組む。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5.</td>
+<td style="text-align: left;">適当なところで Rendering し、確かめながら進める。</td>
+</tr>
+</tbody>
+</table>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-setup" class="level2" data-number="16.4">
+<h2 data-number="16.4" class="anchored" data-anchor-id="sec-setup"><span class="header-section-number">16.4</span> パッケージの準備</h2>
+<p>大学の PC はシャットダウンするたびに初期化されるため、毎回インストールが必要です。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">options</span>(<span class="at">repos =</span> <span class="fu">c</span>(<span class="at">CRAN =</span> <span class="st">"https://cran.rstudio.com/"</span>))</span>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">install.packages</span>(<span class="st">"broom"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">install.packages</span>(<span class="st">"modelsummary"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-assignment" class="level2" data-number="16.5">
+<h2 data-number="16.5" class="anchored" data-anchor-id="sec-assignment"><span class="header-section-number">16.5</span> 本日の課題</h2>
+<p><code>assignmentB03.qmd</code> には、5つのステップに沿って次の課題が並んでいます。論文の該当ページを読みながら、課題1から順に取り組んでください。</p>
+<div style="margin-top: 2.0em;">
+
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 14%">
+<col style="width: 53%">
+<col style="width: 18%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">ステップ</th>
+<th style="text-align: center;">課題</th>
+<th style="text-align: left;">内容</th>
+<th style="text-align: center;">論文</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">課題1</td>
+<td style="text-align: left;">論文の問いを書き出す</td>
+<td style="text-align: center;">p.2〜3</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">課題2</td>
+<td style="text-align: left;">2つの仮説とコントロール変数を整理する</td>
+<td style="text-align: center;">p.4〜5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">課題3</td>
+<td style="text-align: left;">データを確認する</td>
+<td style="text-align: center;">p.6, Appendix</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">課題4</td>
+<td style="text-align: left;">記述統計（表1）を再現する</td>
+<td style="text-align: center;">p.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">課題5</td>
+<td style="text-align: left;">散布図（図3）を再現する</td>
+<td style="text-align: center;">p.8</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">課題6</td>
+<td style="text-align: left;">重回帰分析（表2）を再現する</td>
+<td style="text-align: center;">p.9〜10</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">課題7</td>
+<td style="text-align: left;">交差項を含む重回帰分析（表3）を再現する</td>
+<td style="text-align: center;">p.10〜11</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">課題8</td>
+<td style="text-align: left;">分析の結果、何が分かったかをまとめる</td>
+<td style="text-align: center;">p.11〜12</td>
+</tr>
+</tbody>
+</table>
+<div style="margin-top: 2.0em;">
+
+</div>
+<p><strong>提出方法</strong>：Render して出力された HTML ファイルを ZIP 形式に圧縮して Blackboard から提出してください。提出期限は<span class="marker">金曜日24時</span>です。</p>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-hints" class="level2" data-number="16.6">
+<h2 data-number="16.6" class="anchored" data-anchor-id="sec-hints"><span class="header-section-number">16.6</span> 課題のヒント</h2>
+<p>課題に取り組んでいて困ったときは、該当する課題のヒントを開いてください。<span class="marker">まずは自分の力で考え、どうしても進めないときに開く</span>ようにしましょう。</p>
+<p>コードのヒントの <code>___</code> の部分は、自分で考えて埋めてください。</p>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Render が止まったときは</strong></p>
+<p>Render の途中でエラーが出ると、HTML は作られません。Background Jobs（または Render）タブのエラーメッセージに出ているチャンクの名前（<code>label</code>）を確認し、そのチャンクのコードを直してから、もう一度 Render しましょう。<span class="marker">課題を1つ終えるごとに Render する</span>と、どこでエラーが出たのかすぐに分かります。</p>
+</div>
+</div>
+<div style="margin-top: 2.0em;">
+
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="課題1のヒント">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>課題1のヒント
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Abstract（p.2）と「1. はじめに」（p.3）に「本論文の目的は、……」という一文があります。これが問いにあたります。</li>
+<li>「〜ほど〜なのか」「〜は〜に影響するのか」という<strong>疑問文の形</strong>に書き直すと、問いとして分かりやすくなります。</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="課題2のヒント">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>課題2のヒント
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>2つの仮説は、p.4〜5 に「仮説1：」「仮説２：」として書かれています。表2・表3（p.9〜10）の「予想」の列も参考になります。</li>
+<li>仮説2は「候補者数が<strong>少ない</strong>選挙区ほど、七三分けの影響が<strong>小さい</strong>」という予想です。言いかえると、候補者数が<strong>多い</strong>選挙区ほど、七三分けのプラスの影響が<strong>大きくなる</strong>ということです。このとき、交差項「七三分けダミー × 候補者数」の係数の符号はどうなるでしょうか（前期第12回）。</li>
+<li>コントロール変数とその予想は、p.5 の図1の上の段落に「その他のコントロール変数として……」と書かれています。</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="課題3のヒント">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>課題3のヒント
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>データの行数・列数・変数の型は <code>glimpse()</code> で確認できます。</li>
+<li>欠損値（<code>NA</code>）の数は <code>sum(is.na(データ名))</code> で数えられます。</li>
+<li>ある列にどの値が何人いるかは <code>count(列名)</code> で数えられます。</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># ① データの行数・列数・変数の型を確認する</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">___</span>(df_hair)</span>
+<span id="cb2-3"><a href="#cb2-3"></a></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="co"># ② 欠損値の数を数える</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(___))</span>
+<span id="cb2-6"><a href="#cb2-6"></a></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="co"># ③ ダミー変数の値ごとの人数を数える</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a>df_hair <span class="sc">|&gt;</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a>  <span class="fu">count</span>(___)</span>
+<span id="cb2-10"><a href="#cb2-10"></a></span>
+<span id="cb2-11"><a href="#cb2-11"></a>df_hair <span class="sc">|&gt;</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a>  <span class="fu">count</span>(___)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="課題4のヒント">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>課題4のヒント
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>前回の課題4と同じように、<code>pivot_longer()</code> でデータを縦長に変形してから、<code>group_by()</code> と <code>summarise()</code> で計算します。</li>
+<li><code>name</code> は文字の列なので、平均などは計算できません。<code>select()</code> で5つの変数だけを選んでから変形しましょう。</li>
+<li>0 と 1 のダミー変数の平均は、<strong>1 の人の割合</strong>になります。課題3で数えた人数から、割合を計算して確かめてみましょう。</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>df_hair <span class="sc">|&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">select</span>(seventhree, Tfirst, ___, ___, ___) <span class="sc">|&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">"variable"</span>, <span class="at">values_to =</span> <span class="st">"value"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>  <span class="fu">mutate</span>(<span class="at">variable =</span> <span class="fu">fct_inorder</span>(variable)) <span class="sc">|&gt;</span>           <span class="co"># 変数の並び順を固定する</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a>  <span class="fu">group_by</span>(___) <span class="sc">|&gt;</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb3-7"><a href="#cb3-7"></a>    <span class="at">mean =</span> <span class="fu">___</span>(value),</span>
+<span id="cb3-8"><a href="#cb3-8"></a>    <span class="at">sd   =</span> <span class="fu">sd</span>(value),</span>
+<span id="cb3-9"><a href="#cb3-9"></a>    <span class="at">min  =</span> <span class="fu">min</span>(value),</span>
+<span id="cb3-10"><a href="#cb3-10"></a>    <span class="at">max  =</span> <span class="fu">max</span>(value),</span>
+<span id="cb3-11"><a href="#cb3-11"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="課題5のヒント">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>課題5のヒント
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>x 軸がダミー変数（0 か 1）なので、そのまま <code>geom_point()</code> で描くと点が縦一列に重なってしまいます。<code>geom_jitter()</code> を使うと、点を少しずつ横にずらして描けます。<code>width = 0.03</code> で横のずれの幅を、<code>height = 0</code> で縦にはずらさないことを指定します。</li>
+<li>回帰直線は <code>geom_smooth(method = "lm", se = FALSE)</code> で描きます（前期第4回）。</li>
+<li>グループごとの平均は、<code>group_by()</code> と <code>summarise()</code> で計算できます（前期第6回）。</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># 図3</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>df_hair <span class="sc">|&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> ___, <span class="at">y =</span> ___)) <span class="sc">+</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.03</span>, <span class="at">height =</span> <span class="dv">0</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"七三分けダミー"</span>, <span class="at">y =</span> <span class="st">"得票率（%）"</span>) <span class="sc">+</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb4-8"><a href="#cb4-8"></a></span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="co"># 七三分けかどうか別の平均得票率と人数</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a>df_hair <span class="sc">|&gt;</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a>  <span class="fu">group_by</span>(___) <span class="sc">|&gt;</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a>  <span class="fu">summarise</span>(<span class="at">mean_vote =</span> <span class="fu">mean</span>(___), <span class="at">n =</span> <span class="fu">n</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="課題6のヒント">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>課題6のヒント
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>重回帰分析は <code>lm(被説明変数 ~ 説明変数1 + 説明変数2 + ..., data = データ名)</code> です（前期第10回）。</li>
+<li>ダミー変数の係数は、「1 のグループが 0 のグループと比べて、平均してどれだけ大きいか（小さいか）」を表します（前期第11回）。</li>
+<li>論文の表2では、候補者数の p 値が <code>2e-16</code> と書かれています。これは R の <code>summary()</code> が、とても小さな p 値を「<code>&lt; 2e-16</code>」とまとめて表示したものです。<code>tidy()</code> で表示されるもっと小さな値と一致していなくても、再現できていると考えてかまいません。</li>
+<li>課題5で計算した平均の差と比べて七三分けダミーの係数が小さくなった理由を考えるときは、「都民ファーストの会の候補者に七三分けは何人いたか」を数えてみましょう。</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(___ <span class="sc">~</span> seventhree <span class="sc">+</span> age <span class="sc">+</span> ___ <span class="sc">+</span> ___, <span class="at">data =</span> df_hair)</span>
+<span id="cb5-2"><a href="#cb5-2"></a></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="fu">tidy</span>(model1)</span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="fu">glance</span>(model1)</span>
+<span id="cb5-5"><a href="#cb5-5"></a></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="co"># 都民ファーストかどうか × 七三分けかどうか の人数</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a>df_hair <span class="sc">|&gt;</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a>  <span class="fu">count</span>(___, ___)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="課題7のヒント">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>課題7のヒント
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>交差項は、2つの変数を <code>*</code> でつなぎます。<code>x1 * x2</code> は <code>x1 + x2 + x1:x2</code> と同じ意味です（前期第12回）。</li>
+<li>2つのモデルを並べて表示するには <code>modelsummary()</code> を使います（前期第10回）。</li>
+<li>交差項を入れたモデルでは、七三分けの効果は候補者数によって変わります。</li>
+</ul>
+<p><span class="math display">\[
+\text{七三分けの効果} = \beta_{\text{七三分け}} + \beta_{\text{交差項}} \times \text{候補者数}
+\]</span></p>
+<ul>
+<li>この式に、候補者数 4 人と 12 人を入れて計算してみましょう。係数は <code>coef(model2)</code> で取り出せます。</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(voteshare <span class="sc">~</span> ___ ___ ___ <span class="sc">+</span> age <span class="sc">+</span> Tfirst, <span class="at">data =</span> df_hair)</span>
+<span id="cb6-2"><a href="#cb6-2"></a></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="fu">modelsummary</span>(<span class="fu">list</span>(<span class="st">"表2"</span> <span class="ot">=</span> ___, <span class="st">"表3"</span> <span class="ot">=</span> ___),</span>
+<span id="cb6-4"><a href="#cb6-4"></a>             <span class="at">stars =</span> <span class="cn">TRUE</span>, <span class="at">gof_map =</span> <span class="fu">c</span>(<span class="st">"nobs"</span>, <span class="st">"r.squared"</span>, <span class="st">"adj.r.squared"</span>))</span>
+<span id="cb6-5"><a href="#cb6-5"></a></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="co"># 候補者数が4人の選挙区での七三分けの効果</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="fu">coef</span>(model2)[<span class="st">"seventhree"</span>] <span class="sc">+</span> <span class="fu">coef</span>(model2)[<span class="st">"seventhree:nocand"</span>] <span class="sc">*</span> ___</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="課題8のヒント">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>課題8のヒント
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>仮説が「支持された」と言えるのは、<strong>係数の符号が予想と同じ</strong>で、かつ <strong>p 値 &lt; 0.05</strong> のときです。符号が予想と<strong>逆</strong>で p 値 &lt; 0.05 なら、「支持されない（予想と逆の関係がある）」となります。</li>
+<li>仮説1の結果は課題6の <code>model1</code>、仮説2（交差項）の結果は課題7の <code>model2</code> で確認します。</li>
+<li>仮説2は、交差項の符号だけでなく、課題7で計算した「候補者数が4人と12人のときの七三分けの効果」も見て、<strong>どちらの選挙区で七三分けの影響が大きかったのか</strong>を書きましょう。</li>
+<li>考察では、「仮説が支持されないとき」（本資料）の3つの観点と、論文の「6. 結論と今後の展望」（p.11〜12）を参考にしましょう。</li>
+</ul>
+</div>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-summary" class="level2" data-number="16.7">
+<h2 data-number="16.7" class="anchored" data-anchor-id="sec-summary"><span class="header-section-number">16.7</span> まとめ</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 75%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">項目</th>
+<th style="text-align: left;">ポイント</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">ダミー変数の記述統計</td>
+<td style="text-align: left;">0 と 1 の変数の平均は、1 の人の割合になる</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ダミー変数の係数</td>
+<td style="text-align: left;">1 のグループが 0 のグループと比べて、平均してどれだけ違うか</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">仮説と逆の結果</td>
+<td style="text-align: left;">「有意でない」と「逆の符号で有意」を区別し、なぜ逆になったのかを考察する</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">交差項の読み方</td>
+<td style="text-align: left;">係数の符号だけでなく、条件ごとの効果を計算して、文章の解釈と合っているかを確かめる</td>
+</tr>
+</tbody>
+</table>
+<div style="margin-top: 2.0em;">
+
+</div>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>次回の予告</strong></p>
+<p>第4回からは、<strong>総合分析演習</strong>が始まります。</p>
+<ul>
+<li>これまでの2回は、論文の問い・仮説・分析をなぞりましたが、次回からは与えられたデータについて、<strong>自分で問いと仮説を立てて</strong>分析します</li>
+<li>分析の結果は、2回の論文と同じ5つのステップの構成で、レポートにまとめます</li>
+</ul>
+</div>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -782,8 +1478,8 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./lecB02.html" class="pagination-link" aria-label="演習">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">演習</span></span>
+      <a href="./lecB02.html" class="pagination-link" aria-label="論文のレプリケーション1">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">論文のレプリケーション1</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

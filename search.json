@@ -1476,5 +1476,192 @@
       "後期（B）",
       "<span class='chapter-number'>14</span>  <span class='chapter-title'>データ分析の流れ</span>"
     ]
+  },
+  {
+    "objectID": "lecB02.html",
+    "href": "lecB02.html",
+    "title": "15  論文のレプリケーション1",
+    "section": "",
+    "text": "15.1 レプリケーションとは\n「NHK受信料を払っているのは誰か」を R で再現する\n今日の目標\nレプリケーション（replication）とは、すでに発表された研究の分析を、同じデータ・同じ方法でもう一度行い、同じ結果が得られるかを確かめることです。\nなぜレプリケーションが大切なのでしょうか。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>論文のレプリケーション1</span>"
+    ]
+  },
+  {
+    "objectID": "lecB02.html#sec-replication",
+    "href": "lecB02.html#sec-replication",
+    "title": "15  論文のレプリケーション1",
+    "section": "",
+    "text": "研究の信頼性を確かめるため：同じデータで同じ分析をしても同じ結果が出ないなら、その研究の結論は信用できません。近年、心理学や経済学などで「有名な研究の結果が再現できない」という問題（再現性の危機）が大きく取り上げられています。\n分析の手順を学ぶため：論文には「何をしたか」は書かれていても、「どうやったか（コード）」は書かれていないことが多いです。自分で再現しようとすると、論文の一文一文がどの操作に対応しているのかを考えることになり、分析の力が大きく伸びます。\n研究の出発点にするため：再現できたら、変数を加える・データを変えるなど、少し手を加えて自分の分析に発展させることができます。\n\n\n\n\n\n\n\nImportant\n\n\n\nレプリケーションは「論文のあら探し」ではありません。論文を正確に読み、自分の手で確かめるための練習です。うまく再現できなかったときも、「どこが違うのか」「なぜ違うのか」を考えることに意味があります。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>論文のレプリケーション1</span>"
+    ]
+  },
+  {
+    "objectID": "lecB02.html#sec-steps",
+    "href": "lecB02.html#sec-steps",
+    "title": "15  論文のレプリケーション1",
+    "section": "15.2 論文の構成と5つのステップ",
+    "text": "15.2 論文の構成と5つのステップ\n実証分析の論文は、多くの場合、次のような構成になっています。これは前回学んだ5つのステップとほぼ対応しています。\n\n\n\n\n\n\n\n\n論文の章\n書かれていること\n5つのステップ\n\n\n\n\nはじめに\n研究の背景、問い（何を明らかにしたいか）\n1\n\n\n先行研究\nこれまでの研究で分かっていること\n1\n\n\n理論と仮説\n問いに対する予想（仮説）と、その理由\n1\n\n\nデータ\n使ったデータの出典・変数の説明・記述統計・グラフ\n2・3\n\n\n分析結果\n回帰分析などの結果とその解釈\n4\n\n\n結論と展望\n結果のまとめ、分かったこと、限界と今後の課題\n5\n\n\n\n後期の総合分析演習のレポートも、この構成を目標にして書きます。今日の論文を、レポートの「お手本」として読んでください。\n\n\n\n\n\n\nNote\n\n\n\n論文で使われる言葉\n論文では「従属変数」「独立変数」という言葉が使われています。前期の回帰分析の言葉では、従属変数＝被説明変数（\\(Y\\)）、独立変数＝説明変数（\\(X\\)）です。論文の「コントロール変数」は、主な関心ではないものの、\\(Y\\) に影響しそうなので一緒にモデルに入れておく説明変数のことです。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>論文のレプリケーション1</span>"
+    ]
+  },
+  {
+    "objectID": "lecB02.html#sec-data",
+    "href": "lecB02.html#sec-data",
+    "title": "15  論文のレプリケーション1",
+    "section": "15.3 今日の論文とデータ",
+    "text": "15.3 今日の論文とデータ\n今日の論文\n矢澤翼・永瀬真鈴（2016）「NHK受信料を払っているのは誰か」平成28年度 拓殖大学研究所奨学論文\n拓殖大学政経学部の浅野正彦先生のゼミで書かれた論文です。都道府県によって NHK 受信料の支払率に大きな差がある（秋田県 97% に対して沖縄県 46.8%）のはなぜか、を重回帰分析で調べています。\n今日のデータ（nhk.csv）\n論文の著者が分析に使ったデータです（論文の Appendix に変数の説明があります）。47都道府県が1行ずつ入っています。\n\n\n\n\n\n\n\n\n変数名\n内容\n出典\n\n\n\n\npref\n都道府県名（ローマ字）\n\n\n\nnhk\nNHK 受信料の支払率（%）\nNHK 放送文化研究所（2014年度末）\n\n\nkosu\n賃貸住宅（共同住宅）の戸数（戸）\n日本賃貸住宅管理協会\n\n\nmobility\n人口移動率（%）：5年間で住む場所が変わった人の割合\n国勢調査（2010年）\n\n\nldp\n自民党得票率（%）：衆議院選挙の比例区\n総務省（2014年）\n\n\nage\n高齢化率（%）：65歳以上の人口の割合\n高齢社会白書（2014年）\n\n\nincome\n一人当たりの県民所得（千円）\n内閣府 県民経済計算\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n実際の研究で使われたデータは、きれいに整っているとは限りません。分析を始める前に、データの中身をよく確認しましょう（課題3）。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>論文のレプリケーション1</span>"
+    ]
+  },
+  {
+    "objectID": "lecB02.html#sec-prepare",
+    "href": "lecB02.html#sec-prepare",
+    "title": "15  論文のレプリケーション1",
+    "section": "15.4 今日の準備",
+    "text": "15.4 今日の準備\n\n\n\n\n\n\n\n1.\n新規 R プロジェクトを作成する。Directory name は「LessonB02」、場所は Kドライブの「R_programming」。\n\n\n2.\nBlackboard から nhk.csv・2016_yazawa_marin.pdf（論文）・assignmentB02.qmd をダウンロードし、「R_programming/LessonB02」フォルダに入れる。\n\n\n3.\nまずは氏名（学籍番号）を記入し、この状態で Rendering ができるか確認する。\n\n\n4.\n左側に Rendering して出力された画面を置き、右半分には RStudioを置いて assignmentB02.qmd の課題に取り組む。\n\n\n5.\n適当なところで Rendering し、確かめながら進める。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>論文のレプリケーション1</span>"
+    ]
+  },
+  {
+    "objectID": "lecB02.html#sec-setup",
+    "href": "lecB02.html#sec-setup",
+    "title": "15  論文のレプリケーション1",
+    "section": "15.5 パッケージの準備",
+    "text": "15.5 パッケージの準備\n大学の PC はシャットダウンするたびに初期化されるため、毎回インストールが必要です。\n\noptions(repos = c(CRAN = \"https://cran.rstudio.com/\"))\n\ninstall.packages(\"tidyverse\")\ninstall.packages(\"broom\")\ninstall.packages(\"modelsummary\")",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>論文のレプリケーション1</span>"
+    ]
+  },
+  {
+    "objectID": "lecB02.html#sec-assignment",
+    "href": "lecB02.html#sec-assignment",
+    "title": "15  論文のレプリケーション1",
+    "section": "15.6 本日の課題",
+    "text": "15.6 本日の課題\nassignmentB02.qmd には、5つのステップに沿って次の課題が並んでいます。論文の該当ページを読みながら、課題1から順に取り組んでください。\n\n\n\n\n\n\n\n\n\n\n\n\nステップ\n課題\n内容\n論文\n\n\n\n\n1\n課題1\n論文の問いを書き出す\np.2\n\n\n1\n課題2\n4つの仮説とコントロール変数を整理する\np.4〜5\n\n\n2\n課題3\nデータを確認し、前処理をする\np.6, Appendix\n\n\n3\n課題4\n記述統計（表2）を再現する\np.6〜7\n\n\n3\n課題5\n散布図（図3・図4）を再現する\np.8〜9\n\n\n4\n課題6\n重回帰分析（表3）を再現する\np.10\n\n\n4\n課題7\n交差項を含む重回帰分析（表4）を再現する\np.11\n\n\n5\n課題8\n分析の結果、何が分かったかをまとめる\np.13\n\n\n\n\n\n\n提出方法：Render して出力された HTML ファイルを ZIP 形式に圧縮して Blackboard から提出してください。提出期限は金曜日24時です。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>論文のレプリケーション1</span>"
+    ]
+  },
+  {
+    "objectID": "lecB02.html#sec-hints",
+    "href": "lecB02.html#sec-hints",
+    "title": "15  論文のレプリケーション1",
+    "section": "15.7 課題のヒント",
+    "text": "15.7 課題のヒント\n課題に取り組んでいて困ったときは、該当する課題のヒントを開いてください。まずは自分の力で考え、どうしても進めないときに開くようにしましょう。\nコードのヒントの ___ の部分は、自分で考えて埋めてください。\n\n\n\n\n\n\nNote\n\n\n\nRender が止まったときは\nRender の途中でエラーが出ると、HTML は作られません。Background Jobs（または Render）タブのエラーメッセージに出ているチャンクの名前（label）を確認し、そのチャンクのコードを直してから、もう一度 Render しましょう。課題を1つ終えるごとに Render すると、どこでエラーが出たのかすぐに分かります。\n\n\n\n\n\n\n\n\n\n\n\nTip課題1のヒント\n\n\n\n\n\n\n論文の p.2 に「本論文の目的は、……」という一文があります。これが問いにあたります。\n「なぜ〜なのか」「〜は何によって決まるのか」という疑問文の形に書き直すと、問いとして分かりやすくなります。\n表1（p.3）を見ると、支払率が最も高い県と最も低い県で、どのくらい差があるかが分かります。\n\n\n\n\n\n\n\n\n\n\nTip課題2のヒント\n\n\n\n\n\n\n4つの仮説は、p.4〜5 に「仮説1.」〜「仮説4.」として書かれています。\n仮説の文の「〜ほど受信料を支払わない」は支払率が下がる（−）、「〜ほど受信料を支払う」は支払率が上がる（＋）という予想です。\n仮説4は「自民党の支持が高い県では、人口移動率が高くても受信料を払う」という予想です。人口移動率のマイナスの影響を、自民党得票率が弱める方向に働くとき、交差項の係数の符号はどうなるでしょうか（前期第12回）。\nコントロール変数は、p.5 の図1の上に「コントロール変数として……を加え」と書かれています。\n\n\n\n\n\n\n\n\n\n\nTip課題3のヒント\n\n\n\n\n\n\nデータの行数・列数・変数の型は glimpse() で確認できます。\n1つの列だけを表示するには データ名$列名 と書きます。\n都道府県名の表記を直すには、次の2つの関数を mutate() の中で使います。\n\nstr_remove(列名, \"取り除く文字\")：文字列から指定した文字を取り除く\nstr_to_lower(列名)：文字列をすべて小文字にする\n\n\n\n# ① データの行数・列数・変数の型を確認する\n___(df_nhk)\n\n# ② 都道府県名を表示する\ndf_nhk$___\n\n# ③ 表記の揺れを直す\ndf_nhk &lt;- df_nhk |&gt;\n  ___(\n    pref = str_remove(pref, ___),\n    pref = str_to_lower(___)\n  )\n\n# ④ 直ったことを確認する\ndf_nhk$pref\n\n\n\n\n\n\n\n\n\n\nTip課題4のヒント\n\n\n\n\n\n\n表2には、交差項「人口移動率 × 自民党得票率」も載っています。まず mutate() で、2つの列を掛け算した新しい列を作ります。\n複数の変数について平均などをまとめて計算するには、pivot_longer() でデータを縦長（「変数名」の列と「値」の列の2列）に変形してから、group_by() と summarise() を使うと便利です。\nfct_inorder() を使うと、変数の並び順が select() で選んだ順になります（使わないとアルファベット順になります）。\n\n\ndf_nhk |&gt;\n  mutate(mob_ldp = ___ * ___) |&gt;                         # 交差項の列を作る\n  select(nhk, kosu, mobility, ldp, mob_ldp, age, income) |&gt;\n  pivot_longer(everything(), names_to = \"variable\", values_to = \"value\") |&gt;\n  mutate(variable = fct_inorder(variable)) |&gt;           # 変数の並び順を固定する\n  group_by(___) |&gt;\n  summarise(\n    mean = mean(value),\n    sd   = ___(value),\n    min  = min(value),\n    max  = ___(value),\n    .groups = \"drop\"\n  )\n\n\n\n\n\n\n\n\n\n\nTip課題5のヒント\n\n\n\n\n\n\n散布図は geom_point()、回帰直線は geom_smooth(method = \"lm\", se = FALSE) で描きます（前期第4回）。\n点の近くに文字を表示するには geom_text(aes(label = 列名)) を使います。vjust = -0.8 とすると、文字が点の少し上に表示されます。\n図4は、図3のコードの x 軸の変数と軸ラベルを変えるだけで描けます。\n\n\ndf_nhk |&gt;\n  ggplot(aes(x = ___, y = ___)) +\n  geom_point(color = \"steelblue\") +\n  geom_text(aes(label = ___), size = 2.5, vjust = -0.8) +\n  geom_smooth(method = \"lm\", se = FALSE, color = \"gray30\") +\n  labs(x = \"人口移動率（%）\", y = \"受信料支払率（%）\") +\n  theme_minimal()\n\n\n\n\n\n\n\n\n\n\nTip課題6のヒント\n\n\n\n\n\n\n重回帰分析は lm(被説明変数 ~ 説明変数1 + 説明変数2 + ..., data = データ名) です（前期第10回）。\ntidy() で係数と p 値を、glance() で補正 R²（adj.r.squared）を確認できます。\nkosu の係数は -2.83e-06 のように表示されます。これは \\(-2.83 \\times 10^{-6} = -0.00000283\\) のことです。\n\n\nmodel1 &lt;- lm(___ ~ kosu + ___ + ___ + age + income, data = df_nhk)\n\ntidy(model1)\nglance(model1)\n\n\n\n\n\n\n\n\n\n\nTip課題7のヒント\n\n\n\n\n\n\n交差項は、2つの変数を * でつなぎます。x1 * x2 は x1 + x2 + x1:x2 と同じ意味です（前期第12回）。\n2つのモデルを並べて表示するには modelsummary() を使います（前期第10回）。\nmodelsummary() では kosu の係数が小さすぎて 0.000 と表示されます。細かい値は tidy() で確認しましょう。\n\n\nmodel2 &lt;- lm(nhk ~ kosu + ___ ___ ___ + age + income, data = df_nhk)\n\nmodelsummary(list(\"表3\" = ___, \"表4\" = ___),\n             stars = TRUE, gof_map = c(\"nobs\", \"r.squared\", \"adj.r.squared\"))\n\n\n\n\n\n\n\n\n\n\nTip課題8のヒント\n\n\n\n\n\n\n仮説が「支持された」と言えるのは、係数の符号が予想と同じで、かつ p 値 &lt; 0.05 のときです。符号が予想と同じでも、p 値が 0.05 以上なら「支持されない」となります。\n仮説1〜3の結果は課題6の model1、仮説4（交差項）の結果は課題7の model2 で確認します。\n問いへの答えは、「〜な県ほど、受信料の支払率が高い（低い）」という形で書くと分かりやすくなります。支持されなかった仮説についても、「〜とは関係がなかった」と書きましょう。\n仮説4は、「自民党得票率が高い県では、人口移動率が高くても……」のように、2つの変数を組み合わせて書きます。\n最後に、自分のまとめと論文の結論（p.13）が同じになっているかを確かめましょう。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>論文のレプリケーション1</span>"
+    ]
+  },
+  {
+    "objectID": "lecB02.html#sec-summary",
+    "href": "lecB02.html#sec-summary",
+    "title": "15  論文のレプリケーション1",
+    "section": "15.8 まとめ",
+    "text": "15.8 まとめ\n\n\n\n\n\n\n\n項目\nポイント\n\n\n\n\nレプリケーション\n同じデータ・同じ方法で分析し、同じ結果が得られるかを確かめる\n\n\n論文の構成\nはじめに・先行研究・仮説 → データ → 分析結果 → 結論（＝5つのステップ）\n\n\n再現の確かめ方\n論文の表・図の数字を、自分の結果と一つひとつ比べる\n\n\nまとめ\n仮説ごとに支持されたかを確かめ、問いに対する答えを自分の言葉で書く\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n次回の予告\n第3回では、別の論文「七三分けと得票率の関係」（2017年東京都議会議員選挙）をレプリケーションします。\n\n今日は都道府県のデータでしたが、次回は候補者一人ひとりのデータを使います\n主な説明変数が「七三分けかどうか」というダミー変数になります（前期第11回の復習）\n分析結果が仮説と逆になったとき、どう考察すればよいかを考えます",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>論文のレプリケーション1</span>"
+    ]
+  },
+  {
+    "objectID": "lecB03.html",
+    "href": "lecB03.html",
+    "title": "16  論文のレプリケーション2",
+    "section": "",
+    "text": "16.1 仮説が支持されないとき\n「七三分けと得票率の関係」を R で再現する\n今日の目標\n分析をすると、仮説が支持されないことはよくあります。仮説が支持されなかったのは「分析の失敗」ではありません。予想と違う結果も、問いに対する立派な答えです。\nただし、結果を正しく読み取るためには、「支持されない」にも2つの種類があることに注意しましょう。\n予想と逆の結果が出たときは、考察で次のようなことを考えます。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>論文のレプリケーション2</span>"
+    ]
+  },
+  {
+    "objectID": "lecB03.html#sec-reverse",
+    "href": "lecB03.html#sec-reverse",
+    "title": "16  論文のレプリケーション2",
+    "section": "",
+    "text": "結果\n例（予想は＋）\n言えること\n\n\n\n\n有意ではない\n係数 ＋0.5（p = 0.40）\n\\(X\\) と \\(Y\\) の間に関係があるとは言えない\n\n\n予想と逆の符号で有意\n係数 −3.0（p = 0.02）\n\\(X\\) と \\(Y\\) の間には関係があるが、その向きが予想と逆\n\n\n\n\n\nなぜ逆になったのか：仮説の理由づけ（理論）のどこが現実と合わなかったのか。\n測り方に問題はないか：変数の作り方やデータの集め方に、結果をゆがめるところはないか。\nほかの要因はないか：\\(X\\) と \\(Y\\) の両方に影響する別の要因（交絡因子）が隠れていないか。\n\n\n\n\n\n\n\nNote\n\n\n\n交絡因子とは\n\\(X\\) と \\(Y\\) の両方に影響を与える第3の要因のことです。例えば、「七三分けの候補者」と「得票率」の両方に「所属する政党」が影響しているなら、七三分けそのものの効果ではなく、政党の違いを見ているだけかもしれません。重回帰分析でコントロール変数を入れるのは、こうした要因の影響を取り除くためです。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>論文のレプリケーション2</span>"
+    ]
+  },
+  {
+    "objectID": "lecB03.html#sec-data",
+    "href": "lecB03.html#sec-data",
+    "title": "16  論文のレプリケーション2",
+    "section": "16.2 今日の論文とデータ",
+    "text": "16.2 今日の論文とデータ\n今日の論文\n石割司悠（2017）「七三分けと得票率の関係」平成29年度 拓殖大学研究所奨学論文\n前回と同じく、拓殖大学政経学部の浅野正彦先生のゼミで書かれた論文です。「なぜ男性政治家は皆同じ髪型、特に七三分けをしているのか」という疑問から出発し、2017年7月の東京都議会議員選挙の候補者について、七三分けの候補者ほど得票率が高いのかを重回帰分析で調べています。\n今日のデータ（seventhree.csv）\n論文の著者が分析に使ったデータです（論文の Appendix に変数の説明があります）。候補者165人が1行ずつ入っています。\n\n\n\n\n\n\n\n変数名\n内容\n\n\n\n\nname\n候補者の名前（ローマ字、「姓,名」）\n\n\nseventhree\n七三分けダミー：七三分けなら 1、そうでなければ 0\n\n\nTfirst\n都民ファーストダミー：都民ファーストの会の候補者なら 1、そうでなければ 0\n\n\nvoteshare\n得票率（%）：その候補者が選挙区で得た票の割合\n\n\nage\n候補者の年齢（歳）\n\n\nnocand\n候補者数（人）：その候補者が立候補した選挙区の候補者の数\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n七三分けダミーの作り方\n七三分けかどうかは、著者が選挙公報の写真を5人に見せ、5人中3人以上が「七三分けである」と答えた候補者を 1 としています（論文 p.6）。また、女性の候補者と斜めを向いている男性の候補者は判定が難しいため、データから除かれています。データがどのように作られたかは、考察（課題8）で論文の限界を考えるときの手がかりになります。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>論文のレプリケーション2</span>"
+    ]
+  },
+  {
+    "objectID": "lecB03.html#sec-prepare",
+    "href": "lecB03.html#sec-prepare",
+    "title": "16  論文のレプリケーション2",
+    "section": "16.3 今日の準備",
+    "text": "16.3 今日の準備\n\n\n\n\n\n\n\n1.\n新規 R プロジェクトを作成する。Directory name は「LessonB03」、場所は Kドライブの「R_programming」。\n\n\n2.\nBlackboard から seventhree.csv・2017_ishiwari.pdf（論文）・assignmentB03.qmd をダウンロードし、「R_programming/LessonB03」フォルダに入れる。\n\n\n3.\nまずは氏名（学籍番号）を記入し、この状態で Rendering ができるか確認する。\n\n\n4.\n左側に Rendering して出力された画面を置き、右半分には RStudioを置いて assignmentB03.qmd の課題に取り組む。\n\n\n5.\n適当なところで Rendering し、確かめながら進める。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>論文のレプリケーション2</span>"
+    ]
+  },
+  {
+    "objectID": "lecB03.html#sec-setup",
+    "href": "lecB03.html#sec-setup",
+    "title": "16  論文のレプリケーション2",
+    "section": "16.4 パッケージの準備",
+    "text": "16.4 パッケージの準備\n大学の PC はシャットダウンするたびに初期化されるため、毎回インストールが必要です。\n\noptions(repos = c(CRAN = \"https://cran.rstudio.com/\"))\n\ninstall.packages(\"tidyverse\")\ninstall.packages(\"broom\")\ninstall.packages(\"modelsummary\")",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>論文のレプリケーション2</span>"
+    ]
+  },
+  {
+    "objectID": "lecB03.html#sec-assignment",
+    "href": "lecB03.html#sec-assignment",
+    "title": "16  論文のレプリケーション2",
+    "section": "16.5 本日の課題",
+    "text": "16.5 本日の課題\nassignmentB03.qmd には、5つのステップに沿って次の課題が並んでいます。論文の該当ページを読みながら、課題1から順に取り組んでください。\n\n\n\n\n\n\n\n\n\n\n\n\nステップ\n課題\n内容\n論文\n\n\n\n\n1\n課題1\n論文の問いを書き出す\np.2〜3\n\n\n1\n課題2\n2つの仮説とコントロール変数を整理する\np.4〜5\n\n\n2\n課題3\nデータを確認する\np.6, Appendix\n\n\n3\n課題4\n記述統計（表1）を再現する\np.7\n\n\n3\n課題5\n散布図（図3）を再現する\np.8\n\n\n4\n課題6\n重回帰分析（表2）を再現する\np.9〜10\n\n\n4\n課題7\n交差項を含む重回帰分析（表3）を再現する\np.10〜11\n\n\n5\n課題8\n分析の結果、何が分かったかをまとめる\np.11〜12\n\n\n\n\n\n\n提出方法：Render して出力された HTML ファイルを ZIP 形式に圧縮して Blackboard から提出してください。提出期限は金曜日24時です。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>論文のレプリケーション2</span>"
+    ]
+  },
+  {
+    "objectID": "lecB03.html#sec-hints",
+    "href": "lecB03.html#sec-hints",
+    "title": "16  論文のレプリケーション2",
+    "section": "16.6 課題のヒント",
+    "text": "16.6 課題のヒント\n課題に取り組んでいて困ったときは、該当する課題のヒントを開いてください。まずは自分の力で考え、どうしても進めないときに開くようにしましょう。\nコードのヒントの ___ の部分は、自分で考えて埋めてください。\n\n\n\n\n\n\nNote\n\n\n\nRender が止まったときは\nRender の途中でエラーが出ると、HTML は作られません。Background Jobs（または Render）タブのエラーメッセージに出ているチャンクの名前（label）を確認し、そのチャンクのコードを直してから、もう一度 Render しましょう。課題を1つ終えるごとに Render すると、どこでエラーが出たのかすぐに分かります。\n\n\n\n\n\n\n\n\n\n\n\nTip課題1のヒント\n\n\n\n\n\n\nAbstract（p.2）と「1. はじめに」（p.3）に「本論文の目的は、……」という一文があります。これが問いにあたります。\n「〜ほど〜なのか」「〜は〜に影響するのか」という疑問文の形に書き直すと、問いとして分かりやすくなります。\n\n\n\n\n\n\n\n\n\n\nTip課題2のヒント\n\n\n\n\n\n\n2つの仮説は、p.4〜5 に「仮説1：」「仮説２：」として書かれています。表2・表3（p.9〜10）の「予想」の列も参考になります。\n仮説2は「候補者数が少ない選挙区ほど、七三分けの影響が小さい」という予想です。言いかえると、候補者数が多い選挙区ほど、七三分けのプラスの影響が大きくなるということです。このとき、交差項「七三分けダミー × 候補者数」の係数の符号はどうなるでしょうか（前期第12回）。\nコントロール変数とその予想は、p.5 の図1の上の段落に「その他のコントロール変数として……」と書かれています。\n\n\n\n\n\n\n\n\n\n\nTip課題3のヒント\n\n\n\n\n\n\nデータの行数・列数・変数の型は glimpse() で確認できます。\n欠損値（NA）の数は sum(is.na(データ名)) で数えられます。\nある列にどの値が何人いるかは count(列名) で数えられます。\n\n\n# ① データの行数・列数・変数の型を確認する\n___(df_hair)\n\n# ② 欠損値の数を数える\nsum(is.na(___))\n\n# ③ ダミー変数の値ごとの人数を数える\ndf_hair |&gt;\n  count(___)\n\ndf_hair |&gt;\n  count(___)\n\n\n\n\n\n\n\n\n\n\nTip課題4のヒント\n\n\n\n\n\n\n前回の課題4と同じように、pivot_longer() でデータを縦長に変形してから、group_by() と summarise() で計算します。\nname は文字の列なので、平均などは計算できません。select() で5つの変数だけを選んでから変形しましょう。\n0 と 1 のダミー変数の平均は、1 の人の割合になります。課題3で数えた人数から、割合を計算して確かめてみましょう。\n\n\ndf_hair |&gt;\n  select(seventhree, Tfirst, ___, ___, ___) |&gt;\n  pivot_longer(everything(), names_to = \"variable\", values_to = \"value\") |&gt;\n  mutate(variable = fct_inorder(variable)) |&gt;           # 変数の並び順を固定する\n  group_by(___) |&gt;\n  summarise(\n    mean = ___(value),\n    sd   = sd(value),\n    min  = min(value),\n    max  = max(value),\n    .groups = \"drop\"\n  )\n\n\n\n\n\n\n\n\n\n\nTip課題5のヒント\n\n\n\n\n\n\nx 軸がダミー変数（0 か 1）なので、そのまま geom_point() で描くと点が縦一列に重なってしまいます。geom_jitter() を使うと、点を少しずつ横にずらして描けます。width = 0.03 で横のずれの幅を、height = 0 で縦にはずらさないことを指定します。\n回帰直線は geom_smooth(method = \"lm\", se = FALSE) で描きます（前期第4回）。\nグループごとの平均は、group_by() と summarise() で計算できます（前期第6回）。\n\n\n# 図3\ndf_hair |&gt;\n  ggplot(aes(x = ___, y = ___)) +\n  geom_jitter(width = 0.03, height = 0, alpha = 0.6) +\n  geom_smooth(method = \"lm\", se = FALSE) +\n  labs(x = \"七三分けダミー\", y = \"得票率（%）\") +\n  theme_minimal()\n\n# 七三分けかどうか別の平均得票率と人数\ndf_hair |&gt;\n  group_by(___) |&gt;\n  summarise(mean_vote = mean(___), n = n())\n\n\n\n\n\n\n\n\n\n\nTip課題6のヒント\n\n\n\n\n\n\n重回帰分析は lm(被説明変数 ~ 説明変数1 + 説明変数2 + ..., data = データ名) です（前期第10回）。\nダミー変数の係数は、「1 のグループが 0 のグループと比べて、平均してどれだけ大きいか（小さいか）」を表します（前期第11回）。\n論文の表2では、候補者数の p 値が 2e-16 と書かれています。これは R の summary() が、とても小さな p 値を「&lt; 2e-16」とまとめて表示したものです。tidy() で表示されるもっと小さな値と一致していなくても、再現できていると考えてかまいません。\n課題5で計算した平均の差と比べて七三分けダミーの係数が小さくなった理由を考えるときは、「都民ファーストの会の候補者に七三分けは何人いたか」を数えてみましょう。\n\n\nmodel1 &lt;- lm(___ ~ seventhree + age + ___ + ___, data = df_hair)\n\ntidy(model1)\nglance(model1)\n\n# 都民ファーストかどうか × 七三分けかどうか の人数\ndf_hair |&gt;\n  count(___, ___)\n\n\n\n\n\n\n\n\n\n\nTip課題7のヒント\n\n\n\n\n\n\n交差項は、2つの変数を * でつなぎます。x1 * x2 は x1 + x2 + x1:x2 と同じ意味です（前期第12回）。\n2つのモデルを並べて表示するには modelsummary() を使います（前期第10回）。\n交差項を入れたモデルでは、七三分けの効果は候補者数によって変わります。\n\n\\[\n\\text{七三分けの効果} = \\beta_{\\text{七三分け}} + \\beta_{\\text{交差項}} \\times \\text{候補者数}\n\\]\n\nこの式に、候補者数 4 人と 12 人を入れて計算してみましょう。係数は coef(model2) で取り出せます。\n\n\nmodel2 &lt;- lm(voteshare ~ ___ ___ ___ + age + Tfirst, data = df_hair)\n\nmodelsummary(list(\"表2\" = ___, \"表3\" = ___),\n             stars = TRUE, gof_map = c(\"nobs\", \"r.squared\", \"adj.r.squared\"))\n\n# 候補者数が4人の選挙区での七三分けの効果\ncoef(model2)[\"seventhree\"] + coef(model2)[\"seventhree:nocand\"] * ___\n\n\n\n\n\n\n\n\n\n\nTip課題8のヒント\n\n\n\n\n\n\n仮説が「支持された」と言えるのは、係数の符号が予想と同じで、かつ p 値 &lt; 0.05 のときです。符号が予想と逆で p 値 &lt; 0.05 なら、「支持されない（予想と逆の関係がある）」となります。\n仮説1の結果は課題6の model1、仮説2（交差項）の結果は課題7の model2 で確認します。\n仮説2は、交差項の符号だけでなく、課題7で計算した「候補者数が4人と12人のときの七三分けの効果」も見て、どちらの選挙区で七三分けの影響が大きかったのかを書きましょう。\n考察では、「仮説が支持されないとき」（本資料）の3つの観点と、論文の「6. 結論と今後の展望」（p.11〜12）を参考にしましょう。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>論文のレプリケーション2</span>"
+    ]
+  },
+  {
+    "objectID": "lecB03.html#sec-summary",
+    "href": "lecB03.html#sec-summary",
+    "title": "16  論文のレプリケーション2",
+    "section": "16.7 まとめ",
+    "text": "16.7 まとめ\n\n\n\n\n\n\n\n項目\nポイント\n\n\n\n\nダミー変数の記述統計\n0 と 1 の変数の平均は、1 の人の割合になる\n\n\nダミー変数の係数\n1 のグループが 0 のグループと比べて、平均してどれだけ違うか\n\n\n仮説と逆の結果\n「有意でない」と「逆の符号で有意」を区別し、なぜ逆になったのかを考察する\n\n\n交差項の読み方\n係数の符号だけでなく、条件ごとの効果を計算して、文章の解釈と合っているかを確かめる\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n次回の予告\n第4回からは、総合分析演習が始まります。\n\nこれまでの2回は、論文の問い・仮説・分析をなぞりましたが、次回からは与えられたデータについて、自分で問いと仮説を立てて分析します\n分析の結果は、2回の論文と同じ5つのステップの構成で、レポートにまとめます",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>論文のレプリケーション2</span>"
+    ]
   }
 ]
