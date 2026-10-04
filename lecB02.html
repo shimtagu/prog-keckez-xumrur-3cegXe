@@ -375,7 +375,11 @@ window.Quarto = {
    
   <ul>
   <li><a href="#sec-replication" id="toc-sec-replication" class="nav-link active" data-scroll-target="#sec-replication"><span class="header-section-number">15.1</span> レプリケーションとは</a></li>
-  <li><a href="#sec-steps" id="toc-sec-steps" class="nav-link" data-scroll-target="#sec-steps"><span class="header-section-number">15.2</span> 論文の構成と5つのステップ</a></li>
+  <li><a href="#sec-steps" id="toc-sec-steps" class="nav-link" data-scroll-target="#sec-steps"><span class="header-section-number">15.2</span> 論文の構成と5つのステップ</a>
+  <ul class="collapse">
+  <li><a href="#データ分析の5つのステップ復習" id="toc-データ分析の5つのステップ復習" class="nav-link" data-scroll-target="#データ分析の5つのステップ復習">データ分析の5つのステップ（復習）</a></li>
+  <li><a href="#実証論文の5つのステップ" id="toc-実証論文の5つのステップ" class="nav-link" data-scroll-target="#実証論文の5つのステップ">実証論文の5つのステップ</a></li>
+  </ul></li>
   <li><a href="#sec-data" id="toc-sec-data" class="nav-link" data-scroll-target="#sec-data"><span class="header-section-number">15.3</span> 今日の論文とデータ</a></li>
   <li><a href="#sec-prepare" id="toc-sec-prepare" class="nav-link" data-scroll-target="#sec-prepare"><span class="header-section-number">15.4</span> 今日の準備</a></li>
   <li><a href="#sec-setup" id="toc-sec-setup" class="nav-link" data-scroll-target="#sec-setup"><span class="header-section-number">15.5</span> パッケージの準備</a></li>
@@ -495,7 +499,56 @@ Important
 </section>
 <section id="sec-steps" class="level2" data-number="15.2">
 <h2 data-number="15.2" class="anchored" data-anchor-id="sec-steps"><span class="header-section-number">15.2</span> 論文の構成と5つのステップ</h2>
+<section id="データ分析の5つのステップ復習" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="データ分析の5つのステップ復習">データ分析の5つのステップ（復習）</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 40%">
+<col style="width: 45%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">ステップ</th>
+<th style="text-align: left;">内容</th>
+<th style="text-align: left;">主に使う関数</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: left;">問い（RQ）と仮説を立てる</td>
+<td style="text-align: left;">（文章で書く）</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: left;">データの確認・前処理と記述統計</td>
+<td style="text-align: left;"><code>filter()</code>, <code>select()</code>, <code>drop_na()</code>, <code>summarise()</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: left;">可視化</td>
+<td style="text-align: left;"><code>ggplot()</code>, <code>geom_point()</code>, <code>geom_boxplot()</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: left;">分析（検定・相関・回帰）</td>
+<td style="text-align: left;"><code>t.test()</code>, <code>cor.test()</code>, <code>lm()</code>, <code>tidy()</code>, <code>modelsummary()</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: left;">考察・結論</td>
+<td style="text-align: left;">（文章で書く）</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="実証論文の5つのステップ" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="実証論文の5つのステップ">実証論文の5つのステップ</h3>
 <p>実証分析の論文は、多くの場合、次のような構成になっています。これは前回学んだ<strong>5つのステップ</strong>とほぼ対応しています。</p>
+<div style="margin-top: 3.0em;">
+
+</div>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 20%">
@@ -542,7 +595,13 @@ Important
 </tr>
 </tbody>
 </table>
+<div style="margin-top: 3.0em;">
+
+</div>
 <p><span class="marker">後期の総合分析演習のレポートも、この構成を目標にして書きます。</span>今日の論文を、レポートの「お手本」として読んでください。</p>
+<div style="margin-top: 3.0em;">
+
+</div>
 <div class="my-note callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -560,6 +619,7 @@ Note
 <div style="margin-top: 4.0em;">
 
 </div>
+</section>
 </section>
 <section id="sec-data" class="level2" data-number="15.3">
 <h2 data-number="15.3" class="anchored" data-anchor-id="sec-data"><span class="header-section-number">15.3</span> 今日の論文とデータ</h2>
@@ -880,24 +940,19 @@ Note
 <div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
-<li>表2には、交差項「人口移動率 × 自民党得票率」も載っています。まず <code>mutate()</code> で、2つの列を掛け算した新しい列を作ります。</li>
-<li>複数の変数について平均などをまとめて計算するには、<code>pivot_longer()</code> でデータを<strong>縦長</strong>（「変数名」の列と「値」の列の2列）に変形してから、<code>group_by()</code> と <code>summarise()</code> を使うと便利です。</li>
-<li><code>fct_inorder()</code> を使うと、変数の並び順が <code>select()</code> で選んだ順になります（使わないとアルファベット順になります）。</li>
+<li>表2には、交差項「人口移動率 × 自民党得票率」も載っています。まず <code>mutate()</code> で、2つの列を掛け算した新しい列（例：<code>mob_ldp</code>）を作り、<code>df_nhk</code> に上書きして保存します。</li>
+<li>平均・標準偏差・最小値・最大値は、<code>summarise()</code> の中で <code>mean()</code>・<code>sd()</code>・<code>min()</code>・<code>max()</code> を使って計算します（前期第6回）。</li>
+<li>1つの変数について1行書いたら、その行をコピーして変数名だけを変えます。表2の7つの変数について、7回くり返しましょう。</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>df_nhk <span class="sc">|&gt;</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">mutate</span>(<span class="at">mob_ldp =</span> ___ <span class="sc">*</span> ___) <span class="sc">|&gt;</span>                         <span class="co"># 交差項の列を作る</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a>  <span class="fu">select</span>(nhk, kosu, mobility, ldp, mob_ldp, age, income) <span class="sc">|&gt;</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">"variable"</span>, <span class="at">values_to =</span> <span class="st">"value"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a>  <span class="fu">mutate</span>(<span class="at">variable =</span> <span class="fu">fct_inorder</span>(variable)) <span class="sc">|&gt;</span>           <span class="co"># 変数の並び順を固定する</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a>  <span class="fu">group_by</span>(___) <span class="sc">|&gt;</span></span>
-<span id="cb3-7"><a href="#cb3-7"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb3-8"><a href="#cb3-8"></a>    <span class="at">mean =</span> <span class="fu">mean</span>(value),</span>
-<span id="cb3-9"><a href="#cb3-9"></a>    <span class="at">sd   =</span> <span class="fu">___</span>(value),</span>
-<span id="cb3-10"><a href="#cb3-10"></a>    <span class="at">min  =</span> <span class="fu">min</span>(value),</span>
-<span id="cb3-11"><a href="#cb3-11"></a>    <span class="at">max  =</span> <span class="fu">___</span>(value),</span>
-<span id="cb3-12"><a href="#cb3-12"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
-<span id="cb3-13"><a href="#cb3-13"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># ① 交差項の列を作る</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>df_nhk <span class="ot">&lt;-</span> df_nhk <span class="sc">|&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>  <span class="fu">mutate</span>(<span class="at">mob_ldp =</span> ___ <span class="sc">*</span> ___)</span>
+<span id="cb3-4"><a href="#cb3-4"></a></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="co"># ② 変数ごとに、平均・標準偏差・最小値・最大値を計算する</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>df_nhk <span class="sc">|&gt;</span> <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(nhk), <span class="at">sd =</span> <span class="fu">___</span>(nhk), <span class="at">min =</span> <span class="fu">min</span>(nhk), <span class="at">max =</span> <span class="fu">___</span>(nhk))</span>
+<span id="cb3-7"><a href="#cb3-7"></a>df_nhk <span class="sc">|&gt;</span> <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(kosu), <span class="at">sd =</span> <span class="fu">sd</span>(kosu), <span class="at">min =</span> <span class="fu">min</span>(kosu), <span class="at">max =</span> <span class="fu">max</span>(kosu))</span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="co"># 残りの5つの変数（mobility, ldp, mob_ldp, age, income）も同じように書く</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
