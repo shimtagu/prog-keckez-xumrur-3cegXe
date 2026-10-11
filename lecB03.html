@@ -453,7 +453,7 @@ Note
 | 1. | 最初の約10分で、今日の論文とデータ、課題の進め方を説明します。 |
 | 2. | そのあとは、論文の PDF を読みながら、`assignmentB03.qmd` の課題1から順に取り組みます。 |
 | 3. | 授業の途中で、教員がスクリーンに解答例を映します。自分の答えと見比べて、答え合わせをしてください。 |
-| 4. | 課題1〜8を終えたら Render し、授業時間内の提出を目指してください。 |
+| 4. | 課題1〜7を終えたら Render し、授業時間内の提出を目指してください。 |
 | 5. | 授業中に終わらなかった人は、残りを宿題として仕上げ、期限までに提出してください。 |
 : {tbl-colwidths="[8, 92]"}
 
@@ -584,7 +584,7 @@ Note
 </div>
 <div class="callout-body-container callout-body">
 <p><strong>七三分けダミーの作り方</strong></p>
-<p>七三分けかどうかは、著者が選挙公報の写真を5人に見せ、<strong>5人中3人以上</strong>が「七三分けである」と答えた候補者を 1 としています（論文 p.6）。また、女性の候補者と斜めを向いている男性の候補者は判定が難しいため、データから除かれています。データがどのように作られたかは、考察（課題8）で論文の限界を考えるときの手がかりになります。</p>
+<p>七三分けかどうかは、著者が選挙公報の写真を5人に見せ、<strong>5人中3人以上</strong>が「七三分けである」と答えた候補者を 1 としています（論文 p.6）。また、女性の候補者と斜めを向いている男性の候補者は判定が難しいため、データから除かれています。データがどのように作られたかは、考察（課題7）で論文の限界を考えるときの手がかりになります。</p>
 </div>
 </div>
 <div style="margin-top: 4.0em;">
@@ -632,8 +632,7 @@ Note
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">options</span>(<span class="at">repos =</span> <span class="fu">c</span>(<span class="at">CRAN =</span> <span class="st">"https://cran.rstudio.com/"</span>))</span>
 <span id="cb1-2"><a href="#cb1-2"></a></span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">install.packages</span>(<span class="st">"broom"</span>)</span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">install.packages</span>(<span class="st">"modelsummary"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">install.packages</span>(<span class="st">"broom"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div style="margin-top: 4.0em;">
 
@@ -670,7 +669,7 @@ Note
 <tr class="even">
 <td style="text-align: center;">1</td>
 <td style="text-align: center;">課題2</td>
-<td style="text-align: left;">2つの仮説とコントロール変数を整理する</td>
+<td style="text-align: left;">仮説1とコントロール変数を整理する</td>
 <td style="text-align: center;">p.4〜5</td>
 </tr>
 <tr class="odd">
@@ -698,14 +697,8 @@ Note
 <td style="text-align: center;">p.9〜10</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">4</td>
-<td style="text-align: center;">課題7</td>
-<td style="text-align: left;">交差項を含む重回帰分析（表3）を再現する</td>
-<td style="text-align: center;">p.10〜11</td>
-</tr>
-<tr class="even">
 <td style="text-align: center;">5</td>
-<td style="text-align: center;">課題8</td>
+<td style="text-align: center;">課題7</td>
 <td style="text-align: left;">分析の結果、何が分かったかをまとめる</td>
 <td style="text-align: center;">p.11〜12</td>
 </tr>
@@ -772,8 +765,8 @@ Note
 <div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
-<li>2つの仮説は、p.4〜5 に「仮説1：」「仮説２：」として書かれています。表2・表3（p.9〜10）の「予想」の列も参考になります。</li>
-<li>仮説2は「候補者数が<strong>少ない</strong>選挙区ほど、七三分けの影響が<strong>小さい</strong>」という予想です。言いかえると、候補者数が<strong>多い</strong>選挙区ほど、七三分けのプラスの影響が<strong>大きくなる</strong>ということです。このとき、交差項「七三分けダミー × 候補者数」の係数の符号はどうなるでしょうか（前期第12回）。</li>
+<li>2つの仮説は、p.4〜5 に「仮説1：」「仮説２：」として書かれています。表2（p.9）の「予想」の列も参考になります。</li>
+<li>仮説2は今回は扱いません。</li>
 <li>コントロール変数とその予想は、p.5 の図1の上の段落に「その他のコントロール変数として……」と書かれています。</li>
 </ul>
 </div>
@@ -826,23 +819,15 @@ Note
 <div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
-<li>前回の課題4と同じように、<code>pivot_longer()</code> でデータを縦長に変形してから、<code>group_by()</code> と <code>summarise()</code> で計算します。</li>
-<li><code>name</code> は文字の列なので、平均などは計算できません。<code>select()</code> で5つの変数だけを選んでから変形しましょう。</li>
+<li><code>summarise()</code> の中で <code>mean()</code>・<code>sd()</code>・<code>min()</code>・<code>max()</code> を使うと、1つの変数の平均・標準偏差・最小値・最大値をまとめて計算できます（前期第6回）。</li>
+<li>表1の5つの変数について、1行ずつ同じように書きます。<code>name</code> は文字の列なので計算しません。</li>
 <li>0 と 1 のダミー変数の平均は、<strong>1 の人の割合</strong>になります。課題3で数えた人数から、割合を計算して確かめてみましょう。</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>df_hair <span class="sc">|&gt;</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">select</span>(seventhree, Tfirst, ___, ___, ___) <span class="sc">|&gt;</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">"variable"</span>, <span class="at">values_to =</span> <span class="st">"value"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a>  <span class="fu">mutate</span>(<span class="at">variable =</span> <span class="fu">fct_inorder</span>(variable)) <span class="sc">|&gt;</span>           <span class="co"># 変数の並び順を固定する</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a>  <span class="fu">group_by</span>(___) <span class="sc">|&gt;</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb3-7"><a href="#cb3-7"></a>    <span class="at">mean =</span> <span class="fu">___</span>(value),</span>
-<span id="cb3-8"><a href="#cb3-8"></a>    <span class="at">sd   =</span> <span class="fu">sd</span>(value),</span>
-<span id="cb3-9"><a href="#cb3-9"></a>    <span class="at">min  =</span> <span class="fu">min</span>(value),</span>
-<span id="cb3-10"><a href="#cb3-10"></a>    <span class="at">max  =</span> <span class="fu">max</span>(value),</span>
-<span id="cb3-11"><a href="#cb3-11"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
-<span id="cb3-12"><a href="#cb3-12"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># 変数ごとに、平均・標準偏差・最小値・最大値を計算する</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>df_hair <span class="sc">|&gt;</span> <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(seventhree), <span class="at">sd =</span> <span class="fu">___</span>(seventhree), <span class="at">min =</span> <span class="fu">min</span>(seventhree), <span class="at">max =</span> <span class="fu">___</span>(seventhree))</span>
+<span id="cb3-3"><a href="#cb3-3"></a>df_hair <span class="sc">|&gt;</span> <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(Tfirst), <span class="at">sd =</span> <span class="fu">sd</span>(Tfirst), <span class="at">min =</span> <span class="fu">min</span>(Tfirst), <span class="at">max =</span> <span class="fu">max</span>(Tfirst))</span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="co"># 残りの3つの変数（voteshare, age, nocand）も同じように書く</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -897,17 +882,12 @@ Note
 <li>重回帰分析は <code>lm(被説明変数 ~ 説明変数1 + 説明変数2 + ..., data = データ名)</code> です（前期第10回）。</li>
 <li>ダミー変数の係数は、「1 のグループが 0 のグループと比べて、平均してどれだけ大きいか（小さいか）」を表します（前期第11回）。</li>
 <li>論文の表2では、候補者数の p 値が <code>2e-16</code> と書かれています。これは R の <code>summary()</code> が、とても小さな p 値を「<code>&lt; 2e-16</code>」とまとめて表示したものです。<code>tidy()</code> で表示されるもっと小さな値と一致していなくても、再現できていると考えてかまいません。</li>
-<li>課題5で計算した平均の差と比べて七三分けダミーの係数が小さくなった理由を考えるときは、「都民ファーストの会の候補者に七三分けは何人いたか」を数えてみましょう。</li>
 </ul>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(___ <span class="sc">~</span> seventhree <span class="sc">+</span> age <span class="sc">+</span> ___ <span class="sc">+</span> ___, <span class="at">data =</span> df_hair)</span>
 <span id="cb5-2"><a href="#cb5-2"></a></span>
 <span id="cb5-3"><a href="#cb5-3"></a><span class="fu">tidy</span>(model1)</span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="fu">glance</span>(model1)</span>
-<span id="cb5-5"><a href="#cb5-5"></a></span>
-<span id="cb5-6"><a href="#cb5-6"></a><span class="co"># 都民ファーストかどうか × 七三分けかどうか の人数</span></span>
-<span id="cb5-7"><a href="#cb5-7"></a>df_hair <span class="sc">|&gt;</span></span>
-<span id="cb5-8"><a href="#cb5-8"></a>  <span class="fu">count</span>(___, ___)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="fu">glance</span>(model1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -925,45 +905,9 @@ Note
 <div id="callout-12" class="callout-12-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
-<li>交差項は、2つの変数を <code>*</code> でつなぎます。<code>x1 * x2</code> は <code>x1 + x2 + x1:x2</code> と同じ意味です（前期第12回）。</li>
-<li>2つのモデルを並べて表示するには <code>modelsummary()</code> を使います（前期第10回）。</li>
-<li>交差項を入れたモデルでは、七三分けの効果は候補者数によって変わります。</li>
-</ul>
-<p><span class="math display">\[
-\text{七三分けの効果} = \beta_{\text{七三分け}} + \beta_{\text{交差項}} \times \text{候補者数}
-\]</span></p>
-<ul>
-<li>この式に、候補者数 4 人と 12 人を入れて計算してみましょう。係数は <code>coef(model2)</code> で取り出せます。</li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(voteshare <span class="sc">~</span> ___ ___ ___ <span class="sc">+</span> age <span class="sc">+</span> Tfirst, <span class="at">data =</span> df_hair)</span>
-<span id="cb6-2"><a href="#cb6-2"></a></span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="fu">modelsummary</span>(<span class="fu">list</span>(<span class="st">"表2"</span> <span class="ot">=</span> ___, <span class="st">"表3"</span> <span class="ot">=</span> ___),</span>
-<span id="cb6-4"><a href="#cb6-4"></a>             <span class="at">stars =</span> <span class="cn">TRUE</span>, <span class="at">gof_map =</span> <span class="fu">c</span>(<span class="st">"nobs"</span>, <span class="st">"r.squared"</span>, <span class="st">"adj.r.squared"</span>))</span>
-<span id="cb6-5"><a href="#cb6-5"></a></span>
-<span id="cb6-6"><a href="#cb6-6"></a><span class="co"># 候補者数が4人の選挙区での七三分けの効果</span></span>
-<span id="cb6-7"><a href="#cb6-7"></a><span class="fu">coef</span>(model2)[<span class="st">"seventhree"</span>] <span class="sc">+</span> <span class="fu">coef</span>(model2)[<span class="st">"seventhree:nocand"</span>] <span class="sc">*</span> ___</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled" title="課題8のヒント">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>課題8のヒント
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-13" class="callout-13-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ul>
 <li>仮説が「支持された」と言えるのは、<strong>係数の符号が予想と同じ</strong>で、かつ <strong>p 値 &lt; 0.05</strong> のときです。符号が予想と<strong>逆</strong>で p 値 &lt; 0.05 なら、「支持されない（予想と逆の関係がある）」となります。</li>
-<li>仮説1の結果は課題6の <code>model1</code>、仮説2（交差項）の結果は課題7の <code>model2</code> で確認します。</li>
-<li>仮説2は、交差項の符号だけでなく、課題7で計算した「候補者数が4人と12人のときの七三分けの効果」も見て、<strong>どちらの選挙区で七三分けの影響が大きかったのか</strong>を書きましょう。</li>
-<li>考察では、「仮説が支持されないとき」（本資料）の3つの観点と、論文の「6. 結論と今後の展望」（p.11〜12）を参考にしましょう。</li>
+<li>仮説1とコントロール変数（年齢・都民ファースト・候補者数）の結果は、すべて課題6の <code>model1</code> で確認します。</li>
+<li>問いへの答えは、「七三分けの候補者は、そうでない候補者と比べて得票率が〜」のように書きます。有意だった変数（都民ファースト・候補者数）にも触れましょう。</li>
 </ul>
 </div>
 </div>
@@ -997,10 +941,6 @@ Note
 <tr class="odd">
 <td style="text-align: left;">仮説と逆の結果</td>
 <td style="text-align: left;">「有意でない」と「逆の符号で有意」を区別し、なぜ逆になったのかを考察する</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">交差項の読み方</td>
-<td style="text-align: left;">係数の符号だけでなく、条件ごとの効果を計算して、文章の解釈と合っているかを確かめる</td>
 </tr>
 </tbody>
 </table>
