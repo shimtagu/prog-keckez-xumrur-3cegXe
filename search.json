@@ -1663,5 +1663,203 @@
       "後期（B）",
       "<span class='chapter-number'>16</span>  <span class='chapter-title'>論文のレプリケーション2</span>"
     ]
+  },
+  {
+    "objectID": "lecB04.html",
+    "href": "lecB04.html",
+    "title": "17  総合分析演習1",
+    "section": "",
+    "text": "17.1 総合分析演習の進め方\n「授業評価と教員」のデータを分析する\n今日の目標\n総合分析演習は、後期に5回あります。毎回、次の流れで進めます。\n評価：総合分析演習1回分（15%）は、提出したレポートと、次回の説明の内容をあわせて評価します。説明のときに使うチェックシート（5つのステップ × 3段階＝15点）は、第5回の資料に載せています。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>総合分析演習1</span>"
+    ]
+  },
+  {
+    "objectID": "lecB04.html#sec-howto",
+    "href": "lecB04.html#sec-howto",
+    "title": "17  総合分析演習1",
+    "section": "",
+    "text": "回\n授業ですること\n授業のあとにすること\n\n\n\n\n第4回（今日）\nデータを読み、問いと仮説を立て、assignmentB04.qmd で分析してレポートを書く\nレポートを仕上げて提出する\n\n\n第5回（次回）\nレポートの内容を、教員に一人ずつ説明する（約5分）\n振り返りの課題を提出する\n\n\n\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\n提出期限\nレポート（assignmentB04.qmd を Render した HTML の ZIP）の提出期限は、次回の授業開始（10月26日 15:45）までです。これ以降は提出できず、レポートを提出していないと次回の説明もできません。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>総合分析演習1</span>"
+    ]
+  },
+  {
+    "objectID": "lecB04.html#sec-rq",
+    "href": "lecB04.html#sec-rq",
+    "title": "17  総合分析演習1",
+    "section": "17.2 自分で問いを立てる",
+    "text": "17.2 自分で問いを立てる\n\n被説明変数と説明変数を決める\n問いは、「何が（説明変数 \\(X\\)）、何に（被説明変数 \\(Y\\)）影響するのか」を決めると立てやすくなります。今日のデータでは、被説明変数は授業評価（eval）に決まっています。皆さんが決めるのは、\n\n授業評価に影響しそうな主な説明変数 \\(X\\) を1つ\n\\(X\\) と授業評価の両方に影響しそうなコントロール変数を2〜3個\n\nです。\n\n\n\n問いは、次のような形で書くと分かりやすくなります。\n\n「\\(X\\) が大きい（高い）授業ほど、授業評価は高いのか」（\\(X\\) が数値のとき）\n「\\(X\\) である授業は、そうでない授業と比べて、授業評価が高いのか」（\\(X\\) がダミー変数のとき）\n\n第1回で確認した良い問いの3つの条件（具体的な変数を指定できている／データで答えられる／比較・関係の視点が入っている）を満たしているか、確かめましょう。\n\n\n\n\n\n仮説には「理由」をつける\n仮説は、「\\(X\\) が大きいほど \\(Y\\) は高い（＋）／低い（−）」という予想される符号と、そう予想する理由の2つをセットで書きます。第2回・第3回の論文でも、仮説ごとに理由が書かれていました。\nコントロール変数も、同じように予想される符号と理由を書きます。\n\n\n\n\n\nコントロール変数を選ぶ\n第3回の七三分けの論文では、七三分けの候補者は都民ファーストの会に少なく、都民ファーストの候補者は得票率が高かったため、単純に平均を比べると七三分けの影響を大きく見誤ってしまうことを学びました（交絡因子）。\nコントロール変数は、主な説明変数 \\(X\\) と授業評価の両方に関係していそうな変数から選びます。「\\(X\\) が違う授業は、ほかの点でも違っていないか？」と考えてみましょう。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>総合分析演習1</span>"
+    ]
+  },
+  {
+    "objectID": "lecB04.html#sec-data",
+    "href": "lecB04.html#sec-data",
+    "title": "17  総合分析演習1",
+    "section": "17.3 今日のデータ",
+    "text": "17.3 今日のデータ\nアメリカのテキサス大学オースティン校で、2000〜2002年度に開講された授業の授業評価アンケートの結果です。\n今日のデータ（TeachingRatings.csv）\n1行が1つの授業です。463の授業が入っています。\n\n\n\n\n\n\n\n変数名\n内容\n\n\n\n\nrownames\n行の番号（分析には使わない）\n\n\nminority\n担当教員が人種・民族的マイノリティ（白人以外）か：yes / no\n\n\nage\n担当教員の年齢（歳）\n\n\ngender\n担当教員の性別：female（女性）/ male（男性）\n\n\ncredits\n1単位の授業か：single（1単位の授業）/ more（それ以外）\n\n\nbeauty\n担当教員の見た目の評価（平均が0になるように標準化した値。大きいほど評価が高い）\n\n\neval\n授業評価：授業全体の評価の平均点（1＝とても不満 〜 5＝とても良い）\n\n\ndivision\n授業のレベル：upper（3・4年生向けの専門科目）/ lower（1・2年生向けの科目）\n\n\nnative\n担当教員の母語が英語か：yes / no\n\n\ntenure\n担当教員がテニュア（終身在職権）を持つ、またはその候補か：yes / no\n\n\nstudents\n授業評価アンケートに回答した学生の数（人）\n\n\nallstudents\nその授業の履修者数（人）\n\n\nprof\n担当教員の番号（1〜94）\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n見た目の評価（beauty）の作り方\nこのデータでは、6人の学生（女性3人・男性3人）に教員の写真を見せ、それぞれ見た目を1〜10点で評価してもらいました。その点数を、平均が0、標準偏差が1になるようにそろえて（前期第6回の z スコア）、6人分を平均したものが beauty です。そのため、beauty が 0 なら平均的、プラスなら平均より評価が高い、マイナスなら平均より低いと読みます。\n\n\n\n\n\n\n\n\nNote\n\n\n\n1行は「教員」ではなく「授業」\n教員は94人ですが、1人の教員が複数の授業を担当しているため、データは463行あります（prof が同じ行は同じ教員の授業です）。そのため、beauty・age・gender などの教員の情報は、同じ教員の行ではすべて同じ値になっています。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>総合分析演習1</span>"
+    ]
+  },
+  {
+    "objectID": "lecB04.html#sec-prepare",
+    "href": "lecB04.html#sec-prepare",
+    "title": "17  総合分析演習1",
+    "section": "17.4 今日の準備",
+    "text": "17.4 今日の準備\n\n\n\n\n\n\n\n1.\n新規 R プロジェクトを作成する。Directory name は「LessonB04」、場所は Kドライブの「R_programming」。\n\n\n2.\nBlackboard から TeachingRatings.csv・assignmentB04.qmd をダウンロードし、「R_programming/LessonB04」フォルダに入れる。\n\n\n3.\nまずは氏名（学籍番号）を記入し、この状態で Rendering ができるか確認する。\n\n\n4.\n左側に Rendering して出力された画面を置き、右半分には RStudio を置いて assignmentB04.qmd の課題に取り組む。\n\n\n5.\n適当なところで Rendering し、確かめながら進める。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>総合分析演習1</span>"
+    ]
+  },
+  {
+    "objectID": "lecB04.html#sec-setup",
+    "href": "lecB04.html#sec-setup",
+    "title": "17  総合分析演習1",
+    "section": "17.5 パッケージの準備",
+    "text": "17.5 パッケージの準備\n大学の PC はシャットダウンするたびに初期化されるため、毎回インストールが必要です。\n\noptions(repos = c(CRAN = \"https://cran.rstudio.com/\"))\n\ninstall.packages(\"tidyverse\")\ninstall.packages(\"broom\")\ninstall.packages(\"modelsummary\")",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>総合分析演習1</span>"
+    ]
+  },
+  {
+    "objectID": "lecB04.html#sec-dummy",
+    "href": "lecB04.html#sec-dummy",
+    "title": "17  総合分析演習1",
+    "section": "17.6 yes / no の変数をダミー変数にする",
+    "text": "17.6 yes / no の変数をダミー変数にする\n今日のデータでは、gender や native などが \"female\" や \"yes\" のような文字で記録されています。第3回の七三分けダミーのように、0 と 1 のダミー変数に作り直しておくと、\n\n平均が「1 の授業の割合」になり、記述統計で比べやすい\n回帰分析の係数を「1 のグループが 0 のグループと比べて、平均してどれだけ違うか」と読みやすい\n\nという良いところがあります。\nダミー変数は、mutate() の中で if_else(条件, 条件に合うときの値, 合わないときの値) を使って作ります。下の例は、架空の果物のデータで「赤いかどうか」のダミー変数 red を作っています。\n\nlibrary(tidyverse)\n\ndf_fruit &lt;- tibble(\n  fruit = c(\"りんご\", \"バナナ\", \"いちご\", \"メロン\"),\n  color = c(\"red\", \"yellow\", \"red\", \"green\")\n)\n\ndf_fruit |&gt;\n1  mutate(red = if_else(color == \"red\", 1, 0))\n\n\n1\n\ncolor が \"red\" なら 1、そうでなければ 0 を入れた新しい列 red を作る。== はイコールが2つです。\n\n\n\n\n# A tibble: 4 × 3\n  fruit  color    red\n  &lt;chr&gt;  &lt;chr&gt;  &lt;dbl&gt;\n1 りんご red        1\n2 バナナ yellow     0\n3 いちご red        1\n4 メロン green      0\n\n\n\n\n\n\n\n\nImportant\n\n\n\nダミー変数を作ったら、count() で元の変数と作ったダミー変数の人数（件数）が合っているかを必ず確かめましょう。count() の中に、元の変数と作ったダミー変数をカンマで区切って2つ入れると、その組み合わせごとに件数を数えてくれます。\n\ndf_fruit |&gt;\n  mutate(red = if_else(color == \"red\", 1, 0)) |&gt;\n1  count(color, red)\n\n\n1\n\ncolor と red の組み合わせごとに件数を数える。\n\n\n\n\n# A tibble: 3 × 3\n  color    red     n\n  &lt;chr&gt;  &lt;dbl&gt; &lt;int&gt;\n1 green      0     1\n2 red        1     2\n3 yellow     0     1\n\n\ncolor が red の行だけ red が 1 になっていて（2件）、green と yellow の行は 0 になっていれば正しく作れています。\n\"red\" を \"Red\" と書くなど、文字を1つ間違えるだけで、すべて 0 になってしまいます。そのときは、count() の結果で red の列が全部 0 になるので、すぐに気づけます。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>総合分析演習1</span>"
+    ]
+  },
+  {
+    "objectID": "lecB04.html#sec-assignment",
+    "href": "lecB04.html#sec-assignment",
+    "title": "17  総合分析演習1",
+    "section": "17.7 本日の課題",
+    "text": "17.7 本日の課題\nassignmentB04.qmd には、5つのステップに沿って次の課題が並んでいます。この課題を全部埋めたものが、総合分析演習1のレポートになります。\n\n\n\n\n\n\n\n\n\n\n\nステップ\n課題\n内容\n\n\n\n\n1\n課題1\n主な説明変数を選び、問いを立てる\n\n\n1\n課題2\n仮説と、コントロール変数（2〜3個）の予想を書く\n\n\n2\n課題3\nデータを確認し、前処理（ダミー変数の作成）をする\n\n\n3\n課題4\n記述統計を計算する\n\n\n3\n課題5\n問いに合ったグラフを描く\n\n\n4\n課題6\n単回帰分析と重回帰分析を行う\n\n\n5\n課題7\n分析の結果、何が分かったかをまとめる\n\n\n\n\n\n\n提出方法：Render して出力された HTML ファイルを ZIP 形式に圧縮して Blackboard から提出してください。提出期限は次回の授業開始（10月26日 15:45）までです。\n\n\n\n\n\n\nImportant\n\n\n\n次回は、提出したレポートを画面に映しながら、一人ずつ内容を説明してもらいます。「このコードは何をしているか」「この係数はどういう意味か」と質問されても答えられるように、自分で理解したコードだけを書きましょう。分からないところは、遠慮なく手を挙げて質問してください。生成 AI に質問するのも構いませんが、出てきたコードは自分で理解してから使ってください。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>総合分析演習1</span>"
+    ]
+  },
+  {
+    "objectID": "lecB04.html#sec-hints",
+    "href": "lecB04.html#sec-hints",
+    "title": "17  総合分析演習1",
+    "section": "17.8 課題のヒント",
+    "text": "17.8 課題のヒント\n課題に取り組んでいて困ったときは、該当する課題のヒントを開いてください。まずは自分の力で考え、どうしても進めないときに開くようにしましょう。\n\n\n\n\n\n\nNote\n\n\n\nRender が止まったときは\nRender の途中でエラーが出ると、HTML は作られません。Background Jobs（または Render）タブのエラーメッセージに出ているチャンクの名前（label）を確認し、そのチャンクのコードを直してから、もう一度 Render しましょう。課題を1つ終えるごとに Render すると、どこでエラーが出たのかすぐに分かります。\n\n\n\n\n\n\n\n\n\n\n\nTip課題1のヒント\n\n\n\n\n\n\nまず「今日のデータ」の変数の表を見て、授業評価（eval）に影響しそうな変数を探しましょう。\n主な説明変数は、beauty（見た目）、gender（性別）、age（年齢）、native（英語が母語か）、minority（マイノリティか）、tenure（テニュアか）、credits（1単位の授業か）、division（授業のレベル）などから選べます。\nrownames・prof は番号なので、説明変数にはしません。\n\n\n\n\n\n\n\n\n\n\nTip課題2のヒント\n\n\n\n\n\n\n仮説は「\\(X\\) が〜な授業ほど、授業評価が高い（低い）」という形で、予想される符号（＋ か −）とその理由を書きます。\nコントロール変数は、「主な説明変数が違う授業は、ほかの点でも違っていないか？」と考えて選びます。\n理由は、自分が学生として授業評価アンケートに答えるときのことを思い出して考えてみましょう。\n\n\n\n\n\n\n\n\n\n\nTip課題7のヒント\n\n\n\n\n\n\n仮説が「支持された」と言えるのは、係数の符号が予想と同じで、かつ p 値 &lt; 0.05 のときです（第3回）。\n問いへの答えは、「〜な授業ほど、授業評価が〜。その差（影響）は、〜をコントロールしても残る（残らない）」のように、係数の大きさも入れて書きます。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>総合分析演習1</span>"
+    ]
+  },
+  {
+    "objectID": "lecB04.html#sec-summary",
+    "href": "lecB04.html#sec-summary",
+    "title": "17  総合分析演習1",
+    "section": "17.9 まとめ",
+    "text": "17.9 まとめ\n\n\n\n\n\n\n\n項目\nポイント\n\n\n\n\n問いの立て方\n被説明変数 \\(Y\\) と主な説明変数 \\(X\\) を決め、「\\(X\\) が〜ほど \\(Y\\) は〜か」の形で書く\n\n\n仮説\n予想される符号（＋／−）と、その理由をセットで書く\n\n\nコントロール変数\n\\(X\\) と \\(Y\\) の両方に関係していそうな変数（交絡因子の候補）を選ぶ\n\n\nダミー変数の作成\nmutate(新しい列 = if_else(条件, 1, 0))。作ったら count() で件数を確かめる\n\n\n単回帰と重回帰\nコントロール変数を入れると、主な説明変数の係数がどう変わるかを比べる\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n次回の予告\n次回は発表・分析結果説明1です。\n\n今日のレポートを画面に映しながら、5つのステップに沿って、一人ずつ教員に説明してもらいます\n「なぜこの問いにしたのか」「このコードは何をしているか」「この係数はどういう意味か」と質問するので、答えられるように準備してきてください\nレポートの提出は次回の授業開始までです",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>総合分析演習1</span>"
+    ]
+  },
+  {
+    "objectID": "lecB05.html",
+    "href": "lecB05.html",
+    "title": "18  発表・分析結果説明1",
+    "section": "",
+    "text": "18.1 今日の進め方\n&lt;!–もう出来上がってるいるが、課題が提出されるまで隠す。\n「授業評価と教員」の分析結果を自分の言葉で説明する\n今日の目標",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>発表・分析結果説明1</span>"
+    ]
+  },
+  {
+    "objectID": "lecB05.html#sec-howto",
+    "href": "lecB05.html#sec-howto",
+    "title": "18  発表・分析結果説明1",
+    "section": "",
+    "text": "1.\n最初に、説明のしかたとチェックシートを確認します。\n\n\n2.\n教員が名前を呼んだ人から順に、教員の席でレポートを画面に映しながら説明します（一人約5分、説明のあとに質問もします）。\n\n\n3.\n説明を待っている人・終わった人は、assignmentB05.qmd の課題に取り組みます。\n\n\n4.\n説明が終わった人は、受けた質問やコメントを忘れないうちに、課題1（振り返り）に書いておきます。\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\n前回のレポートを提出していない人は、今日の説明ができません。説明では、Blackboard に提出した HTML ファイルを開いて使います。提出したファイルを自分の PC でもすぐに開けるようにしておきましょう。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>発表・分析結果説明1</span>"
+    ]
+  },
+  {
+    "objectID": "lecB05.html#sec-present",
+    "href": "lecB05.html#sec-present",
+    "title": "18  発表・分析結果説明1",
+    "section": "18.2 説明のしかた",
+    "text": "18.2 説明のしかた\nレポートの見出しの順に、5つのステップを1つずつ説明します。それぞれ、次のことを話せるようにしておきましょう。\n\n\n\n\n\n\n\nステップ\n話すこと\n\n\n\n\n1 問い・仮説\n何を明らかにしたいか（問い）。主な説明変数を選んだ理由、予想される符号とその理由。コントロール変数を選んだ理由\n\n\n2 データ・前処理\n何のデータか、1行は何を表すか、何行あるか。どんな前処理をしたか（作ったダミー変数は何が 1 か）\n\n\n3 記述統計・可視化\n表やグラフから何が読み取れるか。仮説と合っていそうか\n\n\n4 分析\n主な説明変数の係数・p 値の意味。単回帰と重回帰で係数がどう変わったか\n\n\n5 考察・結論\n問いへの答え（係数の大きさも入れて）。仮説は支持されたか\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nよく聞かれる質問の例\n説明のあとで、次のような質問をします。全部に完璧に答える必要はありませんが、自分のレポートに書いたことは、自分の言葉で説明できるようにしておきましょう。\n\nなぜこの説明変数（コントロール変数）を選んだのですか。\nこのチャンクの、この行は何をしていますか。\nif_else(gender == \"female\", 1, 0) の 1 と 0 は、それぞれ何を表していますか。\nこの係数 0.13 は、どういう意味ですか。p 値は何を表していますか。\nR² が小さいのは、どういうことを意味しますか。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>発表・分析結果説明1</span>"
+    ]
+  },
+  {
+    "objectID": "lecB05.html#sec-checksheet",
+    "href": "lecB05.html#sec-checksheet",
+    "title": "18  発表・分析結果説明1",
+    "section": "18.3 評価のチェックシート",
+    "text": "18.3 評価のチェックシート\n説明は、5つのステップごとに3段階（優・良・可）で評価します。5ステップ × 3点 ＝ 15点満点です。\nなお、コードの各行が何をしているかも説明できない場合には、該当のステップの評価をマイナスします。\n\n\n\n\n\n\n\n\n\nステップ\n優（3点）\n良（2点）\n可（1点）\n\n\n\n\n1 問い・仮説\n問いに \\(Y\\) と \\(X\\) が明確で、仮説の符号と理由、コントロール変数を選んだ理由を説明できる\n問いと仮説はあるが、理由の説明が弱い\n問いや仮説があいまい、または理由を説明できない\n\n\n2 データ・前処理\nデータの出典・1行の単位・行数と、前処理（ダミー変数の作り方と確認）を説明できる\nデータの説明か前処理の説明のどちらかが不十分\nデータや前処理の内容をほとんど説明できない\n\n\n3 記述統計・可視化\n問いに合った表・グラフを示し、そこから読み取れることを問いと結びつけて説明できる\n表・グラフはあるが、読み取りが不十分\n表・グラフが問いと合っていない、または読み取りができない\n\n\n4 分析\n係数・p 値・R² の意味を正しく説明できる\n結果の読み取りに誤りや不足がある\n結果の意味をほとんど説明できない\n\n\n5 考察・結論\n係数の大きさを入れて問いに答え、仮説が支持されたかを正しく判断できる\n問いへの答えはあるが、係数の大きさや仮説の判断が不十分\n問いに答えていない、または結果と合わない結論になっている",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>発表・分析結果説明1</span>"
+    ]
+  },
+  {
+    "objectID": "lecB05.html#sec-setup",
+    "href": "lecB05.html#sec-setup",
+    "title": "18  発表・分析結果説明1",
+    "section": "18.4 パッケージの準備",
+    "text": "18.4 パッケージの準備\n今日の課題（発展課題）でも、前回と同じパッケージを使います。\n\noptions(repos = c(CRAN = \"https://cran.rstudio.com/\"))\n\ninstall.packages(\"tidyverse\")\ninstall.packages(\"broom\")",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>発表・分析結果説明1</span>"
+    ]
+  },
+  {
+    "objectID": "lecB05.html#sec-assignment",
+    "href": "lecB05.html#sec-assignment",
+    "title": "18  発表・分析結果説明1",
+    "section": "18.5 本日の課題",
+    "text": "18.5 本日の課題\n前回の「LessonB04」フォルダに、Blackboard からダウンロードした assignmentB05.qmd を入れて取り組みます（前回と同じ TeachingRatings.csv を使います）。\n\n\n\n\n\n\n\n課題\n内容\n\n\n\n\n課題1\n発展：見た目の影響は、教員の性別によって違うか（交差項を含む回帰分析）\n\n\n課題2\n発展：課題1の結果をグラフで確かめる\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n交差項の復習（前期第12回）\n「\\(X\\) が \\(Y\\) に与える影響の大きさが、グループによって違うか」を調べるときは、交差項を使います。lm(Y ~ X * D, data = ...) と書くと、\\(X\\), \\(D\\), \\(X \\times D\\)（交差項）の3つが説明変数に入ります。\n\\[\nY = \\beta_0 + \\beta_1 X + \\beta_2 D + \\beta_3 (X \\times D)\n\\]\n\\(D\\) が 0 と 1 のダミー変数なら、\n\n\\(D = 0\\) のグループの \\(X\\) の傾き：\\(\\beta_1\\)\n\\(D = 1\\) のグループの \\(X\\) の傾き：\\(\\beta_1 + \\beta_3\\)\n\nとなります。交差項の係数 \\(\\beta_3\\) は、2つのグループの傾きの差です。\n\n\n提出方法：Render して出力された HTML ファイルを ZIP 形式に圧縮して Blackboard から提出してください。提出期限は金曜日24時です。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>発表・分析結果説明1</span>"
+    ]
+  },
+  {
+    "objectID": "lecB05.html#sec-hints",
+    "href": "lecB05.html#sec-hints",
+    "title": "18  発表・分析結果説明1",
+    "section": "18.6 課題のヒント",
+    "text": "18.6 課題のヒント\n課題に取り組んでいて困ったときは、該当する課題のヒントを開いてください。まずは自分の力で考え、どうしても進めないときに開くようにしましょう。\nコードのヒントの ___ の部分は、自分で考えて埋めてください。\n\n\n\n\n\n\n\n\n\nTip課題1のヒント\n\n\n\n\n\n\n前回と同じように、女性ダミー female と1単位の授業ダミー single を作ってから分析します。\n交差項は beauty * female と書きます。* を使うと、beauty・female・beauty:female（交差項）の3つが自動で入ります。\n男性（female = 0）の傾きは beauty の係数、女性（female = 1）の傾きは beauty の係数＋beauty:female の係数です。\n\n\nmodel3 &lt;- lm(eval ~ beauty * ___ + age + single, data = df_eval)\ntidy(model3)\nglance(model3)\n\n\n\n\n\n\n\n\n\n\nTip課題2のヒント\n\n\n\n\n\n\naes() の中で color = factor(female) と指定すると、男女で点と回帰直線の色が分かれます（前期第11回・第12回）。\nlabs() の color = で、凡例のタイトルも日本語にできます。\n\n\ndf_eval |&gt;\n  ggplot(aes(x = beauty, y = eval, color = factor(___))) +\n  geom_point(alpha = 0.4) +\n  geom_smooth(method = \"lm\", se = FALSE) +\n  labs(x = \"見た目の評価（標準化）\", y = \"授業評価\", color = \"___\") +\n  theme_minimal()",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>発表・分析結果説明1</span>"
+    ]
+  },
+  {
+    "objectID": "lecB05.html#sec-summary",
+    "href": "lecB05.html#sec-summary",
+    "title": "18  発表・分析結果説明1",
+    "section": "18.7 まとめ",
+    "text": "18.7 まとめ\n\n\n\n\n\n\n\n項目\nポイント\n\n\n\n\n結果の説明\n5つのステップの順に、問い → データ → 表・グラフ → 分析 → 考察 と話す\n\n\nコードの説明\n自分のコードの各行が何をしているかを説明できるようにしておく\n\n\n係数の説明\n「\\(X\\) が1増えると \\(Y\\) が平均してどれだけ変わるか」を、単位をつけて言う\n\n\n交差項\nX * D の交差項の係数は、2つのグループの傾きの差。\\(D=1\\) の傾きは \\(\\beta_1 + \\beta_3\\)\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n次回の予告\n次回（11月9日）は総合分析演習2です。\n\n新しいデータを配布します\n今回と同じように、自分で問いと仮説を立て、5つのステップのレポートにまとめます\n今日の振り返り（課題1・2）で見つけた改善点を、次のレポートに生かしましょう",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>発表・分析結果説明1</span>"
+    ]
   }
 ]
