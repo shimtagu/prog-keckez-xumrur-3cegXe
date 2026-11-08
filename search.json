@@ -1861,5 +1861,115 @@
       "後期（B）",
       "<span class='chapter-number'>18</span>  <span class='chapter-title'>発表・分析結果説明1</span>"
     ]
+  },
+  {
+    "objectID": "lecB06.html",
+    "href": "lecB06.html",
+    "title": "19  総合分析演習2",
+    "section": "",
+    "text": "19.1 総合分析演習の進め方\n「働く人の賃金」のデータを分析する\n今日の目標\n評価：総合分析演習1回分（15%）は、提出したレポートと、次回の説明の内容をあわせて評価します（5つのステップ × 3段階＝15点満点）。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>総合分析演習2</span>"
+    ]
+  },
+  {
+    "objectID": "lecB06.html#sec-howto",
+    "href": "lecB06.html#sec-howto",
+    "title": "19  総合分析演習2",
+    "section": "",
+    "text": "回\n授業ですること\n授業のあとにすること\n\n\n\n\n第6回（今日）\nデータを読み、問いと仮説を立て、assignmentB06.qmd で分析してレポートを書く\nレポートを仕上げて提出する\n\n\n第7回（次回）\nレポートの内容を、教員に一人ずつ説明する（約5分）。自分の番を待つ間に、総合分析演習3のデータを受け取って分析を始める\n総合分析演習3の分析を進める\n\n\n\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\n提出期限\nレポート（assignmentB06.qmd を Render した HTML の ZIP）の提出期限は、次回の授業開始（11月16日 15:45）までです。これ以降は提出できず、レポートを提出していないと次回の説明もできません。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>総合分析演習2</span>"
+    ]
+  },
+  {
+    "objectID": "lecB06.html#sec-rq",
+    "href": "lecB06.html#sec-rq",
+    "title": "19  総合分析演習2",
+    "section": "19.2 自分で問いを立てる",
+    "text": "19.2 自分で問いを立てる\n今日のデータでは、被説明変数は時給（wage）に決まっています。皆さんが決めるのは、\n\n時給に影響しそうな主な説明変数 \\(X\\) を1つ\n\\(X\\) と時給の両方に影響しそうなコントロール変数を2〜3個\n\nです。問いの立て方、仮説に理由をつけること、コントロール変数の選び方は、第4回と同じです。\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\n今日の条件\n主な説明変数とコントロール変数のうち、少なくとも1つは、3つ以上のカテゴリをもつ変数（occupation・sector・ethnicity のどれか）を入れてください。使い方は、下の「3つ以上のカテゴリをもつ変数」で説明します。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>総合分析演習2</span>"
+    ]
+  },
+  {
+    "objectID": "lecB06.html#sec-data",
+    "href": "lecB06.html#sec-data",
+    "title": "19  総合分析演習2",
+    "section": "19.3 今日のデータ",
+    "text": "19.3 今日のデータ\nアメリカで1985年5月に行われた人口動態調査（Current Population Survey、CPS）から取り出した、働く人のデータです。CPS は、日本の「労働力調査」にあたる、アメリカ政府の毎月の調査です。\n今日のデータ（CPS1985.csv）\n1行が1人の働く人です。534人が入っています。\n\n\n\n\n\n\n\n変数名\n内容\n\n\n\n\nrownames\n行の番号（分析には使わない）\n\n\nwage\n時給（ドル／時間）。1985年当時の金額\n\n\neducation\n教育を受けた年数（年）。高校卒業なら 12、大学卒業なら 16\n\n\nexperience\n働いた年数の目安（年）。年齢 − 教育年数 − 6 で計算した値\n\n\nage\n年齢（歳）\n\n\nethnicity\n人種・民族：cauc（白人）/ hispanic（ヒスパニック）/ other（その他）\n\n\nregion\n住んでいる地域：south（南部）/ other（それ以外）\n\n\ngender\n性別：female（女性）/ male（男性）\n\n\noccupation\n職業：worker（工場・現場の労働者）/ technical（専門職・技術職）/ services（サービス職）/ office（事務職）/ sales（販売職）/ management（管理職）\n\n\nsector\n産業：manufacturing（製造業・鉱業）/ construction（建設業）/ other（それ以外）\n\n\nunion\n労働組合に入っているか：yes / no\n\n\nmarried\n結婚しているか：yes / no\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n1985年のドル\n時給は1985年当時のドルの金額です。物価が違うので、今の日本の時給とそのまま比べることはできません。レポートでは「時給が平均して〇ドル高い」のように、ドルのまま書きましょう。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>総合分析演習2</span>"
+    ]
+  },
+  {
+    "objectID": "lecB06.html#sec-prepare",
+    "href": "lecB06.html#sec-prepare",
+    "title": "19  総合分析演習2",
+    "section": "19.4 今日の準備",
+    "text": "19.4 今日の準備\n\n\n\n\n\n\n\n1.\n新規 R プロジェクトを作成する。Directory name は「LessonB06」、場所は Kドライブの「R_programming」。\n\n\n2.\nBlackboard から CPS1985.csv・assignmentB06.qmd をダウンロードし、「R_programming/LessonB06」フォルダに入れる。\n\n\n3.\nまずは氏名（学籍番号）を記入し、この状態で Rendering ができるか確認する。\n\n\n4.\n左側に Rendering して出力された画面を置き、右半分には RStudio を置いて assignmentB06.qmd でレポートを書く。\n\n\n5.\n適当なところで Rendering し、確かめながら進める。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>総合分析演習2</span>"
+    ]
+  },
+  {
+    "objectID": "lecB06.html#sec-setup",
+    "href": "lecB06.html#sec-setup",
+    "title": "19  総合分析演習2",
+    "section": "19.5 パッケージの準備",
+    "text": "19.5 パッケージの準備\n大学の PC はシャットダウンするたびに初期化されるため、毎回インストールが必要です。\n\noptions(repos = c(CRAN = \"https://cran.rstudio.com/\"))\n\ninstall.packages(\"tidyverse\")\ninstall.packages(\"broom\")\ninstall.packages(\"modelsummary\")",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>総合分析演習2</span>"
+    ]
+  },
+  {
+    "objectID": "lecB06.html#sec-category",
+    "href": "lecB06.html#sec-category",
+    "title": "19  総合分析演習2",
+    "section": "19.6 3つ以上のカテゴリをもつ変数",
+    "text": "19.6 3つ以上のカテゴリをもつ変数\n第4回では、female / male のように2つの値しかない変数を、if_else() で 0 と 1 のダミー変数に作り直しました。今日のデータの occupation（職業）は、6つの値（カテゴリ）をもっています。このような変数は、前期第11回で学んだように、文字のまま lm() に入れると、R が自動でダミー変数を作ってくれます。\n下の例は、架空の大学生9人の「1週間の勉強時間」と「部活動」のデータです。部活動 club は、sports（運動部）・culture（文化部）・none（入っていない）の3つのカテゴリをもっています。\n\nlibrary(tidyverse)\nlibrary(broom)\n\ndf_club &lt;- tibble(\n  club  = c(\"sports\", \"sports\", \"sports\", \"culture\", \"culture\", \"culture\", \"none\", \"none\", \"none\"),\n  hours = c(4, 6, 5, 9, 8, 10, 12, 11, 13)\n)\n\n\n\n\n\nまずはカテゴリごとの件数と平均を見る\n3つ以上のカテゴリをもつ変数は、平均や標準偏差を計算しても意味がありません。代わりに、count() でカテゴリごとの件数を、group_by() と summarise() でカテゴリごとの平均を確かめます。\n\ndf_club |&gt;\n1  group_by(club) |&gt;\n2  summarise(mean_hours = mean(hours), n = n())\n\n\n1\n\n部活動のカテゴリごとにグループ分けする。\n\n2\n\nグループごとに、勉強時間の平均と人数（n()）を計算する。\n\n\n\n\n# A tibble: 3 × 3\n  club    mean_hours     n\n  &lt;chr&gt;        &lt;dbl&gt; &lt;int&gt;\n1 culture          9     3\n2 none            12     3\n3 sports           5     3\n\n\n\n\n\n\n\n回帰分析に入れる\n\n1model_club &lt;- lm(hours ~ club, data = df_club)\ntidy(model_club)\n\n\n1\n\n文字の変数 club をそのまま説明変数に入れる。\n\n\n\n\n# A tibble: 3 × 5\n  term        estimate std.error statistic    p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;\n1 (Intercept)        9     0.577     15.6  0.00000441\n2 clubnone           3     0.816      3.67 0.0104    \n3 clubsports        -4     0.816     -4.90 0.00271   \n\n\n結果には clubnone と clubsports の2つの係数が出てきて、culture の係数はありません。R は、アルファベット順で最初のカテゴリ（ここでは culture）を基準のカテゴリにして、残りのカテゴリごとにダミー変数を作るためです。\n\n\n\n\n\n\n\n係数\n読み方\n\n\n\n\n(Intercept)\n基準のカテゴリ（文化部）の平均：9時間\n\n\nclubnone\n部活に入っていない学生は、文化部と比べて平均して 3時間多い\n\n\nclubsports\n運動部の学生は、文化部と比べて平均して 4時間少ない\n\n\n\n上のカテゴリごとの平均（文化部 9、入っていない 12、運動部 5）と見比べると、係数が「基準のカテゴリとの差」になっていることが分かります。\n\n\n\n\n\n\nImportant\n\n\n\n3つ以上のカテゴリをもつ変数の係数は、必ず「基準のカテゴリと比べて」読みます。レポートにも、基準のカテゴリが何かを書きましょう。今日のデータの occupation なら、アルファベット順で最初の management（管理職）が基準のカテゴリになります。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>総合分析演習2</span>"
+    ]
+  },
+  {
+    "objectID": "lecB06.html#sec-assignment",
+    "href": "lecB06.html#sec-assignment",
+    "title": "19  総合分析演習2",
+    "section": "19.7 本日のレポート",
+    "text": "19.7 本日のレポート\n今回から、assignmentB06.qmd には5つのステップの見出しと、レポートの条件だけが書かれています。パッケージやデータの読み込みも含めて、何をどの順番で書くかを自分で考えてレポートを完成させましょう。第4回の課題ファイルを見返すと、各ステップで何をしたかを思い出せます。\n\n\n\nレポートの条件\n\n被説明変数は時給（wage）。主な説明変数1つと、コントロール変数2〜3個を自分で選ぶ。\nそのうち少なくとも1つは、3つ以上のカテゴリをもつ変数（occupation・sector・ethnicity）にする。\n単回帰分析と重回帰分析を行い、modelsummary で並べて表示する。\n\n\n\n\n提出方法：Render して出力された HTML ファイルを ZIP 形式に圧縮して Blackboard から提出してください。提出期限は次回の授業開始（11月16日 15:45）までです。\n\n\n\n\n\n\nImportant\n\n\n\n次回は、提出したレポートを画面に映しながら、一人ずつ内容を説明してもらいます。「このコードは何をしているか」「この係数はどういう意味か」と質問されても答えられるように、自分で理解したコードだけを書きましょう。分からないところは、遠慮なく手を挙げて質問してください。生成 AI に質問するのも構いませんが、出てきたコードは自分で理解してから使ってください。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>総合分析演習2</span>"
+    ]
+  },
+  {
+    "objectID": "lecB06.html#sec-hints",
+    "href": "lecB06.html#sec-hints",
+    "title": "19  総合分析演習2",
+    "section": "19.8 ヒント",
+    "text": "19.8 ヒント\nレポートを書いていて困ったときは、該当するステップのヒントを開いてください。まずは自分の力で考え、どうしても進めないときに開くようにしましょう。\n\n\n\n\n\n\nNote\n\n\n\nRender が止まったときは\nRender の途中でエラーが出ると、HTML は作られません。Background Jobs（または Render）タブのエラーメッセージに出ているチャンクの名前（label）を確認し、そのチャンクのコードを直してから、もう一度 Render しましょう。ステップを1つ終えるごとに Render すると、どこでエラーが出たのかすぐに分かります。\n\n\n\n\n\n\n\n\n\n\n\nTipステップ1のヒント（問い）\n\n\n\n\n\n\nまず「今日のデータ」の変数の表を見て、時給（wage）に影響しそうな変数を探しましょう。\nrownames は番号なので、説明変数にはしません。\nexperience は年齢と教育年数から計算した値なので、age・education・experience の3つを同時に説明変数に入れるのは避けましょう。\n\n\n\n\n\n\n\n\n\n\nTipステップ1のヒント（仮説とコントロール変数）\n\n\n\n\n\n\n仮説は「\\(X\\) が〜な人ほど、時給が高い（低い）」という形で、予想される符号（＋ か −）とその理由を書きます。3つ以上のカテゴリをもつ変数なら、「基準のカテゴリと比べて、どのカテゴリの時給が高い（低い）と予想するか」を書きます。\nコントロール変数は、「主な説明変数が違う人は、ほかの点でも違っていないか？」と考えて選びます。\n理由は、アルバイト先や、将来の就職先の給料がどう決まるかを想像して考えてみましょう。\n\n\n\n\n\n\n\n\n\n\nTipステップ5のヒント\n\n\n\n\n\n\n仮説が「支持された」と言えるのは、係数の符号が予想と同じで、かつ p 値 &lt; 0.05 のときです（第3回）。\n問いへの答えは、「〜な人ほど、時給が〜。その差（影響）は、〜をコントロールしても残る（残らない）」のように、係数の大きさ（ドル）も入れて書きます。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>総合分析演習2</span>"
+    ]
+  },
+  {
+    "objectID": "lecB06.html#sec-summary",
+    "href": "lecB06.html#sec-summary",
+    "title": "19  総合分析演習2",
+    "section": "19.9 まとめ",
+    "text": "19.9 まとめ\n\n\n\n\n\n\n\n項目\nポイント\n\n\n\n\n問いと仮説\n第4回と同じ。\\(Y\\) と \\(X\\) を決め、予想される符号と理由をセットで書く\n\n\n3つ以上のカテゴリ\n文字のまま lm() に入れると、R が自動でダミー変数を作る\n\n\n基準のカテゴリ\nアルファベット順で最初のカテゴリ。係数は「基準のカテゴリと比べて」平均してどれだけ違うか\n\n\nカテゴリの記述統計\ncount() で件数、group_by() と summarise() でカテゴリごとの平均を見る\n\n\n単回帰と重回帰\nコントロール変数を入れると、主な説明変数の係数がどう変わるかを比べる\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n次回の予告\n次回は発表・分析結果説明2です。\n\n今日のレポートを画面に映しながら、5つのステップに沿って、一人ずつ教員に説明してもらいます\n「なぜこの問いにしたのか」「このコードは何をしているか」「この係数は何と比べた差か」と質問するので、答えられるように準備してきてください\n説明の順番を待つ間に、総合分析演習3の新しいデータを配布するので、問いと仮説を考えるところから始めましょう\nレポートの提出は次回の授業開始までです",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>総合分析演習2</span>"
+    ]
   }
 ]
