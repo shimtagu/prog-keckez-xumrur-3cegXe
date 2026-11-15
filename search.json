@@ -1982,5 +1982,115 @@
       "後期（B）",
       "<span class='chapter-number'>20</span>  <span class='chapter-title'>発表・分析結果説明 2</span>"
     ]
+  },
+  {
+    "objectID": "lecB08.html",
+    "href": "lecB08.html",
+    "title": "21  総合分析演習3",
+    "section": "",
+    "text": "21.1 総合分析演習の進め方\n「学区ごとの学力テスト」のデータを分析する\n今日の目標\n評価：総合分析演習1回分（15%）は、提出したレポートと、次回の説明の内容をあわせて評価します（5つのステップ × 3段階＝15点満点）。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>総合分析演習3</span>"
+    ]
+  },
+  {
+    "objectID": "lecB08.html#sec-howto",
+    "href": "lecB08.html#sec-howto",
+    "title": "21  総合分析演習3",
+    "section": "",
+    "text": "回\n授業ですること\n授業のあとにすること\n\n\n\n\n第8回（今日）\nデータを読み、問いと仮説を立て、assignmentB08.qmd で分析してレポートを書く\nレポートを仕上げて提出する\n\n\n第9回（次回）\nレポートの内容を、教員に一人ずつ説明する（約5分）。自分の番を待つ間に、総合分析演習4のデータを受け取って分析を始める\n総合分析演習4の分析を進める\n\n\n\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\n提出期限\nレポート（assignmentB08.qmd を Render した HTML の ZIP）の提出期限は、次回の授業開始（11月30日 15:45）までです。これ以降は提出できず、レポートを提出していないと次回の説明もできません。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>総合分析演習3</span>"
+    ]
+  },
+  {
+    "objectID": "lecB08.html#sec-rq",
+    "href": "lecB08.html#sec-rq",
+    "title": "21  総合分析演習3",
+    "section": "21.2 自分で問いを立てる",
+    "text": "21.2 自分で問いを立てる\n今日のデータでは、被説明変数はテストの平均点（score）に決まっています。ただし、score はデータに入っていないので、読解の平均点（read）と数学の平均点（math）の平均として、自分で作ります。皆さんが決めるのは、\n\nテストの平均点に影響しそうな主な説明変数 \\(X\\) を1つ\n\\(X\\) とテストの平均点の両方に影響しそうなコントロール変数を2〜3個\n\nです。問いの立て方、仮説に理由をつけること、コントロール変数の選び方は、これまでと同じです。\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\n今日の条件\n主な説明変数とコントロール変数のうち、少なくとも1つは、元の変数から計算して自分で作った変数（教員1人あたりの生徒数など）を入れてください。作り方と注意点は、下の「元のデータから新しい変数を作る」で説明します。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>総合分析演習3</span>"
+    ]
+  },
+  {
+    "objectID": "lecB08.html#sec-data",
+    "href": "lecB08.html#sec-data",
+    "title": "21  総合分析演習3",
+    "section": "21.3 今日のデータ",
+    "text": "21.3 今日のデータ\nアメリカのカリフォルニア州で、1998〜1999年度に行われた州の学力テストの結果と、学区ごとの学校・家庭の状況をまとめたデータです。テストを受けたのは小学5年生です。学区（school district）は、いくつかの公立学校をまとめて運営する地域の単位で、日本の市町村の教育委員会にあたります。\n今日のデータ（CASchools.csv）\n1行が1つの学区です。420の学区が入っています。\n\n\n\n\n\n\n\n変数名\n内容\n\n\n\n\nrownames\n行の番号（分析には使わない）\n\n\ndistrict\n学区の番号（分析には使わない）\n\n\nschool\n学区の名前（分析には使わない）\n\n\ncounty\n学区がある郡（county、日本の「県の中の地域」にあたる）。45種類\n\n\ngrades\n学区の学校の範囲：KK-06（幼稚園〜小学6年）/ KK-08（幼稚園〜中学2年）\n\n\nstudents\n生徒数（人）\n\n\nteachers\n教員数（人）。常勤に換算した人数なので、小数になる\n\n\ncalworks\n州の生活保護（CalWORKs）を受けている家庭の生徒の割合（%）\n\n\nlunch\n給食費の補助（無料・割引）を受けている生徒の割合（%）\n\n\ncomputer\nコンピュータの台数（台）\n\n\nexpenditure\n生徒1人あたりの教育支出（ドル）\n\n\nincome\n学区の住民の平均所得（千ドル）\n\n\nenglish\n英語を学んでいる途中の生徒（英語が母語でない生徒）の割合（%）\n\n\nread\n読解テストの平均点\n\n\nmath\n数学テストの平均点\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n割合の変数は 0〜100 の %\ncalworks・lunch・english は 0〜100 の % で記録されています。たとえば english が 10 なら「生徒の10%が英語を学んでいる途中」という意味です。回帰分析の係数は、「割合が1ポイント（1%分）高い学区は、平均点が〇点高い（低い）」と読みます。\nまた、income の単位は千ドルなので、1 増えると「平均所得が1,000ドル高い」という意味になります。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>総合分析演習3</span>"
+    ]
+  },
+  {
+    "objectID": "lecB08.html#sec-prepare",
+    "href": "lecB08.html#sec-prepare",
+    "title": "21  総合分析演習3",
+    "section": "21.4 今日の準備",
+    "text": "21.4 今日の準備\n前回（第7回）にすでに準備した人は、そのフォルダで続けてください。\n\n\n\n\n\n\n\n1.\n新規 R プロジェクトを作成する。Directory name は「LessonB08」、場所は Kドライブの「R_programming」。\n\n\n2.\nBlackboard から CASchools.csv・assignmentB08.qmd をダウンロードし、「R_programming/LessonB08」フォルダに入れる。\n\n\n3.\nまずは氏名（学籍番号）を記入し、この状態で Rendering ができるか確認する。\n\n\n4.\n左側に Rendering して出力された画面を置き、右半分には RStudio を置いて assignmentB08.qmd でレポートを書く。\n\n\n5.\n適当なところで Rendering し、確かめながら進める。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>総合分析演習3</span>"
+    ]
+  },
+  {
+    "objectID": "lecB08.html#sec-setup",
+    "href": "lecB08.html#sec-setup",
+    "title": "21  総合分析演習3",
+    "section": "21.5 パッケージの準備",
+    "text": "21.5 パッケージの準備\n大学の PC はシャットダウンするたびに初期化されるため、毎回インストールが必要です。\n\noptions(repos = c(CRAN = \"https://cran.rstudio.com/\"))\n\ninstall.packages(\"tidyverse\")\ninstall.packages(\"broom\")\ninstall.packages(\"modelsummary\")",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>総合分析演習3</span>"
+    ]
+  },
+  {
+    "objectID": "lecB08.html#sec-newvar",
+    "href": "lecB08.html#sec-newvar",
+    "title": "21  総合分析演習3",
+    "section": "21.6 元のデータから新しい変数を作る",
+    "text": "21.6 元のデータから新しい変数を作る\n今日のデータには、生徒数（students）・教員数（teachers）・コンピュータの台数（computer）のように、数で記録された変数があります。数の変数は、学区が大きいほど大きくなるので、そのままでは「学区が大きいか小さいか」を比べているだけになってしまいます。そこで、前期第2回で学んだ mutate() を使い、割り算で「1人あたり」の変数を作ってから比べます。\n下の例は、架空の4つの町の「人口」と「図書館の本の冊数」と「図書館の予算」のデータです。\n\nlibrary(tidyverse)\n\ndf_town &lt;- tibble(\n  town   = c(\"A町\", \"B町\", \"C町\", \"D町\"),\n  people = c(2000, 8000, 5000, 10000),            # 人口（人）\n  books  = c(10000, 24000, 20000, 20000),         # 本の冊数（冊）\n  budget = c(3000000, 9000000, 6000000, 8000000)  # 予算（円）\n)\n\n\n\n\n\n1人あたりの変数を作る\n\ndf_town &lt;- df_town |&gt;\n1  mutate(books_per_person = books / people)\n\ndf_town\n\n\n1\n\n本の冊数を人口で割って、住民1人あたりの冊数を作る。\n\n\n\n\n# A tibble: 4 × 5\n  town  people books  budget books_per_person\n  &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;            &lt;dbl&gt;\n1 A町     2000 10000 3000000                5\n2 B町     8000 24000 9000000                3\n3 C町     5000 20000 6000000                4\n4 D町    10000 20000 8000000                2\n\n\n本の冊数（books）だけを見ると、B町（24,000冊）が一番多く、A町（10,000冊）が一番少なく見えます。しかし、1人あたりの冊数（books_per_person）で比べると、A町が 5冊で一番多く、D町が 2冊で一番少なくなります。何で割るかによって、比べている中身が変わることに注意しましょう。\n\n\n\n\n\n単位をそろえる\n予算（budget）は円の単位なので、数字がとても大きくなります。このまま回帰分析に入れると、係数は「予算が1円多いと…」という意味になり、とても小さな値になって読みにくくなります。そこで、割り算で単位を変えておくと、係数が読みやすくなります。\n\ndf_town &lt;- df_town |&gt;\n1  mutate(budget_man = budget / 10000)\n\ndf_town |&gt;\n  select(town, budget, budget_man)\n\n\n1\n\n円を1万で割って、万円の単位にする。\n\n\n\n\n# A tibble: 4 × 3\n  town   budget budget_man\n  &lt;chr&gt;   &lt;dbl&gt;      &lt;dbl&gt;\n1 A町   3000000        300\n2 B町   9000000        900\n3 C町   6000000        600\n4 D町   8000000        800\n\n\n\n\n\n\n\n\nImportant\n\n\n\n作った変数を回帰分析に入れたら、係数は作った変数の単位で読みます。たとえば books_per_person の係数なら「住民1人あたりの本が1冊多いと…」、budget_man の係数なら「予算が1万円多いと…」です。レポートには、どの変数をどう計算して作ったか（何を何で割ったか、単位は何か）を必ず書きましょう。\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n作った変数が正しいか確かめる\nmutate() で作った変数は、元の変数と並べて表示し、いくつかの行を電卓で計算して合っているか確かめましょう。第4回・第6回でダミー変数を作ったときに count() で件数を確かめたのと同じ考え方です。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>総合分析演習3</span>"
+    ]
+  },
+  {
+    "objectID": "lecB08.html#sec-assignment",
+    "href": "lecB08.html#sec-assignment",
+    "title": "21  総合分析演習3",
+    "section": "21.7 本日のレポート",
+    "text": "21.7 本日のレポート\n今回の assignmentB08.qmd には、5つのステップの見出しだけが書かれています。パッケージやデータの読み込みも含めて、何をどの順番で書くかを自分で考えてレポートを完成させましょう。第4回・第6回の自分のレポートを見返すと、各ステップで何をしたかを思い出せます。\n\n\n\nレポートの条件\n\n被説明変数は、読解（read）と数学（math）の平均点（score）。mutate() で自分で作る。\n主な説明変数1つと、コントロール変数2〜3個を自分で選ぶ。そのうち少なくとも1つは、元の変数から計算して自分で作った変数にする。\n単回帰分析と重回帰分析を行い、modelsummary で並べて表示する。\n\n\n\n\n提出方法：Render して出力された HTML ファイルを ZIP 形式に圧縮して Blackboard から提出してください。提出期限は次回の授業開始（11月30日 15:45）までです。\n\n\n\n\n\n\nImportant\n\n\n\n次回は、提出したレポートを画面に映しながら、一人ずつ内容を説明してもらいます。「このコードは何をしているか」「この変数はどう計算したか」「この係数はどういう意味か」と質問されても答えられるように、自分で理解したコードだけを書きましょう。分からないところは、遠慮なく手を挙げて質問してください。生成 AI に質問するのも構いませんが、出てきたコードは自分で理解してから使ってください。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>総合分析演習3</span>"
+    ]
+  },
+  {
+    "objectID": "lecB08.html#sec-hints",
+    "href": "lecB08.html#sec-hints",
+    "title": "21  総合分析演習3",
+    "section": "21.8 ヒント",
+    "text": "21.8 ヒント\nレポートを書いていて困ったときは、該当するステップのヒントを開いてください。まずは自分の力で考え、どうしても進めないときに開くようにしましょう。\n\n\n\n\n\n\nNote\n\n\n\nRender が止まったときは\nRender の途中でエラーが出ると、HTML は作られません。Background Jobs（または Render）タブのエラーメッセージに出ているチャンクの名前（label）を確認し、そのチャンクのコードを直してから、もう一度 Render しましょう。ステップを1つ終えるごとに Render すると、どこでエラーが出たのかすぐに分かります。\n\n\n\n\n\n\n\n\n\n\n\nTipステップ1のヒント（問い）\n\n\n\n\n\n\nまず「今日のデータ」の変数の表を見て、テストの平均点に影響しそうな変数を探しましょう。\nrownames・district・school は番号や名前なので、説明変数にはしません。county は45種類もあるので、今回は説明変数に入れないでおきましょう。\nread と math は score を作るのに使うので、説明変数にはしません。\n自分が通っていた小学校・中学校を思い出し、「どんな学校（地域）だと点数が高くなりそうか」を考えてみましょう。\n\n\n\n\n\n\n\n\n\n\nTipステップ1のヒント（仮説とコントロール変数）\n\n\n\n\n\n\n仮説は「\\(X\\) が〜な学区ほど、テストの平均点が高い（低い）」という形で、予想される符号（＋ か −）とその理由を書きます。\nコントロール変数は、「主な説明変数が違う学区は、ほかの点でも違っていないか？」と考えて選びます。たとえば、お金に余裕のある地域とそうでない地域では、学校の条件も家庭の条件も違うかもしれません。\ncalworks・lunch・income は、どれも「家庭の経済状況」に関係する変数です。似た変数を同時にたくさん入れると、係数が読みにくくなることがあります。\n\n\n\n\n\n\n\n\n\n\nTipステップ2のヒント\n\n\n\n\n\n\n作った変数ごとに、「何を何で割ったか」「単位は何か（人、台、ドル、千ドルなど）」を書きましょう。\n割り算で作った変数の値が小さすぎる（大きすぎる）ときは、「100人あたり」「千ドルあたり」のように単位を変えると、係数が読みやすくなります。\n\n\n\n\n\n\n\n\n\n\nTipステップ5のヒント\n\n\n\n\n\n\n仮説が「支持された」と言えるのは、係数の符号が予想と同じで、かつ p 値 &lt; 0.05 のときです（第3回）。\n問いへの答えは、「〜な学区ほど、テストの平均点が〜。その関係は、〜をコントロールしても残る（残らない）」のように、係数の大きさ（点）も入れて書きます。\n今日のデータは学区ごとの平均です。学区について分かったことが、生徒一人ひとりにもそのまま当てはまるとは限りません。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>総合分析演習3</span>"
+    ]
+  },
+  {
+    "objectID": "lecB08.html#sec-summary",
+    "href": "lecB08.html#sec-summary",
+    "title": "21  総合分析演習3",
+    "section": "21.9 まとめ",
+    "text": "21.9 まとめ\n\n\n\n\n\n\n\n項目\nポイント\n\n\n\n\n問いと仮説\nこれまでと同じ。\\(Y\\) と \\(X\\) を決め、予想される符号と理由をセットで書く\n\n\n1行の単位\n今日のデータは1行が1つの学区。生徒一人ひとりではなく、学区の平均や割合を比べている\n\n\n新しい変数を作る\n数の変数は mutate() で割り算をして「1人あたり」にしてから比べる\n\n\n単位\n係数は作った変数の単位で読む。% の変数は「1ポイント」、income は「千ドル」\n\n\n単回帰と重回帰\nコントロール変数を入れると、主な説明変数の係数がどう変わるかを比べる\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n次回の予告\n次回は発表・分析結果説明3です。\n\n今日のレポートを画面に映しながら、5つのステップに沿って、一人ずつ教員に説明してもらいます\n「なぜこの問いにしたのか」「この変数はどう計算したか」「この係数はどういう意味か」と質問するので、答えられるように準備してきてください\n説明の順番を待つ間に、総合分析演習4の新しいデータを配布するので、問いと仮説を考えるところから始めましょう\nレポートの提出は次回の授業開始までです",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>総合分析演習3</span>"
+    ]
   }
 ]

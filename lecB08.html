@@ -8,7 +8,7 @@
 
 <meta name="description" content="2026年度　前期（A） 後期（B） 時間： 月曜日 4 時限（15:45-17:30） 教室： C 館 地下1階 PC4 教室">
 
-<title>21&nbsp; 総合分析演習 3 – R プログラミング</title>
+<title>21&nbsp; 総合分析演習3 – R プログラミング</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -73,6 +108,35 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <meta name="robots" content="noindex, nofollow">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -85,7 +149,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lecB01.html">後期（B）</a></li><li class="breadcrumb-item"><a href="./lecB08.html"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">総合分析演習 3</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lecB01.html">後期（B）</a></li><li class="breadcrumb-item"><a href="./lecB08.html"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">総合分析演習3</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -259,7 +323,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lecB08.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">総合分析演習 3</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">総合分析演習3</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -305,15 +369,33 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-howto" id="toc-sec-howto" class="nav-link active" data-scroll-target="#sec-howto"><span class="header-section-number">21.1</span> 総合分析演習の進め方</a></li>
+  <li><a href="#sec-rq" id="toc-sec-rq" class="nav-link" data-scroll-target="#sec-rq"><span class="header-section-number">21.2</span> 自分で問いを立てる</a></li>
+  <li><a href="#sec-data" id="toc-sec-data" class="nav-link" data-scroll-target="#sec-data"><span class="header-section-number">21.3</span> 今日のデータ</a></li>
+  <li><a href="#sec-prepare" id="toc-sec-prepare" class="nav-link" data-scroll-target="#sec-prepare"><span class="header-section-number">21.4</span> 今日の準備</a></li>
+  <li><a href="#sec-setup" id="toc-sec-setup" class="nav-link" data-scroll-target="#sec-setup"><span class="header-section-number">21.5</span> パッケージの準備</a></li>
+  <li><a href="#sec-newvar" id="toc-sec-newvar" class="nav-link" data-scroll-target="#sec-newvar"><span class="header-section-number">21.6</span> 元のデータから新しい変数を作る</a>
+  <ul class="collapse">
+  <li><a href="#人あたりの変数を作る" id="toc-人あたりの変数を作る" class="nav-link" data-scroll-target="#人あたりの変数を作る">1人あたりの変数を作る</a></li>
+  <li><a href="#単位をそろえる" id="toc-単位をそろえる" class="nav-link" data-scroll-target="#単位をそろえる">単位をそろえる</a></li>
+  </ul></li>
+  <li><a href="#sec-assignment" id="toc-sec-assignment" class="nav-link" data-scroll-target="#sec-assignment"><span class="header-section-number">21.7</span> 本日のレポート</a></li>
+  <li><a href="#sec-hints" id="toc-sec-hints" class="nav-link" data-scroll-target="#sec-hints"><span class="header-section-number">21.8</span> ヒント</a></li>
+  <li><a href="#sec-summary" id="toc-sec-summary" class="nav-link" data-scroll-target="#sec-summary"><span class="header-section-number">21.9</span> まとめ</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lecB01.html">後期（B）</a></li><li class="breadcrumb-item"><a href="./lecB08.html"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">総合分析演習 3</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lecB01.html">後期（B）</a></li><li class="breadcrumb-item"><a href="./lecB08.html"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">総合分析演習3</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">総合分析演習 3</span></h1>
+<h1 class="title"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">総合分析演習3</span></h1>
 </div>
 
 
@@ -330,8 +412,575 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p><strong>「学区ごとの学力テスト」のデータを分析する</strong></p>
+<div style="margin-top: 2.0em;">
+
+</div>
+<p><strong>今日の目標</strong></p>
+<ol type="1">
+<li>与えられたデータを見て、<strong>自分で問いと仮説</strong>を立てる。</li>
+<li>元のデータにない変数（<strong>1人あたりの数</strong>や<strong>平均点</strong>）を <code>mutate()</code> で作り、その<strong>単位</strong>に注意して係数を読めるようになる。</li>
+<li>記述統計・可視化・単回帰・重回帰を使って、<strong>5つのステップのレポート</strong>を一人で完成させる。</li>
+<li>次回、自分のレポートの内容（Rコード含む）を<strong>自分の言葉で説明できる</strong>ように準備する。</li>
+</ol>
+<div style="margin-top: 2.0em;">
+
+</div>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>今日の位置づけ</strong></p>
+<p>総合分析演習の3回目です。進め方はこれまでと同じで、<strong>2回で1セット</strong>です。今日（第8回）に分析してレポートを書き、次回（第9回）にその内容を説明します。前回（第7回）に説明の順番を待つ間に始めた分析の続きから取り組みましょう。</p>
+<p>第4回のデータは「1行が1つの授業」、第6回は「1行が1人の働く人」でした。今日のデータは「<span class="marker">1行が1つの学区（地域）</span>」です。生徒一人ひとりの点数ではなく、学区ごとにまとめた数字が入っています。</p>
+</div>
+</div>
+<div style="margin-top: 3.0em;">
+
+</div>
+<section id="sec-howto" class="level2" data-number="21.1">
+<h2 data-number="21.1" class="anchored" data-anchor-id="sec-howto"><span class="header-section-number">21.1</span> 総合分析演習の進め方</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 40%">
+<col style="width: 40%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">回</th>
+<th style="text-align: left;">授業ですること</th>
+<th style="text-align: left;">授業のあとにすること</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">第8回（今日）</td>
+<td style="text-align: left;">データを読み、問いと仮説を立て、<code>assignmentB08.qmd</code> で分析してレポートを書く</td>
+<td style="text-align: left;">レポートを仕上げて提出する</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">第9回（次回）</td>
+<td style="text-align: left;">レポートの内容を、教員に<strong>一人ずつ説明する</strong>（約5分）。自分の番を待つ間に、<strong>総合分析演習4のデータ</strong>を受け取って分析を始める</td>
+<td style="text-align: left;">総合分析演習4の分析を進める</td>
+</tr>
+</tbody>
+</table>
+<div style="margin-top: 2.0em;">
+
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>提出期限</strong></p>
+<p>レポート（<code>assignmentB08.qmd</code> を Render した HTML の ZIP）の提出期限は、<span class="marker">次回の授業開始（11月30日 15:45）まで</span>です。これ以降は提出できず、レポートを提出していないと次回の説明もできません。</p>
+</div>
+</div>
+<p><strong>評価</strong>：総合分析演習1回分（15%）は、提出したレポートと、次回の説明の内容をあわせて評価します（5つのステップ × 3段階＝15点満点）。</p>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-rq" class="level2" data-number="21.2">
+<h2 data-number="21.2" class="anchored" data-anchor-id="sec-rq"><span class="header-section-number">21.2</span> 自分で問いを立てる</h2>
+<p>今日のデータでは、被説明変数は<strong>テストの平均点（<code>score</code>）</strong>に決まっています。ただし、<code>score</code> はデータに入っていないので、<span class="marker">読解の平均点（<code>read</code>）と数学の平均点（<code>math</code>）の平均</span>として、自分で作ります。皆さんが決めるのは、</p>
+<ol type="1">
+<li>テストの平均点に影響しそうな<strong>主な説明変数 <span class="math inline">\(X\)</span> を1つ</strong></li>
+<li><span class="math inline">\(X\)</span> とテストの平均点の両方に影響しそうな<strong>コントロール変数を2〜3個</strong></li>
+</ol>
+<p>です。問いの立て方、仮説に理由をつけること、コントロール変数の選び方は、これまでと同じです。</p>
+<div style="margin-top: 2.0em;">
+
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>今日の条件</strong></p>
+<p>主な説明変数とコントロール変数のうち、<span class="marker">少なくとも1つは、元の変数から計算して自分で作った変数</span>（教員1人あたりの生徒数など）を入れてください。作り方と注意点は、下の「元のデータから新しい変数を作る」で説明します。</p>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-data" class="level2" data-number="21.3">
+<h2 data-number="21.3" class="anchored" data-anchor-id="sec-data"><span class="header-section-number">21.3</span> 今日のデータ</h2>
+<p>アメリカのカリフォルニア州で、1998〜1999年度に行われた<strong>州の学力テスト</strong>の結果と、学区ごとの学校・家庭の状況をまとめたデータです。テストを受けたのは小学5年生です。<strong>学区</strong>（school district）は、いくつかの公立学校をまとめて運営する地域の単位で、日本の市町村の教育委員会にあたります。</p>
+<p><strong>今日のデータ</strong>（<code>CASchools.csv</code>）</p>
+<p><span class="marker">1行が1つの学区</span>です。420の学区が入っています。</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 82%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>変数名</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>rownames</code></td>
+<td>行の番号（分析には使わない）</td>
+</tr>
+<tr class="even">
+<td><code>district</code></td>
+<td>学区の番号（分析には使わない）</td>
+</tr>
+<tr class="odd">
+<td><code>school</code></td>
+<td>学区の名前（分析には使わない）</td>
+</tr>
+<tr class="even">
+<td><code>county</code></td>
+<td>学区がある郡（county、日本の「県の中の地域」にあたる）。45種類</td>
+</tr>
+<tr class="odd">
+<td><code>grades</code></td>
+<td>学区の学校の範囲：<code>KK-06</code>（幼稚園〜小学6年）/ <code>KK-08</code>（幼稚園〜中学2年）</td>
+</tr>
+<tr class="even">
+<td><code>students</code></td>
+<td>生徒数（人）</td>
+</tr>
+<tr class="odd">
+<td><code>teachers</code></td>
+<td>教員数（人）。常勤に換算した人数なので、小数になる</td>
+</tr>
+<tr class="even">
+<td><code>calworks</code></td>
+<td>州の生活保護（CalWORKs）を受けている家庭の生徒の割合（%）</td>
+</tr>
+<tr class="odd">
+<td><code>lunch</code></td>
+<td>給食費の補助（無料・割引）を受けている生徒の割合（%）</td>
+</tr>
+<tr class="even">
+<td><code>computer</code></td>
+<td>コンピュータの台数（台）</td>
+</tr>
+<tr class="odd">
+<td><code>expenditure</code></td>
+<td>生徒1人あたりの教育支出（ドル）</td>
+</tr>
+<tr class="even">
+<td><code>income</code></td>
+<td>学区の住民の平均所得（<strong>千ドル</strong>）</td>
+</tr>
+<tr class="odd">
+<td><code>english</code></td>
+<td>英語を学んでいる途中の生徒（英語が母語でない生徒）の割合（%）</td>
+</tr>
+<tr class="even">
+<td><code>read</code></td>
+<td>読解テストの平均点</td>
+</tr>
+<tr class="odd">
+<td><code>math</code></td>
+<td>数学テストの平均点</td>
+</tr>
+</tbody>
+</table>
+<div style="margin-top: 2.0em;">
+
+</div>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>割合の変数は 0〜100 の %</strong></p>
+<p><code>calworks</code>・<code>lunch</code>・<code>english</code> は 0〜100 の % で記録されています。たとえば <code>english</code> が 10 なら「生徒の10%が英語を学んでいる途中」という意味です。回帰分析の係数は、「割合が<span class="marker">1ポイント（1%分）</span>高い学区は、平均点が〇点高い（低い）」と読みます。</p>
+<p>また、<code>income</code> の単位は千ドルなので、1 増えると「平均所得が1,000ドル高い」という意味になります。</p>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-prepare" class="level2" data-number="21.4">
+<h2 data-number="21.4" class="anchored" data-anchor-id="sec-prepare"><span class="header-section-number">21.4</span> 今日の準備</h2>
+<p>前回（第7回）にすでに準備した人は、そのフォルダで続けてください。</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 8%">
+<col style="width: 92%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1.</td>
+<td style="text-align: left;">新規 R プロジェクトを作成する。Directory name は「LessonB08」、場所は Kドライブの「R_programming」。</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2.</td>
+<td style="text-align: left;">Blackboard から <code>CASchools.csv</code>・<code>assignmentB08.qmd</code> をダウンロードし、「R_programming/LessonB08」フォルダに入れる。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3.</td>
+<td style="text-align: left;">まずは氏名（学籍番号）を記入し、この状態で Rendering ができるか確認する。</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4.</td>
+<td style="text-align: left;">左側に Rendering して出力された画面を置き、右半分には RStudio を置いて assignmentB08.qmd でレポートを書く。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5.</td>
+<td style="text-align: left;">適当なところで Rendering し、確かめながら進める。</td>
+</tr>
+</tbody>
+</table>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-setup" class="level2" data-number="21.5">
+<h2 data-number="21.5" class="anchored" data-anchor-id="sec-setup"><span class="header-section-number">21.5</span> パッケージの準備</h2>
+<p>大学の PC はシャットダウンするたびに初期化されるため、毎回インストールが必要です。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">options</span>(<span class="at">repos =</span> <span class="fu">c</span>(<span class="at">CRAN =</span> <span class="st">"https://cran.rstudio.com/"</span>))</span>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">install.packages</span>(<span class="st">"broom"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">install.packages</span>(<span class="st">"modelsummary"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-newvar" class="level2" data-number="21.6">
+<h2 data-number="21.6" class="anchored" data-anchor-id="sec-newvar"><span class="header-section-number">21.6</span> 元のデータから新しい変数を作る</h2>
+<p>今日のデータには、生徒数（<code>students</code>）・教員数（<code>teachers</code>）・コンピュータの台数（<code>computer</code>）のように、<strong>数</strong>で記録された変数があります。数の変数は、<span class="marker">学区が大きいほど大きくなる</span>ので、そのままでは「学区が大きいか小さいか」を比べているだけになってしまいます。そこで、前期第2回で学んだ <code>mutate()</code> を使い、割り算で「<strong>1人あたり</strong>」の変数を作ってから比べます。</p>
+<p>下の例は、架空の4つの町の「人口」と「図書館の本の冊数」と「図書館の予算」のデータです。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-2"><a href="#cb2-2"></a></span>
+<span id="cb2-3"><a href="#cb2-3"></a>df_town <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb2-4"><a href="#cb2-4"></a>  <span class="at">town   =</span> <span class="fu">c</span>(<span class="st">"A町"</span>, <span class="st">"B町"</span>, <span class="st">"C町"</span>, <span class="st">"D町"</span>),</span>
+<span id="cb2-5"><a href="#cb2-5"></a>  <span class="at">people =</span> <span class="fu">c</span>(<span class="dv">2000</span>, <span class="dv">8000</span>, <span class="dv">5000</span>, <span class="dv">10000</span>),            <span class="co"># 人口（人）</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a>  <span class="at">books  =</span> <span class="fu">c</span>(<span class="dv">10000</span>, <span class="dv">24000</span>, <span class="dv">20000</span>, <span class="dv">20000</span>),         <span class="co"># 本の冊数（冊）</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a>  <span class="at">budget =</span> <span class="fu">c</span>(<span class="dv">3000000</span>, <span class="dv">9000000</span>, <span class="dv">6000000</span>, <span class="dv">8000000</span>)  <span class="co"># 予算（円）</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div style="margin-top: 2.0em;">
+
+</div>
+<section id="人あたりの変数を作る" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="人あたりの変数を作る">1人あたりの変数を作る</h3>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1"></a>df_town <span class="ot">&lt;-</span> df_town <span class="sc">|&gt;</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1">1</button><span id="annotated-cell-3-2" class="code-annotation-target"><a href="#annotated-cell-3-2"></a>  <span class="fu">mutate</span>(<span class="at">books_per_person =</span> books <span class="sc">/</span> people)</span>
+<span id="annotated-cell-3-3"><a href="#annotated-cell-3-3"></a></span>
+<span id="annotated-cell-3-4"><a href="#annotated-cell-3-4"></a>df_town</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="2" data-code-annotation="1">本の冊数を人口で割って、住民1人あたりの冊数を作る。</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 5
+  town  people books  budget books_per_person
+  &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;            &lt;dbl&gt;
+1 A町     2000 10000 3000000                5
+2 B町     8000 24000 9000000                3
+3 C町     5000 20000 6000000                4
+4 D町    10000 20000 8000000                2</code></pre>
+</div>
+</div>
+<p>本の冊数（<code>books</code>）だけを見ると、B町（24,000冊）が一番多く、A町（10,000冊）が一番少なく見えます。しかし、1人あたりの冊数（<code>books_per_person</code>）で比べると、A町が 5冊で一番多く、D町が 2冊で一番少なくなります。<span class="marker">何で割るか</span>によって、比べている中身が変わることに注意しましょう。</p>
+<div style="margin-top: 2.0em;">
+
+</div>
+</section>
+<section id="単位をそろえる" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="単位をそろえる">単位をそろえる</h3>
+<p>予算（<code>budget</code>）は円の単位なので、数字がとても大きくなります。このまま回帰分析に入れると、係数は「予算が<strong>1円</strong>多いと…」という意味になり、とても小さな値になって読みにくくなります。そこで、割り算で単位を変えておくと、係数が読みやすくなります。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-4"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-4-1"><a href="#annotated-cell-4-1"></a>df_town <span class="ot">&lt;-</span> df_town <span class="sc">|&gt;</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1">1</button><span id="annotated-cell-4-2" class="code-annotation-target"><a href="#annotated-cell-4-2"></a>  <span class="fu">mutate</span>(<span class="at">budget_man =</span> budget <span class="sc">/</span> <span class="dv">10000</span>)</span>
+<span id="annotated-cell-4-3"><a href="#annotated-cell-4-3"></a></span>
+<span id="annotated-cell-4-4"><a href="#annotated-cell-4-4"></a>df_town <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-4-5"><a href="#annotated-cell-4-5"></a>  <span class="fu">select</span>(town, budget, budget_man)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-4" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="2" data-code-annotation="1">円を1万で割って、万円の単位にする。</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+  town   budget budget_man
+  &lt;chr&gt;   &lt;dbl&gt;      &lt;dbl&gt;
+1 A町   3000000        300
+2 B町   9000000        900
+3 C町   6000000        600
+4 D町   8000000        800</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>作った変数を回帰分析に入れたら、係数は<span class="marker">作った変数の単位</span>で読みます。たとえば <code>books_per_person</code> の係数なら「住民1人あたりの本が1冊多いと…」、<code>budget_man</code> の係数なら「予算が1万円多いと…」です。レポートには、どの変数をどう計算して作ったか（何を何で割ったか、単位は何か）を必ず書きましょう。</p>
+</div>
+</div>
+<div style="margin-top: 2.0em;">
+
+</div>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>作った変数が正しいか確かめる</strong></p>
+<p><code>mutate()</code> で作った変数は、元の変数と並べて表示し、いくつかの行を電卓で計算して合っているか確かめましょう。第4回・第6回でダミー変数を作ったときに <code>count()</code> で件数を確かめたのと同じ考え方です。</p>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+</section>
+<section id="sec-assignment" class="level2" data-number="21.7">
+<h2 data-number="21.7" class="anchored" data-anchor-id="sec-assignment"><span class="header-section-number">21.7</span> 本日のレポート</h2>
+<p>今回の <code>assignmentB08.qmd</code> には、<strong>5つのステップの見出しだけ</strong>が書かれています。パッケージやデータの読み込みも含めて、<span class="marker">何をどの順番で書くかを自分で考えて</span>レポートを完成させましょう。第4回・第6回の自分のレポートを見返すと、各ステップで何をしたかを思い出せます。</p>
+<div style="margin-top: 2.0em;">
+
+</div>
+<p><strong>レポートの条件</strong></p>
+<ul>
+<li>被説明変数は、読解（<code>read</code>）と数学（<code>math</code>）の平均点（<code>score</code>）。<code>mutate()</code> で自分で作る。</li>
+<li>主な説明変数1つと、コントロール変数2〜3個を自分で選ぶ。そのうち少なくとも1つは、元の変数から計算して自分で作った変数にする。</li>
+<li>単回帰分析と重回帰分析を行い、<code>modelsummary</code> で並べて表示する。</li>
+</ul>
+<div style="margin-top: 2.0em;">
+
+</div>
+<p><strong>提出方法</strong>：Render して出力された HTML ファイルを ZIP 形式に圧縮して Blackboard から提出してください。提出期限は<span class="marker">次回の授業開始（11月30日 15:45）まで</span>です。</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>次回は、提出したレポートを画面に映しながら、<strong>一人ずつ内容を説明</strong>してもらいます。「このコードは何をしているか」「この変数はどう計算したか」「この係数はどういう意味か」と質問されても答えられるように、<span class="marker">自分で理解したコードだけを書きましょう</span>。分からないところは、遠慮なく手を挙げて質問してください。生成 AI に質問するのも構いませんが、出てきたコードは自分で理解してから使ってください。</p>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-hints" class="level2" data-number="21.8">
+<h2 data-number="21.8" class="anchored" data-anchor-id="sec-hints"><span class="header-section-number">21.8</span> ヒント</h2>
+<p>レポートを書いていて困ったときは、該当するステップのヒントを開いてください。<span class="marker">まずは自分の力で考え、どうしても進めないときに開く</span>ようにしましょう。</p>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Render が止まったときは</strong></p>
+<p>Render の途中でエラーが出ると、HTML は作られません。Background Jobs（または Render）タブのエラーメッセージに出ているチャンクの名前（<code>label</code>）を確認し、そのチャンクのコードを直してから、もう一度 Render しましょう。<span class="marker">ステップを1つ終えるごとに Render する</span>と、どこでエラーが出たのかすぐに分かります。</p>
+</div>
+</div>
+<div style="margin-top: 2.0em;">
+
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="ステップ1のヒント（問い）">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>ステップ1のヒント（問い）
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>まず「今日のデータ」の変数の表を見て、テストの平均点に影響しそうな変数を探しましょう。</li>
+<li><code>rownames</code>・<code>district</code>・<code>school</code> は番号や名前なので、説明変数にはしません。<code>county</code> は45種類もあるので、今回は説明変数に入れないでおきましょう。</li>
+<li><code>read</code> と <code>math</code> は <code>score</code> を作るのに使うので、説明変数にはしません。</li>
+<li>自分が通っていた小学校・中学校を思い出し、「どんな学校（地域）だと点数が高くなりそうか」を考えてみましょう。</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="ステップ1のヒント（仮説とコントロール変数）">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>ステップ1のヒント（仮説とコントロール変数）
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>仮説は「<span class="math inline">\(X\)</span> が〜な学区ほど、テストの平均点が高い（低い）」という形で、<strong>予想される符号（＋ か −）</strong>と<strong>その理由</strong>を書きます。</li>
+<li>コントロール変数は、「主な説明変数が違う学区は、ほかの点でも違っていないか？」と考えて選びます。たとえば、お金に余裕のある地域とそうでない地域では、学校の条件も家庭の条件も違うかもしれません。</li>
+<li><code>calworks</code>・<code>lunch</code>・<code>income</code> は、どれも「家庭の経済状況」に関係する変数です。似た変数を同時にたくさん入れると、係数が読みにくくなることがあります。</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="ステップ2のヒント">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>ステップ2のヒント
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>作った変数ごとに、「何を何で割ったか」「単位は何か（人、台、ドル、千ドルなど）」を書きましょう。</li>
+<li>割り算で作った変数の値が小さすぎる（大きすぎる）ときは、「100人あたり」「千ドルあたり」のように単位を変えると、係数が読みやすくなります。</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="ステップ5のヒント">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>ステップ5のヒント
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>仮説が「支持された」と言えるのは、<strong>係数の符号が予想と同じ</strong>で、かつ <strong>p 値 &lt; 0.05</strong> のときです（第3回）。</li>
+<li>問いへの答えは、「〜な学区ほど、テストの平均点が〜。その関係は、〜をコントロールしても残る（残らない）」のように、係数の大きさ（点）も入れて書きます。</li>
+<li>今日のデータは学区ごとの平均です。学区について分かったことが、生徒一人ひとりにもそのまま当てはまるとは限りません。</li>
+</ul>
+</div>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-summary" class="level2" data-number="21.9">
+<h2 data-number="21.9" class="anchored" data-anchor-id="sec-summary"><span class="header-section-number">21.9</span> まとめ</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 75%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">項目</th>
+<th style="text-align: left;">ポイント</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">問いと仮説</td>
+<td style="text-align: left;">これまでと同じ。<span class="math inline">\(Y\)</span> と <span class="math inline">\(X\)</span> を決め、予想される符号と理由をセットで書く</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1行の単位</td>
+<td style="text-align: left;">今日のデータは1行が1つの学区。生徒一人ひとりではなく、学区の平均や割合を比べている</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">新しい変数を作る</td>
+<td style="text-align: left;">数の変数は <code>mutate()</code> で割り算をして「1人あたり」にしてから比べる</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">単位</td>
+<td style="text-align: left;">係数は作った変数の単位で読む。% の変数は「1ポイント」、<code>income</code> は「千ドル」</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">単回帰と重回帰</td>
+<td style="text-align: left;">コントロール変数を入れると、主な説明変数の係数がどう変わるかを比べる</td>
+</tr>
+</tbody>
+</table>
+<div style="margin-top: 2.0em;">
+
+</div>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>次回の予告</strong></p>
+<p>次回は<strong>発表・分析結果説明3</strong>です。</p>
+<ul>
+<li>今日のレポートを画面に映しながら、5つのステップに沿って、一人ずつ教員に説明してもらいます</li>
+<li>「なぜこの問いにしたのか」「この変数はどう計算したか」「この係数はどういう意味か」と質問するので、答えられるように準備してきてください</li>
+<li>説明の順番を待つ間に、総合分析演習4の新しいデータを配布するので、問いと仮説を考えるところから始めましょう</li>
+<li><span class="marker">レポートの提出は次回の授業開始まで</span>です</li>
+</ul>
+</div>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
