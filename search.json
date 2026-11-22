@@ -1392,1024 +1392,1024 @@
   {
     "objectID": "lecB01.html",
     "href": "lecB01.html",
-    "title": "14  データ分析の流れ",
+    "title": "14  (1) データ分析の流れ",
     "section": "",
     "text": "14.1 今日の準備\nR の復習と、5つのステップによるデータ分析\n今日の目標\n前期と同じ手順で、今日の作業用の R プロジェクトを作成します。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>14</span>  <span class='chapter-title'>データ分析の流れ</span>"
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>(1) データ分析の流れ</span>"
     ]
   },
   {
     "objectID": "lecB01.html#sec-prepare",
     "href": "lecB01.html#sec-prepare",
-    "title": "14  データ分析の流れ",
+    "title": "14  (1) データ分析の流れ",
     "section": "",
     "text": "1.\nRStudio を起動し、左上のアイコン（＋R）から新規 R プロジェクトを作成する（New Directory → New Project）。\n\n\n2.\nDirectory name に「LessonB01」と入力し、Browse から Kドライブの「R_programming」を選んで Create Project をクリックする。\n\n\n3.\nBlackboard から Student_Performance.csv・Student_Performance.xlsx・assignmentB01.qmd をダウンロードし、「R_programming/LessonB01」フォルダに入れる。\n\n\n4.\n講義資料のコードを試すときは、R Script（practiceB01.R）を新規作成して保存する。\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nこの資料のコードは、データを data フォルダに入れた場合の書き方（\"data/Student_Performance.csv\"）になっています。プロジェクトの直下にデータを置いた場合は、read_csv(\"Student_Performance.csv\") のように data/ を外してください。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>14</span>  <span class='chapter-title'>データ分析の流れ</span>"
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>(1) データ分析の流れ</span>"
     ]
   },
   {
     "objectID": "lecB01.html#sec-setup",
     "href": "lecB01.html#sec-setup",
-    "title": "14  データ分析の流れ",
+    "title": "14  (1) データ分析の流れ",
     "section": "14.2 パッケージの準備",
     "text": "14.2 パッケージの準備\n大学の PC はシャットダウンするたびに初期化されるため、毎回インストールが必要です。\n\noptions(repos = c(CRAN = \"https://cran.rstudio.com/\"))\n\ninstall.packages(\"tidyverse\")\ninstall.packages(\"readxl\")\ninstall.packages(\"broom\")\ninstall.packages(\"modelsummary\")\n\n必要なパッケージを読み込みます。\n\nlibrary(tidyverse)\nlibrary(readxl)\nlibrary(broom)\nlibrary(modelsummary)",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>14</span>  <span class='chapter-title'>データ分析の流れ</span>"
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>(1) データ分析の流れ</span>"
     ]
   },
   {
     "objectID": "lecB01.html#sec-data",
     "href": "lecB01.html#sec-data",
-    "title": "14  データ分析の流れ",
+    "title": "14  (1) データ分析の流れ",
     "section": "14.3 今日使うデータ",
     "text": "14.3 今日使うデータ\n学生成績データ（Student_Performance.csv）\n学生 10,000 人について、学習時間や睡眠時間などの生活習慣と、成績の指標が記録されたデータです。前期第10回（回帰分析1）でも使いました。今回は変数名を短く整えたものを使います。\n変数の説明\n\n\n\n\n\n\n\n\n変数名\n内容\n種類\n\n\n\n\nstudy_hours\n1日の学習時間（時間、1〜9）\n数値\n\n\nprevious_score\n前回のテストの点数（40〜99）\n数値\n\n\nactivities\n課外活動への参加（Yes / No）\nカテゴリ\n\n\nsleep_hours\n1日の睡眠時間（時間、4〜9）\n数値\n\n\npractice\n解いた練習問題集の数（0〜9）\n数値\n\n\nscore\n成績の指標（10〜100、大きいほど成績が良い）\n数値\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nこのデータは学習用に作られた（シミュレーションされた）データです。そのため、実際の調査データに比べて変数どうしの関係が非常にきれいに出ます。後期の総合分析演習で扱う実際のデータでは、ここまではっきりした結果にならないことが普通です。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>14</span>  <span class='chapter-title'>データ分析の流れ</span>"
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>(1) データ分析の流れ</span>"
     ]
   },
   {
     "objectID": "lecB01.html#sec-review",
     "href": "lecB01.html#sec-review",
-    "title": "14  データ分析の流れ",
+    "title": "14  (1) データ分析の流れ",
     "section": "14.4 R の復習",
     "text": "14.4 R の復習\n\n14.4.1 ファイルの読み込み（CSV・Excel）\nCSV ファイルは、tidyverse に含まれる readr パッケージの read_csv() で読み込みます。\n\ndf_student &lt;- read_csv(\"data/Student_Performance.csv\")\n\nExcel ファイルは、readxl パッケージの read_excel() で読み込みます。readxl は library(tidyverse) だけでは読み込まれないので、library(readxl) が必要です。\n\ndf_student_xlsx &lt;- read_excel(\"data/Student_Performance.xlsx\")\n\n読み込んだら、まず glimpse() で行数・列数・変数の型を確認します。\n\nglimpse(df_student)\n\nRows: 10,000\nColumns: 6\n$ study_hours    &lt;dbl&gt; 7, 4, 8, 5, 7, 3, 7, 8, 5, 4, 8, 8, 3, 6, 5, 2, 8, 6, 2…\n$ previous_score &lt;dbl&gt; 99, 82, 51, 52, 75, 78, 73, 45, 77, 89, 91, 79, 47, 47,…\n$ activities     &lt;chr&gt; \"Yes\", \"No\", \"Yes\", \"Yes\", \"No\", \"No\", \"Yes\", \"Yes\", \"N…\n$ sleep_hours    &lt;dbl&gt; 9, 4, 7, 5, 8, 9, 5, 4, 8, 4, 4, 6, 9, 4, 7, 4, 8, 7, 4…\n$ practice       &lt;dbl&gt; 1, 2, 2, 2, 5, 6, 6, 6, 2, 0, 5, 2, 2, 2, 8, 3, 4, 2, 9…\n$ score          &lt;dbl&gt; 91, 65, 45, 36, 66, 61, 63, 42, 61, 69, 84, 73, 27, 33,…\n\n\n\n\n\n\n\n\nNote\n\n\n\n読み込めないときの確認ポイント\n\nファイルが R プロジェクトのフォルダ（または data フォルダ）に入っているか\nファイル名のつづり・大文字と小文字・拡張子（.csv / .xlsx）が正しいか\n\" で囲んでいるか\n\nエラー 'data/Student_Performance.csv' does not exist は、「その場所にファイルが無い」という意味です。右下の Files ペインで、ファイルの場所を確認しましょう。\n\n\n\n\n\n\n\n\n\n\n\nWarning\n\n\n\nStudent_Performance.xlsx を read_excel() で読み込み、df_student_xlsx という名前で保存してください。そのあと glimpse() で中身を確認し、行数と列数を答えてください。\n\ndf_student_xlsx &lt;- ___(\"data/Student_Performance.xlsx\")\n\n___(df_student_xlsx)\n\n\n\n\n\n\n\n\n\nTip\n\n\n\n\n\n\ndf_student_xlsx &lt;- read_excel(\"data/Student_Performance.xlsx\")\n\nglimpse(df_student_xlsx)\n\nRows: 10,000\nColumns: 6\n$ study_hours    &lt;dbl&gt; 7, 4, 8, 5, 7, 3, 7, 8, 5, 4, 8, 8, 3, 6, 5, 2, 8, 6, 2…\n$ previous_score &lt;dbl&gt; 99, 82, 51, 52, 75, 78, 73, 45, 77, 89, 91, 79, 47, 47,…\n$ activities     &lt;chr&gt; \"Yes\", \"No\", \"Yes\", \"Yes\", \"No\", \"No\", \"Yes\", \"Yes\", \"N…\n$ sleep_hours    &lt;dbl&gt; 9, 4, 7, 5, 8, 9, 5, 4, 8, 4, 4, 6, 9, 4, 7, 4, 8, 7, 4…\n$ practice       &lt;dbl&gt; 1, 2, 2, 2, 5, 6, 6, 6, 2, 0, 5, 2, 2, 2, 8, 3, 4, 2, 9…\n$ score          &lt;dbl&gt; 91, 65, 45, 36, 66, 61, 63, 42, 61, 69, 84, 73, 27, 33,…\n\n\n行数は 10,000、列数は 6 です。CSV 版と同じデータなので、df_student と同じ大きさになります。\n\n\n\n\n\n\n\n\n14.4.2 dplyr の5つの動詞\n前期第2回で学んだ dplyr の5つの動詞を、パイプ |&gt; でつなげて使います。\n\n\n\n\n\n\n\n関数\n働き\n\n\n\n\nfilter()\n条件に合う行を取り出す\n\n\nselect()\n必要な列を取り出す\n\n\nmutate()\n新しい列を作る・列を変更する\n\n\narrange()\n並べ替える（desc() で降順）\n\n\nsummarise()\n集計する（group_by() と組み合わせてグループごとに）\n\n\n\n例として、学習時間が9時間の学生だけを取り出し、成績が高い順に並べてみます。\n\ndf_student |&gt;\n1  filter(study_hours == 9) |&gt;\n2  select(study_hours, previous_score, score) |&gt;\n3  arrange(desc(score))\n\n\n1\n\n学習時間が9時間の行だけを取り出す（= ではなく == を使う）。\n\n2\n\n必要な列だけを取り出す。\n\n3\n\n成績が高い順に並べ替える。\n\n\n\n\n# A tibble: 1,115 × 3\n   study_hours previous_score score\n         &lt;dbl&gt;          &lt;dbl&gt; &lt;dbl&gt;\n 1           9             98   100\n 2           9             98   100\n 3           9             99   100\n 4           9             98    99\n 5           9             99    99\n 6           9             99    99\n 7           9             99    99\n 8           9             96    99\n 9           9             97    98\n10           9             99    98\n# ℹ 1,105 more rows\n\n\nmutate() で新しい列を作ることもできます。ここでは、成績が60以上なら「合格」、それ以外は「不合格」とする列 pass を作ります。\n\ndf_student &lt;- df_student |&gt;\n  mutate(pass = if_else(score &gt;= 60, \"合格\", \"不合格\"))\n\ndf_student |&gt;\n  count(pass)\n\n# A tibble: 2 × 2\n  pass       n\n  &lt;chr&gt;  &lt;int&gt;\n1 不合格  5710\n2 合格    4290\n\n\n\n\n\n\n\n\n\n\n\nWarning\n\n\n\ndf_student を使い、課外活動に参加していて（activities が \"Yes\"）、睡眠時間が8時間以上の学生だけを取り出してください。何人いるでしょうか。\n\ndf_student |&gt;\n  ___(activities == \"Yes\", sleep_hours ___ 8) |&gt;\n  nrow()\n\n\n\n\n\n\n\n\n\nTip\n\n\n\n\n\n\ndf_student |&gt;\n  filter(activities == \"Yes\", sleep_hours &gt;= 8) |&gt;\n  nrow()\n\n[1] 1639\n\n\nfilter() の中でカンマ , で条件を並べると、「かつ（AND）」の意味になります。\n\n\n\n\n\n\n\n\n\n\n\n\nWarning\n\n\n\ndf_student を使い、学習時間（study_hours）ごとに人数と成績（score）の平均を計算してください。\n\ndf_student |&gt;\n  ___(study_hours) |&gt;\n  ___(\n    n          = n(),\n    mean_score = mean(___),\n    .groups    = \"drop\"\n  )\n\n\n\n\n\n\n\n\n\nTip\n\n\n\n\n\n\ndf_student |&gt;\n  group_by(study_hours) |&gt;\n  summarise(\n    n          = n(),\n    mean_score = mean(score),\n    .groups    = \"drop\"\n  )\n\n# A tibble: 9 × 3\n  study_hours     n mean_score\n        &lt;dbl&gt; &lt;int&gt;      &lt;dbl&gt;\n1           1  1152       44.1\n2           2  1085       46.4\n3           3  1119       49.8\n4           4  1085       52.7\n5           5  1094       55.5\n6           6  1133       58.5\n7           7  1129       60.2\n8           8  1088       64.2\n9           9  1115       65.7\n\n\n学習時間が長いほど、成績の平均が高くなっています。\n\n\n\n\n\n\n\n\n14.4.3 ggplot2 の基本\nggplot2 は「データ → 軸の対応（aes()）→ グラフの種類（geom_*()）→ ラベル・見た目」の順にレイヤーを重ねてグラフを作ります。\n\ndf_student |&gt;\n1  ggplot(aes(x = score)) +\n2  geom_histogram(binwidth = 5, fill = \"steelblue\", color = \"white\") +\n3  labs(x = \"成績\", y = \"人数\") +\n4  theme_minimal()\n\n\n1\n\nx 軸に成績を割り当てる。\n\n2\n\nヒストグラムを描く（binwidth は棒の幅）。\n\n3\n\n軸ラベルを付ける。\n\n4\n\n見た目のテーマを設定する。\n\n\n\n\n\n\n\n成績の分布\n\n\n\n\n\n\n\n\n\n\n\n\n\nWarning\n\n\n\ndf_student を使い、課外活動の有無ごとの成績の箱ひげ図を描いてください。\nただし、以下の条件を満たしてください。\n\nx 軸を activities、y 軸を score にする\n課外活動の有無で色分けし（fill = activities）、凡例は表示しない\nx 軸のラベルを「課外活動」、y 軸のラベルを「成績」にする\n\n\ndf_student |&gt;\n  ggplot(aes(x = ___, y = ___, fill = ___)) +\n  ___() +\n  labs(x = \"課外活動\", y = \"成績\") +\n  theme_minimal() +\n  theme(legend.position = \"none\")\n\n\n\n\n\n\n\n\n\nTip\n\n\n\n\n\n\ndf_student |&gt;\n  ggplot(aes(x = activities, y = score, fill = activities)) +\n  geom_boxplot(alpha = 0.7) +\n  labs(x = \"課外活動\", y = \"成績\") +\n  theme_minimal() +\n  theme(legend.position = \"none\")\n\n\n\n\n課外活動の有無と成績\n\n\n\n\n2つの箱ひげ図はほとんど同じ位置にあり、見た目では大きな差はなさそうです。\n\n\n\n\n\n\n\n\n14.4.4 Quarto の復習\n課題は Quarto ファイル（.qmd）に書き、Render して HTML を作成します。\n\nファイルの一番上の --- で囲まれた部分が YAML ヘッダーです。author: に自分の氏名と学籍番号を書きます。\n```{r} で始まるグレーの枠（コード・チャンク）に R のコードを書きます。チャンクの外には、結果の説明や考察を文章で書きます。\n書き終えたら [Render] を押し、assignmentB01.html ができたことを確認します。\nHTML ファイルを右クリックして「圧縮（ZIP形式）」し、assignmentB01.html.zip を Blackboard に提出します。\n\n\n\n\n\n\n\nNote\n\n\n\nRender では、qmd ファイルの上から順にすべてのコードが実行し直されます。コンソールで動いていても、qmd ファイルの中に library() や read_csv() が書かれていなければエラーになります（前期第6回の「RStudio の R と Render 時の R は別物」を思い出してください）。\n見出しや表、コールアウトの書き方は、前期第13回の「Quartoレポートの書き方」を参照してください。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>14</span>  <span class='chapter-title'>データ分析の流れ</span>"
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>(1) データ分析の流れ</span>"
     ]
   },
   {
     "objectID": "lecB01.html#sec-flow",
     "href": "lecB01.html#sec-flow",
-    "title": "14  データ分析の流れ",
+    "title": "14  (1) データ分析の流れ",
     "section": "14.5 データ分析の5つのステップ",
     "text": "14.5 データ分析の5つのステップ\nここからは、前期第13回で学んだ5つのステップに沿って分析を進めます。後期の総合分析演習のレポートも、この5つのステップで書きます。\n\n\n\n\n\n\n\n\nステップ\n内容\n主に使う関数\n\n\n\n\n1\n問い（RQ）と仮説を立てる\n（文章で書く）\n\n\n2\nデータの確認・前処理と記述統計\nfilter(), select(), drop_na(), summarise()\n\n\n3\n可視化\nggplot(), geom_point(), geom_boxplot()\n\n\n4\n分析（検定・相関・回帰）\nt.test(), cor.test(), lm(), tidy(), modelsummary()\n\n\n5\n考察・結論\n（文章で書く）\n\n\n\n\n\n\n\n14.5.1 ステップ1：問い（Research Question）と仮説を立てる\n分析は「とりあえずグラフを描く」ことから始めるのではなく、何を明らかにしたいかを先に決めます。良い問いの条件は次の3つでした。\n\n具体的な変数を指定できている\nデータで答えられる（データに含まれる変数で検証できる）\n比較・関係の視点が入っている（差があるか／関係があるか）\n\n問いを立てたら、分析結果を見る前に仮説を言葉にしておきます。\nこの資料で使う例\n\n問い：学習時間（study_hours）が長い学生ほど、成績（score）は高いのか。その関係は、前回のテストの点数（previous_score）を考慮しても残るのか。\n仮説：勉強した分だけ理解が深まるため、学習時間が長いほど成績は高いと予想される。もともと成績の良い学生が長く勉強している可能性もあるが、前回の点数を考慮しても、学習時間の効果は残ると予想される。\n\n\n\n\n\n\n\n\n\n\nWarning\n\n\n\n上の例を参考に、このデータを使った自分なりの問いを1つと、その仮説を書いてください（この問いは課題でも使います）。\nヒント：sleep_hours（睡眠時間）、practice（練習問題集の数）、activities（課外活動）などに注目すると、例とは違う問いが立てられます。\n\n\n\n\n\n\n\n\nTip\n\n\n\n\n\n解答例\n\n問い：睡眠時間（sleep_hours）が長い学生ほど、成績は高いのか。\n仮説：十分に眠ると集中力や記憶の定着が良くなるため、睡眠時間が長い学生ほど成績は高いと予想される。\n\n\n\n\n\n\n\n\n\n14.5.2 ステップ2：データの確認・前処理と記述統計\n前処理：欠損値の確認\n分析に進む前に、欠損値（NA）の有無を確認します。\n\ncolSums(is.na(df_student))\n\n   study_hours previous_score     activities    sleep_hours       practice \n             0              0              0              0              0 \n         score           pass \n             0              0 \n\n\nこのデータには欠損値がありません。欠損値がある場合は、drop_na() で除外するか、集計のときに na.rm = TRUE を指定します。\n\n\n\n\n\n\nNote\n\n\n\ndrop_na() をデータ全体に使うと、分析に使わない列に NA がある行まで除外されてしまいます。先に select() で必要な列を選んでから drop_na() を使うのが安全です。\n\n\n記述統計\n問いに関係する変数について、件数・平均・標準偏差・最小値・最大値を計算します。\n\ndf_student |&gt;\n  summarise(\n    n          = n(),\n    mean_study = mean(study_hours),\n    sd_study   = sd(study_hours),\n    mean_prev  = mean(previous_score),\n    sd_prev    = sd(previous_score),\n    mean_score = mean(score),\n    sd_score   = sd(score),\n    min_score  = min(score),\n    max_score  = max(score)\n  )\n\n# A tibble: 1 × 9\n      n mean_study sd_study mean_prev sd_prev mean_score sd_score min_score\n  &lt;int&gt;      &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;\n1 10000       4.99     2.59      69.4    17.3       55.2     19.2        10\n# ℹ 1 more variable: max_score &lt;dbl&gt;\n\n\n\n\n\n\n\n\n\n\n\nWarning\n\n\n\n自分の問いに関係する変数を選び、記述統計量（件数・平均・標準偏差など）を計算してください。グループ（activities など）ごとに計算すると、比較がしやすくなります。\n\n\n\n\n\n\n\n\nTip\n\n\n\n\n\n解答例（ステップ1の解答例の問いの場合）\n睡眠時間ごとに、人数と成績の平均・標準偏差を計算します。\n\ndf_student |&gt;\n  group_by(sleep_hours) |&gt;\n  summarise(\n    n          = n(),\n    mean_score = mean(score),\n    sd_score   = sd(score),\n    .groups    = \"drop\"\n  )\n\n# A tibble: 6 × 4\n  sleep_hours     n mean_score sd_score\n        &lt;dbl&gt; &lt;int&gt;      &lt;dbl&gt;    &lt;dbl&gt;\n1           4  1619       53.8     19.1\n2           5  1606       54.8     19.2\n3           6  1673       54.7     19.3\n4           7  1676       55.3     19.3\n5           8  1804       55.9     19.3\n6           9  1622       56.8     19.1\n\n\n睡眠時間が長いほど成績の平均がわずかに高い傾向はありますが、4時間と9時間の差でも約3点で、標準偏差（約19点）に比べると小さな差です。\n\n\n\n\n\n\n\n\n14.5.3 ステップ3：可視化\n数値だけでは見えにくいパターンを、グラフで確認します。2つの数値の関係は散布図、グループの比較は箱ひげ図が基本です。\nstudy_hours は1〜9の整数なので、そのまま散布図にすると点が縦一列に重なってしまいます。前期第4回で学んだ geom_jitter() で点を少しずらして描きます。\n\ndf_student |&gt;\n  ggplot(aes(x = study_hours, y = score)) +\n1  geom_jitter(width = 0.2, alpha = 0.1, color = \"steelblue\") +\n2  geom_smooth(method = \"lm\", se = FALSE, color = \"gray30\") +\n3  scale_x_continuous(breaks = 1:9) +\n  labs(x = \"学習時間（時間）\", y = \"成績\") +\n  theme_minimal()\n\n\n1\n\n点を左右に少しずらし（width）、透明度（alpha）を下げて重なりを見やすくする。\n\n2\n\n回帰直線を引く。\n\n3\n\nx 軸の目盛りを1〜9の整数にする。\n\n\n\n\n\n\n\n学習時間と成績の関係\n\n\n\n\n右肩上がりの関係が見られます。ただし、同じ学習時間でも成績のばらつきはかなり大きいことも分かります。\n\n\n\n\n\n\n\n\n\nWarning\n\n\n\n自分の問いに関係する変数を選び、適切なグラフを1つ以上描いてください。\n\n\n\n\n\n\n\n\nTip\n\n\n\n\n\n解答例（ステップ1の解答例の問いの場合）\n睡眠時間ごとの成績の分布を、箱ひげ図で比較します。sleep_hours は数値なので、factor() でカテゴリに変換してから使います。\n\ndf_student |&gt;\n  ggplot(aes(x = factor(sleep_hours), y = score)) +\n  geom_boxplot(fill = \"steelblue\", alpha = 0.5) +\n  labs(x = \"睡眠時間（時間）\", y = \"成績\") +\n  theme_minimal()\n\n\n\n\n睡眠時間別の成績\n\n\n\n\n睡眠時間による成績の違いは、グラフではほとんど分かりません。\n\n\n\n\n\n\n\n\n14.5.4 ステップ4：分析（検定・相関・回帰）\n問いの形に合わせて、分析方法を選びます。\n\n\n\n\n\n\n\n\n問いの形\n分析方法\n前期の回\n\n\n\n\n2つのグループで平均に差があるか\nt 検定 t.test()\n第7回\n\n\n2つの数値の間に関係があるか\n相関分析 cor.test()\n第9回\n\n\nある変数が別の変数にどれだけ影響するか\n回帰分析 lm()\n第10回\n\n\nグループによって値が違うか（他の変数を考慮して）\nダミー変数を含む回帰分析\n第11回\n\n\n影響の大きさがグループによって違うか\n交差項を含む回帰分析\n第12回\n\n\n\n相関分析：学習時間と成績に関係はあるか\n\ncor.test(df_student$study_hours, df_student$score) |&gt;\n  tidy()\n\n# A tibble: 1 × 8\n  estimate statistic p.value parameter conf.low conf.high method     alternative\n     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;     &lt;int&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      \n1    0.374      40.3       0      9998    0.357     0.390 Pearson's… two.sided  \n\n\n回帰分析：学習時間は成績にどれだけ影響するか\nモデル1は学習時間だけの単回帰、モデル2は前回のテストの点数を加えた重回帰です。\n\nmodel1 &lt;- lm(score ~ study_hours, data = df_student)\nmodel2 &lt;- lm(score ~ study_hours + previous_score, data = df_student)\n\nmodelsummary(list(\"モデル1\" = model1, \"モデル2\" = model2),\n             stars = TRUE, gof_map = c(\"nobs\", \"r.squared\", \"adj.r.squared\"))\n\n\n\n    \n\n    \n\n    \n    \n    \n      \n        \n        \n              \n                 \n                モデル1\n                モデル2\n              \n        \n        + p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001\n        \n                \n                  (Intercept)\n                  41.379***\n                  -29.817***\n                \n                \n                  \n                  (0.387)\n                  (0.105)\n                \n                \n                  study_hours\n                  2.773***\n                  2.858***\n                \n                \n                  \n                  (0.069)\n                  (0.009)\n                \n                \n                  previous_score\n                  \n                  1.019***\n                \n                \n                  \n                  \n                  (0.001)\n                \n                \n                  Num.Obs.\n                  10000\n                  10000\n                \n                \n                  R2\n                  0.140\n                  0.986\n                \n                \n                  R2 Adj.\n                  0.140\n                  0.986\n                \n        \n      \n    \n\n\n\n（参考）t 検定：課外活動の有無で成績に差はあるか\n2つのグループの平均を比べるときは t 検定を使います。\n\nt.test(score ~ activities, data = df_student) |&gt;\n  tidy()\n\n# A tibble: 1 × 10\n  estimate estimate1 estimate2 statistic p.value parameter conf.low conf.high\n     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;\n1   -0.942      54.8      55.7     -2.45  0.0142     9991.    -1.70    -0.189\n# ℹ 2 more variables: method &lt;chr&gt;, alternative &lt;chr&gt;\n\n\n\n\n\n\n\n\nNote\n\n\n\nサンプルサイズが大きいときの注意\nこのデータは 10,000 人分あるため、ごく小さな差でも p 値が 0.05 を下回り「有意」になりやすくなります。課外活動の有無による成績の差は約 0.9 点で、有意ではあっても、100点満点の成績として実質的に意味のある差かどうかは別に考える必要があります。p 値だけでなく、差や係数の大きさも必ず確認しましょう。\n\n\n\n\n\n\n\n\n\n\n\nWarning\n\n\n\n自分の問いに対応する分析（t 検定・相関分析・回帰分析のいずれか）を実行し、結果を文章で解釈してください。回帰分析の場合は、係数の符号（プラス／マイナス）・大きさ・p 値を確認しましょう。\n\n\n\n\n\n\n\n\nTip\n\n\n\n\n\n解答例（ステップ1の解答例の問いの場合）\n\ncor.test(df_student$sleep_hours, df_student$score) |&gt;\n  tidy()\n\n# A tibble: 1 × 8\n  estimate statistic    p.value parameter conf.low conf.high method  alternative\n     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;     &lt;int&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;      \n1   0.0481      4.82 0.00000149      9998   0.0285    0.0676 Pearso… two.sided  \n\nmodel_sleep &lt;- lm(score ~ sleep_hours, data = df_student)\nmodel_sleep |&gt;\n  tidy()\n\n# A tibble: 2 × 5\n  term        estimate std.error statistic    p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;\n1 (Intercept)   51.7       0.764     67.7  0         \n2 sleep_hours    0.545     0.113      4.82 0.00000149\n\n\n相関係数は約 0.05 で、p 値 &lt; 0.05 のため帰無仮説（相関係数は0である）を棄却します。回帰分析では、睡眠時間が1時間長いと成績は平均で約 0.54 点高くなります。有意ではありますが、関係はとても弱く、影響も小さいと言えます。\n\n\n\n\n\n\n\n\n14.5.5 ステップ5：考察・結論\n分析結果を「出しっぱなし」にせず、必ず言葉でまとめます。考察には次の3つを書きます。\n\n結果の要約：ステップ1の問いに対して、データからどう答えられるか\n解釈：係数や相関係数の大きさ・方向は、現実的にどう解釈できるか\n限界・今後の課題：このデータ・分析では分からないこと（因果関係とは言えない理由など）\n\n\n\n\n\n\n\nTip\n\n\n\n\n\nこの資料の例の考察\n\n結果の要約：学習時間と成績には正の相関があり（相関係数 0.37）、回帰分析でも学習時間の係数はプラスで有意だった。前回のテストの点数を考慮しても学習時間の効果は残っており、仮説を支持する結果である。\n解釈：モデル1では、学習時間が1時間長いと成績は平均で約 2.77 点高い。前回の点数を加えたモデル2でも、学習時間の係数は約 2.86 とほとんど変わらなかった。学習時間と前回の点数はほとんど関係していないため、学習時間の効果は「もともと成績の良い学生が長く勉強しているから」では説明できないと考えられる。また、モデル2の R² は約 0.99 と非常に高く、成績の大部分は前回の点数と学習時間で説明できる。\n限界・今後の課題：このデータは学習用に作られたデータであり、実際の学生の結果とは限らない。また、観測データからは「勉強時間を増やせば成績が上がる」という因果関係までは言えない（やる気のある学生ほど長く勉強し、成績も良いという可能性がある）。今後は、睡眠時間や課外活動なども加えたモデルで検討したい。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>14</span>  <span class='chapter-title'>データ分析の流れ</span>"
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>(1) データ分析の流れ</span>"
     ]
   },
   {
     "objectID": "lecB01.html#sec-assignment",
     "href": "lecB01.html#sec-assignment",
-    "title": "14  データ分析の流れ",
+    "title": "14  (1) データ分析の流れ",
     "section": "14.6 本日の課題",
     "text": "14.6 本日の課題\n\n\n\n\n\n\nWarning\n\n\n\n提出物：ミニレポート（Student_Performance.csv または Student_Performance.xlsx を使用）\n今日の演習で立てた自分の問いについて、5つのステップの構成でまとめてください。資料の例（学習時間と成績）と同じ問いは不可です。\n\n問い（Research Question）と仮説\nデータの説明・前処理（使用した変数とその意味、欠損値の確認）\n記述統計・可視化\n分析（t 検定・相関分析・回帰分析のいずれか）とその結果\n考察・結論（結果の要約・解釈・限界）\n\nコードと出力（表・グラフ）を必ず含めてください。\n\n\n提出方法：assignmentB01.qmd に作業し、Render して出力された HTML ファイルを ZIP 形式に圧縮して Blackboard から提出してください。提出期限は金曜日24時です。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>14</span>  <span class='chapter-title'>データ分析の流れ</span>"
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>(1) データ分析の流れ</span>"
     ]
   },
   {
     "objectID": "lecB01.html#sec-summary",
     "href": "lecB01.html#sec-summary",
-    "title": "14  データ分析の流れ",
+    "title": "14  (1) データ分析の流れ",
     "section": "14.7 まとめ",
     "text": "14.7 まとめ\n\n\n\n\n\n\n\n項目\nポイント\n\n\n\n\nファイルの読み込み\nCSV は read_csv()、Excel は read_excel()（library(readxl) が必要）\n\n\ndplyr\nfilter()・select()・mutate()・arrange()・summarise() を |&gt; でつなぐ\n\n\nggplot2\nggplot(aes()) ＋ geom_*() ＋ labs() ＋ theme_*()\n\n\nQuarto\nRender すると上から全コードが実行される。HTML を ZIP にして提出\n\n\n5つのステップ\n問い・仮説 → 前処理・記述統計 → 可視化 → 分析 → 考察\n\n\n分析方法の選び方\n差なら t 検定、関係なら相関、影響なら回帰（ダミー・交差項）\n\n\n結果の読み方\np 値だけでなく、差や係数の大きさも確認する\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n次回の予告\n第2回と第3回では、R を使って書かれた論文の分析を、自分の手で再現（レプリケーション）します。\n\n論文を読み、どのようなデータで何を分析しているかを確認する\n論文と同じ分析を R で行い、同じ結果が得られるかを確かめる\n今日の5つのステップが、実際の論文の中でどう使われているかを見る",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>14</span>  <span class='chapter-title'>データ分析の流れ</span>"
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>(1) データ分析の流れ</span>"
     ]
   },
   {
     "objectID": "lecB02.html",
     "href": "lecB02.html",
-    "title": "15  論文のレプリケーション1",
+    "title": "15  (2) レプリケーション1",
     "section": "",
     "text": "15.1 レプリケーションとは\n「NHK受信料を払っているのは誰か」を R で再現する\n今日の目標\nレプリケーション（replication）とは、すでに発表された研究の分析を、同じデータ・同じ方法でもう一度行い、同じ結果が得られるかを確かめることです。\nなぜレプリケーションが大切なのでしょうか。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>15</span>  <span class='chapter-title'>論文のレプリケーション1</span>"
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>(2) レプリケーション1</span>"
     ]
   },
   {
     "objectID": "lecB02.html#sec-replication",
     "href": "lecB02.html#sec-replication",
-    "title": "15  論文のレプリケーション1",
+    "title": "15  (2) レプリケーション1",
     "section": "",
     "text": "研究の信頼性を確かめるため：同じデータで同じ分析をしても同じ結果が出ないなら、その研究の結論は信用できません。近年、心理学や経済学などで「有名な研究の結果が再現できない」という問題（再現性の危機）が大きく取り上げられています。\n分析の手順を学ぶため：論文には「何をしたか」は書かれていても、「どうやったか（コード）」は書かれていないことが多いです。自分で再現しようとすると、論文の一文一文がどの操作に対応しているのかを考えることになり、分析の力が大きく伸びます。\n研究の出発点にするため：再現できたら、変数を加える・データを変えるなど、少し手を加えて自分の分析に発展させることができます。\n\n\n\n\n\n\n\nImportant\n\n\n\nレプリケーションは「論文のあら探し」ではありません。論文を正確に読み、自分の手で確かめるための練習です。うまく再現できなかったときも、「どこが違うのか」「なぜ違うのか」を考えることに意味があります。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>15</span>  <span class='chapter-title'>論文のレプリケーション1</span>"
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>(2) レプリケーション1</span>"
     ]
   },
   {
     "objectID": "lecB02.html#sec-steps",
     "href": "lecB02.html#sec-steps",
-    "title": "15  論文のレプリケーション1",
+    "title": "15  (2) レプリケーション1",
     "section": "15.2 論文の構成と5つのステップ",
     "text": "15.2 論文の構成と5つのステップ\n\nデータ分析の5つのステップ（復習）\n\n\n\n\n\n\n\n\nステップ\n内容\n主に使う関数\n\n\n\n\n1\n問い（RQ）と仮説を立てる\n（文章で書く）\n\n\n2\nデータの確認・前処理と記述統計\nfilter(), select(), drop_na(), summarise()\n\n\n3\n可視化\nggplot(), geom_point(), geom_boxplot()\n\n\n4\n分析（検定・相関・回帰）\nt.test(), cor.test(), lm(), tidy(), modelsummary()\n\n\n5\n考察・結論\n（文章で書く）\n\n\n\n\n\n実証論文の5つのステップ\n実証分析の論文は、多くの場合、次のような構成になっています。これは前回学んだ5つのステップとほぼ対応しています。\n\n\n\n\n\n\n\n\n\n\n\n論文の章\n書かれていること\n5つのステップ\n\n\n\n\nはじめに\n研究の背景、問い（何を明らかにしたいか）\n1\n\n\n先行研究\nこれまでの研究で分かっていること\n1\n\n\n理論と仮説\n問いに対する予想（仮説）と、その理由\n1\n\n\nデータ\n使ったデータの出典・変数の説明・記述統計・グラフ\n2・3\n\n\n分析結果\n回帰分析などの結果とその解釈\n4\n\n\n結論と展望\n結果のまとめ、分かったこと、限界と今後の課題\n5\n\n\n\n\n\n\n後期の総合分析演習のレポートも、この構成を目標にして書きます。今日の論文を、レポートの「お手本」として読んでください。\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n論文で使われる言葉\n論文では「従属変数」「独立変数」という言葉が使われています。前期の回帰分析の言葉では、従属変数＝被説明変数（\\(Y\\)）、独立変数＝説明変数（\\(X\\)）です。論文の「コントロール変数」は、主な関心ではないものの、\\(Y\\) に影響しそうなので一緒にモデルに入れておく説明変数のことです。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>15</span>  <span class='chapter-title'>論文のレプリケーション1</span>"
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>(2) レプリケーション1</span>"
     ]
   },
   {
     "objectID": "lecB02.html#sec-data",
     "href": "lecB02.html#sec-data",
-    "title": "15  論文のレプリケーション1",
+    "title": "15  (2) レプリケーション1",
     "section": "15.3 今日の論文とデータ",
     "text": "15.3 今日の論文とデータ\n今日の論文\n矢澤翼・永瀬真鈴（2016）「NHK受信料を払っているのは誰か」平成28年度 拓殖大学研究所奨学論文\n拓殖大学政経学部の浅野正彦先生のゼミで書かれた論文です。都道府県によって NHK 受信料の支払率に大きな差がある（秋田県 97% に対して沖縄県 46.8%）のはなぜか、を重回帰分析で調べています。\n今日のデータ（nhk.csv）\n論文の著者が分析に使ったデータです（論文の Appendix に変数の説明があります）。47都道府県が1行ずつ入っています。\n\n\n\n\n\n\n\n\n変数名\n内容\n出典\n\n\n\n\npref\n都道府県名（ローマ字）\n\n\n\nnhk\nNHK 受信料の支払率（%）\nNHK 放送文化研究所（2014年度末）\n\n\nkosu\n賃貸住宅（共同住宅）の戸数（戸）\n日本賃貸住宅管理協会\n\n\nmobility\n人口移動率（%）：5年間で住む場所が変わった人の割合\n国勢調査（2010年）\n\n\nldp\n自民党得票率（%）：衆議院選挙の比例区\n総務省（2014年）\n\n\nage\n高齢化率（%）：65歳以上の人口の割合\n高齢社会白書（2014年）\n\n\nincome\n一人当たりの県民所得（千円）\n内閣府 県民経済計算\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n実際の研究で使われたデータは、きれいに整っているとは限りません。分析を始める前に、データの中身をよく確認しましょう（課題3）。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>15</span>  <span class='chapter-title'>論文のレプリケーション1</span>"
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>(2) レプリケーション1</span>"
     ]
   },
   {
     "objectID": "lecB02.html#sec-prepare",
     "href": "lecB02.html#sec-prepare",
-    "title": "15  論文のレプリケーション1",
+    "title": "15  (2) レプリケーション1",
     "section": "15.4 今日の準備",
     "text": "15.4 今日の準備\n\n\n\n\n\n\n\n1.\n新規 R プロジェクトを作成する。Directory name は「LessonB02」、場所は Kドライブの「R_programming」。\n\n\n2.\nBlackboard から nhk.csv・2016_yazawa_marin.pdf（論文）・assignmentB02.qmd をダウンロードし、「R_programming/LessonB02」フォルダに入れる。\n\n\n3.\nまずは氏名（学籍番号）を記入し、この状態で Rendering ができるか確認する。\n\n\n4.\n左側に Rendering して出力された画面を置き、右半分には RStudioを置いて assignmentB02.qmd の課題に取り組む。\n\n\n5.\n適当なところで Rendering し、確かめながら進める。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>15</span>  <span class='chapter-title'>論文のレプリケーション1</span>"
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>(2) レプリケーション1</span>"
     ]
   },
   {
     "objectID": "lecB02.html#sec-setup",
     "href": "lecB02.html#sec-setup",
-    "title": "15  論文のレプリケーション1",
+    "title": "15  (2) レプリケーション1",
     "section": "15.5 パッケージの準備",
     "text": "15.5 パッケージの準備\n大学の PC はシャットダウンするたびに初期化されるため、毎回インストールが必要です。\n\noptions(repos = c(CRAN = \"https://cran.rstudio.com/\"))\n\ninstall.packages(\"tidyverse\")\ninstall.packages(\"broom\")\ninstall.packages(\"modelsummary\")",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>15</span>  <span class='chapter-title'>論文のレプリケーション1</span>"
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>(2) レプリケーション1</span>"
     ]
   },
   {
     "objectID": "lecB02.html#sec-assignment",
     "href": "lecB02.html#sec-assignment",
-    "title": "15  論文のレプリケーション1",
+    "title": "15  (2) レプリケーション1",
     "section": "15.6 本日の課題",
     "text": "15.6 本日の課題\nassignmentB02.qmd には、5つのステップに沿って次の課題が並んでいます。論文の該当ページを読みながら、課題1から順に取り組んでください。\n\n\n\n\n\n\n\n\n\n\n\n\nステップ\n課題\n内容\n論文\n\n\n\n\n1\n課題1\n論文の問いを書き出す\np.2\n\n\n1\n課題2\n4つの仮説とコントロール変数を整理する\np.4〜5\n\n\n2\n課題3\nデータを確認し、前処理をする\np.6, Appendix\n\n\n3\n課題4\n記述統計（表2）を再現する\np.6〜7\n\n\n3\n課題5\n散布図（図3・図4）を再現する\np.8〜9\n\n\n4\n課題6\n重回帰分析（表3）を再現する\np.10\n\n\n4\n課題7\n交差項を含む重回帰分析（表4）を再現する\np.11\n\n\n5\n課題8\n分析の結果、何が分かったかをまとめる\np.13\n\n\n\n\n\n\n提出方法：Render して出力された HTML ファイルを ZIP 形式に圧縮して Blackboard から提出してください。提出期限は金曜日24時です。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>15</span>  <span class='chapter-title'>論文のレプリケーション1</span>"
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>(2) レプリケーション1</span>"
     ]
   },
   {
     "objectID": "lecB02.html#sec-hints",
     "href": "lecB02.html#sec-hints",
-    "title": "15  論文のレプリケーション1",
+    "title": "15  (2) レプリケーション1",
     "section": "15.7 課題のヒント",
     "text": "15.7 課題のヒント\n課題に取り組んでいて困ったときは、該当する課題のヒントを開いてください。まずは自分の力で考え、どうしても進めないときに開くようにしましょう。\nコードのヒントの ___ の部分は、自分で考えて埋めてください。\n\n\n\n\n\n\nNote\n\n\n\nRender が止まったときは\nRender の途中でエラーが出ると、HTML は作られません。Background Jobs（または Render）タブのエラーメッセージに出ているチャンクの名前（label）を確認し、そのチャンクのコードを直してから、もう一度 Render しましょう。課題を1つ終えるごとに Render すると、どこでエラーが出たのかすぐに分かります。\n\n\n\n\n\n\n\n\n\n\n\nTip課題1のヒント\n\n\n\n\n\n\n論文の p.2 に「本論文の目的は、……」という一文があります。これが問いにあたります。\n「なぜ〜なのか」「〜は何によって決まるのか」という疑問文の形に書き直すと、問いとして分かりやすくなります。\n表1（p.3）を見ると、支払率が最も高い県と最も低い県で、どのくらい差があるかが分かります。\n\n\n\n\n\n\n\n\n\n\nTip課題2のヒント\n\n\n\n\n\n\n4つの仮説は、p.4〜5 に「仮説1.」〜「仮説4.」として書かれています。\n仮説の文の「〜ほど受信料を支払わない」は支払率が下がる（−）、「〜ほど受信料を支払う」は支払率が上がる（＋）という予想です。\n仮説4は「自民党の支持が高い県では、人口移動率が高くても受信料を払う」という予想です。人口移動率のマイナスの影響を、自民党得票率が弱める方向に働くとき、交差項の係数の符号はどうなるでしょうか（前期第12回）。\nコントロール変数は、p.5 の図1の上に「コントロール変数として……を加え」と書かれています。\n\n\n\n\n\n\n\n\n\n\nTip課題3のヒント\n\n\n\n\n\n\nデータの行数・列数・変数の型は glimpse() で確認できます。\n1つの列だけを表示するには データ名$列名 と書きます。\n都道府県名の表記を直すには、次の2つの関数を mutate() の中で使います。\n\nstr_remove(列名, \"取り除く文字\")：文字列から指定した文字を取り除く\nstr_to_lower(列名)：文字列をすべて小文字にする\n\n\n\n# ① データの行数・列数・変数の型を確認する\n___(df_nhk)\n\n# ② 都道府県名を表示する\ndf_nhk$___\n\n# ③ 表記の揺れを直す\ndf_nhk &lt;- df_nhk |&gt;\n  ___(\n    pref = str_remove(pref, ___),\n    pref = str_to_lower(___)\n  )\n\n# ④ 直ったことを確認する\ndf_nhk$pref\n\n\n\n\n\n\n\n\n\n\nTip課題4のヒント\n\n\n\n\n\n\n表2には、交差項「人口移動率 × 自民党得票率」も載っています。まず mutate() で、2つの列を掛け算した新しい列（例：mob_ldp）を作り、df_nhk に上書きして保存します。\n平均・標準偏差・最小値・最大値は、summarise() の中で mean()・sd()・min()・max() を使って計算します（前期第6回）。\n1つの変数について1行書いたら、その行をコピーして変数名だけを変えます。表2の7つの変数について、7回くり返しましょう。\n\n\n# ① 交差項の列を作る\ndf_nhk &lt;- df_nhk |&gt;\n  mutate(mob_ldp = ___ * ___)\n\n# ② 変数ごとに、平均・標準偏差・最小値・最大値を計算する\ndf_nhk |&gt; summarise(mean = mean(nhk), sd = ___(nhk), min = min(nhk), max = ___(nhk))\ndf_nhk |&gt; summarise(mean = mean(kosu), sd = sd(kosu), min = min(kosu), max = max(kosu))\n# 残りの5つの変数（mobility, ldp, mob_ldp, age, income）も同じように書く\n\n\n\n\n\n\n\n\n\n\nTip課題5のヒント\n\n\n\n\n\n\n散布図は geom_point()、回帰直線は geom_smooth(method = \"lm\", se = FALSE) で描きます（前期第4回）。\n点の近くに文字を表示するには geom_text(aes(label = 列名)) を使います。vjust = -0.8 とすると、文字が点の少し上に表示されます。\n図4は、図3のコードの x 軸の変数と軸ラベルを変えるだけで描けます。\n\n\ndf_nhk |&gt;\n  ggplot(aes(x = ___, y = ___)) +\n  geom_point(color = \"steelblue\") +\n  geom_text(aes(label = ___), size = 2.5, vjust = -0.8) +\n  geom_smooth(method = \"lm\", se = FALSE, color = \"gray30\") +\n  labs(x = \"人口移動率（%）\", y = \"受信料支払率（%）\") +\n  theme_minimal()\n\n\n\n\n\n\n\n\n\n\nTip課題6のヒント\n\n\n\n\n\n\n重回帰分析は lm(被説明変数 ~ 説明変数1 + 説明変数2 + ..., data = データ名) です（前期第10回）。\ntidy() で係数と p 値を、glance() で補正 R²（adj.r.squared）を確認できます。\nkosu の係数は -2.83e-06 のように表示されます。これは \\(-2.83 \\times 10^{-6} = -0.00000283\\) のことです。\n\n\nmodel1 &lt;- lm(___ ~ kosu + ___ + ___ + age + income, data = df_nhk)\n\ntidy(model1)\nglance(model1)\n\n\n\n\n\n\n\n\n\n\nTip課題7のヒント\n\n\n\n\n\n\n交差項は、2つの変数を * でつなぎます。x1 * x2 は x1 + x2 + x1:x2 と同じ意味です（前期第12回）。\n2つのモデルを並べて表示するには modelsummary() を使います（前期第10回）。\nmodelsummary() では kosu の係数が小さすぎて 0.000 と表示されます。細かい値は tidy() で確認しましょう。\n\n\nmodel2 &lt;- lm(nhk ~ kosu + ___ ___ ___ + age + income, data = df_nhk)\n\nmodelsummary(list(\"表3\" = ___, \"表4\" = ___),\n             stars = TRUE, gof_map = c(\"nobs\", \"r.squared\", \"adj.r.squared\"))\n\n\n\n\n\n\n\n\n\n\nTip課題8のヒント\n\n\n\n\n\n\n仮説が「支持された」と言えるのは、係数の符号が予想と同じで、かつ p 値 &lt; 0.05 のときです。符号が予想と同じでも、p 値が 0.05 以上なら「支持されない」となります。\n仮説1〜3の結果は課題6の model1、仮説4（交差項）の結果は課題7の model2 で確認します。\n問いへの答えは、「〜な県ほど、受信料の支払率が高い（低い）」という形で書くと分かりやすくなります。支持されなかった仮説についても、「〜とは関係がなかった」と書きましょう。\n仮説4は、「自民党得票率が高い県では、人口移動率が高くても……」のように、2つの変数を組み合わせて書きます。\n最後に、自分のまとめと論文の結論（p.13）が同じになっているかを確かめましょう。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>15</span>  <span class='chapter-title'>論文のレプリケーション1</span>"
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>(2) レプリケーション1</span>"
     ]
   },
   {
     "objectID": "lecB02.html#sec-summary",
     "href": "lecB02.html#sec-summary",
-    "title": "15  論文のレプリケーション1",
+    "title": "15  (2) レプリケーション1",
     "section": "15.8 まとめ",
     "text": "15.8 まとめ\n\n\n\n\n\n\n\n項目\nポイント\n\n\n\n\nレプリケーション\n同じデータ・同じ方法で分析し、同じ結果が得られるかを確かめる\n\n\n論文の構成\nはじめに・先行研究・仮説 → データ → 分析結果 → 結論（＝5つのステップ）\n\n\n再現の確かめ方\n論文の表・図の数字を、自分の結果と一つひとつ比べる\n\n\nまとめ\n仮説ごとに支持されたかを確かめ、問いに対する答えを自分の言葉で書く\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n次回の予告\n第3回では、別の論文「七三分けと得票率の関係」（2017年東京都議会議員選挙）をレプリケーションします。\n\n今日は都道府県のデータでしたが、次回は候補者一人ひとりのデータを使います\n主な説明変数が「七三分けかどうか」というダミー変数になります（前期第11回の復習）\n分析結果が仮説と逆になったとき、どう考察すればよいかを考えます",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>15</span>  <span class='chapter-title'>論文のレプリケーション1</span>"
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>(2) レプリケーション1</span>"
     ]
   },
   {
     "objectID": "lecB03.html",
     "href": "lecB03.html",
-    "title": "16  論文のレプリケーション2",
+    "title": "16  (3) レプリケーション2",
     "section": "",
     "text": "16.1 仮説が支持されないとき\n「七三分けと得票率の関係」を R で再現する\n今日の目標\n分析をすると、仮説が支持されないことはよくあります。仮説が支持されなかったのは「分析の失敗」ではありません。予想と違う結果も、問いに対する立派な答えです。\nただし、結果を正しく読み取るためには、「支持されない」にも2つの種類があることに注意しましょう。\n予想と逆の結果が出たときは、考察で次のようなことを考えます。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>16</span>  <span class='chapter-title'>論文のレプリケーション2</span>"
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>(3) レプリケーション2</span>"
     ]
   },
   {
     "objectID": "lecB03.html#sec-reverse",
     "href": "lecB03.html#sec-reverse",
-    "title": "16  論文のレプリケーション2",
+    "title": "16  (3) レプリケーション2",
     "section": "",
     "text": "結果\n例（予想は＋）\n言えること\n\n\n\n\n有意ではない\n係数 ＋0.5（p = 0.40）\n\\(X\\) と \\(Y\\) の間に関係があるとは言えない\n\n\n予想と逆の符号で有意\n係数 −3.0（p = 0.02）\n\\(X\\) と \\(Y\\) の間には関係があるが、その向きが予想と逆\n\n\n\n\n\nなぜ逆になったのか：仮説の理由づけ（理論）のどこが現実と合わなかったのか。\n測り方に問題はないか：変数の作り方やデータの集め方に、結果をゆがめるところはないか。\nほかの要因はないか：\\(X\\) と \\(Y\\) の両方に影響する別の要因（交絡因子）が隠れていないか。\n\n\n\n\n\n\n\nNote\n\n\n\n交絡因子とは\n\\(X\\) と \\(Y\\) の両方に影響を与える第3の要因のことです。例えば、「七三分けの候補者」と「得票率」の両方に「所属する政党」が影響しているなら、七三分けそのものの効果ではなく、政党の違いを見ているだけかもしれません。重回帰分析でコントロール変数を入れるのは、こうした要因の影響を取り除くためです。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>16</span>  <span class='chapter-title'>論文のレプリケーション2</span>"
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>(3) レプリケーション2</span>"
     ]
   },
   {
     "objectID": "lecB03.html#sec-data",
     "href": "lecB03.html#sec-data",
-    "title": "16  論文のレプリケーション2",
+    "title": "16  (3) レプリケーション2",
     "section": "16.2 今日の論文とデータ",
     "text": "16.2 今日の論文とデータ\n今日の論文\n石割司悠（2017）「七三分けと得票率の関係」平成29年度 拓殖大学研究所奨学論文\n前回と同じく、拓殖大学政経学部の浅野正彦先生のゼミで書かれた論文です。「なぜ男性政治家は皆同じ髪型、特に七三分けをしているのか」という疑問から出発し、2017年7月の東京都議会議員選挙の候補者について、七三分けの候補者ほど得票率が高いのかを重回帰分析で調べています。\n今日のデータ（seventhree.csv）\n論文の著者が分析に使ったデータです（論文の Appendix に変数の説明があります）。候補者165人が1行ずつ入っています。\n\n\n\n\n\n\n\n変数名\n内容\n\n\n\n\nname\n候補者の名前（ローマ字、「姓,名」）\n\n\nseventhree\n七三分けダミー：七三分けなら 1、そうでなければ 0\n\n\nTfirst\n都民ファーストダミー：都民ファーストの会の候補者なら 1、そうでなければ 0\n\n\nvoteshare\n得票率（%）：その候補者が選挙区で得た票の割合\n\n\nage\n候補者の年齢（歳）\n\n\nnocand\n候補者数（人）：その候補者が立候補した選挙区の候補者の数\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n七三分けダミーの作り方\n七三分けかどうかは、著者が選挙公報の写真を5人に見せ、5人中3人以上が「七三分けである」と答えた候補者を 1 としています（論文 p.6）。また、女性の候補者と斜めを向いている男性の候補者は判定が難しいため、データから除かれています。データがどのように作られたかは、考察（課題7）で論文の限界を考えるときの手がかりになります。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>16</span>  <span class='chapter-title'>論文のレプリケーション2</span>"
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>(3) レプリケーション2</span>"
     ]
   },
   {
     "objectID": "lecB03.html#sec-prepare",
     "href": "lecB03.html#sec-prepare",
-    "title": "16  論文のレプリケーション2",
+    "title": "16  (3) レプリケーション2",
     "section": "16.3 今日の準備",
     "text": "16.3 今日の準備\n\n\n\n\n\n\n\n1.\n新規 R プロジェクトを作成する。Directory name は「LessonB03」、場所は Kドライブの「R_programming」。\n\n\n2.\nBlackboard から seventhree.csv・2017_ishiwari.pdf（論文）・assignmentB03.qmd をダウンロードし、「R_programming/LessonB03」フォルダに入れる。\n\n\n3.\nまずは氏名（学籍番号）を記入し、この状態で Rendering ができるか確認する。\n\n\n4.\n左側に Rendering して出力された画面を置き、右半分には RStudioを置いて assignmentB03.qmd の課題に取り組む。\n\n\n5.\n適当なところで Rendering し、確かめながら進める。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>16</span>  <span class='chapter-title'>論文のレプリケーション2</span>"
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>(3) レプリケーション2</span>"
     ]
   },
   {
     "objectID": "lecB03.html#sec-setup",
     "href": "lecB03.html#sec-setup",
-    "title": "16  論文のレプリケーション2",
+    "title": "16  (3) レプリケーション2",
     "section": "16.4 パッケージの準備",
     "text": "16.4 パッケージの準備\n大学の PC はシャットダウンするたびに初期化されるため、毎回インストールが必要です。\n\noptions(repos = c(CRAN = \"https://cran.rstudio.com/\"))\n\ninstall.packages(\"tidyverse\")\ninstall.packages(\"broom\")",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>16</span>  <span class='chapter-title'>論文のレプリケーション2</span>"
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>(3) レプリケーション2</span>"
     ]
   },
   {
     "objectID": "lecB03.html#sec-assignment",
     "href": "lecB03.html#sec-assignment",
-    "title": "16  論文のレプリケーション2",
+    "title": "16  (3) レプリケーション2",
     "section": "16.5 本日の課題",
     "text": "16.5 本日の課題\nassignmentB03.qmd には、5つのステップに沿って次の課題が並んでいます。論文の該当ページを読みながら、課題1から順に取り組んでください。\n\n\n\n\n\n\n\n\n\n\n\n\nステップ\n課題\n内容\n論文\n\n\n\n\n1\n課題1\n論文の問いを書き出す\np.2〜3\n\n\n1\n課題2\n仮説1とコントロール変数を整理する\np.4〜5\n\n\n2\n課題3\nデータを確認する\np.6, Appendix\n\n\n3\n課題4\n記述統計（表1）を再現する\np.7\n\n\n3\n課題5\n散布図（図3）を再現する\np.8\n\n\n4\n課題6\n重回帰分析（表2）を再現する\np.9〜10\n\n\n5\n課題7\n分析の結果、何が分かったかをまとめる\np.11〜12\n\n\n\n\n\n\n提出方法：Render して出力された HTML ファイルを ZIP 形式に圧縮して Blackboard から提出してください。提出期限は金曜日24時です。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>16</span>  <span class='chapter-title'>論文のレプリケーション2</span>"
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>(3) レプリケーション2</span>"
     ]
   },
   {
     "objectID": "lecB03.html#sec-hints",
     "href": "lecB03.html#sec-hints",
-    "title": "16  論文のレプリケーション2",
+    "title": "16  (3) レプリケーション2",
     "section": "16.6 課題のヒント",
     "text": "16.6 課題のヒント\n課題に取り組んでいて困ったときは、該当する課題のヒントを開いてください。まずは自分の力で考え、どうしても進めないときに開くようにしましょう。\nコードのヒントの ___ の部分は、自分で考えて埋めてください。\n\n\n\n\n\n\nNote\n\n\n\nRender が止まったときは\nRender の途中でエラーが出ると、HTML は作られません。Background Jobs（または Render）タブのエラーメッセージに出ているチャンクの名前（label）を確認し、そのチャンクのコードを直してから、もう一度 Render しましょう。課題を1つ終えるごとに Render すると、どこでエラーが出たのかすぐに分かります。\n\n\n\n\n\n\n\n\n\n\n\nTip課題1のヒント\n\n\n\n\n\n\nAbstract（p.2）と「1. はじめに」（p.3）に「本論文の目的は、……」という一文があります。これが問いにあたります。\n「〜ほど〜なのか」「〜は〜に影響するのか」という疑問文の形に書き直すと、問いとして分かりやすくなります。\n\n\n\n\n\n\n\n\n\n\nTip課題2のヒント\n\n\n\n\n\n\n2つの仮説は、p.4〜5 に「仮説1：」「仮説２：」として書かれています。表2（p.9）の「予想」の列も参考になります。\n仮説2は今回は扱いません。\nコントロール変数とその予想は、p.5 の図1の上の段落に「その他のコントロール変数として……」と書かれています。\n\n\n\n\n\n\n\n\n\n\nTip課題3のヒント\n\n\n\n\n\n\nデータの行数・列数・変数の型は glimpse() で確認できます。\n欠損値（NA）の数は sum(is.na(データ名)) で数えられます。\nある列にどの値が何人いるかは count(列名) で数えられます。\n\n\n# ① データの行数・列数・変数の型を確認する\n___(df_hair)\n\n# ② 欠損値の数を数える\nsum(is.na(___))\n\n# ③ ダミー変数の値ごとの人数を数える\ndf_hair |&gt;\n  count(___)\n\ndf_hair |&gt;\n  count(___)\n\n\n\n\n\n\n\n\n\n\nTip課題4のヒント\n\n\n\n\n\n\nsummarise() の中で mean()・sd()・min()・max() を使うと、1つの変数の平均・標準偏差・最小値・最大値をまとめて計算できます（前期第6回）。\n表1の5つの変数について、1行ずつ同じように書きます。name は文字の列なので計算しません。\n0 と 1 のダミー変数の平均は、1 の人の割合になります。課題3で数えた人数から、割合を計算して確かめてみましょう。\n\n\n# 変数ごとに、平均・標準偏差・最小値・最大値を計算する\ndf_hair |&gt; summarise(mean = mean(seventhree), sd = ___(seventhree), min = min(seventhree), max = ___(seventhree))\ndf_hair |&gt; summarise(mean = mean(Tfirst), sd = sd(Tfirst), min = min(Tfirst), max = max(Tfirst))\n# 残りの3つの変数（voteshare, age, nocand）も同じように書く\n\n\n\n\n\n\n\n\n\n\nTip課題5のヒント\n\n\n\n\n\n\nx 軸がダミー変数（0 か 1）なので、そのまま geom_point() で描くと点が縦一列に重なってしまいます。geom_jitter() を使うと、点を少しずつ横にずらして描けます。width = 0.03 で横のずれの幅を、height = 0 で縦にはずらさないことを指定します。\n回帰直線は geom_smooth(method = \"lm\", se = FALSE) で描きます（前期第4回）。\nグループごとの平均は、group_by() と summarise() で計算できます（前期第6回）。\n\n\n# 図3\ndf_hair |&gt;\n  ggplot(aes(x = ___, y = ___)) +\n  geom_jitter(width = 0.03, height = 0, alpha = 0.6) +\n  geom_smooth(method = \"lm\", se = FALSE) +\n  labs(x = \"七三分けダミー\", y = \"得票率（%）\") +\n  theme_minimal()\n\n# 七三分けかどうか別の平均得票率と人数\ndf_hair |&gt;\n  group_by(___) |&gt;\n  summarise(mean_vote = mean(___), n = n())\n\n\n\n\n\n\n\n\n\n\nTip課題6のヒント\n\n\n\n\n\n\n重回帰分析は lm(被説明変数 ~ 説明変数1 + 説明変数2 + ..., data = データ名) です（前期第10回）。\nダミー変数の係数は、「1 のグループが 0 のグループと比べて、平均してどれだけ大きいか（小さいか）」を表します（前期第11回）。\n論文の表2では、候補者数の p 値が 2e-16 と書かれています。これは R の summary() が、とても小さな p 値を「&lt; 2e-16」とまとめて表示したものです。tidy() で表示されるもっと小さな値と一致していなくても、再現できていると考えてかまいません。\n\n\nmodel1 &lt;- lm(___ ~ seventhree + age + ___ + ___, data = df_hair)\n\ntidy(model1)\nglance(model1)\n\n\n\n\n\n\n\n\n\n\nTip課題7のヒント\n\n\n\n\n\n\n仮説が「支持された」と言えるのは、係数の符号が予想と同じで、かつ p 値 &lt; 0.05 のときです。符号が予想と逆で p 値 &lt; 0.05 なら、「支持されない（予想と逆の関係がある）」となります。\n仮説1とコントロール変数（年齢・都民ファースト・候補者数）の結果は、すべて課題6の model1 で確認します。\n問いへの答えは、「七三分けの候補者は、そうでない候補者と比べて得票率が〜」のように書きます。有意だった変数（都民ファースト・候補者数）にも触れましょう。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>16</span>  <span class='chapter-title'>論文のレプリケーション2</span>"
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>(3) レプリケーション2</span>"
     ]
   },
   {
     "objectID": "lecB03.html#sec-summary",
     "href": "lecB03.html#sec-summary",
-    "title": "16  論文のレプリケーション2",
+    "title": "16  (3) レプリケーション2",
     "section": "16.7 まとめ",
     "text": "16.7 まとめ\n\n\n\n\n\n\n\n項目\nポイント\n\n\n\n\nダミー変数の記述統計\n0 と 1 の変数の平均は、1 の人の割合になる\n\n\nダミー変数の係数\n1 のグループが 0 のグループと比べて、平均してどれだけ違うか\n\n\n仮説と逆の結果\n「有意でない」と「逆の符号で有意」を区別し、なぜ逆になったのかを考察する\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n次回の予告\n第4回からは、総合分析演習が始まります。\n\nこれまでの2回は、論文の問い・仮説・分析をなぞりましたが、次回からは与えられたデータについて、自分で問いと仮説を立てて分析します\n分析の結果は、2回の論文と同じ5つのステップの構成で、レポートにまとめます",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>16</span>  <span class='chapter-title'>論文のレプリケーション2</span>"
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>(3) レプリケーション2</span>"
     ]
   },
   {
     "objectID": "lecB04.html",
     "href": "lecB04.html",
-    "title": "17  総合分析演習1",
+    "title": "17  (4) 総合分析演習1",
     "section": "",
     "text": "17.1 総合分析演習の進め方\n「授業評価と教員」のデータを分析する\n今日の目標\n総合分析演習は、後期に5回あります。毎回、次の流れで進めます。\n評価：総合分析演習1回分（15%）は、提出したレポートと、次回の説明の内容をあわせて評価します（5つのステップ × 3段階＝15点満点）。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>17</span>  <span class='chapter-title'>総合分析演習1</span>"
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>(4) 総合分析演習1</span>"
     ]
   },
   {
     "objectID": "lecB04.html#sec-howto",
     "href": "lecB04.html#sec-howto",
-    "title": "17  総合分析演習1",
+    "title": "17  (4) 総合分析演習1",
     "section": "",
     "text": "回\n授業ですること\n授業のあとにすること\n\n\n\n\n第4回（今日）\nデータを読み、問いと仮説を立て、assignmentB04.qmd で分析してレポートを書く\nレポートを仕上げて提出する\n\n\n第5回（次回）\nレポートの内容を、教員に一人ずつ説明する（約5分）\n追加の課題を提出する\n\n\n\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\n提出期限\nレポート（assignmentB04.qmd を Render した HTML の ZIP）の提出期限は、次回の授業開始（10月26日 15:45）までです。これ以降は提出できず、レポートを提出していないと次回の説明もできません。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>17</span>  <span class='chapter-title'>総合分析演習1</span>"
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>(4) 総合分析演習1</span>"
     ]
   },
   {
     "objectID": "lecB04.html#sec-rq",
     "href": "lecB04.html#sec-rq",
-    "title": "17  総合分析演習1",
+    "title": "17  (4) 総合分析演習1",
     "section": "17.2 自分で問いを立てる",
     "text": "17.2 自分で問いを立てる\n\n被説明変数と説明変数を決める\n問いは、「何が（説明変数 \\(X\\)）、何に（被説明変数 \\(Y\\)）影響するのか」を決めると立てやすくなります。今日のデータでは、被説明変数は授業評価（eval）に決まっています。皆さんが決めるのは、\n\n授業評価に影響しそうな主な説明変数 \\(X\\) を1つ\n\\(X\\) と授業評価の両方に影響しそうなコントロール変数を2〜3個\n\nです。\n\n\n\n問いは、次のような形で書くと分かりやすくなります。\n\n「\\(X\\) が大きい（高い）授業ほど、授業評価は高いのか」（\\(X\\) が数値のとき）\n「\\(X\\) である授業は、そうでない授業と比べて、授業評価が高いのか」（\\(X\\) がダミー変数のとき）\n\n第1回で確認した良い問いの3つの条件（具体的な変数を指定できている／データで答えられる／比較・関係の視点が入っている）を満たしているか、確かめましょう。\n\n\n\n\n\n仮説には「理由」をつける\n仮説は、「\\(X\\) が大きいほど \\(Y\\) は高い（＋）／低い（−）」という予想される符号と、そう予想する理由の2つをセットで書きます。第2回・第3回の論文でも、仮説ごとに理由が書かれていました。\nコントロール変数も、同じように予想される符号と理由を書きます。\n\n\n\n\n\nコントロール変数を選ぶ\n第3回の七三分けの論文では、七三分けの候補者は都民ファーストの会に少なく、都民ファーストの候補者は得票率が高かったため、単純に平均を比べると七三分けの影響を大きく見誤ってしまうことを学びました（交絡因子）。\nコントロール変数は、主な説明変数 \\(X\\) と授業評価の両方に関係していそうな変数から選びます。「\\(X\\) が違う授業は、ほかの点でも違っていないか？」と考えてみましょう。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>17</span>  <span class='chapter-title'>総合分析演習1</span>"
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>(4) 総合分析演習1</span>"
     ]
   },
   {
     "objectID": "lecB04.html#sec-data",
     "href": "lecB04.html#sec-data",
-    "title": "17  総合分析演習1",
+    "title": "17  (4) 総合分析演習1",
     "section": "17.3 今日のデータ",
     "text": "17.3 今日のデータ\nアメリカのテキサス大学オースティン校で、2000〜2002年度に開講された授業の授業評価アンケートの結果です。\n今日のデータ（TeachingRatings.csv）\n1行が1つの授業です。463の授業が入っています。\n\n\n\n\n\n\n\n変数名\n内容\n\n\n\n\nrownames\n行の番号（分析には使わない）\n\n\nminority\n担当教員が人種・民族的マイノリティ（白人以外）か：yes / no\n\n\nage\n担当教員の年齢（歳）\n\n\ngender\n担当教員の性別：female（女性）/ male（男性）\n\n\ncredits\n1単位の授業か：single（1単位の授業）/ more（それ以外）\n\n\nbeauty\n担当教員の見た目の評価（平均が0になるように標準化した値。大きいほど評価が高い）\n\n\neval\n授業評価：授業全体の評価の平均点（1＝とても不満 〜 5＝とても良い）\n\n\ndivision\n授業のレベル：upper（3・4年生向けの専門科目）/ lower（1・2年生向けの科目）\n\n\nnative\n担当教員の母語が英語か：yes / no\n\n\ntenure\n担当教員がテニュア（終身在職権）を持つ、またはその候補か：yes / no\n\n\nstudents\n授業評価アンケートに回答した学生の数（人）\n\n\nallstudents\nその授業の履修者数（人）\n\n\nprof\n担当教員の番号（1〜94）\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n見た目の評価（beauty）の作り方\nこのデータでは、6人の学生（女性3人・男性3人）に教員の写真を見せ、それぞれ見た目を1〜10点で評価してもらいました。その点数を、平均が0、標準偏差が1になるようにそろえて（前期第6回の z スコア）、6人分を平均したものが beauty です。そのため、beauty が 0 なら平均的、プラスなら平均より評価が高い、マイナスなら平均より低いと読みます。\n\n\n\n\n\n\n\n\nNote\n\n\n\n1行は「教員」ではなく「授業」\n教員は94人ですが、1人の教員が複数の授業を担当しているため、データは463行あります（prof が同じ行は同じ教員の授業です）。そのため、beauty・age・gender などの教員の情報は、同じ教員の行ではすべて同じ値になっています。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>17</span>  <span class='chapter-title'>総合分析演習1</span>"
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>(4) 総合分析演習1</span>"
     ]
   },
   {
     "objectID": "lecB04.html#sec-prepare",
     "href": "lecB04.html#sec-prepare",
-    "title": "17  総合分析演習1",
+    "title": "17  (4) 総合分析演習1",
     "section": "17.4 今日の準備",
     "text": "17.4 今日の準備\n\n\n\n\n\n\n\n1.\n新規 R プロジェクトを作成する。Directory name は「LessonB04」、場所は Kドライブの「R_programming」。\n\n\n2.\nBlackboard から TeachingRatings.csv・assignmentB04.qmd をダウンロードし、「R_programming/LessonB04」フォルダに入れる。\n\n\n3.\nまずは氏名（学籍番号）を記入し、この状態で Rendering ができるか確認する。\n\n\n4.\n左側に Rendering して出力された画面を置き、右半分には RStudio を置いて assignmentB04.qmd の課題に取り組む。\n\n\n5.\n適当なところで Rendering し、確かめながら進める。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>17</span>  <span class='chapter-title'>総合分析演習1</span>"
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>(4) 総合分析演習1</span>"
     ]
   },
   {
     "objectID": "lecB04.html#sec-setup",
     "href": "lecB04.html#sec-setup",
-    "title": "17  総合分析演習1",
+    "title": "17  (4) 総合分析演習1",
     "section": "17.5 パッケージの準備",
     "text": "17.5 パッケージの準備\n大学の PC はシャットダウンするたびに初期化されるため、毎回インストールが必要です。\n\noptions(repos = c(CRAN = \"https://cran.rstudio.com/\"))\n\ninstall.packages(\"tidyverse\")\ninstall.packages(\"broom\")\ninstall.packages(\"modelsummary\")",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>17</span>  <span class='chapter-title'>総合分析演習1</span>"
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>(4) 総合分析演習1</span>"
     ]
   },
   {
     "objectID": "lecB04.html#sec-dummy",
     "href": "lecB04.html#sec-dummy",
-    "title": "17  総合分析演習1",
+    "title": "17  (4) 総合分析演習1",
     "section": "17.6 yes / no の変数をダミー変数にする",
     "text": "17.6 yes / no の変数をダミー変数にする\n今日のデータでは、gender や native などが \"female\" や \"yes\" のような文字で記録されています。第3回の七三分けダミーのように、0 と 1 のダミー変数に作り直しておくと、\n\n平均が「1 の授業の割合」になり、記述統計で比べやすい\n回帰分析の係数を「1 のグループが 0 のグループと比べて、平均してどれだけ違うか」と読みやすい\n\nという良いところがあります。\nダミー変数は、mutate() の中で if_else(条件, 条件に合うときの値, 合わないときの値) を使って作ります。下の例は、架空の果物のデータで「赤いかどうか」のダミー変数 red を作っています。\n\nlibrary(tidyverse)\n\ndf_fruit &lt;- tibble(\n  fruit = c(\"りんご\", \"バナナ\", \"いちご\", \"メロン\"),\n  color = c(\"red\", \"yellow\", \"red\", \"green\")\n)\n\ndf_fruit |&gt;\n1  mutate(red = if_else(color == \"red\", 1, 0))\n\n\n1\n\ncolor が \"red\" なら 1、そうでなければ 0 を入れた新しい列 red を作る。== はイコールが2つです。\n\n\n\n\n# A tibble: 4 × 3\n  fruit  color    red\n  &lt;chr&gt;  &lt;chr&gt;  &lt;dbl&gt;\n1 りんご red        1\n2 バナナ yellow     0\n3 いちご red        1\n4 メロン green      0\n\n\n\n\n\n\n\n\nImportant\n\n\n\nダミー変数を作ったら、count() で元の変数と作ったダミー変数の人数（件数）が合っているかを必ず確かめましょう。count() の中に、元の変数と作ったダミー変数をカンマで区切って2つ入れると、その組み合わせごとに件数を数えてくれます。\n\ndf_fruit |&gt;\n  mutate(red = if_else(color == \"red\", 1, 0)) |&gt;\n1  count(color, red)\n\n\n1\n\ncolor と red の組み合わせごとに件数を数える。\n\n\n\n\n# A tibble: 3 × 3\n  color    red     n\n  &lt;chr&gt;  &lt;dbl&gt; &lt;int&gt;\n1 green      0     1\n2 red        1     2\n3 yellow     0     1\n\n\ncolor が red の行だけ red が 1 になっていて（2件）、green と yellow の行は 0 になっていれば正しく作れています。\n\"red\" を \"Red\" と書くなど、文字を1つ間違えるだけで、すべて 0 になってしまいます。そのときは、count() の結果で red の列が全部 0 になるので、すぐに気づけます。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>17</span>  <span class='chapter-title'>総合分析演習1</span>"
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>(4) 総合分析演習1</span>"
     ]
   },
   {
     "objectID": "lecB04.html#sec-assignment",
     "href": "lecB04.html#sec-assignment",
-    "title": "17  総合分析演習1",
+    "title": "17  (4) 総合分析演習1",
     "section": "17.7 本日の課題",
     "text": "17.7 本日の課題\nassignmentB04.qmd には、5つのステップに沿って次の課題が並んでいます。この課題を全部埋めたものが、総合分析演習1のレポートになります。\n\n\n\n\n\n\n\n\n\n\n\nステップ\n課題\n内容\n\n\n\n\n1\n課題1\n主な説明変数を選び、問いを立てる\n\n\n1\n課題2\n仮説と、コントロール変数（2〜3個）の予想を書く\n\n\n2\n課題3\nデータを確認し、前処理（ダミー変数の作成）をする\n\n\n3\n課題4\n記述統計を計算する\n\n\n3\n課題5\n問いに合ったグラフを描く\n\n\n4\n課題6\n単回帰分析と重回帰分析を行う\n\n\n5\n課題7\n分析の結果、何が分かったかをまとめる\n\n\n\n\n\n\n提出方法：Render して出力された HTML ファイルを ZIP 形式に圧縮して Blackboard から提出してください。提出期限は次回の授業開始（10月26日 15:45）までです。\n\n\n\n\n\n\nImportant\n\n\n\n次回は、提出したレポートを画面に映しながら、一人ずつ内容を説明してもらいます。「このコードは何をしているか」「この係数はどういう意味か」と質問されても答えられるように、自分で理解したコードだけを書きましょう。分からないところは、遠慮なく手を挙げて質問してください。生成 AI に質問するのも構いませんが、出てきたコードは自分で理解してから使ってください。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>17</span>  <span class='chapter-title'>総合分析演習1</span>"
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>(4) 総合分析演習1</span>"
     ]
   },
   {
     "objectID": "lecB04.html#sec-hints",
     "href": "lecB04.html#sec-hints",
-    "title": "17  総合分析演習1",
+    "title": "17  (4) 総合分析演習1",
     "section": "17.8 課題のヒント",
     "text": "17.8 課題のヒント\n課題に取り組んでいて困ったときは、該当する課題のヒントを開いてください。まずは自分の力で考え、どうしても進めないときに開くようにしましょう。\n\n\n\n\n\n\nNote\n\n\n\nRender が止まったときは\nRender の途中でエラーが出ると、HTML は作られません。Background Jobs（または Render）タブのエラーメッセージに出ているチャンクの名前（label）を確認し、そのチャンクのコードを直してから、もう一度 Render しましょう。課題を1つ終えるごとに Render すると、どこでエラーが出たのかすぐに分かります。\n\n\n\n\n\n\n\n\n\n\n\nTip課題1のヒント\n\n\n\n\n\n\nまず「今日のデータ」の変数の表を見て、授業評価（eval）に影響しそうな変数を探しましょう。\n主な説明変数は、beauty（見た目）、gender（性別）、age（年齢）、native（英語が母語か）、minority（マイノリティか）、tenure（テニュアか）、credits（1単位の授業か）、division（授業のレベル）などから選べます。\nrownames・prof は番号なので、説明変数にはしません。\n\n\n\n\n\n\n\n\n\n\nTip課題2のヒント\n\n\n\n\n\n\n仮説は「\\(X\\) が〜な授業ほど、授業評価が高い（低い）」という形で、予想される符号（＋ か −）とその理由を書きます。\nコントロール変数は、「主な説明変数が違う授業は、ほかの点でも違っていないか？」と考えて選びます。\n理由は、自分が学生として授業評価アンケートに答えるときのことを思い出して考えてみましょう。\n\n\n\n\n\n\n\n\n\n\nTip課題7のヒント\n\n\n\n\n\n\n仮説が「支持された」と言えるのは、係数の符号が予想と同じで、かつ p 値 &lt; 0.05 のときです（第3回）。\n問いへの答えは、「〜な授業ほど、授業評価が〜。その差（影響）は、〜をコントロールしても残る（残らない）」のように、係数の大きさも入れて書きます。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>17</span>  <span class='chapter-title'>総合分析演習1</span>"
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>(4) 総合分析演習1</span>"
     ]
   },
   {
     "objectID": "lecB04.html#sec-summary",
     "href": "lecB04.html#sec-summary",
-    "title": "17  総合分析演習1",
+    "title": "17  (4) 総合分析演習1",
     "section": "17.9 まとめ",
     "text": "17.9 まとめ\n\n\n\n\n\n\n\n項目\nポイント\n\n\n\n\n問いの立て方\n被説明変数 \\(Y\\) と主な説明変数 \\(X\\) を決め、「\\(X\\) が〜ほど \\(Y\\) は〜か」の形で書く\n\n\n仮説\n予想される符号（＋／−）と、その理由をセットで書く\n\n\nコントロール変数\n\\(X\\) と \\(Y\\) の両方に関係していそうな変数（交絡因子の候補）を選ぶ\n\n\nダミー変数の作成\nmutate(新しい列 = if_else(条件, 1, 0))。作ったら count() で件数を確かめる\n\n\n単回帰と重回帰\nコントロール変数を入れると、主な説明変数の係数がどう変わるかを比べる\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n次回の予告\n次回は発表・分析結果説明1です。\n\n今日のレポートを画面に映しながら、5つのステップに沿って、一人ずつ教員に説明してもらいます\n「なぜこの問いにしたのか」「このコードは何をしているか」「この係数はどういう意味か」と質問するので、答えられるように準備してきてください\nレポートの提出は次回の授業開始までです",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>17</span>  <span class='chapter-title'>総合分析演習1</span>"
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>(4) 総合分析演習1</span>"
     ]
   },
   {
     "objectID": "lecB05.html",
     "href": "lecB05.html",
-    "title": "18  発表・分析結果説明1",
+    "title": "18  (5) 発表・分析結果説明1",
     "section": "",
     "text": "18.1 今日の進め方\n「授業評価と教員」の分析結果を自分の言葉で説明する\n今日の目標",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>18</span>  <span class='chapter-title'>発表・分析結果説明1</span>"
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>(5) 発表・分析結果説明1</span>"
     ]
   },
   {
     "objectID": "lecB05.html#sec-howto",
     "href": "lecB05.html#sec-howto",
-    "title": "18  発表・分析結果説明1",
+    "title": "18  (5) 発表・分析結果説明1",
     "section": "",
     "text": "1.\n最初に、説明のしかたとチェックシートを確認します。\n\n\n2.\n教員が名前を呼んだ人から順に、教員の席でレポートを画面に映しながら説明します。説明の最中には教員が質問します。（一人約5分）\n\n\n3.\n説明を待っている人・終わった人は、assignmentB05.qmd の課題に取り組みます。\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\n前回のレポートを提出していない人は、今日の説明ができません。説明では、Blackboard に提出した HTML ファイルを開いて使います。提出したファイルを自分の PC でもすぐに開けるようにしておきましょう。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>18</span>  <span class='chapter-title'>発表・分析結果説明1</span>"
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>(5) 発表・分析結果説明1</span>"
     ]
   },
   {
     "objectID": "lecB05.html#sec-present",
     "href": "lecB05.html#sec-present",
-    "title": "18  発表・分析結果説明1",
+    "title": "18  (5) 発表・分析結果説明1",
     "section": "18.2 説明のしかた",
     "text": "18.2 説明のしかた\nレポートの見出しの順に、5つのステップを1つずつ説明します。それぞれ、次のことを話せるようにしておきましょう。\n\n\n\n\n\n\n\nステップ\n話すこと\n\n\n\n\n1 問い・仮説\n何を明らかにしたいか（問い）。主な説明変数を選んだ理由、予想される符号とその理由。コントロール変数を選んだ理由\n\n\n2 データ・前処理\n何のデータか、1行は何を表すか、何行あるか。どんな前処理をしたか（作ったダミー変数は何が 1 か）\n\n\n3 記述統計・可視化\n表やグラフから何が読み取れるか。仮説と合っていそうか\n\n\n4 分析\n主な説明変数の係数・p 値の意味。単回帰と重回帰で係数がどう変わったか\n\n\n5 考察・結論\n問いへの答え（係数の大きさも入れて）。仮説は支持されたか\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nよく聞かれる質問の例\n説明の途中で、次のような質問をします。全部に完璧に答える必要はありませんが、自分のレポートに書いたことは、自分の言葉で説明できるようにしておきましょう。\n\nなぜこの説明変数（コントロール変数）を選んだのですか。\nこのチャンクの、この行は何をしていますか。\nif_else(gender == \"female\", 1, 0) の 1 と 0 は、それぞれ何を表していますか。\nこの係数 0.13 は、どういう意味ですか。p 値は何を表していますか。\nR² が小さいのは、どういうことを意味しますか。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>18</span>  <span class='chapter-title'>発表・分析結果説明1</span>"
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>(5) 発表・分析結果説明1</span>"
     ]
   },
   {
     "objectID": "lecB05.html#sec-checksheet",
     "href": "lecB05.html#sec-checksheet",
-    "title": "18  発表・分析結果説明1",
+    "title": "18  (5) 発表・分析結果説明1",
     "section": "18.3 評価のチェックシート",
     "text": "18.3 評価のチェックシート\n説明は、5つのステップごとに3段階（優・良・可）で評価します。5ステップ × 3点 ＝ 15点満点です。\nなお、コードの各行が何をしているかも説明できない場合には、該当のステップの評価をマイナスします。\n\n\n\n\n\n\n\n\n\nステップ\n優（3点）\n良（2点）\n可（1点）\n\n\n\n\n1 問い・仮説\n問いに \\(Y\\) と \\(X\\) が明確で、仮説の符号と理由、コントロール変数を選んだ理由を説明できる\n問いと仮説はあるが、理由の説明が弱い\n問いや仮説があいまい、または理由を説明できない\n\n\n2 データ・前処理\nデータの出典・1行の単位・行数と、前処理（ダミー変数の作り方と確認）を説明できる\nデータの説明か前処理の説明のどちらかが不十分\nデータや前処理の内容をほとんど説明できない\n\n\n3 記述統計・可視化\n問いに合った表・グラフを示し、そこから読み取れることを問いと結びつけて説明できる\n表・グラフはあるが、読み取りが不十分\n表・グラフが問いと合っていない、または読み取りができない\n\n\n4 分析\n係数・p 値・R² の意味を正しく説明できる\n結果の読み取りに誤りや不足がある\n結果の意味をほとんど説明できない\n\n\n5 考察・結論\n係数の大きさを入れて問いに答え、仮説が支持されたかを正しく判断できる\n問いへの答えはあるが、係数の大きさや仮説の判断が不十分\n問いに答えていない、または結果と合わない結論になっている",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>18</span>  <span class='chapter-title'>発表・分析結果説明1</span>"
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>(5) 発表・分析結果説明1</span>"
     ]
   },
   {
     "objectID": "lecB05.html#sec-setup",
     "href": "lecB05.html#sec-setup",
-    "title": "18  発表・分析結果説明1",
+    "title": "18  (5) 発表・分析結果説明1",
     "section": "18.4 パッケージの準備",
     "text": "18.4 パッケージの準備\n今日の課題（発展課題）でも、前回と同じパッケージを使います。\n\noptions(repos = c(CRAN = \"https://cran.rstudio.com/\"))\n\ninstall.packages(\"tidyverse\")\ninstall.packages(\"broom\")",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>18</span>  <span class='chapter-title'>発表・分析結果説明1</span>"
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>(5) 発表・分析結果説明1</span>"
     ]
   },
   {
     "objectID": "lecB05.html#sec-assignment",
     "href": "lecB05.html#sec-assignment",
-    "title": "18  発表・分析結果説明1",
+    "title": "18  (5) 発表・分析結果説明1",
     "section": "18.5 本日の課題",
     "text": "18.5 本日の課題\n前回の「LessonB04」フォルダに、Blackboard からダウンロードした assignmentB05.qmd を入れて取り組みます（前回と同じ TeachingRatings.csv を使います）。\n\n\n\n\n\n\n\n課題\n内容\n\n\n\n\n課題1\n発展：見た目の影響は、教員の性別によって違うか（交差項を含む回帰分析）\n\n\n課題2\n発展：課題1の結果をグラフで確かめる\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n交差項の復習（前期第12回）\n「\\(X\\) が \\(Y\\) に与える影響の大きさが、グループによって違うか」を調べるときは、交差項を使います。lm(Y ~ X * D, data = ...) と書くと、\\(X\\), \\(D\\), \\(X \\times D\\)（交差項）の3つが説明変数に入ります。\n\\[\nY = \\beta_0 + \\beta_1 X + \\beta_2 D + \\beta_3 (X \\times D)\n\\]\n\\(D\\) が 0 と 1 のダミー変数なら、\n\n\\(D = 0\\) のグループの \\(X\\) の傾き：\\(\\beta_1\\)\n\\(D = 1\\) のグループの \\(X\\) の傾き：\\(\\beta_1 + \\beta_3\\)\n\nとなります。交差項の係数 \\(\\beta_3\\) は、2つのグループの傾きの差です。\n\n\n提出方法：Render して出力された HTML ファイルを ZIP 形式に圧縮して Blackboard から提出してください。提出期限は金曜日24時です。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>18</span>  <span class='chapter-title'>発表・分析結果説明1</span>"
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>(5) 発表・分析結果説明1</span>"
     ]
   },
   {
     "objectID": "lecB05.html#sec-hints",
     "href": "lecB05.html#sec-hints",
-    "title": "18  発表・分析結果説明1",
+    "title": "18  (5) 発表・分析結果説明1",
     "section": "18.6 課題のヒント",
     "text": "18.6 課題のヒント\n課題に取り組んでいて困ったときは、該当する課題のヒントを開いてください。まずは自分の力で考え、どうしても進めないときに開くようにしましょう。\nコードのヒントの ___ の部分は、自分で考えて埋めてください。\n\n\n\n\n\n\n\n\n\nTip課題1のヒント\n\n\n\n\n\n\n前回と同じように、女性ダミー female と1単位の授業ダミー single を作ってから分析します。\n交差項は beauty * female と書きます。* を使うと、beauty・female・beauty:female（交差項）の3つが自動で入ります。\n男性（female = 0）の傾きは beauty の係数、女性（female = 1）の傾きは beauty の係数＋beauty:female の係数です。\n\n\nmodel3 &lt;- lm(eval ~ beauty * ___ + age + single, data = df_eval)\ntidy(model3)\nglance(model3)\n\n\n\n\n\n\n\n\n\n\nTip課題2のヒント\n\n\n\n\n\n\naes() の中で color = factor(female) と指定すると、男女で点と回帰直線の色が分かれます（前期第11回・第12回）。\nlabs() の color = で、凡例のタイトルも日本語にできます。\n\n\ndf_eval |&gt;\n  ggplot(aes(x = beauty, y = eval, color = factor(___))) +\n  geom_point(alpha = 0.4) +\n  geom_smooth(method = \"lm\", se = FALSE) +\n  labs(x = \"見た目の評価（標準化）\", y = \"授業評価\", color = \"___\") +\n  theme_minimal()",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>18</span>  <span class='chapter-title'>発表・分析結果説明1</span>"
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>(5) 発表・分析結果説明1</span>"
     ]
   },
   {
     "objectID": "lecB05.html#sec-summary",
     "href": "lecB05.html#sec-summary",
-    "title": "18  発表・分析結果説明1",
+    "title": "18  (5) 発表・分析結果説明1",
     "section": "18.7 まとめ",
     "text": "18.7 まとめ\n\n\n\n\n\n\n\n項目\nポイント\n\n\n\n\n結果の説明\n5つのステップの順に、問い → データ → 表・グラフ → 分析 → 考察 と話す\n\n\nコードの説明\n自分のコードの各行が何をしているかを説明できるようにしておく\n\n\n係数の説明\n「\\(X\\) が1増えると \\(Y\\) が平均してどれだけ変わるか」を、単位をつけて言う\n\n\n交差項\nX * D の交差項の係数は、2つのグループの傾きの差。\\(D=1\\) の傾きは \\(\\beta_1 + \\beta_3\\)\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n次回の予告\n次回（11月9日）は総合分析演習2です。\n\n新しいデータを配布します\n今回と同じように、自分で問いと仮説を立て、5つのステップのレポートにまとめます\n今日の説明で受けた質問やコメントを、次のレポートに生かしましょう",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>18</span>  <span class='chapter-title'>発表・分析結果説明1</span>"
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>(5) 発表・分析結果説明1</span>"
     ]
   },
   {
     "objectID": "lecB06.html",
     "href": "lecB06.html",
-    "title": "19  総合分析演習2",
+    "title": "19  (6) 総合分析演習2",
     "section": "",
     "text": "19.1 総合分析演習の進め方\n「働く人の賃金」のデータを分析する\n今日の目標\n評価：総合分析演習1回分（15%）は、提出したレポートと、次回の説明の内容をあわせて評価します（5つのステップ × 3段階＝15点満点）。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>19</span>  <span class='chapter-title'>総合分析演習2</span>"
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>(6) 総合分析演習2</span>"
     ]
   },
   {
     "objectID": "lecB06.html#sec-howto",
     "href": "lecB06.html#sec-howto",
-    "title": "19  総合分析演習2",
+    "title": "19  (6) 総合分析演習2",
     "section": "",
     "text": "回\n授業ですること\n授業のあとにすること\n\n\n\n\n第6回（今日）\nデータを読み、問いと仮説を立て、assignmentB06.qmd で分析してレポートを書く\nレポートを仕上げて提出する\n\n\n第7回（次回）\nレポートの内容を、教員に一人ずつ説明する（約5分）。自分の番を待つ間に、総合分析演習3のデータを受け取って分析を始める\n総合分析演習3の分析を進める\n\n\n\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\n提出期限\nレポート（assignmentB06.qmd を Render した HTML の ZIP）の提出期限は、次回の授業開始（11月16日 15:45）までです。これ以降は提出できず、レポートを提出していないと次回の説明もできません。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>19</span>  <span class='chapter-title'>総合分析演習2</span>"
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>(6) 総合分析演習2</span>"
     ]
   },
   {
     "objectID": "lecB06.html#sec-rq",
     "href": "lecB06.html#sec-rq",
-    "title": "19  総合分析演習2",
+    "title": "19  (6) 総合分析演習2",
     "section": "19.2 自分で問いを立てる",
     "text": "19.2 自分で問いを立てる\n今日のデータでは、被説明変数は時給（wage）に決まっています。皆さんが決めるのは、\n\n時給に影響しそうな主な説明変数 \\(X\\) を1つ\n\\(X\\) と時給の両方に影響しそうなコントロール変数を2〜3個\n\nです。問いの立て方、仮説に理由をつけること、コントロール変数の選び方は、第4回と同じです。\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\n今日の条件\n主な説明変数とコントロール変数のうち、少なくとも1つは、3つ以上のカテゴリをもつ変数（occupation・sector・ethnicity のどれか）を入れてください。使い方は、下の「3つ以上のカテゴリをもつ変数」で説明します。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>19</span>  <span class='chapter-title'>総合分析演習2</span>"
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>(6) 総合分析演習2</span>"
     ]
   },
   {
     "objectID": "lecB06.html#sec-data",
     "href": "lecB06.html#sec-data",
-    "title": "19  総合分析演習2",
+    "title": "19  (6) 総合分析演習2",
     "section": "19.3 今日のデータ",
     "text": "19.3 今日のデータ\nアメリカで1985年5月に行われた人口動態調査（Current Population Survey、CPS）から取り出した、働く人のデータです。CPS は、日本の「労働力調査」にあたる、アメリカ政府の毎月の調査です。\n今日のデータ（CPS1985.csv）\n1行が1人の働く人です。534人が入っています。\n\n\n\n\n\n\n\n変数名\n内容\n\n\n\n\nrownames\n行の番号（分析には使わない）\n\n\nwage\n時給（ドル／時間）。1985年当時の金額\n\n\neducation\n教育を受けた年数（年）。高校卒業なら 12、大学卒業なら 16\n\n\nexperience\n働いた年数の目安（年）。年齢 − 教育年数 − 6 で計算した値\n\n\nage\n年齢（歳）\n\n\nethnicity\n人種・民族：cauc（白人）/ hispanic（ヒスパニック）/ other（その他）\n\n\nregion\n住んでいる地域：south（南部）/ other（それ以外）\n\n\ngender\n性別：female（女性）/ male（男性）\n\n\noccupation\n職業：worker（工場・現場の労働者）/ technical（専門職・技術職）/ services（サービス職）/ office（事務職）/ sales（販売職）/ management（管理職）\n\n\nsector\n産業：manufacturing（製造業・鉱業）/ construction（建設業）/ other（それ以外）\n\n\nunion\n労働組合に入っているか：yes / no\n\n\nmarried\n結婚しているか：yes / no\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n1985年のドル\n時給は1985年当時のドルの金額です。物価が違うので、今の日本の時給とそのまま比べることはできません。レポートでは「時給が平均して〇ドル高い」のように、ドルのまま書きましょう。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>19</span>  <span class='chapter-title'>総合分析演習2</span>"
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>(6) 総合分析演習2</span>"
     ]
   },
   {
     "objectID": "lecB06.html#sec-prepare",
     "href": "lecB06.html#sec-prepare",
-    "title": "19  総合分析演習2",
+    "title": "19  (6) 総合分析演習2",
     "section": "19.4 今日の準備",
     "text": "19.4 今日の準備\n\n\n\n\n\n\n\n1.\n新規 R プロジェクトを作成する。Directory name は「LessonB06」、場所は Kドライブの「R_programming」。\n\n\n2.\nBlackboard から CPS1985.csv・assignmentB06.qmd をダウンロードし、「R_programming/LessonB06」フォルダに入れる。\n\n\n3.\nまずは氏名（学籍番号）を記入し、この状態で Rendering ができるか確認する。\n\n\n4.\n左側に Rendering して出力された画面を置き、右半分には RStudio を置いて assignmentB06.qmd でレポートを書く。\n\n\n5.\n適当なところで Rendering し、確かめながら進める。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>19</span>  <span class='chapter-title'>総合分析演習2</span>"
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>(6) 総合分析演習2</span>"
     ]
   },
   {
     "objectID": "lecB06.html#sec-setup",
     "href": "lecB06.html#sec-setup",
-    "title": "19  総合分析演習2",
+    "title": "19  (6) 総合分析演習2",
     "section": "19.5 パッケージの準備",
     "text": "19.5 パッケージの準備\n大学の PC はシャットダウンするたびに初期化されるため、毎回インストールが必要です。\n\noptions(repos = c(CRAN = \"https://cran.rstudio.com/\"))\n\ninstall.packages(\"tidyverse\")\ninstall.packages(\"broom\")\ninstall.packages(\"modelsummary\")",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>19</span>  <span class='chapter-title'>総合分析演習2</span>"
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>(6) 総合分析演習2</span>"
     ]
   },
   {
     "objectID": "lecB06.html#sec-category",
     "href": "lecB06.html#sec-category",
-    "title": "19  総合分析演習2",
+    "title": "19  (6) 総合分析演習2",
     "section": "19.6 3つ以上のカテゴリをもつ変数",
     "text": "19.6 3つ以上のカテゴリをもつ変数\n第4回では、female / male のように2つの値しかない変数を、if_else() で 0 と 1 のダミー変数に作り直しました。今日のデータの occupation（職業）は、6つの値（カテゴリ）をもっています。このような変数は、前期第11回で学んだように、文字のまま lm() に入れると、R が自動でダミー変数を作ってくれます。\n下の例は、架空の大学生9人の「1週間の勉強時間」と「部活動」のデータです。部活動 club は、sports（運動部）・culture（文化部）・none（入っていない）の3つのカテゴリをもっています。\n\nlibrary(tidyverse)\nlibrary(broom)\n\ndf_club &lt;- tibble(\n  club  = c(\"sports\", \"sports\", \"sports\", \"culture\", \"culture\", \"culture\", \"none\", \"none\", \"none\"),\n  hours = c(4, 6, 5, 9, 8, 10, 12, 11, 13)\n)\n\n\n\n\n\nまずはカテゴリごとの件数と平均を見る\n3つ以上のカテゴリをもつ変数は、平均や標準偏差を計算しても意味がありません。代わりに、count() でカテゴリごとの件数を、group_by() と summarise() でカテゴリごとの平均を確かめます。\n\ndf_club |&gt;\n1  group_by(club) |&gt;\n2  summarise(mean_hours = mean(hours), n = n())\n\n\n1\n\n部活動のカテゴリごとにグループ分けする。\n\n2\n\nグループごとに、勉強時間の平均と人数（n()）を計算する。\n\n\n\n\n# A tibble: 3 × 3\n  club    mean_hours     n\n  &lt;chr&gt;        &lt;dbl&gt; &lt;int&gt;\n1 culture          9     3\n2 none            12     3\n3 sports           5     3\n\n\n\n\n\n\n\n回帰分析に入れる\n\n1model_club &lt;- lm(hours ~ club, data = df_club)\ntidy(model_club)\n\n\n1\n\n文字の変数 club をそのまま説明変数に入れる。\n\n\n\n\n# A tibble: 3 × 5\n  term        estimate std.error statistic    p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;\n1 (Intercept)        9     0.577     15.6  0.00000441\n2 clubnone           3     0.816      3.67 0.0104    \n3 clubsports        -4     0.816     -4.90 0.00271   \n\n\n結果には clubnone と clubsports の2つの係数が出てきて、culture の係数はありません。R は、アルファベット順で最初のカテゴリ（ここでは culture）を基準のカテゴリにして、残りのカテゴリごとにダミー変数を作るためです。\n\n\n\n\n\n\n\n係数\n読み方\n\n\n\n\n(Intercept)\n基準のカテゴリ（文化部）の平均：9時間\n\n\nclubnone\n部活に入っていない学生は、文化部と比べて平均して 3時間多い\n\n\nclubsports\n運動部の学生は、文化部と比べて平均して 4時間少ない\n\n\n\n上のカテゴリごとの平均（文化部 9、入っていない 12、運動部 5）と見比べると、係数が「基準のカテゴリとの差」になっていることが分かります。\n\n\n\n\n\n\nImportant\n\n\n\n3つ以上のカテゴリをもつ変数の係数は、必ず「基準のカテゴリと比べて」読みます。レポートにも、基準のカテゴリが何かを書きましょう。今日のデータの occupation なら、アルファベット順で最初の management（管理職）が基準のカテゴリになります。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>19</span>  <span class='chapter-title'>総合分析演習2</span>"
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>(6) 総合分析演習2</span>"
     ]
   },
   {
     "objectID": "lecB06.html#sec-assignment",
     "href": "lecB06.html#sec-assignment",
-    "title": "19  総合分析演習2",
+    "title": "19  (6) 総合分析演習2",
     "section": "19.7 本日のレポート",
     "text": "19.7 本日のレポート\n今回から、assignmentB06.qmd には5つのステップの見出しと、レポートの条件だけが書かれています。パッケージやデータの読み込みも含めて、何をどの順番で書くかを自分で考えてレポートを完成させましょう。第4回の課題ファイルを見返すと、各ステップで何をしたかを思い出せます。\n\n\n\nレポートの条件\n\n被説明変数は時給（wage）。主な説明変数1つと、コントロール変数2〜3個を自分で選ぶ。\nそのうち少なくとも1つは、3つ以上のカテゴリをもつ変数（occupation・sector・ethnicity）にする。\n単回帰分析と重回帰分析を行い、modelsummary で並べて表示する。\n\n\n\n\n提出方法：Render して出力された HTML ファイルを ZIP 形式に圧縮して Blackboard から提出してください。提出期限は次回の授業開始（11月16日 15:45）までです。\n\n\n\n\n\n\nImportant\n\n\n\n次回は、提出したレポートを画面に映しながら、一人ずつ内容を説明してもらいます。「このコードは何をしているか」「この係数はどういう意味か」と質問されても答えられるように、自分で理解したコードだけを書きましょう。分からないところは、遠慮なく手を挙げて質問してください。生成 AI に質問するのも構いませんが、出てきたコードは自分で理解してから使ってください。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>19</span>  <span class='chapter-title'>総合分析演習2</span>"
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>(6) 総合分析演習2</span>"
     ]
   },
   {
     "objectID": "lecB06.html#sec-hints",
     "href": "lecB06.html#sec-hints",
-    "title": "19  総合分析演習2",
+    "title": "19  (6) 総合分析演習2",
     "section": "19.8 ヒント",
     "text": "19.8 ヒント\nレポートを書いていて困ったときは、該当するステップのヒントを開いてください。まずは自分の力で考え、どうしても進めないときに開くようにしましょう。\n\n\n\n\n\n\nNote\n\n\n\nRender が止まったときは\nRender の途中でエラーが出ると、HTML は作られません。Background Jobs（または Render）タブのエラーメッセージに出ているチャンクの名前（label）を確認し、そのチャンクのコードを直してから、もう一度 Render しましょう。ステップを1つ終えるごとに Render すると、どこでエラーが出たのかすぐに分かります。\n\n\n\n\n\n\n\n\n\n\n\nTipステップ1のヒント（問い）\n\n\n\n\n\n\nまず「今日のデータ」の変数の表を見て、時給（wage）に影響しそうな変数を探しましょう。\nrownames は番号なので、説明変数にはしません。\nexperience は年齢と教育年数から計算した値なので、age・education・experience の3つを同時に説明変数に入れるのは避けましょう。\n\n\n\n\n\n\n\n\n\n\nTipステップ1のヒント（仮説とコントロール変数）\n\n\n\n\n\n\n仮説は「\\(X\\) が〜な人ほど、時給が高い（低い）」という形で、予想される符号（＋ か −）とその理由を書きます。3つ以上のカテゴリをもつ変数なら、「基準のカテゴリと比べて、どのカテゴリの時給が高い（低い）と予想するか」を書きます。\nコントロール変数は、「主な説明変数が違う人は、ほかの点でも違っていないか？」と考えて選びます。\n理由は、アルバイト先や、将来の就職先の給料がどう決まるかを想像して考えてみましょう。\n\n\n\n\n\n\n\n\n\n\nTipステップ5のヒント\n\n\n\n\n\n\n仮説が「支持された」と言えるのは、係数の符号が予想と同じで、かつ p 値 &lt; 0.05 のときです（第3回）。\n問いへの答えは、「〜な人ほど、時給が〜。その差（影響）は、〜をコントロールしても残る（残らない）」のように、係数の大きさ（ドル）も入れて書きます。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>19</span>  <span class='chapter-title'>総合分析演習2</span>"
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>(6) 総合分析演習2</span>"
     ]
   },
   {
     "objectID": "lecB06.html#sec-summary",
     "href": "lecB06.html#sec-summary",
-    "title": "19  総合分析演習2",
+    "title": "19  (6) 総合分析演習2",
     "section": "19.9 まとめ",
     "text": "19.9 まとめ\n\n\n\n\n\n\n\n項目\nポイント\n\n\n\n\n問いと仮説\n第4回と同じ。\\(Y\\) と \\(X\\) を決め、予想される符号と理由をセットで書く\n\n\n3つ以上のカテゴリ\n文字のまま lm() に入れると、R が自動でダミー変数を作る\n\n\n基準のカテゴリ\nアルファベット順で最初のカテゴリ。係数は「基準のカテゴリと比べて」平均してどれだけ違うか\n\n\nカテゴリの記述統計\ncount() で件数、group_by() と summarise() でカテゴリごとの平均を見る\n\n\n単回帰と重回帰\nコントロール変数を入れると、主な説明変数の係数がどう変わるかを比べる\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n次回の予告\n次回は発表・分析結果説明2です。\n\n今日のレポートを画面に映しながら、5つのステップに沿って、一人ずつ教員に説明してもらいます\n「なぜこの問いにしたのか」「このコードは何をしているか」「この係数は何と比べた差か」と質問するので、答えられるように準備してきてください\n説明の順番を待つ間に、総合分析演習3の新しいデータを配布するので、問いと仮説を考えるところから始めましょう\nレポートの提出は次回の授業開始までです",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>19</span>  <span class='chapter-title'>総合分析演習2</span>"
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>(6) 総合分析演習2</span>"
     ]
   },
   {
     "objectID": "lecB07.html",
     "href": "lecB07.html",
-    "title": "20  発表・分析結果説明 2",
+    "title": "20  (7) 発表・分析結果説明 2",
     "section": "",
     "text": "個別の説明",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>20</span>  <span class='chapter-title'>発表・分析結果説明 2</span>"
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>(7) 発表・分析結果説明 2</span>"
     ]
   },
   {
     "objectID": "lecB08.html",
     "href": "lecB08.html",
-    "title": "21  総合分析演習3",
+    "title": "21  (8) 総合分析演習3",
     "section": "",
     "text": "21.1 総合分析演習の進め方\n「学区ごとの学力テスト」のデータを分析する\n今日の目標\n評価：総合分析演習1回分（15%）は、提出したレポートと、次回の説明の内容をあわせて評価します（5つのステップ × 3段階＝15点満点）。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>21</span>  <span class='chapter-title'>総合分析演習3</span>"
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>(8) 総合分析演習3</span>"
     ]
   },
   {
     "objectID": "lecB08.html#sec-howto",
     "href": "lecB08.html#sec-howto",
-    "title": "21  総合分析演習3",
+    "title": "21  (8) 総合分析演習3",
     "section": "",
     "text": "回\n授業ですること\n授業のあとにすること\n\n\n\n\n第8回（今日）\nデータを読み、問いと仮説を立て、assignmentB08.qmd で分析してレポートを書く\nレポートを仕上げて提出する\n\n\n第9回（次回）\nレポートの内容を、教員に一人ずつ説明する（約5分）。自分の番を待つ間に、総合分析演習4のデータを受け取って分析を始める\n総合分析演習4の分析を進める\n\n\n\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\n提出期限\nレポート（assignmentB08.qmd を Render した HTML の ZIP）の提出期限は、次回の授業開始（11月30日 15:45）までです。これ以降は提出できず、レポートを提出していないと次回の説明もできません。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>21</span>  <span class='chapter-title'>総合分析演習3</span>"
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>(8) 総合分析演習3</span>"
     ]
   },
   {
     "objectID": "lecB08.html#sec-rq",
     "href": "lecB08.html#sec-rq",
-    "title": "21  総合分析演習3",
+    "title": "21  (8) 総合分析演習3",
     "section": "21.2 自分で問いを立てる",
     "text": "21.2 自分で問いを立てる\n今日のデータでは、被説明変数はテストの平均点（score）に決まっています。ただし、score はデータに入っていないので、読解の平均点（read）と数学の平均点（math）の平均として、自分で作ります。皆さんが決めるのは、\n\nテストの平均点に影響しそうな主な説明変数 \\(X\\) を1つ\n\\(X\\) とテストの平均点の両方に影響しそうなコントロール変数を2〜3個\n\nです。問いの立て方、仮説に理由をつけること、コントロール変数の選び方は、これまでと同じです。\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\n今日の条件\n主な説明変数とコントロール変数のうち、少なくとも1つは、元の変数から計算して自分で作った変数（教員1人あたりの生徒数など）を入れてください。作り方と注意点は、下の「元のデータから新しい変数を作る」で説明します。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>21</span>  <span class='chapter-title'>総合分析演習3</span>"
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>(8) 総合分析演習3</span>"
     ]
   },
   {
     "objectID": "lecB08.html#sec-data",
     "href": "lecB08.html#sec-data",
-    "title": "21  総合分析演習3",
+    "title": "21  (8) 総合分析演習3",
     "section": "21.3 今日のデータ",
     "text": "21.3 今日のデータ\nアメリカのカリフォルニア州で、1998〜1999年度に行われた州の学力テストの結果と、学区ごとの学校・家庭の状況をまとめたデータです。テストを受けたのは小学5年生です。学区（school district）は、いくつかの公立学校をまとめて運営する地域の単位で、日本の市町村の教育委員会にあたります。\n今日のデータ（CASchools.csv）\n1行が1つの学区です。420の学区が入っています。\n\n\n\n\n\n\n\n変数名\n内容\n\n\n\n\nrownames\n行の番号（分析には使わない）\n\n\ndistrict\n学区の番号（分析には使わない）\n\n\nschool\n学区の名前（分析には使わない）\n\n\ncounty\n学区がある郡（county、日本の「県の中の地域」にあたる）。45種類\n\n\ngrades\n学区の学校の範囲：KK-06（幼稚園〜小学6年）/ KK-08（幼稚園〜中学2年）\n\n\nstudents\n生徒数（人）\n\n\nteachers\n教員数（人）。常勤に換算した人数なので、小数になる\n\n\ncalworks\n州の生活保護（CalWORKs）を受けている家庭の生徒の割合（%）\n\n\nlunch\n給食費の補助（無料・割引）を受けている生徒の割合（%）\n\n\ncomputer\nコンピュータの台数（台）\n\n\nexpenditure\n生徒1人あたりの教育支出（ドル）\n\n\nincome\n学区の住民の平均所得（千ドル）\n\n\nenglish\n英語を学んでいる途中の生徒（英語が母語でない生徒）の割合（%）\n\n\nread\n読解テストの平均点\n\n\nmath\n数学テストの平均点\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n割合の変数は 0〜100 の %\ncalworks・lunch・english は 0〜100 の % で記録されています。たとえば english が 10 なら「生徒の10%が英語を学んでいる途中」という意味です。回帰分析の係数は、「割合が1ポイント（1%分）高い学区は、平均点が〇点高い（低い）」と読みます。\nまた、income の単位は千ドルなので、1 増えると「平均所得が1,000ドル高い」という意味になります。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>21</span>  <span class='chapter-title'>総合分析演習3</span>"
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>(8) 総合分析演習3</span>"
     ]
   },
   {
     "objectID": "lecB08.html#sec-prepare",
     "href": "lecB08.html#sec-prepare",
-    "title": "21  総合分析演習3",
+    "title": "21  (8) 総合分析演習3",
     "section": "21.4 今日の準備",
     "text": "21.4 今日の準備\n前回（第7回）にすでに準備した人は、そのフォルダで続けてください。\n\n\n\n\n\n\n\n1.\n新規 R プロジェクトを作成する。Directory name は「LessonB08」、場所は Kドライブの「R_programming」。\n\n\n2.\nBlackboard から CASchools.csv・assignmentB08.qmd をダウンロードし、「R_programming/LessonB08」フォルダに入れる。\n\n\n3.\nまずは氏名（学籍番号）を記入し、この状態で Rendering ができるか確認する。\n\n\n4.\n左側に Rendering して出力された画面を置き、右半分には RStudio を置いて assignmentB08.qmd でレポートを書く。\n\n\n5.\n適当なところで Rendering し、確かめながら進める。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>21</span>  <span class='chapter-title'>総合分析演習3</span>"
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>(8) 総合分析演習3</span>"
     ]
   },
   {
     "objectID": "lecB08.html#sec-setup",
     "href": "lecB08.html#sec-setup",
-    "title": "21  総合分析演習3",
+    "title": "21  (8) 総合分析演習3",
     "section": "21.5 パッケージの準備",
     "text": "21.5 パッケージの準備\n大学の PC はシャットダウンするたびに初期化されるため、毎回インストールが必要です。\n\noptions(repos = c(CRAN = \"https://cran.rstudio.com/\"))\n\ninstall.packages(\"tidyverse\")\ninstall.packages(\"broom\")\ninstall.packages(\"modelsummary\")",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>21</span>  <span class='chapter-title'>総合分析演習3</span>"
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>(8) 総合分析演習3</span>"
     ]
   },
   {
     "objectID": "lecB08.html#sec-newvar",
     "href": "lecB08.html#sec-newvar",
-    "title": "21  総合分析演習3",
+    "title": "21  (8) 総合分析演習3",
     "section": "21.6 元のデータから新しい変数を作る",
     "text": "21.6 元のデータから新しい変数を作る\n今日のデータには、生徒数（students）・教員数（teachers）・コンピュータの台数（computer）のように、数で記録された変数があります。数の変数は、学区が大きいほど大きくなるので、そのままでは「学区が大きいか小さいか」を比べているだけになってしまいます。そこで、前期第2回で学んだ mutate() を使い、割り算で「1人あたり」の変数を作ってから比べます。\n下の例は、架空の4つの町の「人口」と「図書館の本の冊数」と「図書館の予算」のデータです。\n\nlibrary(tidyverse)\n\ndf_town &lt;- tibble(\n  town   = c(\"A町\", \"B町\", \"C町\", \"D町\"),\n  people = c(2000, 8000, 5000, 10000),            # 人口（人）\n  books  = c(10000, 24000, 20000, 20000),         # 本の冊数（冊）\n  budget = c(3000000, 9000000, 6000000, 8000000)  # 予算（円）\n)\n\n\n\n\n\n1人あたりの変数を作る\n\ndf_town &lt;- df_town |&gt;\n1  mutate(books_per_person = books / people)\n\ndf_town\n\n\n1\n\n本の冊数を人口で割って、住民1人あたりの冊数を作る。\n\n\n\n\n# A tibble: 4 × 5\n  town  people books  budget books_per_person\n  &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;            &lt;dbl&gt;\n1 A町     2000 10000 3000000                5\n2 B町     8000 24000 9000000                3\n3 C町     5000 20000 6000000                4\n4 D町    10000 20000 8000000                2\n\n\n本の冊数（books）だけを見ると、B町（24,000冊）が一番多く、A町（10,000冊）が一番少なく見えます。しかし、1人あたりの冊数（books_per_person）で比べると、A町が 5冊で一番多く、D町が 2冊で一番少なくなります。何で割るかによって、比べている中身が変わることに注意しましょう。\n\n\n\n\n\n単位をそろえる\n予算（budget）は円の単位なので、数字がとても大きくなります。このまま回帰分析に入れると、係数は「予算が1円多いと…」という意味になり、とても小さな値になって読みにくくなります。そこで、割り算で単位を変えておくと、係数が読みやすくなります。\n\ndf_town &lt;- df_town |&gt;\n1  mutate(budget_man = budget / 10000)\n\ndf_town |&gt;\n  select(town, budget, budget_man)\n\n\n1\n\n円を1万で割って、万円の単位にする。\n\n\n\n\n# A tibble: 4 × 3\n  town   budget budget_man\n  &lt;chr&gt;   &lt;dbl&gt;      &lt;dbl&gt;\n1 A町   3000000        300\n2 B町   9000000        900\n3 C町   6000000        600\n4 D町   8000000        800\n\n\n\n\n\n\n\n\nImportant\n\n\n\n作った変数を回帰分析に入れたら、係数は作った変数の単位で読みます。たとえば books_per_person の係数なら「住民1人あたりの本が1冊多いと…」、budget_man の係数なら「予算が1万円多いと…」です。レポートには、どの変数をどう計算して作ったか（何を何で割ったか、単位は何か）を必ず書きましょう。\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n作った変数が正しいか確かめる\nmutate() で作った変数は、元の変数と並べて表示し、いくつかの行を電卓で計算して合っているか確かめましょう。第4回・第6回でダミー変数を作ったときに count() で件数を確かめたのと同じ考え方です。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>21</span>  <span class='chapter-title'>総合分析演習3</span>"
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>(8) 総合分析演習3</span>"
     ]
   },
   {
     "objectID": "lecB08.html#sec-assignment",
     "href": "lecB08.html#sec-assignment",
-    "title": "21  総合分析演習3",
+    "title": "21  (8) 総合分析演習3",
     "section": "21.7 本日のレポート",
     "text": "21.7 本日のレポート\n今回の assignmentB08.qmd には、5つのステップの見出しだけが書かれています。パッケージやデータの読み込みも含めて、何をどの順番で書くかを自分で考えてレポートを完成させましょう。第4回・第6回の自分のレポートを見返すと、各ステップで何をしたかを思い出せます。\n\n\n\nレポートの条件\n\n被説明変数は、読解（read）と数学（math）の平均点（score）。mutate() で自分で作る。\n主な説明変数1つと、コントロール変数2〜3個を自分で選ぶ。そのうち少なくとも1つは、元の変数から計算して自分で作った変数にする。\n単回帰分析と重回帰分析を行い、modelsummary で並べて表示する。\n\n\n\n\n提出方法：Render して出力された HTML ファイルを ZIP 形式に圧縮して Blackboard から提出してください。提出期限は次回の授業開始（11月30日 15:45）までです。\n\n\n\n\n\n\nImportant\n\n\n\n次回は、提出したレポートを画面に映しながら、一人ずつ内容を説明してもらいます。「このコードは何をしているか」「この変数はどう計算したか」「この係数はどういう意味か」と質問されても答えられるように、自分で理解したコードだけを書きましょう。分からないところは、遠慮なく手を挙げて質問してください。生成 AI に質問するのも構いませんが、出てきたコードは自分で理解してから使ってください。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>21</span>  <span class='chapter-title'>総合分析演習3</span>"
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>(8) 総合分析演習3</span>"
     ]
   },
   {
     "objectID": "lecB08.html#sec-hints",
     "href": "lecB08.html#sec-hints",
-    "title": "21  総合分析演習3",
+    "title": "21  (8) 総合分析演習3",
     "section": "21.8 ヒント",
     "text": "21.8 ヒント\nレポートを書いていて困ったときは、該当するステップのヒントを開いてください。まずは自分の力で考え、どうしても進めないときに開くようにしましょう。\n\n\n\n\n\n\nNote\n\n\n\nRender が止まったときは\nRender の途中でエラーが出ると、HTML は作られません。Background Jobs（または Render）タブのエラーメッセージに出ているチャンクの名前（label）を確認し、そのチャンクのコードを直してから、もう一度 Render しましょう。ステップを1つ終えるごとに Render すると、どこでエラーが出たのかすぐに分かります。\n\n\n\n\n\n\n\n\n\n\n\nTipステップ1のヒント（問い）\n\n\n\n\n\n\nまず「今日のデータ」の変数の表を見て、テストの平均点に影響しそうな変数を探しましょう。\nrownames・district・school は番号や名前なので、説明変数にはしません。county は45種類もあるので、今回は説明変数に入れないでおきましょう。\nread と math は score を作るのに使うので、説明変数にはしません。\n自分が通っていた小学校・中学校を思い出し、「どんな学校（地域）だと点数が高くなりそうか」を考えてみましょう。\n\n\n\n\n\n\n\n\n\n\nTipステップ1のヒント（仮説とコントロール変数）\n\n\n\n\n\n\n仮説は「\\(X\\) が〜な学区ほど、テストの平均点が高い（低い）」という形で、予想される符号（＋ か −）とその理由を書きます。\nコントロール変数は、「主な説明変数が違う学区は、ほかの点でも違っていないか？」と考えて選びます。たとえば、お金に余裕のある地域とそうでない地域では、学校の条件も家庭の条件も違うかもしれません。\ncalworks・lunch・income は、どれも「家庭の経済状況」に関係する変数です。似た変数を同時にたくさん入れると、係数が読みにくくなることがあります。\n\n\n\n\n\n\n\n\n\n\nTipステップ2のヒント\n\n\n\n\n\n\n作った変数ごとに、「何を何で割ったか」「単位は何か（人、台、ドル、千ドルなど）」を書きましょう。\n割り算で作った変数の値が小さすぎる（大きすぎる）ときは、「100人あたり」「千ドルあたり」のように単位を変えると、係数が読みやすくなります。\n\n\n\n\n\n\n\n\n\n\nTipステップ5のヒント\n\n\n\n\n\n\n仮説が「支持された」と言えるのは、係数の符号が予想と同じで、かつ p 値 &lt; 0.05 のときです（第3回）。\n問いへの答えは、「〜な学区ほど、テストの平均点が〜。その関係は、〜をコントロールしても残る（残らない）」のように、係数の大きさ（点）も入れて書きます。\n今日のデータは学区ごとの平均です。学区について分かったことが、生徒一人ひとりにもそのまま当てはまるとは限りません。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>21</span>  <span class='chapter-title'>総合分析演習3</span>"
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>(8) 総合分析演習3</span>"
     ]
   },
   {
     "objectID": "lecB08.html#sec-summary",
     "href": "lecB08.html#sec-summary",
-    "title": "21  総合分析演習3",
+    "title": "21  (8) 総合分析演習3",
     "section": "21.9 まとめ",
     "text": "21.9 まとめ\n\n\n\n\n\n\n\n項目\nポイント\n\n\n\n\n問いと仮説\nこれまでと同じ。\\(Y\\) と \\(X\\) を決め、予想される符号と理由をセットで書く\n\n\n1行の単位\n今日のデータは1行が1つの学区。生徒一人ひとりではなく、学区の平均や割合を比べている\n\n\n新しい変数を作る\n数の変数は mutate() で割り算をして「1人あたり」にしてから比べる\n\n\n単位\n係数は作った変数の単位で読む。% の変数は「1ポイント」、income は「千ドル」\n\n\n単回帰と重回帰\nコントロール変数を入れると、主な説明変数の係数がどう変わるかを比べる\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n次回の予告\n次回は発表・分析結果説明3です。\n\n今日のレポートを画面に映しながら、5つのステップに沿って、一人ずつ教員に説明してもらいます\n「なぜこの問いにしたのか」「この変数はどう計算したか」「この係数はどういう意味か」と質問するので、答えられるように準備してきてください\n説明の順番を待つ間に、総合分析演習4の新しいデータを配布するので、問いと仮説を考えるところから始めましょう\nレポートの提出は次回の授業開始までです",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>21</span>  <span class='chapter-title'>総合分析演習3</span>"
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>(8) 総合分析演習3</span>"
     ]
   },
   {
     "objectID": "lecB10.html",
     "href": "lecB10.html",
-    "title": "23  機械学習入門：予測モデルを作る",
+    "title": "23  (10) 機械学習入門",
     "section": "",
-    "text": "23.1 AI・機械学習・ディープラーニング\nシェアサイクルの貸出台数を予測する\n今日の目標\n一言でいうと、機械学習はAI（人工知能）を実現するための重要な手法の一つです。\n全体像としては、最も広い概念がAIであり、その中に機械学習が含まれ、さらにその中にディープラーニング（深層学習）が含まれるという、入れ子（階層）の構造になっています。",
+    "text": "23.1 AI・機械学習・ディープラーニング\n予測モデルを作る\nシェアサイクルの貸出台数を予測する\n今日の目標\n一言でいうと、機械学習はAI（人工知能）を実現するための重要な手法の一つです。\n全体像としては、最も広い概念がAIであり、その中に機械学習が含まれ、さらにその中にディープラーニング（深層学習）が含まれるという、入れ子（階層）の構造になっています。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>23</span>  <span class='chapter-title'>機械学習入門：予測モデルを作る</span>"
+      "<span class='chapter-number'>23</span>  <span class='chapter-title'>(10) 機械学習入門</span>"
     ]
   },
   {
     "objectID": "lecB10.html#sec-ai",
     "href": "lecB10.html#sec-ai",
-    "title": "23  機械学習入門：予測モデルを作る",
+    "title": "23  (10) 機械学習入門",
     "section": "",
-    "text": "AI（人工知能）\n    例：ルールベースのAI（if-then のルール、探索、エキスパートシステム）\n    \n      機械学習\n      例：回帰分析・決定木 など（前期の lm() もここ）\n      \n        ディープラーニング\n        例：多層ニューラルネットワーク（画像認識、生成AI など）\n      \n    \n  \n\n\n\n図 23.1: AI・機械学習・ディープラーニングの関係\n\n\n\n\n\n\n\nAI（人工知能）とは\n人間のような知的な処理（推論、認識、判断、学習など）をコンピュータに実現させる技術・取り組み全般を指す、広い概念です。\n\n機械学習以外のAIの例：人があらかじめ作成したルールや条件分岐（if-then ルール）に基づいて動くシステム、探索アルゴリズム、エキスパートシステムなど。\nすべてのAIがデータから自律的に学習するわけではなく、ルールベースで動くAIも存在します。\n\n\n\n機械学習（Machine Learning）とは\n膨大なデータからルールやパターンを統計・数理モデルによって自動的に学習し、未知のデータに対する予測や分類、判断を行えるようにするAIの手法です。\n\n人間がすべての判断基準を手作業で書き込む代わりに、データとアルゴリズムを与えることで、モデルが規則性を抽出します。\n主なアプローチとして、教師あり学習（回帰・分類）、教師なし学習（クラスタリング・次元削減）、強化学習などがあります。\n\n\n\nディープラーニング（深層学習）とは\n機械学習の中でも、人間の神経回路網を模した多層のニューラルネットワークを用いる手法です。\n\n従来の機械学習では人間が設計・選定していた「特徴量（データの重要な要素）」の抽出を、モデル自身が階層的に自動で行える点が大きな特徴です。\n画像認識、音声認識、自然言語処理や、近年の生成AIなどの発展を牽引しています。\n\n\n\n\n\n\n違いの比較\n\n\n\n\n\n\n\n\n\n観点\nAI（人工知能）\n機械学習\nディープラーニング\n\n\n\n\n位置づけ\n最も広い概念・目的\nAIを実現する手法の一つ\n機械学習の一種（多層NN）\n\n\nルールの作り方\n人間による記述〜学習まで様々\nデータから統計的に学習\n多層ネットワークで特徴から学習\n\n\n向いている領域\n推論・判断・対話など全般\n数値予測、分類、クラスタリングなど\n画像・音声・テキストなど非構造データ\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n参考資料\n野口竜司「AI、機械学習、ディープラーニングの違いを説明できますか？機械学習と統計の違いは？」MarkeZine（2018年11月27日）\n文系の人向けに、AI・機械学習・ディープラーニングの関係を説明した記事です。続きを読むには MarkeZine への無料の会員登録が必要です。\n\n\n\n\n\n\n\n前期の回帰分析と機械学習\n前期に学んだ回帰分析（lm()）は、データから係数を学習する、最も基本的な機械学習（教師あり学習の回帰）の一つです。使う道具は同じですが、目的が違います。\n\n\n\n\n\n\n\n\n\nこれまで（統計的な分析）\nこれから（予測）\n\n\n\n\n知りたいこと\n\\(X\\) は \\(Y\\) に影響するか（説明）\nまだ分からない \\(Y\\) はいくつか（予測）\n\n\n主に見るもの\n係数・p 値・R²\n新しいデータでの予測の外れ具合（RMSE）\n\n\n変数の選び方\n問いと仮説に合わせて選ぶ\n予測がよく当たるように選ぶ\n\n\n良いモデルとは\n仮説を正しく検証できるモデル\nまだ見ていないデータで、よく当たるモデル",
+    "text": "AI（人工知能）\n    例：ルールベースのAI（if-then のルール、探索、エキスパートシステム）\n    \n      機械学習\n      例：回帰分析・決定木 など（前期の lm() もここ）\n      \n        ディープラーニング\n        例：多層ニューラルネットワーク（画像認識、生成AI など）\n      \n    \n  \n\n\n\n図 23.1: AI・機械学習・ディープラーニングの関係\n\n\n\n\n\n\n\nAI（人工知能）とは\n人間のような知的な処理（推論、認識、判断、学習など）をコンピュータに実現させる技術・取り組み全般を指す、広い概念です。\n\n機械学習以外のAIの例：人があらかじめ作成したルールや条件分岐（if-then ルール）に基づいて動くシステム、探索アルゴリズム、エキスパートシステムなど。\nすべてのAIがデータから自律的に学習するわけではなく、ルールベースで動くAIも存在します。\n\n\n\n機械学習（Machine Learning）とは\n膨大なデータからルールやパターンを統計・数理モデルによって自動的に学習し、未知のデータに対する予測や分類、判断を行えるようにするAIの手法です。\n\n人間がすべての判断基準を手作業で書き込む代わりに、データとアルゴリズムを与えることで、モデルが規則性を抽出します。\n主なアプローチとして、教師あり学習（回帰・分類）、教師なし学習（クラスタリング・次元削減）、強化学習などがあります。\n\n\n\nディープラーニング（深層学習）とは\n機械学習の中でも、人間の神経回路網を模した多層のニューラルネットワークを用いる手法です。\n\n従来の機械学習では人間が設計・選定していた「特徴量（データの重要な要素）」の抽出を、モデル自身が階層的に自動で行える点が大きな特徴です。\n画像認識、音声認識、自然言語処理や、近年の生成AIなどの発展を牽引しています。\n\n\n\n\n\n\n違いの比較\n\n\n\n\n\n\n\n\n\n観点\nAI（人工知能）\n機械学習\nディープラーニング\n\n\n\n\n位置づけ\n最も広い概念・目的\nAIを実現する手法の一つ\n機械学習の一種（多層NN）\n\n\nルールの作り方\n人間による記述〜学習まで様々\nデータから統計的に学習\n多層ネットワークで特徴から学習\n\n\n向いている領域\n推論・判断・対話など全般\n数値予測、分類、クラスタリングなど\n画像・音声・テキストなど非構造データ\n\n\n\n\n\n\n\n\n前期の回帰分析と機械学習\n前期に学んだ回帰分析（lm()）は、データから係数を学習する、最も基本的な機械学習（教師あり学習の回帰）の一つです。使う道具は同じですが、目的が違います。\n\n\n\n\n\n\n\n\n\nこれまで（統計的な分析）\nこれから（予測）\n\n\n\n\n知りたいこと\n\\(X\\) は \\(Y\\) に影響するか（説明）\nまだ分からない \\(Y\\) はいくつか（予測）\n\n\n主に見るもの\n係数・p 値・R²\n新しいデータでの予測の外れ具合（RMSE）\n\n\n変数の選び方\n問いと仮説に合わせて選ぶ\n予測がよく当たるように選ぶ\n\n\n良いモデルとは\n仮説を正しく検証できるモデル\nまだ見ていないデータで、よく当たるモデル",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>23</span>  <span class='chapter-title'>機械学習入門：予測モデルを作る</span>"
+      "<span class='chapter-number'>23</span>  <span class='chapter-title'>(10) 機械学習入門</span>"
     ]
   },
   {
     "objectID": "lecB10.html#sec-request",
     "href": "lecB10.html#sec-request",
-    "title": "23  機械学習入門：予測モデルを作る",
+    "title": "23  (10) 機械学習入門",
     "section": "23.2 今日の依頼",
-    "text": "23.2 今日の依頼\n今日から皆さんは、データ分析の会社で働くデータサイエンティストです。ワシントンD.C. のシェアサイクル Capital Bikeshare の運営チームから、次のような依頼が届きました。\n\n\n\n\n\n\nImportant\n\n\n\n依頼：1時間ごとの貸出台数を予測してほしい\nCapital Bikeshare 運営チームより\n私たちは毎日、トラックで自転車を運んで置き場の台数を調整したり（再配置）、整備スタッフのシフトを組んだりしています。自転車がよく借りられる時間に置き場が空っぽだと、利用者は借りられずに帰ってしまいます。反対に、借りられない時間に人を多く配置するのはむだです。\nそこで、翌日の天気予報とカレンダー（平日か休日か）から、1時間ごとの貸出台数を予測する仕組みを作りたいと考えています。2011年と2012年の2年分のデータをお渡しするので、次の3点を報告してください。\n\n1時間ごとの貸出台数は、どれくらい正確に予測できるか\n予測には、何が効くか（天気、気温、時間帯、平日か休日か など）\n予測を使うときに、気をつけること\n\n\n\nこの依頼は授業のために作った架空のものですが、シェアサイクルの会社が実際に取り組んでいる課題です。\n\n\n\n\nCapital Bikeshare とは\nCapital Bikeshare は、アメリカの首都ワシントンD.C. とその周辺で運営されている、公共のシェアサイクル（自転車の共同利用）です。2010年に始まった、アメリカでも早い時期の大きなシェアサイクルの一つです。\n\n現在は、ワシントンD.C. と、バージニア州・メリーランド州の周辺の市や郡をあわせた8つの自治体で、800 か所以上の自転車置き場（ステーション）と、約 8,000 台の自転車が使われています（公式サイトより）。\n利用者は、スマートフォンのアプリなどで自転車を借り、どのステーションに返してもかまいません（借りた場所に戻す必要はありません）。今日のデータでも、夜中の3時を含めて、すべての時間帯に貸出があります。\n料金プランは、次のとおりです（2026年11月時点、公式サイトの料金ページより。1ドルは約150円）。\n\n\n\n\n\n\n\n\n\nプラン\n料金\nふつうの自転車\n電動アシスト自転車\n\n\n\n\n1回ごと\n1ドル＋利用時間に応じた料金\n1分 0.05ドル\n1分 0.15ドル\n\n\n1日乗り放題\n1日 8ドル\n24時間、1回45分まで何回でも無料\n1分 0.10ドル\n\n\n年会費の会員\n年 95ドルから\n1回45分まで無料、その後は1分 0.05ドル\n料金ページを参照\n\n\n\n条件を満たす住民向けに、年会費 5ドル（地域によっては無料）の会員制度もあります。\n今日のデータでは、貸出の約8割が会員で、会員の利用は平日の朝夕に集中しています。通勤・通学に使われていると考えられます。\n今は電動アシスト自転車もありますが、今日のデータ（2011〜2012年）は、サービスが始まって間もないころのものです。\n日本でも、東京の「ドコモ・バイクシェア」など、同じしくみのシェアサイクルが広がっています。\n\n借りた場所と返す場所が違ってよいので、朝は住宅地から都心へ、夕方は都心から住宅地へ、と自転車がかたよります。だからこそ、いつ・どれくらい借りられるかの予測が、運営に欠かせません。",
+    "text": "23.2 今日の依頼\n今日から皆さんは、データ分析の会社で働くデータサイエンティストです。ワシントンD.C. のシェアサイクル Capital Bikeshare の運営チームから、次のような依頼が届きました。\n\n\n\n\n\n\nImportant\n\n\n\n依頼：1時間ごとの貸出台数を予測してほしい\nCapital Bikeshare 運営チームより\n私たちは毎日、トラックで自転車を運んで置き場の台数を調整したり（再配置）、整備スタッフのシフトを組んだりしています。自転車がよく借りられる時間に置き場が空っぽだと、利用者は借りられずに帰ってしまいます。反対に、借りられない時間に人を多く配置するのはむだです。\nそこで、翌日の天気予報とカレンダー（平日か休日か）から、1時間ごとの貸出台数を予測する仕組みを作りたいと考えています。2011年と2012年の2年分のデータをお渡しするので、次の3点を報告してください。\n\n1時間ごとの貸出台数は、どれくらい正確に予測できるか\n予測には、何が効くか（天気、気温、時間帯、平日か休日か など）\n予測を使うときに、気をつけること\n\n\n\nこの依頼は授業のために作った架空のものですが、シェアサイクルの会社が実際に取り組んでいる課題です。\n\n\n\n\nCapital Bikeshare とは\nCapital Bikeshare は、アメリカの首都ワシントンD.C. とその周辺で運営されている、公共のシェアサイクル（自転車の共同利用）です。2010年に始まった、アメリカでも早い時期の大きなシェアサイクルの一つです。\n\n現在は、ワシントンD.C. と、バージニア州・メリーランド州の周辺の市や郡をあわせた8つの自治体で、800 か所以上の自転車置き場（ステーション）と、約 8,000 台の自転車が使われています（公式サイトより）。\n利用者は、スマートフォンのアプリなどで自転車を借り、どのステーションに返してもかまいません（借りた場所に戻す必要はありません）。今日のデータでも、夜中の3時を含めて、すべての時間帯に貸出があります。\n料金プランは、次のとおりです（2026年11月時点、公式サイトの料金ページより。1ドルは約150円）。\n\n\n\n\n\n\n\n\n\n\nプラン\n料金\nふつうの自転車\n電動アシスト自転車\n\n\n\n\n1回ごと\n1ドル＋利用時間に応じた料金\n1分 0.05ドル\n1分 0.15ドル\n\n\n1日乗り放題\n1日 8ドル\n24時間、1回45分まで何回でも無料\n1分 0.10ドル\n\n\n年会費の会員\n年 95ドルから\n1回45分まで無料、その後は1分 0.05ドル\n料金ページを参照\n\n\n\n条件を満たす住民向けに、年会費 5ドル（地域によっては無料）の会員制度もあります。\n\n今日のデータでは、貸出の約8割が会員で、会員の利用は平日の朝夕に集中しています。通勤・通学に使われていると考えられます。\n今は電動アシスト自転車もありますが、今日のデータ（2011〜2012年）は、サービスが始まって間もないころのものです。\n日本でも、LUUP、ドコモ・バイクシェア、チャリチャリなど、同じしくみのシェアサイクルが広がっています。\n\n借りた場所と返す場所が違ってよいので、朝は住宅地から都心へ、夕方は都心から住宅地へ、と自転車がかたよります。だからこそ、いつ・どれくらい借りられるかの予測が、運営に欠かせません。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>23</span>  <span class='chapter-title'>機械学習入門：予測モデルを作る</span>"
+      "<span class='chapter-number'>23</span>  <span class='chapter-title'>(10) 機械学習入門</span>"
     ]
   },
   {
     "objectID": "lecB10.html#sec-flow",
     "href": "lecB10.html#sec-flow",
-    "title": "23  機械学習入門：予測モデルを作る",
+    "title": "23  (10) 機械学習入門",
     "section": "23.3 データサイエンティストの仕事の流れ",
     "text": "23.3 データサイエンティストの仕事の流れ\n\n\n\n\n\n\n\n\nステップ\nすること\n今日の節\n\n\n\n\n1\nデータを読み込み、使える形に前処理する\nSection 23.7\n\n\n2\nグラフでデータを眺め、予測に効きそうなものを探す\nSection 23.8\n\n\n3\nデータを「学習用」と「検証用」に分ける\nSection 23.9\n\n\n4\n予測の良さ（RMSE と R²）の測り方と、基準（ベースライン）を決める\nSection 23.10\n\n\n5\nモデルを少しずつ育て、検証用の RMSE で比べる\nSection 23.11\n\n\n6\n変数を増やしすぎるとどうなるか確かめる（過学習）\nSection 23.12\n\n\n7\n最終モデルを決めて、依頼主に報告する\nSection 23.13",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>23</span>  <span class='chapter-title'>機械学習入門：予測モデルを作る</span>"
+      "<span class='chapter-number'>23</span>  <span class='chapter-title'>(10) 機械学習入門</span>"
     ]
   },
   {
     "objectID": "lecB10.html#sec-prepare",
     "href": "lecB10.html#sec-prepare",
-    "title": "23  機械学習入門：予測モデルを作る",
+    "title": "23  (10) 機械学習入門",
     "section": "23.4 今日の準備",
     "text": "23.4 今日の準備\n\n\n\n\n\n\n\n1.\n新規 R プロジェクトを作成する。Directory name は「LessonB10」、場所は Kドライブの「R_programming」。\n\n\n2.\n「LessonB10」フォルダの中に「data」フォルダを作る。\n\n\n3.\nBlackboard から bike_hour.csv をダウンロードし、「data」フォルダに入れる。\n\n\n4.\n新しい R スクリプト（または Quarto ファイル）を作り、講義資料のコードを教員と一緒に1つずつ実行する。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>23</span>  <span class='chapter-title'>機械学習入門：予測モデルを作る</span>"
+      "<span class='chapter-number'>23</span>  <span class='chapter-title'>(10) 機械学習入門</span>"
     ]
   },
   {
     "objectID": "lecB10.html#sec-setup",
     "href": "lecB10.html#sec-setup",
-    "title": "23  機械学習入門：予測モデルを作る",
+    "title": "23  (10) 機械学習入門",
     "section": "23.5 パッケージの準備",
     "text": "23.5 パッケージの準備\n大学の PC はシャットダウンするたびに初期化されるため、毎回インストールが必要です。今日使うのは tidyverse だけです。\n\noptions(repos = c(CRAN = \"https://cran.rstudio.com/\"))\n\ninstall.packages(\"tidyverse\")\n\n\nlibrary(tidyverse)",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>23</span>  <span class='chapter-title'>機械学習入門：予測モデルを作る</span>"
+      "<span class='chapter-number'>23</span>  <span class='chapter-title'>(10) 機械学習入門</span>"
     ]
   },
   {
     "objectID": "lecB10.html#sec-data",
     "href": "lecB10.html#sec-data",
-    "title": "23  機械学習入門：予測モデルを作る",
+    "title": "23  (10) 機械学習入門",
     "section": "23.6 今日のデータ",
     "text": "23.6 今日のデータ\nCapital Bikeshare の2011年1月1日〜2012年12月31日の貸出記録を、1時間ごとに集計し、その時間の天気を加えたデータです。1行が1時間で、17,379 行あります。\n出典：UCI Machine Learning Repository「Bike Sharing Dataset」（CC BY 4.0）。Fanaee-T, H. and Gama, J. (2013) “Event labeling combining ensemble detectors and background knowledge”, Progress in Artificial Intelligence, pp. 1–15.\n\n\n\n\n\n\n\n変数名\n内容\n\n\n\n\nid\n行の番号\n\n\ndate\n日付\n\n\nseason_code\n季節の番号（1〜4）。今日は使わず、月から自分で季節を作り直す\n\n\ny2012\n2012年なら 1、2011年なら 0（2012年のダミー変数）\n\n\nmonth\n月（1〜12）\n\n\nhour\n時間帯（0〜23時）\n\n\nholiday\n祝日なら 1\n\n\nweekday\n曜日（0 = 日曜 〜 6 = 土曜）\n\n\nworkday\n平日（土日・祝日でない日）なら 1、休日なら 0\n\n\nweather\n天気の番号（1 = 晴れ・くもり、2 = 霧・くもり、3 = 小雨・小雪、4 = 大雨・大雪）\n\n\ntemp\n気温（℃）\n\n\nfeel_temp\n体感温度（℃）\n\n\nhumidity\n湿度（%）\n\n\nwind\n風速\n\n\nrentals_casual\n一時利用者の貸出台数\n\n\nrentals_member\n会員の貸出台数\n\n\nrentals\n貸出台数の合計（rentals_casual + rentals_member）。今日予測するもの\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n予測に使ってはいけない変数\nrentals_casual と rentals_member を足すと、予測したい rentals そのものになります。依頼主が予測したいのは「明日の貸出台数」なので、その時点ではまだ分からない値は予測に使えません。予測に使えるのは、予測する時点で分かっている情報（天気予報、日付、時間帯など）だけです。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>23</span>  <span class='chapter-title'>機械学習入門：予測モデルを作る</span>"
+      "<span class='chapter-number'>23</span>  <span class='chapter-title'>(10) 機械学習入門</span>"
     ]
   },
   {
     "objectID": "lecB10.html#sec-step1",
     "href": "lecB10.html#sec-step1",
-    "title": "23  機械学習入門：予測モデルを作る",
+    "title": "23  (10) 機械学習入門",
     "section": "23.7 ステップ1：読み込みと前処理",
     "text": "23.7 ステップ1：読み込みと前処理\n\ndf_raw &lt;- read_csv(\"data/bike_hour.csv\")\n\nglimpse(df_raw)\n\nRows: 17,379\nColumns: 17\n$ id             &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, …\n$ date           &lt;date&gt; 2011-01-01, 2011-01-01, 2011-01-01, 2011-01-01, 2011-0…\n$ season_code    &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…\n$ y2012          &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…\n$ month          &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…\n$ hour           &lt;dbl&gt; 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 1…\n$ holiday        &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…\n$ weekday        &lt;dbl&gt; 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6…\n$ workday        &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…\n$ weather        &lt;dbl&gt; 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3…\n$ temp           &lt;dbl&gt; 9.84, 9.02, 9.02, 9.84, 9.84, 9.84, 9.02, 8.20, 9.84, 1…\n$ feel_temp      &lt;dbl&gt; 14.40, 13.64, 13.64, 14.40, 14.40, 12.88, 13.64, 12.88,…\n$ humidity       &lt;dbl&gt; 81, 80, 80, 75, 75, 75, 80, 86, 75, 76, 76, 81, 77, 72,…\n$ wind           &lt;dbl&gt; 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 17, 19, 19, 20, 19, 20, 2…\n$ rentals_casual &lt;dbl&gt; 3, 8, 5, 3, 0, 0, 2, 1, 1, 8, 12, 26, 29, 47, 35, 40, 4…\n$ rentals_member &lt;dbl&gt; 13, 32, 27, 10, 1, 1, 0, 2, 7, 6, 24, 30, 55, 47, 71, 7…\n$ rentals        &lt;dbl&gt; 16, 40, 32, 13, 1, 1, 2, 3, 8, 14, 36, 56, 84, 94, 106,…\n\n\n\n\n\n番号で入っている季節・天気・平日を、分かりやすい文字のラベルに直します。\n\ndf_bike &lt;- df_raw |&gt;\n  mutate(\n1    season   = case_when(month %in% 3:5  ~ \"春\",\n                         month %in% 6:8  ~ \"夏\",\n                         month %in% 9:11 ~ \"秋\",\n                         .default = \"冬\"),\n2    weather  = case_when(weather == 1 ~ \"晴れ・くもり\",\n                         weather == 2 ~ \"霧・くもり\",\n                         .default = \"雨・雪\"),\n3    day_type = if_else(workday == 1, \"平日\", \"休日\")\n  ) |&gt;\n  mutate(\n4    season   = factor(season, levels = c(\"春\", \"夏\", \"秋\", \"冬\")),\n    weather  = factor(weather, levels = c(\"晴れ・くもり\", \"霧・くもり\", \"雨・雪\")),\n    day_type = factor(day_type, levels = c(\"平日\", \"休日\"))\n  ) |&gt;\n  select(id, date, y2012, season, hour, day_type, weather,\n5         temp, humidity, wind, rentals)\n\ndf_bike\n\n\n1\n\n月から季節を作る（3〜5月を春、6〜8月を夏、9〜11月を秋、12〜2月を冬）。\n\n2\n\n天気の番号をラベルに置き換える。「大雨・大雪」（4）は2年間で3時間しかないので、「雨・雪」にまとめる。件数が少なすぎるカテゴリは、学習用データに1件も入らないことがあり、予測のときにエラーの原因になる。\n\n3\n\n平日なら「平日」、土日・祝日なら「休日」。\n\n4\n\nカテゴリの順番を決めておく（因子型、前期第11回）。lm() では最初のカテゴリ（春・晴れ／くもり・平日）が基準になり、係数は「基準と比べて何台多いか少ないか」を表す。\n\n5\n\n予測に使う変数だけを残す（rentals_casual と rentals_member は使わない）。\n\n\n\n\n# A tibble: 17,379 × 11\n      id date       y2012 season  hour day_type weather      temp humidity  wind\n   &lt;dbl&gt; &lt;date&gt;     &lt;dbl&gt; &lt;fct&gt;  &lt;dbl&gt; &lt;fct&gt;    &lt;fct&gt;       &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;\n 1     1 2011-01-01     0 冬         0 休日     晴れ・くもり……  9.84       81     0\n 2     2 2011-01-01     0 冬         1 休日     晴れ・くもり……  9.02       80     0\n 3     3 2011-01-01     0 冬         2 休日     晴れ・くもり……  9.02       80     0\n 4     4 2011-01-01     0 冬         3 休日     晴れ・くもり……  9.84       75     0\n 5     5 2011-01-01     0 冬         4 休日     晴れ・くもり……  9.84       75     0\n 6     6 2011-01-01     0 冬         5 休日     霧・くもり   9.84       75     6\n 7     7 2011-01-01     0 冬         6 休日     晴れ・くもり……  9.02       80     0\n 8     8 2011-01-01     0 冬         7 休日     晴れ・くもり……  8.2        86     0\n 9     9 2011-01-01     0 冬         8 休日     晴れ・くもり……  9.84       75     0\n10    10 2011-01-01     0 冬         9 休日     晴れ・くもり…… 13.1        76     0\n# ℹ 17,369 more rows\n# ℹ 1 more variable: rentals &lt;dbl&gt;",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>23</span>  <span class='chapter-title'>機械学習入門：予測モデルを作る</span>"
+      "<span class='chapter-number'>23</span>  <span class='chapter-title'>(10) 機械学習入門</span>"
     ]
   },
   {
     "objectID": "lecB10.html#sec-step2",
     "href": "lecB10.html#sec-step2",
-    "title": "23  機械学習入門：予測モデルを作る",
+    "title": "23  (10) 機械学習入門",
     "section": "23.8 ステップ2：データを眺める",
     "text": "23.8 ステップ2：データを眺める\nまずは、予測したい貸出台数がどのように変わるのかを、グラフで確かめます。\n\ndf_bike |&gt;\n  group_by(hour, day_type) |&gt;\n  summarise(mean_rentals = mean(rentals), .groups = \"drop\") |&gt;\n  ggplot(aes(x = hour, y = mean_rentals, color = day_type)) +\n  geom_line(linewidth = 1) +\n  geom_point() +\n  scale_x_continuous(breaks = seq(0, 23, by = 3)) +\n  labs(x = \"時間帯（時）\", y = \"平均貸出台数（台）\", color = NULL) +\n  theme_minimal()\n\n\n\n\n時間帯ごとの平均貸出台数（平日と休日）\n\n\n\n\n平日は朝8時ごろと夕方17〜18時ごろに大きな山があります。通勤・通学の時間です。休日は朝の山がなく、昼すぎにゆるやかな山があります。時間帯の影響の仕方が、平日と休日でまったく違うことが分かります。\n\n\n\n\ndf_bike |&gt;\n  mutate(temp_round = round(temp)) |&gt;\n  group_by(temp_round) |&gt;\n  summarise(mean_rentals = mean(rentals), n = n()) |&gt;\n  filter(n &gt;= 20) |&gt;\n  ggplot(aes(x = temp_round, y = mean_rentals)) +\n  geom_line(color = \"steelblue\", linewidth = 1) +\n  geom_point(color = \"steelblue\") +\n  labs(x = \"気温（℃、1℃ごとにまとめた）\", y = \"平均貸出台数（台）\") +\n  theme_minimal()\n\n\n\n\n気温と平均貸出台数\n\n\n\n\n気温が高いほど借りられますが、増え方は一定ではなく、とても暑い時間（37℃以上）には減っています。まっすぐな直線ではなく、曲がった関係です。\n\n\n\n\ndf_bike |&gt;\n  mutate(year = if_else(y2012 == 1, \"2012年\", \"2011年\")) |&gt;\n  group_by(year, weather) |&gt;\n  summarise(mean_rentals = mean(rentals), .groups = \"drop\") |&gt;\n  ggplot(aes(x = weather, y = mean_rentals, fill = year)) +\n  geom_col(position = \"dodge\") +\n  scale_fill_manual(values = c(\"lightsteelblue\", \"steelblue\")) +\n  labs(x = \"天気\", y = \"平均貸出台数（台）\", fill = \"年\") +\n  theme_minimal()\n\n\n\n\n天気と年ごとの平均貸出台数\n\n\n\n\n雨・雪の時間は大きく減ります。また、同じ天気でも、2012年は2011年よりずっと多く借りられています。サービスが知られて、利用者が増えたためと考えられます。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>23</span>  <span class='chapter-title'>機械学習入門：予測モデルを作る</span>"
+      "<span class='chapter-number'>23</span>  <span class='chapter-title'>(10) 機械学習入門</span>"
     ]
   },
   {
     "objectID": "lecB10.html#sec-step3",
     "href": "lecB10.html#sec-step3",
-    "title": "23  機械学習入門：予測モデルを作る",
+    "title": "23  (10) 機械学習入門",
     "section": "23.9 ステップ3：学習用と検証用に分ける",
     "text": "23.9 ステップ3：学習用と検証用に分ける\n依頼主が知りたいのは、まだ起きていない時間の貸出台数です。手元のデータにぴったり当てはまるモデルでも、新しいデータで当たらなければ意味がありません。\nそこで、データの 80% を「学習用」としてモデルを作るのに使い、残りの 20% を「検証用」として取っておきます。検証用データは、正解を知っているのに、知らないふりをして予測してみるためのデータです。\n\n1set.seed(123)\n2df_learn &lt;- df_bike |&gt; slice_sample(prop = 0.8)\n3df_valid &lt;- df_bike |&gt; anti_join(df_learn, by = \"id\")\n\nnrow(df_learn)\nnrow(df_valid)\n\n\n1\n\n乱数の種を決める。同じ数字にすると、何度やっても同じ分け方になる。\n\n2\n\n80% の行をランダムに選んで「学習用」にする。\n\n3\n\n「学習用」に選ばれなかった残りの行（id で照合）を「検証用」にする。\n\n\n\n\n[1] 13903\n[1] 3476",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>23</span>  <span class='chapter-title'>機械学習入門：予測モデルを作る</span>"
+      "<span class='chapter-number'>23</span>  <span class='chapter-title'>(10) 機械学習入門</span>"
     ]
   },
   {
     "objectID": "lecB10.html#sec-step4",
     "href": "lecB10.html#sec-step4",
-    "title": "23  機械学習入門：予測モデルを作る",
+    "title": "23  (10) 機械学習入門",
     "section": "23.10 ステップ4：RMSE・R² とベースライン",
     "text": "23.10 ステップ4：RMSE・R² とベースライン\n\nRMSE\nRMSE（Root Mean Squared Error、平方根平均二乗誤差）は、予測がどれくらい外れているかを表す数字です。\n\\[\n\\text{RMSE} = \\sqrt{\\frac{1}{n}\\sum_{i=1}^{n}(\\text{実際の値}_i - \\text{予測値}_i)^2}\n\\]\n外れた大きさを2乗して平均し、最後に平方根をとって元の単位に戻します。今日なら単位は台で、「予測は平均的に〇〇台くらい外れている」と読みます。小さいほど良い予測です。\n下の図は、6日分の架空のデータで RMSE の計算を表したものです。黒い点が実際の貸出台数、青い直線がモデルの予測、赤い点線が外れ（実際の値 − 予測値）です。\n\n\n\n\n\nRMSE のイメージ（架空のデータ）\n\n\n\n\n\n\n\n\n\n気温（℃）\n実際の値\n予測値\n外れ\n外れの2乗\n\n\n\n\n10\n100\n80\n20\n400\n\n\n15\n110\n130\n-20\n400\n\n\n20\n190\n180\n10\n100\n\n\n25\n260\n230\n30\n900\n\n\n30\n250\n280\n-30\n900\n\n\n35\n340\n330\n10\n100\n\n\n\n\n\n\n\n\n\n\n\n\n計算の順番\nこの例では\n\n\n\n\n① 外れを2乗する（プラスとマイナスが打ち消し合わないようにする）\n400, 400, 100, 900, 900, 100\n\n\n② 2乗した外れを平均する\n(400 + 400 + 100 + 900 + 900 + 100) ÷ 6 ≒ 466.7\n\n\n③ 平方根をとって、元の単位（台）に戻す\n\\(\\sqrt{466.7}\\) ≒ 21.6 台\n\n\n\nこの予測は、平均的に約 22 台外れている、と読みます。外れをそのまま平均すると、+20 と −20 のように打ち消し合って 0 に近くなってしまうので、2乗してから平均します。\n\n\n\n\n\n\nNote\n\n\n\nRMSE では「外れの向き」は分からない\nRMSE は外れを2乗するので、多めに外しても（予測 ＞ 実際）、少なめに外しても（予測 ＜ 実際）、同じ「外れの大きさ」として数えます。多めと少なめのどちらに外しがちかは、RMSE からは分かりません。\n向きを知りたいときは、外れ（実際の値 − 予測値）を2乗せずに、そのまま平均します（平均誤差）。\n\nプラス → 実際より少なめに予測しがち\nマイナス → 実際より多めに予測しがち\n\n上の例では、外れの合計は +20 − 20 + 10 + 30 − 30 + 10 ＝ 20、平均誤差は約 +3.3 台で、ほとんど偏りはありません。\n依頼主にとっては、外れの向きも大事です。たとえば、貸出台数を少なめに予測して自転車の配置が足りなければ、借りたい人が借りられず、利用者を逃してしまいます。多めに予測すれば、使われない自転車を運ぶ手間が無駄になります。どちらの外れが困るかは依頼主の事情によって違うので、報告では「どれくらい外れるか」（RMSE）に加えて、「どちらに外れがちか」も伝えると親切です（補足1で実際に確かめます）。\n\n\n\n1rmse &lt;- function(actual, pred) {\n  sqrt(mean((actual - pred)^2))\n}\n\n\n1\n\nRMSE を計算する関数を自分で作る。actual に実際の値、pred に予測値を入れる。\n\n\n\n\n\n\n\n\n\nR²（決定係数）\n前期の回帰分析で学んだ R²（決定係数）も、予測の良さを表す数字として使えます。R² は「実際の値の散らばりのうち、何%を予測で説明できたか」を表します。\n\\[\nR^2 = 1 - \\frac{\\sum(\\text{実際の値}_i - \\text{予測値}_i)^2}{\\sum(\\text{実際の値}_i - \\text{実際の値の平均})^2}\n\\]\n分母は「平均で予測したときの外れの2乗の合計（もともとの散らばり）」、分子は「モデルで予測したときの外れの2乗の合計（説明できずに残った散らばり）」です。上の例では、実際の値の平均は約 208 台、分母は約 43,483、分子は 2,800 なので、R² ＝ 1 − 2,800 ÷ 43,483 ≒ 0.94。散らばりの約 94% を予測で説明できた、と読みます。1 に近いほど良い予測です。\n\n1r2 &lt;- function(actual, pred) {\n  1 - sum((actual - pred)^2) / sum((actual - mean(actual))^2)\n}\n\n\n1\n\nR² を計算する関数。summary(lm()) に出てくる R² と同じ計算を、好きなデータで行えるようにする。\n\n\n\n\n\n\n\n\n\n\n\n\n\nRMSE\nR²\n\n\n\n\n読み方\n平均的に〇〇台外れる\n散らばりの〇〇%を説明できた\n\n\n単位\nあり（今日は台）\nなし（0〜1）\n\n\n良い予測\n小さいほど良い\n1 に近いほど良い\n\n\n得意なこと\n依頼主に「どれくらい外れるか」を具体的に伝える\n単位の違う別のデータの予測とも比べられる\n\n\n\n今日は RMSE を主な指標にし、R² を並べて見ていきます。\n\n\n\n\n\n\nImportant\n\n\n\nR² は「検証用データ」で計算する\n前期に summary() で見た R² は、モデルを作った学習用データでの値です。学習用の R² は、変数を増やすほど必ず大きくなるので、学習用の R² が高くても、新しいデータをよく予測できるとは限りません（ステップ6で確かめます）。予測の良さは、RMSE と同じく検証用データで計算した R² で判断します。検証用の R² は、平均で予測するより悪いときにはマイナスになることもあります。\n\n\n\n\n\n\n\nベースライン\nモデルが役に立っているかを判断するには、比べる基準（ベースライン）が必要です。一番簡単な予測は、「天気も時間も気にせず、いつも学習用データの平均の台数だと予測する」ことです。\n\n1mean_learn &lt;- mean(df_learn$rentals)\nmean_learn\n\n2rmse(df_valid$rentals, mean_learn)\nr2(df_valid$rentals, mean_learn)\n\n\n1\n\n学習用データの平均の貸出台数。\n\n2\n\n検証用データのすべての時間を、この平均で予測したときの RMSE と R²。\n\n\n\n\n[1] 189.9096\n[1] 180.6807\n[1] -0.0001526779\n\n\n平均だけで予測すると、平均的に約 181 台外れます。R² はほぼ 0 で、散らばりをまったく説明できていません。これより小さい RMSE（大きい R²）を目指します。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>23</span>  <span class='chapter-title'>機械学習入門：予測モデルを作る</span>"
+      "<span class='chapter-number'>23</span>  <span class='chapter-title'>(10) 機械学習入門</span>"
     ]
   },
   {
     "objectID": "lecB10.html#sec-step5",
     "href": "lecB10.html#sec-step5",
-    "title": "23  機械学習入門：予測モデルを作る",
+    "title": "23  (10) 機械学習入門",
     "section": "23.11 ステップ5：モデルを育てる",
     "text": "23.11 ステップ5：モデルを育てる\n前期に学んだ lm() で、学習用データ（df_learn）からモデルを作ります。いきなり完成形を作るのではなく、次の手順を1つずつくり返して、モデルを少しずつ育てていきます。\n\n\n\n\n\n\n\n順番\nすること\n\n\n\n\n①\nモデルを学習用データで作る\n\n\n②\n係数を見て、モデルの中身を読む（どの変数で何台増える・減ると考えているか）\n\n\n③\n学習用・検証用のそれぞれで予測し、RMSE と R² で当たり具合を確かめる\n\n\n④\n結果を見て、「何が足りないか」を考え、次に試す変数を決める\n\n\n\n\n\n\n\nmodel1：気温だけ\nまずは、ステップ2で貸出台数との関係が見えた気温だけで予測してみます。\n\n1model1 &lt;- lm(rentals ~ temp, data = df_learn)\ncoef(model1)\n\n2pred1_learn &lt;- predict(model1, newdata = df_learn)\npred1_valid &lt;- predict(model1, newdata = df_valid)\n\n3rmse(df_learn$rentals, pred1_learn)\nrmse(df_valid$rentals, pred1_valid)\n\n4r2(df_learn$rentals, pred1_learn)\nr2(df_valid$rentals, pred1_valid)\n\n\n1\n\n学習用データで、気温だけのモデルを作る。\n\n2\n\npredict() の newdata にデータを渡すと、1行ずつの予測値が出てくる。学習用と検証用のそれぞれで予測する。\n\n3\n\n学習用と検証用のそれぞれで RMSE を計算する。\n\n4\n\n同じように R² を計算する。学習用の R² は summary(model1) の「Multiple R-squared」と同じ値になる。\n\n\n\n\n(Intercept)        temp \n  -2.543318    9.429318 \n[1] 165.5961\n[1] 166.9235\n[1] 0.1681043\n[1] 0.1463537\n\n\n気温が1℃高いと、貸出台数は約 9.4 台多いと予測するモデルです。検証用の RMSE は約 167 台で、平均だけの予測（約 181 台）より少し良くなりましたが、まだ大きく外れています。R² は約 0.15 で、散らばりの 15% ほどしか説明できていません。\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n毎回の計算を関数にまとめる\nこれからモデルを何回も作り、そのたびに「学習用と検証用で予測して RMSE と R² を計算する」ことをくり返します。同じコードを何度も書かなくてすむように、関数にまとめておきます。\n\n1check_model &lt;- function(model, learn = df_learn) {\n  pred_learn &lt;- predict(model, newdata = learn)\n  pred_valid &lt;- predict(model, newdata = df_valid)\n2  c(rmse_learn = rmse(learn$rentals, pred_learn),\n    rmse_valid = rmse(df_valid$rentals, pred_valid),\n    r2_learn   = r2(learn$rentals, pred_learn),\n    r2_valid   = r2(df_valid$rentals, pred_valid))\n}\n\n3check_model(model1)\n\n\n1\n\nlearn はモデルを作ったデータ。何も指定しなければ df_learn になる（ステップ6で別のデータを指定する）。\n\n2\n\n学習用と検証用の RMSE、学習用と検証用の R² の4つを並べて返す。\n\n3\n\n上で計算した model1 の RMSE・R² と同じ値になることを確かめる。\n\n\n\n\n rmse_learn  rmse_valid    r2_learn    r2_valid \n165.5960637 166.9235471   0.1681043   0.1463537 \n\n\n\n\n\n\n\n\n\nmodel2：気温の2乗を加える\nステップ2のグラフでは、気温と貸出台数の関係はまっすぐな直線ではなく、曲がっているように見えました。そこで、気温の2乗（I(temp^2)）を加えて、曲がった関係を表せるようにしてみます。\n\n1model2 &lt;- lm(rentals ~ temp + I(temp^2), data = df_learn)\ncoef(model2)\n\nres1 &lt;- check_model(model1)\nres2 &lt;- check_model(model2)\nres1\nres2\n\n\n1\n\nI(temp^2) は気温の2乗。I() で囲むと、^2 を「2乗の計算」として扱う。\n\n\n\n\n(Intercept)        temp   I(temp^2) \n11.95711663  7.75437692  0.04110561 \n rmse_learn  rmse_valid    r2_learn    r2_valid \n165.5960637 166.9235471   0.1681043   0.1463537 \nrmse_learn rmse_valid   r2_learn   r2_valid \n165.575092 166.919021   0.168315   0.146400 \n\n\n気温の2乗の係数は約 0.04 で、ほとんど 0 です。検証用の RMSE も、model1 が約 166.9 台、model2 が約 166.9 台、R² も約 0.146 と約 0.146 で、ほとんど変わりませんでした。\n\n\n\n\n\n\nImportant\n\n\n\nグラフで良さそうに見えても、効くとは限らない\nグラフでは曲がって見えた関係も、気温の2乗を入れても予測はほとんど良くなりませんでした。予測に効くかどうかは、実際にモデルに入れて、検証用の RMSE で確かめるまでは分かりません。効かなかった変数は、モデルを複雑にするだけなので、これ以降は入れないことにします。\n\n\n\n\n\n\n\nmodel3：天気・カレンダーを加える\n気温だけでは足りないので、依頼主が「翌日の天気予報とカレンダー」から分かる情報をまとめて加えます。湿度・風速・天気・平日か休日か・年（2012年ダミー）・季節です。\n\nmodel3 &lt;- lm(rentals ~ temp + humidity + wind + weather +\n               day_type + y2012 + season, data = df_learn)\ncoef(model3)\n\n      (Intercept)              temp          humidity              wind \n       78.6434997        11.8908902        -2.7065527         0.2912492 \nweather霧・くもり     weather雨・雪      day_type休日             y2012 \n       12.1064740        -4.2802680        -6.1466211        73.0043180 \n         season夏          season秋          season冬 \n      -66.9111462        37.4777380        19.8529011 \n\nres3 &lt;- check_model(model3)\nres3\n\n rmse_learn  rmse_valid    r2_learn    r2_valid \n149.0351745 147.8157547   0.3261761   0.3306023 \n\n\n係数を読んでみましょう。\n\n気温が1℃高いと約 11.9 台、湿度が1%高いと約 -2.7 台。\n2012年は2011年より約 73 台多い（利用者が増えている）。\nweather雨・雪 は「晴れ・くもりと比べて」、season秋 は「春と比べて」、day_type休日 は「平日と比べて」何台多いか（マイナスなら少ないか）を表す。\n\n検証用の RMSE は約 148 台、R² は約 0.33 になりました。model1 より良くなりましたが、まだ平均的に 148 台も外れています。\n何が足りないか？　ステップ2の最初のグラフを思い出しましょう。貸出台数は、時間帯によって 0 台近くから 500 台近くまで大きく変わっていました。model3 には、時間帯がまだ入っていません。\n\n\n\n\n\nmodel4：時間帯を加える\n\nmodel4 &lt;- lm(rentals ~ temp + humidity + wind + weather +\n1               day_type + y2012 + season + factor(hour), data = df_learn)\n2length(coef(model4))\n\nres4 &lt;- check_model(model4)\nres4\n\n\n1\n\nfactor(hour) と書くと、0〜23 の数字を「24種類のカテゴリ」として扱い、0時を基準にした23個のダミー変数になる（前期第11回）。\n\n2\n\n係数の数を数える。時間帯のダミー変数だけで23個あるので、coef() で全部を並べても読みにくい。\n\n\n\n\n[1] 34\n rmse_learn  rmse_valid    r2_learn    r2_valid \n102.9525911 104.5134201   0.6784538   0.6653531 \n\n\n係数が多いときは、表で眺めるよりグラフにすると読みやすくなります。時間帯の係数（0時と比べて何台多いか）だけを取り出して、折れ線グラフにします。\n\ndf_coef4 &lt;- tibble(\n  hour = 0:23,\n1  coef = c(0, coef(model4)[paste0(\"factor(hour)\", 1:23)])\n)\n\nggplot(df_coef4, aes(x = hour, y = coef)) +\n  geom_line(color = \"steelblue\") +\n  geom_point(color = \"steelblue\") +\n  scale_x_continuous(breaks = seq(0, 23, 3)) +\n  labs(x = \"時間帯（時）\", y = \"0時と比べた台数（係数）\") +\n  theme_minimal()\n\n\n1\n\nfactor(hour)1 〜 factor(hour)23 という名前の係数を取り出す。基準の0時は係数がないので、0 を先頭に付ける。\n\n\n\n\n\n\n\n\n\n\n\n8時と17〜18時に大きな山があります。ステップ2で見た平日の形にそっくりです。\nもう1つ、係数の変化にも注目しましょう。weather雨・雪 の係数は、model3 では約 -4 台でしたが、model4 では約 -66 台になりました。雨は昼にも夜中にも降るので、時間帯を入れないと「雨の時間は少ない」のか「夜中だから少ない」のかが区別できず、雨の効果がうまく表せていなかったのです。\n検証用の RMSE は約 105 台に大きく下がり、R² は約 0.67 に上がりました。散らばりの約 67% を説明できています。時間帯は、貸出台数にとても強く影響しています。\nまだ足りないものは？　ステップ2のグラフでは、時間帯の山の形が平日と休日でまったく違いました（平日は朝夕、休日は昼）。ところが model4 では、時間帯のダミー変数の係数は平日も休日も同じです。つまり model4 は、「平日も休日も同じ形の山で、高さだけが違う」という予測しかできません。\n\n\n\n\n\nmodel5：時間帯 × 平日・休日の交差項を加える\n平日と休日で時間帯の効き方が違うことを表すには、前期第12回で学んだ交差項を使います。\n\nmodel5 &lt;- lm(rentals ~ temp + humidity + wind + weather +\n1               y2012 + season + factor(hour) * day_type, data = df_learn)\nlength(coef(model5))\n\nres5 &lt;- check_model(model5)\nres5\n\n\n1\n\nfactor(hour) * day_type は、時間帯のダミー変数、平日・休日のダミー変数、その交差項をまとめて入れる書き方。\n\n\n\n\n[1] 57\nrmse_learn rmse_valid   r2_learn   r2_valid \n79.2842410 80.0256409  0.8093035  0.8037991 \n\n\n検証用の RMSE は約 80 台まで下がり、R² は約 0.8 になりました。係数は 57 個に増えています。model4 と同じように、時間帯の係数をグラフにしてみます。今度は平日と休日で別々の線になります。\n\n1b_hour  &lt;- c(0, coef(model5)[paste0(\"factor(hour)\", 1:23)])\n2b_inter &lt;- c(0, coef(model5)[paste0(\"factor(hour)\", 1:23, \":day_type休日\")])\n\ndf_coef5 &lt;- tibble(\n  hour = 0:23,\n  平日 = b_hour,\n3  休日 = b_hour + coef(model5)[\"day_type休日\"] + b_inter\n) |&gt;\n  pivot_longer(c(平日, 休日), names_to = \"day_type\", values_to = \"coef\")\n\nggplot(df_coef5, aes(x = hour, y = coef, color = day_type)) +\n  geom_line() +\n  geom_point() +\n  scale_x_continuous(breaks = seq(0, 23, 3)) +\n  scale_color_manual(values = c(\"平日\" = \"steelblue\", \"休日\" = \"orange\")) +\n  labs(x = \"時間帯（時）\", y = \"平日0時と比べた台数\", color = NULL) +\n  theme_minimal()\n\n\n1\n\n平日の時間帯の効果（基準の平日0時と比べて何台多いか）。\n\n2\n\n交差項の係数（休日のときに、その時間帯の効果がどれだけ変わるか）。\n\n3\n\n休日の効果 ＝ 時間帯の係数 ＋ 休日の係数 ＋ 交差項の係数。前期第12回の「グループ別の傾き」と同じ考え方。\n\n\n\n\n\n\n\n\n\n\n\n平日は朝夕の2つの山、休日は昼すぎの1つの山になりました。交差項を入れたことで、モデルが平日と休日の違いを係数として覚えたことが分かります。\n\n\n\n\n\n\nNote\n\n\n\n予測では、係数を1つずつ説明しなくてもよい？\n前期の回帰分析では、「この係数が統計的に有意か」「1増えると何増えるか」を1つずつ読むことが目的でした。予測では、目的はよく当てることなので、70個近い係数を1つずつ説明できなくても、検証用の RMSE が小さければ良いモデルです。それでも、係数をグラフにして「モデルがデータの特徴をつかんでいるか」を確かめておくと、おかしな予測に早く気づけますし、依頼主にも説明しやすくなります。\n\n\n\n\n\n\n\nここまでの結果をまとめる\n\ndf_result &lt;- tibble(\n  model = c(\"ベースライン（平均だけ）\", \"model1 気温\", \"model2 ＋気温の2乗\",\n            \"model3 気温＋天気・カレンダー\", \"model4 ＋時間帯\", \"model5 ＋時間帯×平日・休日\"),\n  rmse_valid = c(rmse(df_valid$rentals, mean_learn),\n                 res1[\"rmse_valid\"], res2[\"rmse_valid\"], res3[\"rmse_valid\"],\n                 res4[\"rmse_valid\"], res5[\"rmse_valid\"]),\n  r2_valid   = c(r2(df_valid$rentals, mean_learn),\n                 res1[\"r2_valid\"], res2[\"r2_valid\"], res3[\"r2_valid\"],\n                 res4[\"r2_valid\"], res5[\"r2_valid\"])\n)\n\ndf_result |&gt;\n  mutate(rmse_valid = round(rmse_valid, 1),\n         r2_valid   = round(r2_valid, 3))\n\n# A tibble: 6 × 3\n  model                         rmse_valid r2_valid\n  &lt;chr&gt;                              &lt;dbl&gt;    &lt;dbl&gt;\n1 ベースライン（平均だけ）            181.    0    \n2 model1 気温                         167.    0.146\n3 model2 ＋気温の2乗                  167.    0.146\n4 model3 気温＋天気・カレンダー       148.    0.331\n5 model4 ＋時間帯                     104.    0.665\n6 model5 ＋時間帯×平日・休日           80     0.804\n\n\n予測が大きく良くなったのは、ステップ2のグラフで見つけた時間帯（model4）と、平日と休日の違い（model5）を入れたときでした。データを眺めて気づいたことをモデルに入れ、検証用の RMSE で確かめる。このくり返しが、予測モデルづくりの基本です。\n\n\n\n\n\n予測をグラフで確かめる\n2012年6月の1週間（月曜〜日曜）について、実際の貸出台数と、model4・model5 の予測を並べて描きます。\n\ndf_bike |&gt;\n  filter(date &gt;= as.Date(\"2012-06-04\"), date &lt;= as.Date(\"2012-06-10\")) |&gt;\n1  mutate(datetime = make_datetime(year(date), month(date), day(date), hour),\n2         `model4 の予測` = predict(model4, newdata = pick(everything())),\n         `model5 の予測` = predict(model5, newdata = pick(everything())),\n         `実際の台数` = rentals) |&gt;\n3  pivot_longer(c(`実際の台数`, `model4 の予測`, `model5 の予測`),\n               names_to = \"type\", values_to = \"count\") |&gt;\n  ggplot(aes(x = datetime, y = count, color = type)) +\n  geom_line() +\n  scale_color_manual(values = c(\"実際の台数\" = \"orange\", \"model4 の予測\" = \"steelblue\",\n                                \"model5 の予測\" = \"black\")) +\n  labs(x = \"日時\", y = \"貸出台数（台）\", color = NULL) +\n  theme_minimal() +\n  theme(legend.position = \"bottom\")\n\n\n1\n\n日付と時間帯から、日時を作る。\n\n2\n\npick(everything()) は「今のデータのすべての列」という意味で、そのデータで予測する。\n\n3\n\n実際の台数と2つの予測を、1つの列（count）にまとめ、どれの値かを type 列に入れる。こうすると、color = type で3本の線を色分けして描ける。\n\n\n\n\n\n\n\n2012年6月4日（月）〜10日（日）の実際の貸出台数と予測\n\n\n\n\nmodel4（青）は、休日（9日・10日）にも朝と夕方の山を予測してしまっています。model5（黒）は、平日は朝夕の2つの山、休日は昼の山と、実際の形（オレンジ）にかなり近い予測ができています。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>23</span>  <span class='chapter-title'>機械学習入門：予測モデルを作る</span>"
+      "<span class='chapter-number'>23</span>  <span class='chapter-title'>(10) 機械学習入門</span>"
     ]
   },
   {
     "objectID": "lecB10.html#sec-step6",
     "href": "lecB10.html#sec-step6",
-    "title": "23  機械学習入門：予測モデルを作る",
+    "title": "23  (10) 機械学習入門",
     "section": "23.12 ステップ6：過学習を体験する",
     "text": "23.12 ステップ6：過学習を体験する\n交差項でこれだけ良くなるなら、もっとたくさん交差項を入れれば、もっと良くなるのでしょうか。時間帯 × 平日・休日 × 天気 × 季節 の交差項をすべて入れた、とても複雑なモデル（model6）を作ってみます。\nさらに、「データが少ないとき」に何が起きるかを見るため、学習用データから 1,000 時間分だけを取り出したデータでも、model5 と model6 を作って比べます。\n\nset.seed(1)\n1df_small &lt;- df_learn |&gt; slice_sample(n = 1000)\n\n2model6 &lt;- lm(rentals ~ temp + humidity + wind + y2012 +\n               factor(hour) * day_type * weather * season, data = df_learn)\n\n3model5_small &lt;- lm(rentals ~ temp + humidity + wind + weather +\n                     y2012 + season + factor(hour) * day_type, data = df_small)\nmodel6_small &lt;- lm(rentals ~ temp + humidity + wind + y2012 +\n                     factor(hour) * day_type * weather * season, data = df_small)\n\n4length(coef(model5))\nlength(coef(model6))\n\n5df_overfit &lt;- rbind(check_model(model5),\n                    check_model(model6),\n                    check_model(model5_small, learn = df_small),\n                    check_model(model6_small, learn = df_small)) |&gt;\n  as_tibble() |&gt;\n  mutate(data  = c(\"学習用（全部）\", \"学習用（全部）\", \"1,000時間分だけ\", \"1,000時間分だけ\"),\n         model = c(\"model5\", \"model6\", \"model5\", \"model6\"),\n         .before = 1)\n\ndf_overfit |&gt;\n  mutate(across(starts_with(\"rmse\"), \\(x) round(x, 1)),\n         across(starts_with(\"r2\"), \\(x) round(x, 3)))\n\n\n1\n\n学習用データから、1,000 行だけをランダムに取り出す。\n\n2\n\na * b * c * d と書くと、4つの変数のすべての組み合わせの交差項が入る。時間帯24 × 平日・休日2 × 天気3 × 季節4 ＝ 576 通りの組み合わせごとに、別々の台数を予測するモデルになる。\n\n3\n\n同じ2つのモデルを、1,000 時間分のデータだけで作る。\n\n4\n\n係数の数を比べる。model6 は係数が 580 個もある。\n\n5\n\n4つのモデルの RMSE と R² を check_model() で計算し、rbind() で縦に並べて表にする。1,000 時間分のモデルは、学習用の値を df_small で計算する（learn = df_small）。\n\n\n\n\n[1] 57\n[1] 580\n# A tibble: 4 × 6\n  data            model  rmse_learn rmse_valid r2_learn r2_valid\n  &lt;chr&gt;           &lt;chr&gt;       &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;\n1 学習用（全部）  model5       79.3       80      0.809    0.804\n2 学習用（全部）  model6       68.4       70.4    0.858    0.848\n3 1,000時間分だけ model5       79.7       84.1    0.797    0.783\n4 1,000時間分だけ model6       55        107.     0.903    0.652\n\n\n\n\n\n\n学習用データを全部（約 13,903 時間分）使うと、model6 の検証用 RMSE（約 70 台）は model5（約 80 台）より小さくなります。データが十分にあれば、複雑なモデルも役に立ちます。\nところが、1,000 時間分しかないと、model6 は学習用の RMSE はとても小さい（約 55 台）のに、検証用の RMSE は大きくなります（約 107 台）。model5 の検証用 RMSE（約 84 台）より悪くなってしまいました。\nR² で見ても同じです。1,000 時間分の model6 は、学習用の R² が約 0.9 と model5（約 0.8）より高いのに、検証用の R² は約 0.65 と model5（約 0.78）より低くなります。前期のように学習用の R² だけを見ていると、model6 のほうが良いモデルだと思い込んでしまいます。\n\n\n\n\n\n\n\nImportant\n\n\n\n過学習\n変数や交差項をたくさん入れると、モデルは学習用データの細かいでこぼこ（たまたまの誤差）まで覚えてしまい、新しいデータでは予測が悪くなることがあります。これを過学習（overfitting）といいます。\n\n学習用の RMSE は、変数を増やすほど必ず小さくなります。だから、モデルの良し悪しは学習用ではなく検証用の RMSEで判断します。\n学習用と検証用の RMSE の差が大きいときは、過学習を疑います。\nどこまで複雑なモデルを使えるかは、データの量によって変わります。\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n係数が NA になる\nmodel6_small の係数を coef() で見ると、NA がたくさん出てきます。1,000 時間分のデータには、「休日 × 雨・雪 × 冬 × 3時」のように、1件もない組み合わせがあり、その係数は計算できないためです。これも「データに対して変数が多すぎる」というサインです（このチャンクでは警告を表示しないようにしています）。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>23</span>  <span class='chapter-title'>機械学習入門：予測モデルを作る</span>"
+      "<span class='chapter-number'>23</span>  <span class='chapter-title'>(10) 機械学習入門</span>"
     ]
   },
   {
     "objectID": "lecB10.html#sec-step7",
     "href": "lecB10.html#sec-step7",
-    "title": "23  機械学習入門：予測モデルを作る",
+    "title": "23  (10) 機械学習入門",
     "section": "23.13 ステップ7：最終モデルと報告",
     "text": "23.13 ステップ7：最終モデルと報告\n検証用の RMSE が一番小さかったモデルを、学習用と検証用を合わせたデータ全体（df_bike）で作り直し、最終モデルにします。検証用データは「モデルを選ぶ」ために取っておいたものなので、選び終わったら学習に使ってかまいません。データが多いほど、予測は安定します。\n\ndf_result_all &lt;- bind_rows(\n  df_result,\n  tibble(model = \"model6 ＋すべての交差項\",\n         rmse_valid = df_overfit$rmse_valid[2], r2_valid = df_overfit$r2_valid[2])\n) |&gt;\n1  arrange(rmse_valid)\n\ndf_result_all |&gt;\n  mutate(rmse_valid = round(rmse_valid, 1),\n         r2_valid   = round(r2_valid, 3))\n\n2model_final &lt;- lm(rentals ~ temp + humidity + wind + y2012 +\n                    factor(hour) * day_type * weather * season, data = df_bike)\n\n\n1\n\n検証用 RMSE の小さい順に並べる。\n\n2\n\n一番小さかったモデル（ここでは model6）を、データ全体で作り直す。\n\n\n\n\n# A tibble: 7 × 3\n  model                         rmse_valid r2_valid\n  &lt;chr&gt;                              &lt;dbl&gt;    &lt;dbl&gt;\n1 model6 ＋すべての交差項             70.4    0.848\n2 model5 ＋時間帯×平日・休日          80      0.804\n3 model4 ＋時間帯                    104.     0.665\n4 model3 気温＋天気・カレンダー      148.     0.331\n5 model2 ＋気温の2乗                 167.     0.146\n6 model1 気温                        167.     0.146\n7 ベースライン（平均だけ）           181.     0    \n\n\n\n\n\n\n依頼主への報告\n\n\n\n\n\n\nTip\n\n\n\nCapital Bikeshare 運営チームへの報告（例）\n\nどれくらい正確に予測できるか：天気・カレンダー・時間帯を使ったモデルで、1時間ごとの貸出台数を、平均的に約 70 台の外れで予測できました（貸出台数の散らばりの約 85% を説明）。何も使わずに平均で予測した場合（約 181 台の外れ）より、大きく改善しています。\n何が効くか：最も効いたのは時間帯と、その平日・休日による違いです。平日は朝8時ごろと夕方17〜18時ごろに通勤の利用が集中し、休日は昼すぎに利用が多くなります。気温（とても暑い時間を除き、高いほど多い）、雨・雪、年（利用者の増加）も効いています。\n気をつけること：\n\n利用者は年々増えています。2011年と2012年のデータで作ったモデルは、2013年以降の台数を少なめに予測してしまうおそれがあります。少なめの予測で配置すると自転車が足りなくなるので、新しいデータで作り直し続ける必要があります（下の補足1）。\n予測に使う天気は「天気予報」なので、予報が外れれば、台数の予測も外れます。\nイベントやハリケーンなど、データにない出来事は予測できません。\n夜中などの利用が少ない時間には、マイナスの台数を予測してしまうことがあります（下の補足）。\n\n\n\n\n\n\n\n\n\n\n\n\n\nNote補足1：過去から未来を予測すると\n\n\n\n\n\n今日は 80% と 20% をランダムに分けたので、検証用データには2011年の時間も2012年の時間も入っていました。しかし、依頼主が本当に予測したいのは「未来」です。そこで、2011年だけでモデルを作り、2012年を予測してみます（2011年のデータしかないので、y2012 は使えません）。\n\ndf_2011 &lt;- df_bike |&gt; filter(y2012 == 0)\ndf_2012 &lt;- df_bike |&gt; filter(y2012 == 1)\n\nmodel_2011 &lt;- lm(rentals ~ temp + humidity + wind + weather +\n                   season + factor(hour) * day_type, data = df_2011)\npred_2012 &lt;- predict(model_2011, newdata = df_2012)\n\nrmse(df_2012$rentals, pred_2012)\n\n[1] 138.7874\n\nmean(df_2012$rentals)   # 2012年の実際の平均\n\n[1] 234.6664\n\nmean(pred_2012)     # 2012年の予測の平均\n\n[1] 148.8801\n\nmean(df_2012$rentals - pred_2012)   # 平均誤差（外れの向き）\n\n[1] 85.78628\n\n\nRMSE は約 139 台と、ランダムに分けたときよりずっと大きくなります。2012年の実際の平均（約 235 台）に対して、予測の平均は約 149 台で、利用者の増加を予測できず、全体に少なめに予測しています。平均誤差は約 +86 台で、1時間あたり平均してそれだけ少なく見積もっていることになります。このまま使うと、自転車の配置がいつも足りなくなるおそれがあります。RMSE だけでは分からない「外れの向き」が、ここではとても重要です。過去のデータで作ったモデルは、世の中が変わると当たらなくなります。\n\n\n\n\n\n\n\n\n\nNote補足2：マイナスの予測\n\n\n\n\n\n\npred_final &lt;- predict(model_final, newdata = df_bike)\nsum(pred_final &lt; 0)                     # マイナスの予測の数\n\n[1] 1888\n\nmean(pred_final &lt; 0)                    # その割合\n\n[1] 0.1086369\n\n\nlm() は直線（足し算）のモデルなので、利用の少ない夜中などに、1888 時間分（全体の約 11%）でマイナスの台数を予測しています。貸出台数がマイナスになることはないので、実際に使うときは 0 に置き換えるなどの工夫が必要です。モデルの作り方を変えて、マイナスにならないようにする方法もあります。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>23</span>  <span class='chapter-title'>機械学習入門：予測モデルを作る</span>"
+      "<span class='chapter-number'>23</span>  <span class='chapter-title'>(10) 機械学習入門</span>"
     ]
   },
   {
     "objectID": "lecB10.html#sec-homework",
     "href": "lecB10.html#sec-homework",
-    "title": "23  機械学習入門：予測モデルを作る",
+    "title": "23  (10) 機械学習入門",
     "section": "23.14 総合分析演習4（宿題）",
     "text": "23.14 総合分析演習4（宿題）\n今日の流れを、別のデータで一人で行ってもらいます。今度は、アメリカ・アイオワ州エイムズ市の不動産会社から、「売り出す住宅の価格の目安を予測してほしい」という依頼が届きました。データ（ames_house.csv）と課題ファイル（assignmentB11.qmd）は Blackboard で配布します。\n\nデータ：エイムズ市で2006〜2010年に売れた住宅 2,909 件の販売価格と、広さ・建築年・地区・設備など。\n課題ファイルの課題1〜9に沿って、今日と同じ流れ（前処理 → グラフ → 学習用と検証用に分ける → モデルを1つずつ育てる → 依頼主への報告）で取り組む。\nベースラインを含めて3つ以上のモデルを作り、検証用の RMSE と R² で比べて、一番良いモデルを選ぶ。どの変数を使うかは自分で考える。\n提出：Render した HTML を ZIP 形式に圧縮して Blackboard から提出。期限は第11回の授業開始（12月14日 15:45）まで。\n第11回に、レポートを画面に映しながら、一人ずつ内容を説明する。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>23</span>  <span class='chapter-title'>機械学習入門：予測モデルを作る</span>"
+      "<span class='chapter-number'>23</span>  <span class='chapter-title'>(10) 機械学習入門</span>"
     ]
   },
   {
     "objectID": "lecB10.html#sec-summary",
     "href": "lecB10.html#sec-summary",
-    "title": "23  機械学習入門：予測モデルを作る",
+    "title": "23  (10) 機械学習入門",
     "section": "23.15 まとめ",
     "text": "23.15 まとめ\n\n\n\n\n\n\n\n項目\nポイント\n\n\n\n\nAI・機械学習\nAI ⊃ 機械学習 ⊃ ディープラーニング。前期の回帰分析（lm()）も機械学習の一つ\n\n\n説明と予測\n同じ lm() でも、予測では「新しいデータで当たるか」を見る\n\n\n学習用と検証用\nデータを分け、学習用でモデルを作り、検証用で当たり具合を確かめる\n\n\npredict()\npredict(モデル, newdata = データ) で、1行ずつの予測値を出す\n\n\nRMSE\n予測が平均的にどれくらい外れているか。元の単位で読み、小さいほど良い\n\n\nR²（検証用）\n実際の値の散らばりの何%を予測で説明できたか。1 に近いほど良い。学習用の R² は変数を増やすと必ず上がるので、検証用で見る\n\n\n平均誤差\n外れ（実際 − 予測）をそのまま平均したもの。RMSE では分からない「外れの向き」が分かる。プラスなら少なめ、マイナスなら多めに予測しがち\n\n\nベースライン\n比べる基準。まずは「平均だけで予測」\n\n\n交差項\n「時間帯の効き方が平日と休日で違う」のような関係を表し、予測を大きく良くすることがある\n\n\n過学習\n変数を増やすと学習用には当てはまるが、新しいデータでは悪くなることがある。データが少ないほど起こりやすい\n\n\n予測に使える変数\n予測する時点で分かっている情報だけ。答えそのもの（rentals_casual + rentals_member）は使えない\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n次回の予告\n次回は発表・分析結果説明4です。\n\n総合分析演習4のレポートを画面に映しながら、一人ずつ教員に説明してもらいます\n「なぜ学習用と検証用に分けたのか」「RMSE が〇〇とはどういう意味か」「どのモデルを選んだか、なぜか」と質問するので、答えられるように準備してきてください\n説明の順番を待つ間に、総合分析演習5（コンペ）のデータを配布するので、データを眺めるところから始めましょう",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>23</span>  <span class='chapter-title'>機械学習入門：予測モデルを作る</span>"
+      "<span class='chapter-number'>23</span>  <span class='chapter-title'>(10) 機械学習入門</span>"
     ]
   },
   {
     "objectID": "lecB12.html",
     "href": "lecB12.html",
-    "title": "25  総合分析演習5",
+    "title": "25  (12) 機械学習コンペ",
     "section": "",
     "text": "25.1 コンペの進め方とルール\n東京23区の中古マンションの価格を予測するコンペ\n今日の目標\nルール\n評価：総合分析演習1回分（15%）は、提出したレポートと第13回の説明の内容をあわせて評価します（5つのステップ × 3段階＝15点満点）。順位は第13回に発表しますが、順位そのものは点数に入れません。ただし、下のベースラインより良い（RMSE が小さい）予測ができていることが、ステップ4で最高の評価をつける条件です。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>25</span>  <span class='chapter-title'>総合分析演習5</span>"
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>(12) 機械学習コンペ</span>"
     ]
   },
   {
     "objectID": "lecB12.html#sec-rules",
     "href": "lecB12.html#sec-rules",
-    "title": "25  総合分析演習5",
+    "title": "25  (12) 機械学習コンペ",
     "section": "",
     "text": "回\n授業ですること\n授業のあとにすること\n\n\n\n\n第12回（今日）\nデータを読み込み、前処理をして、モデルを作って比べる\n冬休み中にモデルを改良し、予測を提出する\n\n\n第13回（1月18日）\n順位の発表。レポートの内容を、教員に一人ずつ説明する（約5分）\n―\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n項目\n内容\n\n\n\n\n参加\n個人戦です。友だちと相談するのは構いませんが、コードとモデルは自分で作ってください\n\n\n使える手法\nlm() だけです。変数の選び方、mutate() で作る変数、log()、ダミー変数、交差項は自由に工夫してください\n\n\n使えるデータ\n配布した tokyo_train.csv と tokyo_test.csv だけです。ほかのデータ（インターネットで見つけた不動産のデータなど）を使うことは禁止です\n\n\n提出の回数\n1回だけです。提出してから出し直すことはできません\n\n\n提出するもの\n① 予測の CSV ファイル（submission_学籍番号.csv）と、② assignmentB12.qmd を Render した HTML の ZIP\n\n\n採点\n予測した価格と正解の価格の RMSE（万円） で順位をつけます。小さいほど上位です\n\n\n\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\n提出期限\n予測の CSV ファイルとレポートの提出期限は、1月15日（金）24時です。これ以降は提出できず、レポートを提出していないと第13回の説明もできません。\n決められた形式でない予測ファイルは採点できません。行数が 1,000 行でない、欠損（NA）がある、価格が万円になっていない（円のまま、log のまま）などのファイルは、順位の対象外になります。提出する前に、下の「提出ファイルの作り方」のチェックを必ず行ってください。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>25</span>  <span class='chapter-title'>総合分析演習5</span>"
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>(12) 機械学習コンペ</span>"
     ]
   },
   {
     "objectID": "lecB12.html#sec-data",
     "href": "lecB12.html#sec-data",
-    "title": "25  総合分析演習5",
+    "title": "25  (12) 機械学習コンペ",
     "section": "25.2 今日のデータ",
     "text": "25.2 今日のデータ\n国土交通省の「不動産情報ライブラリ」で公開されている、2025年に東京23区で売買が成立した中古マンションのデータです。不動産会社の仲介で売買が成立したときの価格（成約価格）が記録されています。1行が1件の売買（1つの部屋）です。\n出典：国土交通省「不動産情報ライブラリ」（https://www.reinfolib.mlit.go.jp/）の不動産価格（成約価格）情報をもとに、教員が23区・2025年の分を取り出して加工しました。\n\n\n\n2つのファイル\n\n\n\n\n\n\n\n\nファイル\n行数\n内容\n\n\n\n\ntokyo_train.csv（学習用データ）\n21,048\n価格（取引価格（総額））が入っている。これを使ってモデルを作る\n\n\ntokyo_test.csv（テストデータ）\n1,000\n価格の列だけが消してある。この 1,000 件の価格を予測して提出する\n\n\n\n2つのファイルの列は、価格の列があるかないか以外は同じです。ダウンロードしたときの形をほとんどそのまま残してあるので、列名は日本語、価格は円、間取りは全角の文字です。変数を使える形にするのも、今日の課題の一部です。\n\n\n\n\n\n\n\n\n\n\n列名\n内容\n\n\n\n\nid\n番号（教員が付けたもの。学習用は 1〜、テストは 100001〜）\n\n\n種類\nすべて「中古マンション等」\n\n\n価格情報区分\nすべて「成約価格情報」\n\n\n市区町村コード\n区の番号（13101 千代田区 〜 13123 江戸川区）\n\n\n都道府県名\nすべて「東京都」\n\n\n市区町村名\n区の名前（23区）\n\n\n地区名\n町の名前（約800種類）\n\n\n最寄駅：名称\n最寄り駅（約450種類）\n\n\n最寄駅：距離（分）\n最寄り駅から徒歩何分か\n\n\n取引価格（総額）\n価格（円）。学習用データにだけある\n\n\n間取り\n間取り（３ＬＤＫ、１Ｋ など）\n\n\n面積（㎡）\n部屋の面積（㎡）。5㎡ ごとに丸めてある\n\n\n建築年\n建物が建てられた年（「2005年」のように「年」が付いている）\n\n\n建物の構造\nＲＣ（鉄筋コンクリート）、ＳＲＣ（鉄骨鉄筋コンクリート）、鉄骨造 など\n\n\n用途・今後の利用目的・建ぺい率（％）・容積率（％）・取引の事情等\nすべて空欄\n\n\n都市計画\nその場所の用途地域（商業、１種住居 など）\n\n\n取引時期\n売買が成立した時期（2025年第1四半期〜第4四半期）\n\n\n改装\n「改装済み」または空欄\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nExcel で中身を見るときは\nCSV ファイルは Excel で開いて中身を確かめて構いません。ただし、Excel で上書き保存はしないでください。保存すると、数字や文字の形が変わってしまうことがあります。R ではダウンロードしたままのファイルを読み込みます。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>25</span>  <span class='chapter-title'>総合分析演習5</span>"
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>(12) 機械学習コンペ</span>"
     ]
   },
   {
     "objectID": "lecB12.html#sec-prepare",
     "href": "lecB12.html#sec-prepare",
-    "title": "25  総合分析演習5",
+    "title": "25  (12) 機械学習コンペ",
     "section": "25.3 今日の準備",
     "text": "25.3 今日の準備\n\n\n\n\n\n\n\n1.\n新規 R プロジェクトを作成する。Directory name は「LessonB12」、場所は Kドライブの「R_programming」。\n\n\n2.\nBlackboard から tokyo_train.csv・tokyo_test.csv・submission_sample.csv・assignmentB12.qmd をダウンロードし、「R_programming/LessonB12」フォルダに入れる。\n\n\n3.\nまずは氏名（学籍番号）を記入し、この状態で Rendering ができるか確認する。\n\n\n4.\n左側に Rendering して出力された画面を置き、右半分には RStudio を置いて assignmentB12.qmd でレポートを書く。\n\n\n5.\n適当なところで Rendering し、確かめながら進める。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>25</span>  <span class='chapter-title'>総合分析演習5</span>"
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>(12) 機械学習コンペ</span>"
     ]
   },
   {
     "objectID": "lecB12.html#sec-setup",
     "href": "lecB12.html#sec-setup",
-    "title": "25  総合分析演習5",
+    "title": "25  (12) 機械学習コンペ",
     "section": "25.4 パッケージの準備",
     "text": "25.4 パッケージの準備\n大学の PC はシャットダウンするたびに初期化されるため、毎回インストールが必要です。\n\noptions(repos = c(CRAN = \"https://cran.rstudio.com/\"))\n\ninstall.packages(\"tidyverse\")\ninstall.packages(\"broom\")\ninstall.packages(\"modelsummary\")",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>25</span>  <span class='chapter-title'>総合分析演習5</span>"
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>(12) 機械学習コンペ</span>"
     ]
   },
   {
     "objectID": "lecB12.html#sec-predict",
     "href": "lecB12.html#sec-predict",
-    "title": "25  総合分析演習5",
+    "title": "25  (12) 機械学習コンペ",
     "section": "25.5 予測の考え方",
     "text": "25.5 予測の考え方\n\n予測の流れ\n\n\n\n\n\n\n\n\n順番\nすること\n使うデータ\n\n\n\n\n1\n読み込んで、前処理をする\n学習用・テストの両方（同じ処理をする）\n\n\n2\n学習用データを、さらに「学習用」と「検証用」に分ける\n学習用\n\n\n3\nいくつかのモデルを「学習用」で作り、「検証用」の RMSE を比べる\n学習用\n\n\n4\n一番良かったモデルを、学習用データ全体で作り直す\n学習用\n\n\n5\nそのモデルでテストデータの価格を予測し、CSV で保存する\nテスト\n\n\n\nテストデータの正解は皆さんには分かりません。そこで、手元の学習用データの一部を「検証用」として取っておき、正解を知っているのに、知らないふりをして予測してみることで、どのモデルが良さそうかを確かめます。\n\n\n\n\n\nRMSE\nRMSE（Root Mean Squared Error、平方根平均二乗誤差）は、予測がどれくらい外れているかを表す数字です。\n\\[\n\\text{RMSE} = \\sqrt{\\frac{1}{n}\\sum_{i=1}^{n}(\\text{実際の値}_i - \\text{予測値}_i)^2}\n\\]\n外れた大きさ（誤差）を2乗して平均し、最後に平方根をとって元の単位に戻します。今回なら単位は万円で、「予測は平均的に〇〇万円くらい外れている」と読みます。小さいほど良い予測です。\n\n\n\n\n\n練習：車の燃費を予測する\n前期第3回で使った mpg データ（車の燃費）で、予測の流れを確かめます。高速道路の燃費 hwy を、エンジンの大きさ displ と駆動方式 drv から予測します。\n\nlibrary(tidyverse)\n\ndf_car &lt;- mpg |&gt;\n1  mutate(id = row_number())\n\n2set.seed(123)\n3df_learn &lt;- df_car |&gt; slice_sample(prop = 0.8)\n4df_valid &lt;- df_car |&gt; anti_join(df_learn, by = \"id\")\n\nnrow(df_learn)\nnrow(df_valid)\n\n\n1\n\n1行ずつに番号を付ける。学習用と検証用に分けるときに使う。\n\n2\n\n乱数の種を決める。同じ数字にすると、何度やっても同じ分け方になる。\n\n3\n\n80% の行をランダムに選んで「学習用」にする。\n\n4\n\n「学習用」に選ばれなかった残りの 20% を「検証用」にする。\n\n\n\n\n[1] 187\n[1] 47\n\n\n\n\n\n\n1rmse &lt;- function(actual, pred) {\n  sqrt(mean((actual - pred)^2))\n}\n\n2model_a &lt;- lm(hwy ~ displ, data = df_learn)\nmodel_b &lt;- lm(hwy ~ displ + drv, data = df_learn)\n\n3pred_a &lt;- predict(model_a, newdata = df_valid)\npred_b &lt;- predict(model_b, newdata = df_valid)\n\n4rmse(df_valid$hwy, pred_a)\nrmse(df_valid$hwy, pred_b)\n\n\n1\n\nRMSE を計算する関数を自分で作る。actual に実際の値、pred に予測値を入れる。\n\n2\n\n2つのモデルを「学習用」だけで作る。\n\n3\n\npredict() の newdata に検証用データを渡すと、検証用データの1行ずつについて予測値が出てくる。\n\n4\n\n検証用データで RMSE を計算する。小さいほうのモデルが良い予測をしている。\n\n\n\n\n[1] 3.593386\n[1] 2.545503\n\n\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\nlog() を使ったモデルは exp() で元に戻す\nlm(log(hwy) ~ ..., data = ...) のように、被説明変数に log() を付けたモデルの predict() は、log の値を返します。RMSE を計算したり提出したりする前に、exp(predict(...)) のように exp() で元の単位に戻してください。戻し忘れると、価格の予測が「8.6」のような小さな数字になってしまいます。\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n変数を増やせば良いとは限らない\n変数をたくさん入れると、学習用データにはよく当てはまるようになります。しかし、学習用データにたまたまあった特徴まで覚えてしまい、新しいデータ（検証用・テスト）では予測が悪くなることがあります。これを過学習といいます。モデルの良し悪しは、必ず検証用データの RMSE で判断しましょう。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>25</span>  <span class='chapter-title'>総合分析演習5</span>"
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>(12) 機械学習コンペ</span>"
     ]
   },
   {
     "objectID": "lecB12.html#sec-read",
     "href": "lecB12.html#sec-read",
-    "title": "25  総合分析演習5",
+    "title": "25  (12) 機械学習コンペ",
     "section": "25.6 データを読み込むときの注意",
     "text": "25.6 データを読み込むときの注意\n\n文字コード\n配布した CSV ファイルは、ダウンロードしたときのまま Shift-JIS（CP932）という文字コードで保存されています。read_csv() は何も指定しないと UTF-8 という文字コードとして読むため、日本語が文字化けしたり、エラーになったりします。前期の期末レポート（SSDSE）と同じように、locale で文字コードを指定して読み込みましょう。\n\ndf_train_raw &lt;- read_csv(\"tokyo_train.csv\",\n                         locale = locale(encoding = \"CP932\"))\n\ntokyo_test.csv も同じように読み込みます。\n\n\n\n\n\n日本語の列名\n列名に「：」や「（）」が入っているので、R のコードの中で使うときは `最寄駅：距離（分）` のようにバッククォート（`、Shift + @ キー）で囲む必要があります。最初に rename() で英語の短い名前に変えておくと、あとのコードが書きやすくなります。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>25</span>  <span class='chapter-title'>総合分析演習5</span>"
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>(12) 機械学習コンペ</span>"
     ]
   },
   {
     "objectID": "lecB12.html#sec-test",
     "href": "lecB12.html#sec-test",
-    "title": "25  総合分析演習5",
+    "title": "25  (12) 機械学習コンペ",
     "section": "25.7 テストデータの前処理で気をつけること",
     "text": "25.7 テストデータの前処理で気をつけること\n\n\n\n\n\n\nImportant\n\n\n\nテストデータの行は1行も消さない\n提出する予測は、テストデータの 1,000 件すべてについて必要です。学習用データでは、欠損のある行や極端な値の行を filter() や drop_na() で除いて構いませんが、テストデータの行を消すと、その分の予測が出せなくなります。\n\n\n\n学習用データで作った変数（単位を変えた価格、築年数、log をとった変数など）は、テストデータにも同じ方法で作ってください。モデルに入れた変数がテストデータにないと、predict() がエラーになります。\nテストデータにも空欄（NA）がある列があります。モデルに入れた変数が NA の行は、予測値も NA になり、採点できなくなります。テストデータで空欄がないか確かめてから、使う変数を選びましょう。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>25</span>  <span class='chapter-title'>総合分析演習5</span>"
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>(12) 機械学習コンペ</span>"
     ]
   },
   {
     "objectID": "lecB12.html#sec-submit",
     "href": "lecB12.html#sec-submit",
-    "title": "25  総合分析演習5",
+    "title": "25  (12) 機械学習コンペ",
     "section": "25.8 提出ファイルの作り方",
     "text": "25.8 提出ファイルの作り方\n提出する CSV ファイルは、submission_sample.csv と同じ形にします。\n\n\n\n\n\n\n\n列名\n内容\n\n\n\n\nid\nテストデータの id（100001〜101000）\n\n\nprice\n予測した価格（万円）\n\n\n\nsubmission_sample.csv は、1,000 件すべてに学習用データの平均価格（7,504万円）を入れた例です。最後に、作った予測を write_csv() で保存します。ファイル名は submission_学籍番号.csv にしてください（例：submission_25X0001.csv）。\n\n\n\n\n\n\nImportant\n\n\n\n提出する前のチェック\n保存したファイルを read_csv() で読み込み直して、次の4つを確かめましょう。\n\n行数が 1,000 行か（nrow()）\n列名が id と price の2つか（names()）\nprice に NA がないか（sum(is.na()) が 0 か）\nprice が万円の単位になっているか（summary() で、数千〜数万の値になっているか。円のままなら数千万、log のままなら 10 前後の値になる）",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>25</span>  <span class='chapter-title'>総合分析演習5</span>"
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>(12) 機械学習コンペ</span>"
     ]
   },
   {
     "objectID": "lecB12.html#sec-baseline",
     "href": "lecB12.html#sec-baseline",
-    "title": "25  総合分析演習5",
+    "title": "25  (12) 機械学習コンペ",
     "section": "25.9 ベースライン",
     "text": "25.9 ベースライン\n予測がうまくできているかの目安として、ベースライン（基準になる簡単なモデル）を決めておきます。\nベースライン：学習用データから、徒歩の分数・建築年が分からない行を除き、lm(価格（万円） ~ 面積 + 築年数 + 徒歩の分数) で予測したもの。\nこのベースラインのテストデータでの RMSE は 約 4,456 万円です。これより小さい RMSE を目指しましょう。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>25</span>  <span class='chapter-title'>総合分析演習5</span>"
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>(12) 機械学習コンペ</span>"
     ]
   },
   {
     "objectID": "lecB12.html#sec-assignment",
     "href": "lecB12.html#sec-assignment",
-    "title": "25  総合分析演習5",
+    "title": "25  (12) 機械学習コンペ",
     "section": "25.10 本日のレポート",
     "text": "25.10 本日のレポート\n今回の assignmentB12.qmd には、5つのステップの見出しだけが書かれています。パッケージやデータの読み込みも含めて、何をどの順番で書くかを自分で考えてレポートを完成させましょう。\n\n\n\nレポートの条件\n\n予測する変数（被説明変数）は、価格（万円）。円から万円への変換は自分で行う。\n学習用データを「学習用」と「検証用」に分け、ベースラインを含めて3つ以上のモデルの検証用 RMSE を表にまとめて比べる。\n一番良かったモデルを学習用データ全体で作り直し、テストデータの価格を予測して、提出用の CSV ファイルを作る。\nステップ5では、どの工夫で RMSE が小さくなったか（ならなかったか）と、その理由を書く。\n\n\n\n\n提出方法：① 予測の CSV ファイル（submission_学籍番号.csv）と、② Render して出力された HTML ファイルの ZIP を、Blackboard から提出してください。提出期限は1月15日（金）24時です。提出は1回だけです。\n\n\n\n\n\n\nImportant\n\n\n\n第13回は、提出したレポートを画面に映しながら、一人ずつ内容を説明してもらいます。「この変数をなぜ使ったか」「このコードは何をしているか」「テストデータにはどんな前処理をしたか」と質問されても答えられるように、自分で理解したコードだけを書きましょう。生成 AI に質問するのも構いませんが、出てきたコードは自分で理解してから使ってください。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>25</span>  <span class='chapter-title'>総合分析演習5</span>"
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>(12) 機械学習コンペ</span>"
     ]
   },
   {
     "objectID": "lecB12.html#sec-hints",
     "href": "lecB12.html#sec-hints",
-    "title": "25  総合分析演習5",
+    "title": "25  (12) 機械学習コンペ",
     "section": "25.11 ヒント",
     "text": "25.11 ヒント\n困ったときは、該当するヒントを開いてください。まずは自分の力で考え、どうしても進めないときに開くようにしましょう。\n\n\n\n\n\n\nTip読み込みのヒント\n\n\n\n\n\n\n文字コードの指定は、上の「データを読み込むときの注意」を見てください。\n読み込んだら glimpse() で列の型を確かめましょう。数字のはずの列が &lt;chr&gt;（文字）になっていたら、その列に数字以外のものが混じっています。\n全部が空欄の列は &lt;lgl&gt; という型で読み込まれます。中身はすべて NA です。\n\n\n\n\n\n\n\n\n\n\nTip前処理のヒント（数字にする）\n\n\n\n\n\n\n学習用データの 最寄駅：距離（分） には、数字ではない値が混じっています。count() で値の一覧を見てみましょう。\n文字の列を数字にするには as.numeric() を使います。数字にできない値は NA になり、警告（Warning）が出ます。\n「2005年」のように数字と文字が混じった値から数字だけを取り出すには、parse_number() が使えます。\n築年数は、今回の売買の年（2025年）から建築年を引いて作れます。\n\n\n\n\n\n\n\n\n\n\nTip前処理のヒント（どの行を除くか）\n\n\n\n\n\n\n学習用データで、使う変数が NA の行は除きましょう。\n価格のヒストグラムや、面積と価格の散布図を描いて、ほかと比べて極端な値の行がないか確かめましょう。極端な値の行は、回帰直線を大きく引っぱることがあります。除くかどうか、除くならなぜかをレポートに書きましょう。\nテストデータの行は消してはいけません（上の「テストデータの前処理で気をつけること」）。\n\n\n\n\n\n\n\n\n\n\nTipモデルを工夫するヒント\n\n\n\n\n\n\nどんな部屋が高く売れるかを考えてみましょう。広さ、古さ、駅からの近さ、場所（区）などが思い浮かびます。\n価格のヒストグラムを描くと、右に長く伸びた形になっています。前期第9回（相関分析）で、1人あたり GDP に log() を使って散布図を描いたことを思い出し、log() を使うと形がどう変わるかを見てみましょう。\n「面積が同じでも、区によって価格の上がり方が違うのでは？」と思ったら、前期第12回の交差項が使えます。\n変数を増やしたら、必ず検証用データの RMSE が小さくなったかを確かめましょう。\n\n\n\n\n\n\n\n\n\n\nTip予測と提出のヒント\n\n\n\n\n\n\npredict(モデル, newdata = テストデータ) で、テストデータの1行ずつの予測値が出てきます。\ntibble(id = テストデータの id, price = 予測値) で提出用の表を作り、write_csv() で保存します。\nlog() を使ったモデルは、exp() で戻すのを忘れずに。\n保存したら、上の「提出する前のチェック」を必ず行いましょう。",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>25</span>  <span class='chapter-title'>総合分析演習5</span>"
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>(12) 機械学習コンペ</span>"
     ]
   },
   {
     "objectID": "lecB12.html#sec-summary",
     "href": "lecB12.html#sec-summary",
-    "title": "25  総合分析演習5",
+    "title": "25  (12) 機械学習コンペ",
     "section": "25.12 まとめ",
     "text": "25.12 まとめ\n\n\n\n\n\n\n\n項目\nポイント\n\n\n\n\n予測\n回帰分析で作ったモデルに新しいデータを入れて、まだ分からない値を当てる。predict(モデル, newdata = ...)\n\n\nRMSE\n予測が平均的にどれくらい外れているか。元の単位（今回は万円）で読み、小さいほど良い\n\n\n検証用データ\n学習用データの一部を取っておき、正解を知らないふりをして予測する。モデルの比較は検証用の RMSE で行う\n\n\n過学習\n変数を増やすと学習用には当てはまるが、新しいデータでは悪くなることがある\n\n\n前処理\n学習用とテストに同じ処理をする。テストの行は消さない\n\n\n文字コード\nShift-JIS の CSV は locale = locale(encoding = \"CP932\") で読む\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n次回の予告\n次回（1月18日）は発表・分析結果説明5です。\n\n最初に、コンペの順位を発表します\n提出したレポートを画面に映しながら、5つのステップに沿って、一人ずつ教員に説明してもらいます\n「この変数をなぜ使ったか」「どの工夫で RMSE が小さくなったか」「テストデータにはどんな前処理をしたか」と質問するので、答えられるように準備してきてください\n予測ファイルとレポートの提出は 1月15日（金）24時まで、1回だけです",
     "crumbs": [
       "後期（B）",
-      "<span class='chapter-number'>25</span>  <span class='chapter-title'>総合分析演習5</span>"
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>(12) 機械学習コンペ</span>"
     ]
   }
 ]
