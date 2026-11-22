@@ -2092,5 +2092,324 @@
       "後期（B）",
       "<span class='chapter-number'>21</span>  <span class='chapter-title'>総合分析演習3</span>"
     ]
+  },
+  {
+    "objectID": "lecB10.html",
+    "href": "lecB10.html",
+    "title": "23  機械学習入門：予測モデルを作る",
+    "section": "",
+    "text": "23.1 AI・機械学習・ディープラーニング\nシェアサイクルの貸出台数を予測する\n今日の目標\n一言でいうと、機械学習はAI（人工知能）を実現するための重要な手法の一つです。\n全体像としては、最も広い概念がAIであり、その中に機械学習が含まれ、さらにその中にディープラーニング（深層学習）が含まれるという、入れ子（階層）の構造になっています。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>23</span>  <span class='chapter-title'>機械学習入門：予測モデルを作る</span>"
+    ]
+  },
+  {
+    "objectID": "lecB10.html#sec-ai",
+    "href": "lecB10.html#sec-ai",
+    "title": "23  機械学習入門：予測モデルを作る",
+    "section": "",
+    "text": "AI（人工知能）\n    例：ルールベースのAI（if-then のルール、探索、エキスパートシステム）\n    \n      機械学習\n      例：回帰分析・決定木 など（前期の lm() もここ）\n      \n        ディープラーニング\n        例：多層ニューラルネットワーク（画像認識、生成AI など）\n      \n    \n  \n\n\n\n図 23.1: AI・機械学習・ディープラーニングの関係\n\n\n\n\n\n\n\nAI（人工知能）とは\n人間のような知的な処理（推論、認識、判断、学習など）をコンピュータに実現させる技術・取り組み全般を指す、広い概念です。\n\n機械学習以外のAIの例：人があらかじめ作成したルールや条件分岐（if-then ルール）に基づいて動くシステム、探索アルゴリズム、エキスパートシステムなど。\nすべてのAIがデータから自律的に学習するわけではなく、ルールベースで動くAIも存在します。\n\n\n\n機械学習（Machine Learning）とは\n膨大なデータからルールやパターンを統計・数理モデルによって自動的に学習し、未知のデータに対する予測や分類、判断を行えるようにするAIの手法です。\n\n人間がすべての判断基準を手作業で書き込む代わりに、データとアルゴリズムを与えることで、モデルが規則性を抽出します。\n主なアプローチとして、教師あり学習（回帰・分類）、教師なし学習（クラスタリング・次元削減）、強化学習などがあります。\n\n\n\nディープラーニング（深層学習）とは\n機械学習の中でも、人間の神経回路網を模した多層のニューラルネットワークを用いる手法です。\n\n従来の機械学習では人間が設計・選定していた「特徴量（データの重要な要素）」の抽出を、モデル自身が階層的に自動で行える点が大きな特徴です。\n画像認識、音声認識、自然言語処理や、近年の生成AIなどの発展を牽引しています。\n\n\n\n\n\n\n違いの比較\n\n\n\n\n\n\n\n\n\n観点\nAI（人工知能）\n機械学習\nディープラーニング\n\n\n\n\n位置づけ\n最も広い概念・目的\nAIを実現する手法の一つ\n機械学習の一種（多層NN）\n\n\nルールの作り方\n人間による記述〜学習まで様々\nデータから統計的に学習\n多層ネットワークで特徴から学習\n\n\n向いている領域\n推論・判断・対話など全般\n数値予測、分類、クラスタリングなど\n画像・音声・テキストなど非構造データ\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n参考資料\n野口竜司「AI、機械学習、ディープラーニングの違いを説明できますか？機械学習と統計の違いは？」MarkeZine（2018年11月27日）\n文系の人向けに、AI・機械学習・ディープラーニングの関係を説明した記事です。続きを読むには MarkeZine への無料の会員登録が必要です。\n\n\n\n\n\n\n\n前期の回帰分析と機械学習\n前期に学んだ回帰分析（lm()）は、データから係数を学習する、最も基本的な機械学習（教師あり学習の回帰）の一つです。使う道具は同じですが、目的が違います。\n\n\n\n\n\n\n\n\n\nこれまで（統計的な分析）\nこれから（予測）\n\n\n\n\n知りたいこと\n\\(X\\) は \\(Y\\) に影響するか（説明）\nまだ分からない \\(Y\\) はいくつか（予測）\n\n\n主に見るもの\n係数・p 値・R²\n新しいデータでの予測の外れ具合（RMSE）\n\n\n変数の選び方\n問いと仮説に合わせて選ぶ\n予測がよく当たるように選ぶ\n\n\n良いモデルとは\n仮説を正しく検証できるモデル\nまだ見ていないデータで、よく当たるモデル",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>23</span>  <span class='chapter-title'>機械学習入門：予測モデルを作る</span>"
+    ]
+  },
+  {
+    "objectID": "lecB10.html#sec-request",
+    "href": "lecB10.html#sec-request",
+    "title": "23  機械学習入門：予測モデルを作る",
+    "section": "23.2 今日の依頼",
+    "text": "23.2 今日の依頼\n今日から皆さんは、データ分析の会社で働くデータサイエンティストです。ワシントンD.C. のシェアサイクル Capital Bikeshare の運営チームから、次のような依頼が届きました。\n\n\n\n\n\n\nImportant\n\n\n\n依頼：1時間ごとの貸出台数を予測してほしい\nCapital Bikeshare 運営チームより\n私たちは毎日、トラックで自転車を運んで置き場の台数を調整したり（再配置）、整備スタッフのシフトを組んだりしています。自転車がよく借りられる時間に置き場が空っぽだと、利用者は借りられずに帰ってしまいます。反対に、借りられない時間に人を多く配置するのはむだです。\nそこで、翌日の天気予報とカレンダー（平日か休日か）から、1時間ごとの貸出台数を予測する仕組みを作りたいと考えています。2011年と2012年の2年分のデータをお渡しするので、次の3点を報告してください。\n\n1時間ごとの貸出台数は、どれくらい正確に予測できるか\n予測には、何が効くか（天気、気温、時間帯、平日か休日か など）\n予測を使うときに、気をつけること\n\n\n\nこの依頼は授業のために作った架空のものですが、シェアサイクルの会社が実際に取り組んでいる課題です。\n\n\n\n\nCapital Bikeshare とは\nCapital Bikeshare は、アメリカの首都ワシントンD.C. とその周辺で運営されている、公共のシェアサイクル（自転車の共同利用）です。2010年に始まった、アメリカでも早い時期の大きなシェアサイクルの一つです。\n\n現在は、ワシントンD.C. と、バージニア州・メリーランド州の周辺の市や郡をあわせた8つの自治体で、800 か所以上の自転車置き場（ステーション）と、約 8,000 台の自転車が使われています（公式サイトより）。\n利用者は、スマートフォンのアプリなどで自転車を借り、どのステーションに返してもかまいません（借りた場所に戻す必要はありません）。今日のデータでも、夜中の3時を含めて、すべての時間帯に貸出があります。\n料金プランは、次のとおりです（2026年11月時点、公式サイトの料金ページより。1ドルは約150円）。\n\n\n\n\n\n\n\n\n\nプラン\n料金\nふつうの自転車\n電動アシスト自転車\n\n\n\n\n1回ごと\n1ドル＋利用時間に応じた料金\n1分 0.05ドル\n1分 0.15ドル\n\n\n1日乗り放題\n1日 8ドル\n24時間、1回45分まで何回でも無料\n1分 0.10ドル\n\n\n年会費の会員\n年 95ドルから\n1回45分まで無料、その後は1分 0.05ドル\n料金ページを参照\n\n\n\n条件を満たす住民向けに、年会費 5ドル（地域によっては無料）の会員制度もあります。\n今日のデータでは、貸出の約8割が会員で、会員の利用は平日の朝夕に集中しています。通勤・通学に使われていると考えられます。\n今は電動アシスト自転車もありますが、今日のデータ（2011〜2012年）は、サービスが始まって間もないころのものです。\n日本でも、東京の「ドコモ・バイクシェア」など、同じしくみのシェアサイクルが広がっています。\n\n借りた場所と返す場所が違ってよいので、朝は住宅地から都心へ、夕方は都心から住宅地へ、と自転車がかたよります。だからこそ、いつ・どれくらい借りられるかの予測が、運営に欠かせません。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>23</span>  <span class='chapter-title'>機械学習入門：予測モデルを作る</span>"
+    ]
+  },
+  {
+    "objectID": "lecB10.html#sec-flow",
+    "href": "lecB10.html#sec-flow",
+    "title": "23  機械学習入門：予測モデルを作る",
+    "section": "23.3 データサイエンティストの仕事の流れ",
+    "text": "23.3 データサイエンティストの仕事の流れ\n\n\n\n\n\n\n\n\nステップ\nすること\n今日の節\n\n\n\n\n1\nデータを読み込み、使える形に前処理する\nSection 23.7\n\n\n2\nグラフでデータを眺め、予測に効きそうなものを探す\nSection 23.8\n\n\n3\nデータを「学習用」と「検証用」に分ける\nSection 23.9\n\n\n4\n予測の良さ（RMSE と R²）の測り方と、基準（ベースライン）を決める\nSection 23.10\n\n\n5\nモデルを少しずつ育て、検証用の RMSE で比べる\nSection 23.11\n\n\n6\n変数を増やしすぎるとどうなるか確かめる（過学習）\nSection 23.12\n\n\n7\n最終モデルを決めて、依頼主に報告する\nSection 23.13",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>23</span>  <span class='chapter-title'>機械学習入門：予測モデルを作る</span>"
+    ]
+  },
+  {
+    "objectID": "lecB10.html#sec-prepare",
+    "href": "lecB10.html#sec-prepare",
+    "title": "23  機械学習入門：予測モデルを作る",
+    "section": "23.4 今日の準備",
+    "text": "23.4 今日の準備\n\n\n\n\n\n\n\n1.\n新規 R プロジェクトを作成する。Directory name は「LessonB10」、場所は Kドライブの「R_programming」。\n\n\n2.\n「LessonB10」フォルダの中に「data」フォルダを作る。\n\n\n3.\nBlackboard から bike_hour.csv をダウンロードし、「data」フォルダに入れる。\n\n\n4.\n新しい R スクリプト（または Quarto ファイル）を作り、講義資料のコードを教員と一緒に1つずつ実行する。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>23</span>  <span class='chapter-title'>機械学習入門：予測モデルを作る</span>"
+    ]
+  },
+  {
+    "objectID": "lecB10.html#sec-setup",
+    "href": "lecB10.html#sec-setup",
+    "title": "23  機械学習入門：予測モデルを作る",
+    "section": "23.5 パッケージの準備",
+    "text": "23.5 パッケージの準備\n大学の PC はシャットダウンするたびに初期化されるため、毎回インストールが必要です。今日使うのは tidyverse だけです。\n\noptions(repos = c(CRAN = \"https://cran.rstudio.com/\"))\n\ninstall.packages(\"tidyverse\")\n\n\nlibrary(tidyverse)",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>23</span>  <span class='chapter-title'>機械学習入門：予測モデルを作る</span>"
+    ]
+  },
+  {
+    "objectID": "lecB10.html#sec-data",
+    "href": "lecB10.html#sec-data",
+    "title": "23  機械学習入門：予測モデルを作る",
+    "section": "23.6 今日のデータ",
+    "text": "23.6 今日のデータ\nCapital Bikeshare の2011年1月1日〜2012年12月31日の貸出記録を、1時間ごとに集計し、その時間の天気を加えたデータです。1行が1時間で、17,379 行あります。\n出典：UCI Machine Learning Repository「Bike Sharing Dataset」（CC BY 4.0）。Fanaee-T, H. and Gama, J. (2013) “Event labeling combining ensemble detectors and background knowledge”, Progress in Artificial Intelligence, pp. 1–15.\n\n\n\n\n\n\n\n変数名\n内容\n\n\n\n\nid\n行の番号\n\n\ndate\n日付\n\n\nseason_code\n季節の番号（1〜4）。今日は使わず、月から自分で季節を作り直す\n\n\ny2012\n2012年なら 1、2011年なら 0（2012年のダミー変数）\n\n\nmonth\n月（1〜12）\n\n\nhour\n時間帯（0〜23時）\n\n\nholiday\n祝日なら 1\n\n\nweekday\n曜日（0 = 日曜 〜 6 = 土曜）\n\n\nworkday\n平日（土日・祝日でない日）なら 1、休日なら 0\n\n\nweather\n天気の番号（1 = 晴れ・くもり、2 = 霧・くもり、3 = 小雨・小雪、4 = 大雨・大雪）\n\n\ntemp\n気温（℃）\n\n\nfeel_temp\n体感温度（℃）\n\n\nhumidity\n湿度（%）\n\n\nwind\n風速\n\n\nrentals_casual\n一時利用者の貸出台数\n\n\nrentals_member\n会員の貸出台数\n\n\nrentals\n貸出台数の合計（rentals_casual + rentals_member）。今日予測するもの\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n予測に使ってはいけない変数\nrentals_casual と rentals_member を足すと、予測したい rentals そのものになります。依頼主が予測したいのは「明日の貸出台数」なので、その時点ではまだ分からない値は予測に使えません。予測に使えるのは、予測する時点で分かっている情報（天気予報、日付、時間帯など）だけです。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>23</span>  <span class='chapter-title'>機械学習入門：予測モデルを作る</span>"
+    ]
+  },
+  {
+    "objectID": "lecB10.html#sec-step1",
+    "href": "lecB10.html#sec-step1",
+    "title": "23  機械学習入門：予測モデルを作る",
+    "section": "23.7 ステップ1：読み込みと前処理",
+    "text": "23.7 ステップ1：読み込みと前処理\n\ndf_raw &lt;- read_csv(\"data/bike_hour.csv\")\n\nglimpse(df_raw)\n\nRows: 17,379\nColumns: 17\n$ id             &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, …\n$ date           &lt;date&gt; 2011-01-01, 2011-01-01, 2011-01-01, 2011-01-01, 2011-0…\n$ season_code    &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…\n$ y2012          &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…\n$ month          &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…\n$ hour           &lt;dbl&gt; 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 1…\n$ holiday        &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…\n$ weekday        &lt;dbl&gt; 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6…\n$ workday        &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…\n$ weather        &lt;dbl&gt; 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3…\n$ temp           &lt;dbl&gt; 9.84, 9.02, 9.02, 9.84, 9.84, 9.84, 9.02, 8.20, 9.84, 1…\n$ feel_temp      &lt;dbl&gt; 14.40, 13.64, 13.64, 14.40, 14.40, 12.88, 13.64, 12.88,…\n$ humidity       &lt;dbl&gt; 81, 80, 80, 75, 75, 75, 80, 86, 75, 76, 76, 81, 77, 72,…\n$ wind           &lt;dbl&gt; 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 17, 19, 19, 20, 19, 20, 2…\n$ rentals_casual &lt;dbl&gt; 3, 8, 5, 3, 0, 0, 2, 1, 1, 8, 12, 26, 29, 47, 35, 40, 4…\n$ rentals_member &lt;dbl&gt; 13, 32, 27, 10, 1, 1, 0, 2, 7, 6, 24, 30, 55, 47, 71, 7…\n$ rentals        &lt;dbl&gt; 16, 40, 32, 13, 1, 1, 2, 3, 8, 14, 36, 56, 84, 94, 106,…\n\n\n\n\n\n番号で入っている季節・天気・平日を、分かりやすい文字のラベルに直します。\n\ndf_bike &lt;- df_raw |&gt;\n  mutate(\n1    season   = case_when(month %in% 3:5  ~ \"春\",\n                         month %in% 6:8  ~ \"夏\",\n                         month %in% 9:11 ~ \"秋\",\n                         .default = \"冬\"),\n2    weather  = case_when(weather == 1 ~ \"晴れ・くもり\",\n                         weather == 2 ~ \"霧・くもり\",\n                         .default = \"雨・雪\"),\n3    day_type = if_else(workday == 1, \"平日\", \"休日\")\n  ) |&gt;\n  mutate(\n4    season   = factor(season, levels = c(\"春\", \"夏\", \"秋\", \"冬\")),\n    weather  = factor(weather, levels = c(\"晴れ・くもり\", \"霧・くもり\", \"雨・雪\")),\n    day_type = factor(day_type, levels = c(\"平日\", \"休日\"))\n  ) |&gt;\n  select(id, date, y2012, season, hour, day_type, weather,\n5         temp, humidity, wind, rentals)\n\ndf_bike\n\n\n1\n\n月から季節を作る（3〜5月を春、6〜8月を夏、9〜11月を秋、12〜2月を冬）。\n\n2\n\n天気の番号をラベルに置き換える。「大雨・大雪」（4）は2年間で3時間しかないので、「雨・雪」にまとめる。件数が少なすぎるカテゴリは、学習用データに1件も入らないことがあり、予測のときにエラーの原因になる。\n\n3\n\n平日なら「平日」、土日・祝日なら「休日」。\n\n4\n\nカテゴリの順番を決めておく（因子型、前期第11回）。lm() では最初のカテゴリ（春・晴れ／くもり・平日）が基準になり、係数は「基準と比べて何台多いか少ないか」を表す。\n\n5\n\n予測に使う変数だけを残す（rentals_casual と rentals_member は使わない）。\n\n\n\n\n# A tibble: 17,379 × 11\n      id date       y2012 season  hour day_type weather      temp humidity  wind\n   &lt;dbl&gt; &lt;date&gt;     &lt;dbl&gt; &lt;fct&gt;  &lt;dbl&gt; &lt;fct&gt;    &lt;fct&gt;       &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;\n 1     1 2011-01-01     0 冬         0 休日     晴れ・くもり……  9.84       81     0\n 2     2 2011-01-01     0 冬         1 休日     晴れ・くもり……  9.02       80     0\n 3     3 2011-01-01     0 冬         2 休日     晴れ・くもり……  9.02       80     0\n 4     4 2011-01-01     0 冬         3 休日     晴れ・くもり……  9.84       75     0\n 5     5 2011-01-01     0 冬         4 休日     晴れ・くもり……  9.84       75     0\n 6     6 2011-01-01     0 冬         5 休日     霧・くもり   9.84       75     6\n 7     7 2011-01-01     0 冬         6 休日     晴れ・くもり……  9.02       80     0\n 8     8 2011-01-01     0 冬         7 休日     晴れ・くもり……  8.2        86     0\n 9     9 2011-01-01     0 冬         8 休日     晴れ・くもり……  9.84       75     0\n10    10 2011-01-01     0 冬         9 休日     晴れ・くもり…… 13.1        76     0\n# ℹ 17,369 more rows\n# ℹ 1 more variable: rentals &lt;dbl&gt;",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>23</span>  <span class='chapter-title'>機械学習入門：予測モデルを作る</span>"
+    ]
+  },
+  {
+    "objectID": "lecB10.html#sec-step2",
+    "href": "lecB10.html#sec-step2",
+    "title": "23  機械学習入門：予測モデルを作る",
+    "section": "23.8 ステップ2：データを眺める",
+    "text": "23.8 ステップ2：データを眺める\nまずは、予測したい貸出台数がどのように変わるのかを、グラフで確かめます。\n\ndf_bike |&gt;\n  group_by(hour, day_type) |&gt;\n  summarise(mean_rentals = mean(rentals), .groups = \"drop\") |&gt;\n  ggplot(aes(x = hour, y = mean_rentals, color = day_type)) +\n  geom_line(linewidth = 1) +\n  geom_point() +\n  scale_x_continuous(breaks = seq(0, 23, by = 3)) +\n  labs(x = \"時間帯（時）\", y = \"平均貸出台数（台）\", color = NULL) +\n  theme_minimal()\n\n\n\n\n時間帯ごとの平均貸出台数（平日と休日）\n\n\n\n\n平日は朝8時ごろと夕方17〜18時ごろに大きな山があります。通勤・通学の時間です。休日は朝の山がなく、昼すぎにゆるやかな山があります。時間帯の影響の仕方が、平日と休日でまったく違うことが分かります。\n\n\n\n\ndf_bike |&gt;\n  mutate(temp_round = round(temp)) |&gt;\n  group_by(temp_round) |&gt;\n  summarise(mean_rentals = mean(rentals), n = n()) |&gt;\n  filter(n &gt;= 20) |&gt;\n  ggplot(aes(x = temp_round, y = mean_rentals)) +\n  geom_line(color = \"steelblue\", linewidth = 1) +\n  geom_point(color = \"steelblue\") +\n  labs(x = \"気温（℃、1℃ごとにまとめた）\", y = \"平均貸出台数（台）\") +\n  theme_minimal()\n\n\n\n\n気温と平均貸出台数\n\n\n\n\n気温が高いほど借りられますが、増え方は一定ではなく、とても暑い時間（37℃以上）には減っています。まっすぐな直線ではなく、曲がった関係です。\n\n\n\n\ndf_bike |&gt;\n  mutate(year = if_else(y2012 == 1, \"2012年\", \"2011年\")) |&gt;\n  group_by(year, weather) |&gt;\n  summarise(mean_rentals = mean(rentals), .groups = \"drop\") |&gt;\n  ggplot(aes(x = weather, y = mean_rentals, fill = year)) +\n  geom_col(position = \"dodge\") +\n  scale_fill_manual(values = c(\"lightsteelblue\", \"steelblue\")) +\n  labs(x = \"天気\", y = \"平均貸出台数（台）\", fill = \"年\") +\n  theme_minimal()\n\n\n\n\n天気と年ごとの平均貸出台数\n\n\n\n\n雨・雪の時間は大きく減ります。また、同じ天気でも、2012年は2011年よりずっと多く借りられています。サービスが知られて、利用者が増えたためと考えられます。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>23</span>  <span class='chapter-title'>機械学習入門：予測モデルを作る</span>"
+    ]
+  },
+  {
+    "objectID": "lecB10.html#sec-step3",
+    "href": "lecB10.html#sec-step3",
+    "title": "23  機械学習入門：予測モデルを作る",
+    "section": "23.9 ステップ3：学習用と検証用に分ける",
+    "text": "23.9 ステップ3：学習用と検証用に分ける\n依頼主が知りたいのは、まだ起きていない時間の貸出台数です。手元のデータにぴったり当てはまるモデルでも、新しいデータで当たらなければ意味がありません。\nそこで、データの 80% を「学習用」としてモデルを作るのに使い、残りの 20% を「検証用」として取っておきます。検証用データは、正解を知っているのに、知らないふりをして予測してみるためのデータです。\n\n1set.seed(123)\n2df_learn &lt;- df_bike |&gt; slice_sample(prop = 0.8)\n3df_valid &lt;- df_bike |&gt; anti_join(df_learn, by = \"id\")\n\nnrow(df_learn)\nnrow(df_valid)\n\n\n1\n\n乱数の種を決める。同じ数字にすると、何度やっても同じ分け方になる。\n\n2\n\n80% の行をランダムに選んで「学習用」にする。\n\n3\n\n「学習用」に選ばれなかった残りの行（id で照合）を「検証用」にする。\n\n\n\n\n[1] 13903\n[1] 3476",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>23</span>  <span class='chapter-title'>機械学習入門：予測モデルを作る</span>"
+    ]
+  },
+  {
+    "objectID": "lecB10.html#sec-step4",
+    "href": "lecB10.html#sec-step4",
+    "title": "23  機械学習入門：予測モデルを作る",
+    "section": "23.10 ステップ4：RMSE・R² とベースライン",
+    "text": "23.10 ステップ4：RMSE・R² とベースライン\n\nRMSE\nRMSE（Root Mean Squared Error、平方根平均二乗誤差）は、予測がどれくらい外れているかを表す数字です。\n\\[\n\\text{RMSE} = \\sqrt{\\frac{1}{n}\\sum_{i=1}^{n}(\\text{実際の値}_i - \\text{予測値}_i)^2}\n\\]\n外れた大きさを2乗して平均し、最後に平方根をとって元の単位に戻します。今日なら単位は台で、「予測は平均的に〇〇台くらい外れている」と読みます。小さいほど良い予測です。\n下の図は、6日分の架空のデータで RMSE の計算を表したものです。黒い点が実際の貸出台数、青い直線がモデルの予測、赤い点線が外れ（実際の値 − 予測値）です。\n\n\n\n\n\nRMSE のイメージ（架空のデータ）\n\n\n\n\n\n\n\n\n\n気温（℃）\n実際の値\n予測値\n外れ\n外れの2乗\n\n\n\n\n10\n100\n80\n20\n400\n\n\n15\n110\n130\n-20\n400\n\n\n20\n190\n180\n10\n100\n\n\n25\n260\n230\n30\n900\n\n\n30\n250\n280\n-30\n900\n\n\n35\n340\n330\n10\n100\n\n\n\n\n\n\n\n\n\n\n\n\n計算の順番\nこの例では\n\n\n\n\n① 外れを2乗する（プラスとマイナスが打ち消し合わないようにする）\n400, 400, 100, 900, 900, 100\n\n\n② 2乗した外れを平均する\n(400 + 400 + 100 + 900 + 900 + 100) ÷ 6 ≒ 466.7\n\n\n③ 平方根をとって、元の単位（台）に戻す\n\\(\\sqrt{466.7}\\) ≒ 21.6 台\n\n\n\nこの予測は、平均的に約 22 台外れている、と読みます。外れをそのまま平均すると、+20 と −20 のように打ち消し合って 0 に近くなってしまうので、2乗してから平均します。\n\n\n\n\n\n\nNote\n\n\n\nRMSE では「外れの向き」は分からない\nRMSE は外れを2乗するので、多めに外しても（予測 ＞ 実際）、少なめに外しても（予測 ＜ 実際）、同じ「外れの大きさ」として数えます。多めと少なめのどちらに外しがちかは、RMSE からは分かりません。\n向きを知りたいときは、外れ（実際の値 − 予測値）を2乗せずに、そのまま平均します（平均誤差）。\n\nプラス → 実際より少なめに予測しがち\nマイナス → 実際より多めに予測しがち\n\n上の例では、外れの合計は +20 − 20 + 10 + 30 − 30 + 10 ＝ 20、平均誤差は約 +3.3 台で、ほとんど偏りはありません。\n依頼主にとっては、外れの向きも大事です。たとえば、貸出台数を少なめに予測して自転車の配置が足りなければ、借りたい人が借りられず、利用者を逃してしまいます。多めに予測すれば、使われない自転車を運ぶ手間が無駄になります。どちらの外れが困るかは依頼主の事情によって違うので、報告では「どれくらい外れるか」（RMSE）に加えて、「どちらに外れがちか」も伝えると親切です（補足1で実際に確かめます）。\n\n\n\n1rmse &lt;- function(actual, pred) {\n  sqrt(mean((actual - pred)^2))\n}\n\n\n1\n\nRMSE を計算する関数を自分で作る。actual に実際の値、pred に予測値を入れる。\n\n\n\n\n\n\n\n\n\nR²（決定係数）\n前期の回帰分析で学んだ R²（決定係数）も、予測の良さを表す数字として使えます。R² は「実際の値の散らばりのうち、何%を予測で説明できたか」を表します。\n\\[\nR^2 = 1 - \\frac{\\sum(\\text{実際の値}_i - \\text{予測値}_i)^2}{\\sum(\\text{実際の値}_i - \\text{実際の値の平均})^2}\n\\]\n分母は「平均で予測したときの外れの2乗の合計（もともとの散らばり）」、分子は「モデルで予測したときの外れの2乗の合計（説明できずに残った散らばり）」です。上の例では、実際の値の平均は約 208 台、分母は約 43,483、分子は 2,800 なので、R² ＝ 1 − 2,800 ÷ 43,483 ≒ 0.94。散らばりの約 94% を予測で説明できた、と読みます。1 に近いほど良い予測です。\n\n1r2 &lt;- function(actual, pred) {\n  1 - sum((actual - pred)^2) / sum((actual - mean(actual))^2)\n}\n\n\n1\n\nR² を計算する関数。summary(lm()) に出てくる R² と同じ計算を、好きなデータで行えるようにする。\n\n\n\n\n\n\n\n\n\n\n\n\n\nRMSE\nR²\n\n\n\n\n読み方\n平均的に〇〇台外れる\n散らばりの〇〇%を説明できた\n\n\n単位\nあり（今日は台）\nなし（0〜1）\n\n\n良い予測\n小さいほど良い\n1 に近いほど良い\n\n\n得意なこと\n依頼主に「どれくらい外れるか」を具体的に伝える\n単位の違う別のデータの予測とも比べられる\n\n\n\n今日は RMSE を主な指標にし、R² を並べて見ていきます。\n\n\n\n\n\n\nImportant\n\n\n\nR² は「検証用データ」で計算する\n前期に summary() で見た R² は、モデルを作った学習用データでの値です。学習用の R² は、変数を増やすほど必ず大きくなるので、学習用の R² が高くても、新しいデータをよく予測できるとは限りません（ステップ6で確かめます）。予測の良さは、RMSE と同じく検証用データで計算した R² で判断します。検証用の R² は、平均で予測するより悪いときにはマイナスになることもあります。\n\n\n\n\n\n\n\nベースライン\nモデルが役に立っているかを判断するには、比べる基準（ベースライン）が必要です。一番簡単な予測は、「天気も時間も気にせず、いつも学習用データの平均の台数だと予測する」ことです。\n\n1mean_learn &lt;- mean(df_learn$rentals)\nmean_learn\n\n2rmse(df_valid$rentals, mean_learn)\nr2(df_valid$rentals, mean_learn)\n\n\n1\n\n学習用データの平均の貸出台数。\n\n2\n\n検証用データのすべての時間を、この平均で予測したときの RMSE と R²。\n\n\n\n\n[1] 189.9096\n[1] 180.6807\n[1] -0.0001526779\n\n\n平均だけで予測すると、平均的に約 181 台外れます。R² はほぼ 0 で、散らばりをまったく説明できていません。これより小さい RMSE（大きい R²）を目指します。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>23</span>  <span class='chapter-title'>機械学習入門：予測モデルを作る</span>"
+    ]
+  },
+  {
+    "objectID": "lecB10.html#sec-step5",
+    "href": "lecB10.html#sec-step5",
+    "title": "23  機械学習入門：予測モデルを作る",
+    "section": "23.11 ステップ5：モデルを育てる",
+    "text": "23.11 ステップ5：モデルを育てる\n前期に学んだ lm() で、学習用データ（df_learn）からモデルを作ります。いきなり完成形を作るのではなく、次の手順を1つずつくり返して、モデルを少しずつ育てていきます。\n\n\n\n\n\n\n\n順番\nすること\n\n\n\n\n①\nモデルを学習用データで作る\n\n\n②\n係数を見て、モデルの中身を読む（どの変数で何台増える・減ると考えているか）\n\n\n③\n学習用・検証用のそれぞれで予測し、RMSE と R² で当たり具合を確かめる\n\n\n④\n結果を見て、「何が足りないか」を考え、次に試す変数を決める\n\n\n\n\n\n\n\nmodel1：気温だけ\nまずは、ステップ2で貸出台数との関係が見えた気温だけで予測してみます。\n\n1model1 &lt;- lm(rentals ~ temp, data = df_learn)\ncoef(model1)\n\n2pred1_learn &lt;- predict(model1, newdata = df_learn)\npred1_valid &lt;- predict(model1, newdata = df_valid)\n\n3rmse(df_learn$rentals, pred1_learn)\nrmse(df_valid$rentals, pred1_valid)\n\n4r2(df_learn$rentals, pred1_learn)\nr2(df_valid$rentals, pred1_valid)\n\n\n1\n\n学習用データで、気温だけのモデルを作る。\n\n2\n\npredict() の newdata にデータを渡すと、1行ずつの予測値が出てくる。学習用と検証用のそれぞれで予測する。\n\n3\n\n学習用と検証用のそれぞれで RMSE を計算する。\n\n4\n\n同じように R² を計算する。学習用の R² は summary(model1) の「Multiple R-squared」と同じ値になる。\n\n\n\n\n(Intercept)        temp \n  -2.543318    9.429318 \n[1] 165.5961\n[1] 166.9235\n[1] 0.1681043\n[1] 0.1463537\n\n\n気温が1℃高いと、貸出台数は約 9.4 台多いと予測するモデルです。検証用の RMSE は約 167 台で、平均だけの予測（約 181 台）より少し良くなりましたが、まだ大きく外れています。R² は約 0.15 で、散らばりの 15% ほどしか説明できていません。\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n毎回の計算を関数にまとめる\nこれからモデルを何回も作り、そのたびに「学習用と検証用で予測して RMSE と R² を計算する」ことをくり返します。同じコードを何度も書かなくてすむように、関数にまとめておきます。\n\n1check_model &lt;- function(model, learn = df_learn) {\n  pred_learn &lt;- predict(model, newdata = learn)\n  pred_valid &lt;- predict(model, newdata = df_valid)\n2  c(rmse_learn = rmse(learn$rentals, pred_learn),\n    rmse_valid = rmse(df_valid$rentals, pred_valid),\n    r2_learn   = r2(learn$rentals, pred_learn),\n    r2_valid   = r2(df_valid$rentals, pred_valid))\n}\n\n3check_model(model1)\n\n\n1\n\nlearn はモデルを作ったデータ。何も指定しなければ df_learn になる（ステップ6で別のデータを指定する）。\n\n2\n\n学習用と検証用の RMSE、学習用と検証用の R² の4つを並べて返す。\n\n3\n\n上で計算した model1 の RMSE・R² と同じ値になることを確かめる。\n\n\n\n\n rmse_learn  rmse_valid    r2_learn    r2_valid \n165.5960637 166.9235471   0.1681043   0.1463537 \n\n\n\n\n\n\n\n\n\nmodel2：気温の2乗を加える\nステップ2のグラフでは、気温と貸出台数の関係はまっすぐな直線ではなく、曲がっているように見えました。そこで、気温の2乗（I(temp^2)）を加えて、曲がった関係を表せるようにしてみます。\n\n1model2 &lt;- lm(rentals ~ temp + I(temp^2), data = df_learn)\ncoef(model2)\n\nres1 &lt;- check_model(model1)\nres2 &lt;- check_model(model2)\nres1\nres2\n\n\n1\n\nI(temp^2) は気温の2乗。I() で囲むと、^2 を「2乗の計算」として扱う。\n\n\n\n\n(Intercept)        temp   I(temp^2) \n11.95711663  7.75437692  0.04110561 \n rmse_learn  rmse_valid    r2_learn    r2_valid \n165.5960637 166.9235471   0.1681043   0.1463537 \nrmse_learn rmse_valid   r2_learn   r2_valid \n165.575092 166.919021   0.168315   0.146400 \n\n\n気温の2乗の係数は約 0.04 で、ほとんど 0 です。検証用の RMSE も、model1 が約 166.9 台、model2 が約 166.9 台、R² も約 0.146 と約 0.146 で、ほとんど変わりませんでした。\n\n\n\n\n\n\nImportant\n\n\n\nグラフで良さそうに見えても、効くとは限らない\nグラフでは曲がって見えた関係も、気温の2乗を入れても予測はほとんど良くなりませんでした。予測に効くかどうかは、実際にモデルに入れて、検証用の RMSE で確かめるまでは分かりません。効かなかった変数は、モデルを複雑にするだけなので、これ以降は入れないことにします。\n\n\n\n\n\n\n\nmodel3：天気・カレンダーを加える\n気温だけでは足りないので、依頼主が「翌日の天気予報とカレンダー」から分かる情報をまとめて加えます。湿度・風速・天気・平日か休日か・年（2012年ダミー）・季節です。\n\nmodel3 &lt;- lm(rentals ~ temp + humidity + wind + weather +\n               day_type + y2012 + season, data = df_learn)\ncoef(model3)\n\n      (Intercept)              temp          humidity              wind \n       78.6434997        11.8908902        -2.7065527         0.2912492 \nweather霧・くもり     weather雨・雪      day_type休日             y2012 \n       12.1064740        -4.2802680        -6.1466211        73.0043180 \n         season夏          season秋          season冬 \n      -66.9111462        37.4777380        19.8529011 \n\nres3 &lt;- check_model(model3)\nres3\n\n rmse_learn  rmse_valid    r2_learn    r2_valid \n149.0351745 147.8157547   0.3261761   0.3306023 \n\n\n係数を読んでみましょう。\n\n気温が1℃高いと約 11.9 台、湿度が1%高いと約 -2.7 台。\n2012年は2011年より約 73 台多い（利用者が増えている）。\nweather雨・雪 は「晴れ・くもりと比べて」、season秋 は「春と比べて」、day_type休日 は「平日と比べて」何台多いか（マイナスなら少ないか）を表す。\n\n検証用の RMSE は約 148 台、R² は約 0.33 になりました。model1 より良くなりましたが、まだ平均的に 148 台も外れています。\n何が足りないか？　ステップ2の最初のグラフを思い出しましょう。貸出台数は、時間帯によって 0 台近くから 500 台近くまで大きく変わっていました。model3 には、時間帯がまだ入っていません。\n\n\n\n\n\nmodel4：時間帯を加える\n\nmodel4 &lt;- lm(rentals ~ temp + humidity + wind + weather +\n1               day_type + y2012 + season + factor(hour), data = df_learn)\n2length(coef(model4))\n\nres4 &lt;- check_model(model4)\nres4\n\n\n1\n\nfactor(hour) と書くと、0〜23 の数字を「24種類のカテゴリ」として扱い、0時を基準にした23個のダミー変数になる（前期第11回）。\n\n2\n\n係数の数を数える。時間帯のダミー変数だけで23個あるので、coef() で全部を並べても読みにくい。\n\n\n\n\n[1] 34\n rmse_learn  rmse_valid    r2_learn    r2_valid \n102.9525911 104.5134201   0.6784538   0.6653531 \n\n\n係数が多いときは、表で眺めるよりグラフにすると読みやすくなります。時間帯の係数（0時と比べて何台多いか）だけを取り出して、折れ線グラフにします。\n\ndf_coef4 &lt;- tibble(\n  hour = 0:23,\n1  coef = c(0, coef(model4)[paste0(\"factor(hour)\", 1:23)])\n)\n\nggplot(df_coef4, aes(x = hour, y = coef)) +\n  geom_line(color = \"steelblue\") +\n  geom_point(color = \"steelblue\") +\n  scale_x_continuous(breaks = seq(0, 23, 3)) +\n  labs(x = \"時間帯（時）\", y = \"0時と比べた台数（係数）\") +\n  theme_minimal()\n\n\n1\n\nfactor(hour)1 〜 factor(hour)23 という名前の係数を取り出す。基準の0時は係数がないので、0 を先頭に付ける。\n\n\n\n\n\n\n\n\n\n\n\n8時と17〜18時に大きな山があります。ステップ2で見た平日の形にそっくりです。\nもう1つ、係数の変化にも注目しましょう。weather雨・雪 の係数は、model3 では約 -4 台でしたが、model4 では約 -66 台になりました。雨は昼にも夜中にも降るので、時間帯を入れないと「雨の時間は少ない」のか「夜中だから少ない」のかが区別できず、雨の効果がうまく表せていなかったのです。\n検証用の RMSE は約 105 台に大きく下がり、R² は約 0.67 に上がりました。散らばりの約 67% を説明できています。時間帯は、貸出台数にとても強く影響しています。\nまだ足りないものは？　ステップ2のグラフでは、時間帯の山の形が平日と休日でまったく違いました（平日は朝夕、休日は昼）。ところが model4 では、時間帯のダミー変数の係数は平日も休日も同じです。つまり model4 は、「平日も休日も同じ形の山で、高さだけが違う」という予測しかできません。\n\n\n\n\n\nmodel5：時間帯 × 平日・休日の交差項を加える\n平日と休日で時間帯の効き方が違うことを表すには、前期第12回で学んだ交差項を使います。\n\nmodel5 &lt;- lm(rentals ~ temp + humidity + wind + weather +\n1               y2012 + season + factor(hour) * day_type, data = df_learn)\nlength(coef(model5))\n\nres5 &lt;- check_model(model5)\nres5\n\n\n1\n\nfactor(hour) * day_type は、時間帯のダミー変数、平日・休日のダミー変数、その交差項をまとめて入れる書き方。\n\n\n\n\n[1] 57\nrmse_learn rmse_valid   r2_learn   r2_valid \n79.2842410 80.0256409  0.8093035  0.8037991 \n\n\n検証用の RMSE は約 80 台まで下がり、R² は約 0.8 になりました。係数は 57 個に増えています。model4 と同じように、時間帯の係数をグラフにしてみます。今度は平日と休日で別々の線になります。\n\n1b_hour  &lt;- c(0, coef(model5)[paste0(\"factor(hour)\", 1:23)])\n2b_inter &lt;- c(0, coef(model5)[paste0(\"factor(hour)\", 1:23, \":day_type休日\")])\n\ndf_coef5 &lt;- tibble(\n  hour = 0:23,\n  平日 = b_hour,\n3  休日 = b_hour + coef(model5)[\"day_type休日\"] + b_inter\n) |&gt;\n  pivot_longer(c(平日, 休日), names_to = \"day_type\", values_to = \"coef\")\n\nggplot(df_coef5, aes(x = hour, y = coef, color = day_type)) +\n  geom_line() +\n  geom_point() +\n  scale_x_continuous(breaks = seq(0, 23, 3)) +\n  scale_color_manual(values = c(\"平日\" = \"steelblue\", \"休日\" = \"orange\")) +\n  labs(x = \"時間帯（時）\", y = \"平日0時と比べた台数\", color = NULL) +\n  theme_minimal()\n\n\n1\n\n平日の時間帯の効果（基準の平日0時と比べて何台多いか）。\n\n2\n\n交差項の係数（休日のときに、その時間帯の効果がどれだけ変わるか）。\n\n3\n\n休日の効果 ＝ 時間帯の係数 ＋ 休日の係数 ＋ 交差項の係数。前期第12回の「グループ別の傾き」と同じ考え方。\n\n\n\n\n\n\n\n\n\n\n\n平日は朝夕の2つの山、休日は昼すぎの1つの山になりました。交差項を入れたことで、モデルが平日と休日の違いを係数として覚えたことが分かります。\n\n\n\n\n\n\nNote\n\n\n\n予測では、係数を1つずつ説明しなくてもよい？\n前期の回帰分析では、「この係数が統計的に有意か」「1増えると何増えるか」を1つずつ読むことが目的でした。予測では、目的はよく当てることなので、70個近い係数を1つずつ説明できなくても、検証用の RMSE が小さければ良いモデルです。それでも、係数をグラフにして「モデルがデータの特徴をつかんでいるか」を確かめておくと、おかしな予測に早く気づけますし、依頼主にも説明しやすくなります。\n\n\n\n\n\n\n\nここまでの結果をまとめる\n\ndf_result &lt;- tibble(\n  model = c(\"ベースライン（平均だけ）\", \"model1 気温\", \"model2 ＋気温の2乗\",\n            \"model3 気温＋天気・カレンダー\", \"model4 ＋時間帯\", \"model5 ＋時間帯×平日・休日\"),\n  rmse_valid = c(rmse(df_valid$rentals, mean_learn),\n                 res1[\"rmse_valid\"], res2[\"rmse_valid\"], res3[\"rmse_valid\"],\n                 res4[\"rmse_valid\"], res5[\"rmse_valid\"]),\n  r2_valid   = c(r2(df_valid$rentals, mean_learn),\n                 res1[\"r2_valid\"], res2[\"r2_valid\"], res3[\"r2_valid\"],\n                 res4[\"r2_valid\"], res5[\"r2_valid\"])\n)\n\ndf_result |&gt;\n  mutate(rmse_valid = round(rmse_valid, 1),\n         r2_valid   = round(r2_valid, 3))\n\n# A tibble: 6 × 3\n  model                         rmse_valid r2_valid\n  &lt;chr&gt;                              &lt;dbl&gt;    &lt;dbl&gt;\n1 ベースライン（平均だけ）            181.    0    \n2 model1 気温                         167.    0.146\n3 model2 ＋気温の2乗                  167.    0.146\n4 model3 気温＋天気・カレンダー       148.    0.331\n5 model4 ＋時間帯                     104.    0.665\n6 model5 ＋時間帯×平日・休日           80     0.804\n\n\n予測が大きく良くなったのは、ステップ2のグラフで見つけた時間帯（model4）と、平日と休日の違い（model5）を入れたときでした。データを眺めて気づいたことをモデルに入れ、検証用の RMSE で確かめる。このくり返しが、予測モデルづくりの基本です。\n\n\n\n\n\n予測をグラフで確かめる\n2012年6月の1週間（月曜〜日曜）について、実際の貸出台数と、model4・model5 の予測を並べて描きます。\n\ndf_bike |&gt;\n  filter(date &gt;= as.Date(\"2012-06-04\"), date &lt;= as.Date(\"2012-06-10\")) |&gt;\n1  mutate(datetime = make_datetime(year(date), month(date), day(date), hour),\n2         `model4 の予測` = predict(model4, newdata = pick(everything())),\n         `model5 の予測` = predict(model5, newdata = pick(everything())),\n         `実際の台数` = rentals) |&gt;\n3  pivot_longer(c(`実際の台数`, `model4 の予測`, `model5 の予測`),\n               names_to = \"type\", values_to = \"count\") |&gt;\n  ggplot(aes(x = datetime, y = count, color = type)) +\n  geom_line() +\n  scale_color_manual(values = c(\"実際の台数\" = \"orange\", \"model4 の予測\" = \"steelblue\",\n                                \"model5 の予測\" = \"black\")) +\n  labs(x = \"日時\", y = \"貸出台数（台）\", color = NULL) +\n  theme_minimal() +\n  theme(legend.position = \"bottom\")\n\n\n1\n\n日付と時間帯から、日時を作る。\n\n2\n\npick(everything()) は「今のデータのすべての列」という意味で、そのデータで予測する。\n\n3\n\n実際の台数と2つの予測を、1つの列（count）にまとめ、どれの値かを type 列に入れる。こうすると、color = type で3本の線を色分けして描ける。\n\n\n\n\n\n\n\n2012年6月4日（月）〜10日（日）の実際の貸出台数と予測\n\n\n\n\nmodel4（青）は、休日（9日・10日）にも朝と夕方の山を予測してしまっています。model5（黒）は、平日は朝夕の2つの山、休日は昼の山と、実際の形（オレンジ）にかなり近い予測ができています。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>23</span>  <span class='chapter-title'>機械学習入門：予測モデルを作る</span>"
+    ]
+  },
+  {
+    "objectID": "lecB10.html#sec-step6",
+    "href": "lecB10.html#sec-step6",
+    "title": "23  機械学習入門：予測モデルを作る",
+    "section": "23.12 ステップ6：過学習を体験する",
+    "text": "23.12 ステップ6：過学習を体験する\n交差項でこれだけ良くなるなら、もっとたくさん交差項を入れれば、もっと良くなるのでしょうか。時間帯 × 平日・休日 × 天気 × 季節 の交差項をすべて入れた、とても複雑なモデル（model6）を作ってみます。\nさらに、「データが少ないとき」に何が起きるかを見るため、学習用データから 1,000 時間分だけを取り出したデータでも、model5 と model6 を作って比べます。\n\nset.seed(1)\n1df_small &lt;- df_learn |&gt; slice_sample(n = 1000)\n\n2model6 &lt;- lm(rentals ~ temp + humidity + wind + y2012 +\n               factor(hour) * day_type * weather * season, data = df_learn)\n\n3model5_small &lt;- lm(rentals ~ temp + humidity + wind + weather +\n                     y2012 + season + factor(hour) * day_type, data = df_small)\nmodel6_small &lt;- lm(rentals ~ temp + humidity + wind + y2012 +\n                     factor(hour) * day_type * weather * season, data = df_small)\n\n4length(coef(model5))\nlength(coef(model6))\n\n5df_overfit &lt;- rbind(check_model(model5),\n                    check_model(model6),\n                    check_model(model5_small, learn = df_small),\n                    check_model(model6_small, learn = df_small)) |&gt;\n  as_tibble() |&gt;\n  mutate(data  = c(\"学習用（全部）\", \"学習用（全部）\", \"1,000時間分だけ\", \"1,000時間分だけ\"),\n         model = c(\"model5\", \"model6\", \"model5\", \"model6\"),\n         .before = 1)\n\ndf_overfit |&gt;\n  mutate(across(starts_with(\"rmse\"), \\(x) round(x, 1)),\n         across(starts_with(\"r2\"), \\(x) round(x, 3)))\n\n\n1\n\n学習用データから、1,000 行だけをランダムに取り出す。\n\n2\n\na * b * c * d と書くと、4つの変数のすべての組み合わせの交差項が入る。時間帯24 × 平日・休日2 × 天気3 × 季節4 ＝ 576 通りの組み合わせごとに、別々の台数を予測するモデルになる。\n\n3\n\n同じ2つのモデルを、1,000 時間分のデータだけで作る。\n\n4\n\n係数の数を比べる。model6 は係数が 580 個もある。\n\n5\n\n4つのモデルの RMSE と R² を check_model() で計算し、rbind() で縦に並べて表にする。1,000 時間分のモデルは、学習用の値を df_small で計算する（learn = df_small）。\n\n\n\n\n[1] 57\n[1] 580\n# A tibble: 4 × 6\n  data            model  rmse_learn rmse_valid r2_learn r2_valid\n  &lt;chr&gt;           &lt;chr&gt;       &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;\n1 学習用（全部）  model5       79.3       80      0.809    0.804\n2 学習用（全部）  model6       68.4       70.4    0.858    0.848\n3 1,000時間分だけ model5       79.7       84.1    0.797    0.783\n4 1,000時間分だけ model6       55        107.     0.903    0.652\n\n\n\n\n\n\n学習用データを全部（約 13,903 時間分）使うと、model6 の検証用 RMSE（約 70 台）は model5（約 80 台）より小さくなります。データが十分にあれば、複雑なモデルも役に立ちます。\nところが、1,000 時間分しかないと、model6 は学習用の RMSE はとても小さい（約 55 台）のに、検証用の RMSE は大きくなります（約 107 台）。model5 の検証用 RMSE（約 84 台）より悪くなってしまいました。\nR² で見ても同じです。1,000 時間分の model6 は、学習用の R² が約 0.9 と model5（約 0.8）より高いのに、検証用の R² は約 0.65 と model5（約 0.78）より低くなります。前期のように学習用の R² だけを見ていると、model6 のほうが良いモデルだと思い込んでしまいます。\n\n\n\n\n\n\n\nImportant\n\n\n\n過学習\n変数や交差項をたくさん入れると、モデルは学習用データの細かいでこぼこ（たまたまの誤差）まで覚えてしまい、新しいデータでは予測が悪くなることがあります。これを過学習（overfitting）といいます。\n\n学習用の RMSE は、変数を増やすほど必ず小さくなります。だから、モデルの良し悪しは学習用ではなく検証用の RMSEで判断します。\n学習用と検証用の RMSE の差が大きいときは、過学習を疑います。\nどこまで複雑なモデルを使えるかは、データの量によって変わります。\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n係数が NA になる\nmodel6_small の係数を coef() で見ると、NA がたくさん出てきます。1,000 時間分のデータには、「休日 × 雨・雪 × 冬 × 3時」のように、1件もない組み合わせがあり、その係数は計算できないためです。これも「データに対して変数が多すぎる」というサインです（このチャンクでは警告を表示しないようにしています）。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>23</span>  <span class='chapter-title'>機械学習入門：予測モデルを作る</span>"
+    ]
+  },
+  {
+    "objectID": "lecB10.html#sec-step7",
+    "href": "lecB10.html#sec-step7",
+    "title": "23  機械学習入門：予測モデルを作る",
+    "section": "23.13 ステップ7：最終モデルと報告",
+    "text": "23.13 ステップ7：最終モデルと報告\n検証用の RMSE が一番小さかったモデルを、学習用と検証用を合わせたデータ全体（df_bike）で作り直し、最終モデルにします。検証用データは「モデルを選ぶ」ために取っておいたものなので、選び終わったら学習に使ってかまいません。データが多いほど、予測は安定します。\n\ndf_result_all &lt;- bind_rows(\n  df_result,\n  tibble(model = \"model6 ＋すべての交差項\",\n         rmse_valid = df_overfit$rmse_valid[2], r2_valid = df_overfit$r2_valid[2])\n) |&gt;\n1  arrange(rmse_valid)\n\ndf_result_all |&gt;\n  mutate(rmse_valid = round(rmse_valid, 1),\n         r2_valid   = round(r2_valid, 3))\n\n2model_final &lt;- lm(rentals ~ temp + humidity + wind + y2012 +\n                    factor(hour) * day_type * weather * season, data = df_bike)\n\n\n1\n\n検証用 RMSE の小さい順に並べる。\n\n2\n\n一番小さかったモデル（ここでは model6）を、データ全体で作り直す。\n\n\n\n\n# A tibble: 7 × 3\n  model                         rmse_valid r2_valid\n  &lt;chr&gt;                              &lt;dbl&gt;    &lt;dbl&gt;\n1 model6 ＋すべての交差項             70.4    0.848\n2 model5 ＋時間帯×平日・休日          80      0.804\n3 model4 ＋時間帯                    104.     0.665\n4 model3 気温＋天気・カレンダー      148.     0.331\n5 model2 ＋気温の2乗                 167.     0.146\n6 model1 気温                        167.     0.146\n7 ベースライン（平均だけ）           181.     0    \n\n\n\n\n\n\n依頼主への報告\n\n\n\n\n\n\nTip\n\n\n\nCapital Bikeshare 運営チームへの報告（例）\n\nどれくらい正確に予測できるか：天気・カレンダー・時間帯を使ったモデルで、1時間ごとの貸出台数を、平均的に約 70 台の外れで予測できました（貸出台数の散らばりの約 85% を説明）。何も使わずに平均で予測した場合（約 181 台の外れ）より、大きく改善しています。\n何が効くか：最も効いたのは時間帯と、その平日・休日による違いです。平日は朝8時ごろと夕方17〜18時ごろに通勤の利用が集中し、休日は昼すぎに利用が多くなります。気温（とても暑い時間を除き、高いほど多い）、雨・雪、年（利用者の増加）も効いています。\n気をつけること：\n\n利用者は年々増えています。2011年と2012年のデータで作ったモデルは、2013年以降の台数を少なめに予測してしまうおそれがあります。少なめの予測で配置すると自転車が足りなくなるので、新しいデータで作り直し続ける必要があります（下の補足1）。\n予測に使う天気は「天気予報」なので、予報が外れれば、台数の予測も外れます。\nイベントやハリケーンなど、データにない出来事は予測できません。\n夜中などの利用が少ない時間には、マイナスの台数を予測してしまうことがあります（下の補足）。\n\n\n\n\n\n\n\n\n\n\n\n\n\nNote補足1：過去から未来を予測すると\n\n\n\n\n\n今日は 80% と 20% をランダムに分けたので、検証用データには2011年の時間も2012年の時間も入っていました。しかし、依頼主が本当に予測したいのは「未来」です。そこで、2011年だけでモデルを作り、2012年を予測してみます（2011年のデータしかないので、y2012 は使えません）。\n\ndf_2011 &lt;- df_bike |&gt; filter(y2012 == 0)\ndf_2012 &lt;- df_bike |&gt; filter(y2012 == 1)\n\nmodel_2011 &lt;- lm(rentals ~ temp + humidity + wind + weather +\n                   season + factor(hour) * day_type, data = df_2011)\npred_2012 &lt;- predict(model_2011, newdata = df_2012)\n\nrmse(df_2012$rentals, pred_2012)\n\n[1] 138.7874\n\nmean(df_2012$rentals)   # 2012年の実際の平均\n\n[1] 234.6664\n\nmean(pred_2012)     # 2012年の予測の平均\n\n[1] 148.8801\n\nmean(df_2012$rentals - pred_2012)   # 平均誤差（外れの向き）\n\n[1] 85.78628\n\n\nRMSE は約 139 台と、ランダムに分けたときよりずっと大きくなります。2012年の実際の平均（約 235 台）に対して、予測の平均は約 149 台で、利用者の増加を予測できず、全体に少なめに予測しています。平均誤差は約 +86 台で、1時間あたり平均してそれだけ少なく見積もっていることになります。このまま使うと、自転車の配置がいつも足りなくなるおそれがあります。RMSE だけでは分からない「外れの向き」が、ここではとても重要です。過去のデータで作ったモデルは、世の中が変わると当たらなくなります。\n\n\n\n\n\n\n\n\n\nNote補足2：マイナスの予測\n\n\n\n\n\n\npred_final &lt;- predict(model_final, newdata = df_bike)\nsum(pred_final &lt; 0)                     # マイナスの予測の数\n\n[1] 1888\n\nmean(pred_final &lt; 0)                    # その割合\n\n[1] 0.1086369\n\n\nlm() は直線（足し算）のモデルなので、利用の少ない夜中などに、1888 時間分（全体の約 11%）でマイナスの台数を予測しています。貸出台数がマイナスになることはないので、実際に使うときは 0 に置き換えるなどの工夫が必要です。モデルの作り方を変えて、マイナスにならないようにする方法もあります。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>23</span>  <span class='chapter-title'>機械学習入門：予測モデルを作る</span>"
+    ]
+  },
+  {
+    "objectID": "lecB10.html#sec-homework",
+    "href": "lecB10.html#sec-homework",
+    "title": "23  機械学習入門：予測モデルを作る",
+    "section": "23.14 総合分析演習4（宿題）",
+    "text": "23.14 総合分析演習4（宿題）\n今日の流れを、別のデータで一人で行ってもらいます。今度は、アメリカ・アイオワ州エイムズ市の不動産会社から、「売り出す住宅の価格の目安を予測してほしい」という依頼が届きました。データ（ames_house.csv）と課題ファイル（assignmentB11.qmd）は Blackboard で配布します。\n\nデータ：エイムズ市で2006〜2010年に売れた住宅 2,909 件の販売価格と、広さ・建築年・地区・設備など。\n課題ファイルの課題1〜9に沿って、今日と同じ流れ（前処理 → グラフ → 学習用と検証用に分ける → モデルを1つずつ育てる → 依頼主への報告）で取り組む。\nベースラインを含めて3つ以上のモデルを作り、検証用の RMSE と R² で比べて、一番良いモデルを選ぶ。どの変数を使うかは自分で考える。\n提出：Render した HTML を ZIP 形式に圧縮して Blackboard から提出。期限は第11回の授業開始（12月14日 15:45）まで。\n第11回に、レポートを画面に映しながら、一人ずつ内容を説明する。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>23</span>  <span class='chapter-title'>機械学習入門：予測モデルを作る</span>"
+    ]
+  },
+  {
+    "objectID": "lecB10.html#sec-summary",
+    "href": "lecB10.html#sec-summary",
+    "title": "23  機械学習入門：予測モデルを作る",
+    "section": "23.15 まとめ",
+    "text": "23.15 まとめ\n\n\n\n\n\n\n\n項目\nポイント\n\n\n\n\nAI・機械学習\nAI ⊃ 機械学習 ⊃ ディープラーニング。前期の回帰分析（lm()）も機械学習の一つ\n\n\n説明と予測\n同じ lm() でも、予測では「新しいデータで当たるか」を見る\n\n\n学習用と検証用\nデータを分け、学習用でモデルを作り、検証用で当たり具合を確かめる\n\n\npredict()\npredict(モデル, newdata = データ) で、1行ずつの予測値を出す\n\n\nRMSE\n予測が平均的にどれくらい外れているか。元の単位で読み、小さいほど良い\n\n\nR²（検証用）\n実際の値の散らばりの何%を予測で説明できたか。1 に近いほど良い。学習用の R² は変数を増やすと必ず上がるので、検証用で見る\n\n\n平均誤差\n外れ（実際 − 予測）をそのまま平均したもの。RMSE では分からない「外れの向き」が分かる。プラスなら少なめ、マイナスなら多めに予測しがち\n\n\nベースライン\n比べる基準。まずは「平均だけで予測」\n\n\n交差項\n「時間帯の効き方が平日と休日で違う」のような関係を表し、予測を大きく良くすることがある\n\n\n過学習\n変数を増やすと学習用には当てはまるが、新しいデータでは悪くなることがある。データが少ないほど起こりやすい\n\n\n予測に使える変数\n予測する時点で分かっている情報だけ。答えそのもの（rentals_casual + rentals_member）は使えない\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n次回の予告\n次回は発表・分析結果説明4です。\n\n総合分析演習4のレポートを画面に映しながら、一人ずつ教員に説明してもらいます\n「なぜ学習用と検証用に分けたのか」「RMSE が〇〇とはどういう意味か」「どのモデルを選んだか、なぜか」と質問するので、答えられるように準備してきてください\n説明の順番を待つ間に、総合分析演習5（コンペ）のデータを配布するので、データを眺めるところから始めましょう",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>23</span>  <span class='chapter-title'>機械学習入門：予測モデルを作る</span>"
+    ]
+  },
+  {
+    "objectID": "lecB12.html",
+    "href": "lecB12.html",
+    "title": "25  総合分析演習5",
+    "section": "",
+    "text": "25.1 コンペの進め方とルール\n東京23区の中古マンションの価格を予測するコンペ\n今日の目標\nルール\n評価：総合分析演習1回分（15%）は、提出したレポートと第13回の説明の内容をあわせて評価します（5つのステップ × 3段階＝15点満点）。順位は第13回に発表しますが、順位そのものは点数に入れません。ただし、下のベースラインより良い（RMSE が小さい）予測ができていることが、ステップ4で最高の評価をつける条件です。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>総合分析演習5</span>"
+    ]
+  },
+  {
+    "objectID": "lecB12.html#sec-rules",
+    "href": "lecB12.html#sec-rules",
+    "title": "25  総合分析演習5",
+    "section": "",
+    "text": "回\n授業ですること\n授業のあとにすること\n\n\n\n\n第12回（今日）\nデータを読み込み、前処理をして、モデルを作って比べる\n冬休み中にモデルを改良し、予測を提出する\n\n\n第13回（1月18日）\n順位の発表。レポートの内容を、教員に一人ずつ説明する（約5分）\n―\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n項目\n内容\n\n\n\n\n参加\n個人戦です。友だちと相談するのは構いませんが、コードとモデルは自分で作ってください\n\n\n使える手法\nlm() だけです。変数の選び方、mutate() で作る変数、log()、ダミー変数、交差項は自由に工夫してください\n\n\n使えるデータ\n配布した tokyo_train.csv と tokyo_test.csv だけです。ほかのデータ（インターネットで見つけた不動産のデータなど）を使うことは禁止です\n\n\n提出の回数\n1回だけです。提出してから出し直すことはできません\n\n\n提出するもの\n① 予測の CSV ファイル（submission_学籍番号.csv）と、② assignmentB12.qmd を Render した HTML の ZIP\n\n\n採点\n予測した価格と正解の価格の RMSE（万円） で順位をつけます。小さいほど上位です\n\n\n\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\n提出期限\n予測の CSV ファイルとレポートの提出期限は、1月15日（金）24時です。これ以降は提出できず、レポートを提出していないと第13回の説明もできません。\n決められた形式でない予測ファイルは採点できません。行数が 1,000 行でない、欠損（NA）がある、価格が万円になっていない（円のまま、log のまま）などのファイルは、順位の対象外になります。提出する前に、下の「提出ファイルの作り方」のチェックを必ず行ってください。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>総合分析演習5</span>"
+    ]
+  },
+  {
+    "objectID": "lecB12.html#sec-data",
+    "href": "lecB12.html#sec-data",
+    "title": "25  総合分析演習5",
+    "section": "25.2 今日のデータ",
+    "text": "25.2 今日のデータ\n国土交通省の「不動産情報ライブラリ」で公開されている、2025年に東京23区で売買が成立した中古マンションのデータです。不動産会社の仲介で売買が成立したときの価格（成約価格）が記録されています。1行が1件の売買（1つの部屋）です。\n出典：国土交通省「不動産情報ライブラリ」（https://www.reinfolib.mlit.go.jp/）の不動産価格（成約価格）情報をもとに、教員が23区・2025年の分を取り出して加工しました。\n\n\n\n2つのファイル\n\n\n\n\n\n\n\n\nファイル\n行数\n内容\n\n\n\n\ntokyo_train.csv（学習用データ）\n21,048\n価格（取引価格（総額））が入っている。これを使ってモデルを作る\n\n\ntokyo_test.csv（テストデータ）\n1,000\n価格の列だけが消してある。この 1,000 件の価格を予測して提出する\n\n\n\n2つのファイルの列は、価格の列があるかないか以外は同じです。ダウンロードしたときの形をほとんどそのまま残してあるので、列名は日本語、価格は円、間取りは全角の文字です。変数を使える形にするのも、今日の課題の一部です。\n\n\n\n\n\n\n\n\n\n\n列名\n内容\n\n\n\n\nid\n番号（教員が付けたもの。学習用は 1〜、テストは 100001〜）\n\n\n種類\nすべて「中古マンション等」\n\n\n価格情報区分\nすべて「成約価格情報」\n\n\n市区町村コード\n区の番号（13101 千代田区 〜 13123 江戸川区）\n\n\n都道府県名\nすべて「東京都」\n\n\n市区町村名\n区の名前（23区）\n\n\n地区名\n町の名前（約800種類）\n\n\n最寄駅：名称\n最寄り駅（約450種類）\n\n\n最寄駅：距離（分）\n最寄り駅から徒歩何分か\n\n\n取引価格（総額）\n価格（円）。学習用データにだけある\n\n\n間取り\n間取り（３ＬＤＫ、１Ｋ など）\n\n\n面積（㎡）\n部屋の面積（㎡）。5㎡ ごとに丸めてある\n\n\n建築年\n建物が建てられた年（「2005年」のように「年」が付いている）\n\n\n建物の構造\nＲＣ（鉄筋コンクリート）、ＳＲＣ（鉄骨鉄筋コンクリート）、鉄骨造 など\n\n\n用途・今後の利用目的・建ぺい率（％）・容積率（％）・取引の事情等\nすべて空欄\n\n\n都市計画\nその場所の用途地域（商業、１種住居 など）\n\n\n取引時期\n売買が成立した時期（2025年第1四半期〜第4四半期）\n\n\n改装\n「改装済み」または空欄\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nExcel で中身を見るときは\nCSV ファイルは Excel で開いて中身を確かめて構いません。ただし、Excel で上書き保存はしないでください。保存すると、数字や文字の形が変わってしまうことがあります。R ではダウンロードしたままのファイルを読み込みます。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>総合分析演習5</span>"
+    ]
+  },
+  {
+    "objectID": "lecB12.html#sec-prepare",
+    "href": "lecB12.html#sec-prepare",
+    "title": "25  総合分析演習5",
+    "section": "25.3 今日の準備",
+    "text": "25.3 今日の準備\n\n\n\n\n\n\n\n1.\n新規 R プロジェクトを作成する。Directory name は「LessonB12」、場所は Kドライブの「R_programming」。\n\n\n2.\nBlackboard から tokyo_train.csv・tokyo_test.csv・submission_sample.csv・assignmentB12.qmd をダウンロードし、「R_programming/LessonB12」フォルダに入れる。\n\n\n3.\nまずは氏名（学籍番号）を記入し、この状態で Rendering ができるか確認する。\n\n\n4.\n左側に Rendering して出力された画面を置き、右半分には RStudio を置いて assignmentB12.qmd でレポートを書く。\n\n\n5.\n適当なところで Rendering し、確かめながら進める。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>総合分析演習5</span>"
+    ]
+  },
+  {
+    "objectID": "lecB12.html#sec-setup",
+    "href": "lecB12.html#sec-setup",
+    "title": "25  総合分析演習5",
+    "section": "25.4 パッケージの準備",
+    "text": "25.4 パッケージの準備\n大学の PC はシャットダウンするたびに初期化されるため、毎回インストールが必要です。\n\noptions(repos = c(CRAN = \"https://cran.rstudio.com/\"))\n\ninstall.packages(\"tidyverse\")\ninstall.packages(\"broom\")\ninstall.packages(\"modelsummary\")",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>総合分析演習5</span>"
+    ]
+  },
+  {
+    "objectID": "lecB12.html#sec-predict",
+    "href": "lecB12.html#sec-predict",
+    "title": "25  総合分析演習5",
+    "section": "25.5 予測の考え方",
+    "text": "25.5 予測の考え方\n\n予測の流れ\n\n\n\n\n\n\n\n\n順番\nすること\n使うデータ\n\n\n\n\n1\n読み込んで、前処理をする\n学習用・テストの両方（同じ処理をする）\n\n\n2\n学習用データを、さらに「学習用」と「検証用」に分ける\n学習用\n\n\n3\nいくつかのモデルを「学習用」で作り、「検証用」の RMSE を比べる\n学習用\n\n\n4\n一番良かったモデルを、学習用データ全体で作り直す\n学習用\n\n\n5\nそのモデルでテストデータの価格を予測し、CSV で保存する\nテスト\n\n\n\nテストデータの正解は皆さんには分かりません。そこで、手元の学習用データの一部を「検証用」として取っておき、正解を知っているのに、知らないふりをして予測してみることで、どのモデルが良さそうかを確かめます。\n\n\n\n\n\nRMSE\nRMSE（Root Mean Squared Error、平方根平均二乗誤差）は、予測がどれくらい外れているかを表す数字です。\n\\[\n\\text{RMSE} = \\sqrt{\\frac{1}{n}\\sum_{i=1}^{n}(\\text{実際の値}_i - \\text{予測値}_i)^2}\n\\]\n外れた大きさ（誤差）を2乗して平均し、最後に平方根をとって元の単位に戻します。今回なら単位は万円で、「予測は平均的に〇〇万円くらい外れている」と読みます。小さいほど良い予測です。\n\n\n\n\n\n練習：車の燃費を予測する\n前期第3回で使った mpg データ（車の燃費）で、予測の流れを確かめます。高速道路の燃費 hwy を、エンジンの大きさ displ と駆動方式 drv から予測します。\n\nlibrary(tidyverse)\n\ndf_car &lt;- mpg |&gt;\n1  mutate(id = row_number())\n\n2set.seed(123)\n3df_learn &lt;- df_car |&gt; slice_sample(prop = 0.8)\n4df_valid &lt;- df_car |&gt; anti_join(df_learn, by = \"id\")\n\nnrow(df_learn)\nnrow(df_valid)\n\n\n1\n\n1行ずつに番号を付ける。学習用と検証用に分けるときに使う。\n\n2\n\n乱数の種を決める。同じ数字にすると、何度やっても同じ分け方になる。\n\n3\n\n80% の行をランダムに選んで「学習用」にする。\n\n4\n\n「学習用」に選ばれなかった残りの 20% を「検証用」にする。\n\n\n\n\n[1] 187\n[1] 47\n\n\n\n\n\n\n1rmse &lt;- function(actual, pred) {\n  sqrt(mean((actual - pred)^2))\n}\n\n2model_a &lt;- lm(hwy ~ displ, data = df_learn)\nmodel_b &lt;- lm(hwy ~ displ + drv, data = df_learn)\n\n3pred_a &lt;- predict(model_a, newdata = df_valid)\npred_b &lt;- predict(model_b, newdata = df_valid)\n\n4rmse(df_valid$hwy, pred_a)\nrmse(df_valid$hwy, pred_b)\n\n\n1\n\nRMSE を計算する関数を自分で作る。actual に実際の値、pred に予測値を入れる。\n\n2\n\n2つのモデルを「学習用」だけで作る。\n\n3\n\npredict() の newdata に検証用データを渡すと、検証用データの1行ずつについて予測値が出てくる。\n\n4\n\n検証用データで RMSE を計算する。小さいほうのモデルが良い予測をしている。\n\n\n\n\n[1] 3.593386\n[1] 2.545503\n\n\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\nlog() を使ったモデルは exp() で元に戻す\nlm(log(hwy) ~ ..., data = ...) のように、被説明変数に log() を付けたモデルの predict() は、log の値を返します。RMSE を計算したり提出したりする前に、exp(predict(...)) のように exp() で元の単位に戻してください。戻し忘れると、価格の予測が「8.6」のような小さな数字になってしまいます。\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n変数を増やせば良いとは限らない\n変数をたくさん入れると、学習用データにはよく当てはまるようになります。しかし、学習用データにたまたまあった特徴まで覚えてしまい、新しいデータ（検証用・テスト）では予測が悪くなることがあります。これを過学習といいます。モデルの良し悪しは、必ず検証用データの RMSE で判断しましょう。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>総合分析演習5</span>"
+    ]
+  },
+  {
+    "objectID": "lecB12.html#sec-read",
+    "href": "lecB12.html#sec-read",
+    "title": "25  総合分析演習5",
+    "section": "25.6 データを読み込むときの注意",
+    "text": "25.6 データを読み込むときの注意\n\n文字コード\n配布した CSV ファイルは、ダウンロードしたときのまま Shift-JIS（CP932）という文字コードで保存されています。read_csv() は何も指定しないと UTF-8 という文字コードとして読むため、日本語が文字化けしたり、エラーになったりします。前期の期末レポート（SSDSE）と同じように、locale で文字コードを指定して読み込みましょう。\n\ndf_train_raw &lt;- read_csv(\"tokyo_train.csv\",\n                         locale = locale(encoding = \"CP932\"))\n\ntokyo_test.csv も同じように読み込みます。\n\n\n\n\n\n日本語の列名\n列名に「：」や「（）」が入っているので、R のコードの中で使うときは `最寄駅：距離（分）` のようにバッククォート（`、Shift + @ キー）で囲む必要があります。最初に rename() で英語の短い名前に変えておくと、あとのコードが書きやすくなります。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>総合分析演習5</span>"
+    ]
+  },
+  {
+    "objectID": "lecB12.html#sec-test",
+    "href": "lecB12.html#sec-test",
+    "title": "25  総合分析演習5",
+    "section": "25.7 テストデータの前処理で気をつけること",
+    "text": "25.7 テストデータの前処理で気をつけること\n\n\n\n\n\n\nImportant\n\n\n\nテストデータの行は1行も消さない\n提出する予測は、テストデータの 1,000 件すべてについて必要です。学習用データでは、欠損のある行や極端な値の行を filter() や drop_na() で除いて構いませんが、テストデータの行を消すと、その分の予測が出せなくなります。\n\n\n\n学習用データで作った変数（単位を変えた価格、築年数、log をとった変数など）は、テストデータにも同じ方法で作ってください。モデルに入れた変数がテストデータにないと、predict() がエラーになります。\nテストデータにも空欄（NA）がある列があります。モデルに入れた変数が NA の行は、予測値も NA になり、採点できなくなります。テストデータで空欄がないか確かめてから、使う変数を選びましょう。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>総合分析演習5</span>"
+    ]
+  },
+  {
+    "objectID": "lecB12.html#sec-submit",
+    "href": "lecB12.html#sec-submit",
+    "title": "25  総合分析演習5",
+    "section": "25.8 提出ファイルの作り方",
+    "text": "25.8 提出ファイルの作り方\n提出する CSV ファイルは、submission_sample.csv と同じ形にします。\n\n\n\n\n\n\n\n列名\n内容\n\n\n\n\nid\nテストデータの id（100001〜101000）\n\n\nprice\n予測した価格（万円）\n\n\n\nsubmission_sample.csv は、1,000 件すべてに学習用データの平均価格（7,504万円）を入れた例です。最後に、作った予測を write_csv() で保存します。ファイル名は submission_学籍番号.csv にしてください（例：submission_25X0001.csv）。\n\n\n\n\n\n\nImportant\n\n\n\n提出する前のチェック\n保存したファイルを read_csv() で読み込み直して、次の4つを確かめましょう。\n\n行数が 1,000 行か（nrow()）\n列名が id と price の2つか（names()）\nprice に NA がないか（sum(is.na()) が 0 か）\nprice が万円の単位になっているか（summary() で、数千〜数万の値になっているか。円のままなら数千万、log のままなら 10 前後の値になる）",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>総合分析演習5</span>"
+    ]
+  },
+  {
+    "objectID": "lecB12.html#sec-baseline",
+    "href": "lecB12.html#sec-baseline",
+    "title": "25  総合分析演習5",
+    "section": "25.9 ベースライン",
+    "text": "25.9 ベースライン\n予測がうまくできているかの目安として、ベースライン（基準になる簡単なモデル）を決めておきます。\nベースライン：学習用データから、徒歩の分数・建築年が分からない行を除き、lm(価格（万円） ~ 面積 + 築年数 + 徒歩の分数) で予測したもの。\nこのベースラインのテストデータでの RMSE は 約 4,456 万円です。これより小さい RMSE を目指しましょう。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>総合分析演習5</span>"
+    ]
+  },
+  {
+    "objectID": "lecB12.html#sec-assignment",
+    "href": "lecB12.html#sec-assignment",
+    "title": "25  総合分析演習5",
+    "section": "25.10 本日のレポート",
+    "text": "25.10 本日のレポート\n今回の assignmentB12.qmd には、5つのステップの見出しだけが書かれています。パッケージやデータの読み込みも含めて、何をどの順番で書くかを自分で考えてレポートを完成させましょう。\n\n\n\nレポートの条件\n\n予測する変数（被説明変数）は、価格（万円）。円から万円への変換は自分で行う。\n学習用データを「学習用」と「検証用」に分け、ベースラインを含めて3つ以上のモデルの検証用 RMSE を表にまとめて比べる。\n一番良かったモデルを学習用データ全体で作り直し、テストデータの価格を予測して、提出用の CSV ファイルを作る。\nステップ5では、どの工夫で RMSE が小さくなったか（ならなかったか）と、その理由を書く。\n\n\n\n\n提出方法：① 予測の CSV ファイル（submission_学籍番号.csv）と、② Render して出力された HTML ファイルの ZIP を、Blackboard から提出してください。提出期限は1月15日（金）24時です。提出は1回だけです。\n\n\n\n\n\n\nImportant\n\n\n\n第13回は、提出したレポートを画面に映しながら、一人ずつ内容を説明してもらいます。「この変数をなぜ使ったか」「このコードは何をしているか」「テストデータにはどんな前処理をしたか」と質問されても答えられるように、自分で理解したコードだけを書きましょう。生成 AI に質問するのも構いませんが、出てきたコードは自分で理解してから使ってください。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>総合分析演習5</span>"
+    ]
+  },
+  {
+    "objectID": "lecB12.html#sec-hints",
+    "href": "lecB12.html#sec-hints",
+    "title": "25  総合分析演習5",
+    "section": "25.11 ヒント",
+    "text": "25.11 ヒント\n困ったときは、該当するヒントを開いてください。まずは自分の力で考え、どうしても進めないときに開くようにしましょう。\n\n\n\n\n\n\nTip読み込みのヒント\n\n\n\n\n\n\n文字コードの指定は、上の「データを読み込むときの注意」を見てください。\n読み込んだら glimpse() で列の型を確かめましょう。数字のはずの列が &lt;chr&gt;（文字）になっていたら、その列に数字以外のものが混じっています。\n全部が空欄の列は &lt;lgl&gt; という型で読み込まれます。中身はすべて NA です。\n\n\n\n\n\n\n\n\n\n\nTip前処理のヒント（数字にする）\n\n\n\n\n\n\n学習用データの 最寄駅：距離（分） には、数字ではない値が混じっています。count() で値の一覧を見てみましょう。\n文字の列を数字にするには as.numeric() を使います。数字にできない値は NA になり、警告（Warning）が出ます。\n「2005年」のように数字と文字が混じった値から数字だけを取り出すには、parse_number() が使えます。\n築年数は、今回の売買の年（2025年）から建築年を引いて作れます。\n\n\n\n\n\n\n\n\n\n\nTip前処理のヒント（どの行を除くか）\n\n\n\n\n\n\n学習用データで、使う変数が NA の行は除きましょう。\n価格のヒストグラムや、面積と価格の散布図を描いて、ほかと比べて極端な値の行がないか確かめましょう。極端な値の行は、回帰直線を大きく引っぱることがあります。除くかどうか、除くならなぜかをレポートに書きましょう。\nテストデータの行は消してはいけません（上の「テストデータの前処理で気をつけること」）。\n\n\n\n\n\n\n\n\n\n\nTipモデルを工夫するヒント\n\n\n\n\n\n\nどんな部屋が高く売れるかを考えてみましょう。広さ、古さ、駅からの近さ、場所（区）などが思い浮かびます。\n価格のヒストグラムを描くと、右に長く伸びた形になっています。前期第9回（相関分析）で、1人あたり GDP に log() を使って散布図を描いたことを思い出し、log() を使うと形がどう変わるかを見てみましょう。\n「面積が同じでも、区によって価格の上がり方が違うのでは？」と思ったら、前期第12回の交差項が使えます。\n変数を増やしたら、必ず検証用データの RMSE が小さくなったかを確かめましょう。\n\n\n\n\n\n\n\n\n\n\nTip予測と提出のヒント\n\n\n\n\n\n\npredict(モデル, newdata = テストデータ) で、テストデータの1行ずつの予測値が出てきます。\ntibble(id = テストデータの id, price = 予測値) で提出用の表を作り、write_csv() で保存します。\nlog() を使ったモデルは、exp() で戻すのを忘れずに。\n保存したら、上の「提出する前のチェック」を必ず行いましょう。",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>総合分析演習5</span>"
+    ]
+  },
+  {
+    "objectID": "lecB12.html#sec-summary",
+    "href": "lecB12.html#sec-summary",
+    "title": "25  総合分析演習5",
+    "section": "25.12 まとめ",
+    "text": "25.12 まとめ\n\n\n\n\n\n\n\n項目\nポイント\n\n\n\n\n予測\n回帰分析で作ったモデルに新しいデータを入れて、まだ分からない値を当てる。predict(モデル, newdata = ...)\n\n\nRMSE\n予測が平均的にどれくらい外れているか。元の単位（今回は万円）で読み、小さいほど良い\n\n\n検証用データ\n学習用データの一部を取っておき、正解を知らないふりをして予測する。モデルの比較は検証用の RMSE で行う\n\n\n過学習\n変数を増やすと学習用には当てはまるが、新しいデータでは悪くなることがある\n\n\n前処理\n学習用とテストに同じ処理をする。テストの行は消さない\n\n\n文字コード\nShift-JIS の CSV は locale = locale(encoding = \"CP932\") で読む\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n次回の予告\n次回（1月18日）は発表・分析結果説明5です。\n\n最初に、コンペの順位を発表します\n提出したレポートを画面に映しながら、5つのステップに沿って、一人ずつ教員に説明してもらいます\n「この変数をなぜ使ったか」「どの工夫で RMSE が小さくなったか」「テストデータにはどんな前処理をしたか」と質問するので、答えられるように準備してきてください\n予測ファイルとレポートの提出は 1月15日（金）24時まで、1回だけです",
+    "crumbs": [
+      "後期（B）",
+      "<span class='chapter-number'>25</span>  <span class='chapter-title'>総合分析演習5</span>"
+    ]
   }
 ]

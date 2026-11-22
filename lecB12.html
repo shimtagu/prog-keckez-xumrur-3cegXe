@@ -8,7 +8,7 @@
 
 <meta name="description" content="2026年度　前期（A） 後期（B） 時間： 月曜日 4 時限（15:45-17:30） 教室： C 館 地下1階 PC4 教室">
 
-<title>25&nbsp; 総合分析演習 5 – R プログラミング</title>
+<title>25&nbsp; 総合分析演習5 – R プログラミング</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -73,6 +108,35 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <meta name="robots" content="noindex, nofollow">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -85,7 +149,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lecB01.html">後期（B）</a></li><li class="breadcrumb-item"><a href="./lecB12.html"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">総合分析演習 5</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lecB01.html">後期（B）</a></li><li class="breadcrumb-item"><a href="./lecB12.html"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">総合分析演習5</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -271,7 +335,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lecB10.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">総合分析演習 4</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">機械学習入門：予測モデルを作る</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -283,7 +347,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lecB12.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">総合分析演習 5</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">総合分析演習5</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -305,15 +369,41 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-rules" id="toc-sec-rules" class="nav-link active" data-scroll-target="#sec-rules"><span class="header-section-number">25.1</span> コンペの進め方とルール</a></li>
+  <li><a href="#sec-data" id="toc-sec-data" class="nav-link" data-scroll-target="#sec-data"><span class="header-section-number">25.2</span> 今日のデータ</a></li>
+  <li><a href="#sec-prepare" id="toc-sec-prepare" class="nav-link" data-scroll-target="#sec-prepare"><span class="header-section-number">25.3</span> 今日の準備</a></li>
+  <li><a href="#sec-setup" id="toc-sec-setup" class="nav-link" data-scroll-target="#sec-setup"><span class="header-section-number">25.4</span> パッケージの準備</a></li>
+  <li><a href="#sec-predict" id="toc-sec-predict" class="nav-link" data-scroll-target="#sec-predict"><span class="header-section-number">25.5</span> 予測の考え方</a>
+  <ul class="collapse">
+  <li><a href="#予測の流れ" id="toc-予測の流れ" class="nav-link" data-scroll-target="#予測の流れ">予測の流れ</a></li>
+  <li><a href="#rmse" id="toc-rmse" class="nav-link" data-scroll-target="#rmse">RMSE</a></li>
+  <li><a href="#練習車の燃費を予測する" id="toc-練習車の燃費を予測する" class="nav-link" data-scroll-target="#練習車の燃費を予測する">練習：車の燃費を予測する</a></li>
+  </ul></li>
+  <li><a href="#sec-read" id="toc-sec-read" class="nav-link" data-scroll-target="#sec-read"><span class="header-section-number">25.6</span> データを読み込むときの注意</a>
+  <ul class="collapse">
+  <li><a href="#文字コード" id="toc-文字コード" class="nav-link" data-scroll-target="#文字コード">文字コード</a></li>
+  <li><a href="#日本語の列名" id="toc-日本語の列名" class="nav-link" data-scroll-target="#日本語の列名">日本語の列名</a></li>
+  </ul></li>
+  <li><a href="#sec-test" id="toc-sec-test" class="nav-link" data-scroll-target="#sec-test"><span class="header-section-number">25.7</span> テストデータの前処理で気をつけること</a></li>
+  <li><a href="#sec-submit" id="toc-sec-submit" class="nav-link" data-scroll-target="#sec-submit"><span class="header-section-number">25.8</span> 提出ファイルの作り方</a></li>
+  <li><a href="#sec-baseline" id="toc-sec-baseline" class="nav-link" data-scroll-target="#sec-baseline"><span class="header-section-number">25.9</span> ベースライン</a></li>
+  <li><a href="#sec-assignment" id="toc-sec-assignment" class="nav-link" data-scroll-target="#sec-assignment"><span class="header-section-number">25.10</span> 本日のレポート</a></li>
+  <li><a href="#sec-hints" id="toc-sec-hints" class="nav-link" data-scroll-target="#sec-hints"><span class="header-section-number">25.11</span> ヒント</a></li>
+  <li><a href="#sec-summary" id="toc-sec-summary" class="nav-link" data-scroll-target="#sec-summary"><span class="header-section-number">25.12</span> まとめ</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lecB01.html">後期（B）</a></li><li class="breadcrumb-item"><a href="./lecB12.html"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">総合分析演習 5</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lecB01.html">後期（B）</a></li><li class="breadcrumb-item"><a href="./lecB12.html"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">総合分析演習5</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">総合分析演習 5</span></h1>
+<h1 class="title"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">総合分析演習5</span></h1>
 </div>
 
 
@@ -330,8 +420,820 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p><strong>東京23区の中古マンションの価格を予測するコンペ</strong></p>
+<div style="margin-top: 2.0em;">
+
+</div>
+<p><strong>今日の目標</strong></p>
+<ol type="1">
+<li>国土交通省が公開している<strong>元のままのデータ</strong>を読み込み、予測に使える形に<strong>自分で前処理</strong>できるようになる。</li>
+<li>学習用データを「学習用」と「検証用」に分け、<strong>検証用データの RMSE</strong> を比べて、予測に使うモデルを自分で選べるようになる。</li>
+<li>選んだモデルで<strong>テストデータの価格を予測</strong>し、決められた形式の CSV ファイルで提出する。</li>
+<li>第13回に、「どの変数をなぜ使ったか」「前処理で何をしたか」を<strong>自分の言葉で説明できる</strong>ように準備する。</li>
+</ol>
+<div style="margin-top: 2.0em;">
+
+</div>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>今日の位置づけ</strong></p>
+<p>総合分析演習の最後（5回目）です。これまでの4回は「<span class="math inline">\(X\)</span> は <span class="math inline">\(Y\)</span> に影響するか」という<strong>問い</strong>に答えるために回帰分析を使いました。今回は回帰分析を、<span class="marker">まだ分からない値を当てる（予測する）</span>ために使います。</p>
+<p>今回は<strong>コンペ（予測の競争）</strong>です。全員が同じデータを使い、テストデータの価格をどれだけ正確に予測できるかを競います。正解の価格は教員だけが持っています。</p>
+</div>
+</div>
+<div style="margin-top: 3.0em;">
+
+</div>
+<section id="sec-rules" class="level2" data-number="25.1">
+<h2 data-number="25.1" class="anchored" data-anchor-id="sec-rules"><span class="header-section-number">25.1</span> コンペの進め方とルール</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 45%">
+<col style="width: 35%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">回</th>
+<th style="text-align: left;">授業ですること</th>
+<th style="text-align: left;">授業のあとにすること</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">第12回（今日）</td>
+<td style="text-align: left;">データを読み込み、前処理をして、モデルを作って比べる</td>
+<td style="text-align: left;">冬休み中にモデルを改良し、予測を提出する</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">第13回（1月18日）</td>
+<td style="text-align: left;">順位の発表。レポートの内容を、教員に<strong>一人ずつ説明する</strong>（約5分）</td>
+<td style="text-align: left;">―</td>
+</tr>
+</tbody>
+</table>
+<div style="margin-top: 2.0em;">
+
+</div>
+<p><strong>ルール</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 82%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">項目</th>
+<th style="text-align: left;">内容</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">参加</td>
+<td style="text-align: left;"><strong>個人戦</strong>です。友だちと相談するのは構いませんが、コードとモデルは自分で作ってください</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">使える手法</td>
+<td style="text-align: left;"><strong><code>lm()</code> だけ</strong>です。変数の選び方、<code>mutate()</code> で作る変数、<code>log()</code>、ダミー変数、交差項は自由に工夫してください</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">使えるデータ</td>
+<td style="text-align: left;">配布した <code>tokyo_train.csv</code> と <code>tokyo_test.csv</code> だけです。<span class="marker">ほかのデータ（インターネットで見つけた不動産のデータなど）を使うことは禁止</span>です</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">提出の回数</td>
+<td style="text-align: left;"><span class="marker">1回だけ</span>です。提出してから出し直すことはできません</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">提出するもの</td>
+<td style="text-align: left;">① 予測の CSV ファイル（<code>submission_学籍番号.csv</code>）と、② <code>assignmentB12.qmd</code> を Render した HTML の ZIP</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">採点</td>
+<td style="text-align: left;">予測した価格と正解の価格の <strong>RMSE（万円）</strong> で順位をつけます。小さいほど上位です</td>
+</tr>
+</tbody>
+</table>
+<div style="margin-top: 2.0em;">
+
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>提出期限</strong></p>
+<p>予測の CSV ファイルとレポートの提出期限は、<span class="marker">1月15日（金）24時</span>です。これ以降は提出できず、レポートを提出していないと第13回の説明もできません。</p>
+<p><strong>決められた形式でない予測ファイルは採点できません。</strong>行数が 1,000 行でない、欠損（<code>NA</code>）がある、価格が万円になっていない（円のまま、<code>log</code> のまま）などのファイルは、順位の対象外になります。提出する前に、下の「提出ファイルの作り方」のチェックを必ず行ってください。</p>
+</div>
+</div>
+<p><strong>評価</strong>：総合分析演習1回分（15%）は、提出したレポートと第13回の説明の内容をあわせて評価します（5つのステップ × 3段階＝15点満点）。順位は第13回に発表しますが、<span class="marker">順位そのものは点数に入れません</span>。ただし、下の<strong>ベースライン</strong>より良い（RMSE が小さい）予測ができていることが、ステップ4で最高の評価をつける条件です。</p>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-data" class="level2" data-number="25.2">
+<h2 data-number="25.2" class="anchored" data-anchor-id="sec-data"><span class="header-section-number">25.2</span> 今日のデータ</h2>
+<p>国土交通省の「不動産情報ライブラリ」で公開されている、<span class="marker">2025年に東京23区で売買が成立した中古マンション</span>のデータです。不動産会社の仲介で売買が成立したときの価格（成約価格）が記録されています。<span class="marker">1行が1件の売買（1つの部屋）</span>です。</p>
+<p>出典：国土交通省「不動産情報ライブラリ」（https://www.reinfolib.mlit.go.jp/）の不動産価格（成約価格）情報をもとに、教員が23区・2025年の分を取り出して加工しました。</p>
+<div style="margin-top: 2.0em;">
+
+</div>
+<p><strong>2つのファイル</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 38%">
+<col style="width: 12%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">ファイル</th>
+<th style="text-align: right;">行数</th>
+<th style="text-align: left;">内容</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>tokyo_train.csv</code>（学習用データ）</td>
+<td style="text-align: right;">21,048</td>
+<td style="text-align: left;">価格（<code>取引価格（総額）</code>）が入っている。これを使ってモデルを作る</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>tokyo_test.csv</code>（テストデータ）</td>
+<td style="text-align: right;">1,000</td>
+<td style="text-align: left;"><strong>価格の列だけが消してある</strong>。この 1,000 件の価格を予測して提出する</td>
+</tr>
+</tbody>
+</table>
+<p>2つのファイルの列は、価格の列があるかないか以外は同じです。ダウンロードしたときの形を<span class="marker">ほとんどそのまま</span>残してあるので、列名は日本語、価格は円、間取りは全角の文字です。変数を使える形にするのも、今日の課題の一部です。</p>
+<div style="margin-top: 2.0em;">
+
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 70%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>列名</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>id</code></td>
+<td>番号（教員が付けたもの。学習用は 1〜、テストは 100001〜）</td>
+</tr>
+<tr class="even">
+<td><code>種類</code></td>
+<td>すべて「中古マンション等」</td>
+</tr>
+<tr class="odd">
+<td><code>価格情報区分</code></td>
+<td>すべて「成約価格情報」</td>
+</tr>
+<tr class="even">
+<td><code>市区町村コード</code></td>
+<td>区の番号（13101 千代田区 〜 13123 江戸川区）</td>
+</tr>
+<tr class="odd">
+<td><code>都道府県名</code></td>
+<td>すべて「東京都」</td>
+</tr>
+<tr class="even">
+<td><code>市区町村名</code></td>
+<td>区の名前（23区）</td>
+</tr>
+<tr class="odd">
+<td><code>地区名</code></td>
+<td>町の名前（約800種類）</td>
+</tr>
+<tr class="even">
+<td><code>最寄駅：名称</code></td>
+<td>最寄り駅（約450種類）</td>
+</tr>
+<tr class="odd">
+<td><code>最寄駅：距離（分）</code></td>
+<td>最寄り駅から徒歩何分か</td>
+</tr>
+<tr class="even">
+<td><code>取引価格（総額）</code></td>
+<td>価格（<strong>円</strong>）。<strong>学習用データにだけある</strong></td>
+</tr>
+<tr class="odd">
+<td><code>間取り</code></td>
+<td>間取り（３ＬＤＫ、１Ｋ など）</td>
+</tr>
+<tr class="even">
+<td><code>面積（㎡）</code></td>
+<td>部屋の面積（㎡）。5㎡ ごとに丸めてある</td>
+</tr>
+<tr class="odd">
+<td><code>建築年</code></td>
+<td>建物が建てられた年（「2005年」のように「年」が付いている）</td>
+</tr>
+<tr class="even">
+<td><code>建物の構造</code></td>
+<td>ＲＣ（鉄筋コンクリート）、ＳＲＣ（鉄骨鉄筋コンクリート）、鉄骨造 など</td>
+</tr>
+<tr class="odd">
+<td><code>用途</code>・<code>今後の利用目的</code>・<code>建ぺい率（％）</code>・<code>容積率（％）</code>・<code>取引の事情等</code></td>
+<td>すべて空欄</td>
+</tr>
+<tr class="even">
+<td><code>都市計画</code></td>
+<td>その場所の用途地域（商業、１種住居 など）</td>
+</tr>
+<tr class="odd">
+<td><code>取引時期</code></td>
+<td>売買が成立した時期（2025年第1四半期〜第4四半期）</td>
+</tr>
+<tr class="even">
+<td><code>改装</code></td>
+<td>「改装済み」または空欄</td>
+</tr>
+</tbody>
+</table>
+<div style="margin-top: 2.0em;">
+
+</div>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Excel で中身を見るときは</strong></p>
+<p>CSV ファイルは Excel で開いて中身を確かめて構いません。ただし、<span class="marker">Excel で上書き保存はしない</span>でください。保存すると、数字や文字の形が変わってしまうことがあります。R ではダウンロードしたままのファイルを読み込みます。</p>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-prepare" class="level2" data-number="25.3">
+<h2 data-number="25.3" class="anchored" data-anchor-id="sec-prepare"><span class="header-section-number">25.3</span> 今日の準備</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 8%">
+<col style="width: 92%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1.</td>
+<td style="text-align: left;">新規 R プロジェクトを作成する。Directory name は「LessonB12」、場所は Kドライブの「R_programming」。</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2.</td>
+<td style="text-align: left;">Blackboard から <code>tokyo_train.csv</code>・<code>tokyo_test.csv</code>・<code>submission_sample.csv</code>・<code>assignmentB12.qmd</code> をダウンロードし、「R_programming/LessonB12」フォルダに入れる。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3.</td>
+<td style="text-align: left;">まずは氏名（学籍番号）を記入し、この状態で Rendering ができるか確認する。</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4.</td>
+<td style="text-align: left;">左側に Rendering して出力された画面を置き、右半分には RStudio を置いて assignmentB12.qmd でレポートを書く。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5.</td>
+<td style="text-align: left;">適当なところで Rendering し、確かめながら進める。</td>
+</tr>
+</tbody>
+</table>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-setup" class="level2" data-number="25.4">
+<h2 data-number="25.4" class="anchored" data-anchor-id="sec-setup"><span class="header-section-number">25.4</span> パッケージの準備</h2>
+<p>大学の PC はシャットダウンするたびに初期化されるため、毎回インストールが必要です。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">options</span>(<span class="at">repos =</span> <span class="fu">c</span>(<span class="at">CRAN =</span> <span class="st">"https://cran.rstudio.com/"</span>))</span>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">install.packages</span>(<span class="st">"broom"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">install.packages</span>(<span class="st">"modelsummary"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-predict" class="level2" data-number="25.5">
+<h2 data-number="25.5" class="anchored" data-anchor-id="sec-predict"><span class="header-section-number">25.5</span> 予測の考え方</h2>
+<section id="予測の流れ" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="予測の流れ">予測の流れ</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 60%">
+<col style="width: 30%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">順番</th>
+<th style="text-align: left;">すること</th>
+<th style="text-align: left;">使うデータ</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: left;">読み込んで、前処理をする</td>
+<td style="text-align: left;">学習用・テストの両方（<strong>同じ処理</strong>をする）</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: left;">学習用データを、さらに「学習用」と「検証用」に分ける</td>
+<td style="text-align: left;">学習用</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: left;">いくつかのモデルを「学習用」で作り、「検証用」の RMSE を比べる</td>
+<td style="text-align: left;">学習用</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: left;">一番良かったモデルを、学習用データ全体で作り直す</td>
+<td style="text-align: left;">学習用</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: left;">そのモデルでテストデータの価格を予測し、CSV で保存する</td>
+<td style="text-align: left;">テスト</td>
+</tr>
+</tbody>
+</table>
+<p>テストデータの正解は皆さんには分かりません。そこで、手元の学習用データの一部を「検証用」として取っておき、<span class="marker">正解を知っているのに、知らないふりをして予測してみる</span>ことで、どのモデルが良さそうかを確かめます。</p>
+<div style="margin-top: 2.0em;">
+
+</div>
+</section>
+<section id="rmse" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="rmse">RMSE</h3>
+<p><strong>RMSE</strong>（Root Mean Squared Error、平方根平均二乗誤差）は、予測がどれくらい外れているかを表す数字です。</p>
+<p><span class="math display">\[
+\text{RMSE} = \sqrt{\frac{1}{n}\sum_{i=1}^{n}(\text{実際の値}_i - \text{予測値}_i)^2}
+\]</span></p>
+<p>外れた大きさ（誤差）を2乗して平均し、最後に平方根をとって元の単位に戻します。今回なら単位は<strong>万円</strong>で、「予測は平均的に〇〇万円くらい外れている」と読みます。<span class="marker">小さいほど良い予測</span>です。</p>
+<div style="margin-top: 2.0em;">
+
+</div>
+</section>
+<section id="練習車の燃費を予測する" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="練習車の燃費を予測する">練習：車の燃費を予測する</h3>
+<p>前期第3回で使った <code>mpg</code> データ（車の燃費）で、予測の流れを確かめます。高速道路の燃費 <code>hwy</code> を、エンジンの大きさ <code>displ</code> と駆動方式 <code>drv</code> から予測します。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-2-1"><a href="#annotated-cell-2-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="annotated-cell-2-2"><a href="#annotated-cell-2-2"></a></span>
+<span id="annotated-cell-2-3"><a href="#annotated-cell-2-3"></a>df_car <span class="ot">&lt;-</span> mpg <span class="sc">|&gt;</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1">1</button><span id="annotated-cell-2-4" class="code-annotation-target"><a href="#annotated-cell-2-4"></a>  <span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">row_number</span>())</span>
+<span id="annotated-cell-2-5"><a href="#annotated-cell-2-5"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="2">2</button><span id="annotated-cell-2-6" class="code-annotation-target"><a href="#annotated-cell-2-6"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="3">3</button><span id="annotated-cell-2-7" class="code-annotation-target"><a href="#annotated-cell-2-7"></a>df_learn <span class="ot">&lt;-</span> df_car <span class="sc">|&gt;</span> <span class="fu">slice_sample</span>(<span class="at">prop =</span> <span class="fl">0.8</span>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="4">4</button><span id="annotated-cell-2-8" class="code-annotation-target"><a href="#annotated-cell-2-8"></a>df_valid <span class="ot">&lt;-</span> df_car <span class="sc">|&gt;</span> <span class="fu">anti_join</span>(df_learn, <span class="at">by =</span> <span class="st">"id"</span>)</span>
+<span id="annotated-cell-2-9"><a href="#annotated-cell-2-9"></a></span>
+<span id="annotated-cell-2-10"><a href="#annotated-cell-2-10"></a><span class="fu">nrow</span>(df_learn)</span>
+<span id="annotated-cell-2-11"><a href="#annotated-cell-2-11"></a><span class="fu">nrow</span>(df_valid)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-2" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="4" data-code-annotation="1">1行ずつに番号を付ける。学習用と検証用に分けるときに使う。</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="6" data-code-annotation="2">乱数の種を決める。同じ数字にすると、何度やっても同じ分け方になる。</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="7" data-code-annotation="3">80% の行をランダムに選んで「学習用」にする。</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="8" data-code-annotation="4">「学習用」に選ばれなかった残りの 20% を「検証用」にする。</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 187
+[1] 47</code></pre>
+</div>
+</div>
+<div style="margin-top: 2.0em;">
+
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1">1</button><span id="annotated-cell-3-1" class="code-annotation-target"><a href="#annotated-cell-3-1"></a>rmse <span class="ot">&lt;-</span> <span class="cf">function</span>(actual, pred) {</span>
+<span id="annotated-cell-3-2"><a href="#annotated-cell-3-2"></a>  <span class="fu">sqrt</span>(<span class="fu">mean</span>((actual <span class="sc">-</span> pred)<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="annotated-cell-3-3"><a href="#annotated-cell-3-3"></a>}</span>
+<span id="annotated-cell-3-4"><a href="#annotated-cell-3-4"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2">2</button><span id="annotated-cell-3-5" class="code-annotation-target"><a href="#annotated-cell-3-5"></a>model_a <span class="ot">&lt;-</span> <span class="fu">lm</span>(hwy <span class="sc">~</span> displ, <span class="at">data =</span> df_learn)</span>
+<span id="annotated-cell-3-6"><a href="#annotated-cell-3-6"></a>model_b <span class="ot">&lt;-</span> <span class="fu">lm</span>(hwy <span class="sc">~</span> displ <span class="sc">+</span> drv, <span class="at">data =</span> df_learn)</span>
+<span id="annotated-cell-3-7"><a href="#annotated-cell-3-7"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="3">3</button><span id="annotated-cell-3-8" class="code-annotation-target"><a href="#annotated-cell-3-8"></a>pred_a <span class="ot">&lt;-</span> <span class="fu">predict</span>(model_a, <span class="at">newdata =</span> df_valid)</span>
+<span id="annotated-cell-3-9"><a href="#annotated-cell-3-9"></a>pred_b <span class="ot">&lt;-</span> <span class="fu">predict</span>(model_b, <span class="at">newdata =</span> df_valid)</span>
+<span id="annotated-cell-3-10"><a href="#annotated-cell-3-10"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="4">4</button><span id="annotated-cell-3-11" class="code-annotation-target"><a href="#annotated-cell-3-11"></a><span class="fu">rmse</span>(df_valid<span class="sc">$</span>hwy, pred_a)</span>
+<span id="annotated-cell-3-12"><a href="#annotated-cell-3-12"></a><span class="fu">rmse</span>(df_valid<span class="sc">$</span>hwy, pred_b)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="1" data-code-annotation="1">RMSE を計算する関数を自分で作る。<code>actual</code> に実際の値、<code>pred</code> に予測値を入れる。</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="5" data-code-annotation="2">2つのモデルを「学習用」だけで作る。</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="8" data-code-annotation="3"><code>predict()</code> の <code>newdata</code> に検証用データを渡すと、検証用データの1行ずつについて予測値が出てくる。</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="11" data-code-annotation="4">検証用データで RMSE を計算する。小さいほうのモデルが良い予測をしている。</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.593386
+[1] 2.545503</code></pre>
+</div>
+</div>
+<div style="margin-top: 2.0em;">
+
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong><code>log()</code> を使ったモデルは <code>exp()</code> で元に戻す</strong></p>
+<p><code>lm(log(hwy) ~ ..., data = ...)</code> のように、被説明変数に <code>log()</code> を付けたモデルの <code>predict()</code> は、<strong>log の値</strong>を返します。RMSE を計算したり提出したりする前に、<code>exp(predict(...))</code> のように <code>exp()</code> で元の単位に戻してください。戻し忘れると、価格の予測が「8.6」のような小さな数字になってしまいます。</p>
+</div>
+</div>
+<div style="margin-top: 2.0em;">
+
+</div>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>変数を増やせば良いとは限らない</strong></p>
+<p>変数をたくさん入れると、学習用データにはよく当てはまるようになります。しかし、学習用データにたまたまあった特徴まで覚えてしまい、<span class="marker">新しいデータ（検証用・テスト）では予測が悪くなる</span>ことがあります。これを<strong>過学習</strong>といいます。モデルの良し悪しは、必ず<strong>検証用データの RMSE</strong> で判断しましょう。</p>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+</section>
+<section id="sec-read" class="level2" data-number="25.6">
+<h2 data-number="25.6" class="anchored" data-anchor-id="sec-read"><span class="header-section-number">25.6</span> データを読み込むときの注意</h2>
+<section id="文字コード" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="文字コード">文字コード</h3>
+<p>配布した CSV ファイルは、ダウンロードしたときのまま <strong>Shift-JIS</strong>（CP932）という文字コードで保存されています。<code>read_csv()</code> は何も指定しないと UTF-8 という文字コードとして読むため、日本語が文字化けしたり、エラーになったりします。前期の期末レポート（SSDSE）と同じように、<code>locale</code> で文字コードを指定して読み込みましょう。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>df_train_raw <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"tokyo_train.csv"</span>,</span>
+<span id="cb4-2"><a href="#cb4-2"></a>                         <span class="at">locale =</span> <span class="fu">locale</span>(<span class="at">encoding =</span> <span class="st">"CP932"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><code>tokyo_test.csv</code> も同じように読み込みます。</p>
+<div style="margin-top: 2.0em;">
+
+</div>
+</section>
+<section id="日本語の列名" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="日本語の列名">日本語の列名</h3>
+<p>列名に「：」や「（）」が入っているので、R のコードの中で使うときは <code>`最寄駅：距離（分）`</code> のように<strong>バッククォート</strong>（<code>`</code>、Shift + @ キー）で囲む必要があります。最初に <code>rename()</code> で英語の短い名前に変えておくと、あとのコードが書きやすくなります。</p>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+</section>
+<section id="sec-test" class="level2" data-number="25.7">
+<h2 data-number="25.7" class="anchored" data-anchor-id="sec-test"><span class="header-section-number">25.7</span> テストデータの前処理で気をつけること</h2>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>テストデータの行は1行も消さない</strong></p>
+<p>提出する予測は、テストデータの <strong>1,000 件すべて</strong>について必要です。学習用データでは、欠損のある行や極端な値の行を <code>filter()</code> や <code>drop_na()</code> で除いて構いませんが、<span class="marker">テストデータの行を消すと、その分の予測が出せなくなります</span>。</p>
+</div>
+</div>
+<ul>
+<li>学習用データで作った変数（単位を変えた価格、築年数、<code>log</code> をとった変数など）は、<strong>テストデータにも同じ方法で</strong>作ってください。モデルに入れた変数がテストデータにないと、<code>predict()</code> がエラーになります。</li>
+<li>テストデータにも<strong>空欄（<code>NA</code>）がある列</strong>があります。モデルに入れた変数が <code>NA</code> の行は、予測値も <code>NA</code> になり、採点できなくなります。テストデータで空欄がないか確かめてから、使う変数を選びましょう。</li>
+</ul>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-submit" class="level2" data-number="25.8">
+<h2 data-number="25.8" class="anchored" data-anchor-id="sec-submit"><span class="header-section-number">25.8</span> 提出ファイルの作り方</h2>
+<p>提出する CSV ファイルは、<code>submission_sample.csv</code> と同じ形にします。</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 80%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">列名</th>
+<th style="text-align: left;">内容</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>id</code></td>
+<td style="text-align: left;">テストデータの <code>id</code>（100001〜101000）</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>price</code></td>
+<td style="text-align: left;">予測した価格（<strong>万円</strong>）</td>
+</tr>
+</tbody>
+</table>
+<p><code>submission_sample.csv</code> は、1,000 件すべてに学習用データの平均価格（7,504万円）を入れた例です。最後に、作った予測を <code>write_csv()</code> で保存します。ファイル名は <code>submission_学籍番号.csv</code> にしてください（例：<code>submission_25X0001.csv</code>）。</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>提出する前のチェック</strong></p>
+<p>保存したファイルを <code>read_csv()</code> で読み込み直して、次の4つを確かめましょう。</p>
+<ol type="1">
+<li>行数が <strong>1,000</strong> 行か（<code>nrow()</code>）</li>
+<li>列名が <code>id</code> と <code>price</code> の2つか（<code>names()</code>）</li>
+<li><code>price</code> に <code>NA</code> がないか（<code>sum(is.na())</code> が 0 か）</li>
+<li><code>price</code> が<strong>万円</strong>の単位になっているか（<code>summary()</code> で、数千〜数万の値になっているか。円のままなら数千万、<code>log</code> のままなら 10 前後の値になる）</li>
+</ol>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-baseline" class="level2" data-number="25.9">
+<h2 data-number="25.9" class="anchored" data-anchor-id="sec-baseline"><span class="header-section-number">25.9</span> ベースライン</h2>
+<p>予測がうまくできているかの目安として、<strong>ベースライン</strong>（基準になる簡単なモデル）を決めておきます。</p>
+<p><strong>ベースライン</strong>：学習用データから、徒歩の分数・建築年が分からない行を除き、<code>lm(価格（万円） ~ 面積 + 築年数 + 徒歩の分数)</code> で予測したもの。</p>
+<p>このベースラインのテストデータでの RMSE は <span class="marker"><strong>約 4,456 万円</strong></span>です。これより小さい RMSE を目指しましょう。</p>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-assignment" class="level2" data-number="25.10">
+<h2 data-number="25.10" class="anchored" data-anchor-id="sec-assignment"><span class="header-section-number">25.10</span> 本日のレポート</h2>
+<p>今回の <code>assignmentB12.qmd</code> には、<strong>5つのステップの見出しだけ</strong>が書かれています。パッケージやデータの読み込みも含めて、<span class="marker">何をどの順番で書くかを自分で考えて</span>レポートを完成させましょう。</p>
+<div style="margin-top: 2.0em;">
+
+</div>
+<p><strong>レポートの条件</strong></p>
+<ul>
+<li>予測する変数（被説明変数）は、価格（<strong>万円</strong>）。円から万円への変換は自分で行う。</li>
+<li>学習用データを「学習用」と「検証用」に分け、<span class="marker">ベースラインを含めて3つ以上のモデル</span>の検証用 RMSE を表にまとめて比べる。</li>
+<li>一番良かったモデルを学習用データ全体で作り直し、テストデータの価格を予測して、提出用の CSV ファイルを作る。</li>
+<li>ステップ5では、どの工夫で RMSE が小さくなったか（ならなかったか）と、その理由を書く。</li>
+</ul>
+<div style="margin-top: 2.0em;">
+
+</div>
+<p><strong>提出方法</strong>：① 予測の CSV ファイル（<code>submission_学籍番号.csv</code>）と、② Render して出力された HTML ファイルの ZIP を、Blackboard から提出してください。提出期限は<span class="marker">1月15日（金）24時</span>です。<strong>提出は1回だけ</strong>です。</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>第13回は、提出したレポートを画面に映しながら、<strong>一人ずつ内容を説明</strong>してもらいます。「この変数をなぜ使ったか」「このコードは何をしているか」「テストデータにはどんな前処理をしたか」と質問されても答えられるように、<span class="marker">自分で理解したコードだけを書きましょう</span>。生成 AI に質問するのも構いませんが、出てきたコードは自分で理解してから使ってください。</p>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-hints" class="level2" data-number="25.11">
+<h2 data-number="25.11" class="anchored" data-anchor-id="sec-hints"><span class="header-section-number">25.11</span> ヒント</h2>
+<p>困ったときは、該当するヒントを開いてください。<span class="marker">まずは自分の力で考え、どうしても進めないときに開く</span>ようにしましょう。</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="読み込みのヒント">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>読み込みのヒント
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>文字コードの指定は、上の「データを読み込むときの注意」を見てください。</li>
+<li>読み込んだら <code>glimpse()</code> で列の型を確かめましょう。数字のはずの列が <code>&lt;chr&gt;</code>（文字）になっていたら、その列に数字以外のものが混じっています。</li>
+<li>全部が空欄の列は <code>&lt;lgl&gt;</code> という型で読み込まれます。中身はすべて <code>NA</code> です。</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="前処理のヒント（数字にする）">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>前処理のヒント（数字にする）
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>学習用データの <code>最寄駅：距離（分）</code> には、数字ではない値が混じっています。<code>count()</code> で値の一覧を見てみましょう。</li>
+<li>文字の列を数字にするには <code>as.numeric()</code> を使います。数字にできない値は <code>NA</code> になり、警告（Warning）が出ます。</li>
+<li>「2005年」のように数字と文字が混じった値から数字だけを取り出すには、<code>parse_number()</code> が使えます。</li>
+<li>築年数は、今回の売買の年（2025年）から建築年を引いて作れます。</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="前処理のヒント（どの行を除くか）">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>前処理のヒント（どの行を除くか）
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>学習用データで、使う変数が <code>NA</code> の行は除きましょう。</li>
+<li>価格のヒストグラムや、面積と価格の散布図を描いて、ほかと比べて極端な値の行がないか確かめましょう。極端な値の行は、回帰直線を大きく引っぱることがあります。除くかどうか、除くならなぜかをレポートに書きましょう。</li>
+<li>テストデータの行は消してはいけません（上の「テストデータの前処理で気をつけること」）。</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="モデルを工夫するヒント">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>モデルを工夫するヒント
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>どんな部屋が高く売れるかを考えてみましょう。広さ、古さ、駅からの近さ、場所（区）などが思い浮かびます。</li>
+<li>価格のヒストグラムを描くと、右に長く伸びた形になっています。前期第9回（相関分析）で、1人あたり GDP に <code>log()</code> を使って散布図を描いたことを思い出し、<code>log()</code> を使うと形がどう変わるかを見てみましょう。</li>
+<li>「面積が同じでも、区によって価格の上がり方が違うのでは？」と思ったら、前期第12回の交差項が使えます。</li>
+<li>変数を増やしたら、必ず検証用データの RMSE が小さくなったかを確かめましょう。</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="予測と提出のヒント">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>予測と提出のヒント
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><code>predict(モデル, newdata = テストデータ)</code> で、テストデータの1行ずつの予測値が出てきます。</li>
+<li><code>tibble(id = テストデータの id, price = 予測値)</code> で提出用の表を作り、<code>write_csv()</code> で保存します。</li>
+<li><code>log()</code> を使ったモデルは、<code>exp()</code> で戻すのを忘れずに。</li>
+<li>保存したら、上の「提出する前のチェック」を必ず行いましょう。</li>
+</ul>
+</div>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-summary" class="level2" data-number="25.12">
+<h2 data-number="25.12" class="anchored" data-anchor-id="sec-summary"><span class="header-section-number">25.12</span> まとめ</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 80%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">項目</th>
+<th style="text-align: left;">ポイント</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">予測</td>
+<td style="text-align: left;">回帰分析で作ったモデルに新しいデータを入れて、まだ分からない値を当てる。<code>predict(モデル, newdata = ...)</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RMSE</td>
+<td style="text-align: left;">予測が平均的にどれくらい外れているか。元の単位（今回は万円）で読み、小さいほど良い</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">検証用データ</td>
+<td style="text-align: left;">学習用データの一部を取っておき、正解を知らないふりをして予測する。モデルの比較は検証用の RMSE で行う</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">過学習</td>
+<td style="text-align: left;">変数を増やすと学習用には当てはまるが、新しいデータでは悪くなることがある</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">前処理</td>
+<td style="text-align: left;">学習用とテストに同じ処理をする。テストの行は消さない</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">文字コード</td>
+<td style="text-align: left;">Shift-JIS の CSV は <code>locale = locale(encoding = "CP932")</code> で読む</td>
+</tr>
+</tbody>
+</table>
+<div style="margin-top: 2.0em;">
+
+</div>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>次回の予告</strong></p>
+<p>次回（1月18日）は<strong>発表・分析結果説明5</strong>です。</p>
+<ul>
+<li>最初に、コンペの順位を発表します</li>
+<li>提出したレポートを画面に映しながら、5つのステップに沿って、一人ずつ教員に説明してもらいます</li>
+<li>「この変数をなぜ使ったか」「どの工夫で RMSE が小さくなったか」「テストデータにはどんな前処理をしたか」と質問するので、答えられるように準備してきてください</li>
+<li><span class="marker">予測ファイルとレポートの提出は 1月15日（金）24時まで、1回だけ</span>です</li>
+</ul>
+</div>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

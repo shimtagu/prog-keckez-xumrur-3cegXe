@@ -8,7 +8,7 @@
 
 <meta name="description" content="2026年度　前期（A） 後期（B） 時間： 月曜日 4 時限（15:45-17:30） 教室： C 館 地下1階 PC4 教室">
 
-<title>23&nbsp; 総合分析演習 4 – R プログラミング</title>
+<title>23&nbsp; 機械学習入門：予測モデルを作る – R プログラミング</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -73,6 +108,35 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <meta name="robots" content="noindex, nofollow">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -85,7 +149,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lecB01.html">後期（B）</a></li><li class="breadcrumb-item"><a href="./lecB10.html"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">総合分析演習 4</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lecB01.html">後期（B）</a></li><li class="breadcrumb-item"><a href="./lecB10.html"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">機械学習入門：予測モデルを作る</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -271,7 +335,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lecB10.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">総合分析演習 4</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">機械学習入門：予測モデルを作る</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -283,7 +347,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lecB12.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">総合分析演習 5</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">総合分析演習5</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -305,15 +369,62 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-ai" id="toc-sec-ai" class="nav-link active" data-scroll-target="#sec-ai"><span class="header-section-number">23.1</span> AI・機械学習・ディープラーニング</a>
+  <ul class="collapse">
+  <li><a href="#ai人工知能とは" id="toc-ai人工知能とは" class="nav-link" data-scroll-target="#ai人工知能とは">AI（人工知能）とは</a></li>
+  <li><a href="#機械学習machine-learningとは" id="toc-機械学習machine-learningとは" class="nav-link" data-scroll-target="#機械学習machine-learningとは">機械学習（Machine Learning）とは</a></li>
+  <li><a href="#ディープラーニング深層学習とは" id="toc-ディープラーニング深層学習とは" class="nav-link" data-scroll-target="#ディープラーニング深層学習とは">ディープラーニング（深層学習）とは</a></li>
+  <li><a href="#違いの比較" id="toc-違いの比較" class="nav-link" data-scroll-target="#違いの比較">違いの比較</a></li>
+  <li><a href="#前期の回帰分析と機械学習" id="toc-前期の回帰分析と機械学習" class="nav-link" data-scroll-target="#前期の回帰分析と機械学習">前期の回帰分析と機械学習</a></li>
+  </ul></li>
+  <li><a href="#sec-request" id="toc-sec-request" class="nav-link" data-scroll-target="#sec-request"><span class="header-section-number">23.2</span> 今日の依頼</a>
+  <ul class="collapse">
+  <li><a href="#capital-bikeshare-とは" id="toc-capital-bikeshare-とは" class="nav-link" data-scroll-target="#capital-bikeshare-とは">Capital Bikeshare とは</a></li>
+  </ul></li>
+  <li><a href="#sec-flow" id="toc-sec-flow" class="nav-link" data-scroll-target="#sec-flow"><span class="header-section-number">23.3</span> データサイエンティストの仕事の流れ</a></li>
+  <li><a href="#sec-prepare" id="toc-sec-prepare" class="nav-link" data-scroll-target="#sec-prepare"><span class="header-section-number">23.4</span> 今日の準備</a></li>
+  <li><a href="#sec-setup" id="toc-sec-setup" class="nav-link" data-scroll-target="#sec-setup"><span class="header-section-number">23.5</span> パッケージの準備</a></li>
+  <li><a href="#sec-data" id="toc-sec-data" class="nav-link" data-scroll-target="#sec-data"><span class="header-section-number">23.6</span> 今日のデータ</a></li>
+  <li><a href="#sec-step1" id="toc-sec-step1" class="nav-link" data-scroll-target="#sec-step1"><span class="header-section-number">23.7</span> ステップ1：読み込みと前処理</a></li>
+  <li><a href="#sec-step2" id="toc-sec-step2" class="nav-link" data-scroll-target="#sec-step2"><span class="header-section-number">23.8</span> ステップ2：データを眺める</a></li>
+  <li><a href="#sec-step3" id="toc-sec-step3" class="nav-link" data-scroll-target="#sec-step3"><span class="header-section-number">23.9</span> ステップ3：学習用と検証用に分ける</a></li>
+  <li><a href="#sec-step4" id="toc-sec-step4" class="nav-link" data-scroll-target="#sec-step4"><span class="header-section-number">23.10</span> ステップ4：RMSE・R² とベースライン</a>
+  <ul class="collapse">
+  <li><a href="#rmse" id="toc-rmse" class="nav-link" data-scroll-target="#rmse">RMSE</a></li>
+  <li><a href="#r²決定係数" id="toc-r²決定係数" class="nav-link" data-scroll-target="#r²決定係数">R²（決定係数）</a></li>
+  <li><a href="#ベースライン" id="toc-ベースライン" class="nav-link" data-scroll-target="#ベースライン">ベースライン</a></li>
+  </ul></li>
+  <li><a href="#sec-step5" id="toc-sec-step5" class="nav-link" data-scroll-target="#sec-step5"><span class="header-section-number">23.11</span> ステップ5：モデルを育てる</a>
+  <ul class="collapse">
+  <li><a href="#model1気温だけ" id="toc-model1気温だけ" class="nav-link" data-scroll-target="#model1気温だけ">model1：気温だけ</a></li>
+  <li><a href="#model2気温の2乗を加える" id="toc-model2気温の2乗を加える" class="nav-link" data-scroll-target="#model2気温の2乗を加える">model2：気温の2乗を加える</a></li>
+  <li><a href="#model3天気カレンダーを加える" id="toc-model3天気カレンダーを加える" class="nav-link" data-scroll-target="#model3天気カレンダーを加える">model3：天気・カレンダーを加える</a></li>
+  <li><a href="#model4時間帯を加える" id="toc-model4時間帯を加える" class="nav-link" data-scroll-target="#model4時間帯を加える">model4：時間帯を加える</a></li>
+  <li><a href="#model5時間帯-平日休日の交差項を加える" id="toc-model5時間帯-平日休日の交差項を加える" class="nav-link" data-scroll-target="#model5時間帯-平日休日の交差項を加える">model5：時間帯 × 平日・休日の交差項を加える</a></li>
+  <li><a href="#ここまでの結果をまとめる" id="toc-ここまでの結果をまとめる" class="nav-link" data-scroll-target="#ここまでの結果をまとめる">ここまでの結果をまとめる</a></li>
+  <li><a href="#予測をグラフで確かめる" id="toc-予測をグラフで確かめる" class="nav-link" data-scroll-target="#予測をグラフで確かめる">予測をグラフで確かめる</a></li>
+  </ul></li>
+  <li><a href="#sec-step6" id="toc-sec-step6" class="nav-link" data-scroll-target="#sec-step6"><span class="header-section-number">23.12</span> ステップ6：過学習を体験する</a></li>
+  <li><a href="#sec-step7" id="toc-sec-step7" class="nav-link" data-scroll-target="#sec-step7"><span class="header-section-number">23.13</span> ステップ7：最終モデルと報告</a>
+  <ul class="collapse">
+  <li><a href="#依頼主への報告" id="toc-依頼主への報告" class="nav-link" data-scroll-target="#依頼主への報告">依頼主への報告</a></li>
+  </ul></li>
+  <li><a href="#sec-homework" id="toc-sec-homework" class="nav-link" data-scroll-target="#sec-homework"><span class="header-section-number">23.14</span> 総合分析演習4（宿題）</a></li>
+  <li><a href="#sec-summary" id="toc-sec-summary" class="nav-link" data-scroll-target="#sec-summary"><span class="header-section-number">23.15</span> まとめ</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lecB01.html">後期（B）</a></li><li class="breadcrumb-item"><a href="./lecB10.html"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">総合分析演習 4</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lecB01.html">後期（B）</a></li><li class="breadcrumb-item"><a href="./lecB10.html"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">機械学習入門：予測モデルを作る</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">総合分析演習 4</span></h1>
+<h1 class="title"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">機械学習入門：予測モデルを作る</span></h1>
 </div>
 
 
@@ -330,8 +441,1789 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p><strong>シェアサイクルの貸出台数を予測する</strong></p>
+<div style="margin-top: 2.0em;">
+
+</div>
+<p><strong>今日の目標</strong></p>
+<ol type="1">
+<li><strong>AI・機械学習・ディープラーニング</strong>の関係と、前期に学んだ回帰分析が機械学習の一つであることを理解する。</li>
+<li>データを「<strong>学習用</strong>」と「<strong>検証用</strong>」に分け、<code>predict()</code> で予測し、<strong>RMSE</strong> で予測の当たり具合を測れるようになる。</li>
+<li>変数や交差項を加えて<strong>モデルを育てる</strong>流れと、変数を増やしすぎたときに起こる<strong>過学習</strong>を体験する。</li>
+<li>総合分析演習4（宿題）に、<strong>一人で</strong>同じ流れで取り組めるように準備する。</li>
+</ol>
+<div style="margin-top: 2.0em;">
+
+</div>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>今日の位置づけ</strong></p>
+<p>ここからの4回は、回帰分析を「<strong>予測</strong>」に使う、機械学習の入門です。</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 80%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">回</th>
+<th style="text-align: left;">内容</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">第10回（今日）</td>
+<td style="text-align: left;">教員と一緒に、シェアサイクルのデータで予測モデルを作る（デモンストレーション）。最後に総合分析演習4（宿題）を配布</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">第11回</td>
+<td style="text-align: left;">総合分析演習4の内容を、一人ずつ説明する</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">第12回</td>
+<td style="text-align: left;">総合分析演習5：東京の中古マンションの価格を予測する<strong>コンペ</strong>を開始</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">第13回</td>
+<td style="text-align: left;">コンペの順位発表と、一人ずつの説明</td>
+</tr>
+</tbody>
+</table>
+<p>今日はコードを教員と一緒に1行ずつ実行していきます。今日の流れは、そのまま第11回〜第13回の課題で使います。</p>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+<section id="sec-ai" class="level2" data-number="23.1">
+<h2 data-number="23.1" class="anchored" data-anchor-id="sec-ai"><span class="header-section-number">23.1</span> AI・機械学習・ディープラーニング</h2>
+<p>一言でいうと、<span class="marker"><strong>機械学習はAI（人工知能）を実現するための重要な手法の一つ</strong></span>です。</p>
+<p>全体像としては、最も広い概念が<strong>AI</strong>であり、その中に<strong>機械学習</strong>が含まれ、さらにその中に<strong>ディープラーニング</strong>（深層学習）が含まれるという、入れ子（階層）の構造になっています。</p>
+<div id="fig-ai" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ai-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div style="max-width: 560px; margin: 0 auto; font-size: 0.95em; line-height: 1.5; text-align: center;">
+  <div style="border: 2px solid #2c3e50; border-radius: 24px; background: #f4f6f8; padding: 12px 16px 16px;">
+    <div style="font-weight: bold; color: #2c3e50;">AI（人工知能）</div>
+    <div style="color: #4a5a6a; font-size: 0.9em; margin-bottom: 10px;">例：ルールベースのAI（if-then のルール、探索、エキスパートシステム）</div>
+    <div style="border: 2px solid #4682b4; border-radius: 20px; background: #dceaf6; padding: 12px 16px 16px;">
+      <div style="font-weight: bold; color: #2c5f8a;">機械学習</div>
+      <div style="color: #2c5f8a; font-size: 0.9em; margin-bottom: 10px;">例：回帰分析・決定木 など（<b>前期の lm() もここ</b>）</div>
+      <div style="border: 2px solid #1f4e79; border-radius: 16px; background: #1f4e79; padding: 14px 16px; color: #ffffff;">
+        <div style="font-weight: bold;">ディープラーニング</div>
+        <div style="font-size: 0.9em;">例：多層ニューラルネットワーク（画像認識、生成AI など）</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ai-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+図&nbsp;23.1: AI・機械学習・ディープラーニングの関係
+</figcaption>
+</figure>
+</div>
+<div style="margin-top: 2.0em;">
+
+</div>
+<section id="ai人工知能とは" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="ai人工知能とは">AI（人工知能）とは</h3>
+<p>人間のような知的な処理（推論、認識、判断、学習など）をコンピュータに実現させる技術・取り組み全般を指す、広い概念です。</p>
+<ul>
+<li><strong>機械学習以外のAIの例</strong>：人があらかじめ作成したルールや条件分岐（if-then ルール）に基づいて動くシステム、探索アルゴリズム、エキスパートシステムなど。</li>
+<li>すべてのAIがデータから自律的に学習するわけではなく、ルールベースで動くAIも存在します。</li>
+</ul>
+</section>
+<section id="機械学習machine-learningとは" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="機械学習machine-learningとは">機械学習（Machine Learning）とは</h3>
+<p>膨大なデータから<strong>ルールやパターンを統計・数理モデルによって自動的に学習</strong>し、未知のデータに対する予測や分類、判断を行えるようにするAIの手法です。</p>
+<ul>
+<li>人間がすべての判断基準を手作業で書き込む代わりに、データとアルゴリズムを与えることで、モデルが規則性を抽出します。</li>
+<li>主なアプローチとして、<strong>教師あり学習</strong>（回帰・分類）、<strong>教師なし学習</strong>（クラスタリング・次元削減）、<strong>強化学習</strong>などがあります。</li>
+</ul>
+</section>
+<section id="ディープラーニング深層学習とは" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="ディープラーニング深層学習とは">ディープラーニング（深層学習）とは</h3>
+<p>機械学習の中でも、人間の神経回路網を模した<strong>多層のニューラルネットワーク</strong>を用いる手法です。</p>
+<ul>
+<li>従来の機械学習では人間が設計・選定していた「特徴量（データの重要な要素）」の抽出を、モデル自身が階層的に自動で行える点が大きな特徴です。</li>
+<li>画像認識、音声認識、自然言語処理や、近年の生成AIなどの発展を牽引しています。</li>
+</ul>
+<div style="margin-top: 2.0em;">
+
+</div>
+</section>
+<section id="違いの比較" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="違いの比較">違いの比較</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 28%">
+<col style="width: 28%">
+<col style="width: 28%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">観点</th>
+<th style="text-align: left;">AI（人工知能）</th>
+<th style="text-align: left;">機械学習</th>
+<th style="text-align: left;">ディープラーニング</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>位置づけ</strong></td>
+<td style="text-align: left;">最も広い概念・目的</td>
+<td style="text-align: left;">AIを実現する手法の一つ</td>
+<td style="text-align: left;">機械学習の一種（多層NN）</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>ルールの作り方</strong></td>
+<td style="text-align: left;">人間による記述〜学習まで様々</td>
+<td style="text-align: left;">データから統計的に学習</td>
+<td style="text-align: left;">多層ネットワークで特徴から学習</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>向いている領域</strong></td>
+<td style="text-align: left;">推論・判断・対話など全般</td>
+<td style="text-align: left;">数値予測、分類、クラスタリングなど</td>
+<td style="text-align: left;">画像・音声・テキストなど非構造データ</td>
+</tr>
+</tbody>
+</table>
+<div style="margin-top: 2.0em;">
+
+</div>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>参考資料</strong></p>
+<p>野口竜司「<a href="https://markezine.jp/article/detail/29471">AI、機械学習、ディープラーニングの違いを説明できますか？機械学習と統計の違いは？</a>」MarkeZine（2018年11月27日）</p>
+<p>文系の人向けに、AI・機械学習・ディープラーニングの関係を説明した記事です。続きを読むには MarkeZine への無料の会員登録が必要です。</p>
+</div>
+</div>
+<div style="margin-top: 3.0em;">
+
+</div>
+</section>
+<section id="前期の回帰分析と機械学習" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="前期の回帰分析と機械学習">前期の回帰分析と機械学習</h3>
+<p>前期に学んだ回帰分析（<code>lm()</code>）は、データから係数を学習する、<span class="marker">最も基本的な機械学習（教師あり学習の回帰）</span>の一つです。使う道具は同じですが、<strong>目的</strong>が違います。</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 40%">
+<col style="width: 40%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">これまで（統計的な分析）</th>
+<th style="text-align: left;">これから（予測）</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">知りたいこと</td>
+<td style="text-align: left;"><span class="math inline">\(X\)</span> は <span class="math inline">\(Y\)</span> に影響するか（<strong>説明</strong>）</td>
+<td style="text-align: left;">まだ分からない <span class="math inline">\(Y\)</span> はいくつか（<strong>予測</strong>）</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">主に見るもの</td>
+<td style="text-align: left;">係数・p 値・R²</td>
+<td style="text-align: left;">新しいデータでの予測の外れ具合（<strong>RMSE</strong>）</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">変数の選び方</td>
+<td style="text-align: left;">問いと仮説に合わせて選ぶ</td>
+<td style="text-align: left;">予測がよく当たるように選ぶ</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">良いモデルとは</td>
+<td style="text-align: left;">仮説を正しく検証できるモデル</td>
+<td style="text-align: left;"><strong>まだ見ていないデータ</strong>で、よく当たるモデル</td>
+</tr>
+</tbody>
+</table>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+</section>
+<section id="sec-request" class="level2" data-number="23.2">
+<h2 data-number="23.2" class="anchored" data-anchor-id="sec-request"><span class="header-section-number">23.2</span> 今日の依頼</h2>
+<p>今日から皆さんは、データ分析の会社で働く<strong>データサイエンティスト</strong>です。ワシントンD.C. のシェアサイクル <strong>Capital Bikeshare</strong> の運営チームから、次のような依頼が届きました。</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>依頼：1時間ごとの貸出台数を予測してほしい</strong></p>
+<p>Capital Bikeshare 運営チームより</p>
+<p>私たちは毎日、トラックで自転車を運んで置き場の台数を調整したり（再配置）、整備スタッフのシフトを組んだりしています。自転車がよく借りられる時間に置き場が空っぽだと、利用者は借りられずに帰ってしまいます。反対に、借りられない時間に人を多く配置するのはむだです。</p>
+<p>そこで、<strong>翌日の天気予報とカレンダー（平日か休日か）から、1時間ごとの貸出台数を予測する仕組み</strong>を作りたいと考えています。2011年と2012年の2年分のデータをお渡しするので、次の3点を報告してください。</p>
+<ol type="1">
+<li>1時間ごとの貸出台数は、<strong>どれくらい正確に予測できるか</strong></li>
+<li>予測には、<strong>何が効くか</strong>（天気、気温、時間帯、平日か休日か など）</li>
+<li>予測を使うときに、<strong>気をつけること</strong></li>
+</ol>
+</div>
+</div>
+<p>この依頼は授業のために作った架空のものですが、シェアサイクルの会社が実際に取り組んでいる課題です。</p>
+<div style="margin-top: 3.0em;">
+
+</div>
+<section id="capital-bikeshare-とは" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="capital-bikeshare-とは">Capital Bikeshare とは</h3>
+<p><a href="https://capitalbikeshare.com/">Capital Bikeshare</a> は、アメリカの首都<strong>ワシントンD.C. とその周辺</strong>で運営されている、公共の<strong>シェアサイクル</strong>（自転車の共同利用）です。2010年に始まった、アメリカでも早い時期の大きなシェアサイクルの一つです。</p>
+<ul>
+<li><p>現在は、ワシントンD.C. と、バージニア州・メリーランド州の周辺の市や郡をあわせた<strong>8つの自治体</strong>で、<strong>800 か所以上</strong>の自転車置き場（<strong>ステーション</strong>）と、<strong>約 8,000 台</strong>の自転車が使われています（公式サイトより）。</p></li>
+<li><p>利用者は、スマートフォンのアプリなどで自転車を借り、<span class="marker">どのステーションに返してもかまいません</span>（借りた場所に戻す必要はありません）。今日のデータでも、夜中の3時を含めて、すべての時間帯に貸出があります。</p></li>
+<li><p>料金プランは、次のとおりです（2026年11月時点、<a href="https://capitalbikeshare.com/pricing">公式サイトの料金ページ</a>より。1ドルは約150円）。</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">プラン</th>
+<th style="text-align: left;">料金</th>
+<th style="text-align: left;">ふつうの自転車</th>
+<th style="text-align: left;">電動アシスト自転車</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1回ごと</td>
+<td style="text-align: left;">1ドル＋利用時間に応じた料金</td>
+<td style="text-align: left;">1分 0.05ドル</td>
+<td style="text-align: left;">1分 0.15ドル</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1日乗り放題</td>
+<td style="text-align: left;">1日 8ドル</td>
+<td style="text-align: left;">24時間、1回45分まで何回でも無料</td>
+<td style="text-align: left;">1分 0.10ドル</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">年会費の<strong>会員</strong></td>
+<td style="text-align: left;">年 95ドルから</td>
+<td style="text-align: left;">1回45分まで無料、その後は1分 0.05ドル</td>
+<td style="text-align: left;">料金ページを参照</td>
+</tr>
+</tbody>
+</table>
+<p>条件を満たす住民向けに、年会費 5ドル（地域によっては無料）の会員制度もあります。</p></li>
+<li><p>今日のデータでは、貸出の約8割が会員で、会員の利用は<strong>平日の朝夕</strong>に集中しています。通勤・通学に使われていると考えられます。</p></li>
+<li><p>今は電動アシスト自転車もありますが、今日のデータ（2011〜2012年）は、サービスが始まって間もないころのものです。</p></li>
+<li><p>日本でも、東京の「ドコモ・バイクシェア」など、同じしくみのシェアサイクルが広がっています。</p></li>
+</ul>
+<p>借りた場所と返す場所が違ってよいので、朝は住宅地から都心へ、夕方は都心から住宅地へ、と自転車がかたよります。だからこそ、<strong>いつ・どれくらい借りられるか</strong>の予測が、運営に欠かせません。</p>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+</section>
+<section id="sec-flow" class="level2" data-number="23.3">
+<h2 data-number="23.3" class="anchored" data-anchor-id="sec-flow"><span class="header-section-number">23.3</span> データサイエンティストの仕事の流れ</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 63%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">ステップ</th>
+<th style="text-align: left;">すること</th>
+<th style="text-align: left;">今日の節</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: left;">データを読み込み、使える形に前処理する</td>
+<td style="text-align: left;"><a href="#sec-step1" class="quarto-xref"><span>Section 23.7</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: left;">グラフでデータを眺め、予測に効きそうなものを探す</td>
+<td style="text-align: left;"><a href="#sec-step2" class="quarto-xref"><span>Section 23.8</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: left;">データを「学習用」と「検証用」に分ける</td>
+<td style="text-align: left;"><a href="#sec-step3" class="quarto-xref"><span>Section 23.9</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: left;">予測の良さ（RMSE と R²）の測り方と、基準（ベースライン）を決める</td>
+<td style="text-align: left;"><a href="#sec-step4" class="quarto-xref"><span>Section 23.10</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: left;">モデルを少しずつ育て、検証用の RMSE で比べる</td>
+<td style="text-align: left;"><a href="#sec-step5" class="quarto-xref"><span>Section 23.11</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">6</td>
+<td style="text-align: left;">変数を増やしすぎるとどうなるか確かめる（過学習）</td>
+<td style="text-align: left;"><a href="#sec-step6" class="quarto-xref"><span>Section 23.12</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">7</td>
+<td style="text-align: left;">最終モデルを決めて、依頼主に報告する</td>
+<td style="text-align: left;"><a href="#sec-step7" class="quarto-xref"><span>Section 23.13</span></a></td>
+</tr>
+</tbody>
+</table>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-prepare" class="level2" data-number="23.4">
+<h2 data-number="23.4" class="anchored" data-anchor-id="sec-prepare"><span class="header-section-number">23.4</span> 今日の準備</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 8%">
+<col style="width: 92%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1.</td>
+<td style="text-align: left;">新規 R プロジェクトを作成する。Directory name は「LessonB10」、場所は Kドライブの「R_programming」。</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2.</td>
+<td style="text-align: left;">「LessonB10」フォルダの中に「data」フォルダを作る。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3.</td>
+<td style="text-align: left;">Blackboard から <code>bike_hour.csv</code> をダウンロードし、「data」フォルダに入れる。</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4.</td>
+<td style="text-align: left;">新しい R スクリプト（または Quarto ファイル）を作り、講義資料のコードを教員と一緒に1つずつ実行する。</td>
+</tr>
+</tbody>
+</table>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-setup" class="level2" data-number="23.5">
+<h2 data-number="23.5" class="anchored" data-anchor-id="sec-setup"><span class="header-section-number">23.5</span> パッケージの準備</h2>
+<p>大学の PC はシャットダウンするたびに初期化されるため、毎回インストールが必要です。今日使うのは <code>tidyverse</code> だけです。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">options</span>(<span class="at">repos =</span> <span class="fu">c</span>(<span class="at">CRAN =</span> <span class="st">"https://cran.rstudio.com/"</span>))</span>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-data" class="level2" data-number="23.6">
+<h2 data-number="23.6" class="anchored" data-anchor-id="sec-data"><span class="header-section-number">23.6</span> 今日のデータ</h2>
+<p>Capital Bikeshare の2011年1月1日〜2012年12月31日の貸出記録を、<strong>1時間ごと</strong>に集計し、その時間の天気を加えたデータです。<span class="marker">1行が1時間</span>で、17,379 行あります。</p>
+<p>出典：UCI Machine Learning Repository「<a href="https://archive.ics.uci.edu/dataset/275/bike+sharing+dataset">Bike Sharing Dataset</a>」（CC BY 4.0）。Fanaee-T, H. and Gama, J. (2013) “Event labeling combining ensemble detectors and background knowledge”, <em>Progress in Artificial Intelligence</em>, pp.&nbsp;1–15.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 82%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>変数名</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>id</code></td>
+<td>行の番号</td>
+</tr>
+<tr class="even">
+<td><code>date</code></td>
+<td>日付</td>
+</tr>
+<tr class="odd">
+<td><code>season_code</code></td>
+<td>季節の番号（1〜4）。今日は使わず、月から自分で季節を作り直す</td>
+</tr>
+<tr class="even">
+<td><code>y2012</code></td>
+<td>2012年なら 1、2011年なら 0（2012年のダミー変数）</td>
+</tr>
+<tr class="odd">
+<td><code>month</code></td>
+<td>月（1〜12）</td>
+</tr>
+<tr class="even">
+<td><code>hour</code></td>
+<td>時間帯（0〜23時）</td>
+</tr>
+<tr class="odd">
+<td><code>holiday</code></td>
+<td>祝日なら 1</td>
+</tr>
+<tr class="even">
+<td><code>weekday</code></td>
+<td>曜日（0 = 日曜 〜 6 = 土曜）</td>
+</tr>
+<tr class="odd">
+<td><code>workday</code></td>
+<td>平日（土日・祝日でない日）なら 1、休日なら 0</td>
+</tr>
+<tr class="even">
+<td><code>weather</code></td>
+<td>天気の番号（1 = 晴れ・くもり、2 = 霧・くもり、3 = 小雨・小雪、4 = 大雨・大雪）</td>
+</tr>
+<tr class="odd">
+<td><code>temp</code></td>
+<td>気温（℃）</td>
+</tr>
+<tr class="even">
+<td><code>feel_temp</code></td>
+<td>体感温度（℃）</td>
+</tr>
+<tr class="odd">
+<td><code>humidity</code></td>
+<td>湿度（%）</td>
+</tr>
+<tr class="even">
+<td><code>wind</code></td>
+<td>風速</td>
+</tr>
+<tr class="odd">
+<td><code>rentals_casual</code></td>
+<td>一時利用者の貸出台数</td>
+</tr>
+<tr class="even">
+<td><code>rentals_member</code></td>
+<td>会員の貸出台数</td>
+</tr>
+<tr class="odd">
+<td><code>rentals</code></td>
+<td><strong>貸出台数の合計</strong>（<code>rentals_casual</code> + <code>rentals_member</code>）。今日予測するもの</td>
+</tr>
+</tbody>
+</table>
+<div style="margin-top: 2.0em;">
+
+</div>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>予測に使ってはいけない変数</strong></p>
+<p><code>rentals_casual</code> と <code>rentals_member</code> を足すと、予測したい <code>rentals</code> そのものになります。依頼主が予測したいのは「<strong>明日</strong>の貸出台数」なので、その時点ではまだ分からない値は予測に使えません。予測に使えるのは、<span class="marker">予測する時点で分かっている情報</span>（天気予報、日付、時間帯など）だけです。</p>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-step1" class="level2" data-number="23.7">
+<h2 data-number="23.7" class="anchored" data-anchor-id="sec-step1"><span class="header-section-number">23.7</span> ステップ1：読み込みと前処理</h2>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>df_raw <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/bike_hour.csv"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2"></a></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="fu">glimpse</span>(df_raw)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 17,379
+Columns: 17
+$ id             &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, …
+$ date           &lt;date&gt; 2011-01-01, 2011-01-01, 2011-01-01, 2011-01-01, 2011-0…
+$ season_code    &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
+$ y2012          &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+$ month          &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
+$ hour           &lt;dbl&gt; 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 1…
+$ holiday        &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+$ weekday        &lt;dbl&gt; 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6…
+$ workday        &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+$ weather        &lt;dbl&gt; 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3…
+$ temp           &lt;dbl&gt; 9.84, 9.02, 9.02, 9.84, 9.84, 9.84, 9.02, 8.20, 9.84, 1…
+$ feel_temp      &lt;dbl&gt; 14.40, 13.64, 13.64, 14.40, 14.40, 12.88, 13.64, 12.88,…
+$ humidity       &lt;dbl&gt; 81, 80, 80, 75, 75, 75, 80, 86, 75, 76, 76, 81, 77, 72,…
+$ wind           &lt;dbl&gt; 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 17, 19, 19, 20, 19, 20, 2…
+$ rentals_casual &lt;dbl&gt; 3, 8, 5, 3, 0, 0, 2, 1, 1, 8, 12, 26, 29, 47, 35, 40, 4…
+$ rentals_member &lt;dbl&gt; 13, 32, 27, 10, 1, 1, 0, 2, 7, 6, 24, 30, 55, 47, 71, 7…
+$ rentals        &lt;dbl&gt; 16, 40, 32, 13, 1, 1, 2, 3, 8, 14, 36, 56, 84, 94, 106,…</code></pre>
+</div>
+</div>
+<div style="margin-top: 2.0em;">
+
+</div>
+<p>番号で入っている季節・天気・平日を、分かりやすい文字のラベルに直します。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-4"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-4-1"><a href="#annotated-cell-4-1"></a>df_bike <span class="ot">&lt;-</span> df_raw <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-4-2"><a href="#annotated-cell-4-2"></a>  <span class="fu">mutate</span>(</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1">1</button><span id="annotated-cell-4-3" class="code-annotation-target"><a href="#annotated-cell-4-3"></a>    <span class="at">season   =</span> <span class="fu">case_when</span>(month <span class="sc">%in%</span> <span class="dv">3</span><span class="sc">:</span><span class="dv">5</span>  <span class="sc">~</span> <span class="st">"春"</span>,</span>
+<span id="annotated-cell-4-4"><a href="#annotated-cell-4-4"></a>                         month <span class="sc">%in%</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">8</span>  <span class="sc">~</span> <span class="st">"夏"</span>,</span>
+<span id="annotated-cell-4-5"><a href="#annotated-cell-4-5"></a>                         month <span class="sc">%in%</span> <span class="dv">9</span><span class="sc">:</span><span class="dv">11</span> <span class="sc">~</span> <span class="st">"秋"</span>,</span>
+<span id="annotated-cell-4-6"><a href="#annotated-cell-4-6"></a>                         <span class="at">.default =</span> <span class="st">"冬"</span>),</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="2">2</button><span id="annotated-cell-4-7" class="code-annotation-target"><a href="#annotated-cell-4-7"></a>    <span class="at">weather  =</span> <span class="fu">case_when</span>(weather <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"晴れ・くもり"</span>,</span>
+<span id="annotated-cell-4-8"><a href="#annotated-cell-4-8"></a>                         weather <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> <span class="st">"霧・くもり"</span>,</span>
+<span id="annotated-cell-4-9"><a href="#annotated-cell-4-9"></a>                         <span class="at">.default =</span> <span class="st">"雨・雪"</span>),</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="3">3</button><span id="annotated-cell-4-10" class="code-annotation-target"><a href="#annotated-cell-4-10"></a>    <span class="at">day_type =</span> <span class="fu">if_else</span>(workday <span class="sc">==</span> <span class="dv">1</span>, <span class="st">"平日"</span>, <span class="st">"休日"</span>)</span>
+<span id="annotated-cell-4-11"><a href="#annotated-cell-4-11"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-4-12"><a href="#annotated-cell-4-12"></a>  <span class="fu">mutate</span>(</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="4">4</button><span id="annotated-cell-4-13" class="code-annotation-target"><a href="#annotated-cell-4-13"></a>    <span class="at">season   =</span> <span class="fu">factor</span>(season, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"春"</span>, <span class="st">"夏"</span>, <span class="st">"秋"</span>, <span class="st">"冬"</span>)),</span>
+<span id="annotated-cell-4-14"><a href="#annotated-cell-4-14"></a>    <span class="at">weather  =</span> <span class="fu">factor</span>(weather, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"晴れ・くもり"</span>, <span class="st">"霧・くもり"</span>, <span class="st">"雨・雪"</span>)),</span>
+<span id="annotated-cell-4-15"><a href="#annotated-cell-4-15"></a>    <span class="at">day_type =</span> <span class="fu">factor</span>(day_type, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"平日"</span>, <span class="st">"休日"</span>))</span>
+<span id="annotated-cell-4-16"><a href="#annotated-cell-4-16"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-4-17"><a href="#annotated-cell-4-17"></a>  <span class="fu">select</span>(id, date, y2012, season, hour, day_type, weather,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="5">5</button><span id="annotated-cell-4-18" class="code-annotation-target"><a href="#annotated-cell-4-18"></a>         temp, humidity, wind, rentals)</span>
+<span id="annotated-cell-4-19"><a href="#annotated-cell-4-19"></a></span>
+<span id="annotated-cell-4-20"><a href="#annotated-cell-4-20"></a>df_bike</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-4" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="3" data-code-annotation="1">月から季節を作る（3〜5月を春、6〜8月を夏、9〜11月を秋、12〜2月を冬）。</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="7" data-code-annotation="2">天気の番号をラベルに置き換える。「大雨・大雪」（4）は2年間で3時間しかないので、「雨・雪」にまとめる。件数が少なすぎるカテゴリは、学習用データに1件も入らないことがあり、予測のときにエラーの原因になる。</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="10" data-code-annotation="3">平日なら「平日」、土日・祝日なら「休日」。</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="13" data-code-annotation="4">カテゴリの順番を決めておく（因子型、前期第11回）。<code>lm()</code> では最初のカテゴリ（春・晴れ／くもり・平日）が基準になり、係数は「基準と比べて何台多いか少ないか」を表す。</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="18" data-code-annotation="5">予測に使う変数だけを残す（<code>rentals_casual</code> と <code>rentals_member</code> は使わない）。</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 17,379 × 11
+      id date       y2012 season  hour day_type weather      temp humidity  wind
+   &lt;dbl&gt; &lt;date&gt;     &lt;dbl&gt; &lt;fct&gt;  &lt;dbl&gt; &lt;fct&gt;    &lt;fct&gt;       &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;
+ 1     1 2011-01-01     0 冬         0 休日     晴れ・くもり……  9.84       81     0
+ 2     2 2011-01-01     0 冬         1 休日     晴れ・くもり……  9.02       80     0
+ 3     3 2011-01-01     0 冬         2 休日     晴れ・くもり……  9.02       80     0
+ 4     4 2011-01-01     0 冬         3 休日     晴れ・くもり……  9.84       75     0
+ 5     5 2011-01-01     0 冬         4 休日     晴れ・くもり……  9.84       75     0
+ 6     6 2011-01-01     0 冬         5 休日     霧・くもり   9.84       75     6
+ 7     7 2011-01-01     0 冬         6 休日     晴れ・くもり……  9.02       80     0
+ 8     8 2011-01-01     0 冬         7 休日     晴れ・くもり……  8.2        86     0
+ 9     9 2011-01-01     0 冬         8 休日     晴れ・くもり……  9.84       75     0
+10    10 2011-01-01     0 冬         9 休日     晴れ・くもり…… 13.1        76     0
+# ℹ 17,369 more rows
+# ℹ 1 more variable: rentals &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-step2" class="level2" data-number="23.8">
+<h2 data-number="23.8" class="anchored" data-anchor-id="sec-step2"><span class="header-section-number">23.8</span> ステップ2：データを眺める</h2>
+<p>まずは、予測したい貸出台数がどのように変わるのかを、グラフで確かめます。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>df_bike <span class="sc">|&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">group_by</span>(hour, day_type) <span class="sc">|&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">summarise</span>(<span class="at">mean_rentals =</span> <span class="fu">mean</span>(rentals), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> hour, <span class="at">y =</span> mean_rentals, <span class="at">color =</span> day_type)) <span class="sc">+</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">23</span>, <span class="at">by =</span> <span class="dv">3</span>)) <span class="sc">+</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"時間帯（時）"</span>, <span class="at">y =</span> <span class="st">"平均貸出台数（台）"</span>, <span class="at">color =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecB10_files/figure-html/plot-hour-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>時間帯ごとの平均貸出台数（平日と休日）</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>平日</strong>は朝8時ごろと夕方17〜18時ごろに大きな山があります。通勤・通学の時間です。<strong>休日</strong>は朝の山がなく、昼すぎにゆるやかな山があります。<span class="marker">時間帯の影響の仕方が、平日と休日でまったく違う</span>ことが分かります。</p>
+<div style="margin-top: 2.0em;">
+
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>df_bike <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">mutate</span>(<span class="at">temp_round =</span> <span class="fu">round</span>(temp)) <span class="sc">|&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">group_by</span>(temp_round) <span class="sc">|&gt;</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">summarise</span>(<span class="at">mean_rentals =</span> <span class="fu">mean</span>(rentals), <span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>  <span class="fu">filter</span>(n <span class="sc">&gt;=</span> <span class="dv">20</span>) <span class="sc">|&gt;</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> temp_round, <span class="at">y =</span> mean_rentals)) <span class="sc">+</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"steelblue"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"気温（℃、1℃ごとにまとめた）"</span>, <span class="at">y =</span> <span class="st">"平均貸出台数（台）"</span>) <span class="sc">+</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecB10_files/figure-html/plot-temp-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>気温と平均貸出台数</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>気温が高いほど借りられますが、増え方は一定ではなく、とても暑い時間（37℃以上）には減っています。まっすぐな直線ではなく、<span class="marker">曲がった関係</span>です。</p>
+<div style="margin-top: 2.0em;">
+
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>df_bike <span class="sc">|&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">if_else</span>(y2012 <span class="sc">==</span> <span class="dv">1</span>, <span class="st">"2012年"</span>, <span class="st">"2011年"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">group_by</span>(year, weather) <span class="sc">|&gt;</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a>  <span class="fu">summarise</span>(<span class="at">mean_rentals =</span> <span class="fu">mean</span>(rentals), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> weather, <span class="at">y =</span> mean_rentals, <span class="at">fill =</span> year)) <span class="sc">+</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"lightsteelblue"</span>, <span class="st">"steelblue"</span>)) <span class="sc">+</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"天気"</span>, <span class="at">y =</span> <span class="st">"平均貸出台数（台）"</span>, <span class="at">fill =</span> <span class="st">"年"</span>) <span class="sc">+</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecB10_files/figure-html/plot-weather-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>天気と年ごとの平均貸出台数</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>雨・雪の時間は大きく減ります。また、同じ天気でも、<strong>2012年は2011年よりずっと多く</strong>借りられています。サービスが知られて、利用者が増えたためと考えられます。</p>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-step3" class="level2" data-number="23.9">
+<h2 data-number="23.9" class="anchored" data-anchor-id="sec-step3"><span class="header-section-number">23.9</span> ステップ3：学習用と検証用に分ける</h2>
+<p>依頼主が知りたいのは、<span class="marker">まだ起きていない時間</span>の貸出台数です。手元のデータにぴったり当てはまるモデルでも、新しいデータで当たらなければ意味がありません。</p>
+<p>そこで、データの 80% を「<strong>学習用</strong>」としてモデルを作るのに使い、残りの 20% を「<strong>検証用</strong>」として取っておきます。検証用データは、<span class="marker">正解を知っているのに、知らないふりをして予測してみる</span>ためのデータです。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-8"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="1">1</button><span id="annotated-cell-8-1" class="code-annotation-target"><a href="#annotated-cell-8-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="2">2</button><span id="annotated-cell-8-2" class="code-annotation-target"><a href="#annotated-cell-8-2"></a>df_learn <span class="ot">&lt;-</span> df_bike <span class="sc">|&gt;</span> <span class="fu">slice_sample</span>(<span class="at">prop =</span> <span class="fl">0.8</span>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="3">3</button><span id="annotated-cell-8-3" class="code-annotation-target"><a href="#annotated-cell-8-3"></a>df_valid <span class="ot">&lt;-</span> df_bike <span class="sc">|&gt;</span> <span class="fu">anti_join</span>(df_learn, <span class="at">by =</span> <span class="st">"id"</span>)</span>
+<span id="annotated-cell-8-4"><a href="#annotated-cell-8-4"></a></span>
+<span id="annotated-cell-8-5"><a href="#annotated-cell-8-5"></a><span class="fu">nrow</span>(df_learn)</span>
+<span id="annotated-cell-8-6"><a href="#annotated-cell-8-6"></a><span class="fu">nrow</span>(df_valid)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-8" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="1" data-code-annotation="1">乱数の種を決める。同じ数字にすると、何度やっても同じ分け方になる。</span>
+</dd>
+<dt data-target-cell="annotated-cell-8" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="2" data-code-annotation="2">80% の行をランダムに選んで「学習用」にする。</span>
+</dd>
+<dt data-target-cell="annotated-cell-8" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="3" data-code-annotation="3">「学習用」に選ばれなかった残りの行（<code>id</code> で照合）を「検証用」にする。</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 13903
+[1] 3476</code></pre>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-step4" class="level2" data-number="23.10">
+<h2 data-number="23.10" class="anchored" data-anchor-id="sec-step4"><span class="header-section-number">23.10</span> ステップ4：RMSE・R² とベースライン</h2>
+<section id="rmse" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="rmse">RMSE</h3>
+<p><strong>RMSE</strong>（Root Mean Squared Error、平方根平均二乗誤差）は、予測がどれくらい外れているかを表す数字です。</p>
+<p><span class="math display">\[
+\text{RMSE} = \sqrt{\frac{1}{n}\sum_{i=1}^{n}(\text{実際の値}_i - \text{予測値}_i)^2}
+\]</span></p>
+<p>外れた大きさを2乗して平均し、最後に平方根をとって元の単位に戻します。今日なら単位は<strong>台</strong>で、「予測は平均的に〇〇台くらい外れている」と読みます。<span class="marker">小さいほど良い予測</span>です。</p>
+<p>下の図は、6日分の架空のデータで RMSE の計算を表したものです。黒い点が実際の貸出台数、青い直線がモデルの予測、赤い点線が<strong>外れ</strong>（実際の値 − 予測値）です。</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecB10_files/figure-html/rmse-illustration-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>RMSE のイメージ（架空のデータ）</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: right;">気温（℃）</th>
+<th style="text-align: right;">実際の値</th>
+<th style="text-align: right;">予測値</th>
+<th style="text-align: right;">外れ</th>
+<th style="text-align: right;">外れの2乗</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">80</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">400</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">110</td>
+<td style="text-align: right;">130</td>
+<td style="text-align: right;">-20</td>
+<td style="text-align: right;">400</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">190</td>
+<td style="text-align: right;">180</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">100</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">260</td>
+<td style="text-align: right;">230</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">900</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">250</td>
+<td style="text-align: right;">280</td>
+<td style="text-align: right;">-30</td>
+<td style="text-align: right;">900</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">35</td>
+<td style="text-align: right;">340</td>
+<td style="text-align: right;">330</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">100</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 55%">
+<col style="width: 45%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">計算の順番</th>
+<th style="text-align: left;">この例では</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">① 外れを2乗する（プラスとマイナスが打ち消し合わないようにする）</td>
+<td style="text-align: left;">400, 400, 100, 900, 900, 100</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">② 2乗した外れを平均する</td>
+<td style="text-align: left;">(400 + 400 + 100 + 900 + 900 + 100) ÷ 6 ≒ 466.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">③ 平方根をとって、元の単位（台）に戻す</td>
+<td style="text-align: left;"><span class="math inline">\(\sqrt{466.7}\)</span> ≒ <strong>21.6 台</strong></td>
+</tr>
+</tbody>
+</table>
+<p>この予測は、平均的に約 22 台外れている、と読みます。外れをそのまま平均すると、+20 と −20 のように打ち消し合って 0 に近くなってしまうので、2乗してから平均します。</p>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>RMSE では「外れの向き」は分からない</strong></p>
+<p>RMSE は外れを2乗するので、多めに外しても（予測 ＞ 実際）、少なめに外しても（予測 ＜ 実際）、同じ「外れの大きさ」として数えます。<span class="marker">多めと少なめのどちらに外しがちかは、RMSE からは分かりません</span>。</p>
+<p>向きを知りたいときは、外れ（実際の値 − 予測値）を2乗せずに、そのまま平均します（<strong>平均誤差</strong>）。</p>
+<ul>
+<li>プラス → 実際より<strong>少なめ</strong>に予測しがち</li>
+<li>マイナス → 実際より<strong>多め</strong>に予測しがち</li>
+</ul>
+<p>上の例では、外れの合計は +20 − 20 + 10 + 30 − 30 + 10 ＝ 20、平均誤差は約 +3.3 台で、ほとんど偏りはありません。</p>
+<p>依頼主にとっては、外れの<strong>向き</strong>も大事です。たとえば、貸出台数を少なめに予測して自転車の配置が足りなければ、借りたい人が借りられず、利用者を逃してしまいます。多めに予測すれば、使われない自転車を運ぶ手間が無駄になります。どちらの外れが困るかは依頼主の事情によって違うので、報告では「どれくらい外れるか」（RMSE）に加えて、「どちらに外れがちか」も伝えると親切です（補足1で実際に確かめます）。</p>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-9"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="1">1</button><span id="annotated-cell-9-1" class="code-annotation-target"><a href="#annotated-cell-9-1"></a>rmse <span class="ot">&lt;-</span> <span class="cf">function</span>(actual, pred) {</span>
+<span id="annotated-cell-9-2"><a href="#annotated-cell-9-2"></a>  <span class="fu">sqrt</span>(<span class="fu">mean</span>((actual <span class="sc">-</span> pred)<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="annotated-cell-9-3"><a href="#annotated-cell-9-3"></a>}</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-9" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-9" data-code-lines="1" data-code-annotation="1">RMSE を計算する関数を自分で作る。<code>actual</code> に実際の値、<code>pred</code> に予測値を入れる。</span>
+</dd>
+</dl>
+</div>
+</div>
+<div style="margin-top: 2.0em;">
+
+</div>
+</section>
+<section id="r²決定係数" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="r²決定係数">R²（決定係数）</h3>
+<p>前期の回帰分析で学んだ <strong>R²</strong>（決定係数）も、予測の良さを表す数字として使えます。R² は「実際の値の散らばりのうち、何%を予測で説明できたか」を表します。</p>
+<p><span class="math display">\[
+R^2 = 1 - \frac{\sum(\text{実際の値}_i - \text{予測値}_i)^2}{\sum(\text{実際の値}_i - \text{実際の値の平均})^2}
+\]</span></p>
+<p>分母は「平均で予測したときの外れの2乗の合計（もともとの散らばり）」、分子は「モデルで予測したときの外れの2乗の合計（説明できずに残った散らばり）」です。上の例では、実際の値の平均は約 208 台、分母は約 43,483、分子は 2,800 なので、R² ＝ 1 − 2,800 ÷ 43,483 ≒ <strong>0.94</strong>。散らばりの約 94% を予測で説明できた、と読みます。<span class="marker">1 に近いほど良い予測</span>です。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-10"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="1">1</button><span id="annotated-cell-10-1" class="code-annotation-target"><a href="#annotated-cell-10-1"></a>r2 <span class="ot">&lt;-</span> <span class="cf">function</span>(actual, pred) {</span>
+<span id="annotated-cell-10-2"><a href="#annotated-cell-10-2"></a>  <span class="dv">1</span> <span class="sc">-</span> <span class="fu">sum</span>((actual <span class="sc">-</span> pred)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> <span class="fu">sum</span>((actual <span class="sc">-</span> <span class="fu">mean</span>(actual))<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="annotated-cell-10-3"><a href="#annotated-cell-10-3"></a>}</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-10" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-10" data-code-lines="1" data-code-annotation="1">R² を計算する関数。<code>summary(lm())</code> に出てくる R² と同じ計算を、好きなデータで行えるようにする。</span>
+</dd>
+</dl>
+</div>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 42%">
+<col style="width: 42%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">RMSE</th>
+<th style="text-align: left;">R²</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">読み方</td>
+<td style="text-align: left;">平均的に〇〇台外れる</td>
+<td style="text-align: left;">散らばりの〇〇%を説明できた</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">単位</td>
+<td style="text-align: left;">あり（今日は台）</td>
+<td style="text-align: left;">なし（0〜1）</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">良い予測</td>
+<td style="text-align: left;">小さいほど良い</td>
+<td style="text-align: left;">1 に近いほど良い</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">得意なこと</td>
+<td style="text-align: left;">依頼主に「どれくらい外れるか」を具体的に伝える</td>
+<td style="text-align: left;">単位の違う別のデータの予測とも比べられる</td>
+</tr>
+</tbody>
+</table>
+<p>今日は <strong>RMSE を主な指標</strong>にし、R² を並べて見ていきます。</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>R² は「検証用データ」で計算する</strong></p>
+<p>前期に <code>summary()</code> で見た R² は、モデルを作った<strong>学習用データ</strong>での値です。学習用の R² は、変数を増やすほど必ず大きくなるので、<span class="marker">学習用の R² が高くても、新しいデータをよく予測できるとは限りません</span>（ステップ6で確かめます）。予測の良さは、RMSE と同じく<strong>検証用データ</strong>で計算した R² で判断します。検証用の R² は、平均で予測するより悪いときにはマイナスになることもあります。</p>
+</div>
+</div>
+<div style="margin-top: 2.0em;">
+
+</div>
+</section>
+<section id="ベースライン" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="ベースライン">ベースライン</h3>
+<p>モデルが役に立っているかを判断するには、比べる基準（<strong>ベースライン</strong>）が必要です。一番簡単な予測は、「天気も時間も気にせず、いつも学習用データの平均の台数だと予測する」ことです。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-11"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="1">1</button><span id="annotated-cell-11-1" class="code-annotation-target"><a href="#annotated-cell-11-1"></a>mean_learn <span class="ot">&lt;-</span> <span class="fu">mean</span>(df_learn<span class="sc">$</span>rentals)</span>
+<span id="annotated-cell-11-2"><a href="#annotated-cell-11-2"></a>mean_learn</span>
+<span id="annotated-cell-11-3"><a href="#annotated-cell-11-3"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="2">2</button><span id="annotated-cell-11-4" class="code-annotation-target"><a href="#annotated-cell-11-4"></a><span class="fu">rmse</span>(df_valid<span class="sc">$</span>rentals, mean_learn)</span>
+<span id="annotated-cell-11-5"><a href="#annotated-cell-11-5"></a><span class="fu">r2</span>(df_valid<span class="sc">$</span>rentals, mean_learn)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-11" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-11" data-code-lines="1" data-code-annotation="1">学習用データの平均の貸出台数。</span>
+</dd>
+<dt data-target-cell="annotated-cell-11" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-11" data-code-lines="4" data-code-annotation="2">検証用データのすべての時間を、この平均で予測したときの RMSE と R²。</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 189.9096
+[1] 180.6807
+[1] -0.0001526779</code></pre>
+</div>
+</div>
+<p>平均だけで予測すると、平均的に約 181 台外れます。R² はほぼ 0 で、散らばりをまったく説明できていません。これより小さい RMSE（大きい R²）を目指します。</p>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+</section>
+<section id="sec-step5" class="level2" data-number="23.11">
+<h2 data-number="23.11" class="anchored" data-anchor-id="sec-step5"><span class="header-section-number">23.11</span> ステップ5：モデルを育てる</h2>
+<p>前期に学んだ <code>lm()</code> で、学習用データ（<code>df_learn</code>）からモデルを作ります。いきなり完成形を作るのではなく、次の手順を<strong>1つずつ</strong>くり返して、モデルを少しずつ育てていきます。</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 88%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">順番</th>
+<th style="text-align: left;">すること</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">①</td>
+<td style="text-align: left;">モデルを学習用データで作る</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">②</td>
+<td style="text-align: left;">係数を見て、モデルの中身を読む（どの変数で何台増える・減ると考えているか）</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">③</td>
+<td style="text-align: left;">学習用・検証用のそれぞれで予測し、RMSE と R² で当たり具合を確かめる</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">④</td>
+<td style="text-align: left;">結果を見て、「何が足りないか」を考え、次に試す変数を決める</td>
+</tr>
+</tbody>
+</table>
+<div style="margin-top: 3.0em;">
+
+</div>
+<section id="model1気温だけ" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="model1気温だけ">model1：気温だけ</h3>
+<p>まずは、ステップ2で貸出台数との関係が見えた<strong>気温</strong>だけで予測してみます。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-12"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="1">1</button><span id="annotated-cell-12-1" class="code-annotation-target"><a href="#annotated-cell-12-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(rentals <span class="sc">~</span> temp, <span class="at">data =</span> df_learn)</span>
+<span id="annotated-cell-12-2"><a href="#annotated-cell-12-2"></a><span class="fu">coef</span>(model1)</span>
+<span id="annotated-cell-12-3"><a href="#annotated-cell-12-3"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="2">2</button><span id="annotated-cell-12-4" class="code-annotation-target"><a href="#annotated-cell-12-4"></a>pred1_learn <span class="ot">&lt;-</span> <span class="fu">predict</span>(model1, <span class="at">newdata =</span> df_learn)</span>
+<span id="annotated-cell-12-5"><a href="#annotated-cell-12-5"></a>pred1_valid <span class="ot">&lt;-</span> <span class="fu">predict</span>(model1, <span class="at">newdata =</span> df_valid)</span>
+<span id="annotated-cell-12-6"><a href="#annotated-cell-12-6"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="3">3</button><span id="annotated-cell-12-7" class="code-annotation-target"><a href="#annotated-cell-12-7"></a><span class="fu">rmse</span>(df_learn<span class="sc">$</span>rentals, pred1_learn)</span>
+<span id="annotated-cell-12-8"><a href="#annotated-cell-12-8"></a><span class="fu">rmse</span>(df_valid<span class="sc">$</span>rentals, pred1_valid)</span>
+<span id="annotated-cell-12-9"><a href="#annotated-cell-12-9"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="4">4</button><span id="annotated-cell-12-10" class="code-annotation-target"><a href="#annotated-cell-12-10"></a><span class="fu">r2</span>(df_learn<span class="sc">$</span>rentals, pred1_learn)</span>
+<span id="annotated-cell-12-11"><a href="#annotated-cell-12-11"></a><span class="fu">r2</span>(df_valid<span class="sc">$</span>rentals, pred1_valid)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-12" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-12" data-code-lines="1" data-code-annotation="1">学習用データで、気温だけのモデルを作る。</span>
+</dd>
+<dt data-target-cell="annotated-cell-12" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-12" data-code-lines="4" data-code-annotation="2"><code>predict()</code> の <code>newdata</code> にデータを渡すと、1行ずつの予測値が出てくる。学習用と検証用のそれぞれで予測する。</span>
+</dd>
+<dt data-target-cell="annotated-cell-12" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-12" data-code-lines="7" data-code-annotation="3">学習用と検証用のそれぞれで RMSE を計算する。</span>
+</dd>
+<dt data-target-cell="annotated-cell-12" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-12" data-code-lines="10" data-code-annotation="4">同じように R² を計算する。学習用の R² は <code>summary(model1)</code> の「Multiple R-squared」と同じ値になる。</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept)        temp 
+  -2.543318    9.429318 
+[1] 165.5961
+[1] 166.9235
+[1] 0.1681043
+[1] 0.1463537</code></pre>
+</div>
+</div>
+<p>気温が1℃高いと、貸出台数は約 9.4 台多いと予測するモデルです。検証用の RMSE は約 167 台で、平均だけの予測（約 181 台）より少し良くなりましたが、まだ大きく外れています。R² は約 0.15 で、散らばりの 15% ほどしか説明できていません。</p>
+<div style="margin-top: 2.0em;">
+
+</div>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>毎回の計算を関数にまとめる</strong></p>
+<p>これからモデルを何回も作り、そのたびに「学習用と検証用で予測して RMSE と R² を計算する」ことをくり返します。同じコードを何度も書かなくてすむように、関数にまとめておきます。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-29"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-29" data-target-annotation="1">1</button><span id="annotated-cell-29-1" class="code-annotation-target"><a href="#annotated-cell-29-1"></a>check_model <span class="ot">&lt;-</span> <span class="cf">function</span>(model, <span class="at">learn =</span> df_learn) {</span>
+<span id="annotated-cell-29-2"><a href="#annotated-cell-29-2"></a>  pred_learn <span class="ot">&lt;-</span> <span class="fu">predict</span>(model, <span class="at">newdata =</span> learn)</span>
+<span id="annotated-cell-29-3"><a href="#annotated-cell-29-3"></a>  pred_valid <span class="ot">&lt;-</span> <span class="fu">predict</span>(model, <span class="at">newdata =</span> df_valid)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-29" data-target-annotation="2">2</button><span id="annotated-cell-29-4" class="code-annotation-target"><a href="#annotated-cell-29-4"></a>  <span class="fu">c</span>(<span class="at">rmse_learn =</span> <span class="fu">rmse</span>(learn<span class="sc">$</span>rentals, pred_learn),</span>
+<span id="annotated-cell-29-5"><a href="#annotated-cell-29-5"></a>    <span class="at">rmse_valid =</span> <span class="fu">rmse</span>(df_valid<span class="sc">$</span>rentals, pred_valid),</span>
+<span id="annotated-cell-29-6"><a href="#annotated-cell-29-6"></a>    <span class="at">r2_learn   =</span> <span class="fu">r2</span>(learn<span class="sc">$</span>rentals, pred_learn),</span>
+<span id="annotated-cell-29-7"><a href="#annotated-cell-29-7"></a>    <span class="at">r2_valid   =</span> <span class="fu">r2</span>(df_valid<span class="sc">$</span>rentals, pred_valid))</span>
+<span id="annotated-cell-29-8"><a href="#annotated-cell-29-8"></a>}</span>
+<span id="annotated-cell-29-9"><a href="#annotated-cell-29-9"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-29" data-target-annotation="3">3</button><span id="annotated-cell-29-10" class="code-annotation-target"><a href="#annotated-cell-29-10"></a><span class="fu">check_model</span>(model1)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-29" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-29" data-code-lines="1" data-code-annotation="1"><code>learn</code> はモデルを作ったデータ。何も指定しなければ <code>df_learn</code> になる（ステップ6で別のデータを指定する）。</span>
+</dd>
+<dt data-target-cell="annotated-cell-29" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-29" data-code-lines="4" data-code-annotation="2">学習用と検証用の RMSE、学習用と検証用の R² の4つを並べて返す。</span>
+</dd>
+<dt data-target-cell="annotated-cell-29" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-29" data-code-lines="10" data-code-annotation="3">上で計算した model1 の RMSE・R² と同じ値になることを確かめる。</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code> rmse_learn  rmse_valid    r2_learn    r2_valid 
+165.5960637 166.9235471   0.1681043   0.1463537 </code></pre>
+</div>
+</div>
+</div>
+</div>
+<div style="margin-top: 3.0em;">
+
+</div>
+</section>
+<section id="model2気温の2乗を加える" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="model2気温の2乗を加える">model2：気温の2乗を加える</h3>
+<p>ステップ2のグラフでは、気温と貸出台数の関係はまっすぐな直線ではなく、曲がっているように見えました。そこで、<strong>気温の2乗</strong>（<code>I(temp^2)</code>）を加えて、曲がった関係を表せるようにしてみます。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-13"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="1">1</button><span id="annotated-cell-13-1" class="code-annotation-target"><a href="#annotated-cell-13-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(rentals <span class="sc">~</span> temp <span class="sc">+</span> <span class="fu">I</span>(temp<span class="sc">^</span><span class="dv">2</span>), <span class="at">data =</span> df_learn)</span>
+<span id="annotated-cell-13-2"><a href="#annotated-cell-13-2"></a><span class="fu">coef</span>(model2)</span>
+<span id="annotated-cell-13-3"><a href="#annotated-cell-13-3"></a></span>
+<span id="annotated-cell-13-4"><a href="#annotated-cell-13-4"></a>res1 <span class="ot">&lt;-</span> <span class="fu">check_model</span>(model1)</span>
+<span id="annotated-cell-13-5"><a href="#annotated-cell-13-5"></a>res2 <span class="ot">&lt;-</span> <span class="fu">check_model</span>(model2)</span>
+<span id="annotated-cell-13-6"><a href="#annotated-cell-13-6"></a>res1</span>
+<span id="annotated-cell-13-7"><a href="#annotated-cell-13-7"></a>res2</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-13" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-13" data-code-lines="1" data-code-annotation="1"><code>I(temp^2)</code> は気温の2乗。<code>I()</code> で囲むと、<code>^2</code> を「2乗の計算」として扱う。</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept)        temp   I(temp^2) 
+11.95711663  7.75437692  0.04110561 
+ rmse_learn  rmse_valid    r2_learn    r2_valid 
+165.5960637 166.9235471   0.1681043   0.1463537 
+rmse_learn rmse_valid   r2_learn   r2_valid 
+165.575092 166.919021   0.168315   0.146400 </code></pre>
+</div>
+</div>
+<p>気温の2乗の係数は約 0.04 で、ほとんど 0 です。検証用の RMSE も、model1 が約 166.9 台、model2 が約 166.9 台、R² も約 0.146 と約 0.146 で、<span class="marker">ほとんど変わりません</span>でした。</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>グラフで良さそうに見えても、効くとは限らない</strong></p>
+<p>グラフでは曲がって見えた関係も、気温の2乗を入れても予測はほとんど良くなりませんでした。予測に効くかどうかは、実際にモデルに入れて、<span class="marker">検証用の RMSE で確かめる</span>までは分かりません。効かなかった変数は、モデルを複雑にするだけなので、これ以降は入れないことにします。</p>
+</div>
+</div>
+<div style="margin-top: 3.0em;">
+
+</div>
+</section>
+<section id="model3天気カレンダーを加える" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="model3天気カレンダーを加える">model3：天気・カレンダーを加える</h3>
+<p>気温だけでは足りないので、依頼主が「翌日の天気予報とカレンダー」から分かる情報をまとめて加えます。湿度・風速・天気・平日か休日か・年（2012年ダミー）・季節です。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>model3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(rentals <span class="sc">~</span> temp <span class="sc">+</span> humidity <span class="sc">+</span> wind <span class="sc">+</span> weather <span class="sc">+</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>               day_type <span class="sc">+</span> y2012 <span class="sc">+</span> season, <span class="at">data =</span> df_learn)</span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="fu">coef</span>(model3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      (Intercept)              temp          humidity              wind 
+       78.6434997        11.8908902        -2.7065527         0.2912492 
+weather霧・くもり     weather雨・雪      day_type休日             y2012 
+       12.1064740        -4.2802680        -6.1466211        73.0043180 
+         season夏          season秋          season冬 
+      -66.9111462        37.4777380        19.8529011 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>res3 <span class="ot">&lt;-</span> <span class="fu">check_model</span>(model3)</span>
+<span id="cb16-2"><a href="#cb16-2"></a>res3</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> rmse_learn  rmse_valid    r2_learn    r2_valid 
+149.0351745 147.8157547   0.3261761   0.3306023 </code></pre>
+</div>
+</div>
+<p>係数を読んでみましょう。</p>
+<ul>
+<li>気温が1℃高いと約 11.9 台、湿度が1%高いと約 -2.7 台。</li>
+<li>2012年は2011年より約 73 台多い（利用者が増えている）。</li>
+<li><code>weather雨・雪</code> は「晴れ・くもりと比べて」、<code>season秋</code> は「春と比べて」、<code>day_type休日</code> は「平日と比べて」何台多いか（マイナスなら少ないか）を表す。</li>
+</ul>
+<p>検証用の RMSE は約 148 台、R² は約 0.33 になりました。model1 より良くなりましたが、まだ平均的に 148 台も外れています。</p>
+<p><strong>何が足りないか？</strong>　ステップ2の最初のグラフを思い出しましょう。貸出台数は、<strong>時間帯</strong>によって 0 台近くから 500 台近くまで大きく変わっていました。model3 には、時間帯がまだ入っていません。</p>
+<div style="margin-top: 3.0em;">
+
+</div>
+</section>
+<section id="model4時間帯を加える" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="model4時間帯を加える">model4：時間帯を加える</h3>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-16"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-16-1"><a href="#annotated-cell-16-1"></a>model4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(rentals <span class="sc">~</span> temp <span class="sc">+</span> humidity <span class="sc">+</span> wind <span class="sc">+</span> weather <span class="sc">+</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-16" data-target-annotation="1">1</button><span id="annotated-cell-16-2" class="code-annotation-target"><a href="#annotated-cell-16-2"></a>               day_type <span class="sc">+</span> y2012 <span class="sc">+</span> season <span class="sc">+</span> <span class="fu">factor</span>(hour), <span class="at">data =</span> df_learn)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-16" data-target-annotation="2">2</button><span id="annotated-cell-16-3" class="code-annotation-target"><a href="#annotated-cell-16-3"></a><span class="fu">length</span>(<span class="fu">coef</span>(model4))</span>
+<span id="annotated-cell-16-4"><a href="#annotated-cell-16-4"></a></span>
+<span id="annotated-cell-16-5"><a href="#annotated-cell-16-5"></a>res4 <span class="ot">&lt;-</span> <span class="fu">check_model</span>(model4)</span>
+<span id="annotated-cell-16-6"><a href="#annotated-cell-16-6"></a>res4</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-16" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-16" data-code-lines="2" data-code-annotation="1"><code>factor(hour)</code> と書くと、0〜23 の数字を「24種類のカテゴリ」として扱い、0時を基準にした23個のダミー変数になる（前期第11回）。</span>
+</dd>
+<dt data-target-cell="annotated-cell-16" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-16" data-code-lines="3" data-code-annotation="2">係数の数を数える。時間帯のダミー変数だけで23個あるので、<code>coef()</code> で全部を並べても読みにくい。</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 34
+ rmse_learn  rmse_valid    r2_learn    r2_valid 
+102.9525911 104.5134201   0.6784538   0.6653531 </code></pre>
+</div>
+</div>
+<p>係数が多いときは、表で眺めるより<strong>グラフにする</strong>と読みやすくなります。時間帯の係数（0時と比べて何台多いか）だけを取り出して、折れ線グラフにします。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-17"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-17-1"><a href="#annotated-cell-17-1"></a>df_coef4 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="annotated-cell-17-2"><a href="#annotated-cell-17-2"></a>  <span class="at">hour =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">23</span>,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-17" data-target-annotation="1">1</button><span id="annotated-cell-17-3" class="code-annotation-target"><a href="#annotated-cell-17-3"></a>  <span class="at">coef =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">coef</span>(model4)[<span class="fu">paste0</span>(<span class="st">"factor(hour)"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">23</span>)])</span>
+<span id="annotated-cell-17-4"><a href="#annotated-cell-17-4"></a>)</span>
+<span id="annotated-cell-17-5"><a href="#annotated-cell-17-5"></a></span>
+<span id="annotated-cell-17-6"><a href="#annotated-cell-17-6"></a><span class="fu">ggplot</span>(df_coef4, <span class="fu">aes</span>(<span class="at">x =</span> hour, <span class="at">y =</span> coef)) <span class="sc">+</span></span>
+<span id="annotated-cell-17-7"><a href="#annotated-cell-17-7"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-17-8"><a href="#annotated-cell-17-8"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-17-9"><a href="#annotated-cell-17-9"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">23</span>, <span class="dv">3</span>)) <span class="sc">+</span></span>
+<span id="annotated-cell-17-10"><a href="#annotated-cell-17-10"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"時間帯（時）"</span>, <span class="at">y =</span> <span class="st">"0時と比べた台数（係数）"</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-17-11"><a href="#annotated-cell-17-11"></a>  <span class="fu">theme_minimal</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-17" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-17" data-code-lines="3" data-code-annotation="1"><code>factor(hour)1</code> 〜 <code>factor(hour)23</code> という名前の係数を取り出す。基準の0時は係数がないので、0 を先頭に付ける。</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecB10_files/figure-html/model4-coef-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="2100"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>8時と17〜18時に大きな山があります。ステップ2で見た<strong>平日</strong>の形にそっくりです。</p>
+<p>もう1つ、係数の変化にも注目しましょう。<code>weather雨・雪</code> の係数は、model3 では約 -4 台でしたが、model4 では約 -66 台になりました。雨は昼にも夜中にも降るので、時間帯を入れないと「雨の時間は少ない」のか「夜中だから少ない」のかが区別できず、雨の効果がうまく表せていなかったのです。</p>
+<p>検証用の RMSE は約 105 台に<span class="marker">大きく下がり</span>、R² は約 0.67 に上がりました。散らばりの約 67% を説明できています。時間帯は、貸出台数にとても強く影響しています。</p>
+<p><strong>まだ足りないものは？</strong>　ステップ2のグラフでは、時間帯の山の形が<strong>平日と休日でまったく違いました</strong>（平日は朝夕、休日は昼）。ところが model4 では、時間帯のダミー変数の係数は平日も休日も同じです。つまり model4 は、「平日も休日も同じ形の山で、高さだけが違う」という予測しかできません。</p>
+<div style="margin-top: 3.0em;">
+
+</div>
+</section>
+<section id="model5時間帯-平日休日の交差項を加える" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="model5時間帯-平日休日の交差項を加える">model5：時間帯 × 平日・休日の交差項を加える</h3>
+<p>平日と休日で時間帯の効き方が違うことを表すには、前期第12回で学んだ<strong>交差項</strong>を使います。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-18"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-18-1"><a href="#annotated-cell-18-1"></a>model5 <span class="ot">&lt;-</span> <span class="fu">lm</span>(rentals <span class="sc">~</span> temp <span class="sc">+</span> humidity <span class="sc">+</span> wind <span class="sc">+</span> weather <span class="sc">+</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-18" data-target-annotation="1">1</button><span id="annotated-cell-18-2" class="code-annotation-target"><a href="#annotated-cell-18-2"></a>               y2012 <span class="sc">+</span> season <span class="sc">+</span> <span class="fu">factor</span>(hour) <span class="sc">*</span> day_type, <span class="at">data =</span> df_learn)</span>
+<span id="annotated-cell-18-3"><a href="#annotated-cell-18-3"></a><span class="fu">length</span>(<span class="fu">coef</span>(model5))</span>
+<span id="annotated-cell-18-4"><a href="#annotated-cell-18-4"></a></span>
+<span id="annotated-cell-18-5"><a href="#annotated-cell-18-5"></a>res5 <span class="ot">&lt;-</span> <span class="fu">check_model</span>(model5)</span>
+<span id="annotated-cell-18-6"><a href="#annotated-cell-18-6"></a>res5</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-18" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-18" data-code-lines="2" data-code-annotation="1"><code>factor(hour) * day_type</code> は、時間帯のダミー変数、平日・休日のダミー変数、その交差項をまとめて入れる書き方。</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 57
+rmse_learn rmse_valid   r2_learn   r2_valid 
+79.2842410 80.0256409  0.8093035  0.8037991 </code></pre>
+</div>
+</div>
+<p>検証用の RMSE は約 80 台まで下がり、R² は約 0.8 になりました。係数は 57 個に増えています。model4 と同じように、時間帯の係数をグラフにしてみます。今度は平日と休日で別々の線になります。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-19"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-19" data-target-annotation="1">1</button><span id="annotated-cell-19-1" class="code-annotation-target"><a href="#annotated-cell-19-1"></a>b_hour  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">coef</span>(model5)[<span class="fu">paste0</span>(<span class="st">"factor(hour)"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">23</span>)])</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-19" data-target-annotation="2">2</button><span id="annotated-cell-19-2" class="code-annotation-target"><a href="#annotated-cell-19-2"></a>b_inter <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">coef</span>(model5)[<span class="fu">paste0</span>(<span class="st">"factor(hour)"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">23</span>, <span class="st">":day_type休日"</span>)])</span>
+<span id="annotated-cell-19-3"><a href="#annotated-cell-19-3"></a></span>
+<span id="annotated-cell-19-4"><a href="#annotated-cell-19-4"></a>df_coef5 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="annotated-cell-19-5"><a href="#annotated-cell-19-5"></a>  <span class="at">hour =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">23</span>,</span>
+<span id="annotated-cell-19-6"><a href="#annotated-cell-19-6"></a>  平日 <span class="ot">=</span> b_hour,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-19" data-target-annotation="3">3</button><span id="annotated-cell-19-7" class="code-annotation-target"><a href="#annotated-cell-19-7"></a>  休日 <span class="ot">=</span> b_hour <span class="sc">+</span> <span class="fu">coef</span>(model5)[<span class="st">"day_type休日"</span>] <span class="sc">+</span> b_inter</span>
+<span id="annotated-cell-19-8"><a href="#annotated-cell-19-8"></a>) <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-19-9"><a href="#annotated-cell-19-9"></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(平日, 休日), <span class="at">names_to =</span> <span class="st">"day_type"</span>, <span class="at">values_to =</span> <span class="st">"coef"</span>)</span>
+<span id="annotated-cell-19-10"><a href="#annotated-cell-19-10"></a></span>
+<span id="annotated-cell-19-11"><a href="#annotated-cell-19-11"></a><span class="fu">ggplot</span>(df_coef5, <span class="fu">aes</span>(<span class="at">x =</span> hour, <span class="at">y =</span> coef, <span class="at">color =</span> day_type)) <span class="sc">+</span></span>
+<span id="annotated-cell-19-12"><a href="#annotated-cell-19-12"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="annotated-cell-19-13"><a href="#annotated-cell-19-13"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="annotated-cell-19-14"><a href="#annotated-cell-19-14"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">23</span>, <span class="dv">3</span>)) <span class="sc">+</span></span>
+<span id="annotated-cell-19-15"><a href="#annotated-cell-19-15"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"平日"</span> <span class="ot">=</span> <span class="st">"steelblue"</span>, <span class="st">"休日"</span> <span class="ot">=</span> <span class="st">"orange"</span>)) <span class="sc">+</span></span>
+<span id="annotated-cell-19-16"><a href="#annotated-cell-19-16"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"時間帯（時）"</span>, <span class="at">y =</span> <span class="st">"平日0時と比べた台数"</span>, <span class="at">color =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-19-17"><a href="#annotated-cell-19-17"></a>  <span class="fu">theme_minimal</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-19" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-19" data-code-lines="1" data-code-annotation="1">平日の時間帯の効果（基準の平日0時と比べて何台多いか）。</span>
+</dd>
+<dt data-target-cell="annotated-cell-19" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-19" data-code-lines="2" data-code-annotation="2">交差項の係数（休日のときに、その時間帯の効果がどれだけ変わるか）。</span>
+</dd>
+<dt data-target-cell="annotated-cell-19" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-19" data-code-lines="7" data-code-annotation="3">休日の効果 ＝ 時間帯の係数 ＋ 休日の係数 ＋ 交差項の係数。前期第12回の「グループ別の傾き」と同じ考え方。</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecB10_files/figure-html/model5-coef-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="2100"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>平日は朝夕の2つの山、休日は昼すぎの1つの山になりました。交差項を入れたことで、モデルが<span class="marker">平日と休日の違いを係数として覚えた</span>ことが分かります。</p>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>予測では、係数を1つずつ説明しなくてもよい？</strong></p>
+<p>前期の回帰分析では、「この係数が統計的に有意か」「1増えると何増えるか」を1つずつ読むことが目的でした。予測では、目的は<strong>よく当てること</strong>なので、70個近い係数を1つずつ説明できなくても、検証用の RMSE が小さければ良いモデルです。それでも、係数をグラフにして「モデルがデータの特徴をつかんでいるか」を確かめておくと、おかしな予測に早く気づけますし、依頼主にも説明しやすくなります。</p>
+</div>
+</div>
+<div style="margin-top: 3.0em;">
+
+</div>
+</section>
+<section id="ここまでの結果をまとめる" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="ここまでの結果をまとめる">ここまでの結果をまとめる</h3>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>df_result <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb20-2"><a href="#cb20-2"></a>  <span class="at">model =</span> <span class="fu">c</span>(<span class="st">"ベースライン（平均だけ）"</span>, <span class="st">"model1 気温"</span>, <span class="st">"model2 ＋気温の2乗"</span>,</span>
+<span id="cb20-3"><a href="#cb20-3"></a>            <span class="st">"model3 気温＋天気・カレンダー"</span>, <span class="st">"model4 ＋時間帯"</span>, <span class="st">"model5 ＋時間帯×平日・休日"</span>),</span>
+<span id="cb20-4"><a href="#cb20-4"></a>  <span class="at">rmse_valid =</span> <span class="fu">c</span>(<span class="fu">rmse</span>(df_valid<span class="sc">$</span>rentals, mean_learn),</span>
+<span id="cb20-5"><a href="#cb20-5"></a>                 res1[<span class="st">"rmse_valid"</span>], res2[<span class="st">"rmse_valid"</span>], res3[<span class="st">"rmse_valid"</span>],</span>
+<span id="cb20-6"><a href="#cb20-6"></a>                 res4[<span class="st">"rmse_valid"</span>], res5[<span class="st">"rmse_valid"</span>]),</span>
+<span id="cb20-7"><a href="#cb20-7"></a>  <span class="at">r2_valid   =</span> <span class="fu">c</span>(<span class="fu">r2</span>(df_valid<span class="sc">$</span>rentals, mean_learn),</span>
+<span id="cb20-8"><a href="#cb20-8"></a>                 res1[<span class="st">"r2_valid"</span>], res2[<span class="st">"r2_valid"</span>], res3[<span class="st">"r2_valid"</span>],</span>
+<span id="cb20-9"><a href="#cb20-9"></a>                 res4[<span class="st">"r2_valid"</span>], res5[<span class="st">"r2_valid"</span>])</span>
+<span id="cb20-10"><a href="#cb20-10"></a>)</span>
+<span id="cb20-11"><a href="#cb20-11"></a></span>
+<span id="cb20-12"><a href="#cb20-12"></a>df_result <span class="sc">|&gt;</span></span>
+<span id="cb20-13"><a href="#cb20-13"></a>  <span class="fu">mutate</span>(<span class="at">rmse_valid =</span> <span class="fu">round</span>(rmse_valid, <span class="dv">1</span>),</span>
+<span id="cb20-14"><a href="#cb20-14"></a>         <span class="at">r2_valid   =</span> <span class="fu">round</span>(r2_valid, <span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+  model                         rmse_valid r2_valid
+  &lt;chr&gt;                              &lt;dbl&gt;    &lt;dbl&gt;
+1 ベースライン（平均だけ）            181.    0    
+2 model1 気温                         167.    0.146
+3 model2 ＋気温の2乗                  167.    0.146
+4 model3 気温＋天気・カレンダー       148.    0.331
+5 model4 ＋時間帯                     104.    0.665
+6 model5 ＋時間帯×平日・休日           80     0.804</code></pre>
+</div>
+</div>
+<p>予測が大きく良くなったのは、ステップ2のグラフで見つけた<strong>時間帯</strong>（model4）と、<strong>平日と休日の違い</strong>（model5）を入れたときでした。データを眺めて気づいたことをモデルに入れ、検証用の RMSE で確かめる。このくり返しが、予測モデルづくりの基本です。</p>
+<div style="margin-top: 2.0em;">
+
+</div>
+</section>
+<section id="予測をグラフで確かめる" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="予測をグラフで確かめる">予測をグラフで確かめる</h3>
+<p>2012年6月の1週間（月曜〜日曜）について、実際の貸出台数と、model4・model5 の予測を並べて描きます。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-21"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-21-1"><a href="#annotated-cell-21-1"></a>df_bike <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-21-2"><a href="#annotated-cell-21-2"></a>  <span class="fu">filter</span>(date <span class="sc">&gt;=</span> <span class="fu">as.Date</span>(<span class="st">"2012-06-04"</span>), date <span class="sc">&lt;=</span> <span class="fu">as.Date</span>(<span class="st">"2012-06-10"</span>)) <span class="sc">|&gt;</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-21" data-target-annotation="1">1</button><span id="annotated-cell-21-3" class="code-annotation-target"><a href="#annotated-cell-21-3"></a>  <span class="fu">mutate</span>(<span class="at">datetime =</span> <span class="fu">make_datetime</span>(<span class="fu">year</span>(date), <span class="fu">month</span>(date), <span class="fu">day</span>(date), hour),</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-21" data-target-annotation="2">2</button><span id="annotated-cell-21-4" class="code-annotation-target"><a href="#annotated-cell-21-4"></a>         <span class="st">`</span><span class="at">model4 の予測</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">predict</span>(model4, <span class="at">newdata =</span> <span class="fu">pick</span>(<span class="fu">everything</span>())),</span>
+<span id="annotated-cell-21-5"><a href="#annotated-cell-21-5"></a>         <span class="st">`</span><span class="at">model5 の予測</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">predict</span>(model5, <span class="at">newdata =</span> <span class="fu">pick</span>(<span class="fu">everything</span>())),</span>
+<span id="annotated-cell-21-6"><a href="#annotated-cell-21-6"></a>         <span class="st">`</span><span class="at">実際の台数</span><span class="st">`</span> <span class="ot">=</span> rentals) <span class="sc">|&gt;</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-21" data-target-annotation="3">3</button><span id="annotated-cell-21-7" class="code-annotation-target"><a href="#annotated-cell-21-7"></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(<span class="st">`</span><span class="at">実際の台数</span><span class="st">`</span>, <span class="st">`</span><span class="at">model4 の予測</span><span class="st">`</span>, <span class="st">`</span><span class="at">model5 の予測</span><span class="st">`</span>),</span>
+<span id="annotated-cell-21-8"><a href="#annotated-cell-21-8"></a>               <span class="at">names_to =</span> <span class="st">"type"</span>, <span class="at">values_to =</span> <span class="st">"count"</span>) <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-21-9"><a href="#annotated-cell-21-9"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> datetime, <span class="at">y =</span> count, <span class="at">color =</span> type)) <span class="sc">+</span></span>
+<span id="annotated-cell-21-10"><a href="#annotated-cell-21-10"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="annotated-cell-21-11"><a href="#annotated-cell-21-11"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"実際の台数"</span> <span class="ot">=</span> <span class="st">"orange"</span>, <span class="st">"model4 の予測"</span> <span class="ot">=</span> <span class="st">"steelblue"</span>,</span>
+<span id="annotated-cell-21-12"><a href="#annotated-cell-21-12"></a>                                <span class="st">"model5 の予測"</span> <span class="ot">=</span> <span class="st">"black"</span>)) <span class="sc">+</span></span>
+<span id="annotated-cell-21-13"><a href="#annotated-cell-21-13"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"日時"</span>, <span class="at">y =</span> <span class="st">"貸出台数（台）"</span>, <span class="at">color =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-21-14"><a href="#annotated-cell-21-14"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="annotated-cell-21-15"><a href="#annotated-cell-21-15"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-21" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-21" data-code-lines="3" data-code-annotation="1">日付と時間帯から、日時を作る。</span>
+</dd>
+<dt data-target-cell="annotated-cell-21" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-21" data-code-lines="4" data-code-annotation="2"><code>pick(everything())</code> は「今のデータのすべての列」という意味で、そのデータで予測する。</span>
+</dd>
+<dt data-target-cell="annotated-cell-21" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-21" data-code-lines="7" data-code-annotation="3">実際の台数と2つの予測を、1つの列（<code>count</code>）にまとめ、どれの値かを <code>type</code> 列に入れる。こうすると、<code>color = type</code> で3本の線を色分けして描ける。</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lecB10_files/figure-html/plot-week-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption>2012年6月4日（月）〜10日（日）の実際の貸出台数と予測</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>model4（青）は、休日（9日・10日）にも朝と夕方の山を予測してしまっています。model5（黒）は、平日は朝夕の2つの山、休日は昼の山と、実際の形（オレンジ）にかなり近い予測ができています。</p>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+</section>
+<section id="sec-step6" class="level2" data-number="23.12">
+<h2 data-number="23.12" class="anchored" data-anchor-id="sec-step6"><span class="header-section-number">23.12</span> ステップ6：過学習を体験する</h2>
+<p>交差項でこれだけ良くなるなら、もっとたくさん交差項を入れれば、もっと良くなるのでしょうか。時間帯 × 平日・休日 × 天気 × 季節 の交差項をすべて入れた、とても複雑なモデル（model6）を作ってみます。</p>
+<p>さらに、「データが少ないとき」に何が起きるかを見るため、学習用データから <strong>1,000 時間分だけ</strong>を取り出したデータでも、model5 と model6 を作って比べます。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-22"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-22-1"><a href="#annotated-cell-22-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-22" data-target-annotation="1">1</button><span id="annotated-cell-22-2" class="code-annotation-target"><a href="#annotated-cell-22-2"></a>df_small <span class="ot">&lt;-</span> df_learn <span class="sc">|&gt;</span> <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">1000</span>)</span>
+<span id="annotated-cell-22-3"><a href="#annotated-cell-22-3"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-22" data-target-annotation="2">2</button><span id="annotated-cell-22-4" class="code-annotation-target"><a href="#annotated-cell-22-4"></a>model6 <span class="ot">&lt;-</span> <span class="fu">lm</span>(rentals <span class="sc">~</span> temp <span class="sc">+</span> humidity <span class="sc">+</span> wind <span class="sc">+</span> y2012 <span class="sc">+</span></span>
+<span id="annotated-cell-22-5"><a href="#annotated-cell-22-5"></a>               <span class="fu">factor</span>(hour) <span class="sc">*</span> day_type <span class="sc">*</span> weather <span class="sc">*</span> season, <span class="at">data =</span> df_learn)</span>
+<span id="annotated-cell-22-6"><a href="#annotated-cell-22-6"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-22" data-target-annotation="3">3</button><span id="annotated-cell-22-7" class="code-annotation-target"><a href="#annotated-cell-22-7"></a>model5_small <span class="ot">&lt;-</span> <span class="fu">lm</span>(rentals <span class="sc">~</span> temp <span class="sc">+</span> humidity <span class="sc">+</span> wind <span class="sc">+</span> weather <span class="sc">+</span></span>
+<span id="annotated-cell-22-8"><a href="#annotated-cell-22-8"></a>                     y2012 <span class="sc">+</span> season <span class="sc">+</span> <span class="fu">factor</span>(hour) <span class="sc">*</span> day_type, <span class="at">data =</span> df_small)</span>
+<span id="annotated-cell-22-9"><a href="#annotated-cell-22-9"></a>model6_small <span class="ot">&lt;-</span> <span class="fu">lm</span>(rentals <span class="sc">~</span> temp <span class="sc">+</span> humidity <span class="sc">+</span> wind <span class="sc">+</span> y2012 <span class="sc">+</span></span>
+<span id="annotated-cell-22-10"><a href="#annotated-cell-22-10"></a>                     <span class="fu">factor</span>(hour) <span class="sc">*</span> day_type <span class="sc">*</span> weather <span class="sc">*</span> season, <span class="at">data =</span> df_small)</span>
+<span id="annotated-cell-22-11"><a href="#annotated-cell-22-11"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-22" data-target-annotation="4">4</button><span id="annotated-cell-22-12" class="code-annotation-target"><a href="#annotated-cell-22-12"></a><span class="fu">length</span>(<span class="fu">coef</span>(model5))</span>
+<span id="annotated-cell-22-13"><a href="#annotated-cell-22-13"></a><span class="fu">length</span>(<span class="fu">coef</span>(model6))</span>
+<span id="annotated-cell-22-14"><a href="#annotated-cell-22-14"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-22" data-target-annotation="5">5</button><span id="annotated-cell-22-15" class="code-annotation-target"><a href="#annotated-cell-22-15"></a>df_overfit <span class="ot">&lt;-</span> <span class="fu">rbind</span>(<span class="fu">check_model</span>(model5),</span>
+<span id="annotated-cell-22-16"><a href="#annotated-cell-22-16"></a>                    <span class="fu">check_model</span>(model6),</span>
+<span id="annotated-cell-22-17"><a href="#annotated-cell-22-17"></a>                    <span class="fu">check_model</span>(model5_small, <span class="at">learn =</span> df_small),</span>
+<span id="annotated-cell-22-18"><a href="#annotated-cell-22-18"></a>                    <span class="fu">check_model</span>(model6_small, <span class="at">learn =</span> df_small)) <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-22-19"><a href="#annotated-cell-22-19"></a>  <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-22-20"><a href="#annotated-cell-22-20"></a>  <span class="fu">mutate</span>(<span class="at">data  =</span> <span class="fu">c</span>(<span class="st">"学習用（全部）"</span>, <span class="st">"学習用（全部）"</span>, <span class="st">"1,000時間分だけ"</span>, <span class="st">"1,000時間分だけ"</span>),</span>
+<span id="annotated-cell-22-21"><a href="#annotated-cell-22-21"></a>         <span class="at">model =</span> <span class="fu">c</span>(<span class="st">"model5"</span>, <span class="st">"model6"</span>, <span class="st">"model5"</span>, <span class="st">"model6"</span>),</span>
+<span id="annotated-cell-22-22"><a href="#annotated-cell-22-22"></a>         <span class="at">.before =</span> <span class="dv">1</span>)</span>
+<span id="annotated-cell-22-23"><a href="#annotated-cell-22-23"></a></span>
+<span id="annotated-cell-22-24"><a href="#annotated-cell-22-24"></a>df_overfit <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-22-25"><a href="#annotated-cell-22-25"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">starts_with</span>(<span class="st">"rmse"</span>), \(x) <span class="fu">round</span>(x, <span class="dv">1</span>)),</span>
+<span id="annotated-cell-22-26"><a href="#annotated-cell-22-26"></a>         <span class="fu">across</span>(<span class="fu">starts_with</span>(<span class="st">"r2"</span>), \(x) <span class="fu">round</span>(x, <span class="dv">3</span>)))</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-22" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-22" data-code-lines="2" data-code-annotation="1">学習用データから、1,000 行だけをランダムに取り出す。</span>
+</dd>
+<dt data-target-cell="annotated-cell-22" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-22" data-code-lines="4" data-code-annotation="2"><code>a * b * c * d</code> と書くと、4つの変数のすべての組み合わせの交差項が入る。時間帯24 × 平日・休日2 × 天気3 × 季節4 ＝ 576 通りの組み合わせごとに、別々の台数を予測するモデルになる。</span>
+</dd>
+<dt data-target-cell="annotated-cell-22" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-22" data-code-lines="7" data-code-annotation="3">同じ2つのモデルを、1,000 時間分のデータだけで作る。</span>
+</dd>
+<dt data-target-cell="annotated-cell-22" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-22" data-code-lines="12" data-code-annotation="4">係数の数を比べる。model6 は係数が 580 個もある。</span>
+</dd>
+<dt data-target-cell="annotated-cell-22" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-22" data-code-lines="15" data-code-annotation="5">4つのモデルの RMSE と R² を <code>check_model()</code> で計算し、<code>rbind()</code> で縦に並べて表にする。1,000 時間分のモデルは、学習用の値を <code>df_small</code> で計算する（<code>learn = df_small</code>）。</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 57
+[1] 580
+# A tibble: 4 × 6
+  data            model  rmse_learn rmse_valid r2_learn r2_valid
+  &lt;chr&gt;           &lt;chr&gt;       &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+1 学習用（全部）  model5       79.3       80      0.809    0.804
+2 学習用（全部）  model6       68.4       70.4    0.858    0.848
+3 1,000時間分だけ model5       79.7       84.1    0.797    0.783
+4 1,000時間分だけ model6       55        107.     0.903    0.652</code></pre>
+</div>
+</div>
+<div style="margin-top: 2.0em;">
+
+</div>
+<ul>
+<li>学習用データを全部（約 13,903 時間分）使うと、model6 の検証用 RMSE（約 70 台）は model5（約 80 台）より小さくなります。データが十分にあれば、複雑なモデルも役に立ちます。</li>
+<li>ところが、1,000 時間分しかないと、model6 は<strong>学習用の RMSE はとても小さい</strong>（約 55 台）のに、<strong>検証用の RMSE は大きくなります</strong>（約 107 台）。model5 の検証用 RMSE（約 84 台）より悪くなってしまいました。</li>
+<li>R² で見ても同じです。1,000 時間分の model6 は、学習用の R² が約 0.9 と model5（約 0.8）より高いのに、検証用の R² は約 0.65 と model5（約 0.78）より低くなります。前期のように学習用の R² だけを見ていると、model6 のほうが良いモデルだと思い込んでしまいます。</li>
+</ul>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>過学習</strong></p>
+<p>変数や交差項をたくさん入れると、モデルは学習用データの細かいでこぼこ（たまたまの誤差）まで覚えてしまい、<span class="marker">新しいデータでは予測が悪くなる</span>ことがあります。これを<strong>過学習</strong>（overfitting）といいます。</p>
+<ul>
+<li>学習用の RMSE は、変数を増やすほど必ず小さくなります。だから、モデルの良し悪しは<strong>学習用ではなく検証用の RMSE</strong>で判断します。</li>
+<li>学習用と検証用の RMSE の差が大きいときは、過学習を疑います。</li>
+<li>どこまで複雑なモデルを使えるかは、データの量によって変わります。</li>
+</ul>
+</div>
+</div>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>係数が NA になる</strong></p>
+<p><code>model6_small</code> の係数を <code>coef()</code> で見ると、<code>NA</code> がたくさん出てきます。1,000 時間分のデータには、「休日 × 雨・雪 × 冬 × 3時」のように、<span class="marker">1件もない組み合わせ</span>があり、その係数は計算できないためです。これも「データに対して変数が多すぎる」というサインです（このチャンクでは警告を表示しないようにしています）。</p>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-step7" class="level2" data-number="23.13">
+<h2 data-number="23.13" class="anchored" data-anchor-id="sec-step7"><span class="header-section-number">23.13</span> ステップ7：最終モデルと報告</h2>
+<p>検証用の RMSE が一番小さかったモデルを、<strong>学習用と検証用を合わせたデータ全体</strong>（<code>df_bike</code>）で作り直し、最終モデルにします。検証用データは「モデルを選ぶ」ために取っておいたものなので、選び終わったら学習に使ってかまいません。データが多いほど、予測は安定します。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-23"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-23-1"><a href="#annotated-cell-23-1"></a>df_result_all <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
+<span id="annotated-cell-23-2"><a href="#annotated-cell-23-2"></a>  df_result,</span>
+<span id="annotated-cell-23-3"><a href="#annotated-cell-23-3"></a>  <span class="fu">tibble</span>(<span class="at">model =</span> <span class="st">"model6 ＋すべての交差項"</span>,</span>
+<span id="annotated-cell-23-4"><a href="#annotated-cell-23-4"></a>         <span class="at">rmse_valid =</span> df_overfit<span class="sc">$</span>rmse_valid[<span class="dv">2</span>], <span class="at">r2_valid =</span> df_overfit<span class="sc">$</span>r2_valid[<span class="dv">2</span>])</span>
+<span id="annotated-cell-23-5"><a href="#annotated-cell-23-5"></a>) <span class="sc">|&gt;</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-23" data-target-annotation="1">1</button><span id="annotated-cell-23-6" class="code-annotation-target"><a href="#annotated-cell-23-6"></a>  <span class="fu">arrange</span>(rmse_valid)</span>
+<span id="annotated-cell-23-7"><a href="#annotated-cell-23-7"></a></span>
+<span id="annotated-cell-23-8"><a href="#annotated-cell-23-8"></a>df_result_all <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-23-9"><a href="#annotated-cell-23-9"></a>  <span class="fu">mutate</span>(<span class="at">rmse_valid =</span> <span class="fu">round</span>(rmse_valid, <span class="dv">1</span>),</span>
+<span id="annotated-cell-23-10"><a href="#annotated-cell-23-10"></a>         <span class="at">r2_valid   =</span> <span class="fu">round</span>(r2_valid, <span class="dv">3</span>))</span>
+<span id="annotated-cell-23-11"><a href="#annotated-cell-23-11"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-23" data-target-annotation="2">2</button><span id="annotated-cell-23-12" class="code-annotation-target"><a href="#annotated-cell-23-12"></a>model_final <span class="ot">&lt;-</span> <span class="fu">lm</span>(rentals <span class="sc">~</span> temp <span class="sc">+</span> humidity <span class="sc">+</span> wind <span class="sc">+</span> y2012 <span class="sc">+</span></span>
+<span id="annotated-cell-23-13"><a href="#annotated-cell-23-13"></a>                    <span class="fu">factor</span>(hour) <span class="sc">*</span> day_type <span class="sc">*</span> weather <span class="sc">*</span> season, <span class="at">data =</span> df_bike)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-23" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-23" data-code-lines="6" data-code-annotation="1">検証用 RMSE の小さい順に並べる。</span>
+</dd>
+<dt data-target-cell="annotated-cell-23" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-23" data-code-lines="12" data-code-annotation="2">一番小さかったモデル（ここでは model6）を、データ全体で作り直す。</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 3
+  model                         rmse_valid r2_valid
+  &lt;chr&gt;                              &lt;dbl&gt;    &lt;dbl&gt;
+1 model6 ＋すべての交差項             70.4    0.848
+2 model5 ＋時間帯×平日・休日          80      0.804
+3 model4 ＋時間帯                    104.     0.665
+4 model3 気温＋天気・カレンダー      148.     0.331
+5 model2 ＋気温の2乗                 167.     0.146
+6 model1 気温                        167.     0.146
+7 ベースライン（平均だけ）           181.     0    </code></pre>
+</div>
+</div>
+<div style="margin-top: 2.0em;">
+
+</div>
+<section id="依頼主への報告" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="依頼主への報告">依頼主への報告</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Capital Bikeshare 運営チームへの報告（例）</strong></p>
+<ol type="1">
+<li><strong>どれくらい正確に予測できるか</strong>：天気・カレンダー・時間帯を使ったモデルで、1時間ごとの貸出台数を、平均的に約 70 台の外れで予測できました（貸出台数の散らばりの約 85% を説明）。何も使わずに平均で予測した場合（約 181 台の外れ）より、大きく改善しています。</li>
+<li><strong>何が効くか</strong>：最も効いたのは<strong>時間帯</strong>と、その<strong>平日・休日による違い</strong>です。平日は朝8時ごろと夕方17〜18時ごろに通勤の利用が集中し、休日は昼すぎに利用が多くなります。気温（とても暑い時間を除き、高いほど多い）、雨・雪、年（利用者の増加）も効いています。</li>
+<li><strong>気をつけること</strong>：
+<ul>
+<li>利用者は年々増えています。2011年と2012年のデータで作ったモデルは、<span class="marker">2013年以降の台数を少なめに予測してしまう</span>おそれがあります。少なめの予測で配置すると自転車が足りなくなるので、新しいデータで作り直し続ける必要があります（下の補足1）。</li>
+<li>予測に使う天気は「天気予報」なので、予報が外れれば、台数の予測も外れます。</li>
+<li>イベントやハリケーンなど、データにない出来事は予測できません。</li>
+<li>夜中などの利用が少ない時間には、マイナスの台数を予測してしまうことがあります（下の補足）。</li>
+</ul></li>
+</ol>
+</div>
+</div>
+<div style="margin-top: 2.0em;">
+
+</div>
+<div class="my-note callout callout-style-default callout-note callout-titled" title="補足1：過去から未来を予測すると">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>補足1：過去から未来を予測すると
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>今日は 80% と 20% をランダムに分けたので、検証用データには2011年の時間も2012年の時間も入っていました。しかし、依頼主が本当に予測したいのは「<strong>未来</strong>」です。そこで、2011年だけでモデルを作り、2012年を予測してみます（2011年のデータしかないので、<code>y2012</code> は使えません）。</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>df_2011 <span class="ot">&lt;-</span> df_bike <span class="sc">|&gt;</span> <span class="fu">filter</span>(y2012 <span class="sc">==</span> <span class="dv">0</span>)</span>
+<span id="cb24-2"><a href="#cb24-2"></a>df_2012 <span class="ot">&lt;-</span> df_bike <span class="sc">|&gt;</span> <span class="fu">filter</span>(y2012 <span class="sc">==</span> <span class="dv">1</span>)</span>
+<span id="cb24-3"><a href="#cb24-3"></a></span>
+<span id="cb24-4"><a href="#cb24-4"></a>model_2011 <span class="ot">&lt;-</span> <span class="fu">lm</span>(rentals <span class="sc">~</span> temp <span class="sc">+</span> humidity <span class="sc">+</span> wind <span class="sc">+</span> weather <span class="sc">+</span></span>
+<span id="cb24-5"><a href="#cb24-5"></a>                   season <span class="sc">+</span> <span class="fu">factor</span>(hour) <span class="sc">*</span> day_type, <span class="at">data =</span> df_2011)</span>
+<span id="cb24-6"><a href="#cb24-6"></a>pred_2012 <span class="ot">&lt;-</span> <span class="fu">predict</span>(model_2011, <span class="at">newdata =</span> df_2012)</span>
+<span id="cb24-7"><a href="#cb24-7"></a></span>
+<span id="cb24-8"><a href="#cb24-8"></a><span class="fu">rmse</span>(df_2012<span class="sc">$</span>rentals, pred_2012)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 138.7874</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">mean</span>(df_2012<span class="sc">$</span>rentals)   <span class="co"># 2012年の実際の平均</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 234.6664</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">mean</span>(pred_2012)     <span class="co"># 2012年の予測の平均</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 148.8801</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">mean</span>(df_2012<span class="sc">$</span>rentals <span class="sc">-</span> pred_2012)   <span class="co"># 平均誤差（外れの向き）</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 85.78628</code></pre>
+</div>
+</div>
+<p>RMSE は約 139 台と、ランダムに分けたときよりずっと大きくなります。2012年の実際の平均（約 235 台）に対して、予測の平均は約 149 台で、<span class="marker">利用者の増加を予測できず、全体に少なめ</span>に予測しています。平均誤差は約 +86 台で、1時間あたり平均してそれだけ少なく見積もっていることになります。このまま使うと、自転車の配置がいつも足りなくなるおそれがあります。RMSE だけでは分からない「外れの向き」が、ここではとても重要です。過去のデータで作ったモデルは、世の中が変わると当たらなくなります。</p>
+</div>
+</div>
+</div>
+<div class="my-note callout callout-style-default callout-note callout-titled" title="補足2：マイナスの予測">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>補足2：マイナスの予測
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a>pred_final <span class="ot">&lt;-</span> <span class="fu">predict</span>(model_final, <span class="at">newdata =</span> df_bike)</span>
+<span id="cb32-2"><a href="#cb32-2"></a><span class="fu">sum</span>(pred_final <span class="sc">&lt;</span> <span class="dv">0</span>)                     <span class="co"># マイナスの予測の数</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1888</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="fu">mean</span>(pred_final <span class="sc">&lt;</span> <span class="dv">0</span>)                    <span class="co"># その割合</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1086369</code></pre>
+</div>
+</div>
+<p><code>lm()</code> は直線（足し算）のモデルなので、利用の少ない夜中などに、1888 時間分（全体の約 11%）でマイナスの台数を予測しています。貸出台数がマイナスになることはないので、実際に使うときは 0 に置き換えるなどの工夫が必要です。モデルの作り方を変えて、マイナスにならないようにする方法もあります。</p>
+</div>
+</div>
+</div>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+</section>
+<section id="sec-homework" class="level2" data-number="23.14">
+<h2 data-number="23.14" class="anchored" data-anchor-id="sec-homework"><span class="header-section-number">23.14</span> 総合分析演習4（宿題）</h2>
+<p>今日の流れを、別のデータで<strong>一人で</strong>行ってもらいます。今度は、アメリカ・アイオワ州エイムズ市の<strong>不動産会社</strong>から、「売り出す住宅の価格の目安を予測してほしい」という依頼が届きました。データ（<code>ames_house.csv</code>）と課題ファイル（<code>assignmentB11.qmd</code>）は Blackboard で配布します。</p>
+<ul>
+<li>データ：エイムズ市で2006〜2010年に売れた住宅 2,909 件の販売価格と、広さ・建築年・地区・設備など。</li>
+<li>課題ファイルの課題1〜9に沿って、今日と同じ流れ（前処理 → グラフ → 学習用と検証用に分ける → モデルを1つずつ育てる → 依頼主への報告）で取り組む。</li>
+<li>ベースラインを含めて<strong>3つ以上のモデル</strong>を作り、検証用の RMSE と R² で比べて、一番良いモデルを選ぶ。どの変数を使うかは自分で考える。</li>
+<li>提出：Render した HTML を ZIP 形式に圧縮して Blackboard から提出。期限は<strong>第11回の授業開始（12月14日 15:45）</strong>まで。</li>
+<li>第11回に、レポートを画面に映しながら、一人ずつ内容を説明する。</li>
+</ul>
+<div style="margin-top: 4.0em;">
+
+</div>
+</section>
+<section id="sec-summary" class="level2" data-number="23.15">
+<h2 data-number="23.15" class="anchored" data-anchor-id="sec-summary"><span class="header-section-number">23.15</span> まとめ</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 80%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">項目</th>
+<th style="text-align: left;">ポイント</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">AI・機械学習</td>
+<td style="text-align: left;">AI ⊃ 機械学習 ⊃ ディープラーニング。前期の回帰分析（<code>lm()</code>）も機械学習の一つ</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">説明と予測</td>
+<td style="text-align: left;">同じ <code>lm()</code> でも、予測では「新しいデータで当たるか」を見る</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">学習用と検証用</td>
+<td style="text-align: left;">データを分け、学習用でモデルを作り、検証用で当たり具合を確かめる</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>predict()</code></td>
+<td style="text-align: left;"><code>predict(モデル, newdata = データ)</code> で、1行ずつの予測値を出す</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">RMSE</td>
+<td style="text-align: left;">予測が平均的にどれくらい外れているか。元の単位で読み、小さいほど良い</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">R²（検証用）</td>
+<td style="text-align: left;">実際の値の散らばりの何%を予測で説明できたか。1 に近いほど良い。学習用の R² は変数を増やすと必ず上がるので、検証用で見る</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">平均誤差</td>
+<td style="text-align: left;">外れ（実際 − 予測）をそのまま平均したもの。RMSE では分からない「外れの向き」が分かる。プラスなら少なめ、マイナスなら多めに予測しがち</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ベースライン</td>
+<td style="text-align: left;">比べる基準。まずは「平均だけで予測」</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">交差項</td>
+<td style="text-align: left;">「時間帯の効き方が平日と休日で違う」のような関係を表し、予測を大きく良くすることがある</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">過学習</td>
+<td style="text-align: left;">変数を増やすと学習用には当てはまるが、新しいデータでは悪くなることがある。データが少ないほど起こりやすい</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">予測に使える変数</td>
+<td style="text-align: left;">予測する時点で分かっている情報だけ。答えそのもの（<code>rentals_casual</code> + <code>rentals_member</code>）は使えない</td>
+</tr>
+</tbody>
+</table>
+<div style="margin-top: 2.0em;">
+
+</div>
+<div class="my-note callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>次回の予告</strong></p>
+<p>次回は<strong>発表・分析結果説明4</strong>です。</p>
+<ul>
+<li>総合分析演習4のレポートを画面に映しながら、一人ずつ教員に説明してもらいます</li>
+<li>「なぜ学習用と検証用に分けたのか」「RMSE が〇〇とはどういう意味か」「どのモデルを選んだか、なぜか」と質問するので、答えられるように準備してきてください</li>
+<li>説明の順番を待つ間に、総合分析演習5（コンペ）のデータを配布するので、データを眺めるところから始めましょう</li>
+</ul>
+</div>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
