@@ -443,7 +443,7 @@ window.Quarto = {
 
 <p>予測モデルを作る</p>
 <ul>
-<li>第10回から第13回の4回で学ぶ機会学習とは、以下のYoutubeで紹介されている内容です。データサイエンティストの仕事を体験します！！
+<li>第10回から第13回の4回で学ぶ機械学習とは、以下のYoutubeで紹介されている内容です。データサイエンティストの仕事を体験します！！
 <ul>
 <li><a href="https://www.youtube.com/watch?v=qxNsMD5Z1S8">中高生も“沼る”データサイエンスなぜ東大の講座に受講生が殺到するのか？</a></li>
 </ul></li>
@@ -811,15 +811,19 @@ Important
 </tr>
 <tr class="even">
 <td style="text-align: center;">2.</td>
-<td style="text-align: left;">「LessonB10」フォルダの中に「data」フォルダを作る。</td>
+<td style="text-align: left;">Blackboard から <code>bike_hour.csv</code> と <code>assignmentB10.qmd</code> をダウンロードし、どちらも「LessonB10」フォルダの中（プロジェクトの直下）に入れる。</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">3.</td>
-<td style="text-align: left;">Blackboard から <code>bike_hour.csv</code> をダウンロードし、「data」フォルダに入れる。</td>
+<td style="text-align: left;">RStudio で <code>assignmentB10.qmd</code> を開く。これが今日の <strong>Capital Bikeshare への報告書</strong> になる。</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">4.</td>
-<td style="text-align: left;">新しい R スクリプト（または Quarto ファイル）を作り、講義資料のコードを教員と一緒に1つずつ実行する。</td>
+<td style="text-align: left;">講義資料のコードを、<code>assignmentB10.qmd</code> の同じ名前（label）の空のチャンクにコピーし、教員と一緒に上から順に1つずつ実行する。文章の「＿＿」と「（A ／ B）」は、結果を見て埋める。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5.</td>
+<td style="text-align: left;">最後に Render すると、依頼主への報告書（HTML）が完成する。</td>
 </tr>
 </tbody>
 </table>
@@ -952,9 +956,11 @@ Note
 <section id="sec-step1" class="level2" data-number="23.7">
 <h2 data-number="23.7" class="anchored" data-anchor-id="sec-step1"><span class="header-section-number">23.7</span> ステップ1：読み込みと前処理</h2>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>df_raw <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/bike_hour.csv"</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>df_raw <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"bike_hour.csv"</span>)</span>
 <span id="cb3-2"><a href="#cb3-2"></a></span>
 <span id="cb3-3"><a href="#cb3-3"></a><span class="fu">glimpse</span>(df_raw)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell" data-layout-align="center">
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 17,379
 Columns: 17
